@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description" uid="_zXgPIL83EfGK09TLxcHe5g" selectedViews="_0XP04L83EfGK09TLxcHe5g" version="15.4.1.202403191723">
+  <semanticResources>PLM_SysML_Architecture.uml</semanticResources>
+  <semanticResources>pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml</semanticResources>
+  <semanticResources>pathmap://UML_PROFILES/Ecore.profile.uml</semanticResources>
+  <semanticResources>pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml</semanticResources>
+  <semanticResources>pathmap://UML_PROFILES/Standard.profile.uml</semanticResources>
+  <semanticResources>pathmap://UML_METAMODELS/UML.metamodel.uml</semanticResources>
+  <semanticResources>pathmap://UML_METAMODELS/Ecore.metamodel.uml</semanticResources>
+  <semanticResources>pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml</semanticResources>
+  <semanticResources>pathmap://SysML16_PROFILES/SysML.profile.uml</semanticResources>
+  <semanticResources>pathmap://SysML16_LIBRARIES/SysML-Standard-Library.notation</semanticResources>
+  <semanticResources>pathmap://SysML16_LIBRARIES/SysML-Standard-Library.di</semanticResources>
+  <semanticResources>PLM.uml</semanticResources>
+  <semanticResources>pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml</semanticResources>
+  <ownedViews xmi:type="viewpoint:DView" uid="_0XP04L83EfGK09TLxcHe5g">
+    <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.papyrus.sirius.properties.uml/description/umlProperties.odesign#//@ownedViewpoints[name='UmlProperties']"/>
+  </ownedViews>
+</viewpoint:DAnalysis>
