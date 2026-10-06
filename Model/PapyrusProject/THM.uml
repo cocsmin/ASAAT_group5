@@ -319,6 +319,10 @@
         <end xmi:type="uml:ConnectorEnd" xmi:id="_qHzqkMGWEfGQuv7PuxR-sQ" partWithPort="_Nhg1S8IlOUGXxY1Ejy3pkQ" role="_OznmASRuFkGh7zl9Su7IOA"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_qH0RoMGWEfGQuv7PuxR-sQ"/>
       </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_RvfpoMGbEfGQuv7PuxR-sQ" name="Connector87">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_RvnlcMGbEfGQuv7PuxR-sQ" partWithPort="_cYLMrfywsU2O1y3fe8PrCw" role="_ZabsGs4Su0avO9EHBT5kAA"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_RvoMgMGbEfGQuv7PuxR-sQ" partWithPort="_Nhg1S8IlOUGXxY1Ejy3pkQ" role="_OznmASRuFkGh7zl9Su7IOA"/>
+      </ownedConnector>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_YNjAWIyojEuUYTD4I1igiA" name="Depositing Control (THM-AF-01)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_4-rIJjxoT0aAKTCjPmKsYQ" name="Batter ready" aggregation="composite"/>
@@ -760,4 +764,6 @@
   <Blocks:NestedConnectorEnd xmi:id="_YbaMMcGUEfGQuv7PuxR-sQ" base_Element="_YbZlIcGUEfGQuv7PuxR-sQ" propertyPath="_5LUdNgBickym9fwnaVKtMg" base_ConnectorEnd="_YbZlIcGUEfGQuv7PuxR-sQ"/>
   <Blocks:NestedConnectorEnd xmi:id="_clveocGUEfGQuv7PuxR-sQ" base_Element="_clu3kMGUEfGQuv7PuxR-sQ" propertyPath="_cYLMrfywsU2O1y3fe8PrCw" base_ConnectorEnd="_clu3kMGUEfGQuv7PuxR-sQ"/>
   <Blocks:NestedConnectorEnd xmi:id="_qH0RocGWEfGQuv7PuxR-sQ" base_Element="_qHzqkMGWEfGQuv7PuxR-sQ" propertyPath="_Nhg1S8IlOUGXxY1Ejy3pkQ" base_ConnectorEnd="_qHzqkMGWEfGQuv7PuxR-sQ"/>
+  <Blocks:NestedConnectorEnd xmi:id="_RvozkMGbEfGQuv7PuxR-sQ" base_Element="_RvnlcMGbEfGQuv7PuxR-sQ" propertyPath="_cYLMrfywsU2O1y3fe8PrCw" base_ConnectorEnd="_RvnlcMGbEfGQuv7PuxR-sQ"/>
+  <Blocks:NestedConnectorEnd xmi:id="_RvqBsMGbEfGQuv7PuxR-sQ" base_Element="_RvoMgMGbEfGQuv7PuxR-sQ" propertyPath="_Nhg1S8IlOUGXxY1Ejy3pkQ" base_ConnectorEnd="_RvoMgMGbEfGQuv7PuxR-sQ"/>
 </xmi:XMI>
