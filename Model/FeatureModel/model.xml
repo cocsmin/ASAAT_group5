@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+	<properties>
+		<graphics key="autolayoutconstraints" value="false"/>
+		<graphics key="legendposition" value="45,20"/>
+		<graphics key="legendautolayout" value="false"/>
+		<graphics key="showconstraints" value="true"/>
+		<graphics key="showshortnames" value="false"/>
+		<graphics key="layout" value="vertical"/>
+		<graphics key="showcollapsedconstraints" value="true"/>
+		<graphics key="legendhidden" value="false"/>
+		<graphics key="layoutalgorithm" value="4"/>
+	</properties>
+	<struct>
+		<and abstract="true" mandatory="true" name="Cake Production System">
+			<graphics key="collapsed" value="false"/>
+			<and mandatory="true" name="BAT-FEAT-00 Batter Preparation">
+				<and mandatory="true" name="BAT-FEAT-01 Ingredient Intake &amp; Dosing">
+					<feature mandatory="true" name="BAT-FEAT-02 Order and ingredient intake"/>
+					<feature mandatory="true" name="BAT-FEAT-03 Recipe-target dispensing"/>
+					<feature mandatory="true" name="BAT-FEAT-04 Dose weighing and verification"/>
+					<feature mandatory="true" name="BAT-FEAT-05 Top-up on under-dose"/>
+					<feature mandatory="true" name="BAT-FEAT-06 Over-dose batch discard"/>
+					<feature mandatory="true" name="BAT-FEAT-07 Repeated-failure lockout"/>
+				</and>
+				<and mandatory="true" name="BAT-FEAT-08 Mixing">
+					<feature mandatory="true" name="BAT-FEAT-09 Recipe-timed mixing"/>
+					<feature mandatory="true" name="BAT-FEAT-10 Consistency monitoring"/>
+					<and mandatory="true" name="BAT-FEAT-11 Batch release gate">
+						<feature mandatory="true" name="BAT-FEAT-12 Human inspection"/>
+					</and>
+					<feature mandatory="true" name="BAT-FEAT-14 Re-mix of a rejected batch"/>
+					<feature mandatory="true" name="BAT-FEAT-15 Mixer fault handling"/>
+				</and>
+				<and mandatory="true" name="BAT-FEAT-16 Batter Handoff">
+					<feature mandatory="true" name="BAT-FEAT-17 Batter-ready handoff"/>
+					<feature mandatory="true" name="BAT-FEAT-18 Batter waiting-time limit"/>
+					<feature mandatory="true" name="BAT-FEAT-19 Hold on depositing stopped"/>
+				</and>
+				<and mandatory="true" name="BAT-FEAT-20 Line health and reporting">
+					<feature mandatory="true" name="BAT-FEAT-21 Event reporting"/>
+					<feature mandatory="true" name="BAT-FEAT-22 Health reporting"/>
+				</and>
+			</and>
+			<and mandatory="true" name="THM-FEAT-00 Thermal Processing">
+				<graphics key="collapsed" value="false"/>
+				<and mandatory="true" name="THM-FEAT-01 Depositing">
+					<graphics key="collapsed" value="false"/>
+					<feature mandatory="true" name="THM-FEAT-02 Pan-presence check"/>
+					<feature mandatory="true" name="THM-FEAT-03 Fill-weight check"/>
+					<feature mandatory="true" name="THM-FEAT-04 Repeated-failure lockout"/>
+					<feature mandatory="true" name="THM-FEAT-05 New-pan admission stop"/>
+					<feature name="THM-FEAT-06 Reduced filling on low pan stock"/>
+				</and>
+				<and mandatory="true" name="THM-FEAT-07 Baking">
+					<graphics key="collapsed" value="false"/>
+					<feature mandatory="true" name="THM-FEAT-08 Zone temperature control"/>
+					<feature mandatory="true" name="THM-FEAT-09 Zone-fault escalation"/>
+				</and>
+				<and mandatory="true" name="THM-FEAT-10 Tunnel-Exit Inspection">
+					<graphics key="collapsed" value="false"/>
+					<feature mandatory="true" name="THM-FEAT-11 Exit doneness check"/>
+					<feature mandatory="true" name="THM-FEAT-12 Refuse diversion and discard logging"/>
+					<feature mandatory="true" name="THM-FEAT-13 Camera-failure fallback"/>
+				</and>
+				<and mandatory="true" name="THM-FEAT-14 Cooling">
+					<graphics key="collapsed" value="false"/>
+					<feature mandatory="true" name="THM-FEAT-15 Cooling control"/>
+					<alt mandatory="true" name="THM-FEAT-16 Cooling-failure response">
+						<graphics key="collapsed" value="false"/>
+						<and name="THM-FEAT-17 Cooling buffer fallback">
+							<graphics key="collapsed" value="false"/>
+							<feature mandatory="true" name="THM-FEAT-18 Buffer hold and release"/>
+							<feature mandatory="true" name="THM-FEAT-19 Buffer wait-time limit"/>
+							<feature mandatory="true" name="THM-FEAT-20 Buffer-full handling"/>
+						</and>
+						<feature name="THM-FEAT-21 Discard fallback"/>
+					</alt>
+				</and>
+				<and mandatory="true" name="THM-FEAT-22 Line health and coordination">
+					<graphics key="collapsed" value="false"/>
+					<feature mandatory="true" name="THM-FEAT-23 Health reporting"/>
+					<feature mandatory="true" name="THM-FEAT-24 Band-state response"/>
+					<or mandatory="true" name="THM-FEAT-25 Event reporting">
+						<graphics key="collapsed" value="false"/>
+						<feature name="THM-FEAT-27 Log events"/>
+						<feature name="THM-FEAT-28 Warning events"/>
+						<feature name="THM-FEAT-29 Error events"/>
+					</or>
+					<feature mandatory="true" name="THM-FEAT-26 Recovery coordination"/>
+				</and>
+			</and>
+			<and mandatory="true" name="FIN-FEAT-00 Finishing &amp; Packaging">
+				<graphics key="collapsed" value="false"/>
+				<and mandatory="true" name="FIN-FEAT-01 Depanning">
+					<feature mandatory="true" name="FIN-FEAT-02 Stuck-cake rejection"/>
+					<feature mandatory="true" name="FIN-FEAT-03 Hold and recover on depanning faults"/>
+				</and>
+				<and mandatory="true" name="FIN-FEAT-04 Quality Inspection">
+					<feature mandatory="true" name="FIN-FEAT-05 Weight check"/>
+					<feature mandatory="true" name="FIN-FEAT-06 Visual check"/>
+					<feature mandatory="true" name="FIN-FEAT-07 Metal check"/>
+					<feature mandatory="true" name="FIN-FEAT-08 Rejection handling and reporting"/>
+				</and>
+				<and mandatory="true" name="FIN-FEAT-09 Packaging">
+					<feature mandatory="true" name="FIN-FEAT-10 Wrapping"/>
+					<feature mandatory="true" name="FIN-FEAT-11 Cartoning"/>
+					<feature mandatory="true" name="FIN-FEAT-12 Case-weight check"/>
+					<feature mandatory="true" name="FIN-FEAT-13 Packaging reject handling"/>
+					<feature mandatory="true" name="FIN-FEAT-14 Holding area with stop/resume"/>
+				</and>
+				<feature mandatory="true" name="FIN-FEAT-15 Palletising"/>
+				<and mandatory="true" name="FIN-FEAT-16 Pan Loop">
+					<feature mandatory="true" name="FIN-FEAT-18 Pan stock management"/>
+					<feature mandatory="true" name="FIN-FEAT-19 Washing catch-up after a fault"/>
+				</and>
+				<and mandatory="true" name="FIN-FEAT-20 Line health and coordination">
+					<feature mandatory="true" name="FIN-FEAT-21 Health reporting"/>
+					<feature mandatory="true" name="FIN-FEAT-22 Band-state response"/>
+				</and>
+			</and>
+			<and mandatory="true" name="MON-FEAT-00 Line Monitoring &amp; Health">
+				<feature mandatory="true" name="MON-FEAT-01 Health Monitoring"/>
+				<feature mandatory="true" name="MON-FEAT-02 Event &amp; Traceability Logging"/>
+				<feature mandatory="true" name="MON-FEAT-03 Maintenance Management"/>
+				<feature mandatory="true" name="MON-FEAT-07 Container Supervision"/>
+				<feature mandatory="true" name="Message Bus"/>
+				<feature mandatory="true" name="Log Database"/>
+				<feature mandatory="true" name="Overseer Dashboard"/>
+			</and>
+			<and mandatory="true" name="Band Transport">
+				<feature mandatory="true" name="Section Control"/>
+				<feature mandatory="true" name="Speed Monitoring"/>
+				<feature mandatory="true" name="Transport Fault Handling"/>
+				<feature mandatory="true" name="Conveyor Controller"/>
+				<feature mandatory="true" name="Conveyor Drive"/>
+				<feature mandatory="true" name="Speed Sensor"/>
+				<feature mandatory="true" name="Section Status Sensor"/>
+			</and>
+			<and mandatory="true" name="PLM-FEAT-00 Production &amp; Logistics Management">
+				<graphics key="collapsed" value="false"/>
+				<and mandatory="true" name="PLM-FEAT-01 Order and Scheduling">
+					<feature mandatory="true" name="PLM-FEAT-02 Production order creation and holding"/>
+					<feature mandatory="true" name="PLM-FEAT-03 Warehouse timeout handling"/>
+				</and>
+				<and mandatory="true" name="PLM-FEAT-04 Recipe Management">
+					<feature mandatory="true" name="PLM-FEAT-05 Recipe target definition"/>
+				</and>
+				<and mandatory="true" name="PLM-FEAT-06 Warehouse and Inventory">
+					<feature mandatory="true" name="PLM-FEAT-07 Ingredient reservation processing"/>
+					<feature mandatory="true" name="PLM-FEAT-08 Organic ingredient verification"/>
+					<feature mandatory="true" name="PLM-FEAT-09 Inventory level updating"/>
+					<feature mandatory="true" name="PLM-FEAT-10 Insufficient stock handling and reporting"/>
+				</and>
+				<and mandatory="true" name="PLM-FEAT-11 Transport and Shipment">
+					<feature mandatory="true" name="PLM-FEAT-12 Pallet receiving and sending coordination"/>
+				</and>
+			</and>
+		</and>
+	</struct>
+</featureModel>
