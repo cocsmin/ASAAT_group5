@@ -6218,4 +6218,68 @@
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wO14eM4GEfGJpPDutUy9XQ"/>
     </edges>
   </notation:Diagram>
+  <notation:Diagram xmi:id="_ZQjlgM4LEfGJpPDutUy9XQ" type="PapyrusUMLClassDiagram" name="RD1 Depanning" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_ZQjlgc4LEfGJpPDutUy9XQ" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_ZQjlgs4LEfGJpPDutUy9XQ"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_ZQjlg84LEfGJpPDutUy9XQ" diagramKindId="org.eclipse.papyrus.sysml16.diagram.requirement">
+      <owner xmi:type="uml:Package" href="FIN.uml#_BBTzQM4LEfGJpPDutUy9XQ"/>
+    </styles>
+    <element xmi:type="uml:Package" href="FIN.uml#_BBTzQM4LEfGJpPDutUy9XQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_bd608M4LEfGJpPDutUy9XQ" type="PapyrusUMLClassDiagram" name="RD2 Quality Inspection" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_bd608c4LEfGJpPDutUy9XQ" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_bd608s4LEfGJpPDutUy9XQ"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_bd60884LEfGJpPDutUy9XQ" diagramKindId="org.eclipse.papyrus.sysml16.diagram.requirement">
+      <owner xmi:type="uml:Package" href="FIN.uml#_DmyAsM4LEfGJpPDutUy9XQ"/>
+    </styles>
+    <element xmi:type="uml:Package" href="FIN.uml#_DmyAsM4LEfGJpPDutUy9XQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_c7BFEM4LEfGJpPDutUy9XQ" type="PapyrusUMLClassDiagram" name="RD3 Packaging" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_c7BFEc4LEfGJpPDutUy9XQ" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_c7BFEs4LEfGJpPDutUy9XQ"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_c7BFE84LEfGJpPDutUy9XQ" diagramKindId="org.eclipse.papyrus.sysml16.diagram.requirement">
+      <owner xmi:type="uml:Package" href="FIN.uml#_FTRXsM4LEfGJpPDutUy9XQ"/>
+    </styles>
+    <element xmi:type="uml:Package" href="FIN.uml#_FTRXsM4LEfGJpPDutUy9XQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_enPWUM4LEfGJpPDutUy9XQ" type="PapyrusUMLClassDiagram" name="RD4 Holding Area" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_enPWUc4LEfGJpPDutUy9XQ" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_enPWUs4LEfGJpPDutUy9XQ"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_enPWU84LEfGJpPDutUy9XQ" diagramKindId="org.eclipse.papyrus.sysml16.diagram.requirement">
+      <owner xmi:type="uml:Package" href="FIN.uml#_H_POsM4LEfGJpPDutUy9XQ"/>
+    </styles>
+    <element xmi:type="uml:Package" href="FIN.uml#_H_POsM4LEfGJpPDutUy9XQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_gLZQsM4LEfGJpPDutUy9XQ" type="PapyrusUMLClassDiagram" name="RD5 Palletising" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_gLZQsc4LEfGJpPDutUy9XQ" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_gLZQss4LEfGJpPDutUy9XQ"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_gLZQs84LEfGJpPDutUy9XQ" diagramKindId="org.eclipse.papyrus.sysml16.diagram.requirement">
+      <owner xmi:type="uml:Package" href="FIN.uml#_JrXZUM4LEfGJpPDutUy9XQ"/>
+    </styles>
+    <element xmi:type="uml:Package" href="FIN.uml#_JrXZUM4LEfGJpPDutUy9XQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_h5DsYM4LEfGJpPDutUy9XQ" type="PapyrusUMLClassDiagram" name="RD6 Pan Washing and Verification" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_h5DsYc4LEfGJpPDutUy9XQ" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_h5DsYs4LEfGJpPDutUy9XQ"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_h5DsY84LEfGJpPDutUy9XQ" diagramKindId="org.eclipse.papyrus.sysml16.diagram.requirement">
+      <owner xmi:type="uml:Package" href="FIN.uml#_LMcKgM4LEfGJpPDutUy9XQ"/>
+    </styles>
+    <element xmi:type="uml:Package" href="FIN.uml#_LMcKgM4LEfGJpPDutUy9XQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_j3tKYM4LEfGJpPDutUy9XQ" type="PapyrusUMLClassDiagram" name="RD7 Pan Stock and Washing Catch-up" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_j3tKYc4LEfGJpPDutUy9XQ" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_j3tKYs4LEfGJpPDutUy9XQ"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_j3tKY84LEfGJpPDutUy9XQ" diagramKindId="org.eclipse.papyrus.sysml16.diagram.requirement">
+      <owner xmi:type="uml:Package" href="FIN.uml#_MZP74M4LEfGJpPDutUy9XQ"/>
+    </styles>
+    <element xmi:type="uml:Package" href="FIN.uml#_MZP74M4LEfGJpPDutUy9XQ"/>
+  </notation:Diagram>
+  <notation:Diagram xmi:id="_lmg1kM4LEfGJpPDutUy9XQ" type="PapyrusUMLClassDiagram" name="RD8 Line Health and Band Response" measurementUnit="Pixel">
+    <styles xmi:type="notation:StringValueStyle" xmi:id="_lmg1kc4LEfGJpPDutUy9XQ" name="diagram_compatibility_version" stringValue="1.4.0"/>
+    <styles xmi:type="notation:DiagramStyle" xmi:id="_lmg1ks4LEfGJpPDutUy9XQ"/>
+    <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_lmg1k84LEfGJpPDutUy9XQ" diagramKindId="org.eclipse.papyrus.sysml16.diagram.requirement">
+      <owner xmi:type="uml:Package" href="FIN.uml#_NrtCQM4LEfGJpPDutUy9XQ"/>
+    </styles>
+    <element xmi:type="uml:Package" href="FIN.uml#_NrtCQM4LEfGJpPDutUy9XQ"/>
+  </notation:Diagram>
 </xmi:XMI>

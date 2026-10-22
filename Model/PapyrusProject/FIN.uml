@@ -7,6 +7,16 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_NC0uELzYEfG45YF_OaBpaA">
       <importedPackage xmi:type="uml:Package" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
     </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="__N4GwM4KEfGJpPDutUy9XQ" name="FIN Requirements">
+      <packagedElement xmi:type="uml:Package" xmi:id="_BBTzQM4LEfGJpPDutUy9XQ" name="RD1 Depanning"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_DmyAsM4LEfGJpPDutUy9XQ" name="RD2 Quality Inspection"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_FTRXsM4LEfGJpPDutUy9XQ" name="RD3 Packaging"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_H_POsM4LEfGJpPDutUy9XQ" name="RD4 Holding Area"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_JrXZUM4LEfGJpPDutUy9XQ" name="RD5 Palletising"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_LMcKgM4LEfGJpPDutUy9XQ" name="RD6 Pan Washing and Verification"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_MZP74M4LEfGJpPDutUy9XQ" name="RD7 Pan Stock and Washing Catch-up"/>
+      <packagedElement xmi:type="uml:Package" xmi:id="_NrtCQM4LEfGJpPDutUy9XQ" name="RD8 Line Health and Band Response"/>
+    </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_JB5r8Lz8EfGC__yJIGIlPQ" name="Finishing &amp; Packaging (FIN) ">
       <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_rxZDML2TEfGl1tErtx_5Og" name="RedefinableTemplateSignature29"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_hblXILz9EfGC__yJIGIlPQ" name="fin-af-13" type="_uxyYsLz8EfGC__yJIGIlPQ" aggregation="composite" association="_hbM8oLz9EfGC__yJIGIlPQ">
