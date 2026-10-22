@@ -9,253 +9,232 @@
     </packageImport>
     <packagedElement xmi:type="uml:Package" xmi:id="__N4GwM4KEfGJpPDutUy9XQ" name="FIN Requirements">
       <packagedElement xmi:type="uml:Package" xmi:id="_BBTzQM4LEfGJpPDutUy9XQ" name="RD1 Depanning">
-      <packagedElement xmi:type="uml:Class" xmi:id="_TKwgEDEaqhzyNnytoB5aoV" name="FIN-REQ-01">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_2NZO_uQ-4w2XrQVmBRDtUh" annotatedElement="_TKwgEDEaqhzyNnytoB5aoV">
-          <body>Rationale: Entry point of the slice; the batch ID is needed for traceability and recall. Source: UC10, UC11. Feature: FIN-FEAT-01. (Applies to FIN-REQ-01.)</body>
-        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_TKwgEDEaqhzyNnytoB5aoV" name="FIN-REQ-01">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_2NZO_uQ-4w2XrQVmBRDtUh" annotatedElement="_TKwgEDEaqhzyNnytoB5aoV">
+            <body>Rationale: Entry point of the slice; the batch ID is needed for traceability and recall. Source: UC10, UC11. Feature: FIN-FEAT-01. (Applies to FIN-REQ-01.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_sS8hhss6inCQmw31l26fqX" name="FIN-REQ-02">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_NQ1JW8uKwck5HJ28i-vjnp" annotatedElement="_sS8hhss6inCQmw31l26fqX">
+            <body>Rationale: The cooling guarantee sits with Thermal Processing at the handoff (UC10 postcondition). Source: UC10. Feature: FIN-FEAT-01. (Applies to FIN-REQ-02.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_AhjVmMyamjXC_9jhUfWa9e" name="FIN-REQ-03">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_w0_pRpIddbrPziAYBWLjWK" annotatedElement="_AhjVmMyamjXC_9jhUfWa9e">
+            <body>Rationale: Batch traceability for recall; the batch IDs are reported when a pallet is ready. Source: UC10, UC11, UC16. Feature: FIN-FEAT-01. (Applies to FIN-REQ-03.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_EduMVfN7bpdLgfbXJ3c6Rz" name="FIN-REQ-04.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_7qGhIMJnp0EPGme9_7g-D3" annotatedElement="_EduMVfN7bpdLgfbXJ3c6Rz _O_JGOYTTwtt7L5tbe6IDp_ _3st9Fc3VlxZRhOnzbITW6i">
+            <body>Rationale: Cake and pan must go their separate ways: the cake to inspection, the pan back into the pan loop. Source: UC11. Feature: FIN-FEAT-01. (Applies to FIN-REQ-04.1, FIN-REQ-04.2, FIN-REQ-04.3.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_O_JGOYTTwtt7L5tbe6IDp_" name="FIN-REQ-04.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3st9Fc3VlxZRhOnzbITW6i" name="FIN-REQ-04.3"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_syj8zR6gunG0aJdekmrbrc" name="FIN-REQ-26.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_dd1sdP0u3NTVw3T4StZEv6" annotatedElement="_syj8zR6gunG0aJdekmrbrc">
+            <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-02. (Applies to FIN-REQ-26.1.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_P9NBqgq9d1gRqAsdewy1qw" name="FIN-REQ-31.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="__AjW2NU9rKZUEOvcZpIuDC" annotatedElement="_P9NBqgq9d1gRqAsdewy1qw _tT9hAYsDpj_CYP2ExeE8el">
+            <body>Rationale: Stuck or broken cakes must not enter inspection; the pan must be recovered. Source: FC21. Feature: FIN-FEAT-02. (Applies to FIN-REQ-31.1, FIN-REQ-31.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_tT9hAYsDpj_CYP2ExeE8el" name="FIN-REQ-31.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_K0mWBj1qz1lLToF7KTmotj" name="FIN-REQ-32.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_Ub6F1c2ptm7zT-495srgXN" annotatedElement="_K0mWBj1qz1lLToF7KTmotj _E6qY3Tze_0MpQul9nhk_Me">
+            <body>Rationale: Availability: incoming product is neither lost nor discarded during a machine fault. Source: FC22. Feature: FIN-FEAT-03. (Applies to FIN-REQ-32.1, FIN-REQ-32.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_E6qY3Tze_0MpQul9nhk_Me" name="FIN-REQ-32.2"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_sS8hhss6inCQmw31l26fqX" name="FIN-REQ-02">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_NQ1JW8uKwck5HJ28i-vjnp" annotatedElement="_sS8hhss6inCQmw31l26fqX">
-          <body>Rationale: The cooling guarantee sits with Thermal Processing at the handoff (UC10 postcondition). Source: UC10. Feature: FIN-FEAT-01. (Applies to FIN-REQ-02.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_AhjVmMyamjXC_9jhUfWa9e" name="FIN-REQ-03">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_w0_pRpIddbrPziAYBWLjWK" annotatedElement="_AhjVmMyamjXC_9jhUfWa9e">
-          <body>Rationale: Batch traceability for recall; the batch IDs are reported when a pallet is ready. Source: UC10, UC11, UC16. Feature: FIN-FEAT-01. (Applies to FIN-REQ-03.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_EduMVfN7bpdLgfbXJ3c6Rz" name="FIN-REQ-04.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_7qGhIMJnp0EPGme9_7g-D3" annotatedElement="_EduMVfN7bpdLgfbXJ3c6Rz _O_JGOYTTwtt7L5tbe6IDp_ _3st9Fc3VlxZRhOnzbITW6i">
-          <body>Rationale: Cake and pan must go their separate ways: the cake to inspection, the pan back into the pan loop. Source: UC11. Feature: FIN-FEAT-01. (Applies to FIN-REQ-04.1, FIN-REQ-04.2, FIN-REQ-04.3.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_O_JGOYTTwtt7L5tbe6IDp_" name="FIN-REQ-04.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_3st9Fc3VlxZRhOnzbITW6i" name="FIN-REQ-04.3">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_syj8zR6gunG0aJdekmrbrc" name="FIN-REQ-26.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_dd1sdP0u3NTVw3T4StZEv6" annotatedElement="_syj8zR6gunG0aJdekmrbrc">
-          <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-02. (Applies to FIN-REQ-26.1.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_P9NBqgq9d1gRqAsdewy1qw" name="FIN-REQ-31.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="__AjW2NU9rKZUEOvcZpIuDC" annotatedElement="_P9NBqgq9d1gRqAsdewy1qw _tT9hAYsDpj_CYP2ExeE8el">
-          <body>Rationale: Stuck or broken cakes must not enter inspection; the pan must be recovered. Source: FC21. Feature: FIN-FEAT-02. (Applies to FIN-REQ-31.1, FIN-REQ-31.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tT9hAYsDpj_CYP2ExeE8el" name="FIN-REQ-31.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_K0mWBj1qz1lLToF7KTmotj" name="FIN-REQ-32.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_Ub6F1c2ptm7zT-495srgXN" annotatedElement="_K0mWBj1qz1lLToF7KTmotj _E6qY3Tze_0MpQul9nhk_Me">
-          <body>Rationale: Availability: incoming product is neither lost nor discarded during a machine fault. Source: FC22. Feature: FIN-FEAT-03. (Applies to FIN-REQ-32.1, FIN-REQ-32.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_E6qY3Tze_0MpQul9nhk_Me" name="FIN-REQ-32.2">
-      </packagedElement>
-    </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_DmyAsM4LEfGJpPDutUy9XQ" name="RD2 Quality Inspection">
-      <packagedElement xmi:type="uml:Class" xmi:id="_ctC_zZimA8EsZ2VxXQNggm" name="FIN-REQ-05.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_Y-D0jYMJj-qfZBh75X_SmW" annotatedElement="_ctC_zZimA8EsZ2VxXQNggm _6C8qhKw992UYPhCrCX6iZl">
-          <body>Rationale: Only cakes within the regulatory tolerance may pass inspection. Source: UC13. Feature: FIN-FEAT-05. (Applies to FIN-REQ-05.1, FIN-REQ-05.2.)</body>
-        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_ctC_zZimA8EsZ2VxXQNggm" name="FIN-REQ-05.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_Y-D0jYMJj-qfZBh75X_SmW" annotatedElement="_ctC_zZimA8EsZ2VxXQNggm _6C8qhKw992UYPhCrCX6iZl">
+            <body>Rationale: Only cakes within the regulatory tolerance may pass inspection. Source: UC13. Feature: FIN-FEAT-05. (Applies to FIN-REQ-05.1, FIN-REQ-05.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_6C8qhKw992UYPhCrCX6iZl" name="FIN-REQ-05.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_xlj7fDNuRGwJSfhIENqKTT" name="FIN-REQ-06.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_FjF36M3_2tJdRdFrcUAfkx" annotatedElement="_xlj7fDNuRGwJSfhIENqKTT _iqt2xN5OXzzezpSWT9SqRz">
+            <body>Rationale: Only cakes passing visual inspection may proceed to packaging. Source: UC13. Feature: FIN-FEAT-06. (Applies to FIN-REQ-06.1, FIN-REQ-06.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_iqt2xN5OXzzezpSWT9SqRz" name="FIN-REQ-06.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_G9lUp--cLLpQJa3WIeMosr" name="FIN-REQ-07.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="__XQqKueEpymzFdL1gmEYDA" annotatedElement="_G9lUp--cLLpQJa3WIeMosr _smhSJnHLwAXcUnTf6MvPTV">
+            <body>Rationale: Product safety; only cakes without metal contamination may proceed to packaging. Source: UC13, FC24. Feature: FIN-FEAT-07. (Applies to FIN-REQ-07.1, FIN-REQ-07.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_smhSJnHLwAXcUnTf6MvPTV" name="FIN-REQ-07.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_gQU9gnSsHUUFRleDJAlNhC" name="FIN-REQ-08.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_uOs4mOvMsFwtee1jxpmopa" annotatedElement="_gQU9gnSsHUUFRleDJAlNhC _YlhQupaD70ahgOQ0TvJDK5">
+            <body>Rationale: Only compliant cakes may ship; non-compliant product is separated without stopping the line. Source: UC13, FC24. Feature: FIN-FEAT-08. (Applies to FIN-REQ-08.1, FIN-REQ-08.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_YlhQupaD70ahgOQ0TvJDK5" name="FIN-REQ-08.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_0NvWG9fpauiPCpgf8dNKdz" name="FIN-REQ-09">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_MoqjMgF0aeI3bLOx6vMiBg" annotatedElement="_0NvWG9fpauiPCpgf8dNKdz">
+            <body>Rationale: Traceability and reporting of quality events for recall. Source: UC13, FC24. Feature: FIN-FEAT-08. (Applies to FIN-REQ-09.)</body>
+          </ownedComment>
+        </packagedElement>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_6C8qhKw992UYPhCrCX6iZl" name="FIN-REQ-05.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_xlj7fDNuRGwJSfhIENqKTT" name="FIN-REQ-06.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_FjF36M3_2tJdRdFrcUAfkx" annotatedElement="_xlj7fDNuRGwJSfhIENqKTT _iqt2xN5OXzzezpSWT9SqRz">
-          <body>Rationale: Only cakes passing visual inspection may proceed to packaging. Source: UC13. Feature: FIN-FEAT-06. (Applies to FIN-REQ-06.1, FIN-REQ-06.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_iqt2xN5OXzzezpSWT9SqRz" name="FIN-REQ-06.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_G9lUp--cLLpQJa3WIeMosr" name="FIN-REQ-07.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="__XQqKueEpymzFdL1gmEYDA" annotatedElement="_G9lUp--cLLpQJa3WIeMosr _smhSJnHLwAXcUnTf6MvPTV">
-          <body>Rationale: Product safety; only cakes without metal contamination may proceed to packaging. Source: UC13, FC24. Feature: FIN-FEAT-07. (Applies to FIN-REQ-07.1, FIN-REQ-07.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_smhSJnHLwAXcUnTf6MvPTV" name="FIN-REQ-07.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_gQU9gnSsHUUFRleDJAlNhC" name="FIN-REQ-08.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_uOs4mOvMsFwtee1jxpmopa" annotatedElement="_gQU9gnSsHUUFRleDJAlNhC _YlhQupaD70ahgOQ0TvJDK5">
-          <body>Rationale: Only compliant cakes may ship; non-compliant product is separated without stopping the line. Source: UC13, FC24. Feature: FIN-FEAT-08. (Applies to FIN-REQ-08.1, FIN-REQ-08.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_YlhQupaD70ahgOQ0TvJDK5" name="FIN-REQ-08.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0NvWG9fpauiPCpgf8dNKdz" name="FIN-REQ-09">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_MoqjMgF0aeI3bLOx6vMiBg" annotatedElement="_0NvWG9fpauiPCpgf8dNKdz">
-          <body>Rationale: Traceability and reporting of quality events for recall. Source: UC13, FC24. Feature: FIN-FEAT-08. (Applies to FIN-REQ-09.)</body>
-        </ownedComment>
-      </packagedElement>
-    </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_FTRXsM4LEfGJpPDutUy9XQ" name="RD3 Packaging">
-      <packagedElement xmi:type="uml:Class" xmi:id="_5agT-OlCIxr89LcspvfiHb" name="FIN-REQ-21.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_eDuMaKUHT1dJW-6wicHTDQ" annotatedElement="_5agT-OlCIxr89LcspvfiHb _twjH_j3Db0BtCH9sYFsvZc">
-          <body>Rationale: Food safety and preservation; only properly wrapped cakes may proceed to shipping. Source: UC14, UC15. Feature: FIN-FEAT-10. (Applies to FIN-REQ-21.1, FIN-REQ-21.2.)</body>
-        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_5agT-OlCIxr89LcspvfiHb" name="FIN-REQ-21.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_eDuMaKUHT1dJW-6wicHTDQ" annotatedElement="_5agT-OlCIxr89LcspvfiHb _twjH_j3Db0BtCH9sYFsvZc">
+            <body>Rationale: Food safety and preservation; only properly wrapped cakes may proceed to shipping. Source: UC14, UC15. Feature: FIN-FEAT-10. (Applies to FIN-REQ-21.1, FIN-REQ-21.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_twjH_j3Db0BtCH9sYFsvZc" name="FIN-REQ-21.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_6Xjc3Gy4OrwdnaWW-iTRnX" name="FIN-REQ-23.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_XjHyxINEYNmHsKI5lFCsEG" annotatedElement="_6Xjc3Gy4OrwdnaWW-iTRnX _vaZtm9eaygGWI3r90T2kms _R95izWTG1E3s9nE_5jG_f3">
+            <body>Rationale: Only properly packed cakes may ship. Source: UC14, UC15. Feature: FIN-FEAT-11. (Applies to FIN-REQ-23.1, FIN-REQ-23.2, FIN-REQ-23.3.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_vaZtm9eaygGWI3r90T2kms" name="FIN-REQ-23.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_R95izWTG1E3s9nE_5jG_f3" name="FIN-REQ-23.3"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_4X5FPbxph9y5QC8WCHXrJa" name="FIN-REQ-24.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_26As4BhfN1LAcF4jSecBIQ" annotatedElement="_4X5FPbxph9y5QC8WCHXrJa _iDNdmTTTX2AZFY2jwikr3q">
+            <body>Rationale: Business rule for food safety and preservation. Source: UC14, UC15. Feature: FIN-FEAT-13. (Applies to FIN-REQ-24.1, FIN-REQ-24.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_iDNdmTTTX2AZFY2jwikr3q" name="FIN-REQ-24.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_8zkGJBJzcOwzZt-QD3zq8F" name="FIN-REQ-25">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_u5TaEwun6fYidjTWdePieG" annotatedElement="_8zkGJBJzcOwzZt-QD3zq8F">
+            <body>Rationale: Wrongly filled cases must be detected and reported while the line keeps running. Source: FC26. Feature: FIN-FEAT-12. (Applies to FIN-REQ-25.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_s1_-hQpt6EmcfxgsyREFg8" name="FIN-REQ-26.2">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_cPLbMcaQSUkjaAVHChXZFE" annotatedElement="_s1_-hQpt6EmcfxgsyREFg8">
+            <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-13. (Applies to FIN-REQ-26.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_f35Bvvh8wILzDHwB8Q7xgf" name="FIN-REQ-26.3">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_fvyEGe1QoDriWEoF8dg9u5" annotatedElement="_f35Bvvh8wILzDHwB8Q7xgf">
+            <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-12. (Applies to FIN-REQ-26.3.)</body>
+          </ownedComment>
+        </packagedElement>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_twjH_j3Db0BtCH9sYFsvZc" name="FIN-REQ-21.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_6Xjc3Gy4OrwdnaWW-iTRnX" name="FIN-REQ-23.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_XjHyxINEYNmHsKI5lFCsEG" annotatedElement="_6Xjc3Gy4OrwdnaWW-iTRnX _vaZtm9eaygGWI3r90T2kms _R95izWTG1E3s9nE_5jG_f3">
-          <body>Rationale: Only properly packed cakes may ship. Source: UC14, UC15. Feature: FIN-FEAT-11. (Applies to FIN-REQ-23.1, FIN-REQ-23.2, FIN-REQ-23.3.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_vaZtm9eaygGWI3r90T2kms" name="FIN-REQ-23.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_R95izWTG1E3s9nE_5jG_f3" name="FIN-REQ-23.3">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_4X5FPbxph9y5QC8WCHXrJa" name="FIN-REQ-24.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_26As4BhfN1LAcF4jSecBIQ" annotatedElement="_4X5FPbxph9y5QC8WCHXrJa _iDNdmTTTX2AZFY2jwikr3q">
-          <body>Rationale: Business rule for food safety and preservation. Source: UC14, UC15. Feature: FIN-FEAT-13. (Applies to FIN-REQ-24.1, FIN-REQ-24.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_iDNdmTTTX2AZFY2jwikr3q" name="FIN-REQ-24.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_8zkGJBJzcOwzZt-QD3zq8F" name="FIN-REQ-25">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_u5TaEwun6fYidjTWdePieG" annotatedElement="_8zkGJBJzcOwzZt-QD3zq8F">
-          <body>Rationale: Wrongly filled cases must be detected and reported while the line keeps running. Source: FC26. Feature: FIN-FEAT-12. (Applies to FIN-REQ-25.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_s1_-hQpt6EmcfxgsyREFg8" name="FIN-REQ-26.2">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_cPLbMcaQSUkjaAVHChXZFE" annotatedElement="_s1_-hQpt6EmcfxgsyREFg8">
-          <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-13. (Applies to FIN-REQ-26.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_f35Bvvh8wILzDHwB8Q7xgf" name="FIN-REQ-26.3">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_fvyEGe1QoDriWEoF8dg9u5" annotatedElement="_f35Bvvh8wILzDHwB8Q7xgf">
-          <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-12. (Applies to FIN-REQ-26.3.)</body>
-        </ownedComment>
-      </packagedElement>
-    </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_H_POsM4LEfGJpPDutUy9XQ" name="RD4 Holding Area">
-      <packagedElement xmi:type="uml:Class" xmi:id="_T1M_Uwk-x2xDjPQNrFLbH5" name="FIN-REQ-33.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_s4CQg7U9H94S6Y3cHJjtGr" annotatedElement="_T1M_Uwk-x2xDjPQNrFLbH5 _Ej2ldvLBlVLBHrDMNuq8tE">
-          <body>Rationale: Availability: the holding area absorbs short wrapping outages. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-33.1, FIN-REQ-33.2.)</body>
-        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_T1M_Uwk-x2xDjPQNrFLbH5" name="FIN-REQ-33.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_s4CQg7U9H94S6Y3cHJjtGr" annotatedElement="_T1M_Uwk-x2xDjPQNrFLbH5 _Ej2ldvLBlVLBHrDMNuq8tE">
+            <body>Rationale: Availability: the holding area absorbs short wrapping outages. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-33.1, FIN-REQ-33.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_Ej2ldvLBlVLBHrDMNuq8tE" name="FIN-REQ-33.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3yebRs-yOItuVrOA7vJURj" name="FIN-REQ-34">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_FWxoJpOO0rVtb9vFXIjX64" annotatedElement="_3yebRs-yOItuVrOA7vJURj">
+            <body>Rationale: Prevents overflow by stopping new pans at depositing. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-34.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_kaEG5AmRaXSYLjjfMo9GNR" name="FIN-REQ-35">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_t7x-SVhDSQxYLmVhzodqxZ" annotatedElement="_kaEG5AmRaXSYLjjfMo9GNR">
+            <body>Rationale: Restores normal flow after the fault. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-35.)</body>
+          </ownedComment>
+        </packagedElement>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Ej2ldvLBlVLBHrDMNuq8tE" name="FIN-REQ-33.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_3yebRs-yOItuVrOA7vJURj" name="FIN-REQ-34">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_FWxoJpOO0rVtb9vFXIjX64" annotatedElement="_3yebRs-yOItuVrOA7vJURj">
-          <body>Rationale: Prevents overflow by stopping new pans at depositing. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-34.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_kaEG5AmRaXSYLjjfMo9GNR" name="FIN-REQ-35">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_t7x-SVhDSQxYLmVhzodqxZ" annotatedElement="_kaEG5AmRaXSYLjjfMo9GNR">
-          <body>Rationale: Restores normal flow after the fault. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-35.)</body>
-        </ownedComment>
-      </packagedElement>
-    </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_JrXZUM4LEfGJpPDutUy9XQ" name="RD5 Palletising">
-      <packagedElement xmi:type="uml:Class" xmi:id="_NzSgjQE5yxaFOBvk_tOVEr" name="FIN-REQ-27">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_l_vVuqxmLZdWZOmEyOzK6r" annotatedElement="_NzSgjQE5yxaFOBvk_tOVEr">
-          <body>Rationale: Cartoned cakes are staged for shipping on pallets. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-27.)</body>
-        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_NzSgjQE5yxaFOBvk_tOVEr" name="FIN-REQ-27">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_l_vVuqxmLZdWZOmEyOzK6r" annotatedElement="_NzSgjQE5yxaFOBvk_tOVEr">
+            <body>Rationale: Cartoned cakes are staged for shipping on pallets. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-27.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_K71hAMvRQzKCgQgHW_0vV1" name="FIN-REQ-28.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_AaFCSkm-ooDSgGXHzMthCl" annotatedElement="_K71hAMvRQzKCgQgHW_0vV1 _4G59Au3veS5MPm5Tn_kW90">
+            <body>Rationale: A full pallet must be secured while palletising continues without waiting. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-28.1, FIN-REQ-28.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_4G59Au3veS5MPm5Tn_kW90" name="FIN-REQ-28.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_AqULhGVOWR0tPVrJzNxtAN" name="FIN-REQ-29">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_jdDNAMRiErbujy1XeW4qJ2" annotatedElement="_AqULhGVOWR0tPVrJzNxtAN">
+            <body>Rationale: Secures the pallet for transport. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-29.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_z79hB79Wy28QYsIfkZjaD2" name="FIN-REQ-30">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_Y63ccegtFm1njgnr998Uhr" annotatedElement="_z79hB79Wy28QYsIfkZjaD2">
+            <body>Rationale: Hands the pallet to Production &amp; Logistics; batch IDs keep traceability intact. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-30.)</body>
+          </ownedComment>
+        </packagedElement>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_K71hAMvRQzKCgQgHW_0vV1" name="FIN-REQ-28.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_AaFCSkm-ooDSgGXHzMthCl" annotatedElement="_K71hAMvRQzKCgQgHW_0vV1 _4G59Au3veS5MPm5Tn_kW90">
-          <body>Rationale: A full pallet must be secured while palletising continues without waiting. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-28.1, FIN-REQ-28.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_4G59Au3veS5MPm5Tn_kW90" name="FIN-REQ-28.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_AqULhGVOWR0tPVrJzNxtAN" name="FIN-REQ-29">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_jdDNAMRiErbujy1XeW4qJ2" annotatedElement="_AqULhGVOWR0tPVrJzNxtAN">
-          <body>Rationale: Secures the pallet for transport. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-29.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_z79hB79Wy28QYsIfkZjaD2" name="FIN-REQ-30">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_Y63ccegtFm1njgnr998Uhr" annotatedElement="_z79hB79Wy28QYsIfkZjaD2">
-          <body>Rationale: Hands the pallet to Production &amp; Logistics; batch IDs keep traceability intact. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-30.)</body>
-        </ownedComment>
-      </packagedElement>
-    </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_LMcKgM4LEfGJpPDutUy9XQ" name="RD6 Pan Washing and Verification">
-      <packagedElement xmi:type="uml:Class" xmi:id="_VHlw6s5wWOroxjtBhYeNvu" name="FIN-REQ-11.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_qCBttJkXKBydddGIz7SqOL" annotatedElement="_VHlw6s5wWOroxjtBhYeNvu _vglFU9leuBZHYyEBrxKbg2 _Ir6zOKRuhlXHz-6q9rMs_l">
-          <body>Rationale: Only fit pans may re-enter production. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-11.1, FIN-REQ-11.2, FIN-REQ-11.3.)</body>
-        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_VHlw6s5wWOroxjtBhYeNvu" name="FIN-REQ-11.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_qCBttJkXKBydddGIz7SqOL" annotatedElement="_VHlw6s5wWOroxjtBhYeNvu _vglFU9leuBZHYyEBrxKbg2 _Ir6zOKRuhlXHz-6q9rMs_l">
+            <body>Rationale: Only fit pans may re-enter production. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-11.1, FIN-REQ-11.2, FIN-REQ-11.3.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_vglFU9leuBZHYyEBrxKbg2" name="FIN-REQ-11.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_Ir6zOKRuhlXHz-6q9rMs_l" name="FIN-REQ-11.3"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_P9U0OSDRlCCy2XaflpZPEI" name="FIN-REQ-12.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_r5ju-5FGMoHzumeWPWtPBZ" annotatedElement="_P9U0OSDRlCCy2XaflpZPEI _kEosNeLJvFZJX_ucvqIDIT">
+            <body>Rationale: Keeps the pan loop supplied and keeps damaged or dirty pans out of production. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-12.1, FIN-REQ-12.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_kEosNeLJvFZJX_ucvqIDIT" name="FIN-REQ-12.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_ZFgE0_FbvIY3nXCZY72Co5" name="FIN-REQ-13">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_AQULvs9dvdemNpdaDWxpng" annotatedElement="_ZFgE0_FbvIY3nXCZY72Co5">
+            <body>Rationale: The pan count must be kept up to date for the pan-stock rule. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-13.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_KBvwNsmJ8VpoAuXnm-sMkb" name="FIN-REQ-15">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_3aBBM_Pip_dac85gtsYdzn" annotatedElement="_KBvwNsmJ8VpoAuXnm-sMkb">
+            <body>Rationale: Pans diverted after a wrong fill weight must be cleaned and reused. Source: UC12, FC9. Feature: FIN-FEAT-17. (Applies to FIN-REQ-15.)</body>
+          </ownedComment>
+        </packagedElement>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_vglFU9leuBZHYyEBrxKbg2" name="FIN-REQ-11.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Ir6zOKRuhlXHz-6q9rMs_l" name="FIN-REQ-11.3">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_P9U0OSDRlCCy2XaflpZPEI" name="FIN-REQ-12.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_r5ju-5FGMoHzumeWPWtPBZ" annotatedElement="_P9U0OSDRlCCy2XaflpZPEI _kEosNeLJvFZJX_ucvqIDIT">
-          <body>Rationale: Keeps the pan loop supplied and keeps damaged or dirty pans out of production. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-12.1, FIN-REQ-12.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_kEosNeLJvFZJX_ucvqIDIT" name="FIN-REQ-12.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_ZFgE0_FbvIY3nXCZY72Co5" name="FIN-REQ-13">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_AQULvs9dvdemNpdaDWxpng" annotatedElement="_ZFgE0_FbvIY3nXCZY72Co5">
-          <body>Rationale: The pan count must be kept up to date for the pan-stock rule. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-13.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_KBvwNsmJ8VpoAuXnm-sMkb" name="FIN-REQ-15">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_3aBBM_Pip_dac85gtsYdzn" annotatedElement="_KBvwNsmJ8VpoAuXnm-sMkb">
-          <body>Rationale: Pans diverted after a wrong fill weight must be cleaned and reused. Source: UC12, FC9. Feature: FIN-FEAT-17. (Applies to FIN-REQ-15.)</body>
-        </ownedComment>
-      </packagedElement>
-    </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_MZP74M4LEfGJpPDutUy9XQ" name="RD7 Pan Stock and Washing Catch-up">
-      <packagedElement xmi:type="uml:Class" xmi:id="_fzjVj-zG5eISJVAG7_rr0x" name="FIN-REQ-14">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_W978nj6mM6l93eyL9kCqoS" annotatedElement="_fzjVj-zG5eISJVAG7_rr0x">
-          <body>Rationale: Business rule: a backlog of one full production system of clean pans must always exist. Source: UC12. Feature: FIN-FEAT-18. (Applies to FIN-REQ-14.)</body>
-        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_fzjVj-zG5eISJVAG7_rr0x" name="FIN-REQ-14">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_W978nj6mM6l93eyL9kCqoS" annotatedElement="_fzjVj-zG5eISJVAG7_rr0x">
+            <body>Rationale: Business rule: a backlog of one full production system of clean pans must always exist. Source: UC12. Feature: FIN-FEAT-18. (Applies to FIN-REQ-14.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_iTANEBhAxQFknjLLlzjkXn" name="FIN-REQ-16">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_NJ8Y3vijYtFaYk8e1yN6bZ" annotatedElement="_iTANEBhAxQFknjLLlzjkXn">
+            <body>Rationale: Depositing must not stall for lack of a pan. Source: FC8. Feature: FIN-FEAT-18. (Applies to FIN-REQ-16.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_HlNfyeG6hf9qIJ8iDc574W" name="FIN-REQ-17">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_5XF7lHf0EKIvBlj4cMqlfq" annotatedElement="_HlNfyeG6hf9qIJ8iDc574W">
+            <body>Rationale: Lets depositing fill fewer pans when stock runs low. Source: UC12, FC23. Feature: FIN-FEAT-18. (Applies to FIN-REQ-17.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_pIHZcsDH6MkCySFwkeSLX1" name="FIN-REQ-18">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_oyrVumOZ8VKRdnbpefiPGf" annotatedElement="_pIHZcsDH6MkCySFwkeSLX1">
+            <body>Rationale: Availability: the pan pool buffers short outages of the washing station. Source: FC23. Feature: FIN-FEAT-18. (Applies to FIN-REQ-18.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_CEdf-8EELEyxyArrv-_ve0" name="FIN-REQ-19">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_5dJa5UMl7vEQqT0567AT2J" annotatedElement="_CEdf-8EELEyxyArrv-_ve0">
+            <body>Rationale: Prevents restarting the washing station in an unsafe state. Source: UC12. Feature: FIN-FEAT-19. (Applies to FIN-REQ-19.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_rmYaREz-Gh6qcl-fKelylI" name="FIN-REQ-20.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_HDIh6xr2uPvb1fqp4d1d3G" annotatedElement="_rmYaREz-Gh6qcl-fKelylI _tZhljRxha7i50u6Ie0OwsI _D5JvFN9sdwUAbwnierFWsA">
+            <body>Rationale: Recovers the pan backlog after a washing-station fault without running fast longer than needed. Source: UC12. Feature: FIN-FEAT-19. (Applies to FIN-REQ-20.1, FIN-REQ-20.2, FIN-REQ-20.3.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_tZhljRxha7i50u6Ie0OwsI" name="FIN-REQ-20.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_D5JvFN9sdwUAbwnierFWsA" name="FIN-REQ-20.3"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_iTANEBhAxQFknjLLlzjkXn" name="FIN-REQ-16">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_NJ8Y3vijYtFaYk8e1yN6bZ" annotatedElement="_iTANEBhAxQFknjLLlzjkXn">
-          <body>Rationale: Depositing must not stall for lack of a pan. Source: FC8. Feature: FIN-FEAT-18. (Applies to FIN-REQ-16.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_HlNfyeG6hf9qIJ8iDc574W" name="FIN-REQ-17">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_5XF7lHf0EKIvBlj4cMqlfq" annotatedElement="_HlNfyeG6hf9qIJ8iDc574W">
-          <body>Rationale: Lets depositing fill fewer pans when stock runs low. Source: UC12, FC23. Feature: FIN-FEAT-18. (Applies to FIN-REQ-17.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_pIHZcsDH6MkCySFwkeSLX1" name="FIN-REQ-18">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_oyrVumOZ8VKRdnbpefiPGf" annotatedElement="_pIHZcsDH6MkCySFwkeSLX1">
-          <body>Rationale: Availability: the pan pool buffers short outages of the washing station. Source: FC23. Feature: FIN-FEAT-18. (Applies to FIN-REQ-18.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_CEdf-8EELEyxyArrv-_ve0" name="FIN-REQ-19">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_5dJa5UMl7vEQqT0567AT2J" annotatedElement="_CEdf-8EELEyxyArrv-_ve0">
-          <body>Rationale: Prevents restarting the washing station in an unsafe state. Source: UC12. Feature: FIN-FEAT-19. (Applies to FIN-REQ-19.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_rmYaREz-Gh6qcl-fKelylI" name="FIN-REQ-20.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_HDIh6xr2uPvb1fqp4d1d3G" annotatedElement="_rmYaREz-Gh6qcl-fKelylI _tZhljRxha7i50u6Ie0OwsI _D5JvFN9sdwUAbwnierFWsA">
-          <body>Rationale: Recovers the pan backlog after a washing-station fault without running fast longer than needed. Source: UC12. Feature: FIN-FEAT-19. (Applies to FIN-REQ-20.1, FIN-REQ-20.2, FIN-REQ-20.3.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tZhljRxha7i50u6Ie0OwsI" name="FIN-REQ-20.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_D5JvFN9sdwUAbwnierFWsA" name="FIN-REQ-20.3">
-      </packagedElement>
-    </packagedElement>
       <packagedElement xmi:type="uml:Package" xmi:id="_NrtCQM4LEfGJpPDutUy9XQ" name="RD8 Line Health and Band Response">
-      <packagedElement xmi:type="uml:Class" xmi:id="_O0VqC4T_ruGjcTgJbhSK0t" name="FIN-REQ-36">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_W7Vosi7Var5VrKgAMPfADJ" annotatedElement="_O0VqC4T_ruGjcTgJbhSK0t">
-          <body>Rationale: Lets the Health Monitor detect stopped stations and start recovery. Source: FC22, FC23, FC25, FC28. Feature: FIN-FEAT-21. (Applies to FIN-REQ-36.)</body>
-        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_O0VqC4T_ruGjcTgJbhSK0t" name="FIN-REQ-36">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_W7Vosi7Var5VrKgAMPfADJ" annotatedElement="_O0VqC4T_ruGjcTgJbhSK0t">
+            <body>Rationale: Lets the Health Monitor detect stopped stations and start recovery. Source: FC22, FC23, FC25, FC28. Feature: FIN-FEAT-21. (Applies to FIN-REQ-36.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_pK3b0qHaeiDReBxG_O8Y1u" name="FIN-REQ-37.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_F-6mnZVVEKoG4X2c59LbgD" annotatedElement="_pK3b0qHaeiDReBxG_O8Y1u _4yYVHw79pJJlDROoyF_F2o">
+            <body>Rationale: Downstream sections keep running until empty. Source: UC2, FC19. Feature: FIN-FEAT-22. (Applies to FIN-REQ-37.1, FIN-REQ-37.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_4yYVHw79pJJlDROoyF_F2o" name="FIN-REQ-37.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_2KBgvCG3QhXJg3Se1QsY2E" name="FIN-REQ-38.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_Sz5oo6SN_YpvVGpxpx2fyu" annotatedElement="_2KBgvCG3QhXJg3Se1QsY2E _0GiHr2-yYlYkpHWqTZ1a50">
+            <body>Rationale: Downstream sections keep running until empty. Source: UC2, FC19, FC20. Feature: FIN-FEAT-22. (Applies to FIN-REQ-38.1, FIN-REQ-38.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_0GiHr2-yYlYkpHWqTZ1a50" name="FIN-REQ-38.2"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_pK3b0qHaeiDReBxG_O8Y1u" name="FIN-REQ-37.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_F-6mnZVVEKoG4X2c59LbgD" annotatedElement="_pK3b0qHaeiDReBxG_O8Y1u _4yYVHw79pJJlDROoyF_F2o">
-          <body>Rationale: Downstream sections keep running until empty. Source: UC2, FC19. Feature: FIN-FEAT-22. (Applies to FIN-REQ-37.1, FIN-REQ-37.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_4yYVHw79pJJlDROoyF_F2o" name="FIN-REQ-37.2">
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_2KBgvCG3QhXJg3Se1QsY2E" name="FIN-REQ-38.1">
-        <ownedComment xmi:type="uml:Comment" xmi:id="_Sz5oo6SN_YpvVGpxpx2fyu" annotatedElement="_2KBgvCG3QhXJg3Se1QsY2E _0GiHr2-yYlYkpHWqTZ1a50">
-          <body>Rationale: Downstream sections keep running until empty. Source: UC2, FC19, FC20. Feature: FIN-FEAT-22. (Applies to FIN-REQ-38.1, FIN-REQ-38.2.)</body>
-        </ownedComment>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0GiHr2-yYlYkpHWqTZ1a50" name="FIN-REQ-38.2">
-      </packagedElement>
-    </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_5sIVnFJET5HuafS5Z3Txoz" name="FIN Traceability">
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_1OmvAp0n3Q2sSK-SeP6lP-" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_TKwgEDEaqhzyNnytoB5aoV"/>
@@ -272,9 +251,9 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_2HJMlQHxdCVjjn3Ua0lkml" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_P9NBqgq9d1gRqAsdewy1qw"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_N8mP45b80e6eq_rLq3_dJ9" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_tT9hAYsDpj_CYP2ExeE8el"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_g89Mq57KmvbtqpzHCMjYVN" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_tT9hAYsDpj_CYP2ExeE8el"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_SB2Mvi0ySBmTv4hwEaRsJu" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_K0mWBj1qz1lLToF7KTmotj"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_SB2Mvi0ySBmTv4hwEaRsJu" client="_BBTzQM4LEfGJpPDutUy9XQ" supplier="_K0mWBj1qz1lLToF7KTmotj"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_-55jc_dJcyCp7cHL2FzUsR" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_K0mWBj1qz1lLToF7KTmotj"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_8jktkLlR9QNQ9XwFr7ohry" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_E6qY3Tze_0MpQul9nhk_Me"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_8jktkLlR9QNQ9XwFr7ohry" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_BBTzQM4LEfGJpPDutUy9XQ"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_rzu-yW3j7d_C-y6bY1PAq5" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_E6qY3Tze_0MpQul9nhk_Me"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_5pKIRk6EDETBJd6ve2NSa4" client="_tnxaML2MEfGO0peuS-3gZA" supplier="_ctC_zZimA8EsZ2VxXQNggm"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="__Aq8y2M4BTGNpNvgG2otBI" client="_JcdCEL2NEfGO0peuS-3gZA" supplier="_ctC_zZimA8EsZ2VxXQNggm"/>
@@ -427,244 +406,244 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="__Wcs_lTfC7RL1DiF7UhQp2" client="_YeIkd4F1eia3J5757fNUcS" supplier="_0GiHr2-yYlYkpHWqTZ1a50"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_8l1LATdqvgxi1J728O1kdy" name="FIN Verification">
-      <packagedElement xmi:type="uml:Activity" xmi:id="_Sccr-TnvBC18Jw0LkggBMY" name="FIN-TC-01 Verify cooled cake intake" clientDependency="_z46VtAZdSNOvcR1FF3EUZK">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_Sccr-TnvBC18Jw0LkggBMY" name="FIN-TC-01 Verify cooled cake intake">
         <ownedComment xmi:type="uml:Comment" xmi:id="_p93HWb7-zVZqqLjafAubac">
-          <body>Verifies: FIN-REQ-01. Stimulus: Send "Cooled cake" with batch ID B1, marked as released by Thermal Processing. Expected result: The cake is received in its pan with B1 attached.</body>
+          <body>Verifies: FIN-REQ-01. Stimulus: Send &quot;Cooled cake&quot; with batch ID B1, marked as released by Thermal Processing. Expected result: The cake is received in its pan with B1 attached.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_9NRG3P9JsPRZ6s1uVkEH-B" name="FIN-TC-02 Verify rejection of unreleased cake" clientDependency="_ye68al9znm7rWjY8A-ZYS5">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_9NRG3P9JsPRZ6s1uVkEH-B" name="FIN-TC-02 Verify rejection of unreleased cake">
         <ownedComment xmi:type="uml:Comment" xmi:id="_YDeTGVNVe96VLExzyqHsgo">
           <body>Verifies: FIN-REQ-02. Stimulus: Present a cake that Thermal Processing has not released as safe-temperature. Expected result: The cake is not accepted for depanning.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_8bGGcyC_bBqy3BvHB6LRha" name="FIN-TC-03 Verify depanning and routing" clientDependency="_q-2-5I0vv7YkwGdRjWJ9fL _nLTcPrOKT1zOY7JIoeOO0N _EtmjHZhAwn_ap5dVVLa9Fl">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_8bGGcyC_bBqy3BvHB6LRha" name="FIN-TC-03 Verify depanning and routing">
         <ownedComment xmi:type="uml:Comment" xmi:id="_tprhhGtfMPnu_K5sL2uSBl">
           <body>Verifies: FIN-REQ-04.1, FIN-REQ-04.2, FIN-REQ-04.3. Stimulus: Depan a cake that comes out cleanly. Expected result: The cake is separated from its pan. The cake is routed toward Weight Check, and the empty pan toward washing.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_7H1h-2zl3VVsVCjYC2HNvP" name="FIN-TC-04 Verify batch ID traceability" clientDependency="_kcF5GKNnuikREb2GBcvPbe">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_7H1h-2zl3VVsVCjYC2HNvP" name="FIN-TC-04 Verify batch ID traceability">
         <ownedComment xmi:type="uml:Comment" xmi:id="_nS6sBTYdkMrm5_AVphlVj-">
-          <body>Verifies: FIN-REQ-03. Stimulus: Follow B1 from arrival to the "Pallet ready for shipment" signal. Expected result: B1 is associated with the cake at every stage and appears in the pallet's batch IDs.</body>
+          <body>Verifies: FIN-REQ-03. Stimulus: Follow B1 from arrival to the &quot;Pallet ready for shipment&quot; signal. Expected result: B1 is associated with the cake at every stage and appears in the pallet's batch IDs.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_aARvCAEJgyi9_mHVpHbk9g" name="FIN-TC-05 Verify stuck-cake rejection" clientDependency="_gNGQC7PeHuHLDdjoS2-qlU _sT_8FaxDXBgwRrV_DB_SH- _3P1I3_NGYxh7KtkTKCzD-Y">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_aARvCAEJgyi9_mHVpHbk9g" name="FIN-TC-05 Verify stuck-cake rejection">
         <ownedComment xmi:type="uml:Comment" xmi:id="_8ir8B00SEz2RTEQoqSnO78">
           <body>Verifies: FIN-REQ-31.1, FIN-REQ-31.2, FIN-REQ-26.1. Stimulus: Simulate a stuck or broken cake at depanning (FC21). Expected result: The cake is rejected and never reaches inspection. Its pan is sent to washing. An event with reason, time and batch ID is published.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_SDL6FomD2VHFIw1j6HcQgY" name="FIN-TC-06 Verify hold on depanning fault" clientDependency="_1dFMre-safIbNflO8I_n4d">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_SDL6FomD2VHFIw1j6HcQgY" name="FIN-TC-06 Verify hold on depanning fault">
         <ownedComment xmi:type="uml:Comment" xmi:id="_nAl65x4ZEvVZkJAuXCafX0">
           <body>Verifies: FIN-REQ-32.1. Stimulus: Stop the depanning machine's response and send cakes to the depanning station (FC22). Expected result: The cakes are held. None are lost or discarded.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_w1TiGbBUQnDqCE9KuOsvYU" name="FIN-TC-07 Verify processing after depanning repair" clientDependency="_doDluOURNT63Sd3m7EN8jI">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_w1TiGbBUQnDqCE9KuOsvYU" name="FIN-TC-07 Verify processing after depanning repair">
         <ownedComment xmi:type="uml:Comment" xmi:id="_Mw7RSjGk-_SDYiPkHfzDg4">
-          <body>Verifies: FIN-REQ-32.2. Stimulus: Following FIN-TC-06, send "Repair confirmed" for the depanning machine. Expected result: The held cakes are processed.</body>
+          <body>Verifies: FIN-REQ-32.2. Stimulus: Following FIN-TC-06, send &quot;Repair confirmed&quot; for the depanning machine. Expected result: The held cakes are processed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_vs2IKoTx1NtW9BrJ6nJgRB" name="FIN-TC-08 Verify weighing within tolerance" clientDependency="_HdnNGsGKIChoy_mY6t82A0">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_vs2IKoTx1NtW9BrJ6nJgRB" name="FIN-TC-08 Verify weighing within tolerance">
         <ownedComment xmi:type="uml:Comment" xmi:id="_fz9GF8Dlxp_JMNYRC9ujri">
           <body>Verifies: FIN-REQ-05.1. Stimulus: Send a cake at target weight to the weigh station. Expected result: The cake is weighed and the result is pass.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_b2DPrqBcBmupy2Sxl5BaNB" name="FIN-TC-09 Verify weight outside tolerance" clientDependency="_cp9iFBFdiz9WFNQvCDr3Wp">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_b2DPrqBcBmupy2Sxl5BaNB" name="FIN-TC-09 Verify weight outside tolerance">
         <ownedComment xmi:type="uml:Comment" xmi:id="_sJxTSZZ-z_1Lisbi28wWem">
           <body>Verifies: FIN-REQ-05.2. Stimulus: Send one cake just below and one just above the tolerance limits. Expected result: Both are marked failed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_J1F-z4YC8BNgsj-7DqEfyc" name="FIN-TC-10 Verify visual pass" clientDependency="_enqB1ZgCVf6mjtDp6Hyt2H">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_J1F-z4YC8BNgsj-7DqEfyc" name="FIN-TC-10 Verify visual pass">
         <ownedComment xmi:type="uml:Comment" xmi:id="_tdHljVNgY8CYVebglRGB0G">
           <body>Verifies: FIN-REQ-06.1. Stimulus: Send a cake with acceptable appearance. Expected result: Its appearance is inspected and the result is pass.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_iiHy8uPAEtqBiue-qdEpTu" name="FIN-TC-11 Verify visual failure" clientDependency="_Ua_HnxtRGs_OZNz4EGgvKr">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_iiHy8uPAEtqBiue-qdEpTu" name="FIN-TC-11 Verify visual failure">
         <ownedComment xmi:type="uml:Comment" xmi:id="_6_Qrq3YFIOK4memluVTako">
           <body>Verifies: FIN-REQ-06.2. Stimulus: Send a cake with an unsatisfactory appearance. Expected result: The cake is marked failed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_tXJVo89Rz3tT8eyq5Am_As" name="FIN-TC-12 Verify clean metal scan" clientDependency="_f2UEHG6FqVJOao_hfpsxRu">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_tXJVo89Rz3tT8eyq5Am_As" name="FIN-TC-12 Verify clean metal scan">
         <ownedComment xmi:type="uml:Comment" xmi:id="_d3iBOx4XulKaLAX-Ymxjdb">
           <body>Verifies: FIN-REQ-07.1. Stimulus: Send a clean cake through the metal scan. Expected result: The cake is scanned and the result is pass.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_TSzb02-xS9TPD3684rzGCa" name="FIN-TC-13 Verify metal detection" clientDependency="_VHJmpXjxLRpoiX0eCEV7UW">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_TSzb02-xS9TPD3684rzGCa" name="FIN-TC-13 Verify metal detection">
         <ownedComment xmi:type="uml:Comment" xmi:id="_oJU2O0YyJjlQ8Peh4OQf5_">
           <body>Verifies: FIN-REQ-07.2. Stimulus: Send a cake containing a metal contaminant (FC24). Expected result: The cake is marked failed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_YXFX2dATH51F2z-3_4p_nR" name="FIN-TC-14 Verify compliant cake proceeds" clientDependency="_-XJWDjkko4JfQOOr4hxCMi">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_YXFX2dATH51F2z-3_4p_nR" name="FIN-TC-14 Verify compliant cake proceeds">
         <ownedComment xmi:type="uml:Comment" xmi:id="_clsZ_X9OP75ZeypPWbmBse">
           <body>Verifies: FIN-REQ-08.1. Stimulus: Send a cake that passes weight, visual and metal checks. Expected result: The cake proceeds to packaging.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_6L0S37RljoAXBPGDt7Gc0R" name="FIN-TC-15 Verify rejection of failed cakes" clientDependency="_yliydC-Jnw3SokoZwPid1g _s-nS2fWTdTOPpRi0bWQEpS">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_6L0S37RljoAXBPGDt7Gc0R" name="FIN-TC-15 Verify rejection of failed cakes">
         <ownedComment xmi:type="uml:Comment" xmi:id="_8d1chGbjrRiCN_YJm6JaYG">
           <body>Verifies: FIN-REQ-08.1, FIN-REQ-08.2. Stimulus: Run three cakes, each failing exactly one check (weight, visual, metal). Expected result: Each goes to the reject bin and none proceeds to packaging. The line keeps running.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_cWdK1BYipoMRIVdcqa_KNZ" name="FIN-TC-16 Verify failed-cake event" clientDependency="_IBu9cdcE-O3JbdzR1yqiHT">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_cWdK1BYipoMRIVdcqa_KNZ" name="FIN-TC-16 Verify failed-cake event">
         <ownedComment xmi:type="uml:Comment" xmi:id="_8JdhGTaKgeyp4envgGSBJJ">
           <body>Verifies: FIN-REQ-09. Stimulus: Fail a cake at any inspection check. Expected result: An event with reason, time and batch ID is published for that cake.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_3pJ74tmd7IA1rNOE6bb_Bv" name="FIN-TC-17 Verify wrapping" clientDependency="_ItX5dDJjvAKvqwKyxrRKGn">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_3pJ74tmd7IA1rNOE6bb_Bv" name="FIN-TC-17 Verify wrapping">
         <ownedComment xmi:type="uml:Comment" xmi:id="_-bv4yWL9dw2hV2Fb_5PIF9">
           <body>Verifies: FIN-REQ-21.1. Stimulus: Send an inspected cake to the wrapping station. Expected result: The cake is wrapped.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_cGlPrCUYmEoa_edLQZCkur" name="FIN-TC-18 Verify wrap verification" clientDependency="_AvKHe16VEkjDRXhr6IU4DY">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_cGlPrCUYmEoa_edLQZCkur" name="FIN-TC-18 Verify wrap verification">
         <ownedComment xmi:type="uml:Comment" xmi:id="_JbAozrt15xWDpJkl14zJkC">
           <body>Verifies: FIN-REQ-21.2. Stimulus: Wrap one cake correctly and one with a wrapping defect. Expected result: The correct wrap passes verification. The defective wrap is detected.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_PY6miTbofQ23cWd-PrFJGM" name="FIN-TC-19 Verify cartoning and sealing" clientDependency="_1WKyVjkwfZvYJ12Dn9Ez__ _XYEhiV8_lSjFYXwv0yEbDA">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_PY6miTbofQ23cWd-PrFJGM" name="FIN-TC-19 Verify cartoning and sealing">
         <ownedComment xmi:type="uml:Comment" xmi:id="_tCl9miiljEiH2uSseC_kpK">
           <body>Verifies: FIN-REQ-23.1, FIN-REQ-23.2. Stimulus: Send a properly wrapped cake to the cartoning station. Expected result: The cake is packed in a carton and the carton is sealed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_nZju8I2ivXi_AK3ckIS6K5" name="FIN-TC-20 Verify carton verification" clientDependency="_ODPrpCdkG5VCxgH07jOxB4">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_nZju8I2ivXi_AK3ckIS6K5" name="FIN-TC-20 Verify carton verification">
         <ownedComment xmi:type="uml:Comment" xmi:id="_ryAzFUkENDQHmdQLwzMCLD">
           <body>Verifies: FIN-REQ-23.3. Stimulus: Carton one cake correctly and one with a cartoning defect. Expected result: The correct carton passes verification. The defective one is detected.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_2hemGT3Lbi99d_EEtQcl68" name="FIN-TC-21 Verify shipping of proper cakes" clientDependency="_Qt9MrUCJ5G9KjKqlSXEniQ">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_2hemGT3Lbi99d_EEtQcl68" name="FIN-TC-21 Verify shipping of proper cakes">
         <ownedComment xmi:type="uml:Comment" xmi:id="_VgSdu03oT_3tmeWdMBVEal">
           <body>Verifies: FIN-REQ-24.1. Stimulus: Send a cake that is both properly wrapped and properly cartoned. Expected result: The cake proceeds to the shipping bin.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_i78om9I80XU4OEjmkoEl68" name="FIN-TC-22 Verify refuse of improper cakes" clientDependency="_mCg7BHH_tbt4MGgihaxGPc _JVhVF5xIU_rhKdBs_Pl29o">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_i78om9I80XU4OEjmkoEl68" name="FIN-TC-22 Verify refuse of improper cakes">
         <ownedComment xmi:type="uml:Comment" xmi:id="_K98_GpPzRix6Zr8v4JOfkx">
           <body>Verifies: FIN-REQ-24.2, FIN-REQ-26.2. Stimulus: Send one cake that is improperly wrapped and one that is improperly cartoned. Expected result: Both go to the refuse bin. An event is published for each.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_caX3Cs3BrSCgQj32RqrM6J" name="FIN-TC-23 Verify correct case weight" clientDependency="_4JRlxNHqn04yn2HLCYr1k-">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_caX3Cs3BrSCgQj32RqrM6J" name="FIN-TC-23 Verify correct case weight">
         <ownedComment xmi:type="uml:Comment" xmi:id="_r6_J4zgkyXz_HDsPMsjFfR">
           <body>Verifies: FIN-REQ-25. Stimulus: Send a sealed case of correct weight to the case weight check. Expected result: The weight is checked and no event is published.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_maNvFDX-jl72XW9xBk259Z" name="FIN-TC-24 Verify incorrect case weight" clientDependency="_EU5rleJFRpilh8J6Oqxh5g _0GSFzdmAJdn0I2xsMdF9e4">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_maNvFDX-jl72XW9xBk259Z" name="FIN-TC-24 Verify incorrect case weight">
         <ownedComment xmi:type="uml:Comment" xmi:id="_dq8M8lR-MCySE-b1X3Uvff">
           <body>Verifies: FIN-REQ-25, FIN-REQ-26.3. Stimulus: Send a sealed case of incorrect weight (FC26). Expected result: The incorrect weight is detected and an event is published.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_cLteRSCztC8rmDVKIZij4r" name="FIN-TC-25 Verify holding on wrapping fault" clientDependency="_iAx8Uzrly9DZzjfOlBkY3r">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_cLteRSCztC8rmDVKIZij4r" name="FIN-TC-25 Verify holding on wrapping fault">
         <ownedComment xmi:type="uml:Comment" xmi:id="_tk-OoWXdsGZZaRz4kkfwZa">
           <body>Verifies: FIN-REQ-33.1. Stimulus: Make the wrapping station unavailable (FC25) and send cakes forward. Expected result: The cakes are held in the holding area.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_lQBHWO5g0DpZmE2Lwbvfge" name="FIN-TC-26 Verify pan admission stop" clientDependency="_zROwZTAQZO3id9VYuWN-nR">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_lQBHWO5g0DpZmE2Lwbvfge" name="FIN-TC-26 Verify pan admission stop">
         <ownedComment xmi:type="uml:Comment" xmi:id="_dkWCxag6mghDS1lm-RxIeu">
-          <body>Verifies: FIN-REQ-34. Stimulus: Keep sending cakes until the holding area is full. Expected result: "Stop / resume pan admission" (stop) is sent to Thermal Processing.</body>
+          <body>Verifies: FIN-REQ-34. Stimulus: Keep sending cakes until the holding area is full. Expected result: &quot;Stop / resume pan admission&quot; (stop) is sent to Thermal Processing.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_7eCxJlMrbcS6q6MAkZ-BxW" name="FIN-TC-27 Verify wrapping after repair and resume" clientDependency="_Wv3AcBIylvNs_dVaGAkXcv _bMtr5FQZOxZ3n312WXN4Pn">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_7eCxJlMrbcS6q6MAkZ-BxW" name="FIN-TC-27 Verify wrapping after repair and resume">
         <ownedComment xmi:type="uml:Comment" xmi:id="_aSA2eUzDAQ70F4Sl8tsx2q">
-          <body>Verifies: FIN-REQ-33.2, FIN-REQ-35. Stimulus: Following FIN-TC-26, send "Repair confirmed" for the wrapping station. Expected result: The held cakes are wrapped, and "Stop / resume pan admission" (resume) is sent.</body>
+          <body>Verifies: FIN-REQ-33.2, FIN-REQ-35. Stimulus: Following FIN-TC-26, send &quot;Repair confirmed&quot; for the wrapping station. Expected result: The held cakes are wrapped, and &quot;Stop / resume pan admission&quot; (resume) is sent.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_wqB6eE2iyHql1jlIWJUoIL" name="FIN-TC-28 Verify placing on pallet" clientDependency="_GO8l172wsvIWy6QTb4TXBy">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wqB6eE2iyHql1jlIWJUoIL" name="FIN-TC-28 Verify placing on pallet">
         <ownedComment xmi:type="uml:Comment" xmi:id="_IKJb95Am_YCknym8gI1Sxa">
           <body>Verifies: FIN-REQ-27. Stimulus: Send a properly cartoned cake to the packing station. Expected result: The cake is placed on a free spot on the current pallet.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_IjKQEFl8Eb-Zo2HPjUw8h_" name="FIN-TC-29 Verify full-pallet handling" clientDependency="_dYSp6WRmKr25HxCXg3YLvt _Y9a2gMW_nz0y0s3b2bkd2i">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_IjKQEFl8Eb-Zo2HPjUw8h_" name="FIN-TC-29 Verify full-pallet handling">
         <ownedComment xmi:type="uml:Comment" xmi:id="_eGYt-_KyNYNyYR0uDhbWAt">
           <body>Verifies: FIN-REQ-28.1, FIN-REQ-28.2. Stimulus: Fill the last free spot on a pallet. Expected result: The full pallet is set aside for wrapping. A new empty pallet is staged, and palletising continues without waiting.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_wdmce0Ol-ivwYKIBddSgrW" name="FIN-TC-30 Verify pallet wrapping" clientDependency="_R-E91iiQ5nCGUWwJiz2XUi">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wdmce0Ol-ivwYKIBddSgrW" name="FIN-TC-30 Verify pallet wrapping">
         <ownedComment xmi:type="uml:Comment" xmi:id="_2_oRSZxu2896DJVT5KG_pD">
           <body>Verifies: FIN-REQ-29. Stimulus: Set aside a full pallet. Expected result: The pallet is wrapped.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_bjVb4p0LPnjswqUQmp527Q" name="FIN-TC-31 Verify pallet ready signal" clientDependency="_B4C3zpF3OMzT1IIxU0_ZVo">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_bjVb4p0LPnjswqUQmp527Q" name="FIN-TC-31 Verify pallet ready signal">
         <ownedComment xmi:type="uml:Comment" xmi:id="_ja_bKeX9XFFHLKeSn0CTX0">
-          <body>Verifies: FIN-REQ-30. Stimulus: Complete the wrapping of a pallet. Expected result: "Pallet ready for shipment" is published with pallet ID, cake count and batch IDs.</body>
+          <body>Verifies: FIN-REQ-30. Stimulus: Complete the wrapping of a pallet. Expected result: &quot;Pallet ready for shipment&quot; is published with pallet ID, cake count and batch IDs.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_QA-epNGnZkBM2mB0KtMvHH" name="FIN-TC-32 Verify washing, drying and verification" clientDependency="_N_9MbjMtsa70en5oVKiFCa _0XR4YpZHcfmxrID9nM34DL _LSA5NjgpNltmb9CoMMgTG3">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_QA-epNGnZkBM2mB0KtMvHH" name="FIN-TC-32 Verify washing, drying and verification">
         <ownedComment xmi:type="uml:Comment" xmi:id="_Vu9NayUPwm1HH29kzxc6I8">
           <body>Verifies: FIN-REQ-11.1, FIN-REQ-11.2, FIN-REQ-11.3. Stimulus: Send an empty pan to the washing station. Expected result: The pan is washed and dried, then verified as clean and undamaged.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_IPcftC3ghaKUeClLFKMJWx" name="FIN-TC-33 Verify recirculation of clean pans" clientDependency="_72bncuVMSUt7KUxoen3JCi">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_IPcftC3ghaKUeClLFKMJWx" name="FIN-TC-33 Verify recirculation of clean pans">
         <ownedComment xmi:type="uml:Comment" xmi:id="_LYyBFzLWH-YFnRBziWaU7s">
           <body>Verifies: FIN-REQ-12.1. Stimulus: Send a pan that passes verification. Expected result: The pan is queued for recirculation to band entry.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_t9LJt97jnYSyAKQSjyiY90" name="FIN-TC-34 Verify discard of unclean pan" clientDependency="_h4FzdBDj3rDJAXzXWeML00 _F7snWYo93foN4haq7NT2o-">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_t9LJt97jnYSyAKQSjyiY90" name="FIN-TC-34 Verify discard of unclean pan">
         <ownedComment xmi:type="uml:Comment" xmi:id="_ftm70b9c3DsxVpjYm0JkJo">
           <body>Verifies: FIN-REQ-12.2, FIN-REQ-13. Stimulus: Send a pan that is not properly washed. Expected result: The pan is removed from the production cycle. A discard event is published.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_ZPcWWLQOiCVxQVGiSGC-tq" name="FIN-TC-35 Verify discard of damaged pan" clientDependency="_hHa9iCONaQi7pZpu_Wn_o_ _fxtsEcf_0-CwKKU7syXew3">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_ZPcWWLQOiCVxQVGiSGC-tq" name="FIN-TC-35 Verify discard of damaged pan">
         <ownedComment xmi:type="uml:Comment" xmi:id="_FDvwmvSnjTQjYh9fwlHKtg">
           <body>Verifies: FIN-REQ-12.2, FIN-REQ-13. Stimulus: Send a pan that is damaged after washing. Expected result: The pan is removed from the production cycle. A discard event is published.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_TD8fZ8GJSL1wkshMSS6Chc" name="FIN-TC-36 Verify diverted pan acceptance" clientDependency="_LMu0YUIkl2Rj4-UH3weC4f">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_TD8fZ8GJSL1wkshMSS6Chc" name="FIN-TC-36 Verify diverted pan acceptance">
         <ownedComment xmi:type="uml:Comment" xmi:id="_MM0XopuOBDcT8SR5ZpcqbO">
-          <body>Verifies: FIN-REQ-15. Stimulus: Send "Pan for washing" from Thermal Processing for a pan diverted after a wrong fill weight. Expected result: The pan is accepted and washed.</body>
+          <body>Verifies: FIN-REQ-15. Stimulus: Send &quot;Pan for washing&quot; from Thermal Processing for a pan diverted after a wrong fill weight. Expected result: The pan is accepted and washed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="__aqruToswr5-5-6q2LrJ5N" name="FIN-TC-37 Verify pan stock rule" clientDependency="_Lz8ZHhRCkURc6bDpV_HXW6">
+      <packagedElement xmi:type="uml:Activity" xmi:id="__aqruToswr5-5-6q2LrJ5N" name="FIN-TC-37 Verify pan stock rule">
         <ownedComment xmi:type="uml:Comment" xmi:id="_gHf1gpHtdyxrwJ8lCB6l8b">
           <body>Verifies: FIN-REQ-14. Stimulus: Check the total pan count at start, then after one pan is discarded. Expected result: The total stays at twice the number needed to fill the production system.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_fzuBYD8FkQxLag2v0CQ_NP" name="FIN-TC-38 Verify clean pan supply" clientDependency="_0-g6CBp_25oDvlQq57ll9Z">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_fzuBYD8FkQxLag2v0CQ_NP" name="FIN-TC-38 Verify clean pan supply">
         <ownedComment xmi:type="uml:Comment" xmi:id="_Cjt_fRBrJyJ9eoUgcZQnde">
-          <body>Verifies: FIN-REQ-16. Stimulus: Send "Pan request" when no pan is at depositing (FC8). Expected result: A clean pan is supplied to the depositing point.</body>
+          <body>Verifies: FIN-REQ-16. Stimulus: Send &quot;Pan request&quot; when no pan is at depositing (FC8). Expected result: A clean pan is supplied to the depositing point.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_wQTS5-JKptuQd-2N6HOnUY" name="FIN-TC-39 Verify stock level report" clientDependency="_JSVEm4PD0opr05YQNlixp5">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wQTS5-JKptuQd-2N6HOnUY" name="FIN-TC-39 Verify stock level report">
         <ownedComment xmi:type="uml:Comment" xmi:id="_UE0EYKDUxPkYIgMDW52xuz">
-          <body>Verifies: FIN-REQ-17. Stimulus: Send "Pan request" at two different stock levels. Expected result: Each "Clean pan supply" carries the current stock level.</body>
+          <body>Verifies: FIN-REQ-17. Stimulus: Send &quot;Pan request&quot; at two different stock levels. Expected result: Each &quot;Clean pan supply&quot; carries the current stock level.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_2ZKYfydNZYYEYI--orkeHV" name="FIN-TC-40 Verify supply during washing outage" clientDependency="_4sb1zkxQ4eVoPXvVv799In">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_2ZKYfydNZYYEYI--orkeHV" name="FIN-TC-40 Verify supply during washing outage">
         <ownedComment xmi:type="uml:Comment" xmi:id="_2CxW2kWODtcnnRMZxIuB8a">
-          <body>Verifies: FIN-REQ-18. Stimulus: Make the washing station unavailable (FC23) and send "Pan request". Expected result: Clean pans are still supplied from stock.</body>
+          <body>Verifies: FIN-REQ-18. Stimulus: Make the washing station unavailable (FC23) and send &quot;Pan request&quot;. Expected result: Clean pans are still supplied from stock.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_-DMQidQdbLrxgOjBOqSm7S" name="FIN-TC-41 Verify washing resume conditions" clientDependency="_TuKVZrbLYAVnxFL78HHjG2">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_-DMQidQdbLrxgOjBOqSm7S" name="FIN-TC-41 Verify washing resume conditions">
         <ownedComment xmi:type="uml:Comment" xmi:id="_-DptAfnphplbhGth8OMuT7">
-          <body>Verifies: FIN-REQ-19. Stimulus: After a washing fault, try three cases: repair confirmed but conditions not met, conditions met but no "Repair confirmed", and both. Expected result: Washing resumes only in the third case.</body>
+          <body>Verifies: FIN-REQ-19. Stimulus: After a washing fault, try three cases: repair confirmed but conditions not met, conditions met but no &quot;Repair confirmed&quot;, and both. Expected result: Washing resumes only in the third case.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_EjjSx8SAy-9kcXZA0-qk24" name="FIN-TC-42 Verify catch-up speed" clientDependency="_Suz7Y6zfwvfl-3vZhYEUJX">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_EjjSx8SAy-9kcXZA0-qk24" name="FIN-TC-42 Verify catch-up speed">
         <ownedComment xmi:type="uml:Comment" xmi:id="_NNBOWmu8Q-hbCNh7Ut300A">
           <body>Verifies: FIN-REQ-20.1. Stimulus: Confirm repair while a pan backlog exists. Expected result: Washing runs at increased speed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_hb0e9RoR7lcWiICuf-nEl7" name="FIN-TC-43 Verify return to normal speed" clientDependency="_ef-eLgWi0bGmpCKXXXuRAw">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_hb0e9RoR7lcWiICuf-nEl7" name="FIN-TC-43 Verify return to normal speed">
         <ownedComment xmi:type="uml:Comment" xmi:id="_-xERqcAP6Do-mnO8wPFmlO">
           <body>Verifies: FIN-REQ-20.2. Stimulus: Following FIN-TC-42, let the backlog drop to zero. Expected result: Washing returns to normal speed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_U7NJqFsq_GLpNV8GhcjCC9" name="FIN-TC-44 Verify speed-change logging" clientDependency="_AML2wXt7nABgHlGe1l9fYO">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_U7NJqFsq_GLpNV8GhcjCC9" name="FIN-TC-44 Verify speed-change logging">
         <ownedComment xmi:type="uml:Comment" xmi:id="_L8rNk0ENm6m-VdLfLr4YS3">
           <body>Verifies: FIN-REQ-20.3. Stimulus: Run FIN-TC-42 and FIN-TC-43. Expected result: Each change of washing speed is logged.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_xIMMQclUo26BJE9OrOTHNN" name="FIN-TC-45 Verify heartbeat" clientDependency="_NXoREoXODr47M2BCy8Clxw">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_xIMMQclUo26BJE9OrOTHNN" name="FIN-TC-45 Verify heartbeat">
         <ownedComment xmi:type="uml:Comment" xmi:id="_QtLkK_VR-9eU_eHYK_vOHs">
-          <body>Verifies: FIN-REQ-36. Stimulus: Observe every station controller over several heartbeat intervals, then stop one controller. Expected result: Each controller publishes "Machine status (heartbeat)" at the configured interval. The stopped one's missing heartbeat is detectable.</body>
+          <body>Verifies: FIN-REQ-36. Stimulus: Observe every station controller over several heartbeat intervals, then stop one controller. Expected result: Each controller publishes &quot;Machine status (heartbeat)&quot; at the configured interval. The stopped one's missing heartbeat is detectable.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_U3u-tN2YkudZMmQHkZdGu1" name="FIN-TC-46 Verify band halt" clientDependency="_RpJRW-SYTefQLHV1VqUmHm _QfEapVgoPKiWlTyoq4tOZv">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_U3u-tN2YkudZMmQHkZdGu1" name="FIN-TC-46 Verify band halt">
         <ownedComment xmi:type="uml:Comment" xmi:id="_c4wnSoVPRvoQ2DQQGy7h_C">
-          <body>Verifies: FIN-REQ-37.1, FIN-REQ-37.2. Stimulus: Send "Band state change" (halt) while product is inside the stations. Expected result: The product already inside is processed. No new product is accepted.</body>
+          <body>Verifies: FIN-REQ-37.1, FIN-REQ-37.2. Stimulus: Send &quot;Band state change&quot; (halt) while product is inside the stations. Expected result: The product already inside is processed. No new product is accepted.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_-HaDqWLRXoR1U7Nu_jS0kb" name="FIN-TC-47 Verify band slow-down" clientDependency="_6cVaQd8U9qZfIV-AFVx67M">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_-HaDqWLRXoR1U7Nu_jS0kb" name="FIN-TC-47 Verify band slow-down">
         <ownedComment xmi:type="uml:Comment" xmi:id="_4UHjA_hqdDqAz_F3RG-YKj">
-          <body>Verifies: FIN-REQ-38.1. Stimulus: Send "Band state change" (slow-down). Expected result: Processing continues at the reduced band speed.</body>
+          <body>Verifies: FIN-REQ-38.1. Stimulus: Send &quot;Band state change&quot; (slow-down). Expected result: Processing continues at the reduced band speed.</body>
         </ownedComment>
       </packagedElement>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_YeIkd4F1eia3J5757fNUcS" name="FIN-TC-48 Verify band restart" clientDependency="__Wcs_lTfC7RL1DiF7UhQp2">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_YeIkd4F1eia3J5757fNUcS" name="FIN-TC-48 Verify band restart">
         <ownedComment xmi:type="uml:Comment" xmi:id="_MelagN_IW58ZcjPaKzLamG">
-          <body>Verifies: FIN-REQ-38.2. Stimulus: Following FIN-TC-46 or FIN-TC-47, send "Band state change" (restart). Expected result: Normal processing resumes.</body>
+          <body>Verifies: FIN-REQ-38.2. Stimulus: Following FIN-TC-46 or FIN-TC-47, send &quot;Band state change&quot; (restart). Expected result: Normal processing resumes.</body>
         </ownedComment>
       </packagedElement>
     </packagedElement>
@@ -1563,65 +1542,65 @@
   <Blocks:NestedConnectorEnd xmi:id="_n9QZsMBFEfGiqthpeiudKA" base_Element="_n9PyoMBFEfGiqthpeiudKA" propertyPath="_h9Co8Lz-EfGC__yJIGIlPQ" base_ConnectorEnd="_n9PyoMBFEfGiqthpeiudKA"/>
   <Blocks:NestedConnectorEnd xmi:id="_5MaNUsBFEfGiqthpeiudKA" base_Element="_5MaNUcBFEfGiqthpeiudKA" propertyPath="_J9KLgL3GEfGzbswKCLJLjQ" base_ConnectorEnd="_5MaNUcBFEfGiqthpeiudKA"/>
   <Blocks:NestedConnectorEnd xmi:id="_F3sNIcBGEfGiqthpeiudKA" base_Element="_F3sNIMBGEfGiqthpeiudKA" propertyPath="_9TN5ML2pEfGzbswKCLJLjQ" base_ConnectorEnd="_F3sNIMBGEfGiqthpeiudKA"/>
-  <Requirements:Requirement xmi:id="_Jrvf9gwuW32y2cX--9CGrB" base_Class="_TKwgEDEaqhzyNnytoB5aoV" id="FIN-REQ-01" text="The system shall receive each cake in its pan, together with its batch ID, from Thermal Processing through the signal &quot;Cooled cake&quot;."/>
-  <Requirements:Requirement xmi:id="_ptwP8sYR-UJdsAugStlE_K" base_Class="_sS8hhss6inCQmw31l26fqX" id="FIN-REQ-02" text="The system shall accept for depanning only cakes that Thermal Processing has released as having reached the safe internal temperature."/>
-  <Requirements:Requirement xmi:id="_6-fZ2jEo5UbaR92_BHxS49" base_Class="_AhjVmMyamjXC_9jhUfWa9e" id="FIN-REQ-03" text="The system shall associate every cake with its batch ID from arrival until the cake is placed on a pallet."/>
-  <Requirements:Requirement xmi:id="_kqR5EXrO1VK1oTUfqzOQGn" base_Class="_EduMVfN7bpdLgfbXJ3c6Rz" id="FIN-REQ-04.1" text="The system shall separate each baked cake from its pan."/>
-  <Requirements:Requirement xmi:id="_tAjxO72plX5MnHGqn4G7E9" base_Class="_O_JGOYTTwtt7L5tbe6IDp_" id="FIN-REQ-04.2" text="The system shall route each depanned cake toward quality inspection."/>
-  <Requirements:Requirement xmi:id="_BtPsUH_tCJ-Gi72syrcAII" base_Class="_3st9Fc3VlxZRhOnzbITW6i" id="FIN-REQ-04.3" text="The system shall route each emptied pan toward the pan washing station."/>
-  <Requirements:Requirement xmi:id="_BxzI3qqDzur6FsSnjfzQ8Q" base_Class="_syj8zR6gunG0aJdekmrbrc" id="FIN-REQ-26.1" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every cake rejected at depanning."/>
-  <Requirements:Requirement xmi:id="_q1j4nlCHgh9MG1IApZOWT6" base_Class="_P9NBqgq9d1gRqAsdewy1qw" id="FIN-REQ-31.1" text="The system shall reject every cake that has not been removed correctly from its pan."/>
-  <Requirements:Requirement xmi:id="_donapoveodZO1uGh6Yl9r-" base_Class="_tT9hAYsDpj_CYP2ExeE8el" id="FIN-REQ-31.2" text="The system shall send the pan of every cake that has not been removed correctly to the washing station."/>
-  <Requirements:Requirement xmi:id="_T1Fo2Rkv-VDKGWrpE1onj_" base_Class="_K0mWBj1qz1lLToF7KTmotj" id="FIN-REQ-32.1" text="The system shall hold cakes arriving at the depanning station while the depanning machine is not responding."/>
-  <Requirements:Requirement xmi:id="_alWopq34ihvZVb6pqYl2rU" base_Class="_E6qY3Tze_0MpQul9nhk_Me" id="FIN-REQ-32.2" text="The system shall process the held cakes once it has received the signal &quot;Repair confirmed&quot; for the depanning machine."/>
-  <Requirements:Requirement xmi:id="_eTEMFDMLRzwc3rkmAhJGTE" base_Class="_ctC_zZimA8EsZ2VxXQNggm" id="FIN-REQ-05.1" text="The system shall weigh every depanned cake."/>
-  <Requirements:Requirement xmi:id="_tzrhjRHSJ4cK0cis1U0_Oj" base_Class="_6C8qhKw992UYPhCrCX6iZl" id="FIN-REQ-05.2" text="The system shall mark a cake as failed if its weight is outside the regulatory tolerance of the target weight."/>
-  <Requirements:Requirement xmi:id="_DB3K0NOCSeLkZU4NuPbitN" base_Class="_xlj7fDNuRGwJSfhIENqKTT" id="FIN-REQ-06.1" text="The system shall inspect the appearance of every cake."/>
-  <Requirements:Requirement xmi:id="_fi0-ddB5VZZ2UItLQlOjzg" base_Class="_iqt2xN5OXzzezpSWT9SqRz" id="FIN-REQ-06.2" text="The system shall mark a cake as failed if its appearance is unsatisfactory."/>
-  <Requirements:Requirement xmi:id="_oWKL-e3eDlOtQ5YCbhuNLk" base_Class="_G9lUp--cLLpQJa3WIeMosr" id="FIN-REQ-07.1" text="The system shall scan every cake for metal contaminants."/>
-  <Requirements:Requirement xmi:id="_t_iR-UVckNyAamVdbrkbW-" base_Class="_smhSJnHLwAXcUnTf6MvPTV" id="FIN-REQ-07.2" text="The system shall mark a cake as failed if metal is found."/>
-  <Requirements:Requirement xmi:id="_55d1FZ2GnTcOBPE-A3sdIb" base_Class="_gQU9gnSsHUUFRleDJAlNhC" id="FIN-REQ-08.1" text="The system shall allow a cake to proceed to packaging only if it has not been marked as failed."/>
-  <Requirements:Requirement xmi:id="_9aIhmbxd_UJp9Kn5XU47T5" base_Class="_YlhQupaD70ahgOQ0TvJDK5" id="FIN-REQ-08.2" text="The system shall move every failed cake to the reject bin."/>
-  <Requirements:Requirement xmi:id="_zeOcfMQyJL7TBwK66YrueY" base_Class="_0NvWG9fpauiPCpgf8dNKdz" id="FIN-REQ-09" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; (reason, time, batch ID) for every failed cake."/>
-  <Requirements:Requirement xmi:id="__0SIXU-C_qsjHqxxv22f_G" base_Class="_5agT-OlCIxr89LcspvfiHb" id="FIN-REQ-21.1" text="The system shall wrap every cake that has passed quality inspection."/>
-  <Requirements:Requirement xmi:id="_zcrrQXY-cVSpbELF-PElJx" base_Class="_twjH_j3Db0BtCH9sYFsvZc" id="FIN-REQ-21.2" text="The system shall verify that every wrapped cake is properly wrapped."/>
-  <Requirements:Requirement xmi:id="_WSk769TYzJEZqVGNS1siRx" base_Class="_6Xjc3Gy4OrwdnaWW-iTRnX" id="FIN-REQ-23.1" text="The system shall pack every properly wrapped cake in a carton."/>
-  <Requirements:Requirement xmi:id="_B_ntnvp8RjN4Xu3tO1WNcr" base_Class="_vaZtm9eaygGWI3r90T2kms" id="FIN-REQ-23.2" text="The system shall seal every carton."/>
-  <Requirements:Requirement xmi:id="_tIZZo0yL4ZVajmGty3Sb2_" base_Class="_R95izWTG1E3s9nE_5jG_f3" id="FIN-REQ-23.3" text="The system shall verify that every cartoned cake is properly cartoned."/>
-  <Requirements:Requirement xmi:id="_P6gBZv6b450zZ2RPyI7zdx" base_Class="_4X5FPbxph9y5QC8WCHXrJa" id="FIN-REQ-24.1" text="The system shall allow only cakes that are properly wrapped and properly cartoned to proceed to the shipping bin."/>
-  <Requirements:Requirement xmi:id="_TYBwPibr6mxL3YnuX7_abd" base_Class="_iDNdmTTTX2AZFY2jwikr3q" id="FIN-REQ-24.2" text="The system shall move every cake that is not properly wrapped or not properly cartoned to the refuse bin."/>
-  <Requirements:Requirement xmi:id="_SMGXT-soK_GIfZXYlAr6VN" base_Class="_8zkGJBJzcOwzZt-QD3zq8F" id="FIN-REQ-25" text="The system shall check the weight of every sealed case."/>
-  <Requirements:Requirement xmi:id="_a6td3qTO0t1r6Mmc0bCY82" base_Class="_s1_-hQpt6EmcfxgsyREFg8" id="FIN-REQ-26.2" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every cake discarded during packaging."/>
-  <Requirements:Requirement xmi:id="_bohdXzHbvNBjGPEL-natis" base_Class="_f35Bvvh8wILzDHwB8Q7xgf" id="FIN-REQ-26.3" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every case with an incorrect weight."/>
-  <Requirements:Requirement xmi:id="_LYQSvWyxTIyzx29ys1GL4r" base_Class="_T1M_Uwk-x2xDjPQNrFLbH5" id="FIN-REQ-33.1" text="The system shall hold incoming cakes in the holding area while the wrapping station is unavailable."/>
-  <Requirements:Requirement xmi:id="_W7uJ5XUEwl-A95J90F-S4M" base_Class="_Ej2ldvLBlVLBHrDMNuq8tE" id="FIN-REQ-33.2" text="The system shall wrap the held cakes once it has received the signal &quot;Repair confirmed&quot; for the wrapping station."/>
-  <Requirements:Requirement xmi:id="_T3VxztfgEwsWBiVZ_gXzBe" base_Class="_3yebRs-yOItuVrOA7vJURj" id="FIN-REQ-34" text="The system shall send the signal &quot;Stop / resume pan admission&quot; (stop) to Thermal Processing when the holding area is full."/>
-  <Requirements:Requirement xmi:id="_dsDOD4i6YRaur8fheWQP3b" base_Class="_kaEG5AmRaXSYLjjfMo9GNR" id="FIN-REQ-35" text="The system shall send the signal &quot;Stop / resume pan admission&quot; (resume) to Thermal Processing once it has received the signal &quot;Repair confirmed&quot; for the wrapping station."/>
-  <Requirements:Requirement xmi:id="_gufStC0NwXjH7YCFEcGdph" base_Class="_NzSgjQE5yxaFOBvk_tOVEr" id="FIN-REQ-27" text="The system shall place every properly cartoned cake on a free spot on the current pallet."/>
-  <Requirements:Requirement xmi:id="_Ng5Uvt7LnbLI0T3qEss-Qa" base_Class="_K71hAMvRQzKCgQgHW_0vV1" id="FIN-REQ-28.1" text="The system shall set a pallet aside for wrapping when all its cake spots are filled."/>
-  <Requirements:Requirement xmi:id="_dFhFdfBHH4yxFx8Vd8gFrV" base_Class="_4G59Au3veS5MPm5Tn_kW90" id="FIN-REQ-28.2" text="The system shall stage a new empty pallet at the packing station when a pallet is set aside."/>
-  <Requirements:Requirement xmi:id="_aKkDU3-G-3wZ03ERsYaFSY" base_Class="_AqULhGVOWR0tPVrJzNxtAN" id="FIN-REQ-29" text="The system shall wrap every full pallet."/>
-  <Requirements:Requirement xmi:id="_NAA7ufLhT3ScrcQkK8dHFm" base_Class="_z79hB79Wy28QYsIfkZjaD2" id="FIN-REQ-30" text="The system shall publish the signal &quot;Pallet ready for shipment&quot; (pallet ID, cake count, batch IDs) when a wrapped pallet is ready to be moved to shipping storage."/>
-  <Requirements:Requirement xmi:id="_soxewQ24e14_OlL9NnPHsI" base_Class="_VHlw6s5wWOroxjtBhYeNvu" id="FIN-REQ-11.1" text="The system shall wash every empty pan received at the washing station."/>
-  <Requirements:Requirement xmi:id="_fU3u5sYJxn6DATbetj9Thp" base_Class="_vglFU9leuBZHYyEBrxKbg2" id="FIN-REQ-11.2" text="The system shall dry every washed pan."/>
-  <Requirements:Requirement xmi:id="_sDkiCthpSlXoVX3sC_Z0oJ" base_Class="_Ir6zOKRuhlXHz-6q9rMs_l" id="FIN-REQ-11.3" text="The system shall verify that every washed and dried pan is clean and undamaged."/>
-  <Requirements:Requirement xmi:id="_ktFlumnXFjJqS2V-5hpJhL" base_Class="_P9U0OSDRlCCy2XaflpZPEI" id="FIN-REQ-12.1" text="The system shall queue every pan that passes verification for recirculation to band entry."/>
-  <Requirements:Requirement xmi:id="_plF4duAV6cMgJaj9QZMRA7" base_Class="_kEosNeLJvFZJX_ucvqIDIT" id="FIN-REQ-12.2" text="The system shall remove every pan that does not pass verification from the production cycle."/>
-  <Requirements:Requirement xmi:id="_H8xgTSUt2Qqzjn7JZ2yYGD" base_Class="_ZFgE0_FbvIY3nXCZY72Co5" id="FIN-REQ-13" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every discarded pan."/>
-  <Requirements:Requirement xmi:id="_hwrwnZalgNKQ2cqK_L40Db" base_Class="_KBvwNsmJ8VpoAuXnm-sMkb" id="FIN-REQ-15" text="The system shall accept pans diverted by Thermal Processing through the signal &quot;Pan for washing&quot;."/>
-  <Requirements:Requirement xmi:id="_hTY0KLfdqqZ2CWD7jY87gs" base_Class="_fzjVj-zG5eISJVAG7_rr0x" id="FIN-REQ-14" text="The system shall keep the total number of pans in the production system at twice the number needed to fill the full production system."/>
-  <Requirements:Requirement xmi:id="_vk37d8qnHJdfou6fku4jbB" base_Class="_iTANEBhAxQFknjLLlzjkXn" id="FIN-REQ-16" text="The system shall supply a clean pan to the depositing point when it receives the signal &quot;Pan request&quot;."/>
-  <Requirements:Requirement xmi:id="_PT9vp_eDOXjDHD7N9eBw0k" base_Class="_HlNfyeG6hf9qIJ8iDc574W" id="FIN-REQ-17" text="The system shall report the current clean-pan stock level to Thermal Processing with each &quot;Clean pan supply&quot;."/>
-  <Requirements:Requirement xmi:id="_bfO8mN_3r3dNhe3LZoTUam" base_Class="_pIHZcsDH6MkCySFwkeSLX1" id="FIN-REQ-18" text="The system shall continue supplying clean pans from stock while the washing station is unavailable."/>
-  <Requirements:Requirement xmi:id="_y9vSVgrcpUra-8gqqdmQPf" base_Class="_CEdf-8EELEyxyArrv-_ve0" id="FIN-REQ-19" text="The system shall resume washing after a fault only when it has received the signal &quot;Repair confirmed&quot; for the washing station and all conditions for continued washing are met."/>
-  <Requirements:Requirement xmi:id="_J-zMQfFWRSuEqnoKhSKaWq" base_Class="_rmYaREz-Gh6qcl-fKelylI" id="FIN-REQ-20.1" text="The system shall wash at an increased speed while pans are waiting after it has received the signal &quot;Repair confirmed&quot; for the washing station."/>
-  <Requirements:Requirement xmi:id="_oOONk-_R3fJB1MZ1E89FSZ" base_Class="_tZhljRxha7i50u6Ie0OwsI" id="FIN-REQ-20.2" text="The system shall return to normal washing speed once no backlog remains."/>
-  <Requirements:Requirement xmi:id="_5R761SgwC_zrM-ms8MFQo4" base_Class="_D5JvFN9sdwUAbwnierFWsA" id="FIN-REQ-20.3" text="The system shall log every change of washing speed."/>
-  <Requirements:Requirement xmi:id="_Bd2LvkoO_fkIYP-2Dpr2SL" base_Class="_O0VqC4T_ruGjcTgJbhSK0t" id="FIN-REQ-36" text="The system shall make each station controller publish a &quot;Machine status (heartbeat)&quot; at a regular interval."/>
-  <Requirements:Requirement xmi:id="_6sI0rZhliFbj48NBsZ3KPE" base_Class="_pK3b0qHaeiDReBxG_O8Y1u" id="FIN-REQ-37.1" text="The system shall continue processing the product already inside its stations when it receives a &quot;Band state change&quot; for a band halt."/>
-  <Requirements:Requirement xmi:id="_pKAqbDRXBQq91Jw2hYEzN1" base_Class="_4yYVHw79pJJlDROoyF_F2o" id="FIN-REQ-37.2" text="The system shall accept no new product when it receives a &quot;Band state change&quot; for a band halt."/>
-  <Requirements:Requirement xmi:id="_4xFf79DRwCTt_QH-IPZ3OU" base_Class="_2KBgvCG3QhXJg3Se1QsY2E" id="FIN-REQ-38.1" text="The system shall continue processing at the reduced band speed after a &quot;Band state change&quot; for a slow-down."/>
-  <Requirements:Requirement xmi:id="_amsIHYeVhouwQMeZrEYowX" base_Class="_0GiHr2-yYlYkpHWqTZ1a50" id="FIN-REQ-38.2" text="The system shall resume normal processing after a &quot;Band state change&quot; for a restart."/>
+  <Requirements:Requirement xmi:id="_Jrvf9gwuW32y2cX--9CGrB" id="FIN-REQ-01" text="The system shall receive each cake in its pan, together with its batch ID, from Thermal Processing through the signal &quot;Cooled cake&quot;." base_Class="_TKwgEDEaqhzyNnytoB5aoV"/>
+  <Requirements:Requirement xmi:id="_ptwP8sYR-UJdsAugStlE_K" id="FIN-REQ-02" text="The system shall accept for depanning only cakes that Thermal Processing has released as having reached the safe internal temperature." base_Class="_sS8hhss6inCQmw31l26fqX"/>
+  <Requirements:Requirement xmi:id="_6-fZ2jEo5UbaR92_BHxS49" id="FIN-REQ-03" text="The system shall associate every cake with its batch ID from arrival until the cake is placed on a pallet." base_Class="_AhjVmMyamjXC_9jhUfWa9e"/>
+  <Requirements:Requirement xmi:id="_kqR5EXrO1VK1oTUfqzOQGn" id="FIN-REQ-04.1" text="The system shall separate each baked cake from its pan." base_Class="_EduMVfN7bpdLgfbXJ3c6Rz"/>
+  <Requirements:Requirement xmi:id="_tAjxO72plX5MnHGqn4G7E9" id="FIN-REQ-04.2" text="The system shall route each depanned cake toward quality inspection." base_Class="_O_JGOYTTwtt7L5tbe6IDp_"/>
+  <Requirements:Requirement xmi:id="_BtPsUH_tCJ-Gi72syrcAII" id="FIN-REQ-04.3" text="The system shall route each emptied pan toward the pan washing station." base_Class="_3st9Fc3VlxZRhOnzbITW6i"/>
+  <Requirements:Requirement xmi:id="_BxzI3qqDzur6FsSnjfzQ8Q" id="FIN-REQ-26.1" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every cake rejected at depanning." base_Class="_syj8zR6gunG0aJdekmrbrc"/>
+  <Requirements:Requirement xmi:id="_q1j4nlCHgh9MG1IApZOWT6" id="FIN-REQ-31.1" text="The system shall reject every cake that has not been removed correctly from its pan." base_Class="_P9NBqgq9d1gRqAsdewy1qw"/>
+  <Requirements:Requirement xmi:id="_donapoveodZO1uGh6Yl9r-" id="FIN-REQ-31.2" text="The system shall send the pan of every cake that has not been removed correctly to the washing station." base_Class="_tT9hAYsDpj_CYP2ExeE8el"/>
+  <Requirements:Requirement xmi:id="_T1Fo2Rkv-VDKGWrpE1onj_" id="FIN-REQ-32.1" text="The system shall hold cakes arriving at the depanning station while the depanning machine is not responding." base_Class="_K0mWBj1qz1lLToF7KTmotj"/>
+  <Requirements:Requirement xmi:id="_alWopq34ihvZVb6pqYl2rU" id="FIN-REQ-32.2" text="The system shall process the held cakes once it has received the signal &quot;Repair confirmed&quot; for the depanning machine." base_Class="_E6qY3Tze_0MpQul9nhk_Me"/>
+  <Requirements:Requirement xmi:id="_eTEMFDMLRzwc3rkmAhJGTE" id="FIN-REQ-05.1" text="The system shall weigh every depanned cake." base_Class="_ctC_zZimA8EsZ2VxXQNggm"/>
+  <Requirements:Requirement xmi:id="_tzrhjRHSJ4cK0cis1U0_Oj" id="FIN-REQ-05.2" text="The system shall mark a cake as failed if its weight is outside the regulatory tolerance of the target weight." base_Class="_6C8qhKw992UYPhCrCX6iZl"/>
+  <Requirements:Requirement xmi:id="_DB3K0NOCSeLkZU4NuPbitN" id="FIN-REQ-06.1" text="The system shall inspect the appearance of every cake." base_Class="_xlj7fDNuRGwJSfhIENqKTT"/>
+  <Requirements:Requirement xmi:id="_fi0-ddB5VZZ2UItLQlOjzg" id="FIN-REQ-06.2" text="The system shall mark a cake as failed if its appearance is unsatisfactory." base_Class="_iqt2xN5OXzzezpSWT9SqRz"/>
+  <Requirements:Requirement xmi:id="_oWKL-e3eDlOtQ5YCbhuNLk" id="FIN-REQ-07.1" text="The system shall scan every cake for metal contaminants." base_Class="_G9lUp--cLLpQJa3WIeMosr"/>
+  <Requirements:Requirement xmi:id="_t_iR-UVckNyAamVdbrkbW-" id="FIN-REQ-07.2" text="The system shall mark a cake as failed if metal is found." base_Class="_smhSJnHLwAXcUnTf6MvPTV"/>
+  <Requirements:Requirement xmi:id="_55d1FZ2GnTcOBPE-A3sdIb" id="FIN-REQ-08.1" text="The system shall allow a cake to proceed to packaging only if it has not been marked as failed." base_Class="_gQU9gnSsHUUFRleDJAlNhC"/>
+  <Requirements:Requirement xmi:id="_9aIhmbxd_UJp9Kn5XU47T5" id="FIN-REQ-08.2" text="The system shall move every failed cake to the reject bin." base_Class="_YlhQupaD70ahgOQ0TvJDK5"/>
+  <Requirements:Requirement xmi:id="_zeOcfMQyJL7TBwK66YrueY" id="FIN-REQ-09" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; (reason, time, batch ID) for every failed cake." base_Class="_0NvWG9fpauiPCpgf8dNKdz"/>
+  <Requirements:Requirement xmi:id="__0SIXU-C_qsjHqxxv22f_G" id="FIN-REQ-21.1" text="The system shall wrap every cake that has passed quality inspection." base_Class="_5agT-OlCIxr89LcspvfiHb"/>
+  <Requirements:Requirement xmi:id="_zcrrQXY-cVSpbELF-PElJx" id="FIN-REQ-21.2" text="The system shall verify that every wrapped cake is properly wrapped." base_Class="_twjH_j3Db0BtCH9sYFsvZc"/>
+  <Requirements:Requirement xmi:id="_WSk769TYzJEZqVGNS1siRx" id="FIN-REQ-23.1" text="The system shall pack every properly wrapped cake in a carton." base_Class="_6Xjc3Gy4OrwdnaWW-iTRnX"/>
+  <Requirements:Requirement xmi:id="_B_ntnvp8RjN4Xu3tO1WNcr" id="FIN-REQ-23.2" text="The system shall seal every carton." base_Class="_vaZtm9eaygGWI3r90T2kms"/>
+  <Requirements:Requirement xmi:id="_tIZZo0yL4ZVajmGty3Sb2_" id="FIN-REQ-23.3" text="The system shall verify that every cartoned cake is properly cartoned." base_Class="_R95izWTG1E3s9nE_5jG_f3"/>
+  <Requirements:Requirement xmi:id="_P6gBZv6b450zZ2RPyI7zdx" id="FIN-REQ-24.1" text="The system shall allow only cakes that are properly wrapped and properly cartoned to proceed to the shipping bin." base_Class="_4X5FPbxph9y5QC8WCHXrJa"/>
+  <Requirements:Requirement xmi:id="_TYBwPibr6mxL3YnuX7_abd" id="FIN-REQ-24.2" text="The system shall move every cake that is not properly wrapped or not properly cartoned to the refuse bin." base_Class="_iDNdmTTTX2AZFY2jwikr3q"/>
+  <Requirements:Requirement xmi:id="_SMGXT-soK_GIfZXYlAr6VN" id="FIN-REQ-25" text="The system shall check the weight of every sealed case." base_Class="_8zkGJBJzcOwzZt-QD3zq8F"/>
+  <Requirements:Requirement xmi:id="_a6td3qTO0t1r6Mmc0bCY82" id="FIN-REQ-26.2" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every cake discarded during packaging." base_Class="_s1_-hQpt6EmcfxgsyREFg8"/>
+  <Requirements:Requirement xmi:id="_bohdXzHbvNBjGPEL-natis" id="FIN-REQ-26.3" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every case with an incorrect weight." base_Class="_f35Bvvh8wILzDHwB8Q7xgf"/>
+  <Requirements:Requirement xmi:id="_LYQSvWyxTIyzx29ys1GL4r" id="FIN-REQ-33.1" text="The system shall hold incoming cakes in the holding area while the wrapping station is unavailable." base_Class="_T1M_Uwk-x2xDjPQNrFLbH5"/>
+  <Requirements:Requirement xmi:id="_W7uJ5XUEwl-A95J90F-S4M" id="FIN-REQ-33.2" text="The system shall wrap the held cakes once it has received the signal &quot;Repair confirmed&quot; for the wrapping station." base_Class="_Ej2ldvLBlVLBHrDMNuq8tE"/>
+  <Requirements:Requirement xmi:id="_T3VxztfgEwsWBiVZ_gXzBe" id="FIN-REQ-34" text="The system shall send the signal &quot;Stop / resume pan admission&quot; (stop) to Thermal Processing when the holding area is full." base_Class="_3yebRs-yOItuVrOA7vJURj"/>
+  <Requirements:Requirement xmi:id="_dsDOD4i6YRaur8fheWQP3b" id="FIN-REQ-35" text="The system shall send the signal &quot;Stop / resume pan admission&quot; (resume) to Thermal Processing once it has received the signal &quot;Repair confirmed&quot; for the wrapping station." base_Class="_kaEG5AmRaXSYLjjfMo9GNR"/>
+  <Requirements:Requirement xmi:id="_gufStC0NwXjH7YCFEcGdph" id="FIN-REQ-27" text="The system shall place every properly cartoned cake on a free spot on the current pallet." base_Class="_NzSgjQE5yxaFOBvk_tOVEr"/>
+  <Requirements:Requirement xmi:id="_Ng5Uvt7LnbLI0T3qEss-Qa" id="FIN-REQ-28.1" text="The system shall set a pallet aside for wrapping when all its cake spots are filled." base_Class="_K71hAMvRQzKCgQgHW_0vV1"/>
+  <Requirements:Requirement xmi:id="_dFhFdfBHH4yxFx8Vd8gFrV" id="FIN-REQ-28.2" text="The system shall stage a new empty pallet at the packing station when a pallet is set aside." base_Class="_4G59Au3veS5MPm5Tn_kW90"/>
+  <Requirements:Requirement xmi:id="_aKkDU3-G-3wZ03ERsYaFSY" id="FIN-REQ-29" text="The system shall wrap every full pallet." base_Class="_AqULhGVOWR0tPVrJzNxtAN"/>
+  <Requirements:Requirement xmi:id="_NAA7ufLhT3ScrcQkK8dHFm" id="FIN-REQ-30" text="The system shall publish the signal &quot;Pallet ready for shipment&quot; (pallet ID, cake count, batch IDs) when a wrapped pallet is ready to be moved to shipping storage." base_Class="_z79hB79Wy28QYsIfkZjaD2"/>
+  <Requirements:Requirement xmi:id="_soxewQ24e14_OlL9NnPHsI" id="FIN-REQ-11.1" text="The system shall wash every empty pan received at the washing station." base_Class="_VHlw6s5wWOroxjtBhYeNvu"/>
+  <Requirements:Requirement xmi:id="_fU3u5sYJxn6DATbetj9Thp" id="FIN-REQ-11.2" text="The system shall dry every washed pan." base_Class="_vglFU9leuBZHYyEBrxKbg2"/>
+  <Requirements:Requirement xmi:id="_sDkiCthpSlXoVX3sC_Z0oJ" id="FIN-REQ-11.3" text="The system shall verify that every washed and dried pan is clean and undamaged." base_Class="_Ir6zOKRuhlXHz-6q9rMs_l"/>
+  <Requirements:Requirement xmi:id="_ktFlumnXFjJqS2V-5hpJhL" id="FIN-REQ-12.1" text="The system shall queue every pan that passes verification for recirculation to band entry." base_Class="_P9U0OSDRlCCy2XaflpZPEI"/>
+  <Requirements:Requirement xmi:id="_plF4duAV6cMgJaj9QZMRA7" id="FIN-REQ-12.2" text="The system shall remove every pan that does not pass verification from the production cycle." base_Class="_kEosNeLJvFZJX_ucvqIDIT"/>
+  <Requirements:Requirement xmi:id="_H8xgTSUt2Qqzjn7JZ2yYGD" id="FIN-REQ-13" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every discarded pan." base_Class="_ZFgE0_FbvIY3nXCZY72Co5"/>
+  <Requirements:Requirement xmi:id="_hwrwnZalgNKQ2cqK_L40Db" id="FIN-REQ-15" text="The system shall accept pans diverted by Thermal Processing through the signal &quot;Pan for washing&quot;." base_Class="_KBvwNsmJ8VpoAuXnm-sMkb"/>
+  <Requirements:Requirement xmi:id="_hTY0KLfdqqZ2CWD7jY87gs" id="FIN-REQ-14" text="The system shall keep the total number of pans in the production system at twice the number needed to fill the full production system." base_Class="_fzjVj-zG5eISJVAG7_rr0x"/>
+  <Requirements:Requirement xmi:id="_vk37d8qnHJdfou6fku4jbB" id="FIN-REQ-16" text="The system shall supply a clean pan to the depositing point when it receives the signal &quot;Pan request&quot;." base_Class="_iTANEBhAxQFknjLLlzjkXn"/>
+  <Requirements:Requirement xmi:id="_PT9vp_eDOXjDHD7N9eBw0k" id="FIN-REQ-17" text="The system shall report the current clean-pan stock level to Thermal Processing with each &quot;Clean pan supply&quot;." base_Class="_HlNfyeG6hf9qIJ8iDc574W"/>
+  <Requirements:Requirement xmi:id="_bfO8mN_3r3dNhe3LZoTUam" id="FIN-REQ-18" text="The system shall continue supplying clean pans from stock while the washing station is unavailable." base_Class="_pIHZcsDH6MkCySFwkeSLX1"/>
+  <Requirements:Requirement xmi:id="_y9vSVgrcpUra-8gqqdmQPf" id="FIN-REQ-19" text="The system shall resume washing after a fault only when it has received the signal &quot;Repair confirmed&quot; for the washing station and all conditions for continued washing are met." base_Class="_CEdf-8EELEyxyArrv-_ve0"/>
+  <Requirements:Requirement xmi:id="_J-zMQfFWRSuEqnoKhSKaWq" id="FIN-REQ-20.1" text="The system shall wash at an increased speed while pans are waiting after it has received the signal &quot;Repair confirmed&quot; for the washing station." base_Class="_rmYaREz-Gh6qcl-fKelylI"/>
+  <Requirements:Requirement xmi:id="_oOONk-_R3fJB1MZ1E89FSZ" id="FIN-REQ-20.2" text="The system shall return to normal washing speed once no backlog remains." base_Class="_tZhljRxha7i50u6Ie0OwsI"/>
+  <Requirements:Requirement xmi:id="_5R761SgwC_zrM-ms8MFQo4" id="FIN-REQ-20.3" text="The system shall log every change of washing speed." base_Class="_D5JvFN9sdwUAbwnierFWsA"/>
+  <Requirements:Requirement xmi:id="_Bd2LvkoO_fkIYP-2Dpr2SL" id="FIN-REQ-36" text="The system shall make each station controller publish a &quot;Machine status (heartbeat)&quot; at a regular interval." base_Class="_O0VqC4T_ruGjcTgJbhSK0t"/>
+  <Requirements:Requirement xmi:id="_6sI0rZhliFbj48NBsZ3KPE" id="FIN-REQ-37.1" text="The system shall continue processing the product already inside its stations when it receives a &quot;Band state change&quot; for a band halt." base_Class="_pK3b0qHaeiDReBxG_O8Y1u"/>
+  <Requirements:Requirement xmi:id="_pKAqbDRXBQq91Jw2hYEzN1" id="FIN-REQ-37.2" text="The system shall accept no new product when it receives a &quot;Band state change&quot; for a band halt." base_Class="_4yYVHw79pJJlDROoyF_F2o"/>
+  <Requirements:Requirement xmi:id="_4xFf79DRwCTt_QH-IPZ3OU" id="FIN-REQ-38.1" text="The system shall continue processing at the reduced band speed after a &quot;Band state change&quot; for a slow-down." base_Class="_2KBgvCG3QhXJg3Se1QsY2E"/>
+  <Requirements:Requirement xmi:id="_amsIHYeVhouwQMeZrEYowX" id="FIN-REQ-38.2" text="The system shall resume normal processing after a &quot;Band state change&quot; for a restart." base_Class="_0GiHr2-yYlYkpHWqTZ1a50"/>
   <Requirements:Satisfy xmi:id="_78J3En0csFfTi2yOvTppqB" base_Abstraction="_1OmvAp0n3Q2sSK-SeP6lP-"/>
   <Requirements:Satisfy xmi:id="_S7fhJAxpU1i7od00bpY2Su" base_Abstraction="_pGpY39yYS7zNRDvpf_0FSR"/>
   <Requirements:Satisfy xmi:id="_oLR57HhtCL_yauk0LT_Y7g" base_Abstraction="_nIK6CKoxg6ZRmaFye9QS8z"/>
