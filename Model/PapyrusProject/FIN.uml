@@ -167,7 +167,7 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_zRE7gL3NEfGtNPx5oKud9w" name="fin-af-12" type="_3dCQgL3LEfGDe7m4W_DlAQ" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_RYR_oL3OEfGIp5_ONuWz1w" name="fin-fd-11" type="_TWqCwL3MEfGtNPx5oKud9w" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_b20bEL3OEfGIp5_ONuWz1w" name="fin-fd-12" type="_azSzcL3MEfGtNPx5oKud9w" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_k6NuML3OEfGIp5_ONuWz1w" name="batch Tracking (FIN-AF-02)" type="_d5xcML3MEfGtNPx5oKud9w" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_k6NuML3OEfGIp5_ONuWz1w" name="fin-af-02" type="_d5xcML3MEfGtNPx5oKud9w" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_Toh5EL3QEfGIp5_ONuWz1w" name="fin-af-16" type="_HjuDYL3QEfGIp5_ONuWz1w" aggregation="composite" association="_TobycL3QEfGIp5_ONuWz1w">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_V7bIwL3QEfGIp5_ONuWz1w" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_V7gBQL3QEfGIp5_ONuWz1w" name="LiteralUnlimitedNatural1" value="1"/>
@@ -668,7 +668,7 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_azSzcL3MEfGtNPx5oKud9w" name="Pallet Wrapper (FIN-FD-12)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_hUJxAL3PEfGIp5_ONuWz1w" name="Pallet wrap control" aggregation="composite"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_d5xcML3MEfGtNPx5oKud9w" name="fin-af-02" visibility="public">
+    <packagedElement xmi:type="uml:Class" xmi:id="_d5xcML3MEfGtNPx5oKud9w" name="Batch Tracking (FIN-AF-02)" visibility="public">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_42daML3OEfGIp5_ONuWz1w" name="Batch IDs" aggregation="composite"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_l7QmYL3MEfGtNPx5oKud9w" memberEnd="_l7YiML3MEfGtNPx5oKud9w _l7aXYb3MEfGtNPx5oKud9w">
