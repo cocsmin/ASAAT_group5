@@ -164,7 +164,7 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_Ex-r0MyHEfG-B8dhrKvttQ" name="PLM-REQ-03"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_FIfuYMyHEfG-B8dhrKvttQ" name="PLM-REQ-04"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_GrrYYMyHEfG-B8dhrKvttQ" name="PLM-REQ-05"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="_HCnRsMyHEfG-B8dhrKvttQ" name="Requirement36"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_HCnRsMyHEfG-B8dhrKvttQ" name="PLM-REQ-06"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_Fm66UMyIEfG-B8dhrKvttQ" name="PLM-REQ-07"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_GhBLEMyIEfG-B8dhrKvttQ" name="PLM-REQ-08"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_HHFskMyIEfG-B8dhrKvttQ" name="PLM-REQ-09"/>
@@ -218,6 +218,31 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_UKEPIMySEfG-B8dhrKvttQ" name="" client="_o8-FEMyMEfG-B8dhrKvttQ" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_X0hHoMySEfG-B8dhrKvttQ" name="" client="_s57p4MyMEfG-B8dhrKvttQ" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_Y_nBwMySEfG-B8dhrKvttQ" name="" client="_s57p4MyMEfG-B8dhrKvttQ" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_2tg24M7IEfG6Z-2Eqxj-FQ" name="PLM-TC-01 Verify production order and recipe creation"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_O3QWsM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-03 Verify inventory level updating"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_T6YSUM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-02 Verify ingredient reservation processing"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_XVegMM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-04 Verify insufficient stock hold"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_aUz_IM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-05 Verify stockout logistics alert"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_hDalIM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-06 Verify warehouse communication suspension"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_le_YkM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-07 Verify local stock fallback instruction"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_oVr44M7MEfG6Z-2Eqxj-FQ" name="PLM-TC-08 Verify transport assignment on pallet ready"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_26aGkM7MEfG6Z-2Eqxj-FQ" name="" client="_2tg24M7IEfG6Z-2Eqxj-FQ" supplier="_VvH0UMyFEfG0tpuZPTrJ-Q"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_8fF3IM7MEfG6Z-2Eqxj-FQ" name="" client="_2tg24M7IEfG6Z-2Eqxj-FQ" supplier="_ES-boMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_C8EhoM7NEfG6Z-2Eqxj-FQ" name="" client="_2tg24M7IEfG6Z-2Eqxj-FQ" supplier="_Ex-r0MyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_PhuakM7NEfG6Z-2Eqxj-FQ" name="" client="_T6YSUM7MEfG6Z-2Eqxj-FQ" supplier="_FIfuYMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_QZGHcM7NEfG6Z-2Eqxj-FQ" name="" client="_T6YSUM7MEfG6Z-2Eqxj-FQ" supplier="_GhBLEMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_RTCAIM7NEfG6Z-2Eqxj-FQ" name="" client="_T6YSUM7MEfG6Z-2Eqxj-FQ" supplier="_GrrYYMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_a1Ch4M7NEfG6Z-2Eqxj-FQ" name="" client="_O3QWsM7MEfG6Z-2Eqxj-FQ" supplier="_Fm66UMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_m40c0M7NEfG6Z-2Eqxj-FQ" name="" client="_XVegMM7MEfG6Z-2Eqxj-FQ" supplier="_XbPQgMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_pXhT4M7NEfG6Z-2Eqxj-FQ" name="Verify106" client="_XVegMM7MEfG6Z-2Eqxj-FQ" supplier="_WZnbcMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_31Z5wM7NEfG6Z-2Eqxj-FQ" name="" client="_XVegMM7MEfG6Z-2Eqxj-FQ" supplier="_HHFskMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_S0ZPwM7OEfG6Z-2Eqxj-FQ" name="Verify108" client="_aUz_IM7MEfG6Z-2Eqxj-FQ" supplier="_YMg8cMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_czrjYM7OEfG6Z-2Eqxj-FQ" name="" client="_aUz_IM7MEfG6Z-2Eqxj-FQ" supplier="_nn8IoMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_hcm2UM7OEfG6Z-2Eqxj-FQ" name="" client="_hDalIM7MEfG6Z-2Eqxj-FQ" supplier="_oGUGsMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_jDrh0M7OEfG6Z-2Eqxj-FQ" name="" client="_hDalIM7MEfG6Z-2Eqxj-FQ" supplier="_xr9yUMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_paqSAM7OEfG6Z-2Eqxj-FQ" name="" client="_le_YkM7MEfG6Z-2Eqxj-FQ" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_trl7sM7OEfG6Z-2Eqxj-FQ" name="" client="_oVr44M7MEfG6Z-2Eqxj-FQ" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_vMl0YM7OEfG6Z-2Eqxj-FQ" name="" client="_oVr44M7MEfG6Z-2Eqxj-FQ" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_0cBAIL83EfGK09TLxcHe5g">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_0cI78L83EfGK09TLxcHe5g" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#/"/>
@@ -363,4 +388,29 @@
   <Requirements:Refine xmi:id="_UKK80MySEfG-B8dhrKvttQ" base_DirectedRelationship="_UKEPIMySEfG-B8dhrKvttQ" base_Abstraction="_UKEPIMySEfG-B8dhrKvttQ"/>
   <Requirements:Refine xmi:id="_X0pqgMySEfG-B8dhrKvttQ" base_DirectedRelationship="_X0hHoMySEfG-B8dhrKvttQ" base_Abstraction="_X0hHoMySEfG-B8dhrKvttQ"/>
   <Requirements:Refine xmi:id="_Y_qFEMySEfG-B8dhrKvttQ" base_DirectedRelationship="_Y_nBwMySEfG-B8dhrKvttQ" base_Abstraction="_Y_nBwMySEfG-B8dhrKvttQ"/>
+  <Requirements:TestCase xmi:id="_2tx8oM7IEfG6Z-2Eqxj-FQ" base_Behavior="_2tg24M7IEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_O3iqkM7MEfG6Z-2Eqxj-FQ" base_Behavior="_O3QWsM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_T6j4gM7MEfG6Z-2Eqxj-FQ" base_Behavior="_T6YSUM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_XVnqIM7MEfG6Z-2Eqxj-FQ" base_Behavior="_XVegMM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_aVDPsM7MEfG6Z-2Eqxj-FQ" base_Behavior="_aUz_IM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_hDnZcM7MEfG6Z-2Eqxj-FQ" base_Behavior="_hDalIM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_lfH7cM7MEfG6Z-2Eqxj-FQ" base_Behavior="_le_YkM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_oVz0sM7MEfG6Z-2Eqxj-FQ" base_Behavior="_oVr44M7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_26mT0M7MEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_26aGkM7MEfG6Z-2Eqxj-FQ" base_Abstraction="_26aGkM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_8fUgoM7MEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_8fF3IM7MEfG6Z-2Eqxj-FQ" base_Abstraction="_8fF3IM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_C8LPUM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_C8EhoM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_C8EhoM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_Ph29cM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_PhuakM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_PhuakM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_QZRGkM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_QZGHcM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_QZGHcM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_RTIGwM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_RTCAIM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_RTCAIM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_a1IogM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_a1Ch4M7NEfG6Z-2Eqxj-FQ" base_Abstraction="_a1Ch4M7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_m48_sM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_m40c0M7NEfG6Z-2Eqxj-FQ" base_Abstraction="_m40c0M7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_pXp2wM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_pXhT4M7NEfG6Z-2Eqxj-FQ" base_Abstraction="_pXhT4M7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_31mHAM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_31Z5wM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_31Z5wM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_S0jn0M7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_S0ZPwM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_S0ZPwM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_czzfMM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_czrjYM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_czrjYM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_hcycgM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_hcm2UM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_hcm2UM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_jDwaUM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_jDrh0M7OEfG6Z-2Eqxj-FQ" base_Abstraction="_jDrh0M7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_pa0DAM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_paqSAM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_paqSAM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_trywAM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_trl7sM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_trl7sM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_vMtwMM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_vMl0YM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_vMl0YM7OEfG6Z-2Eqxj-FQ"/>
 </xmi:XMI>
