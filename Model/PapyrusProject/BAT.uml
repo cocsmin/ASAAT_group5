@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
   <uml:Model xmi:id="_KxcU2kL1W9GcLK516lV44p" name="Batter Preparation (BAT)">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_UEOntls1R8zylIHCEY8BDA">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -457,6 +457,138 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_BejXEsFhEfGOO9iMpQbh-Q" name="bat" type="_SONHJDr6YZnEzTIGyQROVL" association="_BeeekMFhEfGOO9iMpQbh-Q"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_EojjsMx_EfGts8WNJoPXrQ" name="BAT Requirements">
+      <packagedElement xmi:type="uml:Class" xmi:id="_5bAMgMyGEfGts8WNJoPXrQ" name="BAT-REQ-01"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_XSdkcMyHEfGts8WNJoPXrQ" name="BAT-REQ-02"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_iP47UMyHEfGts8WNJoPXrQ" name="BAT-REQ-03"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_rZRhsMyHEfGts8WNJoPXrQ" name="BAT-REQ-04.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_xa2CkMyHEfGts8WNJoPXrQ" name="BAT-REQ-04.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_2arZoMyHEfGts8WNJoPXrQ" name="BAT-REQ-04.3"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_F_kq4MyIEfGts8WNJoPXrQ" name="BAT-REQ-05"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_OibcwMyIEfGts8WNJoPXrQ" name="BAT-REQ-06.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_aG8BwMyIEfGts8WNJoPXrQ" name="BAT-REQ-06.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_eUWdYMyIEfGts8WNJoPXrQ" name="BAT-REQ-07.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pq_lgMyIEfGts8WNJoPXrQ" name="BAT-REQ-07.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_yagTUMyIEfGts8WNJoPXrQ" name="BAT-REQ-07.3"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__2EgkMyIEfGts8WNJoPXrQ" name="BAT-REQ-08.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_FCIVwMyJEfGts8WNJoPXrQ" name="BAT-REQ-08.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_MAWFEMyJEfGts8WNJoPXrQ" name="BAT-REQ-08.3"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Z0E6sMyJEfGts8WNJoPXrQ" name="BAT-REQ-08.4"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_u4V-sMyJEfGts8WNJoPXrQ" name="BAT-REQ-09.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_z2Nm4MyJEfGts8WNJoPXrQ" name="BAT-REQ-09.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5VjkcMyJEfGts8WNJoPXrQ" name="BAT-REQ-10"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_9XGuUMyJEfGts8WNJoPXrQ" name="BAT-REQ-11.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Cj_p8MyKEfGts8WNJoPXrQ" name="BAT-REQ-11.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Gu0roMyKEfGts8WNJoPXrQ" name="BAT-REQ-11.3"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_MqAQoMyKEfGts8WNJoPXrQ" name="BAT-REQ-12"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Vx1-4MyKEfGts8WNJoPXrQ" name="BAT-REQ-13.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_aNx-sMyKEfGts8WNJoPXrQ" name="BAT-REQ-13.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_epPdYMyKEfGts8WNJoPXrQ" name="BAT-REQ-13.3"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_m6hXEMyKEfGts8WNJoPXrQ" name="BAT-REQ-13.4"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_szc5UMyKEfGts8WNJoPXrQ" name="BAT-REQ-14.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_v40u0MyKEfGts8WNJoPXrQ" name="BAT-REQ-14.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-_RJgMyKEfGts8WNJoPXrQ" name="BAT-REQ-14.3"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_MoYqkMyLEfGts8WNJoPXrQ" name="BAT-REQ-15.1"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_UKqJMMyLEfGts8WNJoPXrQ" name="BAT-REQ-15.2"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dhqU0MyLEfGts8WNJoPXrQ" name="BAT-REQ-16"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_lTFCsMyLEfGts8WNJoPXrQ" name="BAT-REQ-17"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_u7DCgMyLEfGts8WNJoPXrQ" name="BAT-NFR-01"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_2lwrcMyLEfGts8WNJoPXrQ" name="BAT-NFR-02"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_-QoFYMyLEfGts8WNJoPXrQ" name="BAT-NFR-03"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Q72OYMyMEfGts8WNJoPXrQ" name="BAT-NFR-04"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Wi9A0MyMEfGts8WNJoPXrQ" name="BAT-NFR-05"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_gWewYMyMEfGts8WNJoPXrQ" name="BAT-NFR-06"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_9li_wM5GEfGts8WNJoPXrQ" name="" client="_xa2CkMyHEfGts8WNJoPXrQ" supplier="_rZRhsMyHEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_Bz0-EM5HEfGts8WNJoPXrQ" name="" client="_2arZoMyHEfGts8WNJoPXrQ" supplier="_xa2CkMyHEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_Fd-UkM5HEfGts8WNJoPXrQ" name="" client="_F_kq4MyIEfGts8WNJoPXrQ" supplier="_2arZoMyHEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_H7PBMM5HEfGts8WNJoPXrQ" name="" client="_OibcwMyIEfGts8WNJoPXrQ" supplier="_2arZoMyHEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_OJ90UM5HEfGts8WNJoPXrQ" name="" client="_aG8BwMyIEfGts8WNJoPXrQ" supplier="_OibcwMyIEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_SMjgAM5HEfGts8WNJoPXrQ" name="" client="_eUWdYMyIEfGts8WNJoPXrQ" supplier="_2arZoMyHEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_awIDkM5HEfGts8WNJoPXrQ" name="" client="_yagTUMyIEfGts8WNJoPXrQ" supplier="_eUWdYMyIEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_fKzfIM5HEfGts8WNJoPXrQ" name="" client="__2EgkMyIEfGts8WNJoPXrQ" supplier="_xa2CkMyHEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_htPmsM5HEfGts8WNJoPXrQ" name="" client="_FCIVwMyJEfGts8WNJoPXrQ" supplier="__2EgkMyIEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_q83X8M5HEfGts8WNJoPXrQ" name="" client="_MAWFEMyJEfGts8WNJoPXrQ" supplier="_FCIVwMyJEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_tH6TMM5HEfGts8WNJoPXrQ" name="" client="_Z0E6sMyJEfGts8WNJoPXrQ" supplier="_FCIVwMyJEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_5pm5MM5HEfGts8WNJoPXrQ" name="" client="_z2Nm4MyJEfGts8WNJoPXrQ" supplier="_u4V-sMyJEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_7MH00M5HEfGts8WNJoPXrQ" name="" client="_Cj_p8MyKEfGts8WNJoPXrQ" supplier="_9XGuUMyJEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_80N0AM5HEfGts8WNJoPXrQ" name="" client="_Gu0roMyKEfGts8WNJoPXrQ" supplier="_Cj_p8MyKEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_CkS8QM5IEfGts8WNJoPXrQ" name="" client="_MqAQoMyKEfGts8WNJoPXrQ" supplier="_Cj_p8MyKEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_FZZhIM5IEfGts8WNJoPXrQ" name="" client="_aNx-sMyKEfGts8WNJoPXrQ" supplier="_Vx1-4MyKEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_HEDFEM5IEfGts8WNJoPXrQ" name="" client="_epPdYMyKEfGts8WNJoPXrQ" supplier="_Vx1-4MyKEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_I7RscM5IEfGts8WNJoPXrQ" name="" client="_m6hXEMyKEfGts8WNJoPXrQ" supplier="_Vx1-4MyKEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_LrX1gM5IEfGts8WNJoPXrQ" name="" client="_v40u0MyKEfGts8WNJoPXrQ" supplier="_szc5UMyKEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_gersYM5IEfGts8WNJoPXrQ" name="" client="_UKqJMMyLEfGts8WNJoPXrQ" supplier="_MoYqkMyLEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_B9bzUM7GEfGts8WNJoPXrQ" name="" client="_-_RJgMyKEfGts8WNJoPXrQ" supplier="_v40u0MyKEfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_FoX0AM7GEfGts8WNJoPXrQ" name="" client="_pq_lgMyIEfGts8WNJoPXrQ" supplier="_eUWdYMyIEfGts8WNJoPXrQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_IxkAcMx_EfGts8WNJoPXrQ" name="BAT Verification">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_iisU0MyCEfGts8WNJoPXrQ" name="TestActivity"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_Nea7sMyAEfGts8WNJoPXrQ" name="BAT Use and Failure Cases">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_r0wkoM7IEfGts8WNJoPXrQ" name="Activity2"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_P0n-EMyAEfGts8WNJoPXrQ" name="BAT Traceability"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_w7aYwMyAEfGts8WNJoPXrQ" name="Imported Requirements (THM)"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_9dcqEMyNEfGts8WNJoPXrQ" name="" client="_D9pVkQiUeWVN7rIsXAvcoO" supplier="_5bAMgMyGEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_zN03kMyREfGts8WNJoPXrQ" name="" client="_3xzAFdgOsGEcOIf921S0Go" supplier="_XSdkcMyHEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_2jX3EMyREfGts8WNJoPXrQ" name="" client="_D9pVkQiUeWVN7rIsXAvcoO" supplier="_iP47UMyHEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_CEmekMySEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_rZRhsMyHEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_DdwC0MySEfGts8WNJoPXrQ" name="" client="_wTES79eZsR3W8TBmK56noy" supplier="_rZRhsMyHEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_JZx8YMySEfGts8WNJoPXrQ" name="" client="_1DFJ3siP8agwu5BF_PF-MI" supplier="_xa2CkMyHEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_J6Mh0MySEfGts8WNJoPXrQ" name="" client="_auzz4L_-hj5cI2rcRCd9Y-" supplier="_xa2CkMyHEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_OZsL8MySEfGts8WNJoPXrQ" name="" client="_1DFJ3siP8agwu5BF_PF-MI" supplier="_2arZoMyHEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_bHEdgMySEfGts8WNJoPXrQ" name="Satisfy66" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_F_kq4MyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_dk2ukMySEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_OibcwMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_ep6SIMySEfGts8WNJoPXrQ" name="" client="_wTES79eZsR3W8TBmK56noy" supplier="_OibcwMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_oM3PEMySEfGts8WNJoPXrQ" name="" client="_1DFJ3siP8agwu5BF_PF-MI" supplier="_aG8BwMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_pFBmIMySEfGts8WNJoPXrQ" name="" client="_auzz4L_-hj5cI2rcRCd9Y-" supplier="_aG8BwMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_vZ-WAMySEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_eUWdYMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_4ZLssMySEfGts8WNJoPXrQ" name="" client="_aRU80OaFZNCxwE6Zz42I2a" supplier="_eUWdYMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_BLz_8MyTEfGts8WNJoPXrQ" name="" client="_M0QOHJCdV07abFSfqczJET" supplier="_pq_lgMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_DejeoMyTEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_yagTUMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_I7aI4MyTEfGts8WNJoPXrQ" name="" client="_8dZrypuB2KkeknAWLlQsY8" supplier="__2EgkMyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_KHrHsMyTEfGts8WNJoPXrQ" name="" client="_8dZrypuB2KkeknAWLlQsY8" supplier="_FCIVwMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_L6rWYMyTEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_FCIVwMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_OwrTIMyTEfGts8WNJoPXrQ" name="" client="_8dZrypuB2KkeknAWLlQsY8" supplier="_MAWFEMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Q51YAMyTEfGts8WNJoPXrQ" name="" client="_M0QOHJCdV07abFSfqczJET" supplier="_MAWFEMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_St4vkMyTEfGts8WNJoPXrQ" name="Satisfy80" client="_8dZrypuB2KkeknAWLlQsY8" supplier="_Z0E6sMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Y27KYMyTEfGts8WNJoPXrQ" name="" client="_CDQNoNr-cruo3VBs5-Ccje" supplier="_u4V-sMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_a4NssMyTEfGts8WNJoPXrQ" name="" client="_l2iVsN_juI3UhyujQiUWyR" supplier="_u4V-sMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_dK2dsMyTEfGts8WNJoPXrQ" name="" client="_CDQNoNr-cruo3VBs5-Ccje" supplier="_z2Nm4MyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_fHP48MyTEfGts8WNJoPXrQ" name="" client="_LOMg3i-OnNAgBTFRnCZJ06" supplier="_5VjkcMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_hxR2QMyTEfGts8WNJoPXrQ" name="" client="_MdhaahRD2GvPqwx_r4MvI_" supplier="_5VjkcMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_lRvFQMyTEfGts8WNJoPXrQ" name="" client="_vEM0uAVKcEziF2J2Nhqudr" supplier="_9XGuUMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_n4tHgMyTEfGts8WNJoPXrQ" name="" client="_-xjg3arrtc1PuAeiMRP1ko" supplier="_9XGuUMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_pR5IAMyTEfGts8WNJoPXrQ" name="" client="_vEM0uAVKcEziF2J2Nhqudr" supplier="_Cj_p8MyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_O6dr0MyUEfGts8WNJoPXrQ" name="" client="_vEM0uAVKcEziF2J2Nhqudr" supplier="_Gu0roMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Sv0z0MyUEfGts8WNJoPXrQ" name="" client="_CDQNoNr-cruo3VBs5-Ccje" supplier="_Gu0roMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_YHajkMyUEfGts8WNJoPXrQ" name="" client="_-26RsfCmnS0P_OqmegmGlF" supplier="_MqAQoMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_dZF4kMyUEfGts8WNJoPXrQ" name="" client="_l2iVsN_juI3UhyujQiUWyR" supplier="_Vx1-4MyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_fSjUkMyUEfGts8WNJoPXrQ" name="" client="_sdCEVF_Ufu1DAwlk0w8waD" supplier="_Vx1-4MyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_gREyUMyUEfGts8WNJoPXrQ" name="" client="_sdCEVF_Ufu1DAwlk0w8waD" supplier="_aNx-sMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_lI0kYMyUEfGts8WNJoPXrQ" name="" client="_aRU80OaFZNCxwE6Zz42I2a" supplier="_aNx-sMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_mb3goMyUEfGts8WNJoPXrQ" name="" client="_sdCEVF_Ufu1DAwlk0w8waD" supplier="_epPdYMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_r40RgMyUEfGts8WNJoPXrQ" name="" client="_M0QOHJCdV07abFSfqczJET" supplier="_epPdYMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_toVHUMyUEfGts8WNJoPXrQ" name="" client="_sdCEVF_Ufu1DAwlk0w8waD" supplier="_m6hXEMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_wnHzsMyUEfGts8WNJoPXrQ" name="" client="_-26RsfCmnS0P_OqmegmGlF" supplier="_szc5UMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_zmPQMMyUEfGts8WNJoPXrQ" name="" client="_-26RsfCmnS0P_OqmegmGlF" supplier="_v40u0MyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_1efyUMyUEfGts8WNJoPXrQ" name="" client="_aRU80OaFZNCxwE6Zz42I2a" supplier="_v40u0MyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_toZCoMydEfGts8WNJoPXrQ" name="" client="_-26RsfCmnS0P_OqmegmGlF" supplier="_MoYqkMyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_yf4WAMydEfGts8WNJoPXrQ" name="" client="_-26RsfCmnS0P_OqmegmGlF" supplier="_UKqJMMyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_HyLO8MyeEfGts8WNJoPXrQ" name="" client="_M0QOHJCdV07abFSfqczJET" supplier="_-_RJgMyKEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_MJTnQMyeEfGts8WNJoPXrQ" name="" client="_M0QOHJCdV07abFSfqczJET" supplier="_dhqU0MyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_N1v68MyeEfGts8WNJoPXrQ" name="" client="_I016oxDOGichYoPmQM-U2A" supplier="_lTFCsMyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_VOEMUMyeEfGts8WNJoPXrQ" name="" client="_8dZrypuB2KkeknAWLlQsY8" supplier="_u7DCgMyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_WsTE4MyeEfGts8WNJoPXrQ" name="" client="_sdCEVF_Ufu1DAwlk0w8waD" supplier="_u7DCgMyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_cHNOYMyeEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_2lwrcMyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_folDYMyeEfGts8WNJoPXrQ" name="" client="_sdCEVF_Ufu1DAwlk0w8waD" supplier="_2lwrcMyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_nmgjQMyeEfGts8WNJoPXrQ" name="" client="_D9pVkQiUeWVN7rIsXAvcoO" supplier="_-QoFYMyLEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_LilwEMyfEfGts8WNJoPXrQ" name="" client="_I016oxDOGichYoPmQM-U2A" supplier="_Q72OYMyMEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_PMAt0MyfEfGts8WNJoPXrQ" name="" client="_sdCEVF_Ufu1DAwlk0w8waD" supplier="_Wi9A0MyMEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Sf45YMyfEfGts8WNJoPXrQ" name="" client="_8dZrypuB2KkeknAWLlQsY8" supplier="_Wi9A0MyMEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Y2--UMyfEfGts8WNJoPXrQ" name="Satisfy115" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_gWewYMyMEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_dL8zcMyfEfGts8WNJoPXrQ" name="" client="_CDQNoNr-cruo3VBs5-Ccje" supplier="_gWewYMyMEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_jOWawMyfEfGts8WNJoPXrQ" name="" client="_sdCEVF_Ufu1DAwlk0w8waD" supplier="_sdCEVF_Ufu1DAwlk0w8waD"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fB2cYKlCjscJ78WmPvKJoo">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XQZg7C66WssUFIg9HnbA8B" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#/"/>
@@ -595,4 +727,127 @@
   <Blocks:NestedConnectorEnd xmi:id="_hTG_wMFfEfGOO9iMpQbh-Q" base_Element="_hTGYscFfEfGOO9iMpQbh-Q" propertyPath="_Ove9xkJpUFk5pM_NvX6jGn" base_ConnectorEnd="_hTGYscFfEfGOO9iMpQbh-Q"/>
   <Blocks:NestedConnectorEnd xmi:id="_CBuLAcFgEfGOO9iMpQbh-Q" base_Element="_CBtj8MFgEfGOO9iMpQbh-Q" propertyPath="_L-OiUMFeEfGOO9iMpQbh-Q" base_ConnectorEnd="_CBtj8MFgEfGOO9iMpQbh-Q"/>
   <Blocks:NestedConnectorEnd xmi:id="_HBpBoMFgEfGOO9iMpQbh-Q" base_Element="_HBoakMFgEfGOO9iMpQbh-Q" propertyPath="_L-OiUMFeEfGOO9iMpQbh-Q" base_ConnectorEnd="_HBoakMFgEfGOO9iMpQbh-Q"/>
+  <Requirements:TestCase xmi:id="_oXng0MyCEfGts8WNJoPXrQ" base_Behavior="_iisU0MyCEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_5bFFAMyGEfGts8WNJoPXrQ" base_NamedElement="_5bAMgMyGEfGts8WNJoPXrQ" id="BAT-REQ-01" text="The system shall receive the production order and its recipe targets from Production &amp; Logistics Management before dosing begins." base_Class="_5bAMgMyGEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_XSic8MyHEfGts8WNJoPXrQ" base_NamedElement="_XSdkcMyHEfGts8WNJoPXrQ" id="BAT-REQ-02" text="The system shall associate every batch with the batch ID of its production order, from intake until the batter is handed off to Thermal Processing." base_Class="_XSdkcMyHEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_iP7-oMyHEfGts8WNJoPXrQ" base_NamedElement="_iP47UMyHEfGts8WNJoPXrQ" id="BAT-REQ-03" text="The system shall request the ingredients required by the production order from Production &amp; Logistics Management, and shall not begin dosing until the request has been confirmed." base_Class="_iP47UMyHEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_rZVzIMyHEfGts8WNJoPXrQ" base_NamedElement="_rZRhsMyHEfGts8WNJoPXrQ" id="BAT-REQ-04.1" text="The system shall dispense each ingredient of the recipe into the mixer." base_Class="_rZRhsMyHEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_xa67EMyHEfGts8WNJoPXrQ" base_NamedElement="_xa2CkMyHEfGts8WNJoPXrQ" id="BAT-REQ-04.2" text="The system shall measure the dispensed weight of each ingredient." base_Class="_xa2CkMyHEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_2avrEMyHEfGts8WNJoPXrQ" base_NamedElement="_2arZoMyHEfGts8WNJoPXrQ" id="BAT-REQ-04.3" text="The system shall compare each measured weight against its recipe target." base_Class="_2arZoMyHEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_F_o8UMyIEfGts8WNJoPXrQ" base_NamedElement="_F_kq4MyIEfGts8WNJoPXrQ" id="BAT-REQ-05" text="The system shall treat a batch as ready for mixing only when every ingredient of the recipe is within the dose tolerance (P1) of its recipe target." base_Class="_F_kq4MyIEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_OigVQMyIEfGts8WNJoPXrQ" base_NamedElement="_OibcwMyIEfGts8WNJoPXrQ" id="BAT-REQ-06.1" text="The system shall request the missing amount of an ingredient when its measured weight is below the recipe target." base_Class="_OibcwMyIEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_aHATMMyIEfGts8WNJoPXrQ" base_NamedElement="_aG8BwMyIEfGts8WNJoPXrQ" id="BAT-REQ-06.2" text="The system shall weigh an ingredient again after every top-up." base_Class="_aG8BwMyIEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_eUbV4MyIEfGts8WNJoPXrQ" base_NamedElement="_eUWdYMyIEfGts8WNJoPXrQ" id="BAT-REQ-07.1" text="The system shall discard the batch when the measured weight of an ingredient exceeds its recipe target." base_Class="_eUWdYMyIEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_prD28MyIEfGts8WNJoPXrQ" base_NamedElement="_pq_lgMyIEfGts8WNJoPXrQ" id="BAT-REQ-07.2" text="The system shall record a discard, with its reason and the batch ID, for every batch discarded because of an over-dose." base_Class="_pq_lgMyIEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_yakkwMyIEfGts8WNJoPXrQ" base_NamedElement="_yagTUMyIEfGts8WNJoPXrQ" id="BAT-REQ-07.3" text="The system shall start a new batch after discarding an over-dosed batch." base_Class="_yagTUMyIEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="__2JZEMyIEfGts8WNJoPXrQ" base_NamedElement="__2EgkMyIEfGts8WNJoPXrQ" id="BAT-REQ-08.1" text="The system shall count consecutive failed dose measurements." base_Class="__2EgkMyIEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_FCNOQMyJEfGts8WNJoPXrQ" base_NamedElement="_FCIVwMyJEfGts8WNJoPXrQ" id="BAT-REQ-08.2" text="The system shall stop dosing when the number of consecutive failed dose measurements reaches the maximum (P2)." base_Class="_FCIVwMyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_MAa9kMyJEfGts8WNJoPXrQ" base_NamedElement="_MAWFEMyJEfGts8WNJoPXrQ" id="BAT-REQ-08.3" text="The system shall record an error, with the batch ID, when dosing is stopped because the maximum consecutive failed dose measurements (P2) was reached." base_Class="_MAWFEMyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_Z0JMIMyJEfGts8WNJoPXrQ" base_NamedElement="_Z0E6sMyJEfGts8WNJoPXrQ" id="BAT-REQ-08.4" text="The system shall resume dosing only after the doser has been marked operational again." base_Class="_Z0E6sMyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_u4a3MMyJEfGts8WNJoPXrQ" base_NamedElement="_u4V-sMyJEfGts8WNJoPXrQ" id="BAT-REQ-09.1" text="The system shall start the mixing cycle when batch loading is complete." base_Class="_u4V-sMyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_z2SfYMyJEfGts8WNJoPXrQ" base_NamedElement="_z2Nm4MyJEfGts8WNJoPXrQ" id="BAT-REQ-09.2" text="The system shall run every mixing cycle for the recipe-defined duration." base_Class="_z2Nm4MyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_5VmnwMyJEfGts8WNJoPXrQ" base_NamedElement="_5VjkcMyJEfGts8WNJoPXrQ" id="BAT-REQ-10" text="The system shall monitor batter consistency throughout the mixing cycle." base_Class="_5VjkcMyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_9XK_wMyJEfGts8WNJoPXrQ" base_NamedElement="_9XGuUMyJEfGts8WNJoPXrQ" id="BAT-REQ-11.1" text="The system shall present every finished batch to a human inspector before release." base_Class="_9XGuUMyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_CkEicMyKEfGts8WNJoPXrQ" base_NamedElement="_Cj_p8MyKEfGts8WNJoPXrQ" id="BAT-REQ-11.2" text="The system shall not release a batch for handoff until that batch has been marked good." base_Class="_Cj_p8MyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_Gu49EMyKEfGts8WNJoPXrQ" base_NamedElement="_Gu0roMyKEfGts8WNJoPXrQ" id="BAT-REQ-11.3" text="The system shall schedule a further mixing cycle immediately for every batch that is not marked good." base_Class="_Gu0roMyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_MqBewMyKEfGts8WNJoPXrQ" base_NamedElement="_MqAQoMyKEfGts8WNJoPXrQ" id="BAT-REQ-12" text="The system shall make a batch available to Thermal Processing for depositing, together with its batch ID, once that batch has been marked good." base_Class="_MqAQoMyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_Vx5pQMyKEfGts8WNJoPXrQ" base_NamedElement="_Vx1-4MyKEfGts8WNJoPXrQ" id="BAT-REQ-13.1" text="The system shall stop the mixer when a mixer fault is detected." base_Class="_Vx1-4MyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_aN2QIMyKEfGts8WNJoPXrQ" base_NamedElement="_aNx-sMyKEfGts8WNJoPXrQ" id="BAT-REQ-13.2" text="The system shall discard the batch that is in the mixer when a mixer fault is detected." base_Class="_aNx-sMyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_epSgsMyKEfGts8WNJoPXrQ" base_NamedElement="_epPdYMyKEfGts8WNJoPXrQ" id="BAT-REQ-13.3" text="The system shall record an error, with the batch ID, when a mixer fault is detected." base_Class="_epPdYMyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_m6jMQMyKEfGts8WNJoPXrQ" base_NamedElement="_m6hXEMyKEfGts8WNJoPXrQ" id="BAT-REQ-13.4" text="The system shall resume mixing only after the mixer has been marked operational again." base_Class="_m6hXEMyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_szhx0MyKEfGts8WNJoPXrQ" base_NamedElement="_szc5UMyKEfGts8WNJoPXrQ" id="BAT-REQ-14.1" text="The system shall track the waiting time of every finished batch of batter." base_Class="_szc5UMyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_v45AQMyKEfGts8WNJoPXrQ" base_NamedElement="_v40u0MyKEfGts8WNJoPXrQ" id="BAT-REQ-14.2" text="The system shall discard any batter whose waiting time exceeds the maximum batter waiting time (P3)." base_Class="_v40u0MyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_-_WpEMyKEfGts8WNJoPXrQ" base_NamedElement="_-_RJgMyKEfGts8WNJoPXrQ" id="BAT-REQ-14.3" text="The system shall record a discard, with its reason and the batch ID, for every batch discarded because it waited longer than the maximum batter waiting time (P3)." base_Class="_-_RJgMyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_Moc8AMyLEfGts8WNJoPXrQ" base_NamedElement="_MoYqkMyLEfGts8WNJoPXrQ" id="BAT-REQ-15.1" text="The system shall hold new batches for as long as depositing is reported stopped." base_Class="_MoYqkMyLEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_UKslcMyLEfGts8WNJoPXrQ" base_NamedElement="_UKqJMMyLEfGts8WNJoPXrQ" id="BAT-REQ-15.2" text="The system shall resume starting new batches once depositing is reported working again." base_Class="_UKqJMMyLEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_dhvNUMyLEfGts8WNJoPXrQ" base_NamedElement="_dhqU0MyLEfGts8WNJoPXrQ" id="BAT-REQ-16" text="The system shall record every log, warning, error and discard event in the slice, each carrying the batch ID, and make it available to Line Monitoring &amp; Health." base_Class="_dhqU0MyLEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_lTJUIMyLEfGts8WNJoPXrQ" base_NamedElement="_lTFCsMyLEfGts8WNJoPXrQ" id="BAT-REQ-17" text="The system shall make the health state of every function and device in the slice observable at an interval no longer than the health status interval (P4)." base_Class="_lTFCsMyLEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_u7HT8MyLEfGts8WNJoPXrQ" base_NamedElement="_u7DCgMyLEfGts8WNJoPXrQ" id="BAT-NFR-01" text="A fault in this slice shall not affect any batch that has already been handed over to Thermal Processing." base_Class="_u7DCgMyLEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_2lzuwMyLEfGts8WNJoPXrQ" base_NamedElement="_2lwrcMyLEfGts8WNJoPXrQ" id="BAT-NFR-02" text="A single dosing or mixing fault shall cost at most the batch being processed when the fault occurred." base_Class="_2lwrcMyLEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_-Qs94MyLEfGts8WNJoPXrQ" base_NamedElement="_-QoFYMyLEfGts8WNJoPXrQ" id="BAT-NFR-03" text="The system shall continue dosing and mixing from already-reserved ingredients while Production &amp; Logistics Management is not responding." base_Class="_-QoFYMyLEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_Q76f0MyMEfGts8WNJoPXrQ" base_NamedElement="_Q72OYMyMEfGts8WNJoPXrQ" id="BAT-NFR-04" text="A function or device that has stopped responding shall become observable to Line Monitoring &amp; Health within the fault report latency (P5)." base_Class="_Q72OYMyMEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_WjBSQMyMEfGts8WNJoPXrQ" base_NamedElement="_Wi9A0MyMEfGts8WNJoPXrQ" id="BAT-NFR-05" text="Dosing and mixing shall each resume without manual reconfiguration once the fault that stopped them has been cleared." base_Class="_Wi9A0MyMEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_gWhzsMyMEfGts8WNJoPXrQ" base_NamedElement="_gWewYMyMEfGts8WNJoPXrQ" id="BAT-NFR-06" text="Ingredient Intake &amp; Dosing and Mixing Control shall each be deployable without stopping the other." base_Class="_gWewYMyMEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_9dj-0MyNEfGts8WNJoPXrQ" base_DirectedRelationship="_9dcqEMyNEfGts8WNJoPXrQ" base_Abstraction="_9dcqEMyNEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_zN364MyREfGts8WNJoPXrQ" base_DirectedRelationship="_zN03kMyREfGts8WNJoPXrQ" base_Abstraction="_zN03kMyREfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_2jbhcMyREfGts8WNJoPXrQ" base_DirectedRelationship="_2jX3EMyREfGts8WNJoPXrQ" base_Abstraction="_2jX3EMyREfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_CEph4MySEfGts8WNJoPXrQ" base_DirectedRelationship="_CEmekMySEfGts8WNJoPXrQ" base_Abstraction="_CEmekMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_DdzGIMySEfGts8WNJoPXrQ" base_DirectedRelationship="_DdwC0MySEfGts8WNJoPXrQ" base_Abstraction="_DdwC0MySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_JZ2N0MySEfGts8WNJoPXrQ" base_DirectedRelationship="_JZx8YMySEfGts8WNJoPXrQ" base_Abstraction="_JZx8YMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_J6PlIMySEfGts8WNJoPXrQ" base_DirectedRelationship="_J6Mh0MySEfGts8WNJoPXrQ" base_Abstraction="_J6Mh0MySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_OZwdYMySEfGts8WNJoPXrQ" base_DirectedRelationship="_OZsL8MySEfGts8WNJoPXrQ" base_Abstraction="_OZsL8MySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_bHIu8MySEfGts8WNJoPXrQ" base_DirectedRelationship="_bHEdgMySEfGts8WNJoPXrQ" base_Abstraction="_bHEdgMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_dk7nEMySEfGts8WNJoPXrQ" base_DirectedRelationship="_dk2ukMySEfGts8WNJoPXrQ" base_Abstraction="_dk2ukMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_ep9VcMySEfGts8WNJoPXrQ" base_DirectedRelationship="_ep6SIMySEfGts8WNJoPXrQ" base_Abstraction="_ep6SIMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_oM8HkMySEfGts8WNJoPXrQ" base_DirectedRelationship="_oM3PEMySEfGts8WNJoPXrQ" base_Abstraction="_oM3PEMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_pFGeoMySEfGts8WNJoPXrQ" base_DirectedRelationship="_pFBmIMySEfGts8WNJoPXrQ" base_Abstraction="_pFBmIMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_vaBZUMySEfGts8WNJoPXrQ" base_DirectedRelationship="_vZ-WAMySEfGts8WNJoPXrQ" base_Abstraction="_vZ-WAMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_4ZNh4MySEfGts8WNJoPXrQ" base_DirectedRelationship="_4ZLssMySEfGts8WNJoPXrQ" base_Abstraction="_4ZLssMySEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_BL4RYMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_BLz_8MyTEfGts8WNJoPXrQ" base_Abstraction="_BLz_8MyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_Demh8MyTEfGts8WNJoPXrQ" base_DirectedRelationship="_DejeoMyTEfGts8WNJoPXrQ" base_Abstraction="_DejeoMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_I7eaUMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_I7aI4MyTEfGts8WNJoPXrQ" base_Abstraction="_I7aI4MyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_KHvZIMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_KHrHsMyTEfGts8WNJoPXrQ" base_Abstraction="_KHrHsMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_L6vn0MyTEfGts8WNJoPXrQ" base_DirectedRelationship="_L6rWYMyTEfGts8WNJoPXrQ" base_Abstraction="_L6rWYMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_OwwLoMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_OwrTIMyTEfGts8WNJoPXrQ" base_Abstraction="_OwrTIMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_Q54bUMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_Q51YAMyTEfGts8WNJoPXrQ" base_Abstraction="_Q51YAMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_St7y4MyTEfGts8WNJoPXrQ" base_DirectedRelationship="_St4vkMyTEfGts8WNJoPXrQ" base_Abstraction="_St4vkMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_Y2-NsMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_Y27KYMyTEfGts8WNJoPXrQ" base_Abstraction="_Y27KYMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_a4R-IMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_a4NssMyTEfGts8WNJoPXrQ" base_Abstraction="_a4NssMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_dK5hAMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_dK2dsMyTEfGts8WNJoPXrQ" base_Abstraction="_dK2dsMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_fHUKYMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_fHP48MyTEfGts8WNJoPXrQ" base_Abstraction="_fHP48MyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_hxVgoMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_hxR2QMyTEfGts8WNJoPXrQ" base_Abstraction="_hxR2QMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_lRyvoMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_lRvFQMyTEfGts8WNJoPXrQ" base_Abstraction="_lRvFQMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_n4yAAMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_n4tHgMyTEfGts8WNJoPXrQ" base_Abstraction="_n4tHgMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_pR-AgMyTEfGts8WNJoPXrQ" base_DirectedRelationship="_pR5IAMyTEfGts8WNJoPXrQ" base_Abstraction="_pR5IAMyTEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_O6jycMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_O6dr0MyUEfGts8WNJoPXrQ" base_Abstraction="_O6dr0MyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_Sv4eMMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_Sv0z0MyUEfGts8WNJoPXrQ" base_Abstraction="_Sv0z0MyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_YHeN8MyUEfGts8WNJoPXrQ" base_DirectedRelationship="_YHajkMyUEfGts8WNJoPXrQ" base_Abstraction="_YHajkMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_dZKxEMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_dZF4kMyUEfGts8WNJoPXrQ" base_Abstraction="_dZF4kMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_fSoNEMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_fSjUkMyUEfGts8WNJoPXrQ" base_Abstraction="_fSjUkMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_gRJq0MyUEfGts8WNJoPXrQ" base_DirectedRelationship="_gREyUMyUEfGts8WNJoPXrQ" base_Abstraction="_gREyUMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_lI5c4MyUEfGts8WNJoPXrQ" base_DirectedRelationship="_lI0kYMyUEfGts8WNJoPXrQ" base_Abstraction="_lI0kYMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_mb7yEMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_mb3goMyUEfGts8WNJoPXrQ" base_Abstraction="_mb3goMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_r46YIMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_r40RgMyUEfGts8WNJoPXrQ" base_Abstraction="_r40RgMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_toccEMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_toVHUMyUEfGts8WNJoPXrQ" base_Abstraction="_toVHUMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_wnK3AMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_wnHzsMyUEfGts8WNJoPXrQ" base_Abstraction="_wnHzsMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_zmSTgMyUEfGts8WNJoPXrQ" base_DirectedRelationship="_zmPQMMyUEfGts8WNJoPXrQ" base_Abstraction="_zmPQMMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_1ekq0MyUEfGts8WNJoPXrQ" base_DirectedRelationship="_1efyUMyUEfGts8WNJoPXrQ" base_Abstraction="_1efyUMyUEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_tod7IMydEfGts8WNJoPXrQ" base_DirectedRelationship="_toZCoMydEfGts8WNJoPXrQ" base_Abstraction="_toZCoMydEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_yf7ZUMydEfGts8WNJoPXrQ" base_DirectedRelationship="_yf4WAMydEfGts8WNJoPXrQ" base_Abstraction="_yf4WAMydEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_HyQugMyeEfGts8WNJoPXrQ" base_DirectedRelationship="_HyLO8MyeEfGts8WNJoPXrQ" base_Abstraction="_HyLO8MyeEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_MJZG0MyeEfGts8WNJoPXrQ" base_DirectedRelationship="_MJTnQMyeEfGts8WNJoPXrQ" base_Abstraction="_MJTnQMyeEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_N1zlUMyeEfGts8WNJoPXrQ" base_DirectedRelationship="_N1v68MyeEfGts8WNJoPXrQ" base_Abstraction="_N1v68MyeEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_VOHPoMyeEfGts8WNJoPXrQ" base_DirectedRelationship="_VOEMUMyeEfGts8WNJoPXrQ" base_Abstraction="_VOEMUMyeEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_WsWvQMyeEfGts8WNJoPXrQ" base_DirectedRelationship="_WsTE4MyeEfGts8WNJoPXrQ" base_Abstraction="_WsTE4MyeEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_cHSt8MyeEfGts8WNJoPXrQ" base_DirectedRelationship="_cHNOYMyeEfGts8WNJoPXrQ" base_Abstraction="_cHNOYMyeEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_fopU0MyeEfGts8WNJoPXrQ" base_DirectedRelationship="_folDYMyeEfGts8WNJoPXrQ" base_Abstraction="_folDYMyeEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_nmlbwMyeEfGts8WNJoPXrQ" base_DirectedRelationship="_nmgjQMyeEfGts8WNJoPXrQ" base_Abstraction="_nmgjQMyeEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_LixWQMyfEfGts8WNJoPXrQ" base_DirectedRelationship="_LilwEMyfEfGts8WNJoPXrQ" base_Abstraction="_LilwEMyfEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_PMFmUMyfEfGts8WNJoPXrQ" base_DirectedRelationship="_PMAt0MyfEfGts8WNJoPXrQ" base_Abstraction="_PMAt0MyfEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_Sf9x4MyfEfGts8WNJoPXrQ" base_DirectedRelationship="_Sf45YMyfEfGts8WNJoPXrQ" base_Abstraction="_Sf45YMyfEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_Y3CosMyfEfGts8WNJoPXrQ" base_DirectedRelationship="_Y2--UMyfEfGts8WNJoPXrQ" base_Abstraction="_Y2--UMyfEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_dMCTAMyfEfGts8WNJoPXrQ" base_DirectedRelationship="_dL8zcMyfEfGts8WNJoPXrQ" base_Abstraction="_dL8zcMyfEfGts8WNJoPXrQ"/>
+  <Requirements:Satisfy xmi:id="_jOb6UMyfEfGts8WNJoPXrQ" base_DirectedRelationship="_jOWawMyfEfGts8WNJoPXrQ" base_Abstraction="_jOWawMyfEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_9lul8M5GEfGts8WNJoPXrQ" base_DirectedRelationship="_9li_wM5GEfGts8WNJoPXrQ" base_Abstraction="_9li_wM5GEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_Bz7rwM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_Bz0-EM5HEfGts8WNJoPXrQ" base_Abstraction="_Bz0-EM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_FeEbMM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_Fd-UkM5HEfGts8WNJoPXrQ" base_Abstraction="_Fd-UkM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_H7UgwM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_H7PBMM5HEfGts8WNJoPXrQ" base_Abstraction="_H7PBMM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_OKCFwM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_OJ90UM5HEfGts8WNJoPXrQ" base_Abstraction="_OJ90UM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_SMnxcM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_SMjgAM5HEfGts8WNJoPXrQ" base_Abstraction="_SMjgAM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_awJ4wM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_awIDkM5HEfGts8WNJoPXrQ" base_Abstraction="_awIDkM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_fK5lwM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_fKzfIM5HEfGts8WNJoPXrQ" base_Abstraction="_fKzfIM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_htTREM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_htPmsM5HEfGts8WNJoPXrQ" base_Abstraction="_htPmsM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_q87pYM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_q83X8M5HEfGts8WNJoPXrQ" base_Abstraction="_q83X8M5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_tIAZ0M5HEfGts8WNJoPXrQ" base_DirectedRelationship="_tH6TMM5HEfGts8WNJoPXrQ" base_Abstraction="_tH6TMM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_5p07oM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_5pm5MM5HEfGts8WNJoPXrQ" base_Abstraction="_5pm5MM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_7MK4IM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_7MH00M5HEfGts8WNJoPXrQ" base_Abstraction="_7MH00M5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_80hWAM5HEfGts8WNJoPXrQ" base_DirectedRelationship="_80N0AM5HEfGts8WNJoPXrQ" base_Abstraction="_80N0AM5HEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_CkXNsM5IEfGts8WNJoPXrQ" base_DirectedRelationship="_CkS8QM5IEfGts8WNJoPXrQ" base_Abstraction="_CkS8QM5IEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_FZdLgM5IEfGts8WNJoPXrQ" base_DirectedRelationship="_FZZhIM5IEfGts8WNJoPXrQ" base_Abstraction="_FZZhIM5IEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_HEGvcM5IEfGts8WNJoPXrQ" base_DirectedRelationship="_HEDFEM5IEfGts8WNJoPXrQ" base_Abstraction="_HEDFEM5IEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_I7VW0M5IEfGts8WNJoPXrQ" base_DirectedRelationship="_I7RscM5IEfGts8WNJoPXrQ" base_Abstraction="_I7RscM5IEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_Lrbf4M5IEfGts8WNJoPXrQ" base_DirectedRelationship="_LrX1gM5IEfGts8WNJoPXrQ" base_Abstraction="_LrX1gM5IEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_gev90M5IEfGts8WNJoPXrQ" base_DirectedRelationship="_gersYM5IEfGts8WNJoPXrQ" base_Abstraction="_gersYM5IEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_B9fdsM7GEfGts8WNJoPXrQ" base_DirectedRelationship="_B9bzUM7GEfGts8WNJoPXrQ" base_Abstraction="_B9bzUM7GEfGts8WNJoPXrQ"/>
+  <Requirements:DeriveReqt xmi:id="_FobeYM7GEfGts8WNJoPXrQ" base_DirectedRelationship="_FoX0AM7GEfGts8WNJoPXrQ" base_Abstraction="_FoX0AM7GEfGts8WNJoPXrQ"/>
 </xmi:XMI>
