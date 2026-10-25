@@ -90,9 +90,91 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_QgI8wL85EfGK09TLxcHe5g" name="Recipe Manager (PLM-AF-02)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_i-3SIL9KEfGK09TLxcHe5g" name="Recipe target data" aggregation="composite"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_ksPpsL85EfGK09TLxcHe5g" name="Warehouse And Inventory Manager (PLM-AF-03)">
+    <packagedElement xmi:type="uml:Class" xmi:id="_ksPpsL85EfGK09TLxcHe5g" name="Warehouse And Inventory Manager (PLM-AF-03)" classifierBehavior="_vvkQwNCeEfG-6PPhNNbUSQ">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_tKKBcL9KEfGK09TLxcHe5g" name="Stock reservation check" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_dquCgL9LEfGK09TLxcHe5g" name="Withdrawal confirmation" aggregation="composite"/>
+      <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_vvkQwNCeEfG-6PPhNNbUSQ" name="StateMachine3">
+        <region xmi:type="uml:Region" xmi:id="_xnYG8NCeEfG-6PPhNNbUSQ" name="Region1">
+          <transition xmi:type="uml:Transition" xmi:id="_i6JyoNCgEfG-6PPhNNbUSQ" source="_WtIcINCgEfG-6PPhNNbUSQ" target="_guzx4NCfEfG-6PPhNNbUSQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_ng-MwNCgEfG-6PPhNNbUSQ" source="_guzx4NCfEfG-6PPhNNbUSQ" target="_inIlcNCfEfG-6PPhNNbUSQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_baSt0NCrEfG-6PPhNNbUSQ" name="" event="_iBGCsNCrEfG-6PPhNNbUSQ" port="_tKKBcL9KEfGK09TLxcHe5g"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_pX1nwNCgEfG-6PPhNNbUSQ" guard="_dQUT8NCuEfG-6PPhNNbUSQ" source="_inIlcNCfEfG-6PPhNNbUSQ" target="_lFSp8NCfEfG-6PPhNNbUSQ">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_dQUT8NCuEfG-6PPhNNbUSQ" name="[validation == OK]">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_dQViENCuEfG-6PPhNNbUSQ" name="constraintSpec">
+                <language>OCL</language>
+                <body>true</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_ux-8QNCgEfG-6PPhNNbUSQ" source="_lFSp8NCfEfG-6PPhNNbUSQ" target="_GGtccNCgEfG-6PPhNNbUSQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_2FrzYNCgEfG-6PPhNNbUSQ" guard="_1pdpENCuEfG-6PPhNNbUSQ" source="_GGtccNCgEfG-6PPhNNbUSQ" target="_sQkk4NCfEfG-6PPhNNbUSQ">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_1pdpENCuEfG-6PPhNNbUSQ" name="[stock >= requested]">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_1pe3MNCuEfG-6PPhNNbUSQ" name="constraintSpec">
+                <language>OCL</language>
+                <body>true</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_8EBaENCgEfG-6PPhNNbUSQ" guard="_-P7voNCuEfG-6PPhNNbUSQ" source="_GGtccNCgEfG-6PPhNNbUSQ" target="_t7TBUNCfEfG-6PPhNNbUSQ">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_-P7voNCuEfG-6PPhNNbUSQ" name="stock &lt; requested">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_-P89wNCuEfG-6PPhNNbUSQ" name="constraintSpec">
+                <language>OCL</language>
+                <body>true</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_-6WG8NCgEfG-6PPhNNbUSQ" source="_t7TBUNCfEfG-6PPhNNbUSQ" target="_lFSp8NCfEfG-6PPhNNbUSQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_FiZbMNCwEfG-6PPhNNbUSQ" name="clear stockout error"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_FVV0cNChEfG-6PPhNNbUSQ" source="_sQkk4NCfEfG-6PPhNNbUSQ" target="_wfvUANCfEfG-6PPhNNbUSQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_d42eINCvEfG-6PPhNNbUSQ" name="send Reservation Result"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_Hl8lINChEfG-6PPhNNbUSQ" source="_wfvUANCfEfG-6PPhNNbUSQ" target="_za6rsNCfEfG-6PPhNNbUSQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_lr0rMNCvEfG-6PPhNNbUSQ" name="" event="_oyoEENCvEfG-6PPhNNbUSQ" port="_dquCgL9LEfGK09TLxcHe5g"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_Pm4VsNChEfG-6PPhNNbUSQ" source="_za6rsNCfEfG-6PPhNNbUSQ" target="_guzx4NCfEfG-6PPhNNbUSQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_5V7eUNCvEfG-6PPhNNbUSQ" name="release database lock"/>
+          </transition>
+          <subvertex xmi:type="uml:State" xmi:id="_guzx4NCfEfG-6PPhNNbUSQ" name="Idle">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_nC5sgNCnEfG-6PPhNNbUSQ" name="listen for incoming Ingredient request"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_-9EcENCmEfG-6PPhNNbUSQ" name="clear previous request data"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_v17BUNCnEfG-6PPhNNbUSQ" name="acknowledge signal reception"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_inIlcNCfEfG-6PPhNNbUSQ" name="Validating_Request">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_ki478NCpEfG-6PPhNNbUSQ" name="verify organic ingredient requirement"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_hpr6MNCpEfG-6PPhNNbUSQ" name="load business rules"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_qF-KANCpEfG-6PPhNNbUSQ" name="log validation result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_lFSp8NCfEfG-6PPhNNbUSQ" name="Checking_Inventory">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_7ZBmMNCpEfG-6PPhNNbUSQ" name="calculate available stock versus requested quantity"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_3QwwUNCpEfG-6PPhNNbUSQ" name="query database for requested item"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="__EnHINCpEfG-6PPhNNbUSQ" name="return stock level value"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_sQkk4NCfEfG-6PPhNNbUSQ" name="Reserving">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_UKmpcNCqEfG-6PPhNNbUSQ" name="process stock reservation"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Rp9RoNCqEfG-6PPhNNbUSQ" name="lock requested amount in database"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_XIhzINCqEfG-6PPhNNbUSQ" name="generate reservation ID"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_t7TBUNCfEfG-6PPhNNbUSQ" name="Handling_Stockout">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_IpLNoNCqEfG-6PPhNNbUSQ" name="hold reservation process"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_GMTikNCqEfG-6PPhNNbUSQ" name="generate insufficient stock error"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_NUd4ENCqEfG-6PPhNNbUSQ" name="publish warning to MON"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_wfvUANCfEfG-6PPhNNbUSQ" name="Waiting_For_Withdrawal">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_6wfKENCqEfG-6PPhNNbUSQ" name="await physical collection of ingredients"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zTU08NCqEfG-6PPhNNbUSQ" name="open listener port for FD-01"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_-8sEwNCqEfG-6PPhNNbUSQ" name="close listener port"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_za6rsNCfEfG-6PPhNNbUSQ" name="Updating_Inventory">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_IFI3ANCrEfG-6PPhNNbUSQ" name="permanently deduct collected amount from warehouse inventory numbers"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_DkhykNCrEfG-6PPhNNbUSQ" name="open inventory database in write mode"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_NFSXINCrEfG-6PPhNNbUSQ" name="save transaction log"/>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_GGtccNCgEfG-6PPhNNbUSQ" name="Choice8" kind="choice"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_WtIcINCgEfG-6PPhNNbUSQ" name="Initial"/>
+        </region>
+      </ownedBehavior>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_qsvzkL85EfGK09TLxcHe5g" name="Transport And Shipment Planner (PLM-AF-04)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_37IbQL9LEfGK09TLxcHe5g" name="Pallet ready for shipment" aggregation="composite"/>
@@ -243,6 +325,13 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_paqSAM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_trl7sM7OEfG6Z-2Eqxj-FQ" name="" client="_oVr44M7MEfG6Z-2Eqxj-FQ" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_vMl0YM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="_exLdANCeEfG-6PPhNNbUSQ" name="StateMachine115">
+      <region xmi:type="uml:Region" xmi:id="_iJKFcNCeEfG-6PPhNNbUSQ" name="Region1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_iBGCsNCrEfG-6PPhNNbUSQ" name="Internal stock request" signal="_tTu0kNCrEfG-6PPhNNbUSQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_tTu0kNCrEfG-6PPhNNbUSQ" name="Internal stock request"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_oyoEENCvEfG-6PPhNNbUSQ" name="" signal="_rFfekNCvEfG-6PPhNNbUSQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_rFfekNCvEfG-6PPhNNbUSQ" name="Withdrawal confirmation"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_0cBAIL83EfGK09TLxcHe5g">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_0cI78L83EfGK09TLxcHe5g" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#/"/>
