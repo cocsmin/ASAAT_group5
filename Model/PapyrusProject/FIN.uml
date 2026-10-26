@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ActionLanguage="http://www.omg.org/spec/ALF/20120827/ActionLanguage-Profile" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.omg.org/spec/ALF/20120827/ActionLanguage-Profile pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
   <uml:Model xmi:id="_M7jBYLzYEfG45YF_OaBpaA" name="Finishing &amp; Packaging (FIN)">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_NCkPYLzYEfG45YF_OaBpaA">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -530,9 +530,6 @@
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_JP6BdrRqi8zll7Vi6aGLaF" name="T13" source="_lXmR3AxiLoVQaYWyW4q-Ik" target="_bIKjIR82HWZSBjuarWl8ek">
             <ownedComment xmi:type="uml:Comment" xmi:id="_QrUTlY4Qg1toFtHoJQgC7p" annotatedElement="_JP6BdrRqi8zll7Vi6aGLaF">
-              <body>Traces to: FIN-REQ-18</body>
-            </ownedComment>
-            <ownedComment xmi:type="uml:Comment" xmi:id="_ZqqwkNEqEfG05Lxk_syBEA">
               <body>Traces to: FIN-REQ-18</body>
             </ownedComment>
             <effect xmi:type="uml:OpaqueBehavior" xmi:id="_RvdcqbsBFrQgZBXN0-cCfj" name="keep supplying from stock"/>
@@ -2466,5 +2463,4 @@
   <Requirements:Verify xmi:id="_M1JvoovFKgFdQnogW3d5wT" base_Abstraction="_QfEapVgoPKiWlTyoq4tOZv"/>
   <Requirements:Verify xmi:id="_fcMrVIWhiadpB-0wlK1axz" base_Abstraction="_6cVaQd8U9qZfIV-AFVx67M"/>
   <Requirements:Verify xmi:id="_vEMlNoGuEzuV-VKJHPlRAs" base_Abstraction="__Wcs_lTfC7RL1DiF7UhQp2"/>
-  <ActionLanguage:TextualRepresentation xmi:id="_Zq0hkNEqEfG05Lxk_syBEA" base_Comment="_ZqqwkNEqEfG05Lxk_syBEA" language="org.eclipse.papyrus.uml.textedit.transition.xtext.UmlTransition"/>
 </xmi:XMI>
