@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ActionLanguage="http://www.omg.org/spec/ALF/20120827/ActionLanguage-Profile" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.omg.org/spec/ALF/20120827/ActionLanguage-Profile pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
   <uml:Model xmi:id="_M7jBYLzYEfG45YF_OaBpaA" name="Finishing &amp; Packaging (FIN)">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_NCkPYLzYEfG45YF_OaBpaA">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -8,663 +8,654 @@
       <importedPackage xmi:type="uml:Package" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
     </packageImport>
     <packagedElement xmi:type="uml:Package" xmi:id="_ItK_AM5IEfGJpPDutUy9XQ" name="FIN State Machine Diagrams">
-    <packagedElement xmi:type="uml:Package" xmi:id="_idtu2T2y0tipviIkdYS_GE" name="FIN Signals and Events">
-      <packagedElement xmi:type="uml:Signal" xmi:id="_oDr_ZlbZTQRyI-RVgBV-A-" name="Cooled cake"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_tAtC8Eh2YoYNbCi5qYvhJJ" name="depanning machine not responding"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_TY-eBk4KO_3wUMW5225krO" name="Repair confirmed"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_M6kBXS1s6G5Uy0CyuJTqqR" name="Depanned cake"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_QKrchFBfiQ5tjj21S9WjQ-" name="cake stuck or broken"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_I8n5PE4JnFWQ9uX9yxiy4E" name="Weight result"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_zEW0p-eS96mnT4v3Tvgnd3" name="Visual result"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_JlKPmhyIkw5DRco2RjSD-x" name="Metal result"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_ONQzH0h1wYVFqZB6JfAb8C" name="Passed cake"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_EUNlO_n1ukPS0ulXRZbffR" name="Wrapped cake"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_S8mmGLtcSkRQWx9THwP62l" name="Sealed case"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_4XcBZ02AdEsp-4CknpJxbv" name="Case weight reading"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_0SA_HoVWJtw0Ys1aO4BJNf" name="Packed cake"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_qDixiiMJui7TS1jSMBrQ5g" name="wrap complete"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_wJb-VweeFly2RLjSEle3Hf" name="Washer free"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_f6myVW0Joa7gCFfs0fGknu" name="wash complete"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_k8Za7MsPmXj-tP1DWSgBI_" name="drying complete"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_NWVKzbOjGjU2IXN8gx1s43" name="Pan request"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_zw0QTagHLyzlo5bPFFBpXd" name="Empty pan"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_UarZt8ZHJrRsst1-rHV7JE" name="Pan for washing"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_mu0bolVyGfOcZx_BaoBqC1" name="washing station unavailable"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_61HNim7RSAbnxSPrWqG2xi" name="backlog = 0"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_i1oGr8Jv-okHtF0iYblq9J" name="Band state change"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_WC-yyZGDBzLLeRYyXbQ_R7" name="heartbeat interval elapsed"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_qX0NBY3PKiRVs2PN9V7Rzh" name="Cooled cake" signal="_oDr_ZlbZTQRyI-RVgBV-A-"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_mTmGL7k0kLbMOkIgbhoTx5" name="depanning machine not responding" signal="_tAtC8Eh2YoYNbCi5qYvhJJ"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_Qje9VTyNMHMuTRY06yU2Ps" name="Repair confirmed" signal="_TY-eBk4KO_3wUMW5225krO"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_09L0mlMo85rw0cohs7CRaB" name="Depanned cake" signal="_M6kBXS1s6G5Uy0CyuJTqqR"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_F_XW5kxaBndnPbhs3FYdtS" name="cake stuck or broken" signal="_QKrchFBfiQ5tjj21S9WjQ-"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_yHlP2OJBsJwbeU7cq90t5w" name="Weight result" signal="_I8n5PE4JnFWQ9uX9yxiy4E"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_VwIFc4Y9zTjKOQhL-uut2q" name="Visual result" signal="_zEW0p-eS96mnT4v3Tvgnd3"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_In-L6P4JCJNwm8020jffNE" name="Metal result" signal="_JlKPmhyIkw5DRco2RjSD-x"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_0aPT30CfkfS_2XhnSIMhjD" name="Passed cake" signal="_ONQzH0h1wYVFqZB6JfAb8C"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_Js6L75pkO1mQhOA7NCHyug" name="Wrapped cake" signal="_EUNlO_n1ukPS0ulXRZbffR"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_HPxolVQ3OzgXGyL-weywli" name="Sealed case" signal="_S8mmGLtcSkRQWx9THwP62l"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_TZz36CSbr3-rt5xNZkOLJk" name="Case weight reading" signal="_4XcBZ02AdEsp-4CknpJxbv"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_TIGnVc8Jfp12tTsW2E9Gwq" name="Packed cake" signal="_0SA_HoVWJtw0Ys1aO4BJNf"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_94OiP1x3zsF38IkBEm8sqr" name="wrap complete" signal="_qDixiiMJui7TS1jSMBrQ5g"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_twtc-gzwoADVN_zbJHG_hM" name="Washer free" signal="_wJb-VweeFly2RLjSEle3Hf"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_9eSpqAaxdDf5SZhZK0c6jS" name="wash complete" signal="_f6myVW0Joa7gCFfs0fGknu"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_L0Bn4fHKwsh-ceT_PhM9yr" name="drying complete" signal="_k8Za7MsPmXj-tP1DWSgBI_"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_yx9Mwhoc8EwjlE7ByXyfHs" name="Pan request" signal="_NWVKzbOjGjU2IXN8gx1s43"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_en5lUraMN3csu9eaK3xEMj" name="Empty pan" signal="_zw0QTagHLyzlo5bPFFBpXd"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_OWXYMrtdDS3Ptm98MjDlE1" name="Pan for washing" signal="_UarZt8ZHJrRsst1-rHV7JE"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_m8KerR49FPBbxrW_JhEPIT" name="washing station unavailable" signal="_mu0bolVyGfOcZx_BaoBqC1"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_GAdQ7Nb1G0jKqPDjSTj0Cy" name="backlog = 0" signal="_61HNim7RSAbnxSPrWqG2xi"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_gWvj22hhUeMi9BYE2KlYRZ" name="Band state change" signal="_i1oGr8Jv-okHtF0iYblq9J"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_R-H5kWxh4DLoijSSQ0VCJA" name="heartbeat interval elapsed" signal="_WC-yyZGDBzLLeRYyXbQ_R7"/>
-    </packagedElement>
-    <packagedElement xmi:type="uml:StateMachine" xmi:id="_3YVY1iX8_buiJEFTVaRMTh" name="SM1 Inspection Flow">
-      <ownedComment xmi:type="uml:Comment" xmi:id="_Z3LeK7y7dBBm_a4hCG0cUb" annotatedElement="_3YVY1iX8_buiJEFTVaRMTh">
-        <body>Behavior of one cake through the Inspection IBD: depanning (AF-01, FD-01), weight, visual and metal checks (AF-03 to AF-05), and the inspection decision with reject handling (AF-06, FD-05).</body>
-      </ownedComment>
-      <region xmi:type="uml:Region" xmi:id="_WUbKadH-03Krn55UiDkfA6" name="Inspection Flow">
-        <subvertex xmi:type="uml:Pseudostate" xmi:id="_csvZftkceRSwgaOPRpdnjb" name="Initial"/>
-        <subvertex xmi:type="uml:State" xmi:id="_9-kJ9mYV5vmK-f21FijHoa" name="Awaiting Cake">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_eUUPKYbRaRs-WsWMmnSuZZ" name="wait for Cooled cake"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_cI7yMRvI8s49vjJK4QTjmZ" name="ready depanning station"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_kGCURLnFmf_7WHp8WMIxW7" name="record batch ID of incoming cake"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_o5SZgOzwKrPMqvQAVdzi2E" name="Depanning">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_TtpcyJtNLuHFmtpB6lMSV_" name="separate cake from pan"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_qxKYLGDlDvW1ll8A8Dt6zC" name="start vision-guided pick"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_mAh4-muVOR3RxSSjUNzBc2" name="hand over depanned cake and empty pan"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="__7JVKtTcIjY_uPJgCQSqEv" name="Weighing">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_mDNRVx_bOkFN3mzBXtxEdH" name="compare weight with target and tolerance"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zxVmZxMqvZiGBbC4v1ZAWK" name="start weight reading"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_vo5Pdp86hWZM_XkbWhNKn-" name="publish Weight result"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_H4aXnmZYwyd0IRwm4jJA27" name="Visual Check">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_MyfRtfxqhkvfRTJiQIPENI" name="inspect appearance of cake"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_RQtGV4euT3M35hAFnjZ7my" name="capture cake image"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Mi9cgLmu5nA-Um2ibGmJmp" name="publish Visual result"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_c_UKXTE7zoVwPj8esdSazv" name="Holding">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_38ZPDusLiBWWyPLz3cSceQ" name="hold arriving cakes"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4tvkcj6yCEa_xi1GWvse7T" name="stop picking new cakes"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_LoK7VhGG8w9-D-yjt3dOTu" name="release held cakes for depanning"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_MLKLKEK1g_c4CPtj0Tn1Bh" name="Rejected">
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_xYljEeBzWOTy3MOQ68Xh0B" name="mark cake as rejected and keep reason"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_kPEVp1YoC2jPnmtjMcnIhc" name="Deciding">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_qCW1_jwKj8rfP_NX9aMKdm" name="evaluate failed marks"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="__jMarKEM3NrW7tqiLARaBD" name="collect weight, visual and metal results"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_QeM-SmoSlXrox93SDdCcaL" name="forward decision to packaging or reject bin"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_hkLIzDOSJng61gXmaSkdeo" name="Metal Check">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Srf_HGeEugpa8nrbc5Bp3g" name="scan cake for metal"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_N5TrUX4tMaZZG69ygkQSZz" name="start metal scan"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_nfch-mGXluIA1mpJnY1eLH" name="publish Metal result"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_4XU1B5-gWqOztSv_jrCaTc" name="Passed">
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_og-OsZRFvUQGJsYQmn5quY" name="hand cake over to packaging"/>
-        </subvertex>
-        <subvertex xmi:type="uml:FinalState" xmi:id="_xW0BEhnH7QK1fDwEzzXKEe" name="Final"/>
-        <transition xmi:type="uml:Transition" xmi:id="_79eiO-06A1w72kIi7eXpKb" name="T0" source="_csvZftkceRSwgaOPRpdnjb" target="_9-kJ9mYV5vmK-f21FijHoa">
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_0tHJpR-iS1ji5MfgqqS5MQ" name="T1" source="_9-kJ9mYV5vmK-f21FijHoa" target="_o5SZgOzwKrPMqvQAVdzi2E">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_TkzqS5nSBvBOAcGhFlZnnS" annotatedElement="_0tHJpR-iS1ji5MfgqqS5MQ">
-            <body>Traces to: FIN-REQ-01, FIN-REQ-02, FIN-REQ-04.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_K4ctMVLl19RqRieDZnbnNu" name="start pick"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_eKm50KIg0Ljm_FFLW5y_pV" name="released as safe temperature">
-            <specification xmi:type="uml:LiteralString" xmi:id="_0znPrvETS_cmMNu9mVQGqC" value="released as safe temperature"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_4i4fV37W65ju--PYEVY-kn" name="Cooled cake" event="_qX0NBY3PKiRVs2PN9V7Rzh"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_aITvAZTt-PNOUzDxlefhXJ" name="T2" source="_9-kJ9mYV5vmK-f21FijHoa" target="_c_UKXTE7zoVwPj8esdSazv">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_zSBalA-Nj6HTf1hrC19UNV" annotatedElement="_aITvAZTt-PNOUzDxlefhXJ">
-            <body>Traces to: FIN-REQ-32.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_svw3IM_nlZuaUhUIGo-eV4" name="hold arriving cakes"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_55TzW62YW5kvZNO5yIlUhz" name="depanning machine not responding" event="_mTmGL7k0kLbMOkIgbhoTx5"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_kMccrCdoOcyH0YDv87tDAo" name="T3" source="_c_UKXTE7zoVwPj8esdSazv" target="_9-kJ9mYV5vmK-f21FijHoa">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_HL05wpUGY4rrmk3kVYtQAA" annotatedElement="_kMccrCdoOcyH0YDv87tDAo">
-            <body>Traces to: FIN-REQ-32.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_QpKE4Yk-LJjNtBKG7vl6DL" name="process held cakes"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_AYTFuEoeU7HMgIr6dgim_7" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_THuXFEELWJFUb88uqR07sd" name="T4" source="_o5SZgOzwKrPMqvQAVdzi2E" target="__7JVKtTcIjY_uPJgCQSqEv">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_-cBS1qDL39E14im7BYkc9A" annotatedElement="_THuXFEELWJFUb88uqR07sd">
-            <body>Traces to: FIN-REQ-04.2, FIN-REQ-04.3</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_49ipHbqjPzephyS-mur_Q1" name="route cake to inspection, pan to washing"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_CrpROfx8Klzc01qQQV1FOP" name="Depanned cake" event="_09L0mlMo85rw0cohs7CRaB"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_VGrRqOfe4UgXEnM12VQd1v" name="T5" source="_o5SZgOzwKrPMqvQAVdzi2E" target="_MLKLKEK1g_c4CPtj0Tn1Bh">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_WvZJFRJmQSoBsyeDrE2iqU" annotatedElement="_VGrRqOfe4UgXEnM12VQd1v">
-            <body>Traces to: FIN-REQ-31.1, FIN-REQ-31.2, FIN-REQ-26.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Lk8qxH5KnvMSrtVXi-E7Ue" name="reject cake, pan to washing, publish event"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_Ob8yGMQcNlgY-BtW1h387T" name="cake stuck or broken" event="_F_XW5kxaBndnPbhs3FYdtS"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_v4S6sht-Vyqtt8WRjeTkWH" name="T6" source="__7JVKtTcIjY_uPJgCQSqEv" target="_H4aXnmZYwyd0IRwm4jJA27">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_D6CLU2_a0HTpnPptOsvphM" annotatedElement="_v4S6sht-Vyqtt8WRjeTkWH">
-            <body>Traces to: FIN-REQ-05.1, FIN-REQ-05.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_dwvY-6cKeqzMftrZvGfEdd" name="mark failed if outside tolerance"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_EyCTVy3VgLEkk5PzzrBBTB" name="Weight result" event="_yHlP2OJBsJwbeU7cq90t5w"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_MN88oEbHW3AH4rXXl2ys_H" name="T7" source="_H4aXnmZYwyd0IRwm4jJA27" target="_hkLIzDOSJng61gXmaSkdeo">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_i1z1TiKKXlA5pK5TGC_Dgu" annotatedElement="_MN88oEbHW3AH4rXXl2ys_H">
-            <body>Traces to: FIN-REQ-06.1, FIN-REQ-06.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_snorLiDInnF3yeIlGhNGk-" name="mark failed if unsatisfactory"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_NgvmXeG1yrzaXWwRkil-Fp" name="Visual result" event="_VwIFc4Y9zTjKOQhL-uut2q"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_7vvPllPO1lB-rBs7rQPDdH" name="T8" source="_hkLIzDOSJng61gXmaSkdeo" target="_kPEVp1YoC2jPnmtjMcnIhc">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_16EvGvadO3blQsji-JGzZ9" annotatedElement="_7vvPllPO1lB-rBs7rQPDdH">
-            <body>Traces to: FIN-REQ-07.1, FIN-REQ-07.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_aSQcVTvEsN9PRl3jLeN1P6" name="mark failed if metal found"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_eJvoctTim6Ps5a47mdD1TZ" name="Metal result" event="_In-L6P4JCJNwm8020jffNE"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_qha2tbbbiekRcGVUwyqc4a" name="T9" source="_kPEVp1YoC2jPnmtjMcnIhc" target="_4XU1B5-gWqOztSv_jrCaTc">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_hVVMWYJTz7cLualT5MfBC2" annotatedElement="_qha2tbbbiekRcGVUwyqc4a">
-            <body>Traces to: FIN-REQ-08.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_4MUpF2EWvF4Cy82CamLCxp" name="release to packaging"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_Cjuowx8nbTfj2kvnVjsYzZ" name="no failed mark">
-            <specification xmi:type="uml:LiteralString" xmi:id="_vKlf59K6xDmM18AuR5YsW4" value="no failed mark"/>
-          </guard>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_S-qIe3xCk6hxkwDco1wOld" name="T10" source="_kPEVp1YoC2jPnmtjMcnIhc" target="_MLKLKEK1g_c4CPtj0Tn1Bh">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_PGxgJ8wOy-PbeD1sHY0fCZ" annotatedElement="_S-qIe3xCk6hxkwDco1wOld">
-            <body>Traces to: FIN-REQ-08.2, FIN-REQ-09</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_cPm982jGDAU8BrClOo64Cc" name="move to reject bin, publish event"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_es0Kml8VqcqItqoKA0SLD1" name="any failed mark">
-            <specification xmi:type="uml:LiteralString" xmi:id="_aNyKkKLKw93LBikoeOYNJS" value="any failed mark"/>
-          </guard>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_ERJ3FNuz-M0nGhGE1slumo" name="T11" source="_9-kJ9mYV5vmK-f21FijHoa" target="_9-kJ9mYV5vmK-f21FijHoa" kind="internal">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_FgPr3Ngxcd5MTIRRMG6-eb" annotatedElement="_ERJ3FNuz-M0nGhGE1slumo">
-            <body>Traces to: FIN-REQ-02</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zRwlJSbMsjF5AlQTDccOxZ" name="do not accept cake"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_r2OE_hN3ui9I-AUF_6CnxP" name="not released as safe temperature">
-            <specification xmi:type="uml:LiteralString" xmi:id="_-O35TuUrgz7xRD0j3gCuim" value="not released as safe temperature"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_paTVX03KIGg8IMezcaY54i" name="Cooled cake" event="_qX0NBY3PKiRVs2PN9V7Rzh"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_GBRN2-A41Zm2aOizonVwRW" name="T12" source="_4XU1B5-gWqOztSv_jrCaTc" target="_xW0BEhnH7QK1fDwEzzXKEe">
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_P9k-5y-jT7Dn16lr3YNtYH" name="T13" source="_MLKLKEK1g_c4CPtj0Tn1Bh" target="_xW0BEhnH7QK1fDwEzzXKEe">
-        </transition>
-      </region>
-    </packagedElement>
-    <packagedElement xmi:type="uml:StateMachine" xmi:id="_a9fJXqzirc0oJhL72f_c2U" name="SM2 Packaging Flow">
-      <ownedComment xmi:type="uml:Comment" xmi:id="_fQqOH9M7L3t_JVqWTtgxfX" annotatedElement="_a9fJXqzirc0oJhL72f_c2U">
-        <body>Behavior of one cake through the Packaging IBD: optional holding area (AF-11, FD-10), wrapping (AF-07), cartoning (AF-08), reject handling (AF-10) and the case weight check (AF-09).</body>
-      </ownedComment>
-      <region xmi:type="uml:Region" xmi:id="_a2srHSxGPr0eNY-sZop6bW" name="Packaging Flow">
-        <subvertex xmi:type="uml:Pseudostate" xmi:id="_WPyxeiJ7JpkapA69FO-VlS" name="Initial"/>
-        <subvertex xmi:type="uml:State" xmi:id="_XKve_Blq7iEJD3f60n_k7y" name="Awaiting Cake">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Sx-r1TwWuLdBCkAY-qQE7C" name="wait for Passed cake"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_np_O-W4YWkhX0d5fG253YS" name="ready wrapping control"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_ostja6kIZEtNFs2EzsQ5UJ" name="note batch ID of cake"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_aRI5HiHkHabQvWhNp9ToPc" name="Wrapping">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_AqtIRmfNZwUZb_lSilhcaC" name="wrap cake"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_DuWdU_bh6PM0xZ-rTuMxaU" name="start wrapping station"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_rWzyfqLG4jD9NaKadiSbFg" name="stop wrapping station"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_z8rTHDNvyFM-waGppRYERe" name="Verifying Wrap">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_85wu-Ml9nf_CD_ifZr56wR" name="check cake is properly wrapped"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_AckU6Sr2a-KMctajoQHI_j" name="capture wrap image"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_f8BmirTnK0C0oM4HlVXH1Q" name="publish Wrapping result"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_07b1Aw1DqxDPRQ_Jhj1KsM" name="Cartoning">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_KE3TqzWfTGA8fyDfDjX9fA" name="pack cake in carton and seal"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_8RLB3qeTefx8JF_I-oCT_M" name="start cartoning station"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_SXdBFq05W2BjmbaqYNt5OA" name="stop cartoning station"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_-2aOO-upke58I44qrPKORE" name="Holding">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_vjyy7H2_PgBHYSa5D0WFYr" name="hold cake and monitor holding capacity"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_kEvt0FO67qjo96H_Z3t9xP" name="take free holding slot"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8A3TdFqOaFPnmKcXJSjgfT" name="free holding slot"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_VyHVyKj4kxzvhAQ3_DO0eY" name="Refused">
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_P86BHN7VZyeQn5OX0BeIWs" name="divert cake to refuse bin"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_bQp0jUwW2Esv3dMxmRdK6x" name="Verifying Carton">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_c5_Y0tiIyfJoD3xpAsLaQa" name="check cake is properly cartoned"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_NT3pQVxfJpXkO9cIWLXX7U" name="capture carton image"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_4KKYb3FqkvbwZ1sRjQZ3wG" name="publish Cartoning result"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_y5wbSWkSd9a_hqAGCbp98G" name="Packed">
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ag7Dm6c_ZmSKMg9rq1Ob8x" name="release case to palletising"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_O3xYt_3a6GwT66CeKg4ckF" name="Weighing Case">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_sDn6kPFSObq59IOfKEfHFd" name="compare case weight with expected weight"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_AeFIRUMSRvjL2oGPteUETY" name="start case weight reading"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_58M_UL0trtu-XMcYlvVppR" name="publish Case weight result"/>
-        </subvertex>
-        <subvertex xmi:type="uml:FinalState" xmi:id="_5_1mL4IEQkXa99ORIaPJ48" name="Final"/>
-        <transition xmi:type="uml:Transition" xmi:id="_bo2a9R65HOrLgjA7rT-wia" name="T0" source="_WPyxeiJ7JpkapA69FO-VlS" target="_XKve_Blq7iEJD3f60n_k7y">
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_z3ZSeAdceuCbK_BRjZq8X4" name="T1" source="_XKve_Blq7iEJD3f60n_k7y" target="_aRI5HiHkHabQvWhNp9ToPc">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_y3fjWdzCwdEIVfsM9F6f2-" annotatedElement="_z3ZSeAdceuCbK_BRjZq8X4">
-            <body>Traces to: FIN-REQ-21.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_k_eRX8V8Oz8jArvY8rS9nf" name="wrap"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_SEKtX7ehSzl6aMr7rAp3I5" name="wrapping available">
-            <specification xmi:type="uml:LiteralString" xmi:id="_v6SmRscgrVsQM4r6_h7HyY" value="wrapping available"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_5Ay2RJEZOjDArVNDnyxB3c" name="Passed cake" event="_0aPT30CfkfS_2XhnSIMhjD"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_djuDlvbue7OfZo0b4zBMz8" name="T2" source="_XKve_Blq7iEJD3f60n_k7y" target="_-2aOO-upke58I44qrPKORE">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_WXdeSSAkoex_UJUY2awkIq" annotatedElement="_djuDlvbue7OfZo0b4zBMz8">
-            <body>Traces to: FIN-REQ-33.1, FIN-REQ-34</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_RL73w4J1Nzh6cWiuY-mdNY" name="hold cake; if holding area full, stop pan admission"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_aAunIgLFlBBJHHv_DU65IV" name="wrapping unavailable">
-            <specification xmi:type="uml:LiteralString" xmi:id="_kMsJMmpH75Gh8tTc6DY7g7" value="wrapping unavailable"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_yAChL9Wy82jvfBS15KHSeI" name="Passed cake" event="_0aPT30CfkfS_2XhnSIMhjD"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_DMTYCjZYqMVgR-YQv35PNU" name="T3" source="_-2aOO-upke58I44qrPKORE" target="_aRI5HiHkHabQvWhNp9ToPc">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_lA_YEp40NOgPfcypwA_MA4" annotatedElement="_DMTYCjZYqMVgR-YQv35PNU">
-            <body>Traces to: FIN-REQ-33.2, FIN-REQ-35</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TsblfdZwq10oFxVxGK4347" name="wrap held cakes, resume pan admission"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_SxOf-8L02A3sClX1fAOjpF" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_luiK2iGJCNEiy31ydUki0W" name="T4" source="_aRI5HiHkHabQvWhNp9ToPc" target="_z8rTHDNvyFM-waGppRYERe">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_6qpjiZJ35ygyLZ0IxBjo-C" annotatedElement="_luiK2iGJCNEiy31ydUki0W">
-            <body>Traces to: FIN-REQ-21.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ZwBm1_2jINz3kEbV2MRgWT" name="check wrap"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_lzTHxA7-jyusa4LcRS2sx5" name="Wrapped cake" event="_Js6L75pkO1mQhOA7NCHyug"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_QJ7Y90cPrmnjPWHcHh5nFZ" name="T5" source="_z8rTHDNvyFM-waGppRYERe" target="_07b1Aw1DqxDPRQ_Jhj1KsM">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_4dX5jYMofgAej330blTGpB" annotatedElement="_QJ7Y90cPrmnjPWHcHh5nFZ">
-            <body>Traces to: FIN-REQ-23.1, FIN-REQ-23.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_y86uVQXWM6txo5q6EK5Fsw" name="pack in carton, seal"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_o-S0GISq11KbCUwbohGHM2" name="wrap OK">
-            <specification xmi:type="uml:LiteralString" xmi:id="_y-AF8Ev0lV_5BUTowJK2XM" value="wrap OK"/>
-          </guard>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_pAHXQ1iF0MEFGiLwe2U7xJ" name="T6" source="_z8rTHDNvyFM-waGppRYERe" target="_VyHVyKj4kxzvhAQ3_DO0eY">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_8fd0FzpghNzPIYnZl0dC9D" annotatedElement="_pAHXQ1iF0MEFGiLwe2U7xJ">
-            <body>Traces to: FIN-REQ-24.2, FIN-REQ-26.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_QEV_sZAIdVT0wSTsG0-l2G" name="refuse bin, publish event"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_Y4H3v7IxbtJ5pzkPvoLrls" name="wrap defective">
-            <specification xmi:type="uml:LiteralString" xmi:id="_raZZ2G9vDuJPBHrORKkhEv" value="wrap defective"/>
-          </guard>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_Ut0yOn43_sOPNaukLcuix5" name="T7" source="_07b1Aw1DqxDPRQ_Jhj1KsM" target="_bQp0jUwW2Esv3dMxmRdK6x">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_5BCM7IqNDwnOj4qKpaaN9s" annotatedElement="_Ut0yOn43_sOPNaukLcuix5">
-            <body>Traces to: FIN-REQ-23.3</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ZMJ4GzDctscSIoIi2QDMXv" name="check carton"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_OFolQsYVZgmXs67QtJl9TF" name="Sealed case" event="_HPxolVQ3OzgXGyL-weywli"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_PG3Uau0r0B0pJvb9B1E-dF" name="T8" source="_bQp0jUwW2Esv3dMxmRdK6x" target="_O3xYt_3a6GwT66CeKg4ckF">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_cflsTNW6BZFZJe1sKNJjZn" annotatedElement="_PG3Uau0r0B0pJvb9B1E-dF">
-            <body>Traces to: FIN-REQ-24.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_eER7Z4pAxym4ukQnew2zQl" name="proceed to shipping bin"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_N2oSewsI6UUHB9YuoOVrV_" name="carton OK">
-            <specification xmi:type="uml:LiteralString" xmi:id="_dXWIQ1eeBa7vXcVh0__w6R" value="carton OK"/>
-          </guard>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_YIv6LSK9bnwmzuOOYpTz0L" name="T9" source="_bQp0jUwW2Esv3dMxmRdK6x" target="_VyHVyKj4kxzvhAQ3_DO0eY">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_Z1fnzD1Mq5ALnVlqw4lU5O" annotatedElement="_YIv6LSK9bnwmzuOOYpTz0L">
-            <body>Traces to: FIN-REQ-24.2, FIN-REQ-26.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_z3iS5kg5-6oksv6gUNBA5K" name="refuse bin, publish event"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_Tciya8bZlS8khBnX6TTNZ9" name="carton defective">
-            <specification xmi:type="uml:LiteralString" xmi:id="_lbHJih568UXXQZMadLJLSb" value="carton defective"/>
-          </guard>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_q40oiWVq61lMeU9RPKymS1" name="T10" source="_O3xYt_3a6GwT66CeKg4ckF" target="_y5wbSWkSd9a_hqAGCbp98G">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_kNZlewbV_KFDhGV_PM3P_X" annotatedElement="_q40oiWVq61lMeU9RPKymS1">
-            <body>Traces to: FIN-REQ-25, FIN-REQ-26.3</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_MMUD0myKLI1Co58VUKjCIj" name="if incorrect weight, publish event"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_aqee9FG4tKAPuojlpCX2gt" name="Case weight reading" event="_TZz36CSbr3-rt5xNZkOLJk"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_4PNzMdvWQ3hIwAYR4BpKHf" name="T11" source="_y5wbSWkSd9a_hqAGCbp98G" target="_5_1mL4IEQkXa99ORIaPJ48">
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_mEWy0AHNpbVT_xC9AB9NPI" name="T12" source="_VyHVyKj4kxzvhAQ3_DO0eY" target="_5_1mL4IEQkXa99ORIaPJ48">
-        </transition>
-      </region>
-    </packagedElement>
-    <packagedElement xmi:type="uml:StateMachine" xmi:id="_b2iI7-8D01ByumbNQeXFQU" name="SM3 Pallet Lifecycle">
-      <ownedComment xmi:type="uml:Comment" xmi:id="_WF5J0RyZ1VyMurVLatHYi2" annotatedElement="_b2iI7-8D01ByumbNQeXFQU">
-        <body>Behavior of one pallet in the Palletising IBD: filling (AF-12, FD-11), wrapping (FD-12) and the "Pallet ready for shipment" signal.</body>
-      </ownedComment>
-      <region xmi:type="uml:Region" xmi:id="_1NBBB_WicaLx2bOPcv4vlI" name="Pallet Lifecycle">
-        <subvertex xmi:type="uml:Pseudostate" xmi:id="_95cdnVuIiG43UanHUsLccJ" name="Initial"/>
-        <subvertex xmi:type="uml:State" xmi:id="_9KAuYOah0BpUrhS8cfXjGm" name="Filling">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_cX-TysJfcrj9E0gNGRWI_e" name="place cakes on free spots"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_LCkY9HrHHh-K9eci81YNgR" name="register pallet and batch IDs"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_KwqwFh3r2Q1UMKlK28ZPQJ" name="close pallet for further cakes"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_wVGdG0kWwfM6Q_gG9aMEFm" name="Full">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_9tOPtBJg8lu11Zp1JVCI0q" name="wait for pallet wrapper"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_1sxx0kruDFwJE9pUDZ6Sab" name="set pallet aside"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_9p6r7lvglatJcOKsPnIdD1" name="move pallet to pallet wrapper"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_doEJ1fth7BDGhc4Ew_H_Cv" name="Wrapping">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_awQVGKMmJNHkq7EOjvADMR" name="wrap pallet"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_YW61nnuCaU3WPPxUSb1H0i" name="start pallet wrapper"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_bIgm4q8MjxcG9ureAMsmjl" name="stop pallet wrapper"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_9d5fPagDPxRnNvrApdMTXm" name="Ready">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_FuywTePwjY23iEeiujkR3j" name="wait for move to shipping storage"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_i9mic5RGltH_eJUAyHk5pI" name="collect pallet ID, cake count and batch IDs"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8D8-iM_eLKFsfmTFwAE2IX" name="hand pallet to Production and Logistics"/>
-        </subvertex>
-        <subvertex xmi:type="uml:FinalState" xmi:id="_tcX_rWPw7L-Y3qgTumtZr8" name="Final"/>
-        <transition xmi:type="uml:Transition" xmi:id="_159sUMLBZbPioD377gIJPd" name="T0" source="_95cdnVuIiG43UanHUsLccJ" target="_9KAuYOah0BpUrhS8cfXjGm">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_WKaPq3J5hIPrwl4Ljc6oKb" annotatedElement="_159sUMLBZbPioD377gIJPd">
-            <body>Traces to: FIN-REQ-28.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TGk4MYbNYhLg-tOTq7QXIl" name="empty pallet staged"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_32fi2CNWduaAIbl7SJwuCE" name="T1" source="_9KAuYOah0BpUrhS8cfXjGm" target="_wVGdG0kWwfM6Q_gG9aMEFm">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_JQuT7vSbPDTKlNaPMh0yi4" annotatedElement="_32fi2CNWduaAIbl7SJwuCE">
-            <body>Traces to: FIN-REQ-27, FIN-REQ-28.1, FIN-REQ-28.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_8w_E84OsKU-243nvHo1wYb" name="place cake, set pallet aside, stage new pallet"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_Sl7b3OWBIW1fX1ENJ2iSd_" name="last spot filled">
-            <specification xmi:type="uml:LiteralString" xmi:id="_m6FJWmzHqgDcvXWfT2ge_N" value="last spot filled"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_0jvqTRnAwfTmLuxQD1WLh9" name="Packed cake" event="_TIGnVc8Jfp12tTsW2E9Gwq"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_qs8cubiXDMPHC8gwTvkWJP" name="T2" source="_wVGdG0kWwfM6Q_gG9aMEFm" target="_doEJ1fth7BDGhc4Ew_H_Cv">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_IiH8UGXV5BUh-pUEyYKWBl" annotatedElement="_qs8cubiXDMPHC8gwTvkWJP">
-            <body>Traces to: FIN-REQ-29</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_bLnMUK0o9uLUgu3guC05zj" name="wrap pallet"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="__Q47MloeYCDQGPAVikbCrW" name="T3" source="_doEJ1fth7BDGhc4Ew_H_Cv" target="_9d5fPagDPxRnNvrApdMTXm">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_zxNm1xT41av_8o-Vyid4Sy" annotatedElement="__Q47MloeYCDQGPAVikbCrW">
-            <body>Traces to: FIN-REQ-30</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_kQ4-jwgRmrs__w-xiuDbwX" name="publish Pallet ready for shipment (pallet ID, cake count, batch IDs)"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_dxnxCnhws1cdubf2YQauPN" name="wrap complete" event="_94OiP1x3zsF38IkBEm8sqr"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_gyx9IOoPzySoU-wUOojH5i" name="T4" source="_9KAuYOah0BpUrhS8cfXjGm" target="_9KAuYOah0BpUrhS8cfXjGm" kind="internal">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_Tn2Ktuumfp1nGWreH2cAaM" annotatedElement="_gyx9IOoPzySoU-wUOojH5i">
-            <body>Traces to: FIN-REQ-27</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_8d1F1XZpY-qhRY8kaA-pTU" name="place cake"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_hNv3bXH3gBlgeavhQOOq-d" name="free spot remains">
-            <specification xmi:type="uml:LiteralString" xmi:id="_i_992qoD53lNy_3uXhBXh7" value="free spot remains"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_4dSpPM4mETcfCm8fqphj7H" name="Packed cake" event="_TIGnVc8Jfp12tTsW2E9Gwq"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_TyvrXhnW_EWmesVSWm4WJv" name="T5" source="_9d5fPagDPxRnNvrApdMTXm" target="_tcX_rWPw7L-Y3qgTumtZr8">
-        </transition>
-      </region>
-    </packagedElement>
-    <packagedElement xmi:type="uml:StateMachine" xmi:id="_O8Nwht2jTv60llH2DmTqFw" name="SM4 Pan Loop">
-      <ownedComment xmi:type="uml:Comment" xmi:id="_dy8oHAm3C6Q01wbpHs5ieK" annotatedElement="_O8Nwht2jTv60llH2DmTqFw">
-        <body>Behavior of the Pan Loop IBD: the life cycle of one pan through washing, verification and stock (AF-13, AF-14), in parallel with the mode of the washing station (AF-15).</body>
-      </ownedComment>
-      <ownedComment xmi:type="uml:Comment" xmi:id="_4d8BGmI8h9N9n_WzEBWhQv" annotatedElement="_O8Nwht2jTv60llH2DmTqFw">
-        <body>Invariant (FIN-REQ-14): the total number of pans in the production system stays at twice the number needed to fill the full production system.</body>
-      </ownedComment>
-      <region xmi:type="uml:Region" xmi:id="_fsgDqd21WdTZfOcovioybl" name="Pan Lifecycle">
-        <subvertex xmi:type="uml:Pseudostate" xmi:id="_eocKMpyZVXpsBntOOWxg7v" name="Initial"/>
-        <subvertex xmi:type="uml:State" xmi:id="_eoBNBnSD9HiLF8D8OmA0xh" name="Awaiting Washing">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_JRR12GwzE1rx6KpFuIq0rU" name="wait for free washer"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zEmmVeBCpxNroDR7jD5qAh" name="register pan at washing station"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_wHIuzqNxSyHsIHpBvnffvZ" name="start washing cycle"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_ZH9KhxSU0LogUMLZ68DCpY" name="Washing">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_MrcSQvhypZxCayR9eJnsg7" name="wash pan"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_c1JT5unC7Tw-yRqzax6uqK" name="start wash control"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Hf72dz51FwhkRi5QJVNpA0" name="stop washing"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_ovC1E0aNDgHYkQhNQiMp5v" name="Drying">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_OS_vEAh73voAz7ftDhuB1D" name="dry pan"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_nB6J4Qo_ExuP_jBDwFkxvO" name="start drying"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_2Yks5-t-36YmJxPw3homZR" name="stop drying"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_oA1Lf71wv_damdkbd60Prq" name="Verifying">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_5N2UZn11UdefswrAZAB3UL" name="check pan is clean and undamaged"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_eM9O2eKirSFf7Hk8fDUgmu" name="inspect pan"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_i-EUD6t94II73axUx6kOiu" name="record verification result"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_7nHwGyYbF9F8pzCtxEltUa" name="Supplied">
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_swtNejQRoicxx9WCJj_iL1" name="hand pan to depositing"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_br3no_iVzwN0nyw2x7lPWz" name="In Stock">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_s5l92nTM_uvmC0lFOQJNY6" name="count clean pan stock"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_IvxdKn7TDt2CoC_4lQc_lF" name="store pan in pan hopper"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_1fQU9ooRGK-KP7BCNRODDj" name="take pan out of stock"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_tZ_ZpbbN918aC63pILrvxZ" name="Discarded">
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_FZgeBjoB7z186CfVgpoEAe" name="drop pan into discard bin"/>
-        </subvertex>
-        <subvertex xmi:type="uml:FinalState" xmi:id="_rEPGnM_f41JoPmw5Ux4g6G" name="Final"/>
-        <transition xmi:type="uml:Transition" xmi:id="_D6N813sMcVtn1KCe1P14u3" name="T0" source="_eocKMpyZVXpsBntOOWxg7v" target="_eoBNBnSD9HiLF8D8OmA0xh">
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_Xgvt2XvAxKDmTW1F2bVHps" name="T1" source="_eoBNBnSD9HiLF8D8OmA0xh" target="_ZH9KhxSU0LogUMLZ68DCpY">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_33iAqBu_krbenBGn_lIRJ6" annotatedElement="_Xgvt2XvAxKDmTW1F2bVHps">
-            <body>Traces to: FIN-REQ-11.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_HCU-Dmk1wNZ5QR03M7K7nS" name="wash"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_-MmdFsPTh0c2bF7SKS3uaj" name="Washer free" event="_twtc-gzwoADVN_zbJHG_hM"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_10dodZiTsO7GSk6MSxwaQq" name="T2" source="_ZH9KhxSU0LogUMLZ68DCpY" target="_ovC1E0aNDgHYkQhNQiMp5v">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_akI84N3DHfIMdbRrn3Kl2E" annotatedElement="_10dodZiTsO7GSk6MSxwaQq">
-            <body>Traces to: FIN-REQ-11.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Xg6nGmlrddCIC3AmXVEXiF" name="dry"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_wgAtOVloyaYx2dtKRDJVXX" name="wash complete" event="_9eSpqAaxdDf5SZhZK0c6jS"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_bCSEDBqht3An5Sec04I9rT" name="T3" source="_ovC1E0aNDgHYkQhNQiMp5v" target="_oA1Lf71wv_damdkbd60Prq">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_hsDjwt0NOLTMy6H4u2SWOn" annotatedElement="_bCSEDBqht3An5Sec04I9rT">
-            <body>Traces to: FIN-REQ-11.3</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_iqbho5fjsxaZQJRk8FPU08" name="check pan"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_08xwgv__3Q-izQmtax9YiA" name="drying complete" event="_L0Bn4fHKwsh-ceT_PhM9yr"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_WW3jY4Tv0xZN1YacUX3i9C" name="T4" source="_oA1Lf71wv_damdkbd60Prq" target="_br3no_iVzwN0nyw2x7lPWz">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_1GwVgPmQW_gqiDhIz9cx6W" annotatedElement="_WW3jY4Tv0xZN1YacUX3i9C">
-            <body>Traces to: FIN-REQ-12.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_V1d7btAbHGHozD1zqBvOZe" name="queue for recirculation"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_3gQNrZUnY6pT2jOP07-x3k" name="clean and undamaged">
-            <specification xmi:type="uml:LiteralString" xmi:id="_1LO6MEtdr50quauoQWFr1q" value="clean and undamaged"/>
-          </guard>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_IS9kR8G-4dz0zI0EXRSY99" name="T5" source="_oA1Lf71wv_damdkbd60Prq" target="_tZ_ZpbbN918aC63pILrvxZ">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_vDdLC7vBcjQKV7bTSm4F0a" annotatedElement="_IS9kR8G-4dz0zI0EXRSY99">
-            <body>Traces to: FIN-REQ-12.2, FIN-REQ-13</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_SJCMOf7lVxu1GvxRzMZCy6" name="remove from cycle, publish discard event"/>
-          <guard xmi:type="uml:Constraint" xmi:id="__SRXeHmxym8s_WdGyKOFEW" name="not clean or damaged">
-            <specification xmi:type="uml:LiteralString" xmi:id="_F_uT9hQOmwQw6XRU691yAG" value="not clean or damaged"/>
-          </guard>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_yotnHmGwm-4gcKw4OJ0QJn" name="T6" source="_br3no_iVzwN0nyw2x7lPWz" target="_7nHwGyYbF9F8pzCtxEltUa">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_m6o2TrJOcqYjxkqUjodTvO" annotatedElement="_yotnHmGwm-4gcKw4OJ0QJn">
-            <body>Traces to: FIN-REQ-16, FIN-REQ-17</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_d2Bkm-wE0ixp2UmzyYoinA" name="supply clean pan, report stock level"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_QFLn6xojNGMqTsDMoEtQBF" name="Pan request" event="_yx9Mwhoc8EwjlE7ByXyfHs"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_KLKxhv_4HliKKDomAP2cTi" name="T11" source="_7nHwGyYbF9F8pzCtxEltUa" target="_eoBNBnSD9HiLF8D8OmA0xh">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_Tx1m7M7I21MksWDFxjuwE-" annotatedElement="_KLKxhv_4HliKKDomAP2cTi">
-            <body>Traces to: FIN-REQ-11.1, FIN-REQ-15</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_q1JG33yrAkMlcKSBX-EJ0y" name="pan returns to the pan loop"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_I7DeX9aN3M99J-ArO95pke" name="Empty pan" event="_en5lUraMN3csu9eaK3xEMj"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_nOds22Yt8boIMEPwtK9YbR" name="Pan for washing" event="_OWXYMrtdDS3Ptm98MjDlE1"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_DD7JGlZZ4TpC1owTmcnCKf" name="T12" source="_tZ_ZpbbN918aC63pILrvxZ" target="_rEPGnM_f41JoPmw5Ux4g6G">
-        </transition>
-      </region>
-      <region xmi:type="uml:Region" xmi:id="_xqhV2oESAaIaDfwh8wesfn" name="Washing Station Mode">
-        <subvertex xmi:type="uml:Pseudostate" xmi:id="_OJh-24k0gy_X_IQ27FrNf7" name="Initial"/>
-        <subvertex xmi:type="uml:State" xmi:id="_j7PyGqVSRvmU3ZGBRYHpvK" name="Normal">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__pIESTKTRSOfb5vbG9iVJz" name="monitor pan backlog"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_7rcrLR5LT9gqaGRvnoUXTd" name="set washing speed to normal"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8eUzkEvJ8AC9jHQiEQeyV4" name="note washing speed change"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_bIKjIR82HWZSBjuarWl8ek" name="Faulted">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_rrVHPIBu6Z5tB5yzth_XRL" name="keep supplying pans from stock"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ZUQ7yjr5E60X9fame8NmHO" name="stop washing"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_qYzLZSAPhd1OllpAiRNOBa" name="check conditions for continued washing"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_lXmR3AxiLoVQaYWyW4q-Ik" name="Catch-up">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_yr-bS0qGsmpQLkB057Fuc3" name="wash backlog of pans"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_NzhI6Czy7WU3VbyMz2_gUC" name="raise washing speed"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_FjwwG2P-orrM6hHZi2Ds8i" name="return speed command to normal"/>
-        </subvertex>
-        <transition xmi:type="uml:Transition" xmi:id="_RKI58VotJB4fn_PYU18G6K" name="T7" source="_OJh-24k0gy_X_IQ27FrNf7" target="_j7PyGqVSRvmU3ZGBRYHpvK">
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_XHDXikUgd34pzJXTLLA44S" name="T8" source="_j7PyGqVSRvmU3ZGBRYHpvK" target="_bIKjIR82HWZSBjuarWl8ek">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_iHxS1SVo1npGBf3zccWQHZ" annotatedElement="_XHDXikUgd34pzJXTLLA44S">
-            <body>Traces to: FIN-REQ-18</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zGeJKZqgs50Rj4zQ5H62HZ" name="keep supplying from stock"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_SGwk8S571-tGB5sWZRni0b" name="washing station unavailable" event="_m8KerR49FPBbxrW_JhEPIT"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_yje6B-9wGP0hwxZrby4TIK" name="T9" source="_bIKjIR82HWZSBjuarWl8ek" target="_lXmR3AxiLoVQaYWyW4q-Ik">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_DWjwE7f9i9AO8ZBEIqSGjA" annotatedElement="_yje6B-9wGP0hwxZrby4TIK">
-            <body>Traces to: FIN-REQ-19, FIN-REQ-20.1, FIN-REQ-20.3</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_9-Oflf0Acdmxpb0BQ16djL" name="increase speed, log change"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_7WbZddW4K_zcVyh6NPOGp6" name="conditions for continued washing met">
-            <specification xmi:type="uml:LiteralString" xmi:id="_ZmpzmebKV5e_VSZgAuryXO" value="conditions for continued washing met"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_x0_jI7axjIWOonTCLWoBj7" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_q1UxoCoq0lvda6zx4BmYV_" name="T10" source="_lXmR3AxiLoVQaYWyW4q-Ik" target="_j7PyGqVSRvmU3ZGBRYHpvK">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_3B3mQtI2bPcxoh_50hd5g5" annotatedElement="_q1UxoCoq0lvda6zx4BmYV_">
-            <body>Traces to: FIN-REQ-20.2, FIN-REQ-20.3</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TdjXwKOQr1VRGC3nU2D5UV" name="normal speed, log change"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_tubBxq_Cm6haFLemfnqdjp" name="backlog = 0" event="_GAdQ7Nb1G0jKqPDjSTj0Cy"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_JP6BdrRqi8zll7Vi6aGLaF" name="T13" source="_lXmR3AxiLoVQaYWyW4q-Ik" target="_bIKjIR82HWZSBjuarWl8ek">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_QrUTlY4Qg1toFtHoJQgC7p" annotatedElement="_JP6BdrRqi8zll7Vi6aGLaF">
-            <body>Traces to: FIN-REQ-18</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_RvdcqbsBFrQgZBXN0-cCfj" name="keep supplying from stock"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_D7t_xdfYTW9jFa25Qj1AfT" name="washing station unavailable" event="_m8KerR49FPBbxrW_JhEPIT"/>
-        </transition>
-      </region>
-    </packagedElement>
-    <packagedElement xmi:type="uml:StateMachine" xmi:id="_4isO4X77TnSitWdvBEDMF3" name="SM5 Band Response and Health">
-      <ownedComment xmi:type="uml:Comment" xmi:id="_Z98Kl0oBlzy-LJu20UQCLX" annotatedElement="_4isO4X77TnSitWdvBEDMF3">
-        <body>Behavior of the Reporting IBD: how Band-State Response (AF-17) reacts to band state changes, in parallel with periodic Health Reporting (AF-16). Event Reporting (AF-18) has no states of its own and appears as the "publish event" effects in SM1 to SM4.</body>
-      </ownedComment>
-      <region xmi:type="uml:Region" xmi:id="_bG03-O9i-AMtYdON4eySaV" name="Band Response">
-        <subvertex xmi:type="uml:Pseudostate" xmi:id="_3E0VQTV9I1u_kAoC6jLj6l" name="Initial"/>
-        <subvertex xmi:type="uml:State" xmi:id="_rROcJrkOfaqkDhg1G3j1b0" name="Running">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_v8flxvgZ0HEUrdAwCUjIlS" name="process incoming product"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UbutcpBFbURAGJFCEgzoST" name="set band speed to normal"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_OswKdoZ0mwR0URRXke9Llt" name="note band state change"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_layNdLyNf4OalZT2GZj_X9" name="Slowed">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_f9GZoNe-YZyLA29tpbnpIX" name="process product at reduced speed"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Ero5sCuXHD-KUnDR_-rnDV" name="set reduced band speed"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_ZV2el6L63_my2Dx2TC1ty1" name="note band state change"/>
-        </subvertex>
-        <subvertex xmi:type="uml:State" xmi:id="_HMAgdhkA_S5Yc1xg5Iow3E" name="Halted">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_WkF973SMRl-mljz2mAI5NA" name="finish product already inside stations"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_mt5BuZdj4XO65Ozgd5OE_9" name="stop accepting new product"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_4fiSnmIwGbBPTyeFjBj69p" name="re-enable product intake"/>
-        </subvertex>
-        <transition xmi:type="uml:Transition" xmi:id="_RpAyeQ81njA38RRCKHUejW" name="T0" source="_3E0VQTV9I1u_kAoC6jLj6l" target="_rROcJrkOfaqkDhg1G3j1b0">
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_lo5q6VwbOutkR6H7TEO0IT" name="T1" source="_rROcJrkOfaqkDhg1G3j1b0" target="_layNdLyNf4OalZT2GZj_X9">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_cMFvleu3QPAINXzH95ywc5" annotatedElement="_lo5q6VwbOutkR6H7TEO0IT">
-            <body>Traces to: FIN-REQ-38.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_mzNWba4uBQldnc5GGPtNLM" name="continue at reduced speed"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_KusG87Oq1ITtICnc0lE2N0" name="slow-down">
-            <specification xmi:type="uml:LiteralString" xmi:id="_rVjWKn2KowxGSXKupZXKaf" value="slow-down"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_jXREcXcwFfxK2OdHkX8SgS" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_-LwbWW-DXC6PVnbXCW8fZp" name="T2" source="_rROcJrkOfaqkDhg1G3j1b0" target="_HMAgdhkA_S5Yc1xg5Iow3E">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_nctO1pXn9LnpY0CLLIs92_" annotatedElement="_-LwbWW-DXC6PVnbXCW8fZp">
-            <body>Traces to: FIN-REQ-37.1, FIN-REQ-37.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_vdBD9kfKipiWkoHQ-wC6W9" name="finish product inside, accept no new product"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_pSD2WOqg2HYcaHE1wuJKoD" name="halt">
-            <specification xmi:type="uml:LiteralString" xmi:id="_F7YXFnud5mO0ZGoqky48eO" value="halt"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_j-cmXnmBqys41_MH6n5vTu" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_MsNtNrG3wiecKNOG2NB_xf" name="T3" source="_layNdLyNf4OalZT2GZj_X9" target="_HMAgdhkA_S5Yc1xg5Iow3E">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_cufI-jcn6FFp91EOmu89tR" annotatedElement="_MsNtNrG3wiecKNOG2NB_xf">
-            <body>Traces to: FIN-REQ-37.1, FIN-REQ-37.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_LQCNtZskzliFuA70mOLqow" name="finish product inside, accept no new product"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_bROmdP7Hfox1j_baNSppc0" name="halt">
-            <specification xmi:type="uml:LiteralString" xmi:id="_w1y5E-MWgQhDaPaZ3_XX7X" value="halt"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_3hGkeBBdVeh_ynZ0mRVlSf" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_QFI7Zu4IsTQWrK0cHYS5AG" name="T4" source="_layNdLyNf4OalZT2GZj_X9" target="_rROcJrkOfaqkDhg1G3j1b0">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_qv29ZaTTlJg6ZXyTRXTyJA" annotatedElement="_QFI7Zu4IsTQWrK0cHYS5AG">
-            <body>Traces to: FIN-REQ-38.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_3ubdrZgGZ4O5OGqI9qhzIo" name="resume normal processing"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_21zE7Mg916I7ZSsGyKdPW-" name="restart">
-            <specification xmi:type="uml:LiteralString" xmi:id="_YpP-EbIhVo652cX9z-6b8R" value="restart"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_RBPFMB9JftzVfXrlcVMdmQ" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_opVI-wI_xQLO5tkOLXkcT3" name="T5" source="_HMAgdhkA_S5Yc1xg5Iow3E" target="_rROcJrkOfaqkDhg1G3j1b0">
-          <ownedComment xmi:type="uml:Comment" xmi:id="__ISRzV8D98NEmGAE25Q1Me" annotatedElement="_opVI-wI_xQLO5tkOLXkcT3">
-            <body>Traces to: FIN-REQ-38.2</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TstvOMK64BN9CqNI_Wql7S" name="resume normal processing"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_90JuOjsreeqx5rijmXJeXC" name="restart">
-            <specification xmi:type="uml:LiteralString" xmi:id="_kI1F93avcuIxQtDjnJiK_K" value="restart"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_rXhVed0f7l-Hxf909AyE1s" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="_QQ-qve9lHePw7vlnIKmnS1" name="T8" source="_HMAgdhkA_S5Yc1xg5Iow3E" target="_layNdLyNf4OalZT2GZj_X9">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_wkaDPeL81RMqeKPy-wuefF" annotatedElement="_QQ-qve9lHePw7vlnIKmnS1">
-            <body>Traces to: FIN-REQ-38.1</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_lBAUfuR91AfQ4X9N5wU9iv" name="continue at reduced speed"/>
-          <guard xmi:type="uml:Constraint" xmi:id="_5ZgdWFJZh1--xXRvMTsRTn" name="slow-down">
-            <specification xmi:type="uml:LiteralString" xmi:id="_8Lwumk1Bn3qeM0ONny-D5M" value="slow-down"/>
-          </guard>
-          <trigger xmi:type="uml:Trigger" xmi:id="_oZe3Lh_WgqQgq_oHpIEqt4" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
-        </transition>
-      </region>
-      <region xmi:type="uml:Region" xmi:id="_D2BQpQnwdvcO2DYXNeKS-2" name="Health Reporting">
-        <subvertex xmi:type="uml:Pseudostate" xmi:id="_r071NekjTEDTv5KBLtQ8xZ" name="Initial"/>
-        <subvertex xmi:type="uml:State" xmi:id="_F2AkPuc6Pvqc_xfyadCFXH" name="Reporting">
-          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__f4-82CICR9rDg5Ys8B-UA" name="monitor machine status"/>
-          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_pHC2vP-bbylQvJ9npQwldJ" name="start heartbeat timer"/>
-          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_PZTb8LxZgC12HC6cxAViRO" name="stop heartbeat timer"/>
-        </subvertex>
-        <transition xmi:type="uml:Transition" xmi:id="_AkOzX8MMGiIDnOv5mw5Y-F" name="T6" source="_r071NekjTEDTv5KBLtQ8xZ" target="_F2AkPuc6Pvqc_xfyadCFXH">
-        </transition>
-        <transition xmi:type="uml:Transition" xmi:id="__3DedraeCnd5CAinoYMDJI" name="T7" source="_F2AkPuc6Pvqc_xfyadCFXH" target="_F2AkPuc6Pvqc_xfyadCFXH" kind="internal">
-          <ownedComment xmi:type="uml:Comment" xmi:id="_kqSUUkssuO3xnUh2Sgg5QU" annotatedElement="__3DedraeCnd5CAinoYMDJI">
-            <body>Traces to: FIN-REQ-36</body>
-          </ownedComment>
-          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_G2mh89HrX7BFeeax0vtV_x" name="publish Machine status (heartbeat)"/>
-          <trigger xmi:type="uml:Trigger" xmi:id="_bQ1g1B6tkCdzzMfOFPE-_F" name="heartbeat interval elapsed" event="_R-H5kWxh4DLoijSSQ0VCJA"/>
-        </transition>
-      </region>
-    </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_idtu2T2y0tipviIkdYS_GE" name="FIN Signals and Events">
+        <packagedElement xmi:type="uml:Signal" xmi:id="_oDr_ZlbZTQRyI-RVgBV-A-" name="Cooled cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_tAtC8Eh2YoYNbCi5qYvhJJ" name="depanning machine not responding"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_TY-eBk4KO_3wUMW5225krO" name="Repair confirmed"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_M6kBXS1s6G5Uy0CyuJTqqR" name="Depanned cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_QKrchFBfiQ5tjj21S9WjQ-" name="cake stuck or broken"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_I8n5PE4JnFWQ9uX9yxiy4E" name="Weight result"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_zEW0p-eS96mnT4v3Tvgnd3" name="Visual result"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_JlKPmhyIkw5DRco2RjSD-x" name="Metal result"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_ONQzH0h1wYVFqZB6JfAb8C" name="Passed cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_EUNlO_n1ukPS0ulXRZbffR" name="Wrapped cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_S8mmGLtcSkRQWx9THwP62l" name="Sealed case"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_4XcBZ02AdEsp-4CknpJxbv" name="Case weight reading"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_0SA_HoVWJtw0Ys1aO4BJNf" name="Packed cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_qDixiiMJui7TS1jSMBrQ5g" name="wrap complete"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_wJb-VweeFly2RLjSEle3Hf" name="Washer free"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_f6myVW0Joa7gCFfs0fGknu" name="wash complete"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_k8Za7MsPmXj-tP1DWSgBI_" name="drying complete"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_NWVKzbOjGjU2IXN8gx1s43" name="Pan request"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_zw0QTagHLyzlo5bPFFBpXd" name="Empty pan"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_UarZt8ZHJrRsst1-rHV7JE" name="Pan for washing"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_mu0bolVyGfOcZx_BaoBqC1" name="washing station unavailable"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_61HNim7RSAbnxSPrWqG2xi" name="backlog = 0"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_i1oGr8Jv-okHtF0iYblq9J" name="Band state change"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_WC-yyZGDBzLLeRYyXbQ_R7" name="heartbeat interval elapsed"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_qX0NBY3PKiRVs2PN9V7Rzh" name="Cooled cake" signal="_oDr_ZlbZTQRyI-RVgBV-A-"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_mTmGL7k0kLbMOkIgbhoTx5" name="depanning machine not responding" signal="_tAtC8Eh2YoYNbCi5qYvhJJ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_Qje9VTyNMHMuTRY06yU2Ps" name="Repair confirmed" signal="_TY-eBk4KO_3wUMW5225krO"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_09L0mlMo85rw0cohs7CRaB" name="Depanned cake" signal="_M6kBXS1s6G5Uy0CyuJTqqR"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_F_XW5kxaBndnPbhs3FYdtS" name="cake stuck or broken" signal="_QKrchFBfiQ5tjj21S9WjQ-"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_yHlP2OJBsJwbeU7cq90t5w" name="Weight result" signal="_I8n5PE4JnFWQ9uX9yxiy4E"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_VwIFc4Y9zTjKOQhL-uut2q" name="Visual result" signal="_zEW0p-eS96mnT4v3Tvgnd3"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_In-L6P4JCJNwm8020jffNE" name="Metal result" signal="_JlKPmhyIkw5DRco2RjSD-x"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_0aPT30CfkfS_2XhnSIMhjD" name="Passed cake" signal="_ONQzH0h1wYVFqZB6JfAb8C"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_Js6L75pkO1mQhOA7NCHyug" name="Wrapped cake" signal="_EUNlO_n1ukPS0ulXRZbffR"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_HPxolVQ3OzgXGyL-weywli" name="Sealed case" signal="_S8mmGLtcSkRQWx9THwP62l"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_TZz36CSbr3-rt5xNZkOLJk" name="Case weight reading" signal="_4XcBZ02AdEsp-4CknpJxbv"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_TIGnVc8Jfp12tTsW2E9Gwq" name="Packed cake" signal="_0SA_HoVWJtw0Ys1aO4BJNf"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_94OiP1x3zsF38IkBEm8sqr" name="wrap complete" signal="_qDixiiMJui7TS1jSMBrQ5g"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_twtc-gzwoADVN_zbJHG_hM" name="Washer free" signal="_wJb-VweeFly2RLjSEle3Hf"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_9eSpqAaxdDf5SZhZK0c6jS" name="wash complete" signal="_f6myVW0Joa7gCFfs0fGknu"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_L0Bn4fHKwsh-ceT_PhM9yr" name="drying complete" signal="_k8Za7MsPmXj-tP1DWSgBI_"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_yx9Mwhoc8EwjlE7ByXyfHs" name="Pan request" signal="_NWVKzbOjGjU2IXN8gx1s43"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_en5lUraMN3csu9eaK3xEMj" name="Empty pan" signal="_zw0QTagHLyzlo5bPFFBpXd"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_OWXYMrtdDS3Ptm98MjDlE1" name="Pan for washing" signal="_UarZt8ZHJrRsst1-rHV7JE"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_m8KerR49FPBbxrW_JhEPIT" name="washing station unavailable" signal="_mu0bolVyGfOcZx_BaoBqC1"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_GAdQ7Nb1G0jKqPDjSTj0Cy" name="backlog = 0" signal="_61HNim7RSAbnxSPrWqG2xi"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_gWvj22hhUeMi9BYE2KlYRZ" name="Band state change" signal="_i1oGr8Jv-okHtF0iYblq9J"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_R-H5kWxh4DLoijSSQ0VCJA" name="heartbeat interval elapsed" signal="_WC-yyZGDBzLLeRYyXbQ_R7"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_3YVY1iX8_buiJEFTVaRMTh" name="SM1 Inspection Flow">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_Z3LeK7y7dBBm_a4hCG0cUb" annotatedElement="_3YVY1iX8_buiJEFTVaRMTh">
+          <body>Behavior of one cake through the Inspection IBD: depanning (AF-01, FD-01), weight, visual and metal checks (AF-03 to AF-05), and the inspection decision with reject handling (AF-06, FD-05).</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_WUbKadH-03Krn55UiDkfA6" name="Inspection Flow">
+          <transition xmi:type="uml:Transition" xmi:id="_79eiO-06A1w72kIi7eXpKb" name="T0" source="_csvZftkceRSwgaOPRpdnjb" target="_9-kJ9mYV5vmK-f21FijHoa"/>
+          <transition xmi:type="uml:Transition" xmi:id="_0tHJpR-iS1ji5MfgqqS5MQ" name="T1" guard="_eKm50KIg0Ljm_FFLW5y_pV" source="_9-kJ9mYV5vmK-f21FijHoa" target="_o5SZgOzwKrPMqvQAVdzi2E">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_TkzqS5nSBvBOAcGhFlZnnS" annotatedElement="_0tHJpR-iS1ji5MfgqqS5MQ">
+              <body>Traces to: FIN-REQ-01, FIN-REQ-02, FIN-REQ-04.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_eKm50KIg0Ljm_FFLW5y_pV" name="released as safe temperature">
+              <specification xmi:type="uml:LiteralString" xmi:id="_0znPrvETS_cmMNu9mVQGqC" value="released as safe temperature"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_K4ctMVLl19RqRieDZnbnNu" name="start pick"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_4i4fV37W65ju--PYEVY-kn" name="Cooled cake" event="_qX0NBY3PKiRVs2PN9V7Rzh"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_aITvAZTt-PNOUzDxlefhXJ" name="T2" source="_9-kJ9mYV5vmK-f21FijHoa" target="_c_UKXTE7zoVwPj8esdSazv">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_zSBalA-Nj6HTf1hrC19UNV" annotatedElement="_aITvAZTt-PNOUzDxlefhXJ">
+              <body>Traces to: FIN-REQ-32.1</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_svw3IM_nlZuaUhUIGo-eV4" name="hold arriving cakes"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_55TzW62YW5kvZNO5yIlUhz" name="depanning machine not responding" event="_mTmGL7k0kLbMOkIgbhoTx5"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_kMccrCdoOcyH0YDv87tDAo" name="T3" source="_c_UKXTE7zoVwPj8esdSazv" target="_9-kJ9mYV5vmK-f21FijHoa">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_HL05wpUGY4rrmk3kVYtQAA" annotatedElement="_kMccrCdoOcyH0YDv87tDAo">
+              <body>Traces to: FIN-REQ-32.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_QpKE4Yk-LJjNtBKG7vl6DL" name="process held cakes"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_AYTFuEoeU7HMgIr6dgim_7" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_THuXFEELWJFUb88uqR07sd" name="T4" source="_o5SZgOzwKrPMqvQAVdzi2E" target="__7JVKtTcIjY_uPJgCQSqEv">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_-cBS1qDL39E14im7BYkc9A" annotatedElement="_THuXFEELWJFUb88uqR07sd">
+              <body>Traces to: FIN-REQ-04.2, FIN-REQ-04.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_49ipHbqjPzephyS-mur_Q1" name="route cake to inspection, pan to washing"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_CrpROfx8Klzc01qQQV1FOP" name="Depanned cake" event="_09L0mlMo85rw0cohs7CRaB"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_VGrRqOfe4UgXEnM12VQd1v" name="T5" source="_o5SZgOzwKrPMqvQAVdzi2E" target="_MLKLKEK1g_c4CPtj0Tn1Bh">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_WvZJFRJmQSoBsyeDrE2iqU" annotatedElement="_VGrRqOfe4UgXEnM12VQd1v">
+              <body>Traces to: FIN-REQ-31.1, FIN-REQ-31.2, FIN-REQ-26.1</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Lk8qxH5KnvMSrtVXi-E7Ue" name="reject cake, pan to washing, publish event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_Ob8yGMQcNlgY-BtW1h387T" name="cake stuck or broken" event="_F_XW5kxaBndnPbhs3FYdtS"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_v4S6sht-Vyqtt8WRjeTkWH" name="T6" source="__7JVKtTcIjY_uPJgCQSqEv" target="_H4aXnmZYwyd0IRwm4jJA27">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_D6CLU2_a0HTpnPptOsvphM" annotatedElement="_v4S6sht-Vyqtt8WRjeTkWH">
+              <body>Traces to: FIN-REQ-05.1, FIN-REQ-05.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_dwvY-6cKeqzMftrZvGfEdd" name="mark failed if outside tolerance"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_EyCTVy3VgLEkk5PzzrBBTB" name="Weight result" event="_yHlP2OJBsJwbeU7cq90t5w"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_MN88oEbHW3AH4rXXl2ys_H" name="T7" source="_H4aXnmZYwyd0IRwm4jJA27" target="_hkLIzDOSJng61gXmaSkdeo">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_i1z1TiKKXlA5pK5TGC_Dgu" annotatedElement="_MN88oEbHW3AH4rXXl2ys_H">
+              <body>Traces to: FIN-REQ-06.1, FIN-REQ-06.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_snorLiDInnF3yeIlGhNGk-" name="mark failed if unsatisfactory"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_NgvmXeG1yrzaXWwRkil-Fp" name="Visual result" event="_VwIFc4Y9zTjKOQhL-uut2q"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_7vvPllPO1lB-rBs7rQPDdH" name="T8" source="_hkLIzDOSJng61gXmaSkdeo" target="_kPEVp1YoC2jPnmtjMcnIhc">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_16EvGvadO3blQsji-JGzZ9" annotatedElement="_7vvPllPO1lB-rBs7rQPDdH">
+              <body>Traces to: FIN-REQ-07.1, FIN-REQ-07.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_aSQcVTvEsN9PRl3jLeN1P6" name="mark failed if metal found"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_eJvoctTim6Ps5a47mdD1TZ" name="Metal result" event="_In-L6P4JCJNwm8020jffNE"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_qha2tbbbiekRcGVUwyqc4a" name="T9" guard="_Cjuowx8nbTfj2kvnVjsYzZ" source="_kPEVp1YoC2jPnmtjMcnIhc" target="_4XU1B5-gWqOztSv_jrCaTc">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_hVVMWYJTz7cLualT5MfBC2" annotatedElement="_qha2tbbbiekRcGVUwyqc4a">
+              <body>Traces to: FIN-REQ-08.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Cjuowx8nbTfj2kvnVjsYzZ" name="no failed mark">
+              <specification xmi:type="uml:LiteralString" xmi:id="_vKlf59K6xDmM18AuR5YsW4" value="no failed mark"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_4MUpF2EWvF4Cy82CamLCxp" name="release to packaging"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_S-qIe3xCk6hxkwDco1wOld" name="T10" guard="_es0Kml8VqcqItqoKA0SLD1" source="_kPEVp1YoC2jPnmtjMcnIhc" target="_MLKLKEK1g_c4CPtj0Tn1Bh">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_PGxgJ8wOy-PbeD1sHY0fCZ" annotatedElement="_S-qIe3xCk6hxkwDco1wOld">
+              <body>Traces to: FIN-REQ-08.2, FIN-REQ-09</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_es0Kml8VqcqItqoKA0SLD1" name="any failed mark">
+              <specification xmi:type="uml:LiteralString" xmi:id="_aNyKkKLKw93LBikoeOYNJS" value="any failed mark"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_cPm982jGDAU8BrClOo64Cc" name="move to reject bin, publish event"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_ERJ3FNuz-M0nGhGE1slumo" name="T11" guard="_r2OE_hN3ui9I-AUF_6CnxP" kind="internal" source="_9-kJ9mYV5vmK-f21FijHoa" target="_9-kJ9mYV5vmK-f21FijHoa">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_FgPr3Ngxcd5MTIRRMG6-eb" annotatedElement="_ERJ3FNuz-M0nGhGE1slumo">
+              <body>Traces to: FIN-REQ-02</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_r2OE_hN3ui9I-AUF_6CnxP" name="not released as safe temperature">
+              <specification xmi:type="uml:LiteralString" xmi:id="_-O35TuUrgz7xRD0j3gCuim" value="not released as safe temperature"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zRwlJSbMsjF5AlQTDccOxZ" name="do not accept cake"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_paTVX03KIGg8IMezcaY54i" name="Cooled cake" event="_qX0NBY3PKiRVs2PN9V7Rzh"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_GBRN2-A41Zm2aOizonVwRW" name="T12" source="_4XU1B5-gWqOztSv_jrCaTc" target="_xW0BEhnH7QK1fDwEzzXKEe"/>
+          <transition xmi:type="uml:Transition" xmi:id="_P9k-5y-jT7Dn16lr3YNtYH" name="T13" source="_MLKLKEK1g_c4CPtj0Tn1Bh" target="_xW0BEhnH7QK1fDwEzzXKEe"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_csvZftkceRSwgaOPRpdnjb" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_9-kJ9mYV5vmK-f21FijHoa" name="Awaiting Cake">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_eUUPKYbRaRs-WsWMmnSuZZ" name="wait for Cooled cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_cI7yMRvI8s49vjJK4QTjmZ" name="ready depanning station"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_kGCURLnFmf_7WHp8WMIxW7" name="record batch ID of incoming cake"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_o5SZgOzwKrPMqvQAVdzi2E" name="Depanning">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_TtpcyJtNLuHFmtpB6lMSV_" name="separate cake from pan"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_qxKYLGDlDvW1ll8A8Dt6zC" name="start vision-guided pick"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_mAh4-muVOR3RxSSjUNzBc2" name="hand over depanned cake and empty pan"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="__7JVKtTcIjY_uPJgCQSqEv" name="Weighing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_mDNRVx_bOkFN3mzBXtxEdH" name="compare weight with target and tolerance"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zxVmZxMqvZiGBbC4v1ZAWK" name="start weight reading"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_vo5Pdp86hWZM_XkbWhNKn-" name="publish Weight result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_H4aXnmZYwyd0IRwm4jJA27" name="Visual Check">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_MyfRtfxqhkvfRTJiQIPENI" name="inspect appearance of cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_RQtGV4euT3M35hAFnjZ7my" name="capture cake image"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Mi9cgLmu5nA-Um2ibGmJmp" name="publish Visual result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_c_UKXTE7zoVwPj8esdSazv" name="Holding">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_38ZPDusLiBWWyPLz3cSceQ" name="hold arriving cakes"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4tvkcj6yCEa_xi1GWvse7T" name="stop picking new cakes"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_LoK7VhGG8w9-D-yjt3dOTu" name="release held cakes for depanning"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_MLKLKEK1g_c4CPtj0Tn1Bh" name="Rejected">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_xYljEeBzWOTy3MOQ68Xh0B" name="mark cake as rejected and keep reason"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_kPEVp1YoC2jPnmtjMcnIhc" name="Deciding">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_qCW1_jwKj8rfP_NX9aMKdm" name="evaluate failed marks"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="__jMarKEM3NrW7tqiLARaBD" name="collect weight, visual and metal results"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_QeM-SmoSlXrox93SDdCcaL" name="forward decision to packaging or reject bin"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_hkLIzDOSJng61gXmaSkdeo" name="Metal Check">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Srf_HGeEugpa8nrbc5Bp3g" name="scan cake for metal"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_N5TrUX4tMaZZG69ygkQSZz" name="start metal scan"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_nfch-mGXluIA1mpJnY1eLH" name="publish Metal result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_4XU1B5-gWqOztSv_jrCaTc" name="Passed">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_og-OsZRFvUQGJsYQmn5quY" name="hand cake over to packaging"/>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_xW0BEhnH7QK1fDwEzzXKEe" name="Final"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_a9fJXqzirc0oJhL72f_c2U" name="SM2 Packaging Flow">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_fQqOH9M7L3t_JVqWTtgxfX" annotatedElement="_a9fJXqzirc0oJhL72f_c2U">
+          <body>Behavior of one cake through the Packaging IBD: optional holding area (AF-11, FD-10), wrapping (AF-07), cartoning (AF-08), reject handling (AF-10) and the case weight check (AF-09).</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_a2srHSxGPr0eNY-sZop6bW" name="Packaging Flow">
+          <transition xmi:type="uml:Transition" xmi:id="_bo2a9R65HOrLgjA7rT-wia" name="T0" source="_WPyxeiJ7JpkapA69FO-VlS" target="_XKve_Blq7iEJD3f60n_k7y"/>
+          <transition xmi:type="uml:Transition" xmi:id="_z3ZSeAdceuCbK_BRjZq8X4" name="T1" guard="_SEKtX7ehSzl6aMr7rAp3I5" source="_XKve_Blq7iEJD3f60n_k7y" target="_aRI5HiHkHabQvWhNp9ToPc">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_y3fjWdzCwdEIVfsM9F6f2-" annotatedElement="_z3ZSeAdceuCbK_BRjZq8X4">
+              <body>Traces to: FIN-REQ-21.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_SEKtX7ehSzl6aMr7rAp3I5" name="wrapping available">
+              <specification xmi:type="uml:LiteralString" xmi:id="_v6SmRscgrVsQM4r6_h7HyY" value="wrapping available"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_k_eRX8V8Oz8jArvY8rS9nf" name="wrap"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_5Ay2RJEZOjDArVNDnyxB3c" name="Passed cake" event="_0aPT30CfkfS_2XhnSIMhjD"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_djuDlvbue7OfZo0b4zBMz8" name="T2" guard="_aAunIgLFlBBJHHv_DU65IV" source="_XKve_Blq7iEJD3f60n_k7y" target="_-2aOO-upke58I44qrPKORE">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_WXdeSSAkoex_UJUY2awkIq" annotatedElement="_djuDlvbue7OfZo0b4zBMz8">
+              <body>Traces to: FIN-REQ-33.1, FIN-REQ-34</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_aAunIgLFlBBJHHv_DU65IV" name="wrapping unavailable">
+              <specification xmi:type="uml:LiteralString" xmi:id="_kMsJMmpH75Gh8tTc6DY7g7" value="wrapping unavailable"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_RL73w4J1Nzh6cWiuY-mdNY" name="hold cake; if holding area full, stop pan admission"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_yAChL9Wy82jvfBS15KHSeI" name="Passed cake" event="_0aPT30CfkfS_2XhnSIMhjD"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_DMTYCjZYqMVgR-YQv35PNU" name="T3" source="_-2aOO-upke58I44qrPKORE" target="_aRI5HiHkHabQvWhNp9ToPc">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_lA_YEp40NOgPfcypwA_MA4" annotatedElement="_DMTYCjZYqMVgR-YQv35PNU">
+              <body>Traces to: FIN-REQ-33.2, FIN-REQ-35</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TsblfdZwq10oFxVxGK4347" name="wrap held cakes, resume pan admission"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_SxOf-8L02A3sClX1fAOjpF" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_luiK2iGJCNEiy31ydUki0W" name="T4" source="_aRI5HiHkHabQvWhNp9ToPc" target="_z8rTHDNvyFM-waGppRYERe">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_6qpjiZJ35ygyLZ0IxBjo-C" annotatedElement="_luiK2iGJCNEiy31ydUki0W">
+              <body>Traces to: FIN-REQ-21.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ZwBm1_2jINz3kEbV2MRgWT" name="check wrap"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_lzTHxA7-jyusa4LcRS2sx5" name="Wrapped cake" event="_Js6L75pkO1mQhOA7NCHyug"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QJ7Y90cPrmnjPWHcHh5nFZ" name="T5" guard="_o-S0GISq11KbCUwbohGHM2" source="_z8rTHDNvyFM-waGppRYERe" target="_07b1Aw1DqxDPRQ_Jhj1KsM">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_4dX5jYMofgAej330blTGpB" annotatedElement="_QJ7Y90cPrmnjPWHcHh5nFZ">
+              <body>Traces to: FIN-REQ-23.1, FIN-REQ-23.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_o-S0GISq11KbCUwbohGHM2" name="wrap OK">
+              <specification xmi:type="uml:LiteralString" xmi:id="_y-AF8Ev0lV_5BUTowJK2XM" value="wrap OK"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_y86uVQXWM6txo5q6EK5Fsw" name="pack in carton, seal"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_pAHXQ1iF0MEFGiLwe2U7xJ" name="T6" guard="_Y4H3v7IxbtJ5pzkPvoLrls" source="_z8rTHDNvyFM-waGppRYERe" target="_VyHVyKj4kxzvhAQ3_DO0eY">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_8fd0FzpghNzPIYnZl0dC9D" annotatedElement="_pAHXQ1iF0MEFGiLwe2U7xJ">
+              <body>Traces to: FIN-REQ-24.2, FIN-REQ-26.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Y4H3v7IxbtJ5pzkPvoLrls" name="wrap defective">
+              <specification xmi:type="uml:LiteralString" xmi:id="_raZZ2G9vDuJPBHrORKkhEv" value="wrap defective"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_QEV_sZAIdVT0wSTsG0-l2G" name="refuse bin, publish event"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_Ut0yOn43_sOPNaukLcuix5" name="T7" source="_07b1Aw1DqxDPRQ_Jhj1KsM" target="_bQp0jUwW2Esv3dMxmRdK6x">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_5BCM7IqNDwnOj4qKpaaN9s" annotatedElement="_Ut0yOn43_sOPNaukLcuix5">
+              <body>Traces to: FIN-REQ-23.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ZMJ4GzDctscSIoIi2QDMXv" name="check carton"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_OFolQsYVZgmXs67QtJl9TF" name="Sealed case" event="_HPxolVQ3OzgXGyL-weywli"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_PG3Uau0r0B0pJvb9B1E-dF" name="T8" guard="_N2oSewsI6UUHB9YuoOVrV_" source="_bQp0jUwW2Esv3dMxmRdK6x" target="_O3xYt_3a6GwT66CeKg4ckF">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_cflsTNW6BZFZJe1sKNJjZn" annotatedElement="_PG3Uau0r0B0pJvb9B1E-dF">
+              <body>Traces to: FIN-REQ-24.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_N2oSewsI6UUHB9YuoOVrV_" name="carton OK">
+              <specification xmi:type="uml:LiteralString" xmi:id="_dXWIQ1eeBa7vXcVh0__w6R" value="carton OK"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_eER7Z4pAxym4ukQnew2zQl" name="proceed to shipping bin"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_YIv6LSK9bnwmzuOOYpTz0L" name="T9" guard="_Tciya8bZlS8khBnX6TTNZ9" source="_bQp0jUwW2Esv3dMxmRdK6x" target="_VyHVyKj4kxzvhAQ3_DO0eY">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Z1fnzD1Mq5ALnVlqw4lU5O" annotatedElement="_YIv6LSK9bnwmzuOOYpTz0L">
+              <body>Traces to: FIN-REQ-24.2, FIN-REQ-26.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Tciya8bZlS8khBnX6TTNZ9" name="carton defective">
+              <specification xmi:type="uml:LiteralString" xmi:id="_lbHJih568UXXQZMadLJLSb" value="carton defective"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_z3iS5kg5-6oksv6gUNBA5K" name="refuse bin, publish event"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_q40oiWVq61lMeU9RPKymS1" name="T10" source="_O3xYt_3a6GwT66CeKg4ckF" target="_y5wbSWkSd9a_hqAGCbp98G">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_kNZlewbV_KFDhGV_PM3P_X" annotatedElement="_q40oiWVq61lMeU9RPKymS1">
+              <body>Traces to: FIN-REQ-25, FIN-REQ-26.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_MMUD0myKLI1Co58VUKjCIj" name="if incorrect weight, publish event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_aqee9FG4tKAPuojlpCX2gt" name="Case weight reading" event="_TZz36CSbr3-rt5xNZkOLJk"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_4PNzMdvWQ3hIwAYR4BpKHf" name="T11" source="_y5wbSWkSd9a_hqAGCbp98G" target="_5_1mL4IEQkXa99ORIaPJ48"/>
+          <transition xmi:type="uml:Transition" xmi:id="_mEWy0AHNpbVT_xC9AB9NPI" name="T12" source="_VyHVyKj4kxzvhAQ3_DO0eY" target="_5_1mL4IEQkXa99ORIaPJ48"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_WPyxeiJ7JpkapA69FO-VlS" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_XKve_Blq7iEJD3f60n_k7y" name="Awaiting Cake">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Sx-r1TwWuLdBCkAY-qQE7C" name="wait for Passed cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_np_O-W4YWkhX0d5fG253YS" name="ready wrapping control"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_ostja6kIZEtNFs2EzsQ5UJ" name="note batch ID of cake"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_aRI5HiHkHabQvWhNp9ToPc" name="Wrapping">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_AqtIRmfNZwUZb_lSilhcaC" name="wrap cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_DuWdU_bh6PM0xZ-rTuMxaU" name="start wrapping station"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_rWzyfqLG4jD9NaKadiSbFg" name="stop wrapping station"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_z8rTHDNvyFM-waGppRYERe" name="Verifying Wrap">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_85wu-Ml9nf_CD_ifZr56wR" name="check cake is properly wrapped"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_AckU6Sr2a-KMctajoQHI_j" name="capture wrap image"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_f8BmirTnK0C0oM4HlVXH1Q" name="publish Wrapping result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_07b1Aw1DqxDPRQ_Jhj1KsM" name="Cartoning">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_KE3TqzWfTGA8fyDfDjX9fA" name="pack cake in carton and seal"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_8RLB3qeTefx8JF_I-oCT_M" name="start cartoning station"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_SXdBFq05W2BjmbaqYNt5OA" name="stop cartoning station"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_-2aOO-upke58I44qrPKORE" name="Holding">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_vjyy7H2_PgBHYSa5D0WFYr" name="hold cake and monitor holding capacity"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_kEvt0FO67qjo96H_Z3t9xP" name="take free holding slot"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8A3TdFqOaFPnmKcXJSjgfT" name="free holding slot"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_VyHVyKj4kxzvhAQ3_DO0eY" name="Refused">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_P86BHN7VZyeQn5OX0BeIWs" name="divert cake to refuse bin"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_bQp0jUwW2Esv3dMxmRdK6x" name="Verifying Carton">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_c5_Y0tiIyfJoD3xpAsLaQa" name="check cake is properly cartoned"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_NT3pQVxfJpXkO9cIWLXX7U" name="capture carton image"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_4KKYb3FqkvbwZ1sRjQZ3wG" name="publish Cartoning result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_y5wbSWkSd9a_hqAGCbp98G" name="Packed">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ag7Dm6c_ZmSKMg9rq1Ob8x" name="release case to palletising"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_O3xYt_3a6GwT66CeKg4ckF" name="Weighing Case">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_sDn6kPFSObq59IOfKEfHFd" name="compare case weight with expected weight"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_AeFIRUMSRvjL2oGPteUETY" name="start case weight reading"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_58M_UL0trtu-XMcYlvVppR" name="publish Case weight result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_5_1mL4IEQkXa99ORIaPJ48" name="Final"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_b2iI7-8D01ByumbNQeXFQU" name="SM3 Pallet Lifecycle">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_WF5J0RyZ1VyMurVLatHYi2" annotatedElement="_b2iI7-8D01ByumbNQeXFQU">
+          <body>Behavior of one pallet in the Palletising IBD: filling (AF-12, FD-11), wrapping (FD-12) and the &quot;Pallet ready for shipment&quot; signal.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_1NBBB_WicaLx2bOPcv4vlI" name="Pallet Lifecycle">
+          <transition xmi:type="uml:Transition" xmi:id="_159sUMLBZbPioD377gIJPd" name="T0" source="_95cdnVuIiG43UanHUsLccJ" target="_9KAuYOah0BpUrhS8cfXjGm">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_WKaPq3J5hIPrwl4Ljc6oKb" annotatedElement="_159sUMLBZbPioD377gIJPd">
+              <body>Traces to: FIN-REQ-28.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TGk4MYbNYhLg-tOTq7QXIl" name="empty pallet staged"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_32fi2CNWduaAIbl7SJwuCE" name="T1" guard="_Sl7b3OWBIW1fX1ENJ2iSd_" source="_9KAuYOah0BpUrhS8cfXjGm" target="_wVGdG0kWwfM6Q_gG9aMEFm">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_JQuT7vSbPDTKlNaPMh0yi4" annotatedElement="_32fi2CNWduaAIbl7SJwuCE">
+              <body>Traces to: FIN-REQ-27, FIN-REQ-28.1, FIN-REQ-28.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Sl7b3OWBIW1fX1ENJ2iSd_" name="last spot filled">
+              <specification xmi:type="uml:LiteralString" xmi:id="_m6FJWmzHqgDcvXWfT2ge_N" value="last spot filled"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_8w_E84OsKU-243nvHo1wYb" name="place cake, set pallet aside, stage new pallet"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_0jvqTRnAwfTmLuxQD1WLh9" name="Packed cake" event="_TIGnVc8Jfp12tTsW2E9Gwq"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_qs8cubiXDMPHC8gwTvkWJP" name="T2" source="_wVGdG0kWwfM6Q_gG9aMEFm" target="_doEJ1fth7BDGhc4Ew_H_Cv">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_IiH8UGXV5BUh-pUEyYKWBl" annotatedElement="_qs8cubiXDMPHC8gwTvkWJP">
+              <body>Traces to: FIN-REQ-29</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_bLnMUK0o9uLUgu3guC05zj" name="wrap pallet"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="__Q47MloeYCDQGPAVikbCrW" name="T3" source="_doEJ1fth7BDGhc4Ew_H_Cv" target="_9d5fPagDPxRnNvrApdMTXm">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_zxNm1xT41av_8o-Vyid4Sy" annotatedElement="__Q47MloeYCDQGPAVikbCrW">
+              <body>Traces to: FIN-REQ-30</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_kQ4-jwgRmrs__w-xiuDbwX" name="publish Pallet ready for shipment (pallet ID, cake count, batch IDs)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_dxnxCnhws1cdubf2YQauPN" name="wrap complete" event="_94OiP1x3zsF38IkBEm8sqr"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_gyx9IOoPzySoU-wUOojH5i" name="T4" guard="_hNv3bXH3gBlgeavhQOOq-d" kind="internal" source="_9KAuYOah0BpUrhS8cfXjGm" target="_9KAuYOah0BpUrhS8cfXjGm">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Tn2Ktuumfp1nGWreH2cAaM" annotatedElement="_gyx9IOoPzySoU-wUOojH5i">
+              <body>Traces to: FIN-REQ-27</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_hNv3bXH3gBlgeavhQOOq-d" name="free spot remains">
+              <specification xmi:type="uml:LiteralString" xmi:id="_i_992qoD53lNy_3uXhBXh7" value="free spot remains"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_8d1F1XZpY-qhRY8kaA-pTU" name="place cake"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_4dSpPM4mETcfCm8fqphj7H" name="Packed cake" event="_TIGnVc8Jfp12tTsW2E9Gwq"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_TyvrXhnW_EWmesVSWm4WJv" name="T5" source="_9d5fPagDPxRnNvrApdMTXm" target="_tcX_rWPw7L-Y3qgTumtZr8"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_95cdnVuIiG43UanHUsLccJ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_9KAuYOah0BpUrhS8cfXjGm" name="Filling">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_cX-TysJfcrj9E0gNGRWI_e" name="place cakes on free spots"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_LCkY9HrHHh-K9eci81YNgR" name="register pallet and batch IDs"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_KwqwFh3r2Q1UMKlK28ZPQJ" name="close pallet for further cakes"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_wVGdG0kWwfM6Q_gG9aMEFm" name="Full">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_9tOPtBJg8lu11Zp1JVCI0q" name="wait for pallet wrapper"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_1sxx0kruDFwJE9pUDZ6Sab" name="set pallet aside"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_9p6r7lvglatJcOKsPnIdD1" name="move pallet to pallet wrapper"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_doEJ1fth7BDGhc4Ew_H_Cv" name="Wrapping">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_awQVGKMmJNHkq7EOjvADMR" name="wrap pallet"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_YW61nnuCaU3WPPxUSb1H0i" name="start pallet wrapper"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_bIgm4q8MjxcG9ureAMsmjl" name="stop pallet wrapper"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_9d5fPagDPxRnNvrApdMTXm" name="Ready">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_FuywTePwjY23iEeiujkR3j" name="wait for move to shipping storage"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_i9mic5RGltH_eJUAyHk5pI" name="collect pallet ID, cake count and batch IDs"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8D8-iM_eLKFsfmTFwAE2IX" name="hand pallet to Production and Logistics"/>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_tcX_rWPw7L-Y3qgTumtZr8" name="Final"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_O8Nwht2jTv60llH2DmTqFw" name="SM4 Pan Loop">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_dy8oHAm3C6Q01wbpHs5ieK" annotatedElement="_O8Nwht2jTv60llH2DmTqFw">
+          <body>Behavior of the Pan Loop IBD: the life cycle of one pan through washing, verification and stock (AF-13, AF-14), in parallel with the mode of the washing station (AF-15).</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_4d8BGmI8h9N9n_WzEBWhQv" annotatedElement="_O8Nwht2jTv60llH2DmTqFw">
+          <body>Invariant (FIN-REQ-14): the total number of pans in the production system stays at twice the number needed to fill the full production system.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_fsgDqd21WdTZfOcovioybl" name="Pan Lifecycle">
+          <transition xmi:type="uml:Transition" xmi:id="_D6N813sMcVtn1KCe1P14u3" name="T0" source="_eocKMpyZVXpsBntOOWxg7v" target="_eoBNBnSD9HiLF8D8OmA0xh"/>
+          <transition xmi:type="uml:Transition" xmi:id="_Xgvt2XvAxKDmTW1F2bVHps" name="T1" source="_eoBNBnSD9HiLF8D8OmA0xh" target="_ZH9KhxSU0LogUMLZ68DCpY">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_33iAqBu_krbenBGn_lIRJ6" annotatedElement="_Xgvt2XvAxKDmTW1F2bVHps">
+              <body>Traces to: FIN-REQ-11.1</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_HCU-Dmk1wNZ5QR03M7K7nS" name="wash"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_-MmdFsPTh0c2bF7SKS3uaj" name="Washer free" event="_twtc-gzwoADVN_zbJHG_hM"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_10dodZiTsO7GSk6MSxwaQq" name="T2" source="_ZH9KhxSU0LogUMLZ68DCpY" target="_ovC1E0aNDgHYkQhNQiMp5v">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_akI84N3DHfIMdbRrn3Kl2E" annotatedElement="_10dodZiTsO7GSk6MSxwaQq">
+              <body>Traces to: FIN-REQ-11.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Xg6nGmlrddCIC3AmXVEXiF" name="dry"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_wgAtOVloyaYx2dtKRDJVXX" name="wash complete" event="_9eSpqAaxdDf5SZhZK0c6jS"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_bCSEDBqht3An5Sec04I9rT" name="T3" source="_ovC1E0aNDgHYkQhNQiMp5v" target="_oA1Lf71wv_damdkbd60Prq">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_hsDjwt0NOLTMy6H4u2SWOn" annotatedElement="_bCSEDBqht3An5Sec04I9rT">
+              <body>Traces to: FIN-REQ-11.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_iqbho5fjsxaZQJRk8FPU08" name="check pan"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_08xwgv__3Q-izQmtax9YiA" name="drying complete" event="_L0Bn4fHKwsh-ceT_PhM9yr"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_WW3jY4Tv0xZN1YacUX3i9C" name="T4" guard="_3gQNrZUnY6pT2jOP07-x3k" source="_oA1Lf71wv_damdkbd60Prq" target="_br3no_iVzwN0nyw2x7lPWz">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_1GwVgPmQW_gqiDhIz9cx6W" annotatedElement="_WW3jY4Tv0xZN1YacUX3i9C">
+              <body>Traces to: FIN-REQ-12.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_3gQNrZUnY6pT2jOP07-x3k" name="clean and undamaged">
+              <specification xmi:type="uml:LiteralString" xmi:id="_1LO6MEtdr50quauoQWFr1q" value="clean and undamaged"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_V1d7btAbHGHozD1zqBvOZe" name="queue for recirculation"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_IS9kR8G-4dz0zI0EXRSY99" name="T5" guard="__SRXeHmxym8s_WdGyKOFEW" source="_oA1Lf71wv_damdkbd60Prq" target="_tZ_ZpbbN918aC63pILrvxZ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_vDdLC7vBcjQKV7bTSm4F0a" annotatedElement="_IS9kR8G-4dz0zI0EXRSY99">
+              <body>Traces to: FIN-REQ-12.2, FIN-REQ-13</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="__SRXeHmxym8s_WdGyKOFEW" name="not clean or damaged">
+              <specification xmi:type="uml:LiteralString" xmi:id="_F_uT9hQOmwQw6XRU691yAG" value="not clean or damaged"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_SJCMOf7lVxu1GvxRzMZCy6" name="remove from cycle, publish discard event"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_yotnHmGwm-4gcKw4OJ0QJn" name="T6" source="_br3no_iVzwN0nyw2x7lPWz" target="_7nHwGyYbF9F8pzCtxEltUa">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_m6o2TrJOcqYjxkqUjodTvO" annotatedElement="_yotnHmGwm-4gcKw4OJ0QJn">
+              <body>Traces to: FIN-REQ-16, FIN-REQ-17</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_d2Bkm-wE0ixp2UmzyYoinA" name="supply clean pan, report stock level"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_QFLn6xojNGMqTsDMoEtQBF" name="Pan request" event="_yx9Mwhoc8EwjlE7ByXyfHs"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_KLKxhv_4HliKKDomAP2cTi" name="T11" source="_7nHwGyYbF9F8pzCtxEltUa" target="_eoBNBnSD9HiLF8D8OmA0xh">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Tx1m7M7I21MksWDFxjuwE-" annotatedElement="_KLKxhv_4HliKKDomAP2cTi">
+              <body>Traces to: FIN-REQ-11.1, FIN-REQ-15</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_q1JG33yrAkMlcKSBX-EJ0y" name="pan returns to the pan loop"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_I7DeX9aN3M99J-ArO95pke" name="Empty pan" event="_en5lUraMN3csu9eaK3xEMj"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_nOds22Yt8boIMEPwtK9YbR" name="Pan for washing" event="_OWXYMrtdDS3Ptm98MjDlE1"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_DD7JGlZZ4TpC1owTmcnCKf" name="T12" source="_tZ_ZpbbN918aC63pILrvxZ" target="_rEPGnM_f41JoPmw5Ux4g6G"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_eocKMpyZVXpsBntOOWxg7v" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_eoBNBnSD9HiLF8D8OmA0xh" name="Awaiting Washing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_JRR12GwzE1rx6KpFuIq0rU" name="wait for free washer"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zEmmVeBCpxNroDR7jD5qAh" name="register pan at washing station"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_wHIuzqNxSyHsIHpBvnffvZ" name="start washing cycle"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_ZH9KhxSU0LogUMLZ68DCpY" name="Washing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_MrcSQvhypZxCayR9eJnsg7" name="wash pan"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_c1JT5unC7Tw-yRqzax6uqK" name="start wash control"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Hf72dz51FwhkRi5QJVNpA0" name="stop washing"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_ovC1E0aNDgHYkQhNQiMp5v" name="Drying">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_OS_vEAh73voAz7ftDhuB1D" name="dry pan"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_nB6J4Qo_ExuP_jBDwFkxvO" name="start drying"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_2Yks5-t-36YmJxPw3homZR" name="stop drying"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_oA1Lf71wv_damdkbd60Prq" name="Verifying">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_5N2UZn11UdefswrAZAB3UL" name="check pan is clean and undamaged"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_eM9O2eKirSFf7Hk8fDUgmu" name="inspect pan"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_i-EUD6t94II73axUx6kOiu" name="record verification result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_7nHwGyYbF9F8pzCtxEltUa" name="Supplied">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_swtNejQRoicxx9WCJj_iL1" name="hand pan to depositing"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_br3no_iVzwN0nyw2x7lPWz" name="In Stock">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_s5l92nTM_uvmC0lFOQJNY6" name="count clean pan stock"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_IvxdKn7TDt2CoC_4lQc_lF" name="store pan in pan hopper"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_1fQU9ooRGK-KP7BCNRODDj" name="take pan out of stock"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_tZ_ZpbbN918aC63pILrvxZ" name="Discarded">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_FZgeBjoB7z186CfVgpoEAe" name="drop pan into discard bin"/>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_rEPGnM_f41JoPmw5Ux4g6G" name="Final"/>
+        </region>
+        <region xmi:type="uml:Region" xmi:id="_xqhV2oESAaIaDfwh8wesfn" name="Washing Station Mode">
+          <transition xmi:type="uml:Transition" xmi:id="_RKI58VotJB4fn_PYU18G6K" name="T7" source="_OJh-24k0gy_X_IQ27FrNf7" target="_j7PyGqVSRvmU3ZGBRYHpvK"/>
+          <transition xmi:type="uml:Transition" xmi:id="_XHDXikUgd34pzJXTLLA44S" name="T8" source="_j7PyGqVSRvmU3ZGBRYHpvK" target="_bIKjIR82HWZSBjuarWl8ek">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_iHxS1SVo1npGBf3zccWQHZ" annotatedElement="_XHDXikUgd34pzJXTLLA44S">
+              <body>Traces to: FIN-REQ-18</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zGeJKZqgs50Rj4zQ5H62HZ" name="keep supplying from stock"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_SGwk8S571-tGB5sWZRni0b" name="washing station unavailable" event="_m8KerR49FPBbxrW_JhEPIT"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_yje6B-9wGP0hwxZrby4TIK" name="T9" guard="_7WbZddW4K_zcVyh6NPOGp6" source="_bIKjIR82HWZSBjuarWl8ek" target="_lXmR3AxiLoVQaYWyW4q-Ik">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_DWjwE7f9i9AO8ZBEIqSGjA" annotatedElement="_yje6B-9wGP0hwxZrby4TIK">
+              <body>Traces to: FIN-REQ-19, FIN-REQ-20.1, FIN-REQ-20.3</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_7WbZddW4K_zcVyh6NPOGp6" name="conditions for continued washing met">
+              <specification xmi:type="uml:LiteralString" xmi:id="_ZmpzmebKV5e_VSZgAuryXO" value="conditions for continued washing met"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_9-Oflf0Acdmxpb0BQ16djL" name="increase speed, log change"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_x0_jI7axjIWOonTCLWoBj7" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_q1UxoCoq0lvda6zx4BmYV_" name="T10" source="_lXmR3AxiLoVQaYWyW4q-Ik" target="_j7PyGqVSRvmU3ZGBRYHpvK">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_3B3mQtI2bPcxoh_50hd5g5" annotatedElement="_q1UxoCoq0lvda6zx4BmYV_">
+              <body>Traces to: FIN-REQ-20.2, FIN-REQ-20.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TdjXwKOQr1VRGC3nU2D5UV" name="normal speed, log change"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_tubBxq_Cm6haFLemfnqdjp" name="backlog = 0" event="_GAdQ7Nb1G0jKqPDjSTj0Cy"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_JP6BdrRqi8zll7Vi6aGLaF" name="T13" source="_lXmR3AxiLoVQaYWyW4q-Ik" target="_bIKjIR82HWZSBjuarWl8ek">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_QrUTlY4Qg1toFtHoJQgC7p" annotatedElement="_JP6BdrRqi8zll7Vi6aGLaF">
+              <body>Traces to: FIN-REQ-18</body>
+            </ownedComment>
+            <ownedComment xmi:type="uml:Comment" xmi:id="_ZqqwkNEqEfG05Lxk_syBEA">
+              <body>Traces to: FIN-REQ-18</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_RvdcqbsBFrQgZBXN0-cCfj" name="keep supplying from stock"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_D7t_xdfYTW9jFa25Qj1AfT" name="washing station unavailable" event="_m8KerR49FPBbxrW_JhEPIT"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_OJh-24k0gy_X_IQ27FrNf7" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_j7PyGqVSRvmU3ZGBRYHpvK" name="Normal">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__pIESTKTRSOfb5vbG9iVJz" name="monitor pan backlog"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_7rcrLR5LT9gqaGRvnoUXTd" name="set washing speed to normal"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8eUzkEvJ8AC9jHQiEQeyV4" name="note washing speed change"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_bIKjIR82HWZSBjuarWl8ek" name="Faulted">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_rrVHPIBu6Z5tB5yzth_XRL" name="keep supplying pans from stock"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ZUQ7yjr5E60X9fame8NmHO" name="stop washing"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_qYzLZSAPhd1OllpAiRNOBa" name="check conditions for continued washing"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_lXmR3AxiLoVQaYWyW4q-Ik" name="Catch-up">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_yr-bS0qGsmpQLkB057Fuc3" name="wash backlog of pans"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_NzhI6Czy7WU3VbyMz2_gUC" name="raise washing speed"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_FjwwG2P-orrM6hHZi2Ds8i" name="return speed command to normal"/>
+          </subvertex>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_4isO4X77TnSitWdvBEDMF3" name="SM5 Band Response and Health">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_Z98Kl0oBlzy-LJu20UQCLX" annotatedElement="_4isO4X77TnSitWdvBEDMF3">
+          <body>Behavior of the Reporting IBD: how Band-State Response (AF-17) reacts to band state changes, in parallel with periodic Health Reporting (AF-16). Event Reporting (AF-18) has no states of its own and appears as the &quot;publish event&quot; effects in SM1 to SM4.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_bG03-O9i-AMtYdON4eySaV" name="Band Response">
+          <transition xmi:type="uml:Transition" xmi:id="_RpAyeQ81njA38RRCKHUejW" name="T0" source="_3E0VQTV9I1u_kAoC6jLj6l" target="_rROcJrkOfaqkDhg1G3j1b0"/>
+          <transition xmi:type="uml:Transition" xmi:id="_lo5q6VwbOutkR6H7TEO0IT" name="T1" guard="_KusG87Oq1ITtICnc0lE2N0" source="_rROcJrkOfaqkDhg1G3j1b0" target="_layNdLyNf4OalZT2GZj_X9">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_cMFvleu3QPAINXzH95ywc5" annotatedElement="_lo5q6VwbOutkR6H7TEO0IT">
+              <body>Traces to: FIN-REQ-38.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_KusG87Oq1ITtICnc0lE2N0" name="slow-down">
+              <specification xmi:type="uml:LiteralString" xmi:id="_rVjWKn2KowxGSXKupZXKaf" value="slow-down"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_mzNWba4uBQldnc5GGPtNLM" name="continue at reduced speed"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_jXREcXcwFfxK2OdHkX8SgS" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_-LwbWW-DXC6PVnbXCW8fZp" name="T2" guard="_pSD2WOqg2HYcaHE1wuJKoD" source="_rROcJrkOfaqkDhg1G3j1b0" target="_HMAgdhkA_S5Yc1xg5Iow3E">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_nctO1pXn9LnpY0CLLIs92_" annotatedElement="_-LwbWW-DXC6PVnbXCW8fZp">
+              <body>Traces to: FIN-REQ-37.1, FIN-REQ-37.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_pSD2WOqg2HYcaHE1wuJKoD" name="halt">
+              <specification xmi:type="uml:LiteralString" xmi:id="_F7YXFnud5mO0ZGoqky48eO" value="halt"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_vdBD9kfKipiWkoHQ-wC6W9" name="finish product inside, accept no new product"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_j-cmXnmBqys41_MH6n5vTu" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_MsNtNrG3wiecKNOG2NB_xf" name="T3" guard="_bROmdP7Hfox1j_baNSppc0" source="_layNdLyNf4OalZT2GZj_X9" target="_HMAgdhkA_S5Yc1xg5Iow3E">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_cufI-jcn6FFp91EOmu89tR" annotatedElement="_MsNtNrG3wiecKNOG2NB_xf">
+              <body>Traces to: FIN-REQ-37.1, FIN-REQ-37.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_bROmdP7Hfox1j_baNSppc0" name="halt">
+              <specification xmi:type="uml:LiteralString" xmi:id="_w1y5E-MWgQhDaPaZ3_XX7X" value="halt"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_LQCNtZskzliFuA70mOLqow" name="finish product inside, accept no new product"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_3hGkeBBdVeh_ynZ0mRVlSf" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QFI7Zu4IsTQWrK0cHYS5AG" name="T4" guard="_21zE7Mg916I7ZSsGyKdPW-" source="_layNdLyNf4OalZT2GZj_X9" target="_rROcJrkOfaqkDhg1G3j1b0">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_qv29ZaTTlJg6ZXyTRXTyJA" annotatedElement="_QFI7Zu4IsTQWrK0cHYS5AG">
+              <body>Traces to: FIN-REQ-38.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_21zE7Mg916I7ZSsGyKdPW-" name="restart">
+              <specification xmi:type="uml:LiteralString" xmi:id="_YpP-EbIhVo652cX9z-6b8R" value="restart"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_3ubdrZgGZ4O5OGqI9qhzIo" name="resume normal processing"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_RBPFMB9JftzVfXrlcVMdmQ" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_opVI-wI_xQLO5tkOLXkcT3" name="T5" guard="_90JuOjsreeqx5rijmXJeXC" source="_HMAgdhkA_S5Yc1xg5Iow3E" target="_rROcJrkOfaqkDhg1G3j1b0">
+            <ownedComment xmi:type="uml:Comment" xmi:id="__ISRzV8D98NEmGAE25Q1Me" annotatedElement="_opVI-wI_xQLO5tkOLXkcT3">
+              <body>Traces to: FIN-REQ-38.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_90JuOjsreeqx5rijmXJeXC" name="restart">
+              <specification xmi:type="uml:LiteralString" xmi:id="_kI1F93avcuIxQtDjnJiK_K" value="restart"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TstvOMK64BN9CqNI_Wql7S" name="resume normal processing"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_rXhVed0f7l-Hxf909AyE1s" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QQ-qve9lHePw7vlnIKmnS1" name="T8" guard="_5ZgdWFJZh1--xXRvMTsRTn" source="_HMAgdhkA_S5Yc1xg5Iow3E" target="_layNdLyNf4OalZT2GZj_X9">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_wkaDPeL81RMqeKPy-wuefF" annotatedElement="_QQ-qve9lHePw7vlnIKmnS1">
+              <body>Traces to: FIN-REQ-38.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_5ZgdWFJZh1--xXRvMTsRTn" name="slow-down">
+              <specification xmi:type="uml:LiteralString" xmi:id="_8Lwumk1Bn3qeM0ONny-D5M" value="slow-down"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_lBAUfuR91AfQ4X9N5wU9iv" name="continue at reduced speed"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_oZe3Lh_WgqQgq_oHpIEqt4" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_3E0VQTV9I1u_kAoC6jLj6l" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_rROcJrkOfaqkDhg1G3j1b0" name="Running">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_v8flxvgZ0HEUrdAwCUjIlS" name="process incoming product"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UbutcpBFbURAGJFCEgzoST" name="set band speed to normal"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_OswKdoZ0mwR0URRXke9Llt" name="note band state change"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_layNdLyNf4OalZT2GZj_X9" name="Slowed">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_f9GZoNe-YZyLA29tpbnpIX" name="process product at reduced speed"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Ero5sCuXHD-KUnDR_-rnDV" name="set reduced band speed"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_ZV2el6L63_my2Dx2TC1ty1" name="note band state change"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_HMAgdhkA_S5Yc1xg5Iow3E" name="Halted">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_WkF973SMRl-mljz2mAI5NA" name="finish product already inside stations"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_mt5BuZdj4XO65Ozgd5OE_9" name="stop accepting new product"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_4fiSnmIwGbBPTyeFjBj69p" name="re-enable product intake"/>
+          </subvertex>
+        </region>
+        <region xmi:type="uml:Region" xmi:id="_D2BQpQnwdvcO2DYXNeKS-2" name="Health Reporting">
+          <transition xmi:type="uml:Transition" xmi:id="_AkOzX8MMGiIDnOv5mw5Y-F" name="T6" source="_r071NekjTEDTv5KBLtQ8xZ" target="_F2AkPuc6Pvqc_xfyadCFXH"/>
+          <transition xmi:type="uml:Transition" xmi:id="__3DedraeCnd5CAinoYMDJI" name="T7" kind="internal" source="_F2AkPuc6Pvqc_xfyadCFXH" target="_F2AkPuc6Pvqc_xfyadCFXH">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_kqSUUkssuO3xnUh2Sgg5QU" annotatedElement="__3DedraeCnd5CAinoYMDJI">
+              <body>Traces to: FIN-REQ-36</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_G2mh89HrX7BFeeax0vtV_x" name="publish Machine status (heartbeat)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_bQ1g1B6tkCdzzMfOFPE-_F" name="heartbeat interval elapsed" event="_R-H5kWxh4DLoijSSQ0VCJA"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_r071NekjTEDTv5KBLtQ8xZ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_F2AkPuc6Pvqc_xfyadCFXH" name="Reporting">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__f4-82CICR9rDg5Ys8B-UA" name="monitor machine status"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_pHC2vP-bbylQvJ9npQwldJ" name="start heartbeat timer"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_PZTb8LxZgC12HC6cxAViRO" name="stop heartbeat timer"/>
+          </subvertex>
+        </region>
+      </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="__N4GwM4KEfGJpPDutUy9XQ" name="FIN Requirements">
       <packagedElement xmi:type="uml:Package" xmi:id="_BBTzQM4LEfGJpPDutUy9XQ" name="RD1 Depanning">
@@ -2475,4 +2466,5 @@
   <Requirements:Verify xmi:id="_M1JvoovFKgFdQnogW3d5wT" base_Abstraction="_QfEapVgoPKiWlTyoq4tOZv"/>
   <Requirements:Verify xmi:id="_fcMrVIWhiadpB-0wlK1axz" base_Abstraction="_6cVaQd8U9qZfIV-AFVx67M"/>
   <Requirements:Verify xmi:id="_vEMlNoGuEzuV-VKJHPlRAs" base_Abstraction="__Wcs_lTfC7RL1DiF7UhQp2"/>
+  <ActionLanguage:TextualRepresentation xmi:id="_Zq0hkNEqEfG05Lxk_syBEA" base_Comment="_ZqqwkNEqEfG05Lxk_syBEA" language="org.eclipse.papyrus.uml.textedit.transition.xtext.UmlTransition"/>
 </xmi:XMI>
