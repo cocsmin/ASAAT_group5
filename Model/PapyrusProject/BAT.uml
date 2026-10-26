@@ -255,7 +255,7 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_t6nPNvUxkcFXfTAjP75fi4" name="Recipe targets" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_Pg8UX_wK2bA3W2FP8IPjdN" name="Batch ID" aggregation="composite"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_VlLljTTKJN6kxnkyBoiQb6" name="Dosing Control (BAT-AF-02)" classifierBehavior="_OBVdhYtI5OsiSzjZGmCxOK">
+    <packagedElement xmi:type="uml:Class" xmi:id="_VlLljTTKJN6kxnkyBoiQb6" name="Dosing Control (BAT-AF-02)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_1myTDoz-aN_6D-miQmtjGS" name="Recipe targets" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_kxJkMUS-uMHFjdCCd7pUrV" name="Dispense control" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_HkRCtOtXWvsYgbdARHkj1T" name="Dose result" aggregation="composite"/>
@@ -263,133 +263,7 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_zyN63SRNgN7DeaxBIgEOny" name="Dosing stop / resume" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_2AS8CwlXGZ4Hs0uUhpAYnh" name="Loading complete" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_kwaJjeTL6kx-jua9PLkqpW" name="Discard control" aggregation="composite"/>
-      <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_OBVdhYtI5OsiSzjZGmCxOK" name="Dosing Control Behaviour">
-        <region xmi:type="uml:Region" xmi:id="_Vc7DmCl49GMGoA6hdLoWtO" name="Dosing">
-          <transition xmi:type="uml:Transition" xmi:id="_b829LHYdb7kxXnG_BWdqfU" source="_zWDnvHpNeHzxcXG_39UUqJ" target="_nZJ-37uitUisLpk8Nm9Jfl"/>
-          <transition xmi:type="uml:Transition" xmi:id="_GBJUph2W9U4PxKQe7LeZv2" guard="_jHU1CxThfeMd0dYkRM0p-T" source="_nZJ-37uitUisLpk8Nm9Jfl" target="_Vn-9XXD8SLuigoek5jDd0P">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_jHU1CxThfeMd0dYkRM0p-T" name="a recipe is loaded">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_qdyNWmHZwr9TfHeqgkjFmc">
-                <language>Natural language</language>
-                <body>a recipe is loaded</body>
-              </specification>
-            </ownedRule>
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_wq3MkCrGeoqx6jxNxcO4Yl" name="batch ID := new batch ; consecutive failure count := 0"/>
-            <trigger xmi:type="uml:Trigger" xmi:id="_4O7rwsUBHfXUNFtZFSRTk2" name="startBatch()" event="_aQ4IOvkYlQBaVSWzou_bfJ"/>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_Z2rbZK0FESbRS52vAmHY4w" guard="_t-UICsR3fCMEycOSwm_eMU" source="_nZJ-37uitUisLpk8Nm9Jfl" target="_9e0bTrl9qcoOyAtNoMmE9Y">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_t-UICsR3fCMEycOSwm_eMU" name="the production order is complete">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_TsyQIXVl3t2RNzBN-inhV9">
-                <language>Natural language</language>
-                <body>the production order is complete</body>
-              </specification>
-            </ownedRule>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_BA9dYC0UIlFdaRJuGyFeGH" source="_Vn-9XXD8SLuigoek5jDd0P" target="_tniIuNOVa0zgNEC6xx_7lW"/>
-          <transition xmi:type="uml:Transition" xmi:id="_0p31A0ZM33XD14uAC_CCAa" source="_tniIuNOVa0zgNEC6xx_7lW" target="_naIAJyoGXcS3BeMJTkO3Xu">
-            <trigger xmi:type="uml:Trigger" xmi:id="_wTL9Kps_dI8YajWf8lClfH" name="doseResult" event="_IuKYPNhXFe2qFjprdGsKJd"/>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_Ph0ti3R6FVE6V3bvzwNMS_" guard="_i41uOWiDi534SNMPhPdwYL" source="_naIAJyoGXcS3BeMJTkO3Xu" target="_Vn-9XXD8SLuigoek5jDd0P">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_i41uOWiDi534SNMPhPdwYL" name="dose result = within tolerance and ingredients remaining">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_cPacUBfZMWTy0q86cO1C44">
-                <language>Natural language</language>
-                <body>dose result = within tolerance and ingredients remaining</body>
-              </specification>
-            </ownedRule>
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_T47vQXUu-bIZkJeotzoVUz" name="ingredient := next ; consecutive failure count := 0"/>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_DX1rhe2AUEwTJ10Iz4kF8F" guard="_ojTpviwIywk8XyuNl_jsWp" source="_naIAJyoGXcS3BeMJTkO3Xu" target="_axFaJOYpr_N3fgh_yxU0dI">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_ojTpviwIywk8XyuNl_jsWp" name="dose result = within tolerance and last ingredient">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_i6DbxHJ-xbYnMRrT6lOORk">
-                <language>Natural language</language>
-                <body>dose result = within tolerance and last ingredient</body>
-              </specification>
-            </ownedRule>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_tYuJ4b2D3SGB02o2ow82Nk" guard="_7XY043qoivjtx6xRq7e2hk" source="_naIAJyoGXcS3BeMJTkO3Xu" target="_04h-sjGlEE97k7ruZ2Me03">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_7XY043qoivjtx6xRq7e2hk" name="dose result = under or over tolerance">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_Wp3MrPSxKtA_bZDdOPjjsG">
-                <language>Natural language</language>
-                <body>dose result = under or over tolerance</body>
-              </specification>
-            </ownedRule>
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_m3dK6Kzlflex0Er6WsYicp" name="consecutive failure count := count + 1"/>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_lemgGdcFSTaPuvIb9AOzAN" guard="_0eEcgN7gnrNmxUE-ryBPI6" source="_04h-sjGlEE97k7ruZ2Me03" target="_O-21yTHR74VdSnEGKB1wsd">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_0eEcgN7gnrNmxUE-ryBPI6" name="consecutive failure count >= P2">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_y3PolAaTYAjj45CYbupz0V">
-                <language>Natural language</language>
-                <body>consecutive failure count >= P2</body>
-              </specification>
-            </ownedRule>
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ljJBDPgs7_rwCE6Qd1jg-W" name="send dose failure"/>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_PcSE1Mp6MaQPXLIP2kRtdk" guard="_oLXtNF0SVh9UgPHZq_1vC7" source="_04h-sjGlEE97k7ruZ2Me03" target="_RmptYd4_B8qrwqS0_td-BP">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_oLXtNF0SVh9UgPHZq_1vC7" name="consecutive failure count &lt; P2 and dose result = under">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_NaXKGUpABNsGr7XX_2j3ZV">
-                <language>Natural language</language>
-                <body>consecutive failure count &lt; P2 and dose result = under</body>
-              </specification>
-            </ownedRule>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_EwMZIMD8KtsvzXojWpPQJO" guard="_oKEH0KJMLietHDXccylT39" source="_04h-sjGlEE97k7ruZ2Me03" target="_WxIPONWgbiCQ2Mvd6xcUxL">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_oKEH0KJMLietHDXccylT39" name="consecutive failure count &lt; P2 and dose result = over">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_vCzShcm-e1O-hI496kxOUr">
-                <language>Natural language</language>
-                <body>consecutive failure count &lt; P2 and dose result = over</body>
-              </specification>
-            </ownedRule>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_rQ0eoALhNI9op_8rPweeMu" source="_RmptYd4_B8qrwqS0_td-BP" target="_tniIuNOVa0zgNEC6xx_7lW"/>
-          <transition xmi:type="uml:Transition" xmi:id="_tjenISg5LfHa_d-XHzm7dO" source="_WxIPONWgbiCQ2Mvd6xcUxL" target="_NWDQ4ua6IcIxat45AZBpAh">
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_bgpFNTlaaIG3nxNB7Nfbvt" name="batch ID := new batch"/>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_DSIrxotukrxSvFXcX0SQCp" source="_O-21yTHR74VdSnEGKB1wsd" target="_NWDQ4ua6IcIxat45AZBpAh">
-            <trigger xmi:type="uml:Trigger" xmi:id="_B4P3AryJO70nGShV2Dqx-W" name="doserOperational" event="_q5W2535O-YJjnp2OrkLD0_"/>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_SRZjW4VXt3256e1xUH3o73" source="_axFaJOYpr_N3fgh_yxU0dI" target="_NWDQ4ua6IcIxat45AZBpAh">
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_uN_Dd0RNx3CzMB44OJngQo" name="signal batch loading complete"/>
-          </transition>
-          <transition xmi:type="uml:Transition" xmi:id="_75yzmCmcSbW6-Ftr7FO3xp" source="_NWDQ4ua6IcIxat45AZBpAh" target="_nZJ-37uitUisLpk8Nm9Jfl"/>
-          <subvertex xmi:type="uml:State" xmi:id="_nZJ-37uitUisLpk8Nm9Jfl" name="Idle">
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_tiKA4BnpehY1zrckXLTo4f" name="clear batch context"/>
-          </subvertex>
-          <subvertex xmi:type="uml:State" xmi:id="_Vn-9XXD8SLuigoek5jDd0P" name="Dispensing">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_xE93YyiKR86VVIhJSSwFd3" name="dispense ingredient toward its recipe target"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Gy1SQFZ0n_BUvP7GjXXgkd" name="select next ingredient from recipe"/>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_e0fRRFVhGk_0W6vYrsOjLK" name="stop dispenser"/>
-          </subvertex>
-          <subvertex xmi:type="uml:State" xmi:id="_tniIuNOVa0zgNEC6xx_7lW" name="Weighing">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_9qYG4JGq78unKFtoVxXuns" name="judge the measured weight against the recipe target and tolerance (P1)"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_dGs7V3rA5hqt5_ifbrcZag" name="read the load cell for the dispensed ingredient"/>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_UjazwcrU-nNm4aHyWvnfXh" name="publish dose result"/>
-          </subvertex>
-          <subvertex xmi:type="uml:State" xmi:id="_RmptYd4_B8qrwqS0_td-BP" name="ToppingUp">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_LIBWmN8OAERHbJ-VZ9xWy7" name="request the missing amount"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_iVv8P2D4-Nms-yReAe5bOl" name="shortfall := recipe target - measured weight"/>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_FOEn84eQ77PLa1e7FjtAXZ" name="stop dispenser"/>
-          </subvertex>
-          <subvertex xmi:type="uml:State" xmi:id="_WxIPONWgbiCQ2Mvd6xcUxL" name="Discarding">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Ccfiv642KhGaOiJhKF42zb" name="open discard chute and dump the batch"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_trc4Y1V_YfVUMHWEI5qp58" name="record discard with reason and batch ID"/>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_eBdyPme2FmDaAOy7D2l4A_" name="close discard chute"/>
-          </subvertex>
-          <subvertex xmi:type="uml:State" xmi:id="_axFaJOYpr_N3fgh_yxU0dI" name="BatchReady">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_kWf-orpUfpy3sDMiDLgYl2" name="hold the batch for mixing"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_n8nIHN8Xv_UFfgoRR2CTl6" name="mark batch loading complete"/>
-          </subvertex>
-          <subvertex xmi:type="uml:State" xmi:id="_O-21yTHR74VdSnEGKB1wsd" name="Locked">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_yenLN0FmXxh_Lv2BQA8Pj7" name="wait for the doser to be marked operational"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zqYJK51rKSmqJFhfqWIMsK" name="stop dosing and record error with batch ID"/>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_6DfkoM9bhAhsRNlUmUd590" name="consecutive failure count := 0"/>
-          </subvertex>
-          <subvertex xmi:type="uml:Pseudostate" xmi:id="_zWDnvHpNeHzxcXG_39UUqJ" name="Initial"/>
-          <subvertex xmi:type="uml:Pseudostate" xmi:id="_naIAJyoGXcS3BeMJTkO3Xu" name="DoseCheck" kind="choice"/>
-          <subvertex xmi:type="uml:Pseudostate" xmi:id="_04h-sjGlEE97k7ruZ2Me03" name="FailCheck" kind="choice"/>
-          <subvertex xmi:type="uml:Pseudostate" xmi:id="_NWDQ4ua6IcIxat45AZBpAh" name="NewBatch" kind="junction"/>
-          <subvertex xmi:type="uml:FinalState" xmi:id="_9e0bTrl9qcoOyAtNoMmE9Y" name="Batch closed"/>
-        </region>
-      </ownedBehavior>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_DbbnAYVU9Vu25kwHv0a78g" name="startBatch"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_8FVqjXUu_fDq4aZidNtXja" name="startBatch"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_1DFJ3siP8agwu5BF_PF-MI" name="Dose Verification (BAT-AF-03)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_QETELjQitpc3b8AerAaldV" name="Weight reading" aggregation="composite"/>
@@ -629,7 +503,7 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_Bz0-EM5HEfGts8WNJoPXrQ" name="" client="_2arZoMyHEfGts8WNJoPXrQ" supplier="_xa2CkMyHEfGts8WNJoPXrQ"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_Fd-UkM5HEfGts8WNJoPXrQ" name="" client="_F_kq4MyIEfGts8WNJoPXrQ" supplier="_2arZoMyHEfGts8WNJoPXrQ"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_H7PBMM5HEfGts8WNJoPXrQ" name="" client="_OibcwMyIEfGts8WNJoPXrQ" supplier="_2arZoMyHEfGts8WNJoPXrQ"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_OJ90UM5HEfGts8WNJoPXrQ" name="" client="_aG8BwMyIEfGts8WNJoPXrQ" supplier="_EojjsMx_EfGts8WNJoPXrQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_OJ90UM5HEfGts8WNJoPXrQ" name="" client="_aG8BwMyIEfGts8WNJoPXrQ" supplier="_OibcwMyIEfGts8WNJoPXrQ"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_SMjgAM5HEfGts8WNJoPXrQ" name="" client="_eUWdYMyIEfGts8WNJoPXrQ" supplier="_2arZoMyHEfGts8WNJoPXrQ"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_awIDkM5HEfGts8WNJoPXrQ" name="" client="_yagTUMyIEfGts8WNJoPXrQ" supplier="_eUWdYMyIEfGts8WNJoPXrQ"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_fKzfIM5HEfGts8WNJoPXrQ" name="" client="__2EgkMyIEfGts8WNJoPXrQ" supplier="_xa2CkMyHEfGts8WNJoPXrQ"/>
@@ -689,7 +563,7 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_JZx8YMySEfGts8WNJoPXrQ" name="" client="_1DFJ3siP8agwu5BF_PF-MI" supplier="_xa2CkMyHEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_J6Mh0MySEfGts8WNJoPXrQ" name="" client="_auzz4L_-hj5cI2rcRCd9Y-" supplier="_xa2CkMyHEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_OZsL8MySEfGts8WNJoPXrQ" name="" client="_1DFJ3siP8agwu5BF_PF-MI" supplier="_2arZoMyHEfGts8WNJoPXrQ"/>
-    <packagedElement xmi:type="uml:Abstraction" xmi:id="_bHEdgMySEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_F_kq4MyIEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_bHEdgMySEfGts8WNJoPXrQ" name="Satisfy66" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_F_kq4MyIEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_dk2ukMySEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_OibcwMyIEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_ep6SIMySEfGts8WNJoPXrQ" name="" client="_wTES79eZsR3W8TBmK56noy" supplier="_OibcwMyIEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_oM3PEMySEfGts8WNJoPXrQ" name="" client="_1DFJ3siP8agwu5BF_PF-MI" supplier="_aG8BwMyIEfGts8WNJoPXrQ"/>
@@ -703,11 +577,11 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_L6rWYMyTEfGts8WNJoPXrQ" name="" client="_VlLljTTKJN6kxnkyBoiQb6" supplier="_FCIVwMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_OwrTIMyTEfGts8WNJoPXrQ" name="" client="_8dZrypuB2KkeknAWLlQsY8" supplier="_MAWFEMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_Q51YAMyTEfGts8WNJoPXrQ" name="" client="_M0QOHJCdV07abFSfqczJET" supplier="_MAWFEMyJEfGts8WNJoPXrQ"/>
-    <packagedElement xmi:type="uml:Abstraction" xmi:id="_St4vkMyTEfGts8WNJoPXrQ" name="" client="_8dZrypuB2KkeknAWLlQsY8" supplier="_Z0E6sMyJEfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_St4vkMyTEfGts8WNJoPXrQ" name="Satisfy80" client="_8dZrypuB2KkeknAWLlQsY8" supplier="_Z0E6sMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_Y27KYMyTEfGts8WNJoPXrQ" name="" client="_CDQNoNr-cruo3VBs5-Ccje" supplier="_u4V-sMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_a4NssMyTEfGts8WNJoPXrQ" name="" client="_l2iVsN_juI3UhyujQiUWyR" supplier="_u4V-sMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_dK2dsMyTEfGts8WNJoPXrQ" name="" client="_CDQNoNr-cruo3VBs5-Ccje" supplier="_z2Nm4MyJEfGts8WNJoPXrQ"/>
-    <packagedElement xmi:type="uml:Abstraction" xmi:id="_fHP48MyTEfGts8WNJoPXrQ" name="" client="_LOMg3i-OnNAgBTFRnCZJ06" supplier="_EojjsMx_EfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_fHP48MyTEfGts8WNJoPXrQ" name="" client="_LOMg3i-OnNAgBTFRnCZJ06" supplier="_5VjkcMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_hxR2QMyTEfGts8WNJoPXrQ" name="" client="_MdhaahRD2GvPqwx_r4MvI_" supplier="_5VjkcMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_lRvFQMyTEfGts8WNJoPXrQ" name="" client="_vEM0uAVKcEziF2J2Nhqudr" supplier="_9XGuUMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_n4tHgMyTEfGts8WNJoPXrQ" name="" client="_-xjg3arrtc1PuAeiMRP1ko" supplier="_9XGuUMyJEfGts8WNJoPXrQ"/>
@@ -769,7 +643,7 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_fsy7Q9lVe33UVtREfG6HVN" client="_paFvu4aeLpLtFhpxJTrZOP" supplier="_MqAQoMyKEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_CTBVsXqDyLpsrzDY8uuRxP" client="_ohuGC7JauYaL9YkXPKDdpH" supplier="_iP47UMyHEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_Vr3tayOEovYpm1dXaP25rE" client="_0kQwbYUxiMsi5mxs3Dgw7u" supplier="_iP47UMyHEfGts8WNJoPXrQ"/>
-    <packagedElement xmi:type="uml:Abstraction" xmi:id="_uHpdutnW6j4AzaNAcA6NSL" client="_nMq8x1kaj4P7o16fAYp0vu" supplier="_EojjsMx_EfGts8WNJoPXrQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_uHpdutnW6j4AzaNAcA6NSL" client="_nMq8x1kaj4P7o16fAYp0vu" supplier="_OibcwMyIEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_hYaowpALGXrMqfSvcLBzVz" client="_nMq8x1kaj4P7o16fAYp0vu" supplier="_aG8BwMyIEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_s8ISeab7ojwwzKoDbfnOqw" client="_MCo_a_Bmd7RxQeFclCgt41" supplier="_eUWdYMyIEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_Ks82I7VWOawze0Gvpzbn4R" client="_MCo_a_Bmd7RxQeFclCgt41" supplier="_yagTUMyIEfGts8WNJoPXrQ"/>
@@ -831,12 +705,297 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_MGBU8KNZbZeWLLyvAOjnt3" client="_Wi9A0MyMEfGts8WNJoPXrQ" supplier="_Z0E6sMyJEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_BXFvbWR5xwfS76vkzUINse" client="_Wi9A0MyMEfGts8WNJoPXrQ" supplier="_m6hXEMyKEfGts8WNJoPXrQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_ZAl8zKyQiBD98uVLmHoZjm" client="_MqAQoMyKEfGts8WNJoPXrQ" supplier="_Slxraf8C1SswASZFOHEqvt"/>
-    <packagedElement xmi:type="uml:Package" xmi:id="_co9EKfpSroiEXEcTktGV7T" name="BAT Dosing Events">
-      <packagedElement xmi:type="uml:Signal" xmi:id="_PanNNlYIqiOqtqKLzZO39Z" name="doseResult"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_IuKYPNhXFe2qFjprdGsKJd" name="doseResult" signal="_PanNNlYIqiOqtqKLzZO39Z"/>
-      <packagedElement xmi:type="uml:Signal" xmi:id="_jQR_YF9_JE2MMwDtN87VUl" name="doserOperational"/>
-      <packagedElement xmi:type="uml:SignalEvent" xmi:id="_q5W2535O-YJjnp2OrkLD0_" name="doserOperational" signal="_jQR_YF9_JE2MMwDtN87VUl"/>
-      <packagedElement xmi:type="uml:CallEvent" xmi:id="_aQ4IOvkYlQBaVSWzou_bfJ" name="startBatch" operation="_DbbnAYVU9Vu25kwHv0a78g"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_JVWFTi5FvaJrPHxMSEmMw_" name="BAT Behaviour">
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_ey_D3nN9KseURvoLUSjb05" name="Dosing Behaviour">
+        <region xmi:type="uml:Region" xmi:id="_i5kO9MrQV7HG4gDE5-A0-w" name="Dosing">
+          <transition xmi:type="uml:Transition" xmi:id="_gNjvzFCmorG3aeTPa26MqP" source="_pcX5NNr9VV-cd94UIRAzWl" target="_TtKNxcPZFynNG6ANb5SC4K"/>
+          <transition xmi:type="uml:Transition" xmi:id="_X9Rh49ts_PT8IFbiddd1pJ" guard="_Wzc1r2Axn5CGUjcd-egS4x" source="_TtKNxcPZFynNG6ANb5SC4K" target="_FVcFLX7hTPVGIjiUjCA0AH">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Wzc1r2Axn5CGUjcd-egS4x" name="a production order is confirmed">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_oEKK0BeJfz4R4ta1jFYkOm" name="a production order is confirmed">
+                <language>Natural language</language>
+                <body>a production order is confirmed</body>
+              </specification>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_QIA6YL3myoPDDHmsBMAd9j" name="batch ID := the order batch ID"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_REzB0t6yuN0Ex44kMTBzkM" name="startBatch()" event="_YjkF3J18dJhdlMIYego334"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_C2peTWPmxELB9nRtqTv2K0" guard="_DGkI7n5Aye1sDQu9WKggwR" source="_TtKNxcPZFynNG6ANb5SC4K" target="_-H7wcaQcADKwBTkaBEtRj4">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_DGkI7n5Aye1sDQu9WKggwR" name="the production order is complete">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_b8uT255UelhwTBzp1NgC_0" name="the production order is complete">
+                <language>Natural language</language>
+                <body>the production order is complete</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_ITYoATcAoVM2TZkdIL2HMJ" guard="_Y3VIp9Au3Zc0ldpIEssIz4" source="_FVcFLX7hTPVGIjiUjCA0AH" target="_ZyZcK_TQEM_xZefZGEPfqp">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Y3VIp9Au3Zc0ldpIEssIz4" name="the ingredients are reserved">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_gTwXSzMHgkJBla5XhT8mIM" name="the ingredients are reserved">
+                <language>Natural language</language>
+                <body>the ingredients are reserved</body>
+              </specification>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_tnfIf2twFccnW4GurkChzy" name="consecutive failure count := 0"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_CLbBRftyiMtsMppVdrw_Uq" name="reservationResult" event="_zmkaklmkOAGLwlb925HI9b"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_7AR9M3Ib69e99aD2QBRqVM" source="_ZyZcK_TQEM_xZefZGEPfqp" target="_6Xm3gt4mtvo2bsawdBIfIx"/>
+          <transition xmi:type="uml:Transition" xmi:id="_d6BtLpebFJRvPAYOzfGe8P" source="_6Xm3gt4mtvo2bsawdBIfIx" target="_G5-bzxVpD1qo50nnYdVmxX">
+            <trigger xmi:type="uml:Trigger" xmi:id="__1tE-Q0eTIIWR4R7EsghZz" name="doseResult" event="_WZMRyT9UH0rAxfQXmgvDDM"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_brAS5_rv9U8Vbwxzyj4uyD" guard="_Pts2p1lC4bk6FvlQXYlkTI" source="_G5-bzxVpD1qo50nnYdVmxX" target="_ZyZcK_TQEM_xZefZGEPfqp">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Pts2p1lC4bk6FvlQXYlkTI" name="within dose tolerance (P1) and ingredients remaining">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_ZSbWQ77BSqwALfc-98Vi6D" name="within dose tolerance (P1) and ingredients remaining">
+                <language>Natural language</language>
+                <body>within dose tolerance (P1) and ingredients remaining</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_LJ9lW4Y38n2Rd0-QTO7Y_L" guard="_572SmqXI0Tvsla6hc1gRbd" source="_G5-bzxVpD1qo50nnYdVmxX" target="_qeqF5fHY11fzEdsiomj6Af">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_572SmqXI0Tvsla6hc1gRbd" name="within dose tolerance (P1) and last ingredient">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_oeEiETJmwttT9bUTxgPq7v" name="within dose tolerance (P1) and last ingredient">
+                <language>Natural language</language>
+                <body>within dose tolerance (P1) and last ingredient</body>
+              </specification>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TNU7spcF1hTS0kXWk7C9Br" name="signal batch loading complete"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_aA471CaJqFqaU4SbFH9IC2" guard="_VMS4l1dXkQhkuAZasIP1xH" source="_G5-bzxVpD1qo50nnYdVmxX" target="_kSXpC9xmcUZJaJAblTkqAD">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_VMS4l1dXkQhkuAZasIP1xH" name="outside dose tolerance (P1) and consecutive failure count >= P2">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_oVBAwugMn0EpA6fT9rfrKO" name="outside dose tolerance (P1) and consecutive failure count >= P2">
+                <language>Natural language</language>
+                <body>outside dose tolerance (P1) and consecutive failure count >= P2</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_cXAwuamOH7ookLZFWnw3p6" guard="_aLhiNbVtp8GkGPUdMHuNsL" source="_G5-bzxVpD1qo50nnYdVmxX" target="_heqZfofIBtIHxwh29PIw4D">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_aLhiNbVtp8GkGPUdMHuNsL" name="under tolerance and consecutive failure count &lt; P2">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_UzXr12HP3IkNBLul9FUxYN" name="under tolerance and consecutive failure count &lt; P2">
+                <language>Natural language</language>
+                <body>under tolerance and consecutive failure count &lt; P2</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_qYJTohWajl_CX2FwGV9Ryr" guard="_gC2htwNApz1gyhpbqkXapQ" source="_G5-bzxVpD1qo50nnYdVmxX" target="_hCWV6VKrcgEIyBU0UklTAu">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_gC2htwNApz1gyhpbqkXapQ" name="over tolerance and consecutive failure count &lt; P2">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_3DCOqoJ-Vp2d4jOvSfNps7" name="over tolerance and consecutive failure count &lt; P2">
+                <language>Natural language</language>
+                <body>over tolerance and consecutive failure count &lt; P2</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_GmPVwTL6rxftjZ8lJZh5mD" source="_heqZfofIBtIHxwh29PIw4D" target="_6Xm3gt4mtvo2bsawdBIfIx"/>
+          <transition xmi:type="uml:Transition" xmi:id="_Hv-f_gYPQ48KxXyxvspDR-" source="_hCWV6VKrcgEIyBU0UklTAu" target="_qeqF5fHY11fzEdsiomj6Af">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_MWhvCitZGYaqhI3tmuujva" name="batch ID := the next batch"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_wR-fEhC0TF7HYZTCZsNkLQ" source="_kSXpC9xmcUZJaJAblTkqAD" target="_qeqF5fHY11fzEdsiomj6Af">
+            <trigger xmi:type="uml:Trigger" xmi:id="_4PCm1XCtAi4tCRfT8SkqN3" name="doserOperational" event="_N1FxITQqsRDEidYDZS7e94"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_7Cs7xXuQyDi6v-Qzkrc_gS" source="_qeqF5fHY11fzEdsiomj6Af" target="_TtKNxcPZFynNG6ANb5SC4K"/>
+          <subvertex xmi:type="uml:State" xmi:id="_TtKNxcPZFynNG6ANb5SC4K" name="Idle">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_JplA3WuFBl_ZrI-Y8MT5d0" name="clear batch context"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_FVcFLX7hTPVGIjiUjCA0AH" name="Reserving">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_vMWcZSgdcVHUGK6lsQncBO" name="await the reservation result"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_QNJhlHTPsDZgKmjaM9IsNs" name="request ingredient reservation"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_ZyZcK_TQEM_xZefZGEPfqp" name="Dispensing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_RTbehwRvFuwz8JLru9qPmP" name="dispense the ingredient toward its recipe target"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_h7_NOpTkyT_HhfYoA6Eq0Q" name="select the next ingredient from the recipe"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Jcp5OAzs3HrJcvZU-5PY_n" name="stop the dispenser"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_6Xm3gt4mtvo2bsawdBIfIx" name="Verifying">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_0ALxB1zak1aWdActgKm5EY" name="judge the measured weight against the recipe target and tolerance (P1)"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UeqU-fzz70IWmajuISlp7k" name="read the load cell for the dispensed ingredient"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_u5C50N1TbDMv0Xr93d5ENo" name="update the consecutive failure count"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_heqZfofIBtIHxwh29PIw4D" name="ToppingUp">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_kXTZAWD5u-axTXcacalVYR" name="request the missing amount"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_HlNgde4qAnf2FlqNe-mS6D" name="shortfall := recipe target - measured weight"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_eNNw4NE5EfGQaMdPIJD0gw" name="stop the dispenser"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_hCWV6VKrcgEIyBU0UklTAu" name="Discarding">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_WKx7HkZP24lc9qAOjZ00Ur" name="dump the batch through the discard chute"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_B4kor3s7-ZQMgNJSYTo_Tj" name="record the discard with its reason and the batch ID"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_kSXpC9xmcUZJaJAblTkqAD" name="Locked">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_iJZ4tVmXY9nsQ2tHGF1NYu" name="wait for the doser to be marked operational"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_7sI3RS5eSvqjb8_ZHst7Gz" name="stop dosing and publish a fault event with the batch ID"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_0MlFDTyymARq9vxmNTs1c7" name="consecutive failure count := 0"/>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_pcX5NNr9VV-cd94UIRAzWl" name="Initial"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_G5-bzxVpD1qo50nnYdVmxX" name="DoseCheck" kind="choice"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_qeqF5fHY11fzEdsiomj6Af" name="BatchEnd" kind="junction"/>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_-H7wcaQcADKwBTkaBEtRj4" name="Dosing closed"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_HOWNcTENOWVGVT6gGU4Sjl" name="Mixing and Handoff Behaviour">
+        <region xmi:type="uml:Region" xmi:id="_8ebyaYNbIiKo35ZWT5pAQE" name="Mixing and handoff">
+          <transition xmi:type="uml:Transition" xmi:id="_8u5CsIbI0m5STqKWgEYNt8" source="_FEtjxEJ_KtaOVHK8Yo1VPC" target="_9g8e0H1QSzubDLF4BbuygK"/>
+          <transition xmi:type="uml:Transition" xmi:id="_hT-i8BKC6OmMxI9kGtF_kd" guard="_N5K02l3kPn_kKzfBfgNBBP" source="_9g8e0H1QSzubDLF4BbuygK" target="_M2oB5rOeTYGNmfhuSfFznh">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_N5K02l3kPn_kKzfBfgNBBP" name="depositing is working">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_Rn_xf_UmSMZPIUMwoTvkON" name="depositing is working">
+                <language>Natural language</language>
+                <body>depositing is working</body>
+              </specification>
+            </ownedRule>
+            <trigger xmi:type="uml:Trigger" xmi:id="_otw_5JvGv1x65t4oBxHWWF" name="loadingComplete" event="__OsPbXBd6PUYusEYR_7dBO"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_kGzp3ZlJzsamR8kImd8oyL" source="_9g8e0H1QSzubDLF4BbuygK" target="_KIp0D_18o9U9X5QK17TTzP">
+            <trigger xmi:type="uml:Trigger" xmi:id="_a2PMcx84m1lMiJ2R85XbZJ" name="depositingStopped" event="_MMfKLX6PS9IWWgMfw-SdKZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_WPmQWDSBB5ZVB8mcBdA4Xc" guard="_f1Uei68Pubr3N5YtAf4tM6" source="_9g8e0H1QSzubDLF4BbuygK" target="_ptWbIEEoO9lAhet7N9XKYv">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_f1Uei68Pubr3N5YtAf4tM6" name="the production order is complete">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_lNHm4O3qW7ieWtyPexgjVJ" name="the production order is complete">
+                <language>Natural language</language>
+                <body>the production order is complete</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_R-yUbxKi9FFmwSn48JbrID" source="_KIp0D_18o9U9X5QK17TTzP" target="_9g8e0H1QSzubDLF4BbuygK">
+            <trigger xmi:type="uml:Trigger" xmi:id="_iix-FkOXmMrLRzZx0KTN_b" name="depositingWorkingAgain" event="_pdUxkLWJnVf2Lq7X7FYXk4"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_wtQm04lNcInALhtZUr6PD9" source="_M2oB5rOeTYGNmfhuSfFznh" target="_Awnms49ELMJabL5ln7SCez">
+            <trigger xmi:type="uml:Trigger" xmi:id="_82yc0Ez4Q0NFqTuBlTfC8u" name="after (the recipe mixing duration)" event="_osoBUtKu4FuEQgzEZcE_bo"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_w6RzsfOM6cSQQ_vaWHMzbp" source="_M2oB5rOeTYGNmfhuSfFznh" target="_2TWp9JUWTHb1WLwERRJxIt">
+            <trigger xmi:type="uml:Trigger" xmi:id="_wyt8VWtwRqcpDhvquS41eM" name="mixerFault" event="_jX8eJHcXE9petg6z2xV7je"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_wpzlqEvkCWbU-GvXcP0C80" source="_Awnms49ELMJabL5ln7SCez" target="_VgWuMPHnivCVdaW-E_TCEq">
+            <trigger xmi:type="uml:Trigger" xmi:id="_k6towzGe61ShzipDCn8I0f" name="inspectionVerdict" event="_g6rnC40tbBqIB9OlIlFBMQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_CW66rKNcXoOoxGdsuJKWCr" guard="_nKNAKb-8OcpAUeDW5gQq8u" source="_VgWuMPHnivCVdaW-E_TCEq" target="_Z35VX_KjP1L6O1j476-Ir2">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_nKNAKb-8OcpAUeDW5gQq8u" name="the batch is marked good">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_mhhOz84RSBepAYvJWqOYRm" name="the batch is marked good">
+                <language>Natural language</language>
+                <body>the batch is marked good</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_58D0gTQHFS0-fh8T9hgCta" guard="_5Vo9MrLmWVqtSkEEdXE0mR" source="_VgWuMPHnivCVdaW-E_TCEq" target="_i7uFkZcscCdaMXvsW2GFpR">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_5Vo9MrLmWVqtSkEEdXE0mR" name="the batch is not marked good">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_uoCyddTo3e2CyyyBtkWBOh" name="the batch is not marked good">
+                <language>Natural language</language>
+                <body>the batch is not marked good</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_4rwEa4LWGdXisMXgoxE75o" source="_i7uFkZcscCdaMXvsW2GFpR" target="_M2oB5rOeTYGNmfhuSfFznh"/>
+          <transition xmi:type="uml:Transition" xmi:id="_D7XdAC9Nb3RtkF0wYeaHK0" source="_Z35VX_KjP1L6O1j476-Ir2" target="_48Da7FedM-o55MXj6-9lw2">
+            <trigger xmi:type="uml:Trigger" xmi:id="_obPOi0qkhN44OMAoikfM2L" name="batchCollected" event="_xQZJBqDYltw_AvX1j-M1kh"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_v81YYkrgObIBJjSP0oavPt" source="_Z35VX_KjP1L6O1j476-Ir2" target="_EthPe4QsJgPnN7v3DjsfV1">
+            <trigger xmi:type="uml:Trigger" xmi:id="_wNvDwD7zfY0iULAuUPDMxC" name="after (the maximum batter waiting time P3)" event="__CDIPd4ekhJT4roTggF0U_"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_r8Z3Oa4PDV9j8NlQq6saqX" source="_EthPe4QsJgPnN7v3DjsfV1" target="_48Da7FedM-o55MXj6-9lw2"/>
+          <transition xmi:type="uml:Transition" xmi:id="_wLVKLzUGa3txFyeoQHqiMY" source="_2TWp9JUWTHb1WLwERRJxIt" target="_48Da7FedM-o55MXj6-9lw2">
+            <trigger xmi:type="uml:Trigger" xmi:id="_kkTZqwOVBk39uhfaCQ2Icn" name="mixerOperational" event="_L80x5VZBYDkVmgDbq7Ef71"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QcLqMa7MZrxb7xUXzzAaxc" source="_48Da7FedM-o55MXj6-9lw2" target="_9g8e0H1QSzubDLF4BbuygK"/>
+          <subvertex xmi:type="uml:State" xmi:id="_9g8e0H1QSzubDLF4BbuygK" name="Idle">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Gf_YW8E2YPn-8I7M4CCGrC" name="clear the mixer context"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_KIp0D_18o9U9X5QK17TTzP" name="Holding">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_MWx7hL1Qfeqg3OYy8sTlWP" name="wait for depositing to be reported working again"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_z232ZlGt4p4xS-PhBuCw0x" name="hold new batches"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_M2oB5rOeTYGNmfhuSfFznh" name="Mixing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_I56eHsRIa18Ses8H5mQr6R" name="run the mixer and monitor batter consistency"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ltz6csKKz0fRejBBa_RAfE" name="start the recipe mixing timer"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_7ze_crvuNBy2fhiW0gZJne" name="signal mixing complete"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_Awnms49ELMJabL5ln7SCez" name="Inspecting">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_8wV_WTZBu8oiAi1TFbNNND" name="await the inspection verdict"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_0GNFZMHNY2IseXShyis8Fx" name="present the finished batch to the inspector"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_i7uFkZcscCdaMXvsW2GFpR" name="ReMixing">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UqvpJ_luz_HTC4U-aw8F2R" name="schedule a further mixing cycle"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_Z35VX_KjP1L6O1j476-Ir2" name="HandingOff">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_g245sITH68Ca7gaT3KAQvO" name="make the batch and its batch ID available to Thermal Processing"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Uorn4YKLrXfJPxMES6Yl4V" name="start the batter waiting timer"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_nYVD9JSqFLdihu_KuqOy81" name="stop the waiting timer"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_EthPe4QsJgPnN7v3DjsfV1" name="DiscardingAged">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_kGIe1Oh6zdBGQ8tAXSgdkc" name="dump the aged batter"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_pFooUuc0GAy-7lOGfK9vdj" name="record the discard with its reason and the batch ID"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_2TWp9JUWTHb1WLwERRJxIt" name="MixerFault">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_nEDFkDwN3LNSMwRR5PH1Xu" name="discard the batch in the mixer and wait for repair"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_kAiCHQgRuvs6I7phD9xAZS" name="stop the mixer and publish a fault event with the batch ID"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_KjiT15MXCU20c-0vUFUfWd" name="clear the fault"/>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_FEtjxEJ_KtaOVHK8Yo1VPC" name="Initial"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_VgWuMPHnivCVdaW-E_TCEq" name="Verdict" kind="choice"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_48Da7FedM-o55MXj6-9lw2" name="BatchEnd" kind="junction"/>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_ptWbIEEoO9lAhet7N9XKYv" name="Mixing closed"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_Nq0fd6YSY3hIJ_Q9xZrPt-" name="Reporting Behaviour">
+        <region xmi:type="uml:Region" xmi:id="_IJE2xJK3VC6S9FSvBjnvOq" name="Reporting">
+          <transition xmi:type="uml:Transition" xmi:id="_gRjmn-uc_U52k87lR2CmMp" source="_XYwb_CxVUU8E50lGUm6OmZ" target="_04EfTa9FiAFw2VCu031pqn"/>
+          <transition xmi:type="uml:Transition" xmi:id="_zkFNBfMgRTffYY2lEdVjRH" source="_04EfTa9FiAFw2VCu031pqn" target="_HwDQxniPfvUbqBBUCfqoG4">
+            <trigger xmi:type="uml:Trigger" xmi:id="_Iy5gxFp04U5gmHKo-DDQOZ" name="faultEvent" event="_WHo6_qr96lyUrdmMKmBBhx"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_vjxl0R8yB9KestRcN_NNlA" source="_04EfTa9FiAFw2VCu031pqn" target="_HwDQxniPfvUbqBBUCfqoG4">
+            <trigger xmi:type="uml:Trigger" xmi:id="_847hvcMYI_j8PWFlpUTVYr" name="waitingTimeEvent" event="_YQNdZm1Eu66KtNE3zVZWtP"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_mKv541nvVY6yYGziQXEJ2H" source="_HwDQxniPfvUbqBBUCfqoG4" target="_04EfTa9FiAFw2VCu031pqn"/>
+          <transition xmi:type="uml:Transition" xmi:id="_pk4aO5ZanpQC8EqpcPfHfO" source="_04EfTa9FiAFw2VCu031pqn" target="_s65ld1A26HD5ioPUSvWkr7">
+            <trigger xmi:type="uml:Trigger" xmi:id="_caxQ9qcu-849OnlZNqNgBt" name="after (the health status interval P4)" event="_w7xDCvMfzrtA4LqOl0kprD"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_f0NYrNwq-YgSwYjjc-MVl-" source="_s65ld1A26HD5ioPUSvWkr7" target="_04EfTa9FiAFw2VCu031pqn"/>
+          <subvertex xmi:type="uml:State" xmi:id="_04EfTa9FiAFw2VCu031pqn" name="Observing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_5wnlxQggrkVPUAXtSOTIji" name="maintain the batch ID association from intake until handoff"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_muG6STUG9Utcl1T22AyygG" name="subscribe to the slice event sources"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_HwDQxniPfvUbqBBUCfqoG4" name="RecordingEvent">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_nD2NOdBqvZ-AR7zGX6uFL8" name="record the log, warning, error or discard event"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_WetGsTb2kf1smdQf-MWVHH" name="attach the batch ID to the event"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_FyKiPGEAesr2LPL-mhnL8e" name="make the record available to Line Monitoring &amp; Health"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_s65ld1A26HD5ioPUSvWkr7" name="PublishingHealth">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_y3E6_nnBMu56JLE-IVVH37" name="publish the machine status heartbeat"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UD23gN2f5_9KmR2OaxTt_a" name="collect the health state of every function and device in the slice"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Ieq0ChwQ5IyPwlagInMMsw" name="restart the health status interval"/>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_XYwb_CxVUU8E50lGUm6OmZ" name="Initial"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_d-v1xvJxJVwCRHM9N7d6T2" name="Events">
+        <packagedElement xmi:type="uml:Signal" xmi:id="_ZXYupUM8FKAMpFRa9fY0uU" name="reservationResult"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_zmkaklmkOAGLwlb925HI9b" name="reservationResult" signal="_ZXYupUM8FKAMpFRa9fY0uU"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_Tvjx3K3_DXmLMN1rdgWPlF" name="doseResult"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_WZMRyT9UH0rAxfQXmgvDDM" name="doseResult" signal="_Tvjx3K3_DXmLMN1rdgWPlF"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_Q8XN0rU3H-GEQXyYX8Qy4U" name="doserOperational"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_N1FxITQqsRDEidYDZS7e94" name="doserOperational" signal="_Q8XN0rU3H-GEQXyYX8Qy4U"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_FwUrvn_BE5IZrnmpbAzdSO" name="loadingComplete"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="__OsPbXBd6PUYusEYR_7dBO" name="loadingComplete" signal="_FwUrvn_BE5IZrnmpbAzdSO"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_3xRihiWX0ZYPT2_xGFYxqH" name="depositingStopped"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_MMfKLX6PS9IWWgMfw-SdKZ" name="depositingStopped" signal="_3xRihiWX0ZYPT2_xGFYxqH"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_9TxXr8O49PzsTU7Ap4iohN" name="depositingWorkingAgain"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_pdUxkLWJnVf2Lq7X7FYXk4" name="depositingWorkingAgain" signal="_9TxXr8O49PzsTU7Ap4iohN"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_kO7v5-I_7LSYmCppkzgNKZ" name="mixerFault"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_jX8eJHcXE9petg6z2xV7je" name="mixerFault" signal="_kO7v5-I_7LSYmCppkzgNKZ"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_ekmOF_se3shv1LueIgiZk7" name="inspectionVerdict"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_g6rnC40tbBqIB9OlIlFBMQ" name="inspectionVerdict" signal="_ekmOF_se3shv1LueIgiZk7"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_lQjedPTiRpHMNfTj5Glr-p" name="batchCollected"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_xQZJBqDYltw_AvX1j-M1kh" name="batchCollected" signal="_lQjedPTiRpHMNfTj5Glr-p"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_xQM5FzidQUlmVemc0tikxN" name="mixerOperational"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_L80x5VZBYDkVmgDbq7Ef71" name="mixerOperational" signal="_xQM5FzidQUlmVemc0tikxN"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_EyC7U84nABzz7uE4XIZ_V6" name="faultEvent"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_WHo6_qr96lyUrdmMKmBBhx" name="faultEvent" signal="_EyC7U84nABzz7uE4XIZ_V6"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_ZBiuB0V9ypDqGf7vbXy-cf" name="waitingTimeEvent"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_YQNdZm1Eu66KtNE3zVZWtP" name="waitingTimeEvent" signal="_ZBiuB0V9ypDqGf7vbXy-cf"/>
+        <packagedElement xmi:type="uml:TimeEvent" xmi:id="_osoBUtKu4FuEQgzEZcE_bo" name="after (the recipe mixing duration)" isRelative="true">
+          <when xmi:type="uml:TimeExpression" xmi:id="_IXi58DQwpD_7Ibs9wz7_-H" name="the recipe mixing duration"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:TimeEvent" xmi:id="__CDIPd4ekhJT4roTggF0U_" name="after (the maximum batter waiting time P3)" isRelative="true">
+          <when xmi:type="uml:TimeExpression" xmi:id="_LWDNDusEYRB6foWOnIBcYH" name="the maximum batter waiting time P3"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:TimeEvent" xmi:id="_w7xDCvMfzrtA4LqOl0kprD" name="after (the health status interval P4)" isRelative="true">
+          <when xmi:type="uml:TimeExpression" xmi:id="_kxn6Hvc2TM9gBQXJZVsqRX" name="the health status interval P4"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:CallEvent" xmi:id="_YjkF3J18dJhdlMIYego334" name="startBatch" operation="_8FVqjXUu_fDq4aZidNtXja"/>
+      </packagedElement>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_fB2cYKlCjscJ78WmPvKJoo">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XQZg7C66WssUFIg9HnbA8B" source="http://www.eclipse.org/uml2/2.0.0/UML">
