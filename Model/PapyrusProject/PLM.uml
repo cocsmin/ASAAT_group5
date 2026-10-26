@@ -7,7 +7,7 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_0iSnQL83EfGK09TLxcHe5g">
       <importedPackage xmi:type="uml:Package" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
     </packageImport>
-    <packagedElement xmi:type="uml:Class" xmi:id="_GC5h0L85EfGK09TLxcHe5g" name="Production and Logistics Management (PLM)">
+    <packagedElement xmi:type="uml:Class" xmi:id="_GC5h0L85EfGK09TLxcHe5g" name="Production and Logistics Management (PLM)" classifierBehavior="_EK3N0NEvEfGZ44KCKtLvcQ">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_sBIsQ788EfGK09TLxcHe5g" name="plm-af-02" type="_QgI8wL85EfGK09TLxcHe5g" aggregation="composite" association="_sBIsQL88EfGK09TLxcHe5g">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3jhC8L8_EfGK09TLxcHe5g" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3jhC8b8_EfGK09TLxcHe5g" name="LiteralUnlimitedNatural1" value="1"/>
@@ -80,6 +80,92 @@
         <end xmi:type="uml:ConnectorEnd" xmi:id="_kKUb0L9OEfGK09TLxcHe5g" role="_Y2-1cL9FEfGK09TLxcHe5g"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_kKUb0b9OEfGK09TLxcHe5g" partWithPort="_uLlxob88EfGK09TLxcHe5g" role="_9B6SYL9MEfGK09TLxcHe5g"/>
       </ownedConnector>
+      <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_EK3N0NEvEfGZ44KCKtLvcQ" name="StateMachine22">
+        <region xmi:type="uml:Region" xmi:id="_IJAeYNEvEfGZ44KCKtLvcQ" name="Region1">
+          <transition xmi:type="uml:Transition" xmi:id="_2FkRoNEvEfGZ44KCKtLvcQ" source="_d0laANEvEfGZ44KCKtLvcQ" target="_hhS8UNEvEfGZ44KCKtLvcQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_13GvUNFlEfGZ44KCKtLvcQ" name="request recipe target data"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_3RcO4NEvEfGZ44KCKtLvcQ" source="_hhS8UNEvEfGZ44KCKtLvcQ" target="_THm58NEvEfGZ44KCKtLvcQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_d1IHkNFmEfGZ44KCKtLvcQ" name="send Production order and recipe targets to BAT"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_P0d4wNEwEfGZ44KCKtLvcQ" source="_m06yENEvEfGZ44KCKtLvcQ" target="_xOgcENEvEfGZ44KCKtLvcQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_M1nskNExEfGZ44KCKtLvcQ" guard="_tP5pwNE1EfGZ44KCKtLvcQ" source="_xOgcENEvEfGZ44KCKtLvcQ" target="_GJTlkNExEfGZ44KCKtLvcQ">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_tP5pwNE1EfGZ44KCKtLvcQ" name="">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_tP634NE1EfGZ44KCKtLvcQ">
+                <language>Natural language</language>
+                <body>stock >= requested</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_OS9NQNExEfGZ44KCKtLvcQ" guard="_t4cwINE4EfGZ44KCKtLvcQ" source="_xOgcENEvEfGZ44KCKtLvcQ" target="_JCk4wNExEfGZ44KCKtLvcQ">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_t4cwINE4EfGZ44KCKtLvcQ" name="">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_t4cwIdE4EfGZ44KCKtLvcQ">
+                <language>Natural language</language>
+                <body>stock &lt; requested</body>
+              </specification>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_O2x0wNFtEfGZ44KCKtLvcQ" name="publish missing ingredients error; / return insufficient stock result to BAT"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_U62HQNExEfGZ44KCKtLvcQ" source="_JCk4wNExEfGZ44KCKtLvcQ" target="_m06yENEvEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_lOfdoNFtEfGZ44KCKtLvcQ" name="" event="_nt1N4NFtEfGZ44KCKtLvcQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_hXZukNExEfGZ44KCKtLvcQ" source="_GJTlkNExEfGZ44KCKtLvcQ" target="_pexBANFiEfGZ44KCKtLvcQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_leI6cNExEfGZ44KCKtLvcQ" source="_cQ_1cNExEfGZ44KCKtLvcQ" target="_THm58NEvEfGZ44KCKtLvcQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_fezMYNFsEfGZ44KCKtLvcQ" name="send reservation result confirmation to BAT"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_NtXMENFhEfGZ44KCKtLvcQ" source="_QpKhkNEvEfGZ44KCKtLvcQ" target="_d0laANEvEfGZ44KCKtLvcQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_tFJHQNFhEfGZ44KCKtLvcQ" source="_THm58NEvEfGZ44KCKtLvcQ" target="_m06yENEvEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_57fuoNFhEfGZ44KCKtLvcQ" name="Trigger1" event="_8NQ88NFhEfGZ44KCKtLvcQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_MzONINFjEfGZ44KCKtLvcQ" source="_pexBANFiEfGZ44KCKtLvcQ" target="_cQ_1cNExEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_2XZKMNFrEfGZ44KCKtLvcQ" name="Trigger1" event="_4kmooNFrEfGZ44KCKtLvcQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_RuMAYNFlEfGZ44KCKtLvcQ" source="_m06yENEvEfGZ44KCKtLvcQ" target="_X-BRoNFjEfGZ44KCKtLvcQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ytcIUNFoEfGZ44KCKtLvcQ" name="send reservation response: use staged ingredients"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_mrwfINFoEfGZ44KCKtLvcQ" name="Trigger1" event="_o0aNsNFoEfGZ44KCKtLvcQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_T2WmwNFlEfGZ44KCKtLvcQ" source="_X-BRoNFjEfGZ44KCKtLvcQ" target="_THm58NEvEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_--0oINFtEfGZ44KCKtLvcQ" name="Trigger1" event="_A-30UNFuEfGZ44KCKtLvcQ"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_QpKhkNEvEfGZ44KCKtLvcQ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_THm58NEvEfGZ44KCKtLvcQ" name="Idle">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_DWkiwNEyEfGZ44KCKtLvcQ" name="await incoming ingredient requests"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="__dKBMNExEfGZ44KCKtLvcQ" name="set system state to ready"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_d0laANEvEfGZ44KCKtLvcQ" name="Scheduling_Order">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__IQ50NEyEfGZ44KCKtLvcQ" name="assign schedule ID and set order status to pending"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4RG0wNEyEfGZ44KCKtLvcQ" name="create new production order"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_hhS8UNEvEfGZ44KCKtLvcQ" name="Fetching_recipe_targets">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_ukqIINEzEfGZ44KCKtLvcQ" name="extract target parameters for order"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_cPLloNEzEfGZ44KCKtLvcQ" name="query recipe database"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_m06yENEvEfGZ44KCKtLvcQ" name="Veryfing_Inventory">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_kdmjINE0EfGZ44KCKtLvcQ" name="calculate requested versus available stock"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_hHsXQNE0EfGZ44KCKtLvcQ" name="enforce organic ingredient rule"/>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_xOgcENEvEfGZ44KCKtLvcQ" name="StockCheck" kind="choice"/>
+          <subvertex xmi:type="uml:State" xmi:id="_GJTlkNExEfGZ44KCKtLvcQ" name="Reserving_Ingredients">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4mwF4NE4EfGZ44KCKtLvcQ" name="lock required ingredient quantities"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_JCk4wNExEfGZ44KCKtLvcQ" name="Holding_Order">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_bxFFoNE5EfGZ44KCKtLvcQ" name="await inventory replenishment"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_YvXoINE5EfGZ44KCKtLvcQ" name="suspend active production order"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_cQ_1cNExEfGZ44KCKtLvcQ" name="Updating_Inventory">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_OzhqENE5EfGZ44KCKtLvcQ" name="compile order and recipe targets"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_L3Np8NE5EfGZ44KCKtLvcQ" name="deduct withdrawn quantities from total warehouse stock"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_pexBANFiEfGZ44KCKtLvcQ" name="Waiting_For_Withdrawal">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_oG6uMNFrEfGZ44KCKtLvcQ" name="await physical ingredient retrieval"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_X-BRoNFjEfGZ44KCKtLvcQ" name="Communication_Suspended">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Qz5ToNFrEfGZ44KCKtLvcQ" name="monitor warehouse responsiveness"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_OQC20NFrEfGZ44KCKtLvcQ" name="log WMS unresponsiveness"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_UqfKsNFrEfGZ44KCKtLvcQ" name="restore warehouse communication"/>
+          </subvertex>
+        </region>
+      </ownedBehavior>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_QGj_IL85EfGK09TLxcHe5g" name="Order and Scheduling Manager (PLM-AF-01)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_cFXAgL9GEfGK09TLxcHe5g" name="Ingredient request and reservation result" aggregation="composite"/>
@@ -171,7 +257,7 @@
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_DkhykNCrEfG-6PPhNNbUSQ" name="open inventory database in write mode"/>
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_NFSXINCrEfG-6PPhNNbUSQ" name="save transaction log"/>
           </subvertex>
-          <subvertex xmi:type="uml:Pseudostate" xmi:id="_GGtccNCgEfG-6PPhNNbUSQ" name="Choice8" kind="choice"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_GGtccNCgEfG-6PPhNNbUSQ" name="StockCheck" kind="choice"/>
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_WtIcINCgEfG-6PPhNNbUSQ" name="Initial"/>
         </region>
       </ownedBehavior>
@@ -332,6 +418,17 @@
     <packagedElement xmi:type="uml:Signal" xmi:id="_tTu0kNCrEfG-6PPhNNbUSQ" name="Internal stock request"/>
     <packagedElement xmi:type="uml:SignalEvent" xmi:id="_oyoEENCvEfG-6PPhNNbUSQ" name="" signal="_rFfekNCvEfG-6PPhNNbUSQ"/>
     <packagedElement xmi:type="uml:Signal" xmi:id="_rFfekNCvEfG-6PPhNNbUSQ" name="Withdrawal confirmation"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_crjOANEyEfGZ44KCKtLvcQ" name="" signal="_i-ucQNEyEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_i-ucQNEyEfGZ44KCKtLvcQ" name="Ingredient request"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_8NQ88NFhEfGZ44KCKtLvcQ" name="SignalEvent1" signal="_i-ucQNEyEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_o0aNsNFoEfGZ44KCKtLvcQ" name="SignalEvent2" signal="_qqdwYNFoEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_qqdwYNFoEfGZ44KCKtLvcQ" name="wms_timeout"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_4kmooNFrEfGZ44KCKtLvcQ" name="" signal="_8KhmcNFrEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_8KhmcNFrEfGZ44KCKtLvcQ" name="Withdrawal confirmation"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_nt1N4NFtEfGZ44KCKtLvcQ" name="SignalEvent3" signal="_pF07kNFtEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_pF07kNFtEfGZ44KCKtLvcQ" name="Restock signal"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_A-30UNFuEfGZ44KCKtLvcQ" name="" signal="_DZmxYNFuEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_DZmxYNFuEfGZ44KCKtLvcQ" name="wms_responsive_confirmation"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_0cBAIL83EfGK09TLxcHe5g">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_0cI78L83EfGK09TLxcHe5g" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#/"/>
