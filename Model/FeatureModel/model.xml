@@ -119,17 +119,15 @@
 					<feature mandatory="true" name="FIN-FEAT-22 Band-state response"/>
 				</and>
 			</and>
-			<and mandatory="true" name="MON-FEAT-00 Line Monitoring &amp; Health">
+			<and mandatory="true" name="MON-FEAT-00 Line Monitoring &amp; Health + Band Transport">
 				<feature mandatory="true" name="MON-FEAT-01 Health Monitoring"/>
-				<feature mandatory="true" name="MON-FEAT-02 Event &amp; Traceability Logging"/>
+				<feature mandatory="true" name="MON-FEAT-02 Traceability &amp; Event Logging"/>
 				<feature mandatory="true" name="MON-FEAT-03 Maintenance Management"/>
-				<feature mandatory="true" name="MON-FEAT-07 Container Supervision"/>
-			</and>
-			<and mandatory="true" name="MON-FEAT-09 Band Transport">
-				<feature mandatory="true" name="MON-FEAT-04 Band Coordination"/>
-				<feature mandatory="true" name="MON-FEAT-05 Band Speed Supervision"/>
-				<feature mandatory="true" name="MON-FEAT-06 Pan Position &amp; Spacing Tracking"/>
-				<feature mandatory="true" name="MON-FEAT-08 Transport Fault Handling"/>
+				<and mandatory="true" name="MON-FEAT-04 Band Coordination">
+					<feature mandatory="true" name="MON-FEAT-05 Band Speed Supervision"/>
+					<feature mandatory="true" name="MON-FEAT-06 Pan Position &amp; Spacing Tracking"/>
+				</and>
+				<feature mandatory="true" name="MON-FEAT-07 Container Recovery"/>
 			</and>
 			<and mandatory="true" name="PLM-FEAT-00 Production &amp; Logistics Management">
 				<graphics key="collapsed" value="false"/>

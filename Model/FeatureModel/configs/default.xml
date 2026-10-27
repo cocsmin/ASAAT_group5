@@ -75,16 +75,14 @@
 	<feature manual="selected" name="FIN-FEAT-20 Line health and coordination"/>
 	<feature manual="selected" name="FIN-FEAT-21 Health reporting"/>
 	<feature manual="selected" name="FIN-FEAT-22 Band-state response"/>
-	<feature manual="selected" name="MON-FEAT-00 Line Monitoring &amp; Health"/>
+	<feature manual="selected" name="MON-FEAT-00 Line Monitoring &amp; Health + Band Transport"/>
 	<feature manual="selected" name="MON-FEAT-01 Health Monitoring"/>
-	<feature manual="selected" name="MON-FEAT-02 Event &amp; Traceability Logging"/>
+	<feature manual="selected" name="MON-FEAT-02 Traceability &amp; Event Logging"/>
 	<feature manual="selected" name="MON-FEAT-03 Maintenance Management"/>
-	<feature manual="selected" name="MON-FEAT-07 Container Supervision"/>
-	<feature manual="selected" name="MON-FEAT-09 Band Transport"/>
 	<feature manual="selected" name="MON-FEAT-04 Band Coordination"/>
 	<feature manual="selected" name="MON-FEAT-05 Band Speed Supervision"/>
 	<feature manual="selected" name="MON-FEAT-06 Pan Position &amp; Spacing Tracking"/>
-	<feature manual="selected" name="MON-FEAT-08 Transport Fault Handling"/>
+	<feature manual="selected" name="MON-FEAT-07 Container Recovery"/>
 	<feature manual="selected" name="PLM-FEAT-00 Production &amp; Logistics Management"/>
 	<feature manual="selected" name="PLM-FEAT-01 Order and Scheduling"/>
 	<feature manual="selected" name="PLM-FEAT-02 Production order creation and holding"/>
