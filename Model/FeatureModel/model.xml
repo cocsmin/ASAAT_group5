@@ -124,18 +124,12 @@
 				<feature mandatory="true" name="MON-FEAT-02 Event &amp; Traceability Logging"/>
 				<feature mandatory="true" name="MON-FEAT-03 Maintenance Management"/>
 				<feature mandatory="true" name="MON-FEAT-07 Container Supervision"/>
-				<feature mandatory="true" name="Message Bus"/>
-				<feature mandatory="true" name="Log Database"/>
-				<feature mandatory="true" name="Overseer Dashboard"/>
 			</and>
-			<and mandatory="true" name="Band Transport">
-				<feature mandatory="true" name="Section Control"/>
-				<feature mandatory="true" name="Speed Monitoring"/>
-				<feature mandatory="true" name="Transport Fault Handling"/>
-				<feature mandatory="true" name="Conveyor Controller"/>
-				<feature mandatory="true" name="Conveyor Drive"/>
-				<feature mandatory="true" name="Speed Sensor"/>
-				<feature mandatory="true" name="Section Status Sensor"/>
+			<and mandatory="true" name="MON-FEAT-09 Band Transport">
+				<feature mandatory="true" name="MON-FEAT-04 Band Coordination"/>
+				<feature mandatory="true" name="MON-FEAT-05 Band Speed Supervision"/>
+				<feature mandatory="true" name="MON-FEAT-06 Pan Position &amp; Spacing Tracking"/>
+				<feature mandatory="true" name="MON-FEAT-08 Transport Fault Handling"/>
 			</and>
 			<and mandatory="true" name="PLM-FEAT-00 Production &amp; Logistics Management">
 				<graphics key="collapsed" value="false"/>

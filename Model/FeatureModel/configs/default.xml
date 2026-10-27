@@ -80,17 +80,11 @@
 	<feature manual="selected" name="MON-FEAT-02 Event &amp; Traceability Logging"/>
 	<feature manual="selected" name="MON-FEAT-03 Maintenance Management"/>
 	<feature manual="selected" name="MON-FEAT-07 Container Supervision"/>
-	<feature manual="selected" name="Message Bus"/>
-	<feature manual="selected" name="Log Database"/>
-	<feature manual="selected" name="Overseer Dashboard"/>
-	<feature manual="selected" name="Band Transport"/>
-	<feature manual="selected" name="Section Control"/>
-	<feature manual="selected" name="Speed Monitoring"/>
-	<feature manual="selected" name="Transport Fault Handling"/>
-	<feature manual="selected" name="Conveyor Controller"/>
-	<feature manual="selected" name="Conveyor Drive"/>
-	<feature manual="selected" name="Speed Sensor"/>
-	<feature manual="selected" name="Section Status Sensor"/>
+	<feature manual="selected" name="MON-FEAT-09 Band Transport"/>
+	<feature manual="selected" name="MON-FEAT-04 Band Coordination"/>
+	<feature manual="selected" name="MON-FEAT-05 Band Speed Supervision"/>
+	<feature manual="selected" name="MON-FEAT-06 Pan Position &amp; Spacing Tracking"/>
+	<feature manual="selected" name="MON-FEAT-08 Transport Fault Handling"/>
 	<feature manual="selected" name="PLM-FEAT-00 Production &amp; Logistics Management"/>
 	<feature manual="selected" name="PLM-FEAT-01 Order and Scheduling"/>
 	<feature manual="selected" name="PLM-FEAT-02 Production order creation and holding"/>
