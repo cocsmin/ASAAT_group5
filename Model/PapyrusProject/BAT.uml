@@ -986,13 +986,19 @@
         <packagedElement xmi:type="uml:Signal" xmi:id="_ZBiuB0V9ypDqGf7vbXy-cf" name="waitingTimeEvent"/>
         <packagedElement xmi:type="uml:SignalEvent" xmi:id="_YQNdZm1Eu66KtNE3zVZWtP" name="waitingTimeEvent" signal="_ZBiuB0V9ypDqGf7vbXy-cf"/>
         <packagedElement xmi:type="uml:TimeEvent" xmi:id="_osoBUtKu4FuEQgzEZcE_bo" name="after (the recipe mixing duration)" isRelative="true">
-          <when xmi:type="uml:TimeExpression" xmi:id="_IXi58DQwpD_7Ibs9wz7_-H" name="the recipe mixing duration"/>
+          <when xmi:type="uml:TimeExpression" xmi:id="_IXi58DQwpD_7Ibs9wz7_-H" name="the recipe mixing duration">
+            <expr xmi:type="uml:LiteralString" xmi:id="_BFnws1ngmJd2Z2bIP9xm_a" value="the recipe mixing duration"/>
+          </when>
         </packagedElement>
         <packagedElement xmi:type="uml:TimeEvent" xmi:id="__CDIPd4ekhJT4roTggF0U_" name="after (the maximum batter waiting time P3)" isRelative="true">
-          <when xmi:type="uml:TimeExpression" xmi:id="_LWDNDusEYRB6foWOnIBcYH" name="the maximum batter waiting time P3"/>
+          <when xmi:type="uml:TimeExpression" xmi:id="_LWDNDusEYRB6foWOnIBcYH" name="the maximum batter waiting time P3">
+            <expr xmi:type="uml:LiteralString" xmi:id="_RSCp7vyralKBp1uZ1nWB3Y" value="the maximum batter waiting time P3"/>
+          </when>
         </packagedElement>
         <packagedElement xmi:type="uml:TimeEvent" xmi:id="_w7xDCvMfzrtA4LqOl0kprD" name="after (the health status interval P4)" isRelative="true">
-          <when xmi:type="uml:TimeExpression" xmi:id="_kxn6Hvc2TM9gBQXJZVsqRX" name="the health status interval P4"/>
+          <when xmi:type="uml:TimeExpression" xmi:id="_kxn6Hvc2TM9gBQXJZVsqRX" name="the health status interval P4">
+            <expr xmi:type="uml:LiteralString" xmi:id="_8STuT6e3eaT1dnJroCV7F3" value="the health status interval P4"/>
+          </when>
         </packagedElement>
         <packagedElement xmi:type="uml:CallEvent" xmi:id="_YjkF3J18dJhdlMIYego334" name="startBatch" operation="_8FVqjXUu_fDq4aZidNtXja"/>
       </packagedElement>
