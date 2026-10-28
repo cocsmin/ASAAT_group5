@@ -673,136 +673,136 @@
       <packagedElement xmi:type="uml:Class" xmi:id="_9Jgu8qDkTm3XOEcCNfj-b2" name="THM-REQ-01"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_IFkQ4UYZX83SQQb2KdsCuj" name="THM-REQ-02"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_y19ugeE_d9aBvwjyOIDhgx" name="THM-REQ-03"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_KYlK7OwbemyVf1v8XvhrY9" name="THM-REQ-04" clientDependency="_3Jth8DbMLP4gaS1Z7SzvGD"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_sP8i2z_DrOCrAtmnrFvlwl" name="THM-REQ-05" clientDependency="_G_P-92BfSg4Cl419W5OWGs"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_9zwd6kRWwIocsXOXU9d-AL" name="THM-REQ-06" clientDependency="_9deY8D7DxtZOfbAKCJFViB"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_KYlK7OwbemyVf1v8XvhrY9" name="THM-REQ-04"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_sP8i2z_DrOCrAtmnrFvlwl" name="THM-REQ-05"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_9zwd6kRWwIocsXOXU9d-AL" name="THM-REQ-06"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_hM-uWQASJ6fdhC06v__Wj2" name="THM-REQ-07"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_qwFgO5fr75Ib4oj2PxcOg2" name="THM-REQ-08" clientDependency="_8WNLyT2o2EABsEoKi2mf9e"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_8J1e5CAN4QfSEqrZi60VcM" name="THM-REQ-09" clientDependency="_Dw3U8bj7XlYk-JMB6SiwYy"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_5okMhwcgETRasOz0mlZCg6" name="THM-REQ-10" clientDependency="_edWz3M5oycyFQLr2J_AmkZ"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_qt43vnF_9VHX7KVuaqT2jy" name="THM-REQ-11" clientDependency="_9JZUp4YoR4XxOiwxHdf2FW"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_K5_zX_qJqckGWnanlmNQU0" name="THM-REQ-12" clientDependency="_MvMuibqp2T1WPqVEMQ7ST3"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_qwFgO5fr75Ib4oj2PxcOg2" name="THM-REQ-08"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_8J1e5CAN4QfSEqrZi60VcM" name="THM-REQ-09"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_5okMhwcgETRasOz0mlZCg6" name="THM-REQ-10"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_qt43vnF_9VHX7KVuaqT2jy" name="THM-REQ-11"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_K5_zX_qJqckGWnanlmNQU0" name="THM-REQ-12"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_2wmZiYWzEEGWFtPuiDSjgk" name="THM-REQ-13"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_aPsKTa6luDLBZvmAcADqe-" name="THM-REQ-14"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_NLbKgBrI0ctdbgpynQtNPR" name="THM-REQ-15"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_3G_86TS1Mg5zEDa-xch1T5" name="THM-REQ-16"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_1Oroqkmn53lVhIg1Mxp973" name="THM-REQ-17" clientDependency="_Pz8BqCMWxr-vr3AlH5-2B0"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_se4hLp7O6XE473QyG_rCHw" name="THM-REQ-18" clientDependency="_recngYYhzxzFgWpCFcQGJP"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_QSnWMv2W6TYXr9GUF0ugZ5" name="THM-REQ-19" clientDependency="_Zgr-T02SKZfOdf1YG_e1g4"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_1Oroqkmn53lVhIg1Mxp973" name="THM-REQ-17"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_se4hLp7O6XE473QyG_rCHw" name="THM-REQ-18"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_QSnWMv2W6TYXr9GUF0ugZ5" name="THM-REQ-19"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_tMD8IxICy-Ld9KcfUZIBGr" name="THM-REQ-20"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_qR7i1xY1x-FqBWdVNgl0kS" name="THM-REQ-21"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_f3Fd38Dov4rfy6i8gqBCZ3" name="THM-REQ-22"/>
       <packagedElement xmi:type="uml:Class" xmi:id="__LCgmJQ5_quP3Ae0N4TFfa" name="THM-REQ-23"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_YBYbx0lXfmMiX9mJqraNPN" name="THM-REQ-24"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_PJwkMIHVDgijL9Fj03j_i9" name="THM-REQ-25" clientDependency="_597-Sdcg4ljJ30qW0Ae37p _p5KoEcjuvVS1DmgkAwlYcL _xXXrbyjC-GYs1jxfgFcNSs"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_PJwkMIHVDgijL9Fj03j_i9" name="THM-REQ-25"/>
       <packagedElement xmi:type="uml:Class" xmi:id="__YmRRmUnYa8sjX3Ba7Yp3U" name="THM-REQ-26"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_C7N_6SjAExmQVfPHN14Eey" name="THM-REQ-27" clientDependency="_v9aEc5-DcVlizaiIAlLrXr"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Os1S_Ntqdle_cCnpTTNV30" name="THM-REQ-28" clientDependency="_w5jgSXLP-4-seiN7llVd3F"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_4aV_RwBLhPy4k3pKJs0mGD" name="THM-REQ-29" clientDependency="_Aly0tcICXRXoGeF5qrjWfP"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_SHBqfQS_OdomOxrYC3iOzs" name="THM-REQ-30" clientDependency="__RAb_6MwAl82-yLloH5Hc8"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Awx0ek1BDi_SAww8l4p4sX" name="THM-REQ-31" clientDependency="_du6w5J9hHtPEMgGpcW2507"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_C7N_6SjAExmQVfPHN14Eey" name="THM-REQ-27"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Os1S_Ntqdle_cCnpTTNV30" name="THM-REQ-28"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_4aV_RwBLhPy4k3pKJs0mGD" name="THM-REQ-29"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_SHBqfQS_OdomOxrYC3iOzs" name="THM-REQ-30"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Awx0ek1BDi_SAww8l4p4sX" name="THM-REQ-31"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_rzPARlM2hkbwCfvTN9GfYO" name="THM-REQ-32"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_gfKfwgHmzwtYh_OtoPJRIM" name="THM-REQ-33" clientDependency="_JQLywK_XxxuG4qv04HeWjh"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Y3e2Vb9UvTsFms0DPMN3Sf" name="THM-REQ-34" clientDependency="_rxeOMhdgjn8-VLZHBz251V"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Mv1witVSU4vP9GwyvrAYmt" name="THM-REQ-35" clientDependency="_HJxJh_9Y0iC-O9m7KA3hpL"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_gfKfwgHmzwtYh_OtoPJRIM" name="THM-REQ-33"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Y3e2Vb9UvTsFms0DPMN3Sf" name="THM-REQ-34"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Mv1witVSU4vP9GwyvrAYmt" name="THM-REQ-35"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_B9X3XmtWd7_Eo1Y5wrX5Em" name="THM-REQ-36"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Uu18kwRb4k1h1geAbavV1u" name="THM-REQ-37" clientDependency="_ra4tovvd-yYh01Hf0Ptpyw"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_eSThUVU6fDRfRd6pIAbXwn" name="THM-REQ-38" clientDependency="_Yk43MZKFz_9d_lcdsSs3yD"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_PVzLj7Yv85JnSjrviTc-hs" name="THM-REQ-39" clientDependency="_v7wdeWfF4-Al4MBb9ayxxr"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Uu18kwRb4k1h1geAbavV1u" name="THM-REQ-37"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_eSThUVU6fDRfRd6pIAbXwn" name="THM-REQ-38"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_PVzLj7Yv85JnSjrviTc-hs" name="THM-REQ-39"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_l6k5EPAd7YaGJ0W23NMqQB" name="THM-REQ-40"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="__oS7LtMOtCre-ieS8DzeSx" name="THM-REQ-41" clientDependency="_kz8MoFTyuXwu58jar0ZF6i"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_A11wbC-bcJ0c82-DHUL3Cr" name="THM-REQ-42" clientDependency="_vHkLDauEuFGsLNz-2BK4wj"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_VJA7lWbT8KYmbR00RcQlnr" name="THM-REQ-43" clientDependency="_TW7lxsodehQEdeyRabI1XC _goqfCemkDWfq5gne4HtnMi"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_J_75cYsrKrvQrPr3ir2Nct" name="THM-REQ-44" clientDependency="_1sWUN06N3NpvWulludb6XG"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_BtY_G5OtN1aCtkK1UXkruj" name="THM-REQ-45" clientDependency="_gGblPLYe2Gtb4H5CP0OCnF"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__oS7LtMOtCre-ieS8DzeSx" name="THM-REQ-41"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_A11wbC-bcJ0c82-DHUL3Cr" name="THM-REQ-42"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_VJA7lWbT8KYmbR00RcQlnr" name="THM-REQ-43"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_J_75cYsrKrvQrPr3ir2Nct" name="THM-REQ-44"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_BtY_G5OtN1aCtkK1UXkruj" name="THM-REQ-45"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_l58CPQsGW-2MFKlRB2qUQG" name="THM-REQ-46"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_AS8765EMhG01F4ehO8RzxV" name="THM-REQ-47" clientDependency="_YJorCUYSmeusQGcPPNi8DW"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_8uM40o3EW0_yTxLSDIOwOq" name="THM-REQ-48" clientDependency="_WBDPB9dcvJ6xyvDkU3zCip"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_AS8765EMhG01F4ehO8RzxV" name="THM-REQ-47"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_8uM40o3EW0_yTxLSDIOwOq" name="THM-REQ-48"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_qS4IvNsM7qLlcoaJhaH9iX" name="THM-REQ-49"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_8WofiBjezUMyJpcoO2qd3b" name="THM-REQ-50" clientDependency="__1X_hsmlFuejRjYkTIedQg"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_a5L6qKdzHTc3IlzWj93_mj" name="THM-REQ-51" clientDependency="_gm8OHeusz1CrRx64feaLPS"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_lxTCRgOqwqtXo_HYa8sTgi" name="THM-REQ-52" clientDependency="_TvxicRgfWjp7F3A6mVHQIv"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_8WofiBjezUMyJpcoO2qd3b" name="THM-REQ-50"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_a5L6qKdzHTc3IlzWj93_mj" name="THM-REQ-51"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_lxTCRgOqwqtXo_HYa8sTgi" name="THM-REQ-52"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_w7yRhl1g8t5R0wbewn5GaZ" name="THM-REQ-53"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_FcxITRdaukJgvjGt0PNmlW" name="THM-REQ-54" clientDependency="_ConiZiBkJehRB5DqadyL7n"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_fZyxL60n2_TvZ4VRJyKVwL" name="THM-REQ-55" clientDependency="_3B4IMPDoaAqWj8JwgVcgux"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_oxCUZfcsazNdfNCtmpBRA4" name="THM-REQ-56" clientDependency="_5QNYPNPNdDEjP95Ph7mS_P"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_FcxITRdaukJgvjGt0PNmlW" name="THM-REQ-54"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_fZyxL60n2_TvZ4VRJyKVwL" name="THM-REQ-55"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_oxCUZfcsazNdfNCtmpBRA4" name="THM-REQ-56"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_U0pesySANq2jym-hj1-48c" name="THM-REQ-57"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_7i--A45bhI4uN2pS2X3g_U" name="THM-REQ-58" clientDependency="_qtTvTYgTWgK3i28sMmapoh"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_RUCja6QQL7yvdROQSpoA1e" name="THM-REQ-59" clientDependency="_Peh9npr6tlWT2bdj68BmHS"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_HUhW42Y8Xb1o3HFlZ4XcdR" name="THM-REQ-60" clientDependency="_4QA9KhJA0IjIqm_IhgtcHg"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_btDjgIFjZVpsXR7GbKW0Aa" name="THM-REQ-61" clientDependency="_0qXvyhxV2nNlRHt5nc7KxR"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Erw-PNo-ANcI9dEEkLaLaE" name="THM-REQ-62" clientDependency="_kQVSH9vCXRVAkccAN63KcT"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_7i--A45bhI4uN2pS2X3g_U" name="THM-REQ-58"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_RUCja6QQL7yvdROQSpoA1e" name="THM-REQ-59"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_HUhW42Y8Xb1o3HFlZ4XcdR" name="THM-REQ-60"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_btDjgIFjZVpsXR7GbKW0Aa" name="THM-REQ-61"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Erw-PNo-ANcI9dEEkLaLaE" name="THM-REQ-62"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_LK2c-YKT41JToXLiUK5Hx-" name="THM-REQ-63"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_3eFu0nowhZ1nUbfg6MI0Rm" name="THM-REQ-64" clientDependency="_tLgCPWu-JHj6FLhAz8V1Fd"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_3eFu0nowhZ1nUbfg6MI0Rm" name="THM-REQ-64"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_SuT-1R3IyrJmNxnMndGtkn" name="THM-REQ-65"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_LldUMLSoyA41bs319uIHpC" name="THM-REQ-66"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_zQZ1uwLX5ShPds52agVT79" name="THM-REQ-67"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_vZvXUIosjlUZZQe9yvyiEt" name="THM-REQ-68" clientDependency="_eSlGLHvesYlh8f_VGFaYzC"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_M_UTQXUzqCPhz8qP_fq-zL" name="THM-REQ-69" clientDependency="_fSRrE7l9KHDpUHkL_QTDyS"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_b6nuDkdaSqtaJJri5V6TFN" name="THM-REQ-70" clientDependency="_XOlSpna7fyObSnSwd9Iuyn"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_vZvXUIosjlUZZQe9yvyiEt" name="THM-REQ-68"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_M_UTQXUzqCPhz8qP_fq-zL" name="THM-REQ-69"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_b6nuDkdaSqtaJJri5V6TFN" name="THM-REQ-70"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_Kgt5KuuOwKKxuqn08AJjuj" name="THM-REQ-71"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_HqAO3Pmnj0wKc2IvAkSkcJ" name="THM-REQ-72" clientDependency="_jih7tKw9lN3aD6KMgEkm4U"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_l1CCYTe6OXlKdj7qznmQeS" name="THM-REQ-73" clientDependency="_7LfxZVWKNqmxRtsGoeUx9H"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_GsKwHM7W1QXtxUVOAB-y-p" name="THM-REQ-74" clientDependency="_l1mnXEKtO5CjBEE2hPRUtF __EyABodviIhBbUVkRWWVGO"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_6k5nr7N3F_w2I3rNiKJBzN" name="THM-REQ-75" clientDependency="_69G4NWeVLet4vlDPLQfaUi"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_dgcv_gUHVMgLwXQj7vPdk8" name="THM-REQ-76" clientDependency="_lJ0NZfuySoG22MGsoM0zLN _QJDgRUty6m8QsCtKqPUbgA _sGgy7vMiCPHnn37RPvJR7B"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_NeatzRpO7tcXO28PPS4-hY" name="THM-REQ-77" clientDependency="_ElpSQtF_RDKEMp29jhfN8T"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_c_RNwuMQt8gUNg7qITtYvC" name="THM-REQ-78" clientDependency="_dja59-fYe_W6AJrfRTGYD5 _LD77s3nxRSfWWbf53WtNe8 _S_gJskzHceo8mIX7DqyNR7"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_HqAO3Pmnj0wKc2IvAkSkcJ" name="THM-REQ-72"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_l1CCYTe6OXlKdj7qznmQeS" name="THM-REQ-73"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_GsKwHM7W1QXtxUVOAB-y-p" name="THM-REQ-74"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_6k5nr7N3F_w2I3rNiKJBzN" name="THM-REQ-75"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dgcv_gUHVMgLwXQj7vPdk8" name="THM-REQ-76"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_NeatzRpO7tcXO28PPS4-hY" name="THM-REQ-77"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_c_RNwuMQt8gUNg7qITtYvC" name="THM-REQ-78"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_jqNwW5GIg1oKMtkF8cM5LR" name="Imported Requirements (FIN)">
       <packagedElement xmi:type="uml:Class" xmi:id="_l1SSvrnYBKWMuwTllMO5wp" name="FIN-REQ-02"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_4iwI2N9uCtvz0VhP5O1GyL" name="THM Verification">
-      <packagedElement xmi:type="uml:Activity" xmi:id="_aX6CHdP9f24Ed1dZW7oOt7" name="THM-TC-01 Verify Depositing" clientDependency="_i-19QxQXCGZ-CayWWcO5PV _EUAUhQTg3i_2uHh_veqccn _Ziioc91uDTJubtz1iesM4f"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_TQiSRRtTn-iEjYgG3Khjj_" name="THM-TC-02 Verify Pan-presence check" clientDependency="_vHPiPh3iTvfDhP8gj7L3U4 _d-42gchw5dVxAZtrdJexCr _MSix7NlNR9fcGNykXK8IeK _fsDTkoKjfiRkHE7Cq65bEv"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_h9kLUQ9UG2pXkIZwMe6Wbx" name="THM-TC-03 Verify Fill-weight check" clientDependency="_enxHLeufNrYLTHjdQIjrAP _C2vJAoo4aF1y1E3IgvqdDT _ZM4mjLMx7yeWr1Cztf2Ucg _5PNobbB3lferW5Ep1_kXS9 _6yNIzyoWfXKyOkOfI_P4GJ _71_MYbCB-MaNHXsYI_dSUt"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_wqeSbGd9QwsP7WeL7A7ndb" name="THM-TC-04 Verify Repeated-failure lockout" clientDependency="_7Zd38zOMJLCoZyz4aCibVH _2OX-UE_UasrhRBnPLY561b _WaEXYdku7-yzHlwxyfni7g _2IyuYuL3oK2aO1hWV2nHgE"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_Qhspj9R7e1K2-jTwoW5cGo" name="THM-TC-05 Verify New-pan admission stop" clientDependency="_FbUyQxyZfaa4g_WF1JHa3n _cV5dIIWx6wcKLqJMx7TDK6 _co3DcvF_-CxLuPL0PfjCd1 _ix9lioEWP4MwqV9BU24A7J _seRoGL-UtcfbrEZOvRKoNX _rijnT8OasxwTKsxCnHEwUP"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_FENr-DaU-tUxhcZOxeqlm2" name="THM-TC-06 Verify Reduced filling on low pan stock" clientDependency="_Lfx56iq572Gmlnm6LWb0KB"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_CsDG5MHSHey3lxcUg42TqG" name="THM-TC-08 Verify Zone temperature control" clientDependency="_RwAzjf5Enkn5V3E7Axsjyf _VqFr1UW6DgV48WI8C-PjCK _kp15wmDgrM_e7_XlrY8dyB _KxSxP2oCL3_V9Mcc4Mp_z2"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="__WRcO0FYxmMnvK2nvrg33L" name="THM-TC-09 Verify Zone-fault escalation" clientDependency="_9QtBqz4YdfYpseEJ_SvPmu _kfR4touX4fgXq-jUxRa7-2 _10qyPZv0kyCdIzMIn3Nrwq"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_xPdq6sr7MV8lsOlfAsXkzj" name="THM-TC-11 Verify Exit doneness check" clientDependency="_akprRWlr7MT4uNeChCKgu0 _9s7dgOoXxzxSBL0CIJ3H1h _hj1rPCY1o1QneP2NfBhguh"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_c0pPXuq2vfiRCI_b3nDYaH" name="THM-TC-12 Verify Refuse diversion and discard logging" clientDependency="_KlHTGGX4bDS7BxvD6WrbUm _icdZrjCAXD77ZGe_I5nsNn _uNLaFFpgzovbWd3S14Bmc0"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_4xpg0O5UzvFJyL3XRwjbyc" name="THM-TC-13 Verify Camera-failure fallback" clientDependency="_0inIt4xyaSrJtonVjb5kIJ _k9iRLhiQ-QbKx7UZ2uouTu _S4J5F_9cPaQPGzapkhgBJ1 _zR5CEIfHxrgppfKX9gQI2f"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_B2zqgVt10P8lK1-7wFlCPN" name="THM-TC-15 Verify Cooling control" clientDependency="_4vV50cwt0Kg94EoJmBTmdT _k2EFpGM2jku2V-RKPTsFd_ _HC-JqpWcwVeOwYmm9Qu7Xq _g1inRG9KWymEIHne8KTvJX _imEbTpC63iO1l8yDYWz94e"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_N1BpmDFv7OG5yLSR-edBXJ" name="THM-TC-16 Verify Cooling-failure response" clientDependency="_ZLU9fQX5iz_gDf0mp4rm-q"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_5uf0KEozwkDq8DCd3hAtN2" name="THM-TC-17 Verify Cooling buffer fallback" clientDependency="_hzx2LEvjrldD1mgtI7KShK"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_VMP8xCBHN1m02abJopzFT1" name="THM-TC-18 Verify Buffer hold and release" clientDependency="_DQs1ECjo-bNtGZAnuOY7tq _fyvA6LFGT8nWRWuchZjLB- _FFL2w9TPbAMt5AO-g_odhs _8aiwc2007RWpzdLxlv2o8g _PSoG8smyiydMMvHPovOapB _qFUs2bzEbZkY4IvdmQ90ez"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_0xbs-7tJlK2bDaDcF-YsSb" name="THM-TC-19 Verify Buffer wait-time limit" clientDependency="_pPFertHy02rKVBCVjqyyE3 _-fVve5m2PHsVGobMxegvgA _sCoZq-HwgtZ0F7MJgQd3cK _fG1CLR1uBXtxFV8mkvTFez"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_k-Ru7_lYZEmd3ksTiocQLx" name="THM-TC-20 Verify Buffer-full handling" clientDependency="_wVkZBPyzd-5PYX1Vbel2OX _7dABaUd839UTR9PeyiwwAk _2p4uZU-a8F7fwdXVOz2MMn _AT-sI7xqjnIR-yIygyOag1 _GbHj4utOnakra9EUCt6YHz"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_1bnQMx9THDft0g5EYzMwqt" name="THM-TC-21 Verify Discard fallback" clientDependency="_ckulfUxMTo0_fkZNuKmpDo _HM0zz-hgqPa1_8IL2dkL5Q"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_qc3-4403SXAwBStAxY-HL9" name="THM-TC-22 Verify Line health and coordination" clientDependency="_X3UXByUEUj02a7MBo0Sfx6"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_NYUZjDkc-xBm5S8hxnPP1r" name="THM-TC-23 Verify Health reporting" clientDependency="_QvzBpX33lT8fQdWNznHdxO _y1SvN7B03fyPHhse8UEBMw"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_hH83xHQHj1e5vmsFoI3GwY" name="THM-TC-24 Verify Band-state response" clientDependency="_kg2NO3ItAAwZdEjIC0LXWY _bwe5HYtfMiHP8jiDKo1K8j _WPyhA4IYVafFXjv5_g3Qjv _vXTGvVYvE_CoP5DwEBzUOo"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_Rhg1ka9GYMMiNqF4IJwg4K" name="THM-TC-26 Verify Recovery coordination" clientDependency="_yCuV_-2PsjgIc72EwYGyn1 _SU_6PhA3t7TrhqfMEj00Dv"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_xBEjtnyBiIIzs1jHe7JMmd" name="THM-TC-27 Verify Log events" clientDependency="_D7IPTistusb7N9Wy4WYJWB _h9V3tKRUG3hvpZojsncJcp"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_dwiGLOSVZBOmh2Fc75BftH" name="THM-TC-28 Verify Warning events" clientDependency="_F1EIRotzv4koJRYdBUD4zO"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_K-X8U43dGcOYheN_JzwCqJ" name="THM-TC-29 Verify Error events" clientDependency="_BP498pDU4cEPFtEWED2tg0"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_aX6CHdP9f24Ed1dZW7oOt7" name="THM-TC-01 Verify Depositing"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_TQiSRRtTn-iEjYgG3Khjj_" name="THM-TC-02 Verify Pan-presence check"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_h9kLUQ9UG2pXkIZwMe6Wbx" name="THM-TC-03 Verify Fill-weight check"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wqeSbGd9QwsP7WeL7A7ndb" name="THM-TC-04 Verify Repeated-failure lockout"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_Qhspj9R7e1K2-jTwoW5cGo" name="THM-TC-05 Verify New-pan admission stop"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_FENr-DaU-tUxhcZOxeqlm2" name="THM-TC-06 Verify Reduced filling on low pan stock"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_CsDG5MHSHey3lxcUg42TqG" name="THM-TC-08 Verify Zone temperature control"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="__WRcO0FYxmMnvK2nvrg33L" name="THM-TC-09 Verify Zone-fault escalation"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_xPdq6sr7MV8lsOlfAsXkzj" name="THM-TC-11 Verify Exit doneness check"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_c0pPXuq2vfiRCI_b3nDYaH" name="THM-TC-12 Verify Refuse diversion and discard logging"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_4xpg0O5UzvFJyL3XRwjbyc" name="THM-TC-13 Verify Camera-failure fallback"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_B2zqgVt10P8lK1-7wFlCPN" name="THM-TC-15 Verify Cooling control"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_N1BpmDFv7OG5yLSR-edBXJ" name="THM-TC-16 Verify Cooling-failure response"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_5uf0KEozwkDq8DCd3hAtN2" name="THM-TC-17 Verify Cooling buffer fallback"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_VMP8xCBHN1m02abJopzFT1" name="THM-TC-18 Verify Buffer hold and release"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_0xbs-7tJlK2bDaDcF-YsSb" name="THM-TC-19 Verify Buffer wait-time limit"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_k-Ru7_lYZEmd3ksTiocQLx" name="THM-TC-20 Verify Buffer-full handling"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_1bnQMx9THDft0g5EYzMwqt" name="THM-TC-21 Verify Discard fallback"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_qc3-4403SXAwBStAxY-HL9" name="THM-TC-22 Verify Line health and coordination"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_NYUZjDkc-xBm5S8hxnPP1r" name="THM-TC-23 Verify Health reporting"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_hH83xHQHj1e5vmsFoI3GwY" name="THM-TC-24 Verify Band-state response"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_Rhg1ka9GYMMiNqF4IJwg4K" name="THM-TC-26 Verify Recovery coordination"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_xBEjtnyBiIIzs1jHe7JMmd" name="THM-TC-27 Verify Log events"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_dwiGLOSVZBOmh2Fc75BftH" name="THM-TC-28 Verify Warning events"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_K-X8U43dGcOYheN_JzwCqJ" name="THM-TC-29 Verify Error events"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_4rQ7vWb1lzg2_pPjSkvxCq" name="THM Use and Failure Cases">
-      <packagedElement xmi:type="uml:Activity" xmi:id="_4-fLkXIj0Sz9vK2M_vcfJ1" name="UC5 &amp; UC6 Deposit batter and check fill weight" clientDependency="_vrIdKJVMZsDjXheJF_p71v _mYQerXZy6A_xkBCbRpFb_m _GSaPhQuDn9GjAjDIg36kiQ _hBNHSbt-DxSiq16RFZFwR7 _-v1tDxBUaZYrxGbNEg2Kwn _gti4JvI9-wh_qFXz8f-BfT _tFUAB3oyio_NSMCPqUpunZ _Y5x5bgHpQKjNVgM4-jSdC2 _09KoOCMgqXAv5xsBB1vfco"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_cJNPhZ9nAdee6Cih-3WjwO" name="FC8 No pan at depositing" clientDependency="_uEDR3ubleryM7eFuYsbpeO _Ypct4IdxHyp_UeHWoFpD-0 _bCloZQhuyGoJZC4u3y6Afo _LISnZyvsTEU7-4iqWEd4j4 _UbeSUBdHtScCOaNKXnGWsH"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_lKeM-q6soa8U33mWZiUjhy" name="FC9 Wrong fill weight" clientDependency="_blj5mphH4HLRc8xYKapm_0 _8heNgZHWdVTtVaJpbKIaRe _rZwjT9mO3leG56v-Yn0iLK _vTMy3w4GcGoR-wtphCu_30"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_F7tK5ylkv0c6FuxMbwszUA" name="UC12 Pan supply (Finishing &amp; Packaging)" clientDependency="_aRo2T0ptL7UK4XPSv0LikL"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="__P6ByjCofvFyYAXTmRQTtE" name="FC23 Washing fault, stop new pans / fewer pans" clientDependency="_eKOrSCPThPFgfLedoZdTwb _SSDjXN9WYtURTkx3wHADJW _oROI7j8k2XklkmdoUAyzXq _GdFC3gSMZYLQmrp71BUYGv"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_vgv3AP8qhsXbFzJ1sUYwVQ" name="FC10 Repeated wrong fill weight" clientDependency="_QaLC_NPdBJmz-iAkCqVfHv _hd__V3toqbRVTKC1MQAdsG _thCWevZYpSDZBc8qLvQ9vz _tLbDMSLJgAC2Pamkvbqwvz _jN7fcdXoU3YerGoAxZlsGI _rMUgixg2fl3GtBtHyXhevQ _SOJ7L_rL_vJkTdaHl-NXFD _PJOgXrKP-1PiiyU5IeIUD7"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_UB6w8dSiif8axz8_uH5YIC" name="FC7 Depositing stopped, Batter Preparation holds batches" clientDependency="_3QgS2aWeZJsYcmLr213Q-L"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_0FsKSdgwX6xYv2Yw96kXfT" name="FC11 Baking zone temperature wrong" clientDependency="_yvwvJa3RhimUoA4vnM69KX _XQTm8R3Jr3KXJqq8Zd2nRZ _Xp6mmchnS-w6y6kkuXa7nD _Lo-Ax7QsNG1WS0Hq2i-Nmc _A9sxrAMG9AZzHAAn2VHRkL _up_9EDLWvJ0jlOiG2pqh1o _jYO-tDyIme2pDAfgapNxIZ _jWVdJTp00QfOHLSrEIeZNU _QpV3v6UOMLwQSVcSqYnRVG _HSKbnrxppJy_tRDsphK9TZ _rdHqYF6OdrTd67hzgm-FTO _GEP9SdG3oQmTrLVb343aL3 _qO1ldUlfVffH74ClREk6o9 _89hexHGVYtx7_rRx8fmzAY"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_iQ-ttHCLfJsAQnW8Fmppxt" name="FC18 Cooling buffer full" clientDependency="_Mhg0C8kfyT-Ug9plDNRV5v _pxygNJenC9dfkWL9e043FO _WHhdTJxrV62SdeuaG2ou1s _z61BhN9TJdgdKC2MVGE6X4 _TuyfTcwYAe7e8alnWU6z9P _oUY-x3i_xuNX-ENzgpiUZh _eYBQ7ZZMHGOXktlVjHGqRE _brHkE5WwkquoJc5AZCIdK2 _0QKsKPkJUxGQmkJbw7Hptw _lZPXIKLWlrpTkjUvvCxw1H _U4mhrs4qGwAFlxTgeoHWX1"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_-ynlzaQq2wut39yxAiwmz8" name="FC25 Wrapping fault, stop new pans" clientDependency="_bhyhByAByevSyMlMTmBjO0 _NRibf8Qng8SLj4TT_qrvjs _BNvmTSJ2cyv_K66C_WKWkQ"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_Nu5fxR_oEAEaHrYs2OACsN" name="UC9 Bake and check doneness at tunnel exit" clientDependency="_RMSD4_z9tem429ryQwIAlK _NmZ9NQFkVyLKxR5pwWkVag _fT2ukM3vNO-dT81y-bbw9L _3AZYyFqGzY7PAluZXgQDLF _OsA5I_1q69Ywlnn0MoNOXf _rjRAi-MBF-dqvcuCmLkPfd _VPYN_AtMTw6Uf0xFvpoufF _J_PYHqxLZmjU593rE47tUm _tQfvDuyeX-_lFkZvU2yNFK"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_1FoGaEruTPoJwt5iStOuhQ" name="FC12 Cake under- or overcooked at tunnel exit" clientDependency="_v-alzOp_s1c-lYsHJ40TwH _3_c0mJjKqfGiWiNHrGcIMd _JJoU5OIq6-P4vVp832SUAJ"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_zhSHKE6XeMSc8z7PCG_tnK" name="FC13 Temperature measurement at tunnel exit broken" clientDependency="_a94FPuSZVkf9FQEKWAdROr _069Y-eVnCb69cIVbFr8Nch _8gwsRKG0dk2DQagypSIv1A _HEZhmrs27Gep_LkHddH_q6 _L03qA-rJCnNN7POiJL0YMF _iFfWpK_Bamrt1guvnyD6ZU _YQ5WNH9po8DW13N6oHMBlt _HcAGdATc6XdWj0Lnr2bgJ5 _KAuchPaiVYe5BM3Ax7UksX _mrbLDFIoj3Cnq46v25vKi6 _IOO_SCItU0vOozRijX2DXw"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_B6iopDRtpgNIuN0GRVrHLX" name="UC10 Cool cakes and hand off at room temperature" clientDependency="_0r_aI8tRnBnbR5ZXICTfhd _CPzuzv4pHc2WuQxkgRY1Ik _lkPSh8mUpVqTD6lfqflEAP _6-P5DHSdvryNmS_a811Xz4 _6ExAbrzfBGs3hNV2hTt6qH _LUs7FfLIf16I7OjnYyjy0- _hwBwPZ11ng3z9lQXYSJcml"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_wt2iDVtUQ7wrrA0sY5MxyQ" name="UC11 Depanning (Finishing &amp; Packaging)" clientDependency="_oUcM9AjlPef1mkCxV1gqvf"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_XdZLfaZhFgDOJbtYuurv_0" name="FC14 Cake too hot after cooling" clientDependency="_AKixkqSzMlyKkD9VJa_pDM _Jc5N2XcjjLh5_a1ZpASZP9 _-oPpyH7ElGAABJKoWs2esh"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_WxfJo3HuUdd5XRKuHHMdQ-" name="FC15 Cooling stops working" clientDependency="_MYyZl2BykylbZJn0riYnzB _ZJG9i5PWxAqqnQC9ZsIWdY _IKMfdf-SsevWQKi95ULIYB _JeIgotFPEcAmO8-_t41F5i _zvJSK5HUrI_vgtEAPU_4UL _7pINkfyuwbs77crkTKVTpC _QaKIOoQWbbU1-2LYcQ0WbB _CQfJwxB5llMqmqLH0OHZzw"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_7lOhkK1C-TY1MRTg_1tJMh" name="FC16 Cooling repaired" clientDependency="_sXeYfIUFYxUjX-3lsMNCVI _N4UoVXoEk1QVavmYZEa0Ft _juzhZwmKj1AspPovgtL57T _9H0c2fynykp9ptlhQ-us9x"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_uRXAoO9bGHOWOT9M4SzWow" name="FC17 Cake waited too long in cooling buffer" clientDependency="_Qx7fnp-ZWpYRSir0zP07_z _rzVzrjx8m1fdxIoXVqbdi_ _tl1kEzVn7kUxGiwpe4EErJ _02jj9y1b4jsCmRzU0kozec"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_TB9GFAfLT2BVXMPgtKv-e8" name="UC2 Report warnings and errors, band halt or slow-down" clientDependency="_s5urObEOCHMI6ikSsixBD_ _r2c-loVe06HXlWeu4lGbxe _hph_SMQfI6QrxSP8Ec-D8p _79srKaH28WRR81vNfw4E4Z _gx1UMRlnM7-7bvce22GPNB _N0LrCZkV83NB42XJ-Bezoz _j4eaaharOjwaaWlx-nCSVO"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_x7ZqPaioqx47dH6zsaVY_3" name="FC28 Controller or device stops (heartbeat lost)" clientDependency="_3R1TYEu6sAI98r5jJqgMd- _YBQnM9zA5h6nfYav6UDfYq _GT-s36PPPkwO-HuExpHbRh"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="__7C-ttF9pTu4DoPYIdsJj8" name="FC19 Band state change (halt / restart)" clientDependency="__awtng1RZoaOhgMM93n-tA _JzulAvOvUULpkdbJo8QDgP _QAc5a833L-JB6V_weFqSFU"/>
-      <packagedElement xmi:type="uml:Activity" xmi:id="_wVLaWuh58JTCIy97NWge1H" name="FC20 Band state change (slow-down)" clientDependency="_L62HDKGRjhlRr6YuqWIvwU _8eKlGFwavoo5OgnjWW2dix _sDzkdu4wKe7zEw5vpLUhVg"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_4-fLkXIj0Sz9vK2M_vcfJ1" name="UC5 &amp; UC6 Deposit batter and check fill weight"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_cJNPhZ9nAdee6Cih-3WjwO" name="FC8 No pan at depositing"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_lKeM-q6soa8U33mWZiUjhy" name="FC9 Wrong fill weight"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_F7tK5ylkv0c6FuxMbwszUA" name="UC12 Pan supply (Finishing &amp; Packaging)"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="__P6ByjCofvFyYAXTmRQTtE" name="FC23 Washing fault, stop new pans / fewer pans"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_vgv3AP8qhsXbFzJ1sUYwVQ" name="FC10 Repeated wrong fill weight"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_UB6w8dSiif8axz8_uH5YIC" name="FC7 Depositing stopped, Batter Preparation holds batches"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_0FsKSdgwX6xYv2Yw96kXfT" name="FC11 Baking zone temperature wrong"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_iQ-ttHCLfJsAQnW8Fmppxt" name="FC18 Cooling buffer full"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_-ynlzaQq2wut39yxAiwmz8" name="FC25 Wrapping fault, stop new pans"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_Nu5fxR_oEAEaHrYs2OACsN" name="UC9 Bake and check doneness at tunnel exit"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_1FoGaEruTPoJwt5iStOuhQ" name="FC12 Cake under- or overcooked at tunnel exit"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_zhSHKE6XeMSc8z7PCG_tnK" name="FC13 Temperature measurement at tunnel exit broken"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_B6iopDRtpgNIuN0GRVrHLX" name="UC10 Cool cakes and hand off at room temperature"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wt2iDVtUQ7wrrA0sY5MxyQ" name="UC11 Depanning (Finishing &amp; Packaging)"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_XdZLfaZhFgDOJbtYuurv_0" name="FC14 Cake too hot after cooling"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_WxfJo3HuUdd5XRKuHHMdQ-" name="FC15 Cooling stops working"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_7lOhkK1C-TY1MRTg_1tJMh" name="FC16 Cooling repaired"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_uRXAoO9bGHOWOT9M4SzWow" name="FC17 Cake waited too long in cooling buffer"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_TB9GFAfLT2BVXMPgtKv-e8" name="UC2 Report warnings and errors, band halt or slow-down"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_x7ZqPaioqx47dH6zsaVY_3" name="FC28 Controller or device stops (heartbeat lost)"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="__7C-ttF9pTu4DoPYIdsJj8" name="FC19 Band state change (halt / restart)"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wVLaWuh58JTCIy97NWge1H" name="FC20 Band state change (slow-down)"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_uMhG2phN-Gw8MJRX53VV2M" name="THM Traceability">
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_SGepfzohljGvTsZl-Iip5i" client="_YNjAWIyojEuUYTD4I1igiA" supplier="_9Jgu8qDkTm3XOEcCNfj-b2"/>
@@ -849,22 +849,22 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_2gkj-vItE0YiNtVBuFG88c" client="_0lfa7fcY_EG10Dlqc5uXbQ" supplier="__LCgmJQ5_quP3Ae0N4TFfa"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_C0YN4oHoagVcG6UqguWz7T" client="_YNjAWIyojEuUYTD4I1igiA" supplier="_YBYbx0lXfmMiX9mJqraNPN"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_FwQ2qZU5lVmc7elr3qBEOI" client="_YNjAWIyojEuUYTD4I1igiA" supplier="_PJwkMIHVDgijL9Fj03j_i9"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ydKfFdf8hEPLdPNU3KzvnH" client="_liEkRi-m9UuQh4bF_mlAfA" supplier="__YmRRmUnYa8sjX3Ba7Yp3U"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_1Eo3DQFqE1HHlVziDQ0tpV" client="_zmGp8tr4_EGCcq9Fcl3VXA" supplier="__YmRRmUnYa8sjX3Ba7Yp3U"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_zKsyRemP8E3iPficf7mAM1" client="_YaffEbbKQEmz1Bp3HG1P3Q" supplier="__YmRRmUnYa8sjX3Ba7Yp3U"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ydKfFdf8hEPLdPNU3KzvnH" client="_liEkRi-m9UuQh4bF_mlAfA" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_1Eo3DQFqE1HHlVziDQ0tpV" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_zKsyRemP8E3iPficf7mAM1" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="__YmRRmUnYa8sjX3Ba7Yp3U"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_6OLl-J87iv8CSFHXFUZO0n" client="_liEkRi-m9UuQh4bF_mlAfA" supplier="_C7N_6SjAExmQVfPHN14Eey"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_VCjQ7bSVOpXYfn7UadgzKr" client="_zmGp8tr4_EGCcq9Fcl3VXA" supplier="_C7N_6SjAExmQVfPHN14Eey"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_TkHMaTkZ__5wC11GEZQxgM" client="_YaffEbbKQEmz1Bp3HG1P3Q" supplier="_C7N_6SjAExmQVfPHN14Eey"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_c9QT7NFdnfy8oYevtw8iFL" client="_liEkRi-m9UuQh4bF_mlAfA" supplier="_Os1S_Ntqdle_cCnpTTNV30"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="__QfuWE-RyiW98dPfQw-Vp_" client="_zmGp8tr4_EGCcq9Fcl3VXA" supplier="_Os1S_Ntqdle_cCnpTTNV30"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_7ilO5Jlex68ynzI5If3qEa" client="_YaffEbbKQEmz1Bp3HG1P3Q" supplier="_Os1S_Ntqdle_cCnpTTNV30"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_7ilO5Jlex68ynzI5If3qEa" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_B3XZYt9JfnbrmrvK1FxENU" client="_liEkRi-m9UuQh4bF_mlAfA" supplier="_4aV_RwBLhPy4k3pKJs0mGD"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_6TAFl4yrMWE9ZjL815dhpK" client="_zmGp8tr4_EGCcq9Fcl3VXA" supplier="_4aV_RwBLhPy4k3pKJs0mGD"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_6TAFl4yrMWE9ZjL815dhpK" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_BbiEwG4YTcWqxSiLW1fxjf" client="_liEkRi-m9UuQh4bF_mlAfA" supplier="_SHBqfQS_OdomOxrYC3iOzs"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_GzOVQJMTOvgLmcYdHaMBVe" client="_Gvo8fyIMnUGPpT1TaFhHzg" supplier="_SHBqfQS_OdomOxrYC3iOzs"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_cgKn9kunllyvyGZSaYAesg" client="_liEkRi-m9UuQh4bF_mlAfA" supplier="_Awx0ek1BDi_SAww8l4p4sX"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_GzOVQJMTOvgLmcYdHaMBVe" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_cgKn9kunllyvyGZSaYAesg" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_Awx0ek1BDi_SAww8l4p4sX"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_4SXRC9hXGafOGE3vOKJC2L" client="_geYFB98qi0qBeXeClbko3Q" supplier="_Awx0ek1BDi_SAww8l4p4sX"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ON_rbTo34Vu76Pe1_8KYeJ" client="_zmGp8tr4_EGCcq9Fcl3VXA" supplier="_Awx0ek1BDi_SAww8l4p4sX"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ON_rbTo34Vu76Pe1_8KYeJ" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_Awx0ek1BDi_SAww8l4p4sX"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_IL0BkNDWy8y4YRdJsOjrGA" client="_gdi76L6ng0u9tHyFYuZhpg" supplier="_rzPARlM2hkbwCfvTN9GfYO"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_iI1S6-vTUD2QldFfj98K_3" client="_GmobUQGtjku_zSaorSXlRg" supplier="_rzPARlM2hkbwCfvTN9GfYO"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_gDwIP2_7nQqlOp3m5BWfYl" client="_gdi76L6ng0u9tHyFYuZhpg" supplier="_gfKfwgHmzwtYh_OtoPJRIM"/>
@@ -973,7 +973,7 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_fDB-AFy0jjWop2pauGBVnI" client="_gdi76L6ng0u9tHyFYuZhpg" supplier="_Kgt5KuuOwKKxuqn08AJjuj"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_7mmEAFeVbYef71CPS4yXjA" client="_r3QDvFCowE6cKhJtoNo8EQ" supplier="_HqAO3Pmnj0wKc2IvAkSkcJ"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_XC5l70hUJIAJjwnE4e8Hof" client="_geYFB98qi0qBeXeClbko3Q" supplier="_l1CCYTe6OXlKdj7qznmQeS"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ZCBi41xqgC1Su9Zcn945dS" client="_liEkRi-m9UuQh4bF_mlAfA" supplier="_GsKwHM7W1QXtxUVOAB-y-p"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ZCBi41xqgC1Su9Zcn945dS" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_GsKwHM7W1QXtxUVOAB-y-p"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_ViyRJkhRJpBYFOUHp2XPuz" client="_gdi76L6ng0u9tHyFYuZhpg" supplier="_6k5nr7N3F_w2I3rNiKJBzN"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_Nb-Qm3Hy6ACPF2tk18NJq-" client="_YNjAWIyojEuUYTD4I1igiA" supplier="_dgcv_gUHVMgLwXQj7vPdk8"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_XRfIyJIKhy_ImlMmdCFp7P" client="_Gvo8fyIMnUGPpT1TaFhHzg" supplier="_NeatzRpO7tcXO28PPS4-hY"/>
@@ -1003,9 +1003,9 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_seRoGL-UtcfbrEZOvRKoNX" client="_Qhspj9R7e1K2-jTwoW5cGo" supplier="_PJwkMIHVDgijL9Fj03j_i9"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_rijnT8OasxwTKsxCnHEwUP" client="_Qhspj9R7e1K2-jTwoW5cGo" supplier="_dgcv_gUHVMgLwXQj7vPdk8"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_Lfx56iq572Gmlnm6LWb0KB" client="_FENr-DaU-tUxhcZOxeqlm2" supplier="_NLbKgBrI0ctdbgpynQtNPR"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_RwAzjf5Enkn5V3E7Axsjyf" client="_CsDG5MHSHey3lxcUg42TqG" supplier="__YmRRmUnYa8sjX3Ba7Yp3U"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_VqFr1UW6DgV48WI8C-PjCK" client="_CsDG5MHSHey3lxcUg42TqG" supplier="_C7N_6SjAExmQVfPHN14Eey"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_kp15wmDgrM_e7_XlrY8dyB" client="_CsDG5MHSHey3lxcUg42TqG" supplier="_Os1S_Ntqdle_cCnpTTNV30"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_RwAzjf5Enkn5V3E7Axsjyf" client="_CsDG5MHSHey3lxcUg42TqG" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_VqFr1UW6DgV48WI8C-PjCK" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_C7N_6SjAExmQVfPHN14Eey"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_kp15wmDgrM_e7_XlrY8dyB" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_C7N_6SjAExmQVfPHN14Eey"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_KxSxP2oCL3_V9Mcc4Mp_z2" client="_CsDG5MHSHey3lxcUg42TqG" supplier="_GsKwHM7W1QXtxUVOAB-y-p"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_9QtBqz4YdfYpseEJ_SvPmu" client="__WRcO0FYxmMnvK2nvrg33L" supplier="_4aV_RwBLhPy4k3pKJs0mGD"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_kfR4touX4fgXq-jUxRa7-2" client="__WRcO0FYxmMnvK2nvrg33L" supplier="_SHBqfQS_OdomOxrYC3iOzs"/>
@@ -1094,8 +1094,8 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_WHhdTJxrV62SdeuaG2ou1s" client="_iQ-ttHCLfJsAQnW8Fmppxt" supplier="_PJwkMIHVDgijL9Fj03j_i9"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_oROI7j8k2XklkmdoUAyzXq" client="__P6ByjCofvFyYAXTmRQTtE" supplier="_PJwkMIHVDgijL9Fj03j_i9"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_NRibf8Qng8SLj4TT_qrvjs" client="_-ynlzaQq2wut39yxAiwmz8" supplier="_PJwkMIHVDgijL9Fj03j_i9"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_RMSD4_z9tem429ryQwIAlK" client="_Nu5fxR_oEAEaHrYs2OACsN" supplier="__YmRRmUnYa8sjX3Ba7Yp3U"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_NmZ9NQFkVyLKxR5pwWkVag" client="_Nu5fxR_oEAEaHrYs2OACsN" supplier="_C7N_6SjAExmQVfPHN14Eey"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_RMSD4_z9tem429ryQwIAlK" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_NmZ9NQFkVyLKxR5pwWkVag" client="_Nu5fxR_oEAEaHrYs2OACsN" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_A9sxrAMG9AZzHAAn2VHRkL" client="_0FsKSdgwX6xYv2Yw96kXfT" supplier="_C7N_6SjAExmQVfPHN14Eey"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_up_9EDLWvJ0jlOiG2pqh1o" client="_0FsKSdgwX6xYv2Yw96kXfT" supplier="_Os1S_Ntqdle_cCnpTTNV30"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_jYO-tDyIme2pDAfgapNxIZ" client="_0FsKSdgwX6xYv2Yw96kXfT" supplier="_4aV_RwBLhPy4k3pKJs0mGD"/>
@@ -1169,8 +1169,8 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_mrbLDFIoj3Cnq46v25vKi6" client="_zhSHKE6XeMSc8z7PCG_tnK" supplier="_l1CCYTe6OXlKdj7qznmQeS"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_CQfJwxB5llMqmqLH0OHZzw" client="_WxfJo3HuUdd5XRKuHHMdQ-" supplier="_l1CCYTe6OXlKdj7qznmQeS"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_0QKsKPkJUxGQmkJbw7Hptw" client="_iQ-ttHCLfJsAQnW8Fmppxt" supplier="_l1CCYTe6OXlKdj7qznmQeS"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_J_PYHqxLZmjU593rE47tUm" client="_Nu5fxR_oEAEaHrYs2OACsN" supplier="_GsKwHM7W1QXtxUVOAB-y-p"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_qO1ldUlfVffH74ClREk6o9" client="_0FsKSdgwX6xYv2Yw96kXfT" supplier="_GsKwHM7W1QXtxUVOAB-y-p"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_J_PYHqxLZmjU593rE47tUm" client="_XNJflI6ZUUm27gAMsm_S8Q" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_qO1ldUlfVffH74ClREk6o9" client="_0FsKSdgwX6xYv2Yw96kXfT" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_tQfvDuyeX-_lFkZvU2yNFK" client="_Nu5fxR_oEAEaHrYs2OACsN" supplier="_6k5nr7N3F_w2I3rNiKJBzN"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_89hexHGVYtx7_rRx8fmzAY" client="_0FsKSdgwX6xYv2Yw96kXfT" supplier="_dgcv_gUHVMgLwXQj7vPdk8"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_lZPXIKLWlrpTkjUvvCxw1H" client="_iQ-ttHCLfJsAQnW8Fmppxt" supplier="_dgcv_gUHVMgLwXQj7vPdk8"/>
@@ -1195,9 +1195,9 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_recngYYhzxzFgWpCFcQGJP" client="_se4hLp7O6XE473QyG_rCHw" supplier="_1Oroqkmn53lVhIg1Mxp973"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_Zgr-T02SKZfOdf1YG_e1g4" client="_QSnWMv2W6TYXr9GUF0ugZ5" supplier="_1Oroqkmn53lVhIg1Mxp973"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_v9aEc5-DcVlizaiIAlLrXr" client="_C7N_6SjAExmQVfPHN14Eey" supplier="__YmRRmUnYa8sjX3Ba7Yp3U"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="_w5jgSXLP-4-seiN7llVd3F" client="_Os1S_Ntqdle_cCnpTTNV30" supplier="__YmRRmUnYa8sjX3Ba7Yp3U"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_w5jgSXLP-4-seiN7llVd3F" client="_Os1S_Ntqdle_cCnpTTNV30" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_Aly0tcICXRXoGeF5qrjWfP" client="_4aV_RwBLhPy4k3pKJs0mGD" supplier="_Os1S_Ntqdle_cCnpTTNV30"/>
-      <packagedElement xmi:type="uml:Abstraction" xmi:id="__RAb_6MwAl82-yLloH5Hc8" client="_SHBqfQS_OdomOxrYC3iOzs" supplier="_4aV_RwBLhPy4k3pKJs0mGD"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="__RAb_6MwAl82-yLloH5Hc8" client="_SHBqfQS_OdomOxrYC3iOzs" supplier="_XNJflI6ZUUm27gAMsm_S8Q"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_du6w5J9hHtPEMgGpcW2507" client="_Awx0ek1BDi_SAww8l4p4sX" supplier="_4aV_RwBLhPy4k3pKJs0mGD"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_JQLywK_XxxuG4qv04HeWjh" client="_gfKfwgHmzwtYh_OtoPJRIM" supplier="_rzPARlM2hkbwCfvTN9GfYO"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_rxeOMhdgjn8-VLZHBz251V" client="_Y3e2Vb9UvTsFms0DPMN3Sf" supplier="_gfKfwgHmzwtYh_OtoPJRIM"/>
@@ -1243,6 +1243,600 @@
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_LD77s3nxRSfWWbf53WtNe8" client="_c_RNwuMQt8gUNg7qITtYvC" supplier="_LldUMLSoyA41bs319uIHpC"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_S_gJskzHceo8mIX7DqyNR7" client="_c_RNwuMQt8gUNg7qITtYvC" supplier="_zQZ1uwLX5ShPds52agVT79"/>
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_goqfCemkDWfq5gne4HtnMi" client="_VJA7lWbT8KYmbR00RcQlnr" supplier="_l1SSvrnYBKWMuwTllMO5wp"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_NETGQHUzo0KVwFgF0beRmg" name="THM State Machine Diagrams">
+      <packagedElement xmi:type="uml:Package" xmi:id="_nX3YXCnvkES0LM-N8alm-A" name="THM Signals and Events">
+        <packagedElement xmi:type="uml:Signal" xmi:id="_fM4zXHlvP0yUi5eGX6Xd1A" name="pan detected"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="__Sdcka8i5EqDz-wu0FCKFQ" name="no pan detected"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_yKMDNWvQMUagcHCOfN4HlQ" name="Clean pan supply"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_dbTy5uCE-UezJOB1sZflIg" name="batter deposited"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_MO_OZI7Rb0KdCC4opH23CQ" name="fill weight within tolerance"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_PdJ8Y4_yckSqrwRQplCICA" name="fill weight outside tolerance"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_ITTJQF_5jU-I1acbHO84uQ" name="pan diverted"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_LHG6yApxy0OB55akoswqoQ" name="Repair confirmed"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_WVUR1LZQlUOtTnztivZ65g" name="Zone fault"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_AbnDyvxhsEKcMmg5pnmiPw" name="Buffer full"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_fokn--f-MUyt3lsKRLZSQA" name="Stop / resume pan admission"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_SeAe5OlvgEqZJnClI8IWWw" name="Band state change"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_4m05XZ8PkEq2Nzb2YATzXQ" name="stop reason cleared"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_MYMvNEput0KE3rjPtRBifA" name="zone temperature out of range"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_GrOzDeC8b0abKu6rSGNA1Q" name="zone temperature back in range"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_VgXnpqSkDkmDsISzsz2z4A" name="T_adjust elapsed"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_2HHmeYZZyk28CU1t8MITAQ" name="cake temperature within 97 °C ± 0.5 °C"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_JkE04haPCU6TE781IKdk-Q" name="cake temperature outside 97 °C ± 0.5 °C"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_jFepoliFr06MKL5vYt4BYA" name="cake diverted"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_VHTQor4tikyBT2n0KNuSdA" name="no valid reading within T_resp"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_estnYDquzk6GQIWT-Agz0g" name="cake leaving the tunnel"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_gJEW3ZY5SkiLXA0Tgmckww" name="cooling buffer has free places"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_mLYRERL8cUa-V_bGe486wQ" name="core temperature at or below T_safe"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_zIjo2_uS4U27MtfwoS5_jA" name="core temperature above T_safe"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_UEed7aec1ECGa3jKaAWtig" name="core temperature still above T_safe"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_mQF5oNpjh0ioySiBVnmCAA" name="cooling failure detected"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_Dg9lt_X1ekiv0dc-7hM1wA" name="waiting time exceeds T_wait"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_dgVMi51YfU2Z7x5fXEIodg" name="released cake measured"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_Zjx5-DdrQEuQkMiy9kQFEQ" name="cooling buffer empty"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_0GQe4VH0sESvbyuU-po5qA" name="heartbeat interval T_hb elapsed"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_xgulx3DB3UOjgYTsYwTJqA" name="event raised"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_8gI03y2DREG-Vf2OEes5ZQ" name="pan detected" signal="_fM4zXHlvP0yUi5eGX6Xd1A"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_kpRkV-zckkOAyjediy6ngw" name="no pan detected" signal="__Sdcka8i5EqDz-wu0FCKFQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_1_1xjWqVKkOH6pnrYicJlg" name="Clean pan supply" signal="_yKMDNWvQMUagcHCOfN4HlQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_yohzoV64gkODZmxuWjMmOA" name="batter deposited" signal="_dbTy5uCE-UezJOB1sZflIg"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_3c9MPmMeHEuinT0GXYWe1g" name="fill weight within tolerance" signal="_MO_OZI7Rb0KdCC4opH23CQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_ItX-hTY8906BdBID7JXSVw" name="fill weight outside tolerance" signal="_PdJ8Y4_yckSqrwRQplCICA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_ud9_QUQXYECOaGW1-XRmrA" name="pan diverted" signal="_ITTJQF_5jU-I1acbHO84uQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_5kJs6X5wj0GT2K-477uasw" name="Repair confirmed" signal="_LHG6yApxy0OB55akoswqoQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_Z4pJWwMKaU-QWj6p63KjCA" name="Zone fault" signal="_WVUR1LZQlUOtTnztivZ65g"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_BoDP4CI6x0-oZr3CnP5_Tg" name="Buffer full" signal="_AbnDyvxhsEKcMmg5pnmiPw"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_5ypQFeW6gk219qxclAiQpw" name="Stop / resume pan admission" signal="_fokn--f-MUyt3lsKRLZSQA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_zSwn4OmQs06SxCMlNDgJXQ" name="Band state change" signal="_SeAe5OlvgEqZJnClI8IWWw"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_vgE4PLTJyUaA7_kAKboKZw" name="stop reason cleared" signal="_4m05XZ8PkEq2Nzb2YATzXQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_jkb5aqsc3kiKg2Wj9-hx2Q" name="zone temperature out of range" signal="_MYMvNEput0KE3rjPtRBifA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_XBOyPUpZPE2TwIH0t8aVpA" name="zone temperature back in range" signal="_GrOzDeC8b0abKu6rSGNA1Q"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_prFoShMVqkyL0Hf3LJrTeg" name="T_adjust elapsed" signal="_VgXnpqSkDkmDsISzsz2z4A"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_igApunyJEUyUQ5JJWBuw5A" name="cake temperature within 97 °C ± 0.5 °C" signal="_2HHmeYZZyk28CU1t8MITAQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_w585rCU41UysXJMF5bZ3GA" name="cake temperature outside 97 °C ± 0.5 °C" signal="_JkE04haPCU6TE781IKdk-Q"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_z9sq6hCiJEe5AmgWciVTrg" name="cake diverted" signal="_jFepoliFr06MKL5vYt4BYA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_qA3gE_Ybd0ymvoIiYL81eg" name="no valid reading within T_resp" signal="_VHTQor4tikyBT2n0KNuSdA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_hJj3e92JQEaPv3ar-C6JCQ" name="cake leaving the tunnel" signal="_estnYDquzk6GQIWT-Agz0g"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_tRa3qhMJ_EmmOCH_l7NcDg" name="cooling buffer has free places" signal="_gJEW3ZY5SkiLXA0Tgmckww"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_RcXiMd_Da0msavB5TzxUlw" name="core temperature at or below T_safe" signal="_mLYRERL8cUa-V_bGe486wQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_2VykvnWx-EKt916WvuDuzA" name="core temperature above T_safe" signal="_zIjo2_uS4U27MtfwoS5_jA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="__nlEVBBJOEiu2f-PnnsdMA" name="core temperature still above T_safe" signal="_UEed7aec1ECGa3jKaAWtig"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_6IrRi99-t0yJHlDcoYCu8A" name="cooling failure detected" signal="_mQF5oNpjh0ioySiBVnmCAA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_LYrlJmtnhUib5CFKHk7ajA" name="waiting time exceeds T_wait" signal="_Dg9lt_X1ekiv0dc-7hM1wA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_Qvk8GdlyNky6sEN2tdL0MA" name="released cake measured" signal="_dgVMi51YfU2Z7x5fXEIodg"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_e_C4pWO1a0GRpjQ1kZyDKg" name="cooling buffer empty" signal="_Zjx5-DdrQEuQkMiy9kQFEQ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_DITP6IKoW0G4O2HoL-Gh3Q" name="heartbeat interval T_hb elapsed" signal="_0GQe4VH0sESvbyuU-po5qA"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_jj_kmrbdt0WcheOZ3HauYQ" name="event raised" signal="_xgulx3DB3UOjgYTsYwTJqA"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_W_5u9JoKBU6kFuevNuC3Lg" name="SM1 Depositing">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_iKBsJhiM0UuTZQu1ZFDaMQ" annotatedElement="_W_5u9JoKBU6kFuevNuC3Lg">
+          <body>Behavior of Depositing Control (THM-AF-01) with its photoeye, depositor, Weight-Checker and pan diverter (THM-FD-01 to THM-FD-04): pan check, batter release, weighing, diversion, repeated-failure lockout and the stop and resume of new pans.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_HAMzwNtdrUOBcCu9VNFa6g" name="Depositing">
+          <transition xmi:type="uml:Transition" xmi:id="_ihnJzQbYLEuu0KqXsIe4cQ" name="T0" source="_qVkw8s5skEuR6pdj3IWoYQ" target="__CGGsNpJoE2kFrWfC5SbOQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_SxxwddVXKkurehxQx4A76Q" name="T1" guard="_PDa27rJIqkC-_xU2dCL8nw" source="__CGGsNpJoE2kFrWfC5SbOQ" target="_5tjI12RDh0azzUugAVTpVw">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_qj3OZQoQV0iH4O1Ofg-MnQ" annotatedElement="_SxxwddVXKkurehxQx4A76Q">
+              <body>Traces to: THM-REQ-02, THM-REQ-03, THM-REQ-06, THM-REQ-09</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_PDa27rJIqkC-_xU2dCL8nw" name="admission open and Weight-Checker calibrated">
+              <specification xmi:type="uml:LiteralString" xmi:id="_YXB4Evo0ekq1xsr3miw-8g" value="admission open and Weight-Checker calibrated"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_O_cy8OyBEkK60nCfVvO-Sg" name="start deposit"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_YGwVotJOWEWoGa9PBwUEaA" name="pan detected" event="_8gI03y2DREG-Vf2OEes5ZQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_oGZwtXlFqkekM7aCzEVb7g" name="T2" kind="internal" source="__CGGsNpJoE2kFrWfC5SbOQ" target="__CGGsNpJoE2kFrWfC5SbOQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_nvbWscbF6ECUmCl58QgLfQ" annotatedElement="_oGZwtXlFqkekM7aCzEVb7g">
+              <body>Traces to: THM-REQ-04, THM-REQ-05, THM-REQ-13</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_4q2SX0q6P0yoVms5bPuULg" name="withhold batter, send Pan request, publish log event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_laL3WjSdR0-8BvE99WRsUg" name="no pan detected" event="_kpRkV-zckkOAyjediy6ngw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QvvjUJ35EUWoeEzlYCWyDw" name="T3" kind="internal" source="__CGGsNpJoE2kFrWfC5SbOQ" target="__CGGsNpJoE2kFrWfC5SbOQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Qc1p4WMCz0WyFJsvp8dE8Q" annotatedElement="_QvvjUJ35EUWoeEzlYCWyDw">
+              <body>Traces to: THM-REQ-14, THM-REQ-15</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_eP61CTw-PUO4BRydxrV59A" name="update pan stock; fill fewer pans if stock level is below S_low"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_phM2WaXjDEO6wWV_vaNQ3w" name="Clean pan supply" event="_1_1xjWqVKkOH6pnrYicJlg"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_pII_B8y04EauYuc5H2kB2g" name="T4" source="_5tjI12RDh0azzUugAVTpVw" target="_wdvRkSQH8UuO5vR9ZuQdXg">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_-nv6lZ3IoUORu0ZdY7Brtw" annotatedElement="_pII_B8y04EauYuc5H2kB2g">
+              <body>Traces to: THM-REQ-03, THM-REQ-07</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zviigsX1tke_WYEFJ86JqQ" name="weigh filled pan"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_j2h8Md_DYUu6k4WUPG6t7w" name="batter deposited" event="_yohzoV64gkODZmxuWjMmOA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_hS6JI012l0K9-hdqjW4OJQ" name="T5" source="_wdvRkSQH8UuO5vR9ZuQdXg" target="__CGGsNpJoE2kFrWfC5SbOQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_qXYnbBiTIUG2tWLivJRF_Q" annotatedElement="_hS6JI012l0K9-hdqjW4OJQ">
+              <body>Traces to: THM-REQ-08, THM-REQ-16</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_RiDQyeHQF0S84DuRVkiS0Q" name="pan continues toward baking; reset wrong-fill count"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_9okuNiq48UqcPkb7tq1Kng" name="fill weight within tolerance" event="_3c9MPmMeHEuinT0GXYWe1g"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_3Fq5cRFSlkqdU55MEcxmiw" name="T6" source="_wdvRkSQH8UuO5vR9ZuQdXg" target="_wFCJ1ZOce0GNkaJEBrJDBQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_pGIcB2uNcUKv69GOUZFdUA" annotatedElement="_3Fq5cRFSlkqdU55MEcxmiw">
+              <body>Traces to: THM-REQ-10, THM-REQ-16</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_12UORhwROE6PIF4KMwEI7A" name="count wrong fill"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_DLQvqkdJEEqVeOA_7YSq8Q" name="fill weight outside tolerance" event="_ItX-hTY8906BdBID7JXSVw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_-iIZ3FbZTUiPqp3jmf2zBw" name="T7" guard="_YcE22hdxBkaRmDFDOvPS-g" source="_wFCJ1ZOce0GNkaJEBrJDBQ" target="__CGGsNpJoE2kFrWfC5SbOQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_NTB6Y1BOoEq8X4WyPinVcw" annotatedElement="_-iIZ3FbZTUiPqp3jmf2zBw">
+              <body>Traces to: THM-REQ-11, THM-REQ-12, THM-REQ-13</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_YcE22hdxBkaRmDFDOvPS-g" name="wrong-fill count below N_wrong">
+              <specification xmi:type="uml:LiteralString" xmi:id="_iom8yebW8kmHCxbmMVb1TQ" value="wrong-fill count below N_wrong"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_FRcuyID3-keMZ2CULlm-CA" name="publish log event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_lTSLLqUPDUW5aTgRf5S9Bw" name="pan diverted" event="_ud9_QUQXYECOaGW1-XRmrA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_IU3ZHsAQ7EKF3BD05elfSg" name="T8" guard="_pAUs7QKbOky-JStHRMBLhA" source="_wFCJ1ZOce0GNkaJEBrJDBQ" target="_xP5mtrfKhUKt55FFwc0neA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_g_MKGj250kSebvD-46ULFQ" annotatedElement="_IU3ZHsAQ7EKF3BD05elfSg">
+              <body>Traces to: THM-REQ-17, THM-REQ-18, THM-REQ-20</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_pAUs7QKbOky-JStHRMBLhA" name="wrong-fill count equals N_wrong">
+              <specification xmi:type="uml:LiteralString" xmi:id="_G1HfN6mu50yI1PnYreMRRQ" value="wrong-fill count equals N_wrong"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Nm3oFazENU2_F8LIHf1DEw" name="publish error event, send Depositing stopped / working again (stopped)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_QT6_Vs8A_k-cFMYSldmJmw" name="pan diverted" event="_ud9_QUQXYECOaGW1-XRmrA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_rq3u-xP7N0uJsRUVQFWxtw" name="T9" guard="_q3lzALM5OEu0O772-AmtAQ" source="_xP5mtrfKhUKt55FFwc0neA" target="__CGGsNpJoE2kFrWfC5SbOQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_cLLt3aMq_keHVgcqc3VQHw" annotatedElement="_rq3u-xP7N0uJsRUVQFWxtw">
+              <body>Traces to: THM-REQ-19, THM-REQ-20</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_q3lzALM5OEu0O772-AmtAQ" name="repair is for the depositing equipment">
+              <specification xmi:type="uml:LiteralString" xmi:id="_S91JK5XQrUCa27XJ85aXdg" value="repair is for the depositing equipment"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_GoFFXFZTn06iv7RbJvjNyg" name="resume depositing"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_Qo_OkeS65kmUYotewiipOw" name="Repair confirmed" event="_5kJs6X5wj0GT2K-477uasw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_aiL-wV8ScUyafxuB2WOBIw" name="T10" source="__CGGsNpJoE2kFrWfC5SbOQ" target="_B15ObLuGm0KRnsi42C6i7Q">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_W-7QhLQdckeeDVWvLpgJIA" annotatedElement="_aiL-wV8ScUyafxuB2WOBIw">
+              <body>Traces to: THM-REQ-21, THM-REQ-20</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_U5vqOBH42EOreK5a2fLecQ" name="stop admitting new pans; send Depositing stopped / working again (stopped)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_p5qwrvEsZEa36aCrkzDcJw" name="Zone fault" event="_Z4pJWwMKaU-QWj6p63KjCA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_3WtZGdITpkqSxmefROm3LA" name="T11" source="__CGGsNpJoE2kFrWfC5SbOQ" target="_B15ObLuGm0KRnsi42C6i7Q">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_OAtZljNDskODj03jXbzXrA" annotatedElement="_3WtZGdITpkqSxmefROm3LA">
+              <body>Traces to: THM-REQ-23, THM-REQ-20</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_AiKPH8ij5EGyTfJpvv1kOQ" name="stop admitting new pans; send Depositing stopped / working again (stopped)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_L8YutolAYEyNcw3KzIBGhg" name="Buffer full" event="_BoDP4CI6x0-oZr3CnP5_Tg"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_KtlkGlQj4kSF3eOLDBl6bQ" name="T12" guard="_FD-_FgLUVki35C7kGEJbwg" source="__CGGsNpJoE2kFrWfC5SbOQ" target="_B15ObLuGm0KRnsi42C6i7Q">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_3fVFgpTe_UiD4QE6M9dq8w" annotatedElement="_KtlkGlQj4kSF3eOLDBl6bQ">
+              <body>Traces to: THM-REQ-24, THM-REQ-20</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_FD-_FgLUVki35C7kGEJbwg" name="signal says stop">
+              <specification xmi:type="uml:LiteralString" xmi:id="_NK2_wSNT1kqKuLE9OyW4pQ" value="signal says stop"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_VlROJu0T1Uy8praGjP6ppw" name="stop admitting new pans; send Depositing stopped / working again (stopped)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_-PS0s7O3zkWiEO1KYHVbHg" name="Stop / resume pan admission" event="_5ypQFeW6gk219qxclAiQpw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_3AdwUFow3ku2igUriQg2lg" name="T13" guard="_oypaCufNAE-S6ZFKZBbxUA" source="__CGGsNpJoE2kFrWfC5SbOQ" target="_B15ObLuGm0KRnsi42C6i7Q">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_kFME8L9kG0mXpuRlEtwS7Q" annotatedElement="_3AdwUFow3ku2igUriQg2lg">
+              <body>Traces to: THM-REQ-65</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_oypaCufNAE-S6ZFKZBbxUA" name="band halt">
+              <specification xmi:type="uml:LiteralString" xmi:id="_sXSou0zGW0qI4XLOhkqcPQ" value="band halt"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_fYaKiDCsg0-SWHLhLBqlcg" name="stop admitting new pans"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="__aEpDVQ7oUu-fjCMhY8dzA" name="Band state change" event="_zSwn4OmQs06SxCMlNDgJXQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_9t4NEnfUOUe3N9zedSKLQw" name="T14" guard="_mN2tkmnX4U-kcPCskoawIA" source="_B15ObLuGm0KRnsi42C6i7Q" target="__CGGsNpJoE2kFrWfC5SbOQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Q_RU27t0DUqsb21_Opr5cA" annotatedElement="_9t4NEnfUOUe3N9zedSKLQw">
+              <body>Traces to: THM-REQ-25, THM-REQ-60, THM-REQ-67, THM-REQ-20</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_mN2tkmnX4U-kcPCskoawIA" name="no stop reason remains active">
+              <specification xmi:type="uml:LiteralString" xmi:id="_f9meqAxA_kmPD00ToxSnxg" value="no stop reason remains active"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_F-XeuFN5f0u2UARC1-G-OA" name="resume admitting new pans"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_NohbItzfSE2MwUYtGFUIng" name="stop reason cleared" event="_vgE4PLTJyUaA7_kAKboKZw"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_qVkw8s5skEuR6pdj3IWoYQ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="__CGGsNpJoE2kFrWfC5SbOQ" name="Waiting for Pan">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_uF6pXjcPQU6muUJYMWtcUA" name="check whether a pan is present"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_nyP7OXItcEmmqxQd-dnQQA" name="ready depositing point"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_j806btBJgUOvddGNemqm3A" name="record batch ID of incoming batter"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_5tjI12RDh0azzUugAVTpVw" name="Depositing">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_bEcwWD0V6EuJuO8ihPT-5A" name="release recipe-defined fixed amount of batter"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_PINL58OIUUa5EdoUGr911w" name="close batter release"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_wdvRkSQH8UuO5vR9ZuQdXg" name="Weighing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_ow9M4II4D0WVlmqQk-kX7w" name="compare fill weight with target and tolerance"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_iTet2mhNrk6vA7NtE7H0hg" name="start weight reading"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_X745v-ce5EajNyuy49_BuQ" name="publish fill weight result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_wFCJ1ZOce0GNkaJEBrJDBQ" name="Diverting Pan">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_xx9ZclYSNkOvjJnwKyy4-w" name="discard batter of the pan"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_oyY-Ko2VPUWEzgjxhgvIyg" name="divert pan off the band"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_BM0qOVBkwkC-1MWxw0QTpA" name="send Pan for washing"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_xP5mtrfKhUKt55FFwc0neA" name="Locked Out">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Yqikg7pmokmM-pEAxDhjXA" name="wait for Repair confirmed"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UMHIqIqjEku1L6qdgZhEIQ" name="stop depositing"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_jM5b1toSQUWd1ga1a94Ulg" name="send Depositing stopped / working again (working again)"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_B15ObLuGm0KRnsi42C6i7Q" name="Admission Stopped">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_u1CVa5W7mUu4PVKDKlk9og" name="keep list of active stop reasons"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_9VIrcLqE9U-ERzds0z47bg" name="stop admitting new pans"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_IAgGTKC1I0KpDz6I2kR4og" name="send Depositing stopped / working again (working again)"/>
+          </subvertex>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_cwazN3lNvUWx56KVnbbXKQ" name="SM2 Baking Zone Control">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_M8o9iFGtQkGrou_h78IHZg" annotatedElement="_cwazN3lNvUWx56KVnbbXKQ">
+          <body>Behavior of Baking Zone Control (THM-AF-02) for one baking zone with its thermocouples and heaters (THM-FD-05, THM-FD-06): local control loop, adjustment, zone fault and recovery. Zone control keeps running while product is inside the baking tunnel.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_XtZk0LbN1Eu8BtWZUlSmLg" name="Baking Zone">
+          <transition xmi:type="uml:Transition" xmi:id="_KW37_YgEqU24hM4WoFqFoA" name="T0" source="_EFdu1qFIfE-lqCHYzxi-hg" target="_q3nyK8ssJEaVZ2Axm0RZvQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_uySF8gUHT0Sj3rH2_6yIrw" name="T1" source="_q3nyK8ssJEaVZ2Axm0RZvQ" target="_Y5Yrz-91HEG8o0ksGs699Q">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_21dLUfExDEiutW7RJaQR3w" annotatedElement="_uySF8gUHT0Sj3rH2_6yIrw">
+              <body>Traces to: THM-REQ-26, THM-REQ-28</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Sph9sLKN6kCh2g7wNk8GSQ" name="adjust heating of the zone"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_LavfgM0Q70OU3JjPGyfHrA" name="zone temperature out of range" event="_jkb5aqsc3kiKg2Wj9-hx2Q"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_XkJEPJq400C_c9dHFD8Nsw" name="T2" source="_Y5Yrz-91HEG8o0ksGs699Q" target="_q3nyK8ssJEaVZ2Axm0RZvQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_p4uGtRpOK0KRQr792iTV-Q" annotatedElement="_XkJEPJq400C_c9dHFD8Nsw">
+              <body>Traces to: THM-REQ-26, THM-REQ-27</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_2AMTU6CyYke5CKtbqF9ASA" name="continue local control loop"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_bc85m3_OIEChXtpTfYzw2Q" name="zone temperature back in range" event="_XBOyPUpZPE2TwIH0t8aVpA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_VD8tTXm0RkCniT5Rnl8TIA" name="T3" guard="_asWsagKTIEOBqHSyi74SEA" source="_Y5Yrz-91HEG8o0ksGs699Q" target="_HOgkpHXnfUyF5FbAtvWfdg">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_3x0BKbG3DUqb5JfaSbLeDg" annotatedElement="_VD8tTXm0RkCniT5Rnl8TIA">
+              <body>Traces to: THM-REQ-29, THM-REQ-30, THM-REQ-21, THM-REQ-22</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_asWsagKTIEOBqHSyi74SEA" name="zone temperature still out of range">
+              <specification xmi:type="uml:LiteralString" xmi:id="_zimTrPYNLUm8GUF6pBHKtQ" value="zone temperature still out of range"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_QdbpZuUsHEyofMrFSR_9AA" name="send Zone fault, publish error event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_ntQ6jCsbk0-NduRgh_fkKQ" name="T_adjust elapsed" event="_prFoShMVqkyL0Hf3LJrTeg"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_E-4Pi6KJgkeyqTAQUq9G7g" name="T4" guard="_VMb9-8myV0Oq4braxpYzPg" source="_HOgkpHXnfUyF5FbAtvWfdg" target="_q3nyK8ssJEaVZ2Axm0RZvQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_0Xn_3EVfjECK7k2GZ0pcFA" annotatedElement="_E-4Pi6KJgkeyqTAQUq9G7g">
+              <body>Traces to: THM-REQ-31</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_VMb9-8myV0Oq4braxpYzPg" name="zone temperature within range">
+              <specification xmi:type="uml:LiteralString" xmi:id="_ln5qR0INBEKQh-jdV2NOqA" value="zone temperature within range"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_litmy1HPk0Smg_BHzk3ssA" name="clear faulty flag"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_HUZAyCGdFUKXpmxbHwj5CQ" name="Repair confirmed" event="_5kJs6X5wj0GT2K-477uasw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QPvh3GMPDkGS7SA-KYucFg" name="T5" kind="internal" source="_q3nyK8ssJEaVZ2Axm0RZvQ" target="_q3nyK8ssJEaVZ2Axm0RZvQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_fOuy9UvDeEWnqRkxt75WUA" annotatedElement="_QPvh3GMPDkGS7SA-KYucFg">
+              <body>Traces to: THM-REQ-27, THM-REQ-65, THM-REQ-74</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_1YjGVfmek0mS-pRudfq5Lg" name="keep regulating while product is inside"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_9qiT0VdI7UygMWsfZ1I_uw" name="Band state change" event="_zSwn4OmQs06SxCMlNDgJXQ"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_EFdu1qFIfE-lqCHYzxi-hg" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_q3nyK8ssJEaVZ2Axm0RZvQ" name="Regulating">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_DAln9mxEUU2v94eAa7XxDQ" name="regulate zone temperature in the local control loop while product is inside"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_qGx82kP-YESDm_7ezmCI4g" name="select zone setpoint"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_Y5Yrz-91HEG8o0ksGs699Q" name="Adjusting">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_5YMdN47SDUig871oTbJu5w" name="adjust zone heating"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_q-ZrRjqdiEusxeYyNvey9g" name="start timer T_adjust"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_AYq2LtGdzUqr4x-A8_cqow" name="stop timer T_adjust"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_HOgkpHXnfUyF5FbAtvWfdg" name="Zone Faulty">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_pMUIJyFbYk-qOO8Kb5mqiA" name="keep regulating zone while product is inside"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_YR3nj5IpTEaJ0yFerSvkoA" name="flag zone as faulty"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_iiBIt9Axa0agFW6KmpsMZQ" name="clear faulty flag"/>
+          </subvertex>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_sX8Fl8oD40aaAeXfqLtsFg" name="SM3 Tunnel Exit Inspection">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_efcFHTxPFkmFPLlvINNdgg" annotatedElement="_sX8Fl8oD40aaAeXfqLtsFg">
+          <body>Behavior of Tunnel-Exit Controller (THM-AF-04) with the Heat Camera, the Tunnel-Exit Diverter and the Refuse Container (THM-FD-07 to THM-FD-09): 100 % temperature check at 97 °C ± 0.5 °C, diversion, camera failure fallback and diversion while the cooling buffer is full.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_DlebfUksFEyzH8tsHlnzgw" name="Tunnel Exit">
+          <transition xmi:type="uml:Transition" xmi:id="_r7zokeLAUE-7BwoU8_C2Ag" name="T0" source="_vl4--G5Vv0OeHGx5FwQwrQ" target="_Sj68gC8zbEOMtWZ4kCmHWg"/>
+          <transition xmi:type="uml:Transition" xmi:id="_X7jhNPGPxEOSX1qJESIFUg" name="T1" kind="internal" source="_Sj68gC8zbEOMtWZ4kCmHWg" target="_Sj68gC8zbEOMtWZ4kCmHWg">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_a4EnIjriJUqD3Re1naKCGA" annotatedElement="_X7jhNPGPxEOSX1qJESIFUg">
+              <body>Traces to: THM-REQ-32, THM-REQ-33, THM-REQ-75</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_2CSFlK0MlkSWe8kIfHHEhQ" name="pass cake to cooling"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_RMQiTLx8dka9vV_EAJP_dw" name="cake temperature within 97 °C ± 0.5 °C" event="_igApunyJEUyUQ5JJWBuw5A"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_i6XoCsyUj0OlBOhVZiJcvQ" name="T2" source="_Sj68gC8zbEOMtWZ4kCmHWg" target="_8fotz-5xM0StFrNWvyi-nw">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_gKcOLHyqNkKWYtX_Wtnfkg" annotatedElement="_i6XoCsyUj0OlBOhVZiJcvQ">
+              <body>Traces to: THM-REQ-34, THM-REQ-35</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_xDcdiIZwqEaDGQqhExXQ1Q" name="divert cake"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_xr1M7pH9ZkyjjyIwLA0-7g" name="cake temperature outside 97 °C ± 0.5 °C" event="_w585rCU41UysXJMF5bZ3GA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_3yag3iVl6E2lyr-MST8kUA" name="T3" source="_8fotz-5xM0StFrNWvyi-nw" target="_Sj68gC8zbEOMtWZ4kCmHWg">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_uHisfq5bEUCINEPHnV0Y1Q" annotatedElement="_3yag3iVl6E2lyr-MST8kUA">
+              <body>Traces to: THM-REQ-35, THM-REQ-77</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_DCtb5EgNe0eyYeW-VCXhaw" name="publish discard event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_JYinmq_rhUm5VPQhypCFtA" name="cake diverted" event="_z9sq6hCiJEe5AmgWciVTrg"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_w5ldeUGK8064n99i_3y2QA" name="T4" source="_Sj68gC8zbEOMtWZ4kCmHWg" target="_JoMo5digzkOm5p7pKSfoYQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_wGGomM42VUe-LR3vBs1POw" annotatedElement="_w5ldeUGK8064n99i_3y2QA">
+              <body>Traces to: THM-REQ-36, THM-REQ-38</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_uvys_OHu_UCA9Z9jaFnRjQ" name="divert all cakes, publish error event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_Oa8vx0P1K0G-cuGuW3itSw" name="no valid reading within T_resp" event="_qA3gE_Ybd0ymvoIiYL81eg"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_DN9TixV-bkaBOfyJhsAOOQ" name="T5" kind="internal" source="_JoMo5digzkOm5p7pKSfoYQ" target="_JoMo5digzkOm5p7pKSfoYQ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Ubi-lQL1Bkicj1F7bWyxpg" annotatedElement="_DN9TixV-bkaBOfyJhsAOOQ">
+              <body>Traces to: THM-REQ-36, THM-REQ-37, THM-REQ-77</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_nwg1slKt_k2Q8SSqm5I4kg" name="divert cake, publish discard event (cannot be checked)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_Eu38O79u-0mIabm_ruugTg" name="cake leaving the tunnel" event="_hJj3e92JQEaPv3ar-C6JCQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_yPx0M4PEu0q4MXX9UeQ-bg" name="T6" guard="_4mqFqNCPDUerZBNHhRTs4Q" source="_JoMo5digzkOm5p7pKSfoYQ" target="_Sj68gC8zbEOMtWZ4kCmHWg">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_PUk1oXoE-0GfCj7F5F4fsg" annotatedElement="_yPx0M4PEu0q4MXX9UeQ-bg">
+              <body>Traces to: THM-REQ-39</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_4mqFqNCPDUerZBNHhRTs4Q" name="repair is for the temperature measurement">
+              <specification xmi:type="uml:LiteralString" xmi:id="_lvWUr1y0wUKsGWqxiRoMpA" value="repair is for the temperature measurement"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_JJDSsEknqUaevQ1f3pdTUQ" name="resume normal 100 % check"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_t7LFAv5yVkGgyJTWhAAx8Q" name="Repair confirmed" event="_5kJs6X5wj0GT2K-477uasw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_tXnE9rV1DECS8eJyrnSu5A" name="T7" source="_Sj68gC8zbEOMtWZ4kCmHWg" target="_wDIHc-5zdE-qs6Bn-8hcfg">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_4Dg-3DofzUWHkypFeUZ1mA" annotatedElement="_tXnE9rV1DECS8eJyrnSu5A">
+              <body>Traces to: THM-REQ-58, THM-REQ-59</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_SatMcKi87kmjrFbeLhbUYQ" name="divert cakes still leaving the tunnel"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_MbJWlSdNck6V3gCq4v3GOg" name="Buffer full" event="_BoDP4CI6x0-oZr3CnP5_Tg"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_707HcXTuZk-_LG9u7u7sOw" name="T8" source="_wDIHc-5zdE-qs6Bn-8hcfg" target="_Sj68gC8zbEOMtWZ4kCmHWg">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_meIs1icZIUyN7HJAKat8PQ" annotatedElement="_707HcXTuZk-_LG9u7u7sOw">
+              <body>Traces to: THM-REQ-60</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_3N6nc7PGCkevnKgWvny4SQ" name="resume normal 100 % check"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_aSC-wkyoJ0WzSiq4vbEoXw" name="cooling buffer has free places" event="_tRa3qhMJ_EmmOCH_l7NcDg"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_vl4--G5Vv0OeHGx5FwQwrQ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_Sj68gC8zbEOMtWZ4kCmHWg" name="Checking Cakes">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_bPHI8AtZtEa-NQtaJ-EuoA" name="measure internal temperature of every cake leaving the tunnel"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_T7D1SKrOPk2A27oC-POCpg" name="start measurement of the cake temperature"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_8fotz-5xM0StFrNWvyi-nw" name="Diverting Cake">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Ovv2QmS33Uq8SuOchm1vIg" name="divert cake to the refuse path"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_F_aT7u3EgUKJoarqeBzmjg" name="publish discard event (undercooked or overcooked, time, batch ID)"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_JoMo5digzkOm5p7pKSfoYQ" name="Camera Failed">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_XOwXDBI4V0Cq1c12m_qKOw" name="divert every cake leaving the tunnel to the refuse path"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_teVVmwPci0Ks7gKoiqgt-g" name="publish error event"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_daveW2VxqkSkvGn1c9j0fg" name="resume normal 100 % check"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_wDIHc-5zdE-qs6Bn-8hcfg" name="Diverting All Cakes">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Sx39OtWxtkmDaZRObXBhuQ" name="publish discard event (buffer full, time, batch ID)"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zYs4nlubw0mD2ytMaakb5w" name="divert cakes still leaving the tunnel"/>
+          </subvertex>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_3kJSzTzfKkOpkf_6yxWxhw" name="SM4 Cooling and Buffer">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_rmilkB_m-kCQ__7SRDE_8g" annotatedElement="_3kJSzTzfKkOpkf_6yxWxhw">
+          <body>Behavior of Cooling Control (THM-AF-03) and Cooling Buffer Management (THM-AF-05) with sprays, core temperature probe, cooling diverter and cooling buffer (THM-FD-10 to THM-FD-13): cooling to T_safe, handoff of cooled cakes, cooling failure with buffering, release after repair, waiting-time limit and the 30-minute rule. The discard variant (no buffer, THM-FEAT-21) is not shown.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_xwCLBxn-5UWRmRk6M0_FNQ" name="Cooling">
+          <transition xmi:type="uml:Transition" xmi:id="_SF5u_QnwUk2Q0VEOkkIg_A" name="T0" source="_3H6p7FMudk-YBkETsbNN4w" target="_vhX6kXXaNEes7pkO1rPtxA"/>
+          <transition xmi:type="uml:Transition" xmi:id="_SLk_gHrSRkeINk4EbMZZTA" name="T1" kind="internal" source="_vhX6kXXaNEes7pkO1rPtxA" target="_vhX6kXXaNEes7pkO1rPtxA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Hx4Uw1Vhdk6Kf9t7a3h6lg" annotatedElement="_SLk_gHrSRkeINk4EbMZZTA">
+              <body>Traces to: THM-REQ-40, THM-REQ-41, THM-REQ-42, THM-REQ-43</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_qhVXTWui_UmRo-VkvaMWsg" name="send Cooled cake with batch ID"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_s7QBI7dAdUyUcGVfHaELEQ" name="core temperature at or below T_safe" event="_RcXiMd_Da0msavB5TzxUlw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_m10AOlDm9kWSr_orPvxoMA" name="T2" source="_vhX6kXXaNEes7pkO1rPtxA" target="_lwNqazR-4kmsR3RMRYj8Zw">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_hso9wB5Az0KSg1wH1-Jr5A" annotatedElement="_m10AOlDm9kWSr_orPvxoMA">
+              <body>Traces to: THM-REQ-44</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_CkL2ruETXUKMiMONmaLzjA" name="increase cooling"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_uaIpgTbpmkqIoUjqDFKISw" name="core temperature above T_safe" event="_2VykvnWx-EKt916WvuDuzA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_ac7ieaR320KWJ4m_VSD5cQ" name="T3" source="_lwNqazR-4kmsR3RMRYj8Zw" target="_vhX6kXXaNEes7pkO1rPtxA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_3wThs1hAAUG-CKbQ_e_Prg" annotatedElement="_ac7ieaR320KWJ4m_VSD5cQ">
+              <body>Traces to: THM-REQ-42</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_9wkU52855Ea6fyPM4K7DKg" name="send Cooled cake with batch ID"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_x78t1QMkcUeqpq0nzAYbIg" name="core temperature at or below T_safe" event="_RcXiMd_Da0msavB5TzxUlw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_GCSs-FMmOEGpa6l9Q77F3A" name="T4" kind="internal" source="_lwNqazR-4kmsR3RMRYj8Zw" target="_lwNqazR-4kmsR3RMRYj8Zw">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_lSeZBl6JP0mjOW97t6YRMg" annotatedElement="_GCSs-FMmOEGpa6l9Q77F3A">
+              <body>Traces to: THM-REQ-45</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_AXf1E3hmxEGfmaUDY6IEmA" name="route cake to the cooling buffer"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_ejGBHil9J0eTr5xgFTmqVQ" name="core temperature still above T_safe" event="__nlEVBBJOEiu2f-PnnsdMA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_kNrnyx_60kWgKVkeMbN0-w" name="T5" source="_vhX6kXXaNEes7pkO1rPtxA" target="_PZQBNGWR_0WUDdtK3ekrBA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_OuhzaYgtnECjYJ4bQrV7fg" annotatedElement="_kNrnyx_60kWgKVkeMbN0-w">
+              <body>Traces to: THM-REQ-46, THM-REQ-47, THM-REQ-49</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_oxYdypP0K0CObBCkGgiOgg" name="publish error event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_AZGRTy3xjkOzoXGP5VDhOw" name="cooling failure detected" event="_6IrRi99-t0yJHlDcoYCu8A"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_yZAronv4OEuH8ppQuXOAuA" name="T6" source="_lwNqazR-4kmsR3RMRYj8Zw" target="_PZQBNGWR_0WUDdtK3ekrBA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_LvZJ1b8MNk6Ws_4IeIogdg" annotatedElement="_yZAronv4OEuH8ppQuXOAuA">
+              <body>Traces to: THM-REQ-46, THM-REQ-47, THM-REQ-49</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_0r_ryhSLW02yO49o2u6cWw" name="publish error event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_z1N3qWlJ70WEIctEwuBwGQ" name="cooling failure detected" event="_6IrRi99-t0yJHlDcoYCu8A"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_ZjRlHrPja0SijjXWkMn3Lg" name="T7" kind="internal" source="_PZQBNGWR_0WUDdtK3ekrBA" target="_PZQBNGWR_0WUDdtK3ekrBA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_o5_xz3XzPE2SL7tGYt8p-g" annotatedElement="_ZjRlHrPja0SijjXWkMn3Lg">
+              <body>Traces to: THM-REQ-53, THM-REQ-54, THM-REQ-55</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_0t-jFrxVh02bdSUNv2tMig" name="move cake to the refuse path, publish discard event (waited too long)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_xBl2Si0DnEKU2SqbEkb8lA" name="waiting time exceeds T_wait" event="_LYrlJmtnhUib5CFKHk7ajA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_KBHuRuxLHka-34vyUGy3Sw" name="T8" kind="internal" source="_PZQBNGWR_0WUDdtK3ekrBA" target="_PZQBNGWR_0WUDdtK3ekrBA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_vG349Z7dnUmBq0Z7jUx6fA" annotatedElement="_KBHuRuxLHka-34vyUGy3Sw">
+              <body>Traces to: THM-REQ-48, THM-REQ-57</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_vjakKNMdpEyfVoTZoGPGAA" name="report buffer full to Depositing Control and Tunnel-Exit Controller"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_25wiVu7w6UKqO0fTeKSkUg" name="Buffer full" event="_BoDP4CI6x0-oZr3CnP5_Tg"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_awwfzlj_LESKACllwJFvcg" name="T9" guard="_boTr9M5nO0OQe6OfSEn7XQ" source="_PZQBNGWR_0WUDdtK3ekrBA" target="_enOH8A9EdUW76NJx-qg0lw">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_bkpDHo05nk-f5hBhzuYyNQ" annotatedElement="_awwfzlj_LESKACllwJFvcg">
+              <body>Traces to: THM-REQ-50, THM-REQ-51</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_boTr9M5nO0OQe6OfSEn7XQ" name="repaired within 30 minutes of the failure">
+              <specification xmi:type="uml:LiteralString" xmi:id="_tunISwjtnkG2VwyOs_FZbA" value="repaired within 30 minutes of the failure"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_w9R0BHBj5EKplsXAs4TTkA" name="lower cooling diverter"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_9SCH1HsUOkm6NvTnbiIN1A" name="Repair confirmed" event="_5kJs6X5wj0GT2K-477uasw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_mv0uWEZOBEeSOXz_g1eJqQ" name="T10" guard="_ToJAZ05at0KQv7PEijd9Og" source="_PZQBNGWR_0WUDdtK3ekrBA" target="_vhX6kXXaNEes7pkO1rPtxA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_m-nWHVuXYUW6Pm1-l9vc3Q" annotatedElement="_mv0uWEZOBEeSOXz_g1eJqQ">
+              <body>Traces to: THM-REQ-56, THM-REQ-50</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_ToJAZ05at0KQv7PEijd9Og" name="more than 30 minutes since the failure">
+              <specification xmi:type="uml:LiteralString" xmi:id="_UqrWWO9L2E6wPd-EqUkqSw" value="more than 30 minutes since the failure"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_0rui8_j00EeYUa58Zzse7Q" name="move all cakes on the cooling conveyor and in the waiting zone to the refuse path"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_TmmnmO16lESMtvJGkkFa5Q" name="Repair confirmed" event="_5kJs6X5wj0GT2K-477uasw"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_BZTaUql2NEGcBR8uxr87WA" name="T11" kind="internal" source="_enOH8A9EdUW76NJx-qg0lw" target="_enOH8A9EdUW76NJx-qg0lw">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_3i9MQJR2nUyc8mdyUcEdpw" annotatedElement="_BZTaUql2NEGcBR8uxr87WA">
+              <body>Traces to: THM-REQ-52</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ntkBLydlD02drvIZUdz02w" name="send Cooled cake if at or below T_safe, otherwise through the cooling zone again"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_BtZ6b0Wva0WMDDkeWWwOhQ" name="released cake measured" event="_Qvk8GdlyNky6sEN2tdL0MA"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_hJkrOD__VUSZ3qRcBe2zmg" name="T12" source="_enOH8A9EdUW76NJx-qg0lw" target="_vhX6kXXaNEes7pkO1rPtxA">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_XygFRh8yaEeWS_rMIGkTxA" annotatedElement="_hJkrOD__VUSZ3qRcBe2zmg">
+              <body>Traces to: THM-REQ-52, THM-REQ-60</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_7Kap4HEbpkSRb0mDPOE1Xg" name="continue normal cooling"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_CpJwTJpznUST10C_L5Ee5w" name="cooling buffer empty" event="_e_C4pWO1a0GRpjQ1kZyDKg"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_3H6p7FMudk-YBkETsbNN4w" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_vhX6kXXaNEes7pkO1rPtxA" name="Cooling">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_-R71PLXQGkug4GSElAuuPQ" name="measure core temperature of every cake at the cooling exit"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_m7KJs6jWIkydQsocqkIpcg" name="control sprays toward T_safe"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_lwNqazR-4kmsR3RMRYj8Zw" name="Increased Cooling">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_k3uS8orgIEeRzKgi4-GgKg" name="measure core temperature of the cake again"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_yqmKf1yVIUKu__reHg94yg" name="increase cooling"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_PZQBNGWR_0WUDdtK3ekrBA" name="Cooling Failed">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_hW9iBt-gjk6ZGa3A1xY0uw" name="hold cakes in the cooling buffer; track waiting time of every cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_OxSb7KLYzE27uYXMseKDbA" name="route new cakes to the cooling buffer; let cakes in the zone finish and go to the buffer"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_TBZ1rjawuUafWSgtsR8xPw" name="record time of repair"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_enOH8A9EdUW76NJx-qg0lw" name="Recovering">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_NFHsSlVCx0GWdMFx4Dtlmg" name="release buffered cakes one by one in order of arrival"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_MArae4vcE0GblWNIULkCjQ" name="route new cakes to the cooling zone again"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_UmWJO4ZF50qWTQaUAgn4yw" name="continue normal cooling"/>
+          </subvertex>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_qSwUO4QCz06ulNotYZnDtg" name="SM5 Band Response Reporting and Recovery">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_i24fGNUHZEmJDdvu_K1kEQ" annotatedElement="_qSwUO4QCz06ulNotYZnDtg">
+          <body>Behavior of Band-State Response, Event Reporting, Health Reporting and Recovery Coordination (THM-AF-06 to THM-AF-09), running in parallel: response to the Band state change, publishing of events and Machine status (heartbeat), and distribution of Repair confirmed.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_fKOPMuIzokmHxSrXhP8EKQ" name="Slice Operation">
+          <transition xmi:type="uml:Transition" xmi:id="_z9PJZPa1TE-XKClobkZCow" name="T0" source="_tpZqBYhXcUmgG29KXYvJnQ" target="_6YGVO7x5-UuPNAM9HUlBNw"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_tpZqBYhXcUmgG29KXYvJnQ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_6YGVO7x5-UuPNAM9HUlBNw" name="Operating">
+            <region xmi:type="uml:Region" xmi:id="_ye8CQ1IFyk-VQiGwjqW8lQ" name="Band Response">
+              <transition xmi:type="uml:Transition" xmi:id="_Kb1S8GBMfkO5BYSSVCYQBw" name="T0" source="_QCK-kwJv7UawoXPO_AdH-Q" target="_8U16biX51EKKD8dS_aC52w"/>
+              <transition xmi:type="uml:Transition" xmi:id="_ujDnk0MvSkG04UVV0wxtmw" name="T1" guard="_8KsaW1XxyUC-vVrOPb37SQ" source="_8U16biX51EKKD8dS_aC52w" target="_7eWSC4Rhx0-FlvMGIe5eEQ">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_Be19jZKx8E-ujSE-tu3q5g" annotatedElement="_ujDnk0MvSkG04UVV0wxtmw">
+                  <body>Traces to: THM-REQ-66, THM-REQ-78</body>
+                </ownedComment>
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_8KsaW1XxyUC-vVrOPb37SQ" name="slow-down">
+                  <specification xmi:type="uml:LiteralString" xmi:id="_ACTgKsKd5UCC9MUHzYWBAA" value="slow-down"/>
+                </ownedRule>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Vuc2qiKWmES2p2YEJyVD_Q" name="continue at the reduced band speed"/>
+                <trigger xmi:type="uml:Trigger" xmi:id="_UX7fwRQWpUKqLKuQ8METQQ" name="Band state change" event="_zSwn4OmQs06SxCMlNDgJXQ"/>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_Ia8l_X7ujkCCpKSxY-nPVg" name="T2" guard="_0zQ6UKAFmUW4PTSM4Olvag" source="_8U16biX51EKKD8dS_aC52w" target="_ibVvPbeJrkSJMQ9TZZ4RFw">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_bbIQXgqI1E6JDWFbzOj4fg" annotatedElement="_Ia8l_X7ujkCCpKSxY-nPVg">
+                  <body>Traces to: THM-REQ-65, THM-REQ-78</body>
+                </ownedComment>
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_0zQ6UKAFmUW4PTSM4Olvag" name="halt">
+                  <specification xmi:type="uml:LiteralString" xmi:id="_aY-GH41Wx0CGL2xEBuvUBw" value="halt"/>
+                </ownedRule>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_2MZ1xtXyZEuQ_pYas0FwzA" name="stop admitting new pans"/>
+                <trigger xmi:type="uml:Trigger" xmi:id="_g4C4sGZyqkuCQH4noBkMXA" name="Band state change" event="_zSwn4OmQs06SxCMlNDgJXQ"/>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_OpQclVCLT0aNhoAtY7AZng" name="T3" guard="_FAXaZCfsM0K_7dDoOxwQEA" source="_7eWSC4Rhx0-FlvMGIe5eEQ" target="_ibVvPbeJrkSJMQ9TZZ4RFw">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_su06A1xfYUmjZOSGtcs05A" annotatedElement="_OpQclVCLT0aNhoAtY7AZng">
+                  <body>Traces to: THM-REQ-65</body>
+                </ownedComment>
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_FAXaZCfsM0K_7dDoOxwQEA" name="halt">
+                  <specification xmi:type="uml:LiteralString" xmi:id="_NzowFAvTt0O-oPS069Wwmg" value="halt"/>
+                </ownedRule>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_4oOAOpBWT0SvlDahvBK8RA" name="stop admitting new pans"/>
+                <trigger xmi:type="uml:Trigger" xmi:id="_YsjKwwVw3kOEE7lWB71fhQ" name="Band state change" event="_zSwn4OmQs06SxCMlNDgJXQ"/>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_d9197VXCFkGs6oQ4Tziu_Q" name="T4" guard="_jQtL9QiBXUiGNg5jY-CC6Q" source="_7eWSC4Rhx0-FlvMGIe5eEQ" target="_8U16biX51EKKD8dS_aC52w">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_sKh1hiI1okGeVd0Ta3S-Fw" annotatedElement="_d9197VXCFkGs6oQ4Tziu_Q">
+                  <body>Traces to: THM-REQ-67</body>
+                </ownedComment>
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_jQtL9QiBXUiGNg5jY-CC6Q" name="restart">
+                  <specification xmi:type="uml:LiteralString" xmi:id="_gBK9oM3M7Uy4uPQpgCT9cA" value="restart"/>
+                </ownedRule>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zSRFi_uh7kui_-A-wUJvpA" name="resume normal operation"/>
+                <trigger xmi:type="uml:Trigger" xmi:id="_bnQg7819O02af9b5-c-pKA" name="Band state change" event="_zSwn4OmQs06SxCMlNDgJXQ"/>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_IYw_MXNp1Uu7ZYDRFP_9hw" name="T5" guard="_hSQUKp-wAUC5eJ41ogs8wA" source="_ibVvPbeJrkSJMQ9TZZ4RFw" target="_8U16biX51EKKD8dS_aC52w">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_b6UHnKPdT0SFTCJiGHDTHA" annotatedElement="_IYw_MXNp1Uu7ZYDRFP_9hw">
+                  <body>Traces to: THM-REQ-67, THM-REQ-25</body>
+                </ownedComment>
+                <ownedRule xmi:type="uml:Constraint" xmi:id="_hSQUKp-wAUC5eJ41ogs8wA" name="restart">
+                  <specification xmi:type="uml:LiteralString" xmi:id="_xQGDAkSCNEiMANL50RqqPw" value="restart"/>
+                </ownedRule>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_2NLTPDEwhUWXEEbCr7ocYg" name="resume normal operation; admit new pans if no other stop reason is active"/>
+                <trigger xmi:type="uml:Trigger" xmi:id="_LngKoJvKw0Oql55eBpxBnw" name="Band state change" event="_zSwn4OmQs06SxCMlNDgJXQ"/>
+              </transition>
+              <subvertex xmi:type="uml:Pseudostate" xmi:id="_QCK-kwJv7UawoXPO_AdH-Q" name="Initial"/>
+              <subvertex xmi:type="uml:State" xmi:id="_8U16biX51EKKD8dS_aC52w" name="Running">
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_VISotCaa3kOL2rZnFMU62w" name="admit new pans when no other stop reason is active"/>
+              </subvertex>
+              <subvertex xmi:type="uml:State" xmi:id="_7eWSC4Rhx0-FlvMGIe5eEQ" name="Slowed">
+                <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_U5ag_WWfd0qaK18hmKFg0w" name="keep inspecting every cake"/>
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Kt_lXK_HnUasl1hX4oBzMg" name="work at the reduced band speed"/>
+              </subvertex>
+              <subvertex xmi:type="uml:State" xmi:id="_ibVvPbeJrkSJMQ9TZZ4RFw" name="Halted">
+                <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_ze_tvBfLq0apwq6_6jqOhQ" name="keep zone control, exit inspection and cooling control running for the product already inside"/>
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_aeg40IgKOEiBRDPLcBUpSQ" name="stop admitting new pans"/>
+              </subvertex>
+            </region>
+            <region xmi:type="uml:Region" xmi:id="_coMc472MRkqgUs0cJRBICg" name="Reporting and Recovery">
+              <transition xmi:type="uml:Transition" xmi:id="_t3UGGghOUEekiUP0h1aLBQ" name="T0" source="_nSe78qihzU2bsnNnd7DTgg" target="_PlWXBdFPBEmnNV-UKVfqRQ"/>
+              <transition xmi:type="uml:Transition" xmi:id="_ZtVUONcK4UiBB0U5Y3DTfg" name="T1" kind="internal" source="_PlWXBdFPBEmnNV-UKVfqRQ" target="_PlWXBdFPBEmnNV-UKVfqRQ">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_4sqYjYBxYUOJxCpqjXy7GA" annotatedElement="_ZtVUONcK4UiBB0U5Y3DTfg">
+                  <body>Traces to: THM-REQ-64, THM-REQ-72</body>
+                </ownedComment>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_kjeKOIe6uUKUYx3CDLQAWQ" name="publish Machine status (heartbeat) of controllers and devices"/>
+                <trigger xmi:type="uml:Trigger" xmi:id="_hb6e6ZnQqU2xWs-Nl9riXQ" name="heartbeat interval T_hb elapsed" event="_DITP6IKoW0G4O2HoL-Gh3Q"/>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_RNzL1JCQFkG63ULeypoUYQ" name="T2" kind="internal" source="_PlWXBdFPBEmnNV-UKVfqRQ" target="_PlWXBdFPBEmnNV-UKVfqRQ">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_K6dpuSX_tky00zhv-arvsA" annotatedElement="_RNzL1JCQFkG63ULeypoUYQ">
+                  <body>Traces to: THM-REQ-13, THM-REQ-63, THM-REQ-69, THM-REQ-70, THM-REQ-77</body>
+                </ownedComment>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_HQ7kqS8fDUSd1DkYmYIcjg" name="publish Log, warning, error and discard events (reason, time, batch ID, type)"/>
+                <trigger xmi:type="uml:Trigger" xmi:id="_R-Zke61r_0y3nSC4MQyDYg" name="event raised" event="_jj_kmrbdt0WcheOZ3HauYQ"/>
+              </transition>
+              <transition xmi:type="uml:Transition" xmi:id="_AnISq7x2XUeTBt2MuP1RmQ" name="T3" kind="internal" source="_PlWXBdFPBEmnNV-UKVfqRQ" target="_PlWXBdFPBEmnNV-UKVfqRQ">
+                <ownedComment xmi:type="uml:Comment" xmi:id="_l2hwZUuYC0qB-HMHSLQliQ" annotatedElement="_AnISq7x2XUeTBt2MuP1RmQ">
+                  <body>Traces to: THM-REQ-68, THM-REQ-73</body>
+                </ownedComment>
+                <effect xmi:type="uml:OpaqueBehavior" xmi:id="_AexsLvHLkUexkI0lsXNdOQ" name="give the owning controller permission to resume (Resume permission)"/>
+                <trigger xmi:type="uml:Trigger" xmi:id="_SW0Faf_u70Wp51Dg9hAcdQ" name="Repair confirmed" event="_5kJs6X5wj0GT2K-477uasw"/>
+              </transition>
+              <subvertex xmi:type="uml:Pseudostate" xmi:id="_nSe78qihzU2bsnNnd7DTgg" name="Initial"/>
+              <subvertex xmi:type="uml:State" xmi:id="_PlWXBdFPBEmnNV-UKVfqRQ" name="Reporting">
+                <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_l9M2QHM85Uijfieni2AFuA" name="collect events and status of the five controllers"/>
+                <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ROsG7yL1uEmGq9hGd_RmTA" name="start heartbeat timer T_hb"/>
+              </subvertex>
+            </region>
+          </subvertex>
+        </region>
+      </packagedElement>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_NAAqoLzYEfG45YF_OaBpaA">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_NAHYULzYEfG45YF_OaBpaA" source="http://www.eclipse.org/uml2/2.0.0/UML">
@@ -1456,85 +2050,85 @@
   <Blocks:NestedConnectorEnd xmi:id="_HQbu4cJNEfGQ8p8AWzIUhA" base_Element="_HQbH0MJNEfGQ8p8AWzIUhA" propertyPath="_SZtPaKLzwEKTwJcjQfkImA" base_ConnectorEnd="_HQbH0MJNEfGQ8p8AWzIUhA"/>
   <Blocks:NestedConnectorEnd xmi:id="_LyKNocJNEfGQ8p8AWzIUhA" base_Element="_LyJmkMJNEfGQ8p8AWzIUhA" propertyPath="_MGvgJ14_tUaeDeJ3GFUJDA" base_ConnectorEnd="_LyJmkMJNEfGQ8p8AWzIUhA"/>
   <Blocks:NestedConnectorEnd xmi:id="_Qb7OEsJNEfGQ8p8AWzIUhA" base_Element="_Qb7OEMJNEfGQ8p8AWzIUhA" propertyPath="_gRqZgIoMP0Sawp1GdY_eRQ" base_ConnectorEnd="_Qb7OEMJNEfGQ8p8AWzIUhA"/>
-  <Requirements:Requirement xmi:id="_bf54kSdcgBjvlQStTQszXR" base_Class="_9Jgu8qDkTm3XOEcCNfj-b2" id="THM-REQ-01" text="The system shall accept finished batter together with its batch ID from Batter Preparation through the signal &quot;Batter ready&quot;."/>
-  <Requirements:Requirement xmi:id="_LGE1U6VeO0osUxwcAJFPU_" base_Class="_IFkQ4UYZX83SQQb2KdsCuj" id="THM-REQ-02" text="The system shall detect whether a pan is present at the depositing point before it releases any batter."/>
-  <Requirements:Requirement xmi:id="_EqNoiCy_ZodP8sqnGQPqXj" base_Class="_y19ugeE_d9aBvwjyOIDhgx" id="THM-REQ-03" text="When a pan is present at the depositing point, the system shall deposit the recipe-defined fixed amount of batter into that pan."/>
-  <Requirements:Requirement xmi:id="_Q0UuUWIHkFsC7g10Pjakiv" base_Class="_KYlK7OwbemyVf1v8XvhrY9" id="THM-REQ-04" text="While no pan is present at the depositing point, the system shall withhold batter."/>
-  <Requirements:Requirement xmi:id="_1SXyURHI3XoWUe-yGuAP_O" base_Class="_sP8i2z_DrOCrAtmnrFvlwl" id="THM-REQ-05" text="When no pan is present at the depositing point, the system shall send the signal &quot;Pan request&quot; to Finishing &amp; Packaging."/>
-  <Requirements:Requirement xmi:id="_jF64VFOipl1fpRGpWKMA_8" base_Class="_9zwd6kRWwIocsXOXU9d-AL" id="THM-REQ-06" text="When a pan is detected after a pan request, the system shall resume depositing."/>
-  <Requirements:Requirement xmi:id="_uevNNLbz-I202PtNZCZ6Yz" base_Class="_hM-uWQASJ6fdhC06v__Wj2" id="THM-REQ-07" text="The system shall weigh every filled pan."/>
-  <Requirements:Requirement xmi:id="_Z03nJ0D4U6JE7CWWE7Eb_z" base_Class="_qwFgO5fr75Ib4oj2PxcOg2" id="THM-REQ-08" text="The system shall let a filled pan continue toward baking only if its weight is within the legal tolerance (EU rules for the average quantity) of the target fill weight."/>
-  <Requirements:Requirement xmi:id="_CPCSfQRoDKvvvFDW7ipq57" base_Class="_8J1e5CAN4QfSEqrZi60VcM" id="THM-REQ-09" text="The system shall not start depositing while the fill-weight measurement is not calibrated."/>
-  <Requirements:Requirement xmi:id="_iRqYK0hRipx8Ym1i6c_bQQ" base_Class="_5okMhwcgETRasOz0mlZCg6" id="THM-REQ-10" text="The system shall divert every filled pan whose weight is outside the tolerance off the band."/>
-  <Requirements:Requirement xmi:id="_oXAZI8eNMChsTZD5YNASu_" base_Class="_qt43vnF_9VHX7KVuaqT2jy" id="THM-REQ-11" text="The system shall discard the batter of every diverted pan."/>
-  <Requirements:Requirement xmi:id="_w258OPpCqotNUNR_uv7rxT" base_Class="_K5_zX_qJqckGWnanlmNQU0" id="THM-REQ-12" text="The system shall send every diverted pan to Finishing &amp; Packaging for washing through the signal &quot;Pan for washing&quot;."/>
-  <Requirements:Requirement xmi:id="_h0Xc-7Te-sMkp0Fe-ahonX" base_Class="_2wmZiYWzEEGWFtPuiDSjgk" id="THM-REQ-13" text="The system shall publish a log event (reason, time, batch ID) for every wait for a pan and for every diverted pan."/>
-  <Requirements:Requirement xmi:id="_MLU-JnlACAKCykxFL1ZKoK" base_Class="_aPsKTa6luDLBZvmAcADqe-" id="THM-REQ-14" text="The system shall accept clean pans together with the current clean-pan stock level through the signal &quot;Clean pan supply&quot;."/>
-  <Requirements:Requirement xmi:id="_TlJ_O8oGQtzKthSbcpp_qk" base_Class="_NLbKgBrI0ctdbgpynQtNPR" id="THM-REQ-15" text="When the received clean-pan stock level is below the low-stock limit S_low, the system shall fill fewer pans."/>
-  <Requirements:Requirement xmi:id="_-5PNaW3XcSCbPLHNguSGY3" base_Class="_3G_86TS1Mg5zEDa-xch1T5" id="THM-REQ-16" text="The system shall count the filled pans with out-of-tolerance weight in a row and reset the count when a filled pan is within tolerance."/>
-  <Requirements:Requirement xmi:id="_ailcFHIDgFiXt1Ednx9I78" base_Class="_1Oroqkmn53lVhIg1Mxp973" id="THM-REQ-17" text="When the count reaches the limit N_wrong, the system shall stop depositing."/>
-  <Requirements:Requirement xmi:id="_78RsmLKI5dH3b8g7ImSxQ8" base_Class="_se4hLp7O6XE473QyG_rCHw" id="THM-REQ-18" text="When depositing is stopped because the count reached N_wrong, the system shall publish an error event so that the Health Monitor notifies Maintenance."/>
-  <Requirements:Requirement xmi:id="_ymtIrYb-EiHMvYvssCBnbG" base_Class="_QSnWMv2W6TYXr9GUF0ugZ5" id="THM-REQ-19" text="The system shall resume depositing after a repeated-failure stop only after it has received the signal &quot;Repair confirmed&quot; for the depositing equipment."/>
-  <Requirements:Requirement xmi:id="_T0GRjHKiqZpy8TQc8-8ZB1" base_Class="_tMD8IxICy-Ld9KcfUZIBGr" id="THM-REQ-20" text="The system shall send the signal &quot;Depositing stopped / working again&quot; to Batter Preparation whenever depositing stops and whenever it resumes."/>
-  <Requirements:Requirement xmi:id="_QMpwwHYPC6uWzkLo5IqO5X" base_Class="_qR7i1xY1x-FqBWdVNgl0kS" id="THM-REQ-21" text="When a baking zone is flagged faulty, the system shall stop admitting new pans at depositing."/>
-  <Requirements:Requirement xmi:id="_IMkYAzsPeoqI9x3gGqj-5G" base_Class="_f3Fd38Dov4rfy6i8gqBCZ3" id="THM-REQ-22" text="While new pans are stopped because of a zone fault, the system shall let the pans already inside the baking tunnel finish baking and be checked at tunnel exit."/>
-  <Requirements:Requirement xmi:id="_d_O4CgpAh9uHkco4UfELtp" base_Class="__LCgmJQ5_quP3Ae0N4TFfa" id="THM-REQ-23" text="When the cooling buffer management reports that the cooling buffer is full, the system shall stop admitting new pans at depositing."/>
-  <Requirements:Requirement xmi:id="_A2SX5M28TorfzEK8-hkepW" base_Class="_YBYbx0lXfmMiX9mJqraNPN" id="THM-REQ-24" text="When the signal &quot;Stop / resume pan admission&quot; says stop, the system shall stop admitting new pans at depositing."/>
-  <Requirements:Requirement xmi:id="_P1Uvw8sot7culD28G86-K7" base_Class="_PJwkMIHVDgijL9Fj03j_i9" id="THM-REQ-25" text="The system shall resume admitting new pans only when no stop reason remains active (zone fault, buffer full, stop from Finishing &amp; Packaging, repeated-failure stop, band halt)."/>
-  <Requirements:Requirement xmi:id="_4s97c2PQtaKuYr-_nk-A-L" base_Class="__YmRRmUnYa8sjX3Ba7Yp3U" id="THM-REQ-26" text="The system shall regulate the temperature of each baking zone to its setpoint in real time with a local control loop."/>
-  <Requirements:Requirement xmi:id="_jL8HpHsGz4NqMVR2zpOGDX" base_Class="_C7N_6SjAExmQVfPHN14Eey" id="THM-REQ-27" text="The system shall keep regulating the zone temperatures while any pan is inside the baking tunnel, also while depositing is stopped."/>
-  <Requirements:Requirement xmi:id="_BL2ArNVBCY0vHDrPZUPjya" base_Class="_Os1S_Ntqdle_cCnpTTNV30" id="THM-REQ-28" text="When a zone temperature is outside its range, the system shall adjust the heating of that zone."/>
-  <Requirements:Requirement xmi:id="_YTOou7LG_OyxlKH3pVYjbI" base_Class="_4aV_RwBLhPy4k3pKJs0mGD" id="THM-REQ-29" text="When a zone temperature is still out of range after the adjustment time T_adjust, the system shall flag the zone as faulty."/>
-  <Requirements:Requirement xmi:id="_q5mBQKpnOyyqHcKvDJH8UA" base_Class="_SHBqfQS_OdomOxrYC3iOzs" id="THM-REQ-30" text="When a zone is flagged faulty, the system shall publish an error event so that the Health Monitor notifies Maintenance."/>
-  <Requirements:Requirement xmi:id="_J6sCQYTbIW5s2Reh_I2y8K" base_Class="_Awx0ek1BDi_SAww8l4p4sX" id="THM-REQ-31" text="The system shall clear the faulty flag of a zone only after it has received the signal &quot;Repair confirmed&quot; for that zone and the zone temperature is within range."/>
-  <Requirements:Requirement xmi:id="_xED_TFiqxsZUgwpPMp0sMY" base_Class="_rzPARlM2hkbwCfvTN9GfYO" id="THM-REQ-32" text="The system shall measure the internal temperature of every cake leaving the baking tunnel."/>
-  <Requirements:Requirement xmi:id="_ZiL_43jfmXKI_ITBURuApv" base_Class="_gfKfwgHmzwtYh_OtoPJRIM" id="THM-REQ-33" text="The system shall let a cake continue to cooling only if its internal temperature is 97 °C ± 0.5 °C."/>
-  <Requirements:Requirement xmi:id="_N9wbw8KbsVeQB9gR0Kic-B" base_Class="_Y3e2Vb9UvTsFms0DPMN3Sf" id="THM-REQ-34" text="The system shall divert every cake whose internal temperature is outside 97 °C ± 0.5 °C to the refuse path."/>
-  <Requirements:Requirement xmi:id="_pbhoPkenRFEsgNJ4PxGyQX" base_Class="_Mv1witVSU4vP9GwyvrAYmt" id="THM-REQ-35" text="The system shall publish a discard event (reason &quot;undercooked&quot; or &quot;overcooked&quot;, time, batch ID) for every cake diverted because of its temperature."/>
-  <Requirements:Requirement xmi:id="_xzi6WNP9islq_RxyvLcHxM" base_Class="_B9X3XmtWd7_Eo1Y5wrX5Em" id="THM-REQ-36" text="When the temperature measurement at tunnel exit delivers no valid reading within T_resp, the system shall divert every cake leaving the baking tunnel to the refuse path."/>
-  <Requirements:Requirement xmi:id="_cOjCaBusDzPqjD6F-EOe9C" base_Class="_Uu18kwRb4k1h1geAbavV1u" id="THM-REQ-37" text="The system shall publish a discard event (reason &quot;cannot be checked&quot;, time, batch ID) for every cake diverted because no temperature reading is available."/>
-  <Requirements:Requirement xmi:id="_ZtLiXaTWfMy7T-ZSJRgbSu" base_Class="_eSThUVU6fDRfRd6pIAbXwn" id="THM-REQ-38" text="When the temperature measurement at tunnel exit stops responding, the system shall publish an error event so that the Health Monitor notifies Maintenance."/>
-  <Requirements:Requirement xmi:id="_wdMGJftL1tY1mxUQBr8JJm" base_Class="_PVzLj7Yv85JnSjrviTc-hs" id="THM-REQ-39" text="The system shall resume the normal 100% check only after it has received the signal &quot;Repair confirmed&quot; for the temperature measurement at tunnel exit."/>
-  <Requirements:Requirement xmi:id="__M6aJ4slSCe8OofAOQ2yow" base_Class="_l6k5EPAd7YaGJ0W23NMqQB" id="THM-REQ-40" text="The system shall control the cooling so that every cake passing the cooling zone is cooled to the safe temperature T_safe."/>
-  <Requirements:Requirement xmi:id="_OKTSmpomx4F9JT6-JZSG3t" base_Class="__oS7LtMOtCre-ieS8DzeSx" id="THM-REQ-41" text="The system shall measure the core temperature of every cake at the exit of the cooling zone."/>
-  <Requirements:Requirement xmi:id="_aw9m-_65Pz65W72xdWkmwb" base_Class="_A11wbC-bcJ0c82-DHUL3Cr" id="THM-REQ-42" text="When the core temperature of a cake is at or below T_safe, the system shall release the cake with its batch ID to Finishing &amp; Packaging through the signal &quot;Cooled cake&quot;."/>
-  <Requirements:Requirement xmi:id="_luQIIZSd5Zhelptt8lNtcz" base_Class="_VJA7lWbT8KYmbR00RcQlnr" id="THM-REQ-43" text="The system shall not release to Finishing &amp; Packaging any cake whose core temperature is above T_safe."/>
-  <Requirements:Requirement xmi:id="_lR-qnLWfOKfi809W3UZ5ES" base_Class="_J_75cYsrKrvQrPr3ir2Nct" id="THM-REQ-44" text="When the core temperature of a cake at the cooling exit is above T_safe, the system shall increase the cooling."/>
-  <Requirements:Requirement xmi:id="_JSYAeO2JuU4JGta4gkOrT8" base_Class="_BtY_G5OtN1aCtkK1UXkruj" id="THM-REQ-45" text="When a cake is still above T_safe after the cooling was increased, the system shall route it to the cooling buffer (waiting zone)."/>
-  <Requirements:Requirement xmi:id="_HzyaA0lf3GdnyhR6gUAPmB" base_Class="_l58CPQsGW-2MFKlRB2qUQG" id="THM-REQ-46" text="When cooling has stopped working, the system shall route new cakes to the cooling buffer."/>
-  <Requirements:Requirement xmi:id="_Unw-4fkUwwYPvPaufhjfgg" base_Class="_AS8765EMhG01F4ehO8RzxV" id="THM-REQ-47" text="The system shall let the cakes that are inside the cooling zone when cooling fails finish the zone and then send them to the cooling buffer."/>
-  <Requirements:Requirement xmi:id="_LpOit6LkzBF0Kv2hnPks_u" base_Class="_8uM40o3EW0_yTxLSDIOwOq" id="THM-REQ-48" text="The system shall hold the cakes in the cooling buffer until cooling is repaired."/>
-  <Requirements:Requirement xmi:id="_YG9iealaZ2oBJPnmMKrfxC" base_Class="_qS4IvNsM7qLlcoaJhaH9iX" id="THM-REQ-49" text="When cooling has stopped working, the system shall publish an error event so that the Health Monitor notifies Maintenance."/>
-  <Requirements:Requirement xmi:id="__WwEvYoP3BAWmAfm4kIzpS" base_Class="_8WofiBjezUMyJpcoO2qd3b" id="THM-REQ-50" text="When the signal &quot;Repair confirmed&quot; for the cooling zone is received, the system shall route new cakes to the cooling zone again."/>
-  <Requirements:Requirement xmi:id="_zVi7vBgXB9vhVga_Gv4h6N" base_Class="_a5L6qKdzHTc3IlzWj93_mj" id="THM-REQ-51" text="Once cooling works again and new cakes are sent to cooling, the system shall release the buffered cakes one by one in their order of arrival."/>
-  <Requirements:Requirement xmi:id="_613cWHAxqIT3QJpBKvQR_Z" base_Class="_lxTCRgOqwqtXo_HYa8sTgi" id="THM-REQ-52" text="The system shall measure the core temperature of every released cake and send it to Finishing &amp; Packaging as &quot;Cooled cake&quot; if it is at or below T_safe, otherwise through the cooling zone again."/>
-  <Requirements:Requirement xmi:id="_uzcjKdWkXCUg3GXHaNhTCY" base_Class="_w7yRhl1g8t5R0wbewn5GaZ" id="THM-REQ-53" text="The system shall track the waiting time of every cake in the cooling buffer."/>
-  <Requirements:Requirement xmi:id="_LaMwfx28cJh8WPgGOf8qUU" base_Class="_FcxITRdaukJgvjGt0PNmlW" id="THM-REQ-54" text="When the waiting time of a cake in the cooling buffer exceeds T_wait (default 30 minutes), the system shall move the cake to the refuse path."/>
-  <Requirements:Requirement xmi:id="_7__nlyTF2eQ0T6-3L6daQp" base_Class="_fZyxL60n2_TvZ4VRJyKVwL" id="THM-REQ-55" text="The system shall publish a discard event (reason &quot;waited too long&quot;, time, batch ID) for every cake moved out of the cooling buffer because of its waiting time."/>
-  <Requirements:Requirement xmi:id="_FNwFU_v8OA2AxNwOuvEt-C" base_Class="_oxCUZfcsazNdfNCtmpBRA4" id="THM-REQ-56" text="When more than 30 minutes pass between a cooling failure and its repair, the system shall move all cakes on the cooling conveyor and in the waiting zone to the refuse path."/>
-  <Requirements:Requirement xmi:id="_WRkOs83_c2_rALmB_PTqb_" base_Class="_U0pesySANq2jym-hj1-48c" id="THM-REQ-57" text="When the cooling buffer has no free place left, the system shall report &quot;buffer full&quot; to Depositing Control and to the Tunnel-Exit Controller."/>
-  <Requirements:Requirement xmi:id="_NcL_29vy558KucG6-eIc1A" base_Class="_7i--A45bhI4uN2pS2X3g_U" id="THM-REQ-58" text="When the cooling buffer is full, the system shall divert the cakes that are still leaving the baking tunnel to the refuse path."/>
-  <Requirements:Requirement xmi:id="_CezIgV35nL4CAgMhTDfHAn" base_Class="_RUCja6QQL7yvdROQSpoA1e" id="THM-REQ-59" text="The system shall publish a discard event (reason &quot;buffer full&quot;, time, batch ID) for every cake diverted because the cooling buffer is full."/>
-  <Requirements:Requirement xmi:id="__SyxcbwpTR3M16ug2IvCnU" base_Class="_HUhW42Y8Xb1o3HFlZ4XcdR" id="THM-REQ-60" text="The system shall resume depositing after a buffer-full stop only after cooling is repaired (&quot;Repair confirmed&quot; for the cooling zone) and the cooling buffer has free places."/>
-  <Requirements:Requirement xmi:id="_x9RK6cxAY1Ne4q6NnQTrr0" base_Class="_btDjgIFjZVpsXR7GbKW0Aa" id="THM-REQ-61" text="Where no cooling buffer is installed, the system shall route new cakes to the refuse path when cooling stops."/>
-  <Requirements:Requirement xmi:id="_Wn3qKjg8MS-yJE2_JDWxC1" base_Class="_Erw-PNo-ANcI9dEEkLaLaE" id="THM-REQ-62" text="Where no cooling buffer is installed, the system shall send a cake that is still above T_safe after the cooling was increased to the refuse path and publish a discard event (reason &quot;too hot&quot;, time, batch ID)."/>
-  <Requirements:Requirement xmi:id="_ufEVxfNbGuthJwR254BjMH" base_Class="_LK2c-YKT41JToXLiUK5Hx-" id="THM-REQ-63" text="The system shall publish log events with time and, where known, batch ID to Line Monitoring through the signal &quot;Log, warning, error and discard events&quot;."/>
-  <Requirements:Requirement xmi:id="_R_i1yDZlPsqhsu0vDzKRTx" base_Class="_3eFu0nowhZ1nUbfg6MI0Rm" id="THM-REQ-64" text="Each controller of the slice shall publish its own status and the status of its devices through the signal &quot;Machine status (heartbeat)&quot; at a regular interval T_hb."/>
-  <Requirements:Requirement xmi:id="_EUTApkT701mYd85joexiri" base_Class="_SuT-1R3IyrJmNxnMndGtkn" id="THM-REQ-65" text="When it receives the notification for a band halt, the system shall stop admitting new pans and shall keep zone control, exit inspection and cooling control running for the product already inside."/>
-  <Requirements:Requirement xmi:id="_B3YgglmOvAori22ByxWVox" base_Class="_LldUMLSoyA41bs319uIHpC" id="THM-REQ-66" text="When it receives the notification for a slow-down, the system shall continue working at the reduced band speed and keep inspecting every cake."/>
-  <Requirements:Requirement xmi:id="_WfzW190UJ39SJrGeu9BtwY" base_Class="_zQZ1uwLX5ShPds52agVT79" id="THM-REQ-67" text="When it receives the notification for a restart, the system shall resume normal operation and admit new pans again as soon as no other stop reason is active (THM-REQ-25)."/>
-  <Requirements:Requirement xmi:id="_jcy4-wi7JcoLL2-EPsLzW3" base_Class="_vZvXUIosjlUZZQe9yvyiEt" id="THM-REQ-68" text="The system shall receive the signal &quot;Repair confirmed&quot; (machine, repaired) and give the owning controller the permission to resume."/>
-  <Requirements:Requirement xmi:id="_h6w1kQkoZrZ2GDKa7y5sYx" base_Class="_M_UTQXUzqCPhz8qP_fq-zL" id="THM-REQ-69" text="When a function of the slice enters degraded operation (a zone is being adjusted, cooling had to be increased, the cooling buffer is nearly full), the system shall publish a warning event to Line Monitoring through the signal &quot;Log, warning, error and discard events&quot;."/>
-  <Requirements:Requirement xmi:id="_uIax-YE-rWZhi-hV28R0Lr" base_Class="_b6nuDkdaSqtaJJri5V6TFN" id="THM-REQ-70" text="When a function of the slice needs Maintenance or a halt of production, the system shall publish an error event to Line Monitoring through the signal &quot;Log, warning, error and discard events&quot;."/>
-  <Requirements:Requirement xmi:id="_Nu7mJ71LWZjVye7mRpmL2p" base_Class="_Kgt5KuuOwKKxuqn08AJjuj" id="THM-REQ-71" text="NFR (availability): the controllers of the slice shall be available 24/7 with a monthly availability of at least 99.5 % (proposed value)."/>
-  <Requirements:Requirement xmi:id="_ETruHsnUGHEMxVV0fARZft" base_Class="_HqAO3Pmnj0wKc2IvAkSkcJ" id="THM-REQ-72" text="NFR (detection time): the system shall detect a stopped controller or device of the slice within 3 heartbeat intervals, i.e. within 15 s with T_hb = 5 s (proposed values)."/>
-  <Requirements:Requirement xmi:id="_a-1jaEcOHKBGJEj6uy9-_G" base_Class="_l1CCYTe6OXlKdj7qznmQeS" id="THM-REQ-73" text="NFR (recovery time): after &quot;Repair confirmed&quot; is received, the affected function shall be back in normal operation within 60 s (proposed value)."/>
-  <Requirements:Requirement xmi:id="_lphSnyBs9XB9kbb3DOBM87" base_Class="_GsKwHM7W1QXtxUVOAB-y-p" id="THM-REQ-74" text="NFR (continuity): zone temperature control shall have no interruption (0 s) while product is inside the baking tunnel, also during deployment, restart of other functions and band halt."/>
-  <Requirements:Requirement xmi:id="_VWqPt5pH5yC9_9nv5_Bc9a" base_Class="_6k5nr7N3F_w2I3rNiKJBzN" id="THM-REQ-75" text="NFR (accuracy): the measurement of the internal cake temperature at tunnel exit shall have an uncertainty of at most 0.1 °C (proposed value)."/>
-  <Requirements:Requirement xmi:id="_KYtnQfMt3Mr3G0ahqnSZUk" base_Class="_dgcv_gUHVMgLwXQj7vPdk8" id="THM-REQ-76" text="NFR (reaction time): new pans shall stop being admitted within 1 s after a stop reason arises (proposed value)."/>
-  <Requirements:Requirement xmi:id="_FIycoHi27hPCQMkpoS-_uh" base_Class="_NeatzRpO7tcXO28PPS4-hY" id="THM-REQ-77" text="NFR (traceability): 100 % of discarded cakes shall have a discard event (reason, time, batch ID) published within 5 s of the discard (proposed value)."/>
-  <Requirements:Requirement xmi:id="_A4fEqT441QmdIILZmCC0Rr" base_Class="_c_RNwuMQt8gUNg7qITtYvC" id="THM-REQ-78" text="NFR (reaction time): the slice shall react to a &quot;Band state change&quot; within 1 s (proposed value)."/>
-  <Requirements:Requirement xmi:id="_ijheNwHSVG2iObnhO_v91T" base_Class="_l1SSvrnYBKWMuwTllMO5wp" id="FIN-REQ-02" text="The system shall accept for depanning only cakes that Thermal Processing has released as having reached the safe internal temperature."/>
+  <Requirements:Requirement xmi:id="_bf54kSdcgBjvlQStTQszXR" id="THM-REQ-01" text="The system shall accept finished batter together with its batch ID from Batter Preparation through the signal &quot;Batter ready&quot;." base_Class="_9Jgu8qDkTm3XOEcCNfj-b2"/>
+  <Requirements:Requirement xmi:id="_LGE1U6VeO0osUxwcAJFPU_" id="THM-REQ-02" text="The system shall detect whether a pan is present at the depositing point before it releases any batter." base_Class="_IFkQ4UYZX83SQQb2KdsCuj"/>
+  <Requirements:Requirement xmi:id="_EqNoiCy_ZodP8sqnGQPqXj" id="THM-REQ-03" text="When a pan is present at the depositing point, the system shall deposit the recipe-defined fixed amount of batter into that pan." base_Class="_y19ugeE_d9aBvwjyOIDhgx"/>
+  <Requirements:Requirement xmi:id="_Q0UuUWIHkFsC7g10Pjakiv" id="THM-REQ-04" text="While no pan is present at the depositing point, the system shall withhold batter." base_Class="_KYlK7OwbemyVf1v8XvhrY9"/>
+  <Requirements:Requirement xmi:id="_1SXyURHI3XoWUe-yGuAP_O" id="THM-REQ-05" text="When no pan is present at the depositing point, the system shall send the signal &quot;Pan request&quot; to Finishing &amp; Packaging." base_Class="_sP8i2z_DrOCrAtmnrFvlwl"/>
+  <Requirements:Requirement xmi:id="_jF64VFOipl1fpRGpWKMA_8" id="THM-REQ-06" text="When a pan is detected after a pan request, the system shall resume depositing." base_Class="_9zwd6kRWwIocsXOXU9d-AL"/>
+  <Requirements:Requirement xmi:id="_uevNNLbz-I202PtNZCZ6Yz" id="THM-REQ-07" text="The system shall weigh every filled pan." base_Class="_hM-uWQASJ6fdhC06v__Wj2"/>
+  <Requirements:Requirement xmi:id="_Z03nJ0D4U6JE7CWWE7Eb_z" id="THM-REQ-08" text="The system shall let a filled pan continue toward baking only if its weight is within the legal tolerance (EU rules for the average quantity) of the target fill weight." base_Class="_qwFgO5fr75Ib4oj2PxcOg2"/>
+  <Requirements:Requirement xmi:id="_CPCSfQRoDKvvvFDW7ipq57" id="THM-REQ-09" text="The system shall not start depositing while the fill-weight measurement is not calibrated." base_Class="_8J1e5CAN4QfSEqrZi60VcM"/>
+  <Requirements:Requirement xmi:id="_iRqYK0hRipx8Ym1i6c_bQQ" id="THM-REQ-10" text="The system shall divert every filled pan whose weight is outside the tolerance off the band." base_Class="_5okMhwcgETRasOz0mlZCg6"/>
+  <Requirements:Requirement xmi:id="_oXAZI8eNMChsTZD5YNASu_" id="THM-REQ-11" text="The system shall discard the batter of every diverted pan." base_Class="_qt43vnF_9VHX7KVuaqT2jy"/>
+  <Requirements:Requirement xmi:id="_w258OPpCqotNUNR_uv7rxT" id="THM-REQ-12" text="The system shall send every diverted pan to Finishing &amp; Packaging for washing through the signal &quot;Pan for washing&quot;." base_Class="_K5_zX_qJqckGWnanlmNQU0"/>
+  <Requirements:Requirement xmi:id="_h0Xc-7Te-sMkp0Fe-ahonX" id="THM-REQ-13" text="The system shall publish a log event (reason, time, batch ID) for every wait for a pan and for every diverted pan." base_Class="_2wmZiYWzEEGWFtPuiDSjgk"/>
+  <Requirements:Requirement xmi:id="_MLU-JnlACAKCykxFL1ZKoK" id="THM-REQ-14" text="The system shall accept clean pans together with the current clean-pan stock level through the signal &quot;Clean pan supply&quot;." base_Class="_aPsKTa6luDLBZvmAcADqe-"/>
+  <Requirements:Requirement xmi:id="_TlJ_O8oGQtzKthSbcpp_qk" id="THM-REQ-15" text="When the received clean-pan stock level is below the low-stock limit S_low, the system shall fill fewer pans." base_Class="_NLbKgBrI0ctdbgpynQtNPR"/>
+  <Requirements:Requirement xmi:id="_-5PNaW3XcSCbPLHNguSGY3" id="THM-REQ-16" text="The system shall count the filled pans with out-of-tolerance weight in a row and reset the count when a filled pan is within tolerance." base_Class="_3G_86TS1Mg5zEDa-xch1T5"/>
+  <Requirements:Requirement xmi:id="_ailcFHIDgFiXt1Ednx9I78" id="THM-REQ-17" text="When the count reaches the limit N_wrong, the system shall stop depositing." base_Class="_1Oroqkmn53lVhIg1Mxp973"/>
+  <Requirements:Requirement xmi:id="_78RsmLKI5dH3b8g7ImSxQ8" id="THM-REQ-18" text="When depositing is stopped because the count reached N_wrong, the system shall publish an error event so that the Health Monitor notifies Maintenance." base_Class="_se4hLp7O6XE473QyG_rCHw"/>
+  <Requirements:Requirement xmi:id="_ymtIrYb-EiHMvYvssCBnbG" id="THM-REQ-19" text="The system shall resume depositing after a repeated-failure stop only after it has received the signal &quot;Repair confirmed&quot; for the depositing equipment." base_Class="_QSnWMv2W6TYXr9GUF0ugZ5"/>
+  <Requirements:Requirement xmi:id="_T0GRjHKiqZpy8TQc8-8ZB1" id="THM-REQ-20" text="The system shall send the signal &quot;Depositing stopped / working again&quot; to Batter Preparation whenever depositing stops and whenever it resumes." base_Class="_tMD8IxICy-Ld9KcfUZIBGr"/>
+  <Requirements:Requirement xmi:id="_QMpwwHYPC6uWzkLo5IqO5X" id="THM-REQ-21" text="When a baking zone is flagged faulty, the system shall stop admitting new pans at depositing." base_Class="_qR7i1xY1x-FqBWdVNgl0kS"/>
+  <Requirements:Requirement xmi:id="_IMkYAzsPeoqI9x3gGqj-5G" id="THM-REQ-22" text="While new pans are stopped because of a zone fault, the system shall let the pans already inside the baking tunnel finish baking and be checked at tunnel exit." base_Class="_f3Fd38Dov4rfy6i8gqBCZ3"/>
+  <Requirements:Requirement xmi:id="_d_O4CgpAh9uHkco4UfELtp" id="THM-REQ-23" text="When the cooling buffer management reports that the cooling buffer is full, the system shall stop admitting new pans at depositing." base_Class="__LCgmJQ5_quP3Ae0N4TFfa"/>
+  <Requirements:Requirement xmi:id="_A2SX5M28TorfzEK8-hkepW" id="THM-REQ-24" text="When the signal &quot;Stop / resume pan admission&quot; says stop, the system shall stop admitting new pans at depositing." base_Class="_YBYbx0lXfmMiX9mJqraNPN"/>
+  <Requirements:Requirement xmi:id="_P1Uvw8sot7culD28G86-K7" id="THM-REQ-25" text="The system shall resume admitting new pans only when no stop reason remains active (zone fault, buffer full, stop from Finishing &amp; Packaging, repeated-failure stop, band halt)." base_Class="_PJwkMIHVDgijL9Fj03j_i9"/>
+  <Requirements:Requirement xmi:id="_4s97c2PQtaKuYr-_nk-A-L" id="THM-REQ-26" text="The system shall regulate the temperature of each baking zone to its setpoint in real time with a local control loop." base_Class="__YmRRmUnYa8sjX3Ba7Yp3U"/>
+  <Requirements:Requirement xmi:id="_jL8HpHsGz4NqMVR2zpOGDX" id="THM-REQ-27" text="The system shall keep regulating the zone temperatures while any pan is inside the baking tunnel, also while depositing is stopped." base_Class="_C7N_6SjAExmQVfPHN14Eey"/>
+  <Requirements:Requirement xmi:id="_BL2ArNVBCY0vHDrPZUPjya" id="THM-REQ-28" text="When a zone temperature is outside its range, the system shall adjust the heating of that zone." base_Class="_Os1S_Ntqdle_cCnpTTNV30"/>
+  <Requirements:Requirement xmi:id="_YTOou7LG_OyxlKH3pVYjbI" id="THM-REQ-29" text="When a zone temperature is still out of range after the adjustment time T_adjust, the system shall flag the zone as faulty." base_Class="_4aV_RwBLhPy4k3pKJs0mGD"/>
+  <Requirements:Requirement xmi:id="_q5mBQKpnOyyqHcKvDJH8UA" id="THM-REQ-30" text="When a zone is flagged faulty, the system shall publish an error event so that the Health Monitor notifies Maintenance." base_Class="_SHBqfQS_OdomOxrYC3iOzs"/>
+  <Requirements:Requirement xmi:id="_J6sCQYTbIW5s2Reh_I2y8K" id="THM-REQ-31" text="The system shall clear the faulty flag of a zone only after it has received the signal &quot;Repair confirmed&quot; for that zone and the zone temperature is within range." base_Class="_Awx0ek1BDi_SAww8l4p4sX"/>
+  <Requirements:Requirement xmi:id="_xED_TFiqxsZUgwpPMp0sMY" id="THM-REQ-32" text="The system shall measure the internal temperature of every cake leaving the baking tunnel." base_Class="_rzPARlM2hkbwCfvTN9GfYO"/>
+  <Requirements:Requirement xmi:id="_ZiL_43jfmXKI_ITBURuApv" id="THM-REQ-33" text="The system shall let a cake continue to cooling only if its internal temperature is 97 °C ± 0.5 °C." base_Class="_gfKfwgHmzwtYh_OtoPJRIM"/>
+  <Requirements:Requirement xmi:id="_N9wbw8KbsVeQB9gR0Kic-B" id="THM-REQ-34" text="The system shall divert every cake whose internal temperature is outside 97 °C ± 0.5 °C to the refuse path." base_Class="_Y3e2Vb9UvTsFms0DPMN3Sf"/>
+  <Requirements:Requirement xmi:id="_pbhoPkenRFEsgNJ4PxGyQX" id="THM-REQ-35" text="The system shall publish a discard event (reason &quot;undercooked&quot; or &quot;overcooked&quot;, time, batch ID) for every cake diverted because of its temperature." base_Class="_Mv1witVSU4vP9GwyvrAYmt"/>
+  <Requirements:Requirement xmi:id="_xzi6WNP9islq_RxyvLcHxM" id="THM-REQ-36" text="When the temperature measurement at tunnel exit delivers no valid reading within T_resp, the system shall divert every cake leaving the baking tunnel to the refuse path." base_Class="_B9X3XmtWd7_Eo1Y5wrX5Em"/>
+  <Requirements:Requirement xmi:id="_cOjCaBusDzPqjD6F-EOe9C" id="THM-REQ-37" text="The system shall publish a discard event (reason &quot;cannot be checked&quot;, time, batch ID) for every cake diverted because no temperature reading is available." base_Class="_Uu18kwRb4k1h1geAbavV1u"/>
+  <Requirements:Requirement xmi:id="_ZtLiXaTWfMy7T-ZSJRgbSu" id="THM-REQ-38" text="When the temperature measurement at tunnel exit stops responding, the system shall publish an error event so that the Health Monitor notifies Maintenance." base_Class="_eSThUVU6fDRfRd6pIAbXwn"/>
+  <Requirements:Requirement xmi:id="_wdMGJftL1tY1mxUQBr8JJm" id="THM-REQ-39" text="The system shall resume the normal 100% check only after it has received the signal &quot;Repair confirmed&quot; for the temperature measurement at tunnel exit." base_Class="_PVzLj7Yv85JnSjrviTc-hs"/>
+  <Requirements:Requirement xmi:id="__M6aJ4slSCe8OofAOQ2yow" id="THM-REQ-40" text="The system shall control the cooling so that every cake passing the cooling zone is cooled to the safe temperature T_safe." base_Class="_l6k5EPAd7YaGJ0W23NMqQB"/>
+  <Requirements:Requirement xmi:id="_OKTSmpomx4F9JT6-JZSG3t" id="THM-REQ-41" text="The system shall measure the core temperature of every cake at the exit of the cooling zone." base_Class="__oS7LtMOtCre-ieS8DzeSx"/>
+  <Requirements:Requirement xmi:id="_aw9m-_65Pz65W72xdWkmwb" id="THM-REQ-42" text="When the core temperature of a cake is at or below T_safe, the system shall release the cake with its batch ID to Finishing &amp; Packaging through the signal &quot;Cooled cake&quot;." base_Class="_A11wbC-bcJ0c82-DHUL3Cr"/>
+  <Requirements:Requirement xmi:id="_luQIIZSd5Zhelptt8lNtcz" id="THM-REQ-43" text="The system shall not release to Finishing &amp; Packaging any cake whose core temperature is above T_safe." base_Class="_VJA7lWbT8KYmbR00RcQlnr"/>
+  <Requirements:Requirement xmi:id="_lR-qnLWfOKfi809W3UZ5ES" id="THM-REQ-44" text="When the core temperature of a cake at the cooling exit is above T_safe, the system shall increase the cooling." base_Class="_J_75cYsrKrvQrPr3ir2Nct"/>
+  <Requirements:Requirement xmi:id="_JSYAeO2JuU4JGta4gkOrT8" id="THM-REQ-45" text="When a cake is still above T_safe after the cooling was increased, the system shall route it to the cooling buffer (waiting zone)." base_Class="_BtY_G5OtN1aCtkK1UXkruj"/>
+  <Requirements:Requirement xmi:id="_HzyaA0lf3GdnyhR6gUAPmB" id="THM-REQ-46" text="When cooling has stopped working, the system shall route new cakes to the cooling buffer." base_Class="_l58CPQsGW-2MFKlRB2qUQG"/>
+  <Requirements:Requirement xmi:id="_Unw-4fkUwwYPvPaufhjfgg" id="THM-REQ-47" text="The system shall let the cakes that are inside the cooling zone when cooling fails finish the zone and then send them to the cooling buffer." base_Class="_AS8765EMhG01F4ehO8RzxV"/>
+  <Requirements:Requirement xmi:id="_LpOit6LkzBF0Kv2hnPks_u" id="THM-REQ-48" text="The system shall hold the cakes in the cooling buffer until cooling is repaired." base_Class="_8uM40o3EW0_yTxLSDIOwOq"/>
+  <Requirements:Requirement xmi:id="_YG9iealaZ2oBJPnmMKrfxC" id="THM-REQ-49" text="When cooling has stopped working, the system shall publish an error event so that the Health Monitor notifies Maintenance." base_Class="_qS4IvNsM7qLlcoaJhaH9iX"/>
+  <Requirements:Requirement xmi:id="__WwEvYoP3BAWmAfm4kIzpS" id="THM-REQ-50" text="When the signal &quot;Repair confirmed&quot; for the cooling zone is received, the system shall route new cakes to the cooling zone again." base_Class="_8WofiBjezUMyJpcoO2qd3b"/>
+  <Requirements:Requirement xmi:id="_zVi7vBgXB9vhVga_Gv4h6N" id="THM-REQ-51" text="Once cooling works again and new cakes are sent to cooling, the system shall release the buffered cakes one by one in their order of arrival." base_Class="_a5L6qKdzHTc3IlzWj93_mj"/>
+  <Requirements:Requirement xmi:id="_613cWHAxqIT3QJpBKvQR_Z" id="THM-REQ-52" text="The system shall measure the core temperature of every released cake and send it to Finishing &amp; Packaging as &quot;Cooled cake&quot; if it is at or below T_safe, otherwise through the cooling zone again." base_Class="_lxTCRgOqwqtXo_HYa8sTgi"/>
+  <Requirements:Requirement xmi:id="_uzcjKdWkXCUg3GXHaNhTCY" id="THM-REQ-53" text="The system shall track the waiting time of every cake in the cooling buffer." base_Class="_w7yRhl1g8t5R0wbewn5GaZ"/>
+  <Requirements:Requirement xmi:id="_LaMwfx28cJh8WPgGOf8qUU" id="THM-REQ-54" text="When the waiting time of a cake in the cooling buffer exceeds T_wait (default 30 minutes), the system shall move the cake to the refuse path." base_Class="_FcxITRdaukJgvjGt0PNmlW"/>
+  <Requirements:Requirement xmi:id="_7__nlyTF2eQ0T6-3L6daQp" id="THM-REQ-55" text="The system shall publish a discard event (reason &quot;waited too long&quot;, time, batch ID) for every cake moved out of the cooling buffer because of its waiting time." base_Class="_fZyxL60n2_TvZ4VRJyKVwL"/>
+  <Requirements:Requirement xmi:id="_FNwFU_v8OA2AxNwOuvEt-C" id="THM-REQ-56" text="When more than 30 minutes pass between a cooling failure and its repair, the system shall move all cakes on the cooling conveyor and in the waiting zone to the refuse path." base_Class="_oxCUZfcsazNdfNCtmpBRA4"/>
+  <Requirements:Requirement xmi:id="_WRkOs83_c2_rALmB_PTqb_" id="THM-REQ-57" text="When the cooling buffer has no free place left, the system shall report &quot;buffer full&quot; to Depositing Control and to the Tunnel-Exit Controller." base_Class="_U0pesySANq2jym-hj1-48c"/>
+  <Requirements:Requirement xmi:id="_NcL_29vy558KucG6-eIc1A" id="THM-REQ-58" text="When the cooling buffer is full, the system shall divert the cakes that are still leaving the baking tunnel to the refuse path." base_Class="_7i--A45bhI4uN2pS2X3g_U"/>
+  <Requirements:Requirement xmi:id="_CezIgV35nL4CAgMhTDfHAn" id="THM-REQ-59" text="The system shall publish a discard event (reason &quot;buffer full&quot;, time, batch ID) for every cake diverted because the cooling buffer is full." base_Class="_RUCja6QQL7yvdROQSpoA1e"/>
+  <Requirements:Requirement xmi:id="__SyxcbwpTR3M16ug2IvCnU" id="THM-REQ-60" text="The system shall resume depositing after a buffer-full stop only after cooling is repaired (&quot;Repair confirmed&quot; for the cooling zone) and the cooling buffer has free places." base_Class="_HUhW42Y8Xb1o3HFlZ4XcdR"/>
+  <Requirements:Requirement xmi:id="_x9RK6cxAY1Ne4q6NnQTrr0" id="THM-REQ-61" text="Where no cooling buffer is installed, the system shall route new cakes to the refuse path when cooling stops." base_Class="_btDjgIFjZVpsXR7GbKW0Aa"/>
+  <Requirements:Requirement xmi:id="_Wn3qKjg8MS-yJE2_JDWxC1" id="THM-REQ-62" text="Where no cooling buffer is installed, the system shall send a cake that is still above T_safe after the cooling was increased to the refuse path and publish a discard event (reason &quot;too hot&quot;, time, batch ID)." base_Class="_Erw-PNo-ANcI9dEEkLaLaE"/>
+  <Requirements:Requirement xmi:id="_ufEVxfNbGuthJwR254BjMH" id="THM-REQ-63" text="The system shall publish log events with time and, where known, batch ID to Line Monitoring through the signal &quot;Log, warning, error and discard events&quot;." base_Class="_LK2c-YKT41JToXLiUK5Hx-"/>
+  <Requirements:Requirement xmi:id="_R_i1yDZlPsqhsu0vDzKRTx" id="THM-REQ-64" text="Each controller of the slice shall publish its own status and the status of its devices through the signal &quot;Machine status (heartbeat)&quot; at a regular interval T_hb." base_Class="_3eFu0nowhZ1nUbfg6MI0Rm"/>
+  <Requirements:Requirement xmi:id="_EUTApkT701mYd85joexiri" id="THM-REQ-65" text="When it receives the notification for a band halt, the system shall stop admitting new pans and shall keep zone control, exit inspection and cooling control running for the product already inside." base_Class="_SuT-1R3IyrJmNxnMndGtkn"/>
+  <Requirements:Requirement xmi:id="_B3YgglmOvAori22ByxWVox" id="THM-REQ-66" text="When it receives the notification for a slow-down, the system shall continue working at the reduced band speed and keep inspecting every cake." base_Class="_LldUMLSoyA41bs319uIHpC"/>
+  <Requirements:Requirement xmi:id="_WfzW190UJ39SJrGeu9BtwY" id="THM-REQ-67" text="When it receives the notification for a restart, the system shall resume normal operation and admit new pans again as soon as no other stop reason is active (THM-REQ-25)." base_Class="_zQZ1uwLX5ShPds52agVT79"/>
+  <Requirements:Requirement xmi:id="_jcy4-wi7JcoLL2-EPsLzW3" id="THM-REQ-68" text="The system shall receive the signal &quot;Repair confirmed&quot; (machine, repaired) and give the owning controller the permission to resume." base_Class="_vZvXUIosjlUZZQe9yvyiEt"/>
+  <Requirements:Requirement xmi:id="_h6w1kQkoZrZ2GDKa7y5sYx" id="THM-REQ-69" text="When a function of the slice enters degraded operation (a zone is being adjusted, cooling had to be increased, the cooling buffer is nearly full), the system shall publish a warning event to Line Monitoring through the signal &quot;Log, warning, error and discard events&quot;." base_Class="_M_UTQXUzqCPhz8qP_fq-zL"/>
+  <Requirements:Requirement xmi:id="_uIax-YE-rWZhi-hV28R0Lr" id="THM-REQ-70" text="When a function of the slice needs Maintenance or a halt of production, the system shall publish an error event to Line Monitoring through the signal &quot;Log, warning, error and discard events&quot;." base_Class="_b6nuDkdaSqtaJJri5V6TFN"/>
+  <Requirements:Requirement xmi:id="_Nu7mJ71LWZjVye7mRpmL2p" id="THM-REQ-71" text="NFR (availability): the controllers of the slice shall be available 24/7 with a monthly availability of at least 99.5 % (proposed value)." base_Class="_Kgt5KuuOwKKxuqn08AJjuj"/>
+  <Requirements:Requirement xmi:id="_ETruHsnUGHEMxVV0fARZft" id="THM-REQ-72" text="NFR (detection time): the system shall detect a stopped controller or device of the slice within 3 heartbeat intervals, i.e. within 15 s with T_hb = 5 s (proposed values)." base_Class="_HqAO3Pmnj0wKc2IvAkSkcJ"/>
+  <Requirements:Requirement xmi:id="_a-1jaEcOHKBGJEj6uy9-_G" id="THM-REQ-73" text="NFR (recovery time): after &quot;Repair confirmed&quot; is received, the affected function shall be back in normal operation within 60 s (proposed value)." base_Class="_l1CCYTe6OXlKdj7qznmQeS"/>
+  <Requirements:Requirement xmi:id="_lphSnyBs9XB9kbb3DOBM87" id="THM-REQ-74" text="NFR (continuity): zone temperature control shall have no interruption (0 s) while product is inside the baking tunnel, also during deployment, restart of other functions and band halt." base_Class="_GsKwHM7W1QXtxUVOAB-y-p"/>
+  <Requirements:Requirement xmi:id="_VWqPt5pH5yC9_9nv5_Bc9a" id="THM-REQ-75" text="NFR (accuracy): the measurement of the internal cake temperature at tunnel exit shall have an uncertainty of at most 0.1 °C (proposed value)." base_Class="_6k5nr7N3F_w2I3rNiKJBzN"/>
+  <Requirements:Requirement xmi:id="_KYtnQfMt3Mr3G0ahqnSZUk" id="THM-REQ-76" text="NFR (reaction time): new pans shall stop being admitted within 1 s after a stop reason arises (proposed value)." base_Class="_dgcv_gUHVMgLwXQj7vPdk8"/>
+  <Requirements:Requirement xmi:id="_FIycoHi27hPCQMkpoS-_uh" id="THM-REQ-77" text="NFR (traceability): 100 % of discarded cakes shall have a discard event (reason, time, batch ID) published within 5 s of the discard (proposed value)." base_Class="_NeatzRpO7tcXO28PPS4-hY"/>
+  <Requirements:Requirement xmi:id="_A4fEqT441QmdIILZmCC0Rr" id="THM-REQ-78" text="NFR (reaction time): the slice shall react to a &quot;Band state change&quot; within 1 s (proposed value)." base_Class="_c_RNwuMQt8gUNg7qITtYvC"/>
+  <Requirements:Requirement xmi:id="_ijheNwHSVG2iObnhO_v91T" id="FIN-REQ-02" text="The system shall accept for depanning only cakes that Thermal Processing has released as having reached the safe internal temperature." base_Class="_l1SSvrnYBKWMuwTllMO5wp"/>
   <Requirements:TestCase xmi:id="_L_uXf7Tkr5S6hjCuVodLPA" base_Behavior="_aX6CHdP9f24Ed1dZW7oOt7"/>
   <Requirements:TestCase xmi:id="_z_8VLHWuI25FGZizNWAeNL" base_Behavior="_TQiSRRtTn-iEjYgG3Khjj_"/>
   <Requirements:TestCase xmi:id="_W0dyN3eSxUMoFFzNVv0Shj" base_Behavior="_h9kLUQ9UG2pXkIZwMe6Wbx"/>
