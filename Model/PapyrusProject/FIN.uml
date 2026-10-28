@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
   <uml:Model xmi:id="_M7jBYLzYEfG45YF_OaBpaA" name="Finishing &amp; Packaging (FIN)">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_NCkPYLzYEfG45YF_OaBpaA">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -7,6 +7,1293 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_NC0uELzYEfG45YF_OaBpaA">
       <importedPackage xmi:type="uml:Package" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
     </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_ItK_AM5IEfGJpPDutUy9XQ" name="FIN State Machine Diagrams">
+      <packagedElement xmi:type="uml:Package" xmi:id="_idtu2T2y0tipviIkdYS_GE" name="FIN Signals and Events">
+        <packagedElement xmi:type="uml:Signal" xmi:id="_oDr_ZlbZTQRyI-RVgBV-A-" name="Cooled cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_tAtC8Eh2YoYNbCi5qYvhJJ" name="depanning machine not responding"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_TY-eBk4KO_3wUMW5225krO" name="Repair confirmed"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_M6kBXS1s6G5Uy0CyuJTqqR" name="Depanned cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_QKrchFBfiQ5tjj21S9WjQ-" name="cake stuck or broken"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_I8n5PE4JnFWQ9uX9yxiy4E" name="Weight result"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_zEW0p-eS96mnT4v3Tvgnd3" name="Visual result"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_JlKPmhyIkw5DRco2RjSD-x" name="Metal result"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_ONQzH0h1wYVFqZB6JfAb8C" name="Passed cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_EUNlO_n1ukPS0ulXRZbffR" name="Wrapped cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_S8mmGLtcSkRQWx9THwP62l" name="Sealed case"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_4XcBZ02AdEsp-4CknpJxbv" name="Case weight reading"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_0SA_HoVWJtw0Ys1aO4BJNf" name="Packed cake"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_qDixiiMJui7TS1jSMBrQ5g" name="wrap complete"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_wJb-VweeFly2RLjSEle3Hf" name="Washer free"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_f6myVW0Joa7gCFfs0fGknu" name="wash complete"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_k8Za7MsPmXj-tP1DWSgBI_" name="drying complete"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_NWVKzbOjGjU2IXN8gx1s43" name="Pan request"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_zw0QTagHLyzlo5bPFFBpXd" name="Empty pan"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_UarZt8ZHJrRsst1-rHV7JE" name="Pan for washing"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_mu0bolVyGfOcZx_BaoBqC1" name="washing station unavailable"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_61HNim7RSAbnxSPrWqG2xi" name="backlog = 0"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_i1oGr8Jv-okHtF0iYblq9J" name="Band state change"/>
+        <packagedElement xmi:type="uml:Signal" xmi:id="_WC-yyZGDBzLLeRYyXbQ_R7" name="heartbeat interval elapsed"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_qX0NBY3PKiRVs2PN9V7Rzh" name="Cooled cake" signal="_oDr_ZlbZTQRyI-RVgBV-A-"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_mTmGL7k0kLbMOkIgbhoTx5" name="depanning machine not responding" signal="_tAtC8Eh2YoYNbCi5qYvhJJ"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_Qje9VTyNMHMuTRY06yU2Ps" name="Repair confirmed" signal="_TY-eBk4KO_3wUMW5225krO"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_09L0mlMo85rw0cohs7CRaB" name="Depanned cake" signal="_M6kBXS1s6G5Uy0CyuJTqqR"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_F_XW5kxaBndnPbhs3FYdtS" name="cake stuck or broken" signal="_QKrchFBfiQ5tjj21S9WjQ-"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_yHlP2OJBsJwbeU7cq90t5w" name="Weight result" signal="_I8n5PE4JnFWQ9uX9yxiy4E"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_VwIFc4Y9zTjKOQhL-uut2q" name="Visual result" signal="_zEW0p-eS96mnT4v3Tvgnd3"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_In-L6P4JCJNwm8020jffNE" name="Metal result" signal="_JlKPmhyIkw5DRco2RjSD-x"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_0aPT30CfkfS_2XhnSIMhjD" name="Passed cake" signal="_ONQzH0h1wYVFqZB6JfAb8C"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_Js6L75pkO1mQhOA7NCHyug" name="Wrapped cake" signal="_EUNlO_n1ukPS0ulXRZbffR"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_HPxolVQ3OzgXGyL-weywli" name="Sealed case" signal="_S8mmGLtcSkRQWx9THwP62l"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_TZz36CSbr3-rt5xNZkOLJk" name="Case weight reading" signal="_4XcBZ02AdEsp-4CknpJxbv"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_TIGnVc8Jfp12tTsW2E9Gwq" name="Packed cake" signal="_0SA_HoVWJtw0Ys1aO4BJNf"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_94OiP1x3zsF38IkBEm8sqr" name="wrap complete" signal="_qDixiiMJui7TS1jSMBrQ5g"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_twtc-gzwoADVN_zbJHG_hM" name="Washer free" signal="_wJb-VweeFly2RLjSEle3Hf"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_9eSpqAaxdDf5SZhZK0c6jS" name="wash complete" signal="_f6myVW0Joa7gCFfs0fGknu"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_L0Bn4fHKwsh-ceT_PhM9yr" name="drying complete" signal="_k8Za7MsPmXj-tP1DWSgBI_"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_yx9Mwhoc8EwjlE7ByXyfHs" name="Pan request" signal="_NWVKzbOjGjU2IXN8gx1s43"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_en5lUraMN3csu9eaK3xEMj" name="Empty pan" signal="_zw0QTagHLyzlo5bPFFBpXd"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_OWXYMrtdDS3Ptm98MjDlE1" name="Pan for washing" signal="_UarZt8ZHJrRsst1-rHV7JE"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_m8KerR49FPBbxrW_JhEPIT" name="washing station unavailable" signal="_mu0bolVyGfOcZx_BaoBqC1"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_GAdQ7Nb1G0jKqPDjSTj0Cy" name="backlog = 0" signal="_61HNim7RSAbnxSPrWqG2xi"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_gWvj22hhUeMi9BYE2KlYRZ" name="Band state change" signal="_i1oGr8Jv-okHtF0iYblq9J"/>
+        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_R-H5kWxh4DLoijSSQ0VCJA" name="heartbeat interval elapsed" signal="_WC-yyZGDBzLLeRYyXbQ_R7"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_3YVY1iX8_buiJEFTVaRMTh" name="SM1 Inspection Flow">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_Z3LeK7y7dBBm_a4hCG0cUb" annotatedElement="_3YVY1iX8_buiJEFTVaRMTh">
+          <body>Behavior of one cake through the Inspection IBD: depanning (AF-01, FD-01), weight, visual and metal checks (AF-03 to AF-05), and the inspection decision with reject handling (AF-06, FD-05).</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_WUbKadH-03Krn55UiDkfA6" name="Inspection Flow">
+          <transition xmi:type="uml:Transition" xmi:id="_79eiO-06A1w72kIi7eXpKb" name="T0" source="_csvZftkceRSwgaOPRpdnjb" target="_9-kJ9mYV5vmK-f21FijHoa"/>
+          <transition xmi:type="uml:Transition" xmi:id="_0tHJpR-iS1ji5MfgqqS5MQ" name="T1" guard="_eKm50KIg0Ljm_FFLW5y_pV" source="_9-kJ9mYV5vmK-f21FijHoa" target="_o5SZgOzwKrPMqvQAVdzi2E">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_TkzqS5nSBvBOAcGhFlZnnS" annotatedElement="_0tHJpR-iS1ji5MfgqqS5MQ">
+              <body>Traces to: FIN-REQ-01, FIN-REQ-02, FIN-REQ-04.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_eKm50KIg0Ljm_FFLW5y_pV" name="released as safe temperature">
+              <specification xmi:type="uml:LiteralString" xmi:id="_0znPrvETS_cmMNu9mVQGqC" value="released as safe temperature"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_K4ctMVLl19RqRieDZnbnNu" name="start pick"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_4i4fV37W65ju--PYEVY-kn" name="Cooled cake" event="_qX0NBY3PKiRVs2PN9V7Rzh"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_aITvAZTt-PNOUzDxlefhXJ" name="T2" source="_9-kJ9mYV5vmK-f21FijHoa" target="_c_UKXTE7zoVwPj8esdSazv">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_zSBalA-Nj6HTf1hrC19UNV" annotatedElement="_aITvAZTt-PNOUzDxlefhXJ">
+              <body>Traces to: FIN-REQ-32.1</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_svw3IM_nlZuaUhUIGo-eV4" name="hold arriving cakes"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_55TzW62YW5kvZNO5yIlUhz" name="depanning machine not responding" event="_mTmGL7k0kLbMOkIgbhoTx5"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_kMccrCdoOcyH0YDv87tDAo" name="T3" source="_c_UKXTE7zoVwPj8esdSazv" target="_9-kJ9mYV5vmK-f21FijHoa">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_HL05wpUGY4rrmk3kVYtQAA" annotatedElement="_kMccrCdoOcyH0YDv87tDAo">
+              <body>Traces to: FIN-REQ-32.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_QpKE4Yk-LJjNtBKG7vl6DL" name="process held cakes"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_AYTFuEoeU7HMgIr6dgim_7" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_THuXFEELWJFUb88uqR07sd" name="T4" source="_o5SZgOzwKrPMqvQAVdzi2E" target="__7JVKtTcIjY_uPJgCQSqEv">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_-cBS1qDL39E14im7BYkc9A" annotatedElement="_THuXFEELWJFUb88uqR07sd">
+              <body>Traces to: FIN-REQ-04.2, FIN-REQ-04.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_49ipHbqjPzephyS-mur_Q1" name="route cake to inspection, pan to washing"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_CrpROfx8Klzc01qQQV1FOP" name="Depanned cake" event="_09L0mlMo85rw0cohs7CRaB"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_VGrRqOfe4UgXEnM12VQd1v" name="T5" source="_o5SZgOzwKrPMqvQAVdzi2E" target="_MLKLKEK1g_c4CPtj0Tn1Bh">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_WvZJFRJmQSoBsyeDrE2iqU" annotatedElement="_VGrRqOfe4UgXEnM12VQd1v">
+              <body>Traces to: FIN-REQ-31.1, FIN-REQ-31.2, FIN-REQ-26.1</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Lk8qxH5KnvMSrtVXi-E7Ue" name="reject cake, pan to washing, publish event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_Ob8yGMQcNlgY-BtW1h387T" name="cake stuck or broken" event="_F_XW5kxaBndnPbhs3FYdtS"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_v4S6sht-Vyqtt8WRjeTkWH" name="T6" source="__7JVKtTcIjY_uPJgCQSqEv" target="_H4aXnmZYwyd0IRwm4jJA27">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_D6CLU2_a0HTpnPptOsvphM" annotatedElement="_v4S6sht-Vyqtt8WRjeTkWH">
+              <body>Traces to: FIN-REQ-05.1, FIN-REQ-05.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_dwvY-6cKeqzMftrZvGfEdd" name="mark failed if outside tolerance"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_EyCTVy3VgLEkk5PzzrBBTB" name="Weight result" event="_yHlP2OJBsJwbeU7cq90t5w"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_MN88oEbHW3AH4rXXl2ys_H" name="T7" source="_H4aXnmZYwyd0IRwm4jJA27" target="_hkLIzDOSJng61gXmaSkdeo">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_i1z1TiKKXlA5pK5TGC_Dgu" annotatedElement="_MN88oEbHW3AH4rXXl2ys_H">
+              <body>Traces to: FIN-REQ-06.1, FIN-REQ-06.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_snorLiDInnF3yeIlGhNGk-" name="mark failed if unsatisfactory"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_NgvmXeG1yrzaXWwRkil-Fp" name="Visual result" event="_VwIFc4Y9zTjKOQhL-uut2q"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_7vvPllPO1lB-rBs7rQPDdH" name="T8" source="_hkLIzDOSJng61gXmaSkdeo" target="_kPEVp1YoC2jPnmtjMcnIhc">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_16EvGvadO3blQsji-JGzZ9" annotatedElement="_7vvPllPO1lB-rBs7rQPDdH">
+              <body>Traces to: FIN-REQ-07.1, FIN-REQ-07.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_aSQcVTvEsN9PRl3jLeN1P6" name="mark failed if metal found"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_eJvoctTim6Ps5a47mdD1TZ" name="Metal result" event="_In-L6P4JCJNwm8020jffNE"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_qha2tbbbiekRcGVUwyqc4a" name="T9" guard="_Cjuowx8nbTfj2kvnVjsYzZ" source="_kPEVp1YoC2jPnmtjMcnIhc" target="_4XU1B5-gWqOztSv_jrCaTc">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_hVVMWYJTz7cLualT5MfBC2" annotatedElement="_qha2tbbbiekRcGVUwyqc4a">
+              <body>Traces to: FIN-REQ-08.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Cjuowx8nbTfj2kvnVjsYzZ" name="no failed mark">
+              <specification xmi:type="uml:LiteralString" xmi:id="_vKlf59K6xDmM18AuR5YsW4" value="no failed mark"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_4MUpF2EWvF4Cy82CamLCxp" name="release to packaging"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_S-qIe3xCk6hxkwDco1wOld" name="T10" guard="_es0Kml8VqcqItqoKA0SLD1" source="_kPEVp1YoC2jPnmtjMcnIhc" target="_MLKLKEK1g_c4CPtj0Tn1Bh">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_PGxgJ8wOy-PbeD1sHY0fCZ" annotatedElement="_S-qIe3xCk6hxkwDco1wOld">
+              <body>Traces to: FIN-REQ-08.2, FIN-REQ-09</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_es0Kml8VqcqItqoKA0SLD1" name="any failed mark">
+              <specification xmi:type="uml:LiteralString" xmi:id="_aNyKkKLKw93LBikoeOYNJS" value="any failed mark"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_cPm982jGDAU8BrClOo64Cc" name="move to reject bin, publish event"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_ERJ3FNuz-M0nGhGE1slumo" name="T11" guard="_r2OE_hN3ui9I-AUF_6CnxP" kind="internal" source="_9-kJ9mYV5vmK-f21FijHoa" target="_9-kJ9mYV5vmK-f21FijHoa">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_FgPr3Ngxcd5MTIRRMG6-eb" annotatedElement="_ERJ3FNuz-M0nGhGE1slumo">
+              <body>Traces to: FIN-REQ-02</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_r2OE_hN3ui9I-AUF_6CnxP" name="not released as safe temperature">
+              <specification xmi:type="uml:LiteralString" xmi:id="_-O35TuUrgz7xRD0j3gCuim" value="not released as safe temperature"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zRwlJSbMsjF5AlQTDccOxZ" name="do not accept cake"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_paTVX03KIGg8IMezcaY54i" name="Cooled cake" event="_qX0NBY3PKiRVs2PN9V7Rzh"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_GBRN2-A41Zm2aOizonVwRW" name="T12" source="_4XU1B5-gWqOztSv_jrCaTc" target="_xW0BEhnH7QK1fDwEzzXKEe"/>
+          <transition xmi:type="uml:Transition" xmi:id="_P9k-5y-jT7Dn16lr3YNtYH" name="T13" source="_MLKLKEK1g_c4CPtj0Tn1Bh" target="_xW0BEhnH7QK1fDwEzzXKEe"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_csvZftkceRSwgaOPRpdnjb" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_9-kJ9mYV5vmK-f21FijHoa" name="Awaiting Cake">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_eUUPKYbRaRs-WsWMmnSuZZ" name="wait for Cooled cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_cI7yMRvI8s49vjJK4QTjmZ" name="ready depanning station"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_kGCURLnFmf_7WHp8WMIxW7" name="record batch ID of incoming cake"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_o5SZgOzwKrPMqvQAVdzi2E" name="Depanning">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_TtpcyJtNLuHFmtpB6lMSV_" name="separate cake from pan"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_qxKYLGDlDvW1ll8A8Dt6zC" name="start vision-guided pick"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_mAh4-muVOR3RxSSjUNzBc2" name="hand over depanned cake and empty pan"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="__7JVKtTcIjY_uPJgCQSqEv" name="Weighing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_mDNRVx_bOkFN3mzBXtxEdH" name="compare weight with target and tolerance"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zxVmZxMqvZiGBbC4v1ZAWK" name="start weight reading"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_vo5Pdp86hWZM_XkbWhNKn-" name="publish Weight result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_H4aXnmZYwyd0IRwm4jJA27" name="Visual Check">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_MyfRtfxqhkvfRTJiQIPENI" name="inspect appearance of cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_RQtGV4euT3M35hAFnjZ7my" name="capture cake image"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Mi9cgLmu5nA-Um2ibGmJmp" name="publish Visual result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_c_UKXTE7zoVwPj8esdSazv" name="Holding">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_38ZPDusLiBWWyPLz3cSceQ" name="hold arriving cakes"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4tvkcj6yCEa_xi1GWvse7T" name="stop picking new cakes"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_LoK7VhGG8w9-D-yjt3dOTu" name="release held cakes for depanning"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_MLKLKEK1g_c4CPtj0Tn1Bh" name="Rejected">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_xYljEeBzWOTy3MOQ68Xh0B" name="mark cake as rejected and keep reason"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_kPEVp1YoC2jPnmtjMcnIhc" name="Deciding">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_qCW1_jwKj8rfP_NX9aMKdm" name="evaluate failed marks"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="__jMarKEM3NrW7tqiLARaBD" name="collect weight, visual and metal results"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_QeM-SmoSlXrox93SDdCcaL" name="forward decision to packaging or reject bin"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_hkLIzDOSJng61gXmaSkdeo" name="Metal Check">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Srf_HGeEugpa8nrbc5Bp3g" name="scan cake for metal"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_N5TrUX4tMaZZG69ygkQSZz" name="start metal scan"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_nfch-mGXluIA1mpJnY1eLH" name="publish Metal result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_4XU1B5-gWqOztSv_jrCaTc" name="Passed">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_og-OsZRFvUQGJsYQmn5quY" name="hand cake over to packaging"/>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_xW0BEhnH7QK1fDwEzzXKEe" name="Final"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_a9fJXqzirc0oJhL72f_c2U" name="SM2 Packaging Flow">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_fQqOH9M7L3t_JVqWTtgxfX" annotatedElement="_a9fJXqzirc0oJhL72f_c2U">
+          <body>Behavior of one cake through the Packaging IBD: optional holding area (AF-11, FD-10), wrapping (AF-07), cartoning (AF-08), reject handling (AF-10) and the case weight check (AF-09).</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_a2srHSxGPr0eNY-sZop6bW" name="Packaging Flow">
+          <transition xmi:type="uml:Transition" xmi:id="_bo2a9R65HOrLgjA7rT-wia" name="T0" source="_WPyxeiJ7JpkapA69FO-VlS" target="_XKve_Blq7iEJD3f60n_k7y"/>
+          <transition xmi:type="uml:Transition" xmi:id="_z3ZSeAdceuCbK_BRjZq8X4" name="T1" guard="_SEKtX7ehSzl6aMr7rAp3I5" source="_XKve_Blq7iEJD3f60n_k7y" target="_aRI5HiHkHabQvWhNp9ToPc">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_y3fjWdzCwdEIVfsM9F6f2-" annotatedElement="_z3ZSeAdceuCbK_BRjZq8X4">
+              <body>Traces to: FIN-REQ-21.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_SEKtX7ehSzl6aMr7rAp3I5" name="wrapping available">
+              <specification xmi:type="uml:LiteralString" xmi:id="_v6SmRscgrVsQM4r6_h7HyY" value="wrapping available"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_k_eRX8V8Oz8jArvY8rS9nf" name="wrap"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_5Ay2RJEZOjDArVNDnyxB3c" name="Passed cake" event="_0aPT30CfkfS_2XhnSIMhjD"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_djuDlvbue7OfZo0b4zBMz8" name="T2" guard="_aAunIgLFlBBJHHv_DU65IV" source="_XKve_Blq7iEJD3f60n_k7y" target="_-2aOO-upke58I44qrPKORE">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_WXdeSSAkoex_UJUY2awkIq" annotatedElement="_djuDlvbue7OfZo0b4zBMz8">
+              <body>Traces to: FIN-REQ-33.1, FIN-REQ-34</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_aAunIgLFlBBJHHv_DU65IV" name="wrapping unavailable">
+              <specification xmi:type="uml:LiteralString" xmi:id="_kMsJMmpH75Gh8tTc6DY7g7" value="wrapping unavailable"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_RL73w4J1Nzh6cWiuY-mdNY" name="hold cake; if holding area full, stop pan admission"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_yAChL9Wy82jvfBS15KHSeI" name="Passed cake" event="_0aPT30CfkfS_2XhnSIMhjD"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_DMTYCjZYqMVgR-YQv35PNU" name="T3" source="_-2aOO-upke58I44qrPKORE" target="_aRI5HiHkHabQvWhNp9ToPc">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_lA_YEp40NOgPfcypwA_MA4" annotatedElement="_DMTYCjZYqMVgR-YQv35PNU">
+              <body>Traces to: FIN-REQ-33.2, FIN-REQ-35</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TsblfdZwq10oFxVxGK4347" name="wrap held cakes, resume pan admission"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_SxOf-8L02A3sClX1fAOjpF" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_luiK2iGJCNEiy31ydUki0W" name="T4" source="_aRI5HiHkHabQvWhNp9ToPc" target="_z8rTHDNvyFM-waGppRYERe">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_6qpjiZJ35ygyLZ0IxBjo-C" annotatedElement="_luiK2iGJCNEiy31ydUki0W">
+              <body>Traces to: FIN-REQ-21.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ZwBm1_2jINz3kEbV2MRgWT" name="check wrap"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_lzTHxA7-jyusa4LcRS2sx5" name="Wrapped cake" event="_Js6L75pkO1mQhOA7NCHyug"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QJ7Y90cPrmnjPWHcHh5nFZ" name="T5" guard="_o-S0GISq11KbCUwbohGHM2" source="_z8rTHDNvyFM-waGppRYERe" target="_07b1Aw1DqxDPRQ_Jhj1KsM">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_4dX5jYMofgAej330blTGpB" annotatedElement="_QJ7Y90cPrmnjPWHcHh5nFZ">
+              <body>Traces to: FIN-REQ-23.1, FIN-REQ-23.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_o-S0GISq11KbCUwbohGHM2" name="wrap OK">
+              <specification xmi:type="uml:LiteralString" xmi:id="_y-AF8Ev0lV_5BUTowJK2XM" value="wrap OK"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_y86uVQXWM6txo5q6EK5Fsw" name="pack in carton, seal"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_pAHXQ1iF0MEFGiLwe2U7xJ" name="T6" guard="_Y4H3v7IxbtJ5pzkPvoLrls" source="_z8rTHDNvyFM-waGppRYERe" target="_VyHVyKj4kxzvhAQ3_DO0eY">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_8fd0FzpghNzPIYnZl0dC9D" annotatedElement="_pAHXQ1iF0MEFGiLwe2U7xJ">
+              <body>Traces to: FIN-REQ-24.2, FIN-REQ-26.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Y4H3v7IxbtJ5pzkPvoLrls" name="wrap defective">
+              <specification xmi:type="uml:LiteralString" xmi:id="_raZZ2G9vDuJPBHrORKkhEv" value="wrap defective"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_QEV_sZAIdVT0wSTsG0-l2G" name="refuse bin, publish event"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_Ut0yOn43_sOPNaukLcuix5" name="T7" source="_07b1Aw1DqxDPRQ_Jhj1KsM" target="_bQp0jUwW2Esv3dMxmRdK6x">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_5BCM7IqNDwnOj4qKpaaN9s" annotatedElement="_Ut0yOn43_sOPNaukLcuix5">
+              <body>Traces to: FIN-REQ-23.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ZMJ4GzDctscSIoIi2QDMXv" name="check carton"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_OFolQsYVZgmXs67QtJl9TF" name="Sealed case" event="_HPxolVQ3OzgXGyL-weywli"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_PG3Uau0r0B0pJvb9B1E-dF" name="T8" guard="_N2oSewsI6UUHB9YuoOVrV_" source="_bQp0jUwW2Esv3dMxmRdK6x" target="_O3xYt_3a6GwT66CeKg4ckF">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_cflsTNW6BZFZJe1sKNJjZn" annotatedElement="_PG3Uau0r0B0pJvb9B1E-dF">
+              <body>Traces to: FIN-REQ-24.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_N2oSewsI6UUHB9YuoOVrV_" name="carton OK">
+              <specification xmi:type="uml:LiteralString" xmi:id="_dXWIQ1eeBa7vXcVh0__w6R" value="carton OK"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_eER7Z4pAxym4ukQnew2zQl" name="proceed to shipping bin"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_YIv6LSK9bnwmzuOOYpTz0L" name="T9" guard="_Tciya8bZlS8khBnX6TTNZ9" source="_bQp0jUwW2Esv3dMxmRdK6x" target="_VyHVyKj4kxzvhAQ3_DO0eY">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Z1fnzD1Mq5ALnVlqw4lU5O" annotatedElement="_YIv6LSK9bnwmzuOOYpTz0L">
+              <body>Traces to: FIN-REQ-24.2, FIN-REQ-26.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Tciya8bZlS8khBnX6TTNZ9" name="carton defective">
+              <specification xmi:type="uml:LiteralString" xmi:id="_lbHJih568UXXQZMadLJLSb" value="carton defective"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_z3iS5kg5-6oksv6gUNBA5K" name="refuse bin, publish event"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_q40oiWVq61lMeU9RPKymS1" name="T10" source="_O3xYt_3a6GwT66CeKg4ckF" target="_y5wbSWkSd9a_hqAGCbp98G">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_kNZlewbV_KFDhGV_PM3P_X" annotatedElement="_q40oiWVq61lMeU9RPKymS1">
+              <body>Traces to: FIN-REQ-25, FIN-REQ-26.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_MMUD0myKLI1Co58VUKjCIj" name="if incorrect weight, publish event"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_aqee9FG4tKAPuojlpCX2gt" name="Case weight reading" event="_TZz36CSbr3-rt5xNZkOLJk"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_4PNzMdvWQ3hIwAYR4BpKHf" name="T11" source="_y5wbSWkSd9a_hqAGCbp98G" target="_5_1mL4IEQkXa99ORIaPJ48"/>
+          <transition xmi:type="uml:Transition" xmi:id="_mEWy0AHNpbVT_xC9AB9NPI" name="T12" source="_VyHVyKj4kxzvhAQ3_DO0eY" target="_5_1mL4IEQkXa99ORIaPJ48"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_WPyxeiJ7JpkapA69FO-VlS" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_XKve_Blq7iEJD3f60n_k7y" name="Awaiting Cake">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Sx-r1TwWuLdBCkAY-qQE7C" name="wait for Passed cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_np_O-W4YWkhX0d5fG253YS" name="ready wrapping control"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_ostja6kIZEtNFs2EzsQ5UJ" name="note batch ID of cake"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_aRI5HiHkHabQvWhNp9ToPc" name="Wrapping">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_AqtIRmfNZwUZb_lSilhcaC" name="wrap cake"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_DuWdU_bh6PM0xZ-rTuMxaU" name="start wrapping station"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_rWzyfqLG4jD9NaKadiSbFg" name="stop wrapping station"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_z8rTHDNvyFM-waGppRYERe" name="Verifying Wrap">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_85wu-Ml9nf_CD_ifZr56wR" name="check cake is properly wrapped"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_AckU6Sr2a-KMctajoQHI_j" name="capture wrap image"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_f8BmirTnK0C0oM4HlVXH1Q" name="publish Wrapping result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_07b1Aw1DqxDPRQ_Jhj1KsM" name="Cartoning">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_KE3TqzWfTGA8fyDfDjX9fA" name="pack cake in carton and seal"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_8RLB3qeTefx8JF_I-oCT_M" name="start cartoning station"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_SXdBFq05W2BjmbaqYNt5OA" name="stop cartoning station"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_-2aOO-upke58I44qrPKORE" name="Holding">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_vjyy7H2_PgBHYSa5D0WFYr" name="hold cake and monitor holding capacity"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_kEvt0FO67qjo96H_Z3t9xP" name="take free holding slot"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8A3TdFqOaFPnmKcXJSjgfT" name="free holding slot"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_VyHVyKj4kxzvhAQ3_DO0eY" name="Refused">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_P86BHN7VZyeQn5OX0BeIWs" name="divert cake to refuse bin"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_bQp0jUwW2Esv3dMxmRdK6x" name="Verifying Carton">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_c5_Y0tiIyfJoD3xpAsLaQa" name="check cake is properly cartoned"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_NT3pQVxfJpXkO9cIWLXX7U" name="capture carton image"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_4KKYb3FqkvbwZ1sRjQZ3wG" name="publish Cartoning result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_y5wbSWkSd9a_hqAGCbp98G" name="Packed">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ag7Dm6c_ZmSKMg9rq1Ob8x" name="release case to palletising"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_O3xYt_3a6GwT66CeKg4ckF" name="Weighing Case">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_sDn6kPFSObq59IOfKEfHFd" name="compare case weight with expected weight"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_AeFIRUMSRvjL2oGPteUETY" name="start case weight reading"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_58M_UL0trtu-XMcYlvVppR" name="publish Case weight result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_5_1mL4IEQkXa99ORIaPJ48" name="Final"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_b2iI7-8D01ByumbNQeXFQU" name="SM3 Pallet Lifecycle">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_WF5J0RyZ1VyMurVLatHYi2" annotatedElement="_b2iI7-8D01ByumbNQeXFQU">
+          <body>Behavior of one pallet in the Palletising IBD: filling (AF-12, FD-11), wrapping (FD-12) and the &quot;Pallet ready for shipment&quot; signal.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_1NBBB_WicaLx2bOPcv4vlI" name="Pallet Lifecycle">
+          <transition xmi:type="uml:Transition" xmi:id="_159sUMLBZbPioD377gIJPd" name="T0" source="_95cdnVuIiG43UanHUsLccJ" target="_9KAuYOah0BpUrhS8cfXjGm">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_WKaPq3J5hIPrwl4Ljc6oKb" annotatedElement="_159sUMLBZbPioD377gIJPd">
+              <body>Traces to: FIN-REQ-28.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TGk4MYbNYhLg-tOTq7QXIl" name="empty pallet staged"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_32fi2CNWduaAIbl7SJwuCE" name="T1" guard="_Sl7b3OWBIW1fX1ENJ2iSd_" source="_9KAuYOah0BpUrhS8cfXjGm" target="_wVGdG0kWwfM6Q_gG9aMEFm">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_JQuT7vSbPDTKlNaPMh0yi4" annotatedElement="_32fi2CNWduaAIbl7SJwuCE">
+              <body>Traces to: FIN-REQ-27, FIN-REQ-28.1, FIN-REQ-28.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Sl7b3OWBIW1fX1ENJ2iSd_" name="last spot filled">
+              <specification xmi:type="uml:LiteralString" xmi:id="_m6FJWmzHqgDcvXWfT2ge_N" value="last spot filled"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_8w_E84OsKU-243nvHo1wYb" name="place cake, set pallet aside, stage new pallet"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_0jvqTRnAwfTmLuxQD1WLh9" name="Packed cake" event="_TIGnVc8Jfp12tTsW2E9Gwq"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_qs8cubiXDMPHC8gwTvkWJP" name="T2" source="_wVGdG0kWwfM6Q_gG9aMEFm" target="_doEJ1fth7BDGhc4Ew_H_Cv">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_IiH8UGXV5BUh-pUEyYKWBl" annotatedElement="_qs8cubiXDMPHC8gwTvkWJP">
+              <body>Traces to: FIN-REQ-29</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_bLnMUK0o9uLUgu3guC05zj" name="wrap pallet"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="__Q47MloeYCDQGPAVikbCrW" name="T3" source="_doEJ1fth7BDGhc4Ew_H_Cv" target="_9d5fPagDPxRnNvrApdMTXm">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_zxNm1xT41av_8o-Vyid4Sy" annotatedElement="__Q47MloeYCDQGPAVikbCrW">
+              <body>Traces to: FIN-REQ-30</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_kQ4-jwgRmrs__w-xiuDbwX" name="publish Pallet ready for shipment (pallet ID, cake count, batch IDs)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_dxnxCnhws1cdubf2YQauPN" name="wrap complete" event="_94OiP1x3zsF38IkBEm8sqr"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_gyx9IOoPzySoU-wUOojH5i" name="T4" guard="_hNv3bXH3gBlgeavhQOOq-d" kind="internal" source="_9KAuYOah0BpUrhS8cfXjGm" target="_9KAuYOah0BpUrhS8cfXjGm">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Tn2Ktuumfp1nGWreH2cAaM" annotatedElement="_gyx9IOoPzySoU-wUOojH5i">
+              <body>Traces to: FIN-REQ-27</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_hNv3bXH3gBlgeavhQOOq-d" name="free spot remains">
+              <specification xmi:type="uml:LiteralString" xmi:id="_i_992qoD53lNy_3uXhBXh7" value="free spot remains"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_8d1F1XZpY-qhRY8kaA-pTU" name="place cake"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_4dSpPM4mETcfCm8fqphj7H" name="Packed cake" event="_TIGnVc8Jfp12tTsW2E9Gwq"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_TyvrXhnW_EWmesVSWm4WJv" name="T5" source="_9d5fPagDPxRnNvrApdMTXm" target="_tcX_rWPw7L-Y3qgTumtZr8"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_95cdnVuIiG43UanHUsLccJ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_9KAuYOah0BpUrhS8cfXjGm" name="Filling">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_cX-TysJfcrj9E0gNGRWI_e" name="place cakes on free spots"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_LCkY9HrHHh-K9eci81YNgR" name="register pallet and batch IDs"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_KwqwFh3r2Q1UMKlK28ZPQJ" name="close pallet for further cakes"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_wVGdG0kWwfM6Q_gG9aMEFm" name="Full">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_9tOPtBJg8lu11Zp1JVCI0q" name="wait for pallet wrapper"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_1sxx0kruDFwJE9pUDZ6Sab" name="set pallet aside"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_9p6r7lvglatJcOKsPnIdD1" name="move pallet to pallet wrapper"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_doEJ1fth7BDGhc4Ew_H_Cv" name="Wrapping">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_awQVGKMmJNHkq7EOjvADMR" name="wrap pallet"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_YW61nnuCaU3WPPxUSb1H0i" name="start pallet wrapper"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_bIgm4q8MjxcG9ureAMsmjl" name="stop pallet wrapper"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_9d5fPagDPxRnNvrApdMTXm" name="Ready">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_FuywTePwjY23iEeiujkR3j" name="wait for move to shipping storage"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_i9mic5RGltH_eJUAyHk5pI" name="collect pallet ID, cake count and batch IDs"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8D8-iM_eLKFsfmTFwAE2IX" name="hand pallet to Production and Logistics"/>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_tcX_rWPw7L-Y3qgTumtZr8" name="Final"/>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_O8Nwht2jTv60llH2DmTqFw" name="SM4 Pan Loop">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_dy8oHAm3C6Q01wbpHs5ieK" annotatedElement="_O8Nwht2jTv60llH2DmTqFw">
+          <body>Behavior of the Pan Loop IBD: the life cycle of one pan through washing, verification and stock (AF-13, AF-14), in parallel with the mode of the washing station (AF-15).</body>
+        </ownedComment>
+        <ownedComment xmi:type="uml:Comment" xmi:id="_4d8BGmI8h9N9n_WzEBWhQv" annotatedElement="_O8Nwht2jTv60llH2DmTqFw">
+          <body>Invariant (FIN-REQ-14): the total number of pans in the production system stays at twice the number needed to fill the full production system.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_fsgDqd21WdTZfOcovioybl" name="Pan Lifecycle">
+          <transition xmi:type="uml:Transition" xmi:id="_D6N813sMcVtn1KCe1P14u3" name="T0" source="_eocKMpyZVXpsBntOOWxg7v" target="_eoBNBnSD9HiLF8D8OmA0xh"/>
+          <transition xmi:type="uml:Transition" xmi:id="_Xgvt2XvAxKDmTW1F2bVHps" name="T1" source="_eoBNBnSD9HiLF8D8OmA0xh" target="_ZH9KhxSU0LogUMLZ68DCpY">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_33iAqBu_krbenBGn_lIRJ6" annotatedElement="_Xgvt2XvAxKDmTW1F2bVHps">
+              <body>Traces to: FIN-REQ-11.1</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_HCU-Dmk1wNZ5QR03M7K7nS" name="wash"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_-MmdFsPTh0c2bF7SKS3uaj" name="Washer free" event="_twtc-gzwoADVN_zbJHG_hM"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_10dodZiTsO7GSk6MSxwaQq" name="T2" source="_ZH9KhxSU0LogUMLZ68DCpY" target="_ovC1E0aNDgHYkQhNQiMp5v">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_akI84N3DHfIMdbRrn3Kl2E" annotatedElement="_10dodZiTsO7GSk6MSxwaQq">
+              <body>Traces to: FIN-REQ-11.2</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_Xg6nGmlrddCIC3AmXVEXiF" name="dry"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_wgAtOVloyaYx2dtKRDJVXX" name="wash complete" event="_9eSpqAaxdDf5SZhZK0c6jS"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_bCSEDBqht3An5Sec04I9rT" name="T3" source="_ovC1E0aNDgHYkQhNQiMp5v" target="_oA1Lf71wv_damdkbd60Prq">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_hsDjwt0NOLTMy6H4u2SWOn" annotatedElement="_bCSEDBqht3An5Sec04I9rT">
+              <body>Traces to: FIN-REQ-11.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_iqbho5fjsxaZQJRk8FPU08" name="check pan"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_08xwgv__3Q-izQmtax9YiA" name="drying complete" event="_L0Bn4fHKwsh-ceT_PhM9yr"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_WW3jY4Tv0xZN1YacUX3i9C" name="T4" guard="_3gQNrZUnY6pT2jOP07-x3k" source="_oA1Lf71wv_damdkbd60Prq" target="_br3no_iVzwN0nyw2x7lPWz">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_1GwVgPmQW_gqiDhIz9cx6W" annotatedElement="_WW3jY4Tv0xZN1YacUX3i9C">
+              <body>Traces to: FIN-REQ-12.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_3gQNrZUnY6pT2jOP07-x3k" name="clean and undamaged">
+              <specification xmi:type="uml:LiteralString" xmi:id="_1LO6MEtdr50quauoQWFr1q" value="clean and undamaged"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_V1d7btAbHGHozD1zqBvOZe" name="queue for recirculation"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_IS9kR8G-4dz0zI0EXRSY99" name="T5" guard="__SRXeHmxym8s_WdGyKOFEW" source="_oA1Lf71wv_damdkbd60Prq" target="_tZ_ZpbbN918aC63pILrvxZ">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_vDdLC7vBcjQKV7bTSm4F0a" annotatedElement="_IS9kR8G-4dz0zI0EXRSY99">
+              <body>Traces to: FIN-REQ-12.2, FIN-REQ-13</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="__SRXeHmxym8s_WdGyKOFEW" name="not clean or damaged">
+              <specification xmi:type="uml:LiteralString" xmi:id="_F_uT9hQOmwQw6XRU691yAG" value="not clean or damaged"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_SJCMOf7lVxu1GvxRzMZCy6" name="remove from cycle, publish discard event"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_yotnHmGwm-4gcKw4OJ0QJn" name="T6" source="_br3no_iVzwN0nyw2x7lPWz" target="_7nHwGyYbF9F8pzCtxEltUa">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_m6o2TrJOcqYjxkqUjodTvO" annotatedElement="_yotnHmGwm-4gcKw4OJ0QJn">
+              <body>Traces to: FIN-REQ-16, FIN-REQ-17</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_d2Bkm-wE0ixp2UmzyYoinA" name="supply clean pan, report stock level"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_QFLn6xojNGMqTsDMoEtQBF" name="Pan request" event="_yx9Mwhoc8EwjlE7ByXyfHs"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_KLKxhv_4HliKKDomAP2cTi" name="T11" source="_7nHwGyYbF9F8pzCtxEltUa" target="_eoBNBnSD9HiLF8D8OmA0xh">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_Tx1m7M7I21MksWDFxjuwE-" annotatedElement="_KLKxhv_4HliKKDomAP2cTi">
+              <body>Traces to: FIN-REQ-11.1, FIN-REQ-15</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_q1JG33yrAkMlcKSBX-EJ0y" name="pan returns to the pan loop"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_I7DeX9aN3M99J-ArO95pke" name="Empty pan" event="_en5lUraMN3csu9eaK3xEMj"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_nOds22Yt8boIMEPwtK9YbR" name="Pan for washing" event="_OWXYMrtdDS3Ptm98MjDlE1"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_DD7JGlZZ4TpC1owTmcnCKf" name="T12" source="_tZ_ZpbbN918aC63pILrvxZ" target="_rEPGnM_f41JoPmw5Ux4g6G"/>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_eocKMpyZVXpsBntOOWxg7v" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_eoBNBnSD9HiLF8D8OmA0xh" name="Awaiting Washing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_JRR12GwzE1rx6KpFuIq0rU" name="wait for free washer"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zEmmVeBCpxNroDR7jD5qAh" name="register pan at washing station"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_wHIuzqNxSyHsIHpBvnffvZ" name="start washing cycle"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_ZH9KhxSU0LogUMLZ68DCpY" name="Washing">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_MrcSQvhypZxCayR9eJnsg7" name="wash pan"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_c1JT5unC7Tw-yRqzax6uqK" name="start wash control"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Hf72dz51FwhkRi5QJVNpA0" name="stop washing"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_ovC1E0aNDgHYkQhNQiMp5v" name="Drying">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_OS_vEAh73voAz7ftDhuB1D" name="dry pan"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_nB6J4Qo_ExuP_jBDwFkxvO" name="start drying"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_2Yks5-t-36YmJxPw3homZR" name="stop drying"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_oA1Lf71wv_damdkbd60Prq" name="Verifying">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_5N2UZn11UdefswrAZAB3UL" name="check pan is clean and undamaged"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_eM9O2eKirSFf7Hk8fDUgmu" name="inspect pan"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_i-EUD6t94II73axUx6kOiu" name="record verification result"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_7nHwGyYbF9F8pzCtxEltUa" name="Supplied">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_swtNejQRoicxx9WCJj_iL1" name="hand pan to depositing"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_br3no_iVzwN0nyw2x7lPWz" name="In Stock">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_s5l92nTM_uvmC0lFOQJNY6" name="count clean pan stock"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_IvxdKn7TDt2CoC_4lQc_lF" name="store pan in pan hopper"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_1fQU9ooRGK-KP7BCNRODDj" name="take pan out of stock"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_tZ_ZpbbN918aC63pILrvxZ" name="Discarded">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_FZgeBjoB7z186CfVgpoEAe" name="drop pan into discard bin"/>
+          </subvertex>
+          <subvertex xmi:type="uml:FinalState" xmi:id="_rEPGnM_f41JoPmw5Ux4g6G" name="Final"/>
+        </region>
+        <region xmi:type="uml:Region" xmi:id="_xqhV2oESAaIaDfwh8wesfn" name="Washing Station Mode">
+          <transition xmi:type="uml:Transition" xmi:id="_RKI58VotJB4fn_PYU18G6K" name="T7" source="_OJh-24k0gy_X_IQ27FrNf7" target="_j7PyGqVSRvmU3ZGBRYHpvK"/>
+          <transition xmi:type="uml:Transition" xmi:id="_XHDXikUgd34pzJXTLLA44S" name="T8" source="_j7PyGqVSRvmU3ZGBRYHpvK" target="_bIKjIR82HWZSBjuarWl8ek">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_iHxS1SVo1npGBf3zccWQHZ" annotatedElement="_XHDXikUgd34pzJXTLLA44S">
+              <body>Traces to: FIN-REQ-18</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zGeJKZqgs50Rj4zQ5H62HZ" name="keep supplying from stock"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_SGwk8S571-tGB5sWZRni0b" name="washing station unavailable" event="_m8KerR49FPBbxrW_JhEPIT"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_yje6B-9wGP0hwxZrby4TIK" name="T9" guard="_7WbZddW4K_zcVyh6NPOGp6" source="_bIKjIR82HWZSBjuarWl8ek" target="_lXmR3AxiLoVQaYWyW4q-Ik">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_DWjwE7f9i9AO8ZBEIqSGjA" annotatedElement="_yje6B-9wGP0hwxZrby4TIK">
+              <body>Traces to: FIN-REQ-19, FIN-REQ-20.1, FIN-REQ-20.3</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_7WbZddW4K_zcVyh6NPOGp6" name="conditions for continued washing met">
+              <specification xmi:type="uml:LiteralString" xmi:id="_ZmpzmebKV5e_VSZgAuryXO" value="conditions for continued washing met"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_9-Oflf0Acdmxpb0BQ16djL" name="increase speed, log change"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_x0_jI7axjIWOonTCLWoBj7" name="Repair confirmed" event="_Qje9VTyNMHMuTRY06yU2Ps"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_q1UxoCoq0lvda6zx4BmYV_" name="T10" source="_lXmR3AxiLoVQaYWyW4q-Ik" target="_j7PyGqVSRvmU3ZGBRYHpvK">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_3B3mQtI2bPcxoh_50hd5g5" annotatedElement="_q1UxoCoq0lvda6zx4BmYV_">
+              <body>Traces to: FIN-REQ-20.2, FIN-REQ-20.3</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TdjXwKOQr1VRGC3nU2D5UV" name="normal speed, log change"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_tubBxq_Cm6haFLemfnqdjp" name="backlog = 0" event="_GAdQ7Nb1G0jKqPDjSTj0Cy"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_JP6BdrRqi8zll7Vi6aGLaF" name="T13" source="_lXmR3AxiLoVQaYWyW4q-Ik" target="_bIKjIR82HWZSBjuarWl8ek">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_QrUTlY4Qg1toFtHoJQgC7p" annotatedElement="_JP6BdrRqi8zll7Vi6aGLaF">
+              <body>Traces to: FIN-REQ-18</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_RvdcqbsBFrQgZBXN0-cCfj" name="keep supplying from stock"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_D7t_xdfYTW9jFa25Qj1AfT" name="washing station unavailable" event="_m8KerR49FPBbxrW_JhEPIT"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_OJh-24k0gy_X_IQ27FrNf7" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_j7PyGqVSRvmU3ZGBRYHpvK" name="Normal">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__pIESTKTRSOfb5vbG9iVJz" name="monitor pan backlog"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_7rcrLR5LT9gqaGRvnoUXTd" name="set washing speed to normal"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_8eUzkEvJ8AC9jHQiEQeyV4" name="note washing speed change"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_bIKjIR82HWZSBjuarWl8ek" name="Faulted">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_rrVHPIBu6Z5tB5yzth_XRL" name="keep supplying pans from stock"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ZUQ7yjr5E60X9fame8NmHO" name="stop washing"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_qYzLZSAPhd1OllpAiRNOBa" name="check conditions for continued washing"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_lXmR3AxiLoVQaYWyW4q-Ik" name="Catch-up">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_yr-bS0qGsmpQLkB057Fuc3" name="wash backlog of pans"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_NzhI6Czy7WU3VbyMz2_gUC" name="raise washing speed"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_FjwwG2P-orrM6hHZi2Ds8i" name="return speed command to normal"/>
+          </subvertex>
+        </region>
+      </packagedElement>
+      <packagedElement xmi:type="uml:StateMachine" xmi:id="_4isO4X77TnSitWdvBEDMF3" name="SM5 Band Response and Health">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_Z98Kl0oBlzy-LJu20UQCLX" annotatedElement="_4isO4X77TnSitWdvBEDMF3">
+          <body>Behavior of the Reporting IBD: how Band-State Response (AF-17) reacts to band state changes, in parallel with periodic Health Reporting (AF-16). Event Reporting (AF-18) has no states of its own and appears as the &quot;publish event&quot; effects in SM1 to SM4.</body>
+        </ownedComment>
+        <region xmi:type="uml:Region" xmi:id="_bG03-O9i-AMtYdON4eySaV" name="Band Response">
+          <transition xmi:type="uml:Transition" xmi:id="_RpAyeQ81njA38RRCKHUejW" name="T0" source="_3E0VQTV9I1u_kAoC6jLj6l" target="_rROcJrkOfaqkDhg1G3j1b0"/>
+          <transition xmi:type="uml:Transition" xmi:id="_lo5q6VwbOutkR6H7TEO0IT" name="T1" guard="_KusG87Oq1ITtICnc0lE2N0" source="_rROcJrkOfaqkDhg1G3j1b0" target="_layNdLyNf4OalZT2GZj_X9">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_cMFvleu3QPAINXzH95ywc5" annotatedElement="_lo5q6VwbOutkR6H7TEO0IT">
+              <body>Traces to: FIN-REQ-38.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_KusG87Oq1ITtICnc0lE2N0" name="slow-down">
+              <specification xmi:type="uml:LiteralString" xmi:id="_rVjWKn2KowxGSXKupZXKaf" value="slow-down"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_mzNWba4uBQldnc5GGPtNLM" name="continue at reduced speed"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_jXREcXcwFfxK2OdHkX8SgS" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_-LwbWW-DXC6PVnbXCW8fZp" name="T2" guard="_pSD2WOqg2HYcaHE1wuJKoD" source="_rROcJrkOfaqkDhg1G3j1b0" target="_HMAgdhkA_S5Yc1xg5Iow3E">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_nctO1pXn9LnpY0CLLIs92_" annotatedElement="_-LwbWW-DXC6PVnbXCW8fZp">
+              <body>Traces to: FIN-REQ-37.1, FIN-REQ-37.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_pSD2WOqg2HYcaHE1wuJKoD" name="halt">
+              <specification xmi:type="uml:LiteralString" xmi:id="_F7YXFnud5mO0ZGoqky48eO" value="halt"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_vdBD9kfKipiWkoHQ-wC6W9" name="finish product inside, accept no new product"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_j-cmXnmBqys41_MH6n5vTu" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_MsNtNrG3wiecKNOG2NB_xf" name="T3" guard="_bROmdP7Hfox1j_baNSppc0" source="_layNdLyNf4OalZT2GZj_X9" target="_HMAgdhkA_S5Yc1xg5Iow3E">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_cufI-jcn6FFp91EOmu89tR" annotatedElement="_MsNtNrG3wiecKNOG2NB_xf">
+              <body>Traces to: FIN-REQ-37.1, FIN-REQ-37.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_bROmdP7Hfox1j_baNSppc0" name="halt">
+              <specification xmi:type="uml:LiteralString" xmi:id="_w1y5E-MWgQhDaPaZ3_XX7X" value="halt"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_LQCNtZskzliFuA70mOLqow" name="finish product inside, accept no new product"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_3hGkeBBdVeh_ynZ0mRVlSf" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QFI7Zu4IsTQWrK0cHYS5AG" name="T4" guard="_21zE7Mg916I7ZSsGyKdPW-" source="_layNdLyNf4OalZT2GZj_X9" target="_rROcJrkOfaqkDhg1G3j1b0">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_qv29ZaTTlJg6ZXyTRXTyJA" annotatedElement="_QFI7Zu4IsTQWrK0cHYS5AG">
+              <body>Traces to: FIN-REQ-38.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_21zE7Mg916I7ZSsGyKdPW-" name="restart">
+              <specification xmi:type="uml:LiteralString" xmi:id="_YpP-EbIhVo652cX9z-6b8R" value="restart"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_3ubdrZgGZ4O5OGqI9qhzIo" name="resume normal processing"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_RBPFMB9JftzVfXrlcVMdmQ" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_opVI-wI_xQLO5tkOLXkcT3" name="T5" guard="_90JuOjsreeqx5rijmXJeXC" source="_HMAgdhkA_S5Yc1xg5Iow3E" target="_rROcJrkOfaqkDhg1G3j1b0">
+            <ownedComment xmi:type="uml:Comment" xmi:id="__ISRzV8D98NEmGAE25Q1Me" annotatedElement="_opVI-wI_xQLO5tkOLXkcT3">
+              <body>Traces to: FIN-REQ-38.2</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_90JuOjsreeqx5rijmXJeXC" name="restart">
+              <specification xmi:type="uml:LiteralString" xmi:id="_kI1F93avcuIxQtDjnJiK_K" value="restart"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TstvOMK64BN9CqNI_Wql7S" name="resume normal processing"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_rXhVed0f7l-Hxf909AyE1s" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_QQ-qve9lHePw7vlnIKmnS1" name="T8" guard="_5ZgdWFJZh1--xXRvMTsRTn" source="_HMAgdhkA_S5Yc1xg5Iow3E" target="_layNdLyNf4OalZT2GZj_X9">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_wkaDPeL81RMqeKPy-wuefF" annotatedElement="_QQ-qve9lHePw7vlnIKmnS1">
+              <body>Traces to: FIN-REQ-38.1</body>
+            </ownedComment>
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_5ZgdWFJZh1--xXRvMTsRTn" name="slow-down">
+              <specification xmi:type="uml:LiteralString" xmi:id="_8Lwumk1Bn3qeM0ONny-D5M" value="slow-down"/>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_lBAUfuR91AfQ4X9N5wU9iv" name="continue at reduced speed"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_oZe3Lh_WgqQgq_oHpIEqt4" name="Band state change" event="_gWvj22hhUeMi9BYE2KlYRZ"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_3E0VQTV9I1u_kAoC6jLj6l" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_rROcJrkOfaqkDhg1G3j1b0" name="Running">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_v8flxvgZ0HEUrdAwCUjIlS" name="process incoming product"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UbutcpBFbURAGJFCEgzoST" name="set band speed to normal"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_OswKdoZ0mwR0URRXke9Llt" name="note band state change"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_layNdLyNf4OalZT2GZj_X9" name="Slowed">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_f9GZoNe-YZyLA29tpbnpIX" name="process product at reduced speed"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Ero5sCuXHD-KUnDR_-rnDV" name="set reduced band speed"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_ZV2el6L63_my2Dx2TC1ty1" name="note band state change"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_HMAgdhkA_S5Yc1xg5Iow3E" name="Halted">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_WkF973SMRl-mljz2mAI5NA" name="finish product already inside stations"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_mt5BuZdj4XO65Ozgd5OE_9" name="stop accepting new product"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_4fiSnmIwGbBPTyeFjBj69p" name="re-enable product intake"/>
+          </subvertex>
+        </region>
+        <region xmi:type="uml:Region" xmi:id="_D2BQpQnwdvcO2DYXNeKS-2" name="Health Reporting">
+          <transition xmi:type="uml:Transition" xmi:id="_AkOzX8MMGiIDnOv5mw5Y-F" name="T6" source="_r071NekjTEDTv5KBLtQ8xZ" target="_F2AkPuc6Pvqc_xfyadCFXH"/>
+          <transition xmi:type="uml:Transition" xmi:id="__3DedraeCnd5CAinoYMDJI" name="T7" kind="internal" source="_F2AkPuc6Pvqc_xfyadCFXH" target="_F2AkPuc6Pvqc_xfyadCFXH">
+            <ownedComment xmi:type="uml:Comment" xmi:id="_kqSUUkssuO3xnUh2Sgg5QU" annotatedElement="__3DedraeCnd5CAinoYMDJI">
+              <body>Traces to: FIN-REQ-36</body>
+            </ownedComment>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_G2mh89HrX7BFeeax0vtV_x" name="publish Machine status (heartbeat)"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_bQ1g1B6tkCdzzMfOFPE-_F" name="heartbeat interval elapsed" event="_R-H5kWxh4DLoijSSQ0VCJA"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_r071NekjTEDTv5KBLtQ8xZ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_F2AkPuc6Pvqc_xfyadCFXH" name="Reporting">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__f4-82CICR9rDg5Ys8B-UA" name="monitor machine status"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_pHC2vP-bbylQvJ9npQwldJ" name="start heartbeat timer"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_PZTb8LxZgC12HC6cxAViRO" name="stop heartbeat timer"/>
+          </subvertex>
+        </region>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="__N4GwM4KEfGJpPDutUy9XQ" name="FIN Requirements">
+      <packagedElement xmi:type="uml:Package" xmi:id="_BBTzQM4LEfGJpPDutUy9XQ" name="RD1 Depanning">
+        <packagedElement xmi:type="uml:Class" xmi:id="_TKwgEDEaqhzyNnytoB5aoV" name="FIN-REQ-01">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_2NZO_uQ-4w2XrQVmBRDtUh" annotatedElement="_TKwgEDEaqhzyNnytoB5aoV">
+            <body>Rationale: Entry point of the slice; the batch ID is needed for traceability and recall. Source: UC10, UC11. Feature: FIN-FEAT-01. (Applies to FIN-REQ-01.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_sS8hhss6inCQmw31l26fqX" name="FIN-REQ-02">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_NQ1JW8uKwck5HJ28i-vjnp" annotatedElement="_sS8hhss6inCQmw31l26fqX">
+            <body>Rationale: The cooling guarantee sits with Thermal Processing at the handoff (UC10 postcondition). Source: UC10. Feature: FIN-FEAT-01. (Applies to FIN-REQ-02.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_AhjVmMyamjXC_9jhUfWa9e" name="FIN-REQ-03">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_w0_pRpIddbrPziAYBWLjWK" annotatedElement="_AhjVmMyamjXC_9jhUfWa9e">
+            <body>Rationale: Batch traceability for recall; the batch IDs are reported when a pallet is ready. Source: UC10, UC11, UC16. Feature: FIN-FEAT-01. (Applies to FIN-REQ-03.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_EduMVfN7bpdLgfbXJ3c6Rz" name="FIN-REQ-04.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_7qGhIMJnp0EPGme9_7g-D3" annotatedElement="_EduMVfN7bpdLgfbXJ3c6Rz _O_JGOYTTwtt7L5tbe6IDp_ _3st9Fc3VlxZRhOnzbITW6i">
+            <body>Rationale: Cake and pan must go their separate ways: the cake to inspection, the pan back into the pan loop. Source: UC11. Feature: FIN-FEAT-01. (Applies to FIN-REQ-04.1, FIN-REQ-04.2, FIN-REQ-04.3.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_O_JGOYTTwtt7L5tbe6IDp_" name="FIN-REQ-04.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3st9Fc3VlxZRhOnzbITW6i" name="FIN-REQ-04.3"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_syj8zR6gunG0aJdekmrbrc" name="FIN-REQ-26.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_dd1sdP0u3NTVw3T4StZEv6" annotatedElement="_syj8zR6gunG0aJdekmrbrc">
+            <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-02. (Applies to FIN-REQ-26.1.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_P9NBqgq9d1gRqAsdewy1qw" name="FIN-REQ-31.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="__AjW2NU9rKZUEOvcZpIuDC" annotatedElement="_P9NBqgq9d1gRqAsdewy1qw _tT9hAYsDpj_CYP2ExeE8el">
+            <body>Rationale: Stuck or broken cakes must not enter inspection; the pan must be recovered. Source: FC21. Feature: FIN-FEAT-02. (Applies to FIN-REQ-31.1, FIN-REQ-31.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_tT9hAYsDpj_CYP2ExeE8el" name="FIN-REQ-31.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_K0mWBj1qz1lLToF7KTmotj" name="FIN-REQ-32.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_Ub6F1c2ptm7zT-495srgXN" annotatedElement="_K0mWBj1qz1lLToF7KTmotj _E6qY3Tze_0MpQul9nhk_Me">
+            <body>Rationale: Availability: incoming product is neither lost nor discarded during a machine fault. Source: FC22. Feature: FIN-FEAT-03. (Applies to FIN-REQ-32.1, FIN-REQ-32.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_E6qY3Tze_0MpQul9nhk_Me" name="FIN-REQ-32.2"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_DmyAsM4LEfGJpPDutUy9XQ" name="RD2 Quality Inspection">
+        <packagedElement xmi:type="uml:Class" xmi:id="_ctC_zZimA8EsZ2VxXQNggm" name="FIN-REQ-05.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_Y-D0jYMJj-qfZBh75X_SmW" annotatedElement="_ctC_zZimA8EsZ2VxXQNggm _6C8qhKw992UYPhCrCX6iZl">
+            <body>Rationale: Only cakes within the regulatory tolerance may pass inspection. Source: UC13. Feature: FIN-FEAT-05. (Applies to FIN-REQ-05.1, FIN-REQ-05.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_6C8qhKw992UYPhCrCX6iZl" name="FIN-REQ-05.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_xlj7fDNuRGwJSfhIENqKTT" name="FIN-REQ-06.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_FjF36M3_2tJdRdFrcUAfkx" annotatedElement="_xlj7fDNuRGwJSfhIENqKTT _iqt2xN5OXzzezpSWT9SqRz">
+            <body>Rationale: Only cakes passing visual inspection may proceed to packaging. Source: UC13. Feature: FIN-FEAT-06. (Applies to FIN-REQ-06.1, FIN-REQ-06.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_iqt2xN5OXzzezpSWT9SqRz" name="FIN-REQ-06.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_G9lUp--cLLpQJa3WIeMosr" name="FIN-REQ-07.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="__XQqKueEpymzFdL1gmEYDA" annotatedElement="_G9lUp--cLLpQJa3WIeMosr _smhSJnHLwAXcUnTf6MvPTV">
+            <body>Rationale: Product safety; only cakes without metal contamination may proceed to packaging. Source: UC13, FC24. Feature: FIN-FEAT-07. (Applies to FIN-REQ-07.1, FIN-REQ-07.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_smhSJnHLwAXcUnTf6MvPTV" name="FIN-REQ-07.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_gQU9gnSsHUUFRleDJAlNhC" name="FIN-REQ-08.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_uOs4mOvMsFwtee1jxpmopa" annotatedElement="_gQU9gnSsHUUFRleDJAlNhC _YlhQupaD70ahgOQ0TvJDK5">
+            <body>Rationale: Only compliant cakes may ship; non-compliant product is separated without stopping the line. Source: UC13, FC24. Feature: FIN-FEAT-08. (Applies to FIN-REQ-08.1, FIN-REQ-08.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_YlhQupaD70ahgOQ0TvJDK5" name="FIN-REQ-08.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_0NvWG9fpauiPCpgf8dNKdz" name="FIN-REQ-09">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_MoqjMgF0aeI3bLOx6vMiBg" annotatedElement="_0NvWG9fpauiPCpgf8dNKdz">
+            <body>Rationale: Traceability and reporting of quality events for recall. Source: UC13, FC24. Feature: FIN-FEAT-08. (Applies to FIN-REQ-09.)</body>
+          </ownedComment>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_FTRXsM4LEfGJpPDutUy9XQ" name="RD3 Packaging">
+        <packagedElement xmi:type="uml:Class" xmi:id="_5agT-OlCIxr89LcspvfiHb" name="FIN-REQ-21.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_eDuMaKUHT1dJW-6wicHTDQ" annotatedElement="_5agT-OlCIxr89LcspvfiHb _twjH_j3Db0BtCH9sYFsvZc">
+            <body>Rationale: Food safety and preservation; only properly wrapped cakes may proceed to shipping. Source: UC14, UC15. Feature: FIN-FEAT-10. (Applies to FIN-REQ-21.1, FIN-REQ-21.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_twjH_j3Db0BtCH9sYFsvZc" name="FIN-REQ-21.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_6Xjc3Gy4OrwdnaWW-iTRnX" name="FIN-REQ-23.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_XjHyxINEYNmHsKI5lFCsEG" annotatedElement="_6Xjc3Gy4OrwdnaWW-iTRnX _vaZtm9eaygGWI3r90T2kms _R95izWTG1E3s9nE_5jG_f3">
+            <body>Rationale: Only properly packed cakes may ship. Source: UC14, UC15. Feature: FIN-FEAT-11. (Applies to FIN-REQ-23.1, FIN-REQ-23.2, FIN-REQ-23.3.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_vaZtm9eaygGWI3r90T2kms" name="FIN-REQ-23.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_R95izWTG1E3s9nE_5jG_f3" name="FIN-REQ-23.3"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_4X5FPbxph9y5QC8WCHXrJa" name="FIN-REQ-24.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_26As4BhfN1LAcF4jSecBIQ" annotatedElement="_4X5FPbxph9y5QC8WCHXrJa _iDNdmTTTX2AZFY2jwikr3q">
+            <body>Rationale: Business rule for food safety and preservation. Source: UC14, UC15. Feature: FIN-FEAT-13. (Applies to FIN-REQ-24.1, FIN-REQ-24.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_iDNdmTTTX2AZFY2jwikr3q" name="FIN-REQ-24.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_8zkGJBJzcOwzZt-QD3zq8F" name="FIN-REQ-25">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_u5TaEwun6fYidjTWdePieG" annotatedElement="_8zkGJBJzcOwzZt-QD3zq8F">
+            <body>Rationale: Wrongly filled cases must be detected and reported while the line keeps running. Source: FC26. Feature: FIN-FEAT-12. (Applies to FIN-REQ-25.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_s1_-hQpt6EmcfxgsyREFg8" name="FIN-REQ-26.2">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_cPLbMcaQSUkjaAVHChXZFE" annotatedElement="_s1_-hQpt6EmcfxgsyREFg8">
+            <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-13. (Applies to FIN-REQ-26.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_f35Bvvh8wILzDHwB8Q7xgf" name="FIN-REQ-26.3">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_fvyEGe1QoDriWEoF8dg9u5" annotatedElement="_f35Bvvh8wILzDHwB8Q7xgf">
+            <body>Rationale: Design decision: these discards are recorded for traceability. Source: FC21, FC26, UC14, UC15. Feature: FIN-FEAT-12. (Applies to FIN-REQ-26.3.)</body>
+          </ownedComment>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_H_POsM4LEfGJpPDutUy9XQ" name="RD4 Holding Area">
+        <packagedElement xmi:type="uml:Class" xmi:id="_T1M_Uwk-x2xDjPQNrFLbH5" name="FIN-REQ-33.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_s4CQg7U9H94S6Y3cHJjtGr" annotatedElement="_T1M_Uwk-x2xDjPQNrFLbH5 _Ej2ldvLBlVLBHrDMNuq8tE">
+            <body>Rationale: Availability: the holding area absorbs short wrapping outages. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-33.1, FIN-REQ-33.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_Ej2ldvLBlVLBHrDMNuq8tE" name="FIN-REQ-33.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_3yebRs-yOItuVrOA7vJURj" name="FIN-REQ-34">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_FWxoJpOO0rVtb9vFXIjX64" annotatedElement="_3yebRs-yOItuVrOA7vJURj">
+            <body>Rationale: Prevents overflow by stopping new pans at depositing. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-34.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_kaEG5AmRaXSYLjjfMo9GNR" name="FIN-REQ-35">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_t7x-SVhDSQxYLmVhzodqxZ" annotatedElement="_kaEG5AmRaXSYLjjfMo9GNR">
+            <body>Rationale: Restores normal flow after the fault. Source: FC25. Feature: FIN-FEAT-14. (Applies to FIN-REQ-35.)</body>
+          </ownedComment>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_JrXZUM4LEfGJpPDutUy9XQ" name="RD5 Palletising">
+        <packagedElement xmi:type="uml:Class" xmi:id="_NzSgjQE5yxaFOBvk_tOVEr" name="FIN-REQ-27">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_l_vVuqxmLZdWZOmEyOzK6r" annotatedElement="_NzSgjQE5yxaFOBvk_tOVEr">
+            <body>Rationale: Cartoned cakes are staged for shipping on pallets. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-27.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_K71hAMvRQzKCgQgHW_0vV1" name="FIN-REQ-28.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_AaFCSkm-ooDSgGXHzMthCl" annotatedElement="_K71hAMvRQzKCgQgHW_0vV1 _4G59Au3veS5MPm5Tn_kW90">
+            <body>Rationale: A full pallet must be secured while palletising continues without waiting. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-28.1, FIN-REQ-28.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_4G59Au3veS5MPm5Tn_kW90" name="FIN-REQ-28.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_AqULhGVOWR0tPVrJzNxtAN" name="FIN-REQ-29">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_jdDNAMRiErbujy1XeW4qJ2" annotatedElement="_AqULhGVOWR0tPVrJzNxtAN">
+            <body>Rationale: Secures the pallet for transport. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-29.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_z79hB79Wy28QYsIfkZjaD2" name="FIN-REQ-30">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_Y63ccegtFm1njgnr998Uhr" annotatedElement="_z79hB79Wy28QYsIfkZjaD2">
+            <body>Rationale: Hands the pallet to Production &amp; Logistics; batch IDs keep traceability intact. Source: UC16. Feature: FIN-FEAT-15. (Applies to FIN-REQ-30.)</body>
+          </ownedComment>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_LMcKgM4LEfGJpPDutUy9XQ" name="RD6 Pan Washing and Verification">
+        <packagedElement xmi:type="uml:Class" xmi:id="_VHlw6s5wWOroxjtBhYeNvu" name="FIN-REQ-11.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_qCBttJkXKBydddGIz7SqOL" annotatedElement="_VHlw6s5wWOroxjtBhYeNvu _vglFU9leuBZHYyEBrxKbg2 _Ir6zOKRuhlXHz-6q9rMs_l">
+            <body>Rationale: Only fit pans may re-enter production. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-11.1, FIN-REQ-11.2, FIN-REQ-11.3.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_vglFU9leuBZHYyEBrxKbg2" name="FIN-REQ-11.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_Ir6zOKRuhlXHz-6q9rMs_l" name="FIN-REQ-11.3"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_P9U0OSDRlCCy2XaflpZPEI" name="FIN-REQ-12.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_r5ju-5FGMoHzumeWPWtPBZ" annotatedElement="_P9U0OSDRlCCy2XaflpZPEI _kEosNeLJvFZJX_ucvqIDIT">
+            <body>Rationale: Keeps the pan loop supplied and keeps damaged or dirty pans out of production. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-12.1, FIN-REQ-12.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_kEosNeLJvFZJX_ucvqIDIT" name="FIN-REQ-12.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_ZFgE0_FbvIY3nXCZY72Co5" name="FIN-REQ-13">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_AQULvs9dvdemNpdaDWxpng" annotatedElement="_ZFgE0_FbvIY3nXCZY72Co5">
+            <body>Rationale: The pan count must be kept up to date for the pan-stock rule. Source: UC12. Feature: FIN-FEAT-17. (Applies to FIN-REQ-13.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_KBvwNsmJ8VpoAuXnm-sMkb" name="FIN-REQ-15">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_3aBBM_Pip_dac85gtsYdzn" annotatedElement="_KBvwNsmJ8VpoAuXnm-sMkb">
+            <body>Rationale: Pans diverted after a wrong fill weight must be cleaned and reused. Source: UC12, FC9. Feature: FIN-FEAT-17. (Applies to FIN-REQ-15.)</body>
+          </ownedComment>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_MZP74M4LEfGJpPDutUy9XQ" name="RD7 Pan Stock and Washing Catch-up">
+        <packagedElement xmi:type="uml:Class" xmi:id="_fzjVj-zG5eISJVAG7_rr0x" name="FIN-REQ-14">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_W978nj6mM6l93eyL9kCqoS" annotatedElement="_fzjVj-zG5eISJVAG7_rr0x">
+            <body>Rationale: Business rule: a backlog of one full production system of clean pans must always exist. Source: UC12. Feature: FIN-FEAT-18. (Applies to FIN-REQ-14.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_iTANEBhAxQFknjLLlzjkXn" name="FIN-REQ-16">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_NJ8Y3vijYtFaYk8e1yN6bZ" annotatedElement="_iTANEBhAxQFknjLLlzjkXn">
+            <body>Rationale: Depositing must not stall for lack of a pan. Source: FC8. Feature: FIN-FEAT-18. (Applies to FIN-REQ-16.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_HlNfyeG6hf9qIJ8iDc574W" name="FIN-REQ-17">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_5XF7lHf0EKIvBlj4cMqlfq" annotatedElement="_HlNfyeG6hf9qIJ8iDc574W">
+            <body>Rationale: Lets depositing fill fewer pans when stock runs low. Source: UC12, FC23. Feature: FIN-FEAT-18. (Applies to FIN-REQ-17.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_pIHZcsDH6MkCySFwkeSLX1" name="FIN-REQ-18">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_oyrVumOZ8VKRdnbpefiPGf" annotatedElement="_pIHZcsDH6MkCySFwkeSLX1">
+            <body>Rationale: Availability: the pan pool buffers short outages of the washing station. Source: FC23. Feature: FIN-FEAT-18. (Applies to FIN-REQ-18.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_CEdf-8EELEyxyArrv-_ve0" name="FIN-REQ-19">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_5dJa5UMl7vEQqT0567AT2J" annotatedElement="_CEdf-8EELEyxyArrv-_ve0">
+            <body>Rationale: Prevents restarting the washing station in an unsafe state. Source: UC12. Feature: FIN-FEAT-19. (Applies to FIN-REQ-19.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_rmYaREz-Gh6qcl-fKelylI" name="FIN-REQ-20.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_HDIh6xr2uPvb1fqp4d1d3G" annotatedElement="_rmYaREz-Gh6qcl-fKelylI _tZhljRxha7i50u6Ie0OwsI _D5JvFN9sdwUAbwnierFWsA">
+            <body>Rationale: Recovers the pan backlog after a washing-station fault without running fast longer than needed. Source: UC12. Feature: FIN-FEAT-19. (Applies to FIN-REQ-20.1, FIN-REQ-20.2, FIN-REQ-20.3.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_tZhljRxha7i50u6Ie0OwsI" name="FIN-REQ-20.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_D5JvFN9sdwUAbwnierFWsA" name="FIN-REQ-20.3"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_NrtCQM4LEfGJpPDutUy9XQ" name="RD8 Line Health and Band Response">
+        <packagedElement xmi:type="uml:Class" xmi:id="_O0VqC4T_ruGjcTgJbhSK0t" name="FIN-REQ-36">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_W7Vosi7Var5VrKgAMPfADJ" annotatedElement="_O0VqC4T_ruGjcTgJbhSK0t">
+            <body>Rationale: Lets the Health Monitor detect stopped stations and start recovery. Source: FC22, FC23, FC25, FC28. Feature: FIN-FEAT-21. (Applies to FIN-REQ-36.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_pK3b0qHaeiDReBxG_O8Y1u" name="FIN-REQ-37.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_F-6mnZVVEKoG4X2c59LbgD" annotatedElement="_pK3b0qHaeiDReBxG_O8Y1u _4yYVHw79pJJlDROoyF_F2o">
+            <body>Rationale: Downstream sections keep running until empty. Source: UC2, FC19. Feature: FIN-FEAT-22. (Applies to FIN-REQ-37.1, FIN-REQ-37.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_4yYVHw79pJJlDROoyF_F2o" name="FIN-REQ-37.2"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_2KBgvCG3QhXJg3Se1QsY2E" name="FIN-REQ-38.1">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_Sz5oo6SN_YpvVGpxpx2fyu" annotatedElement="_2KBgvCG3QhXJg3Se1QsY2E _0GiHr2-yYlYkpHWqTZ1a50">
+            <body>Rationale: Downstream sections keep running until empty. Source: UC2, FC19, FC20. Feature: FIN-FEAT-22. (Applies to FIN-REQ-38.1, FIN-REQ-38.2.)</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_0GiHr2-yYlYkpHWqTZ1a50" name="FIN-REQ-38.2"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_5sIVnFJET5HuafS5Z3Txoz" name="FIN Traceability">
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_1OmvAp0n3Q2sSK-SeP6lP-" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_TKwgEDEaqhzyNnytoB5aoV"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_pGpY39yYS7zNRDvpf_0FSR" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_sS8hhss6inCQmw31l26fqX"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_nIK6CKoxg6ZRmaFye9QS8z" client="_d5xcML3MEfGtNPx5oKud9w" supplier="_AhjVmMyamjXC_9jhUfWa9e"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_02lMX1ip1EFJ8FP3RNnnHf" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_EduMVfN7bpdLgfbXJ3c6Rz"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_paCB14TQVoR1a1SAJwcXtF" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_EduMVfN7bpdLgfbXJ3c6Rz"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_-GeoXbgP9YytpWjdgIMWP6" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_O_JGOYTTwtt7L5tbe6IDp_"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_VzrhgUb4N2x8T0jH6EIQIk" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_O_JGOYTTwtt7L5tbe6IDp_"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_m97cNOvdGhxveVdI46e9fE" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_3st9Fc3VlxZRhOnzbITW6i"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_HkoHzuPHhxGTbe8oZxoKyk" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_3st9Fc3VlxZRhOnzbITW6i"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_9N72U5YOrq7zjL4B5eRfUZ" client="_B35wEL3QEfGIp5_ONuWz1w" supplier="_syj8zR6gunG0aJdekmrbrc"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_la_fboF7v5ucFvZABPVk3u" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_P9NBqgq9d1gRqAsdewy1qw"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_2HJMlQHxdCVjjn3Ua0lkml" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_P9NBqgq9d1gRqAsdewy1qw"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_N8mP45b80e6eq_rLq3_dJ9" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_tT9hAYsDpj_CYP2ExeE8el"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_g89Mq57KmvbtqpzHCMjYVN" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_tT9hAYsDpj_CYP2ExeE8el"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_SB2Mvi0ySBmTv4hwEaRsJu" client="_BBTzQM4LEfGJpPDutUy9XQ" supplier="_K0mWBj1qz1lLToF7KTmotj"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_-55jc_dJcyCp7cHL2FzUsR" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_K0mWBj1qz1lLToF7KTmotj"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_8jktkLlR9QNQ9XwFr7ohry" client="_beSK0L3EEfGzbswKCLJLjQ" supplier="_BBTzQM4LEfGJpPDutUy9XQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_rzu-yW3j7d_C-y6bY1PAq5" client="_fuajQL3EEfGzbswKCLJLjQ" supplier="_E6qY3Tze_0MpQul9nhk_Me"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_5pKIRk6EDETBJd6ve2NSa4" client="_tnxaML2MEfGO0peuS-3gZA" supplier="_ctC_zZimA8EsZ2VxXQNggm"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="__Aq8y2M4BTGNpNvgG2otBI" client="_JcdCEL2NEfGO0peuS-3gZA" supplier="_ctC_zZimA8EsZ2VxXQNggm"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_CQ6rHf_TDf0NEa1uw-3nna" client="_tnxaML2MEfGO0peuS-3gZA" supplier="_6C8qhKw992UYPhCrCX6iZl"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_1Zy4T0G2zjDzdTNfzR9SZ2" client="_JcdCEL2NEfGO0peuS-3gZA" supplier="_6C8qhKw992UYPhCrCX6iZl"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_yI3ug2onWilcrin0kPMBNZ" client="_4zV6wL2MEfGO0peuS-3gZA" supplier="_xlj7fDNuRGwJSfhIENqKTT"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_7QtKpFMjiprHGV_aNQPWGN" client="_LrgTkL2NEfGO0peuS-3gZA" supplier="_xlj7fDNuRGwJSfhIENqKTT"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_I-hdbwFPPoOFZtIbcAnOT9" client="_4zV6wL2MEfGO0peuS-3gZA" supplier="_iqt2xN5OXzzezpSWT9SqRz"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ccUBaHyXkcwTtLTEDy2_av" client="_LrgTkL2NEfGO0peuS-3gZA" supplier="_iqt2xN5OXzzezpSWT9SqRz"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_9_fhWj01xoL4EpK8l11YKZ" client="_9VsroL2MEfGO0peuS-3gZA" supplier="_G9lUp--cLLpQJa3WIeMosr"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_y5LSJ3n_VItoofcBWGRxt1" client="_NrXSgL2NEfGO0peuS-3gZA" supplier="_G9lUp--cLLpQJa3WIeMosr"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_QrYfUTgBB31IFiL1gMoPcX" client="_9VsroL2MEfGO0peuS-3gZA" supplier="_smhSJnHLwAXcUnTf6MvPTV"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_c4kJEkwvK8i12bzsEWIh5c" client="_NrXSgL2NEfGO0peuS-3gZA" supplier="_smhSJnHLwAXcUnTf6MvPTV"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ona80jyKH-PJfxZJok44-5" client="_BhD40L2NEfGO0peuS-3gZA" supplier="_gQU9gnSsHUUFRleDJAlNhC"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_6GPExbiBsTuQpjTnwUxAYd" client="_PjTEgL2NEfGO0peuS-3gZA" supplier="_gQU9gnSsHUUFRleDJAlNhC"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_wiroTIkTFgxGhNc0gXizZ7" client="_BhD40L2NEfGO0peuS-3gZA" supplier="_YlhQupaD70ahgOQ0TvJDK5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_izeuhF6rbTx2AH8qhGIn88" client="_PjTEgL2NEfGO0peuS-3gZA" supplier="_YlhQupaD70ahgOQ0TvJDK5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_GrLzZHTVKQOjwCvJFN2HLG" client="_B35wEL3QEfGIp5_ONuWz1w" supplier="_0NvWG9fpauiPCpgf8dNKdz"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_8IZ2rsm5kKZW5qFdDl_TLU" client="_qAL8kL2ZEfGl1tErtx_5Og" supplier="_5agT-OlCIxr89LcspvfiHb"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_6qRJT6mULEjgMA3Q2MNhDT" client="_g9LZEL2bEfGl1tErtx_5Og" supplier="_5agT-OlCIxr89LcspvfiHb"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_I4boHLo5c2QKcMhZZMvDmY" client="_3c_OAL2bEfGl1tErtx_5Og" supplier="_5agT-OlCIxr89LcspvfiHb"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_XOm33a8V_t_gLfHSIPp4vI" client="_qAL8kL2ZEfGl1tErtx_5Og" supplier="_twjH_j3Db0BtCH9sYFsvZc"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_nf2ZEX9YcKs3P4etHqVPUa" client="_g9LZEL2bEfGl1tErtx_5Og" supplier="_twjH_j3Db0BtCH9sYFsvZc"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_eu8KRS_XPbKTNYQ4slnN_g" client="_3c_OAL2bEfGl1tErtx_5Og" supplier="_twjH_j3Db0BtCH9sYFsvZc"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_PCcyiVdemek7k_J9xIAZKP" client="_iobr4L2ZEfGl1tErtx_5Og" supplier="_6Xjc3Gy4OrwdnaWW-iTRnX"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_vACPX0QUWzrAB24pfa7_rt" client="_mGElgL2bEfGl1tErtx_5Og" supplier="_6Xjc3Gy4OrwdnaWW-iTRnX"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_HyxJ85PtXzxVSCGdg3AqqE" client="__seX8L2bEfGl1tErtx_5Og" supplier="_6Xjc3Gy4OrwdnaWW-iTRnX"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_TMvgD2zfOUE7xOqU737DNv" client="_iobr4L2ZEfGl1tErtx_5Og" supplier="_vaZtm9eaygGWI3r90T2kms"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_8KmHe1aEkXv4luxWx6FIS8" client="_mGElgL2bEfGl1tErtx_5Og" supplier="_vaZtm9eaygGWI3r90T2kms"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ndnWtdG6SmShs8gieUPF8k" client="__seX8L2bEfGl1tErtx_5Og" supplier="_vaZtm9eaygGWI3r90T2kms"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_TyuFBcrc4IPeXp46z3tc1o" client="_iobr4L2ZEfGl1tErtx_5Og" supplier="_R95izWTG1E3s9nE_5jG_f3"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_bQJWjjVeePskEd-YP-3DGs" client="_mGElgL2bEfGl1tErtx_5Og" supplier="_FTRXsM4LEfGJpPDutUy9XQ"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_swT0YvP7K4FpRIiSgxS3gm" client="__seX8L2bEfGl1tErtx_5Og" supplier="_R95izWTG1E3s9nE_5jG_f3"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_fAwmD_-pz8YLtJMhvsg_GU" client="_8ICIML2YEfGl1tErtx_5Og" supplier="_4X5FPbxph9y5QC8WCHXrJa"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_UxbBfBwWBeVQMc4ZOl-Xg5" client="_uaX-AL2bEfGl1tErtx_5Og" supplier="_4X5FPbxph9y5QC8WCHXrJa"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_qTUELSH1cyCP8qlnoCKSgg" client="_8ICIML2YEfGl1tErtx_5Og" supplier="_iDNdmTTTX2AZFY2jwikr3q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_2jSDh1zUdLjY4rOsob6GNY" client="_uaX-AL2bEfGl1tErtx_5Og" supplier="_iDNdmTTTX2AZFY2jwikr3q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_M_TZz6xMgN0c7z7wNOxhPm" client="_Ah65kL2ZEfGl1tErtx_5Og" supplier="_8zkGJBJzcOwzZt-QD3zq8F"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_g8yUJc0n9fwdz3YObEMPEf" client="_oLs1QL2bEfGl1tErtx_5Og" supplier="_8zkGJBJzcOwzZt-QD3zq8F"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_XRJSphDlBfkinc92C-wRX_" client="_B35wEL3QEfGIp5_ONuWz1w" supplier="_s1_-hQpt6EmcfxgsyREFg8"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="__imfXP7ZCabD0m5lZtRX5z" client="_B35wEL3QEfGIp5_ONuWz1w" supplier="_f35Bvvh8wILzDHwB8Q7xgf"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_vj1XdH9KJTGwKhZzshQ0ac" client="_gh95ML2aEfGl1tErtx_5Og" supplier="_T1M_Uwk-x2xDjPQNrFLbH5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_rkE-dNpN3TH54E2HLeeNuE" client="_zZnfML2bEfGl1tErtx_5Og" supplier="_T1M_Uwk-x2xDjPQNrFLbH5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_VuLig6ONWrPOil3DwPNla1" client="_gh95ML2aEfGl1tErtx_5Og" supplier="_Ej2ldvLBlVLBHrDMNuq8tE"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_e9PAIPZclx5gBS9Tqf4coB" client="_zZnfML2bEfGl1tErtx_5Og" supplier="_Ej2ldvLBlVLBHrDMNuq8tE"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_lenjEm-J_pwMuOZBvIjSN1" client="_gh95ML2aEfGl1tErtx_5Og" supplier="_3yebRs-yOItuVrOA7vJURj"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_fFlmPSjINoMg5t8Cvnk1Dw" client="_zZnfML2bEfGl1tErtx_5Og" supplier="_3yebRs-yOItuVrOA7vJURj"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_q_-1C8drEX9I3-80hl66cB" client="_gh95ML2aEfGl1tErtx_5Og" supplier="_kaEG5AmRaXSYLjjfMo9GNR"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_B-CIKIqg_6SGNyMZb86sAJ" client="_3dCQgL3LEfGDe7m4W_DlAQ" supplier="_NzSgjQE5yxaFOBvk_tOVEr"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_R65vWQlkzxWUZES92P6YW3" client="_TWqCwL3MEfGtNPx5oKud9w" supplier="_NzSgjQE5yxaFOBvk_tOVEr"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="__oKr9ppHo5bGDX1y7_TccP" client="_3dCQgL3LEfGDe7m4W_DlAQ" supplier="_K71hAMvRQzKCgQgHW_0vV1"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_z8Djv9inBRzxEobxnPreJs" client="_TWqCwL3MEfGtNPx5oKud9w" supplier="_K71hAMvRQzKCgQgHW_0vV1"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_pfxNFysHhpcb-rwRmCP7KK" client="_3dCQgL3LEfGDe7m4W_DlAQ" supplier="_4G59Au3veS5MPm5Tn_kW90"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_gzQP_moW_1J9d-uhR5pm48" client="_TWqCwL3MEfGtNPx5oKud9w" supplier="_4G59Au3veS5MPm5Tn_kW90"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_H5BJw6hAeBGnxsEzCtUxKm" client="_3dCQgL3LEfGDe7m4W_DlAQ" supplier="_AqULhGVOWR0tPVrJzNxtAN"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_0bEI8-tnlMe7UC3mU_e_b-" client="_azSzcL3MEfGtNPx5oKud9w" supplier="_AqULhGVOWR0tPVrJzNxtAN"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_zqGohy3Iw0tm2EHABi5slo" client="_3dCQgL3LEfGDe7m4W_DlAQ" supplier="_z79hB79Wy28QYsIfkZjaD2"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_PY1TpFYZPdbGUJ9G6AjZQH" client="_uxyYsLz8EfGC__yJIGIlPQ" supplier="_VHlw6s5wWOroxjtBhYeNvu"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_4Va8Xij4P8Di0ce3kNWby9" client="_8reFULz8EfGC__yJIGIlPQ" supplier="_VHlw6s5wWOroxjtBhYeNvu"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_kQr-nN066fnTYvcQE5hwJo" client="_uxyYsLz8EfGC__yJIGIlPQ" supplier="_vglFU9leuBZHYyEBrxKbg2"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_labRrT9bZmQaFio-3UvkdR" client="_8reFULz8EfGC__yJIGIlPQ" supplier="_vglFU9leuBZHYyEBrxKbg2"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_F9R0jbc3PMYao_aJvhfXG4" client="_uxyYsLz8EfGC__yJIGIlPQ" supplier="_Ir6zOKRuhlXHz-6q9rMs_l"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_q6lLjlsYHWEQqsJwhsuviU" client="_8reFULz8EfGC__yJIGIlPQ" supplier="_Ir6zOKRuhlXHz-6q9rMs_l"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_mLeD4G3th7PufDyMfFo0C2" client="_uxyYsLz8EfGC__yJIGIlPQ" supplier="_P9U0OSDRlCCy2XaflpZPEI"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_YwMek993nWlnWf1g-Qv9iN" client="_8reFULz8EfGC__yJIGIlPQ" supplier="_P9U0OSDRlCCy2XaflpZPEI"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_CHchgVT0Mfp1UeCFS7zuH8" client="_-UMWoLz8EfGC__yJIGIlPQ" supplier="_P9U0OSDRlCCy2XaflpZPEI"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_C1EjtufFyPR-4NouyblVV4" client="_uxyYsLz8EfGC__yJIGIlPQ" supplier="_kEosNeLJvFZJX_ucvqIDIT"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_T7tpmn7TQvzpw42iTvMHNz" client="_8reFULz8EfGC__yJIGIlPQ" supplier="_kEosNeLJvFZJX_ucvqIDIT"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_pucGJ1SgRUZv9-yGB9_8ew" client="_-UMWoLz8EfGC__yJIGIlPQ" supplier="_kEosNeLJvFZJX_ucvqIDIT"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_NiGI5z29SWqZt5_4P77ErO" client="_B35wEL3QEfGIp5_ONuWz1w" supplier="_ZFgE0_FbvIY3nXCZY72Co5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_jDLLm3k4Gc4xJGEt8JkesO" client="_uxyYsLz8EfGC__yJIGIlPQ" supplier="_KBvwNsmJ8VpoAuXnm-sMkb"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_tF4ScnI2m_gcoHdx6R8GfO" client="_zgWZkLz8EfGC__yJIGIlPQ" supplier="_fzjVj-zG5eISJVAG7_rr0x"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_GgOeQa-eFlstqNOgiNxtDG" client="_ADZqcLz9EfGC__yJIGIlPQ" supplier="_fzjVj-zG5eISJVAG7_rr0x"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_xgscZX-juvCULvpYYl-r_f" client="_zgWZkLz8EfGC__yJIGIlPQ" supplier="_iTANEBhAxQFknjLLlzjkXn"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_C1VnPZ5k1XKtxtcUKVM_4Z" client="_ADZqcLz9EfGC__yJIGIlPQ" supplier="_iTANEBhAxQFknjLLlzjkXn"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_CUIR6V7alSwz7Pna4tMKym" client="_zgWZkLz8EfGC__yJIGIlPQ" supplier="_HlNfyeG6hf9qIJ8iDc574W"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_44iFxrFD3502723ERyWlPg" client="_zgWZkLz8EfGC__yJIGIlPQ" supplier="_pIHZcsDH6MkCySFwkeSLX1"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_I2h4wxZA3XuAlgO-QwM6hn" client="_ADZqcLz9EfGC__yJIGIlPQ" supplier="_pIHZcsDH6MkCySFwkeSLX1"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_GicLBXWpGIcPbZ23EZGH0c" client="_4THlALz8EfGC__yJIGIlPQ" supplier="_CEdf-8EELEyxyArrv-_ve0"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_xEndJtTQ6Py210kb3iUX4h" client="_4THlALz8EfGC__yJIGIlPQ" supplier="_rmYaREz-Gh6qcl-fKelylI"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_w74BcLP4k9zm7sqd1fTV-w" client="_4THlALz8EfGC__yJIGIlPQ" supplier="_tZhljRxha7i50u6Ie0OwsI"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_6hgwu5sonWwLR-G0KLkh9z" client="_4THlALz8EfGC__yJIGIlPQ" supplier="_D5JvFN9sdwUAbwnierFWsA"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="__4hxu3EvwLGIOue-7Dfzcy" client="_HjuDYL3QEfGIp5_ONuWz1w" supplier="_O0VqC4T_ruGjcTgJbhSK0t"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_at_HPaacPARgdYn1v-4lrF" client="_LPvCIL3QEfGIp5_ONuWz1w" supplier="_pK3b0qHaeiDReBxG_O8Y1u"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_QNyUGv3MSB_h327Lze_PE4" client="_LPvCIL3QEfGIp5_ONuWz1w" supplier="_4yYVHw79pJJlDROoyF_F2o"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_24ydamuJdOjI1h2pbht9XW" client="_LPvCIL3QEfGIp5_ONuWz1w" supplier="_2KBgvCG3QhXJg3Se1QsY2E"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_qg2mHe8vVVjTlTS9EWZl_h" client="_LPvCIL3QEfGIp5_ONuWz1w" supplier="_0GiHr2-yYlYkpHWqTZ1a50"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_z46VtAZdSNOvcR1FF3EUZK" client="_Sccr-TnvBC18Jw0LkggBMY" supplier="_TKwgEDEaqhzyNnytoB5aoV"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ye68al9znm7rWjY8A-ZYS5" client="_9NRG3P9JsPRZ6s1uVkEH-B" supplier="_sS8hhss6inCQmw31l26fqX"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_q-2-5I0vv7YkwGdRjWJ9fL" client="_8bGGcyC_bBqy3BvHB6LRha" supplier="_EduMVfN7bpdLgfbXJ3c6Rz"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_nLTcPrOKT1zOY7JIoeOO0N" client="_8bGGcyC_bBqy3BvHB6LRha" supplier="_O_JGOYTTwtt7L5tbe6IDp_"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_EtmjHZhAwn_ap5dVVLa9Fl" client="_8bGGcyC_bBqy3BvHB6LRha" supplier="_3st9Fc3VlxZRhOnzbITW6i"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_kcF5GKNnuikREb2GBcvPbe" client="_7H1h-2zl3VVsVCjYC2HNvP" supplier="_AhjVmMyamjXC_9jhUfWa9e"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_gNGQC7PeHuHLDdjoS2-qlU" client="_aARvCAEJgyi9_mHVpHbk9g" supplier="_P9NBqgq9d1gRqAsdewy1qw"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_sT_8FaxDXBgwRrV_DB_SH-" client="_aARvCAEJgyi9_mHVpHbk9g" supplier="_tT9hAYsDpj_CYP2ExeE8el"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_3P1I3_NGYxh7KtkTKCzD-Y" client="_aARvCAEJgyi9_mHVpHbk9g" supplier="_syj8zR6gunG0aJdekmrbrc"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_1dFMre-safIbNflO8I_n4d" client="_SDL6FomD2VHFIw1j6HcQgY" supplier="_K0mWBj1qz1lLToF7KTmotj"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_doDluOURNT63Sd3m7EN8jI" client="_w1TiGbBUQnDqCE9KuOsvYU" supplier="_E6qY3Tze_0MpQul9nhk_Me"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_HdnNGsGKIChoy_mY6t82A0" client="_vs2IKoTx1NtW9BrJ6nJgRB" supplier="_ctC_zZimA8EsZ2VxXQNggm"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_cp9iFBFdiz9WFNQvCDr3Wp" client="_b2DPrqBcBmupy2Sxl5BaNB" supplier="_6C8qhKw992UYPhCrCX6iZl"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_enqB1ZgCVf6mjtDp6Hyt2H" client="_J1F-z4YC8BNgsj-7DqEfyc" supplier="_xlj7fDNuRGwJSfhIENqKTT"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_Ua_HnxtRGs_OZNz4EGgvKr" client="_iiHy8uPAEtqBiue-qdEpTu" supplier="_iqt2xN5OXzzezpSWT9SqRz"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_f2UEHG6FqVJOao_hfpsxRu" client="_tXJVo89Rz3tT8eyq5Am_As" supplier="_G9lUp--cLLpQJa3WIeMosr"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_VHJmpXjxLRpoiX0eCEV7UW" client="_TSzb02-xS9TPD3684rzGCa" supplier="_smhSJnHLwAXcUnTf6MvPTV"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_-XJWDjkko4JfQOOr4hxCMi" client="_YXFX2dATH51F2z-3_4p_nR" supplier="_gQU9gnSsHUUFRleDJAlNhC"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_yliydC-Jnw3SokoZwPid1g" client="_6L0S37RljoAXBPGDt7Gc0R" supplier="_gQU9gnSsHUUFRleDJAlNhC"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_s-nS2fWTdTOPpRi0bWQEpS" client="_6L0S37RljoAXBPGDt7Gc0R" supplier="_YlhQupaD70ahgOQ0TvJDK5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_IBu9cdcE-O3JbdzR1yqiHT" client="_cWdK1BYipoMRIVdcqa_KNZ" supplier="_0NvWG9fpauiPCpgf8dNKdz"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ItX5dDJjvAKvqwKyxrRKGn" client="_3pJ74tmd7IA1rNOE6bb_Bv" supplier="_5agT-OlCIxr89LcspvfiHb"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_AvKHe16VEkjDRXhr6IU4DY" client="_cGlPrCUYmEoa_edLQZCkur" supplier="_twjH_j3Db0BtCH9sYFsvZc"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_1WKyVjkwfZvYJ12Dn9Ez__" client="_PY6miTbofQ23cWd-PrFJGM" supplier="_6Xjc3Gy4OrwdnaWW-iTRnX"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_XYEhiV8_lSjFYXwv0yEbDA" client="_PY6miTbofQ23cWd-PrFJGM" supplier="_vaZtm9eaygGWI3r90T2kms"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ODPrpCdkG5VCxgH07jOxB4" client="_nZju8I2ivXi_AK3ckIS6K5" supplier="_R95izWTG1E3s9nE_5jG_f3"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_Qt9MrUCJ5G9KjKqlSXEniQ" client="_2hemGT3Lbi99d_EEtQcl68" supplier="_4X5FPbxph9y5QC8WCHXrJa"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_mCg7BHH_tbt4MGgihaxGPc" client="_i78om9I80XU4OEjmkoEl68" supplier="_iDNdmTTTX2AZFY2jwikr3q"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_JVhVF5xIU_rhKdBs_Pl29o" client="_i78om9I80XU4OEjmkoEl68" supplier="_s1_-hQpt6EmcfxgsyREFg8"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_4JRlxNHqn04yn2HLCYr1k-" client="_caX3Cs3BrSCgQj32RqrM6J" supplier="_8zkGJBJzcOwzZt-QD3zq8F"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_EU5rleJFRpilh8J6Oqxh5g" client="_maNvFDX-jl72XW9xBk259Z" supplier="_8zkGJBJzcOwzZt-QD3zq8F"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_0GSFzdmAJdn0I2xsMdF9e4" client="_maNvFDX-jl72XW9xBk259Z" supplier="_f35Bvvh8wILzDHwB8Q7xgf"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_iAx8Uzrly9DZzjfOlBkY3r" client="_cLteRSCztC8rmDVKIZij4r" supplier="_T1M_Uwk-x2xDjPQNrFLbH5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_zROwZTAQZO3id9VYuWN-nR" client="_lQBHWO5g0DpZmE2Lwbvfge" supplier="_3yebRs-yOItuVrOA7vJURj"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_Wv3AcBIylvNs_dVaGAkXcv" client="_7eCxJlMrbcS6q6MAkZ-BxW" supplier="_Ej2ldvLBlVLBHrDMNuq8tE"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_bMtr5FQZOxZ3n312WXN4Pn" client="_7eCxJlMrbcS6q6MAkZ-BxW" supplier="_kaEG5AmRaXSYLjjfMo9GNR"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_GO8l172wsvIWy6QTb4TXBy" client="_wqB6eE2iyHql1jlIWJUoIL" supplier="_NzSgjQE5yxaFOBvk_tOVEr"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_dYSp6WRmKr25HxCXg3YLvt" client="_IjKQEFl8Eb-Zo2HPjUw8h_" supplier="_K71hAMvRQzKCgQgHW_0vV1"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_Y9a2gMW_nz0y0s3b2bkd2i" client="_IjKQEFl8Eb-Zo2HPjUw8h_" supplier="_4G59Au3veS5MPm5Tn_kW90"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_R-E91iiQ5nCGUWwJiz2XUi" client="_wdmce0Ol-ivwYKIBddSgrW" supplier="_AqULhGVOWR0tPVrJzNxtAN"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_B4C3zpF3OMzT1IIxU0_ZVo" client="_bjVb4p0LPnjswqUQmp527Q" supplier="_z79hB79Wy28QYsIfkZjaD2"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_N_9MbjMtsa70en5oVKiFCa" client="_QA-epNGnZkBM2mB0KtMvHH" supplier="_VHlw6s5wWOroxjtBhYeNvu"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_0XR4YpZHcfmxrID9nM34DL" client="_QA-epNGnZkBM2mB0KtMvHH" supplier="_vglFU9leuBZHYyEBrxKbg2"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_LSA5NjgpNltmb9CoMMgTG3" client="_QA-epNGnZkBM2mB0KtMvHH" supplier="_Ir6zOKRuhlXHz-6q9rMs_l"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_72bncuVMSUt7KUxoen3JCi" client="_IPcftC3ghaKUeClLFKMJWx" supplier="_P9U0OSDRlCCy2XaflpZPEI"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_h4FzdBDj3rDJAXzXWeML00" client="_t9LJt97jnYSyAKQSjyiY90" supplier="_kEosNeLJvFZJX_ucvqIDIT"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_F7snWYo93foN4haq7NT2o-" client="_t9LJt97jnYSyAKQSjyiY90" supplier="_ZFgE0_FbvIY3nXCZY72Co5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_hHa9iCONaQi7pZpu_Wn_o_" client="_ZPcWWLQOiCVxQVGiSGC-tq" supplier="_kEosNeLJvFZJX_ucvqIDIT"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_fxtsEcf_0-CwKKU7syXew3" client="_ZPcWWLQOiCVxQVGiSGC-tq" supplier="_ZFgE0_FbvIY3nXCZY72Co5"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_LMu0YUIkl2Rj4-UH3weC4f" client="_TD8fZ8GJSL1wkshMSS6Chc" supplier="_KBvwNsmJ8VpoAuXnm-sMkb"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_Lz8ZHhRCkURc6bDpV_HXW6" client="__aqruToswr5-5-6q2LrJ5N" supplier="_fzjVj-zG5eISJVAG7_rr0x"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_0-g6CBp_25oDvlQq57ll9Z" client="_fzuBYD8FkQxLag2v0CQ_NP" supplier="_iTANEBhAxQFknjLLlzjkXn"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_JSVEm4PD0opr05YQNlixp5" client="_wQTS5-JKptuQd-2N6HOnUY" supplier="_HlNfyeG6hf9qIJ8iDc574W"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_4sb1zkxQ4eVoPXvVv799In" client="_2ZKYfydNZYYEYI--orkeHV" supplier="_pIHZcsDH6MkCySFwkeSLX1"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_TuKVZrbLYAVnxFL78HHjG2" client="_-DMQidQdbLrxgOjBOqSm7S" supplier="_CEdf-8EELEyxyArrv-_ve0"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_Suz7Y6zfwvfl-3vZhYEUJX" client="_EjjSx8SAy-9kcXZA0-qk24" supplier="_rmYaREz-Gh6qcl-fKelylI"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_ef-eLgWi0bGmpCKXXXuRAw" client="_hb0e9RoR7lcWiICuf-nEl7" supplier="_tZhljRxha7i50u6Ie0OwsI"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_AML2wXt7nABgHlGe1l9fYO" client="_U7NJqFsq_GLpNV8GhcjCC9" supplier="_D5JvFN9sdwUAbwnierFWsA"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_NXoREoXODr47M2BCy8Clxw" client="_xIMMQclUo26BJE9OrOTHNN" supplier="_O0VqC4T_ruGjcTgJbhSK0t"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_RpJRW-SYTefQLHV1VqUmHm" client="_U3u-tN2YkudZMmQHkZdGu1" supplier="_pK3b0qHaeiDReBxG_O8Y1u"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_QfEapVgoPKiWlTyoq4tOZv" client="_U3u-tN2YkudZMmQHkZdGu1" supplier="_4yYVHw79pJJlDROoyF_F2o"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="_6cVaQd8U9qZfIV-AFVx67M" client="_-HaDqWLRXoR1U7Nu_jS0kb" supplier="_2KBgvCG3QhXJg3Se1QsY2E"/>
+      <packagedElement xmi:type="uml:Abstraction" xmi:id="__Wcs_lTfC7RL1DiF7UhQp2" client="_YeIkd4F1eia3J5757fNUcS" supplier="_0GiHr2-yYlYkpHWqTZ1a50"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_8l1LATdqvgxi1J728O1kdy" name="FIN Verification">
+      <packagedElement xmi:type="uml:Activity" xmi:id="_Sccr-TnvBC18Jw0LkggBMY" name="FIN-TC-01 Verify cooled cake intake">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_p93HWb7-zVZqqLjafAubac">
+          <body>Verifies: FIN-REQ-01. Stimulus: Send &quot;Cooled cake&quot; with batch ID B1, marked as released by Thermal Processing. Expected result: The cake is received in its pan with B1 attached.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_9NRG3P9JsPRZ6s1uVkEH-B" name="FIN-TC-02 Verify rejection of unreleased cake">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_YDeTGVNVe96VLExzyqHsgo">
+          <body>Verifies: FIN-REQ-02. Stimulus: Present a cake that Thermal Processing has not released as safe-temperature. Expected result: The cake is not accepted for depanning.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_8bGGcyC_bBqy3BvHB6LRha" name="FIN-TC-03 Verify depanning and routing">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_tprhhGtfMPnu_K5sL2uSBl">
+          <body>Verifies: FIN-REQ-04.1, FIN-REQ-04.2, FIN-REQ-04.3. Stimulus: Depan a cake that comes out cleanly. Expected result: The cake is separated from its pan. The cake is routed toward Weight Check, and the empty pan toward washing.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_7H1h-2zl3VVsVCjYC2HNvP" name="FIN-TC-04 Verify batch ID traceability">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_nS6sBTYdkMrm5_AVphlVj-">
+          <body>Verifies: FIN-REQ-03. Stimulus: Follow B1 from arrival to the &quot;Pallet ready for shipment&quot; signal. Expected result: B1 is associated with the cake at every stage and appears in the pallet's batch IDs.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_aARvCAEJgyi9_mHVpHbk9g" name="FIN-TC-05 Verify stuck-cake rejection">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_8ir8B00SEz2RTEQoqSnO78">
+          <body>Verifies: FIN-REQ-31.1, FIN-REQ-31.2, FIN-REQ-26.1. Stimulus: Simulate a stuck or broken cake at depanning (FC21). Expected result: The cake is rejected and never reaches inspection. Its pan is sent to washing. An event with reason, time and batch ID is published.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_SDL6FomD2VHFIw1j6HcQgY" name="FIN-TC-06 Verify hold on depanning fault">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_nAl65x4ZEvVZkJAuXCafX0">
+          <body>Verifies: FIN-REQ-32.1. Stimulus: Stop the depanning machine's response and send cakes to the depanning station (FC22). Expected result: The cakes are held. None are lost or discarded.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_w1TiGbBUQnDqCE9KuOsvYU" name="FIN-TC-07 Verify processing after depanning repair">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_Mw7RSjGk-_SDYiPkHfzDg4">
+          <body>Verifies: FIN-REQ-32.2. Stimulus: Following FIN-TC-06, send &quot;Repair confirmed&quot; for the depanning machine. Expected result: The held cakes are processed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_vs2IKoTx1NtW9BrJ6nJgRB" name="FIN-TC-08 Verify weighing within tolerance">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_fz9GF8Dlxp_JMNYRC9ujri">
+          <body>Verifies: FIN-REQ-05.1. Stimulus: Send a cake at target weight to the weigh station. Expected result: The cake is weighed and the result is pass.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_b2DPrqBcBmupy2Sxl5BaNB" name="FIN-TC-09 Verify weight outside tolerance">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_sJxTSZZ-z_1Lisbi28wWem">
+          <body>Verifies: FIN-REQ-05.2. Stimulus: Send one cake just below and one just above the tolerance limits. Expected result: Both are marked failed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_J1F-z4YC8BNgsj-7DqEfyc" name="FIN-TC-10 Verify visual pass">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_tdHljVNgY8CYVebglRGB0G">
+          <body>Verifies: FIN-REQ-06.1. Stimulus: Send a cake with acceptable appearance. Expected result: Its appearance is inspected and the result is pass.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_iiHy8uPAEtqBiue-qdEpTu" name="FIN-TC-11 Verify visual failure">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_6_Qrq3YFIOK4memluVTako">
+          <body>Verifies: FIN-REQ-06.2. Stimulus: Send a cake with an unsatisfactory appearance. Expected result: The cake is marked failed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_tXJVo89Rz3tT8eyq5Am_As" name="FIN-TC-12 Verify clean metal scan">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_d3iBOx4XulKaLAX-Ymxjdb">
+          <body>Verifies: FIN-REQ-07.1. Stimulus: Send a clean cake through the metal scan. Expected result: The cake is scanned and the result is pass.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_TSzb02-xS9TPD3684rzGCa" name="FIN-TC-13 Verify metal detection">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_oJU2O0YyJjlQ8Peh4OQf5_">
+          <body>Verifies: FIN-REQ-07.2. Stimulus: Send a cake containing a metal contaminant (FC24). Expected result: The cake is marked failed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_YXFX2dATH51F2z-3_4p_nR" name="FIN-TC-14 Verify compliant cake proceeds">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_clsZ_X9OP75ZeypPWbmBse">
+          <body>Verifies: FIN-REQ-08.1. Stimulus: Send a cake that passes weight, visual and metal checks. Expected result: The cake proceeds to packaging.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_6L0S37RljoAXBPGDt7Gc0R" name="FIN-TC-15 Verify rejection of failed cakes">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_8d1chGbjrRiCN_YJm6JaYG">
+          <body>Verifies: FIN-REQ-08.1, FIN-REQ-08.2. Stimulus: Run three cakes, each failing exactly one check (weight, visual, metal). Expected result: Each goes to the reject bin and none proceeds to packaging. The line keeps running.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_cWdK1BYipoMRIVdcqa_KNZ" name="FIN-TC-16 Verify failed-cake event">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_8JdhGTaKgeyp4envgGSBJJ">
+          <body>Verifies: FIN-REQ-09. Stimulus: Fail a cake at any inspection check. Expected result: An event with reason, time and batch ID is published for that cake.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_3pJ74tmd7IA1rNOE6bb_Bv" name="FIN-TC-17 Verify wrapping">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_-bv4yWL9dw2hV2Fb_5PIF9">
+          <body>Verifies: FIN-REQ-21.1. Stimulus: Send an inspected cake to the wrapping station. Expected result: The cake is wrapped.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_cGlPrCUYmEoa_edLQZCkur" name="FIN-TC-18 Verify wrap verification">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_JbAozrt15xWDpJkl14zJkC">
+          <body>Verifies: FIN-REQ-21.2. Stimulus: Wrap one cake correctly and one with a wrapping defect. Expected result: The correct wrap passes verification. The defective wrap is detected.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_PY6miTbofQ23cWd-PrFJGM" name="FIN-TC-19 Verify cartoning and sealing">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_tCl9miiljEiH2uSseC_kpK">
+          <body>Verifies: FIN-REQ-23.1, FIN-REQ-23.2. Stimulus: Send a properly wrapped cake to the cartoning station. Expected result: The cake is packed in a carton and the carton is sealed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_nZju8I2ivXi_AK3ckIS6K5" name="FIN-TC-20 Verify carton verification">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_ryAzFUkENDQHmdQLwzMCLD">
+          <body>Verifies: FIN-REQ-23.3. Stimulus: Carton one cake correctly and one with a cartoning defect. Expected result: The correct carton passes verification. The defective one is detected.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_2hemGT3Lbi99d_EEtQcl68" name="FIN-TC-21 Verify shipping of proper cakes">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_VgSdu03oT_3tmeWdMBVEal">
+          <body>Verifies: FIN-REQ-24.1. Stimulus: Send a cake that is both properly wrapped and properly cartoned. Expected result: The cake proceeds to the shipping bin.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_i78om9I80XU4OEjmkoEl68" name="FIN-TC-22 Verify refuse of improper cakes">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_K98_GpPzRix6Zr8v4JOfkx">
+          <body>Verifies: FIN-REQ-24.2, FIN-REQ-26.2. Stimulus: Send one cake that is improperly wrapped and one that is improperly cartoned. Expected result: Both go to the refuse bin. An event is published for each.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_caX3Cs3BrSCgQj32RqrM6J" name="FIN-TC-23 Verify correct case weight">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_r6_J4zgkyXz_HDsPMsjFfR">
+          <body>Verifies: FIN-REQ-25. Stimulus: Send a sealed case of correct weight to the case weight check. Expected result: The weight is checked and no event is published.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_maNvFDX-jl72XW9xBk259Z" name="FIN-TC-24 Verify incorrect case weight">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_dq8M8lR-MCySE-b1X3Uvff">
+          <body>Verifies: FIN-REQ-25, FIN-REQ-26.3. Stimulus: Send a sealed case of incorrect weight (FC26). Expected result: The incorrect weight is detected and an event is published.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_cLteRSCztC8rmDVKIZij4r" name="FIN-TC-25 Verify holding on wrapping fault">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_tk-OoWXdsGZZaRz4kkfwZa">
+          <body>Verifies: FIN-REQ-33.1. Stimulus: Make the wrapping station unavailable (FC25) and send cakes forward. Expected result: The cakes are held in the holding area.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_lQBHWO5g0DpZmE2Lwbvfge" name="FIN-TC-26 Verify pan admission stop">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_dkWCxag6mghDS1lm-RxIeu">
+          <body>Verifies: FIN-REQ-34. Stimulus: Keep sending cakes until the holding area is full. Expected result: &quot;Stop / resume pan admission&quot; (stop) is sent to Thermal Processing.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_7eCxJlMrbcS6q6MAkZ-BxW" name="FIN-TC-27 Verify wrapping after repair and resume">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_aSA2eUzDAQ70F4Sl8tsx2q">
+          <body>Verifies: FIN-REQ-33.2, FIN-REQ-35. Stimulus: Following FIN-TC-26, send &quot;Repair confirmed&quot; for the wrapping station. Expected result: The held cakes are wrapped, and &quot;Stop / resume pan admission&quot; (resume) is sent.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wqB6eE2iyHql1jlIWJUoIL" name="FIN-TC-28 Verify placing on pallet">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_IKJb95Am_YCknym8gI1Sxa">
+          <body>Verifies: FIN-REQ-27. Stimulus: Send a properly cartoned cake to the packing station. Expected result: The cake is placed on a free spot on the current pallet.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_IjKQEFl8Eb-Zo2HPjUw8h_" name="FIN-TC-29 Verify full-pallet handling">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_eGYt-_KyNYNyYR0uDhbWAt">
+          <body>Verifies: FIN-REQ-28.1, FIN-REQ-28.2. Stimulus: Fill the last free spot on a pallet. Expected result: The full pallet is set aside for wrapping. A new empty pallet is staged, and palletising continues without waiting.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wdmce0Ol-ivwYKIBddSgrW" name="FIN-TC-30 Verify pallet wrapping">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_2_oRSZxu2896DJVT5KG_pD">
+          <body>Verifies: FIN-REQ-29. Stimulus: Set aside a full pallet. Expected result: The pallet is wrapped.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_bjVb4p0LPnjswqUQmp527Q" name="FIN-TC-31 Verify pallet ready signal">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_ja_bKeX9XFFHLKeSn0CTX0">
+          <body>Verifies: FIN-REQ-30. Stimulus: Complete the wrapping of a pallet. Expected result: &quot;Pallet ready for shipment&quot; is published with pallet ID, cake count and batch IDs.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_QA-epNGnZkBM2mB0KtMvHH" name="FIN-TC-32 Verify washing, drying and verification">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_Vu9NayUPwm1HH29kzxc6I8">
+          <body>Verifies: FIN-REQ-11.1, FIN-REQ-11.2, FIN-REQ-11.3. Stimulus: Send an empty pan to the washing station. Expected result: The pan is washed and dried, then verified as clean and undamaged.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_IPcftC3ghaKUeClLFKMJWx" name="FIN-TC-33 Verify recirculation of clean pans">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_LYyBFzLWH-YFnRBziWaU7s">
+          <body>Verifies: FIN-REQ-12.1. Stimulus: Send a pan that passes verification. Expected result: The pan is queued for recirculation to band entry.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_t9LJt97jnYSyAKQSjyiY90" name="FIN-TC-34 Verify discard of unclean pan">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_ftm70b9c3DsxVpjYm0JkJo">
+          <body>Verifies: FIN-REQ-12.2, FIN-REQ-13. Stimulus: Send a pan that is not properly washed. Expected result: The pan is removed from the production cycle. A discard event is published.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_ZPcWWLQOiCVxQVGiSGC-tq" name="FIN-TC-35 Verify discard of damaged pan">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_FDvwmvSnjTQjYh9fwlHKtg">
+          <body>Verifies: FIN-REQ-12.2, FIN-REQ-13. Stimulus: Send a pan that is damaged after washing. Expected result: The pan is removed from the production cycle. A discard event is published.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_TD8fZ8GJSL1wkshMSS6Chc" name="FIN-TC-36 Verify diverted pan acceptance">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_MM0XopuOBDcT8SR5ZpcqbO">
+          <body>Verifies: FIN-REQ-15. Stimulus: Send &quot;Pan for washing&quot; from Thermal Processing for a pan diverted after a wrong fill weight. Expected result: The pan is accepted and washed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="__aqruToswr5-5-6q2LrJ5N" name="FIN-TC-37 Verify pan stock rule">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_gHf1gpHtdyxrwJ8lCB6l8b">
+          <body>Verifies: FIN-REQ-14. Stimulus: Check the total pan count at start, then after one pan is discarded. Expected result: The total stays at twice the number needed to fill the production system.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_fzuBYD8FkQxLag2v0CQ_NP" name="FIN-TC-38 Verify clean pan supply">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_Cjt_fRBrJyJ9eoUgcZQnde">
+          <body>Verifies: FIN-REQ-16. Stimulus: Send &quot;Pan request&quot; when no pan is at depositing (FC8). Expected result: A clean pan is supplied to the depositing point.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_wQTS5-JKptuQd-2N6HOnUY" name="FIN-TC-39 Verify stock level report">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_UE0EYKDUxPkYIgMDW52xuz">
+          <body>Verifies: FIN-REQ-17. Stimulus: Send &quot;Pan request&quot; at two different stock levels. Expected result: Each &quot;Clean pan supply&quot; carries the current stock level.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_2ZKYfydNZYYEYI--orkeHV" name="FIN-TC-40 Verify supply during washing outage">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_2CxW2kWODtcnnRMZxIuB8a">
+          <body>Verifies: FIN-REQ-18. Stimulus: Make the washing station unavailable (FC23) and send &quot;Pan request&quot;. Expected result: Clean pans are still supplied from stock.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_-DMQidQdbLrxgOjBOqSm7S" name="FIN-TC-41 Verify washing resume conditions">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_-DptAfnphplbhGth8OMuT7">
+          <body>Verifies: FIN-REQ-19. Stimulus: After a washing fault, try three cases: repair confirmed but conditions not met, conditions met but no &quot;Repair confirmed&quot;, and both. Expected result: Washing resumes only in the third case.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_EjjSx8SAy-9kcXZA0-qk24" name="FIN-TC-42 Verify catch-up speed">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_NNBOWmu8Q-hbCNh7Ut300A">
+          <body>Verifies: FIN-REQ-20.1. Stimulus: Confirm repair while a pan backlog exists. Expected result: Washing runs at increased speed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_hb0e9RoR7lcWiICuf-nEl7" name="FIN-TC-43 Verify return to normal speed">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_-xERqcAP6Do-mnO8wPFmlO">
+          <body>Verifies: FIN-REQ-20.2. Stimulus: Following FIN-TC-42, let the backlog drop to zero. Expected result: Washing returns to normal speed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_U7NJqFsq_GLpNV8GhcjCC9" name="FIN-TC-44 Verify speed-change logging">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_L8rNk0ENm6m-VdLfLr4YS3">
+          <body>Verifies: FIN-REQ-20.3. Stimulus: Run FIN-TC-42 and FIN-TC-43. Expected result: Each change of washing speed is logged.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_xIMMQclUo26BJE9OrOTHNN" name="FIN-TC-45 Verify heartbeat">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_QtLkK_VR-9eU_eHYK_vOHs">
+          <body>Verifies: FIN-REQ-36. Stimulus: Observe every station controller over several heartbeat intervals, then stop one controller. Expected result: Each controller publishes &quot;Machine status (heartbeat)&quot; at the configured interval. The stopped one's missing heartbeat is detectable.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_U3u-tN2YkudZMmQHkZdGu1" name="FIN-TC-46 Verify band halt">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_c4wnSoVPRvoQ2DQQGy7h_C">
+          <body>Verifies: FIN-REQ-37.1, FIN-REQ-37.2. Stimulus: Send &quot;Band state change&quot; (halt) while product is inside the stations. Expected result: The product already inside is processed. No new product is accepted.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_-HaDqWLRXoR1U7Nu_jS0kb" name="FIN-TC-47 Verify band slow-down">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_4UHjA_hqdDqAz_F3RG-YKj">
+          <body>Verifies: FIN-REQ-38.1. Stimulus: Send &quot;Band state change&quot; (slow-down). Expected result: Processing continues at the reduced band speed.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_YeIkd4F1eia3J5757fNUcS" name="FIN-TC-48 Verify band restart">
+        <ownedComment xmi:type="uml:Comment" xmi:id="_MelagN_IW58ZcjPaKzLamG">
+          <body>Verifies: FIN-REQ-38.2. Stimulus: Following FIN-TC-46 or FIN-TC-47, send &quot;Band state change&quot; (restart). Expected result: Normal processing resumes.</body>
+        </ownedComment>
+      </packagedElement>
+    </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_JB5r8Lz8EfGC__yJIGIlPQ" name="Finishing &amp; Packaging (FIN) ">
       <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_rxZDML2TEfGl1tErtx_5Og" name="RedefinableTemplateSignature29"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_hblXILz9EfGC__yJIGIlPQ" name="fin-af-13" type="_uxyYsLz8EfGC__yJIGIlPQ" aggregation="composite" association="_hbM8oLz9EfGC__yJIGIlPQ">
@@ -167,7 +1454,7 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_zRE7gL3NEfGtNPx5oKud9w" name="fin-af-12" type="_3dCQgL3LEfGDe7m4W_DlAQ" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_RYR_oL3OEfGIp5_ONuWz1w" name="fin-fd-11" type="_TWqCwL3MEfGtNPx5oKud9w" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_b20bEL3OEfGIp5_ONuWz1w" name="fin-fd-12" type="_azSzcL3MEfGtNPx5oKud9w" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_k6NuML3OEfGIp5_ONuWz1w" name="batch Tracking (FIN-AF-02)" type="_d5xcML3MEfGtNPx5oKud9w" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_k6NuML3OEfGIp5_ONuWz1w" name="fin-af-02" type="_d5xcML3MEfGtNPx5oKud9w" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_Toh5EL3QEfGIp5_ONuWz1w" name="fin-af-16" type="_HjuDYL3QEfGIp5_ONuWz1w" aggregation="composite" association="_TobycL3QEfGIp5_ONuWz1w">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_V7bIwL3QEfGIp5_ONuWz1w" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_V7gBQL3QEfGIp5_ONuWz1w" name="LiteralUnlimitedNatural1" value="1"/>
@@ -668,7 +1955,7 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_azSzcL3MEfGtNPx5oKud9w" name="Pallet Wrapper (FIN-FD-12)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_hUJxAL3PEfGIp5_ONuWz1w" name="Pallet wrap control" aggregation="composite"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_d5xcML3MEfGtNPx5oKud9w" name="fin-af-02" visibility="public">
+    <packagedElement xmi:type="uml:Class" xmi:id="_d5xcML3MEfGtNPx5oKud9w" name="Batch Tracking (FIN-AF-02)" visibility="public">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_42daML3OEfGIp5_ONuWz1w" name="Batch IDs" aggregation="composite"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_l7QmYL3MEfGtNPx5oKud9w" memberEnd="_l7YiML3MEfGtNPx5oKud9w _l7aXYb3MEfGtNPx5oKud9w">
@@ -902,4 +2189,278 @@
   <Blocks:NestedConnectorEnd xmi:id="_n9QZsMBFEfGiqthpeiudKA" base_Element="_n9PyoMBFEfGiqthpeiudKA" propertyPath="_h9Co8Lz-EfGC__yJIGIlPQ" base_ConnectorEnd="_n9PyoMBFEfGiqthpeiudKA"/>
   <Blocks:NestedConnectorEnd xmi:id="_5MaNUsBFEfGiqthpeiudKA" base_Element="_5MaNUcBFEfGiqthpeiudKA" propertyPath="_J9KLgL3GEfGzbswKCLJLjQ" base_ConnectorEnd="_5MaNUcBFEfGiqthpeiudKA"/>
   <Blocks:NestedConnectorEnd xmi:id="_F3sNIcBGEfGiqthpeiudKA" base_Element="_F3sNIMBGEfGiqthpeiudKA" propertyPath="_9TN5ML2pEfGzbswKCLJLjQ" base_ConnectorEnd="_F3sNIMBGEfGiqthpeiudKA"/>
+  <Requirements:Requirement xmi:id="_Jrvf9gwuW32y2cX--9CGrB" id="FIN-REQ-01" text="The system shall receive each cake in its pan, together with its batch ID, from Thermal Processing through the signal &quot;Cooled cake&quot;." base_Class="_TKwgEDEaqhzyNnytoB5aoV"/>
+  <Requirements:Requirement xmi:id="_ptwP8sYR-UJdsAugStlE_K" id="FIN-REQ-02" text="The system shall accept for depanning only cakes that Thermal Processing has released as having reached the safe internal temperature." base_Class="_sS8hhss6inCQmw31l26fqX"/>
+  <Requirements:Requirement xmi:id="_6-fZ2jEo5UbaR92_BHxS49" id="FIN-REQ-03" text="The system shall associate every cake with its batch ID from arrival until the cake is placed on a pallet." base_Class="_AhjVmMyamjXC_9jhUfWa9e"/>
+  <Requirements:Requirement xmi:id="_kqR5EXrO1VK1oTUfqzOQGn" id="FIN-REQ-04.1" text="The system shall separate each baked cake from its pan." base_Class="_EduMVfN7bpdLgfbXJ3c6Rz"/>
+  <Requirements:Requirement xmi:id="_tAjxO72plX5MnHGqn4G7E9" id="FIN-REQ-04.2" text="The system shall route each depanned cake toward quality inspection." base_Class="_O_JGOYTTwtt7L5tbe6IDp_"/>
+  <Requirements:Requirement xmi:id="_BtPsUH_tCJ-Gi72syrcAII" id="FIN-REQ-04.3" text="The system shall route each emptied pan toward the pan washing station." base_Class="_3st9Fc3VlxZRhOnzbITW6i"/>
+  <Requirements:Requirement xmi:id="_BxzI3qqDzur6FsSnjfzQ8Q" id="FIN-REQ-26.1" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every cake rejected at depanning." base_Class="_syj8zR6gunG0aJdekmrbrc"/>
+  <Requirements:Requirement xmi:id="_q1j4nlCHgh9MG1IApZOWT6" id="FIN-REQ-31.1" text="The system shall reject every cake that has not been removed correctly from its pan." base_Class="_P9NBqgq9d1gRqAsdewy1qw"/>
+  <Requirements:Requirement xmi:id="_donapoveodZO1uGh6Yl9r-" id="FIN-REQ-31.2" text="The system shall send the pan of every cake that has not been removed correctly to the washing station." base_Class="_tT9hAYsDpj_CYP2ExeE8el"/>
+  <Requirements:Requirement xmi:id="_T1Fo2Rkv-VDKGWrpE1onj_" id="FIN-REQ-32.1" text="The system shall hold cakes arriving at the depanning station while the depanning machine is not responding." base_Class="_K0mWBj1qz1lLToF7KTmotj"/>
+  <Requirements:Requirement xmi:id="_alWopq34ihvZVb6pqYl2rU" id="FIN-REQ-32.2" text="The system shall process the held cakes once it has received the signal &quot;Repair confirmed&quot; for the depanning machine." base_Class="_E6qY3Tze_0MpQul9nhk_Me"/>
+  <Requirements:Requirement xmi:id="_eTEMFDMLRzwc3rkmAhJGTE" id="FIN-REQ-05.1" text="The system shall weigh every depanned cake." base_Class="_ctC_zZimA8EsZ2VxXQNggm"/>
+  <Requirements:Requirement xmi:id="_tzrhjRHSJ4cK0cis1U0_Oj" id="FIN-REQ-05.2" text="The system shall mark a cake as failed if its weight is outside the regulatory tolerance of the target weight." base_Class="_6C8qhKw992UYPhCrCX6iZl"/>
+  <Requirements:Requirement xmi:id="_DB3K0NOCSeLkZU4NuPbitN" id="FIN-REQ-06.1" text="The system shall inspect the appearance of every cake." base_Class="_xlj7fDNuRGwJSfhIENqKTT"/>
+  <Requirements:Requirement xmi:id="_fi0-ddB5VZZ2UItLQlOjzg" id="FIN-REQ-06.2" text="The system shall mark a cake as failed if its appearance is unsatisfactory." base_Class="_iqt2xN5OXzzezpSWT9SqRz"/>
+  <Requirements:Requirement xmi:id="_oWKL-e3eDlOtQ5YCbhuNLk" id="FIN-REQ-07.1" text="The system shall scan every cake for metal contaminants." base_Class="_G9lUp--cLLpQJa3WIeMosr"/>
+  <Requirements:Requirement xmi:id="_t_iR-UVckNyAamVdbrkbW-" id="FIN-REQ-07.2" text="The system shall mark a cake as failed if metal is found." base_Class="_smhSJnHLwAXcUnTf6MvPTV"/>
+  <Requirements:Requirement xmi:id="_55d1FZ2GnTcOBPE-A3sdIb" id="FIN-REQ-08.1" text="The system shall allow a cake to proceed to packaging only if it has not been marked as failed." base_Class="_gQU9gnSsHUUFRleDJAlNhC"/>
+  <Requirements:Requirement xmi:id="_9aIhmbxd_UJp9Kn5XU47T5" id="FIN-REQ-08.2" text="The system shall move every failed cake to the reject bin." base_Class="_YlhQupaD70ahgOQ0TvJDK5"/>
+  <Requirements:Requirement xmi:id="_zeOcfMQyJL7TBwK66YrueY" id="FIN-REQ-09" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; (reason, time, batch ID) for every failed cake." base_Class="_0NvWG9fpauiPCpgf8dNKdz"/>
+  <Requirements:Requirement xmi:id="__0SIXU-C_qsjHqxxv22f_G" id="FIN-REQ-21.1" text="The system shall wrap every cake that has passed quality inspection." base_Class="_5agT-OlCIxr89LcspvfiHb"/>
+  <Requirements:Requirement xmi:id="_zcrrQXY-cVSpbELF-PElJx" id="FIN-REQ-21.2" text="The system shall verify that every wrapped cake is properly wrapped." base_Class="_twjH_j3Db0BtCH9sYFsvZc"/>
+  <Requirements:Requirement xmi:id="_WSk769TYzJEZqVGNS1siRx" id="FIN-REQ-23.1" text="The system shall pack every properly wrapped cake in a carton." base_Class="_6Xjc3Gy4OrwdnaWW-iTRnX"/>
+  <Requirements:Requirement xmi:id="_B_ntnvp8RjN4Xu3tO1WNcr" id="FIN-REQ-23.2" text="The system shall seal every carton." base_Class="_vaZtm9eaygGWI3r90T2kms"/>
+  <Requirements:Requirement xmi:id="_tIZZo0yL4ZVajmGty3Sb2_" id="FIN-REQ-23.3" text="The system shall verify that every cartoned cake is properly cartoned." base_Class="_R95izWTG1E3s9nE_5jG_f3"/>
+  <Requirements:Requirement xmi:id="_P6gBZv6b450zZ2RPyI7zdx" id="FIN-REQ-24.1" text="The system shall allow only cakes that are properly wrapped and properly cartoned to proceed to the shipping bin." base_Class="_4X5FPbxph9y5QC8WCHXrJa"/>
+  <Requirements:Requirement xmi:id="_TYBwPibr6mxL3YnuX7_abd" id="FIN-REQ-24.2" text="The system shall move every cake that is not properly wrapped or not properly cartoned to the refuse bin." base_Class="_iDNdmTTTX2AZFY2jwikr3q"/>
+  <Requirements:Requirement xmi:id="_SMGXT-soK_GIfZXYlAr6VN" id="FIN-REQ-25" text="The system shall check the weight of every sealed case." base_Class="_8zkGJBJzcOwzZt-QD3zq8F"/>
+  <Requirements:Requirement xmi:id="_a6td3qTO0t1r6Mmc0bCY82" id="FIN-REQ-26.2" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every cake discarded during packaging." base_Class="_s1_-hQpt6EmcfxgsyREFg8"/>
+  <Requirements:Requirement xmi:id="_bohdXzHbvNBjGPEL-natis" id="FIN-REQ-26.3" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every case with an incorrect weight." base_Class="_f35Bvvh8wILzDHwB8Q7xgf"/>
+  <Requirements:Requirement xmi:id="_LYQSvWyxTIyzx29ys1GL4r" id="FIN-REQ-33.1" text="The system shall hold incoming cakes in the holding area while the wrapping station is unavailable." base_Class="_T1M_Uwk-x2xDjPQNrFLbH5"/>
+  <Requirements:Requirement xmi:id="_W7uJ5XUEwl-A95J90F-S4M" id="FIN-REQ-33.2" text="The system shall wrap the held cakes once it has received the signal &quot;Repair confirmed&quot; for the wrapping station." base_Class="_Ej2ldvLBlVLBHrDMNuq8tE"/>
+  <Requirements:Requirement xmi:id="_T3VxztfgEwsWBiVZ_gXzBe" id="FIN-REQ-34" text="The system shall send the signal &quot;Stop / resume pan admission&quot; (stop) to Thermal Processing when the holding area is full." base_Class="_3yebRs-yOItuVrOA7vJURj"/>
+  <Requirements:Requirement xmi:id="_dsDOD4i6YRaur8fheWQP3b" id="FIN-REQ-35" text="The system shall send the signal &quot;Stop / resume pan admission&quot; (resume) to Thermal Processing once it has received the signal &quot;Repair confirmed&quot; for the wrapping station." base_Class="_kaEG5AmRaXSYLjjfMo9GNR"/>
+  <Requirements:Requirement xmi:id="_gufStC0NwXjH7YCFEcGdph" id="FIN-REQ-27" text="The system shall place every properly cartoned cake on a free spot on the current pallet." base_Class="_NzSgjQE5yxaFOBvk_tOVEr"/>
+  <Requirements:Requirement xmi:id="_Ng5Uvt7LnbLI0T3qEss-Qa" id="FIN-REQ-28.1" text="The system shall set a pallet aside for wrapping when all its cake spots are filled." base_Class="_K71hAMvRQzKCgQgHW_0vV1"/>
+  <Requirements:Requirement xmi:id="_dFhFdfBHH4yxFx8Vd8gFrV" id="FIN-REQ-28.2" text="The system shall stage a new empty pallet at the packing station when a pallet is set aside." base_Class="_4G59Au3veS5MPm5Tn_kW90"/>
+  <Requirements:Requirement xmi:id="_aKkDU3-G-3wZ03ERsYaFSY" id="FIN-REQ-29" text="The system shall wrap every full pallet." base_Class="_AqULhGVOWR0tPVrJzNxtAN"/>
+  <Requirements:Requirement xmi:id="_NAA7ufLhT3ScrcQkK8dHFm" id="FIN-REQ-30" text="The system shall publish the signal &quot;Pallet ready for shipment&quot; (pallet ID, cake count, batch IDs) when a wrapped pallet is ready to be moved to shipping storage." base_Class="_z79hB79Wy28QYsIfkZjaD2"/>
+  <Requirements:Requirement xmi:id="_soxewQ24e14_OlL9NnPHsI" id="FIN-REQ-11.1" text="The system shall wash every empty pan received at the washing station." base_Class="_VHlw6s5wWOroxjtBhYeNvu"/>
+  <Requirements:Requirement xmi:id="_fU3u5sYJxn6DATbetj9Thp" id="FIN-REQ-11.2" text="The system shall dry every washed pan." base_Class="_vglFU9leuBZHYyEBrxKbg2"/>
+  <Requirements:Requirement xmi:id="_sDkiCthpSlXoVX3sC_Z0oJ" id="FIN-REQ-11.3" text="The system shall verify that every washed and dried pan is clean and undamaged." base_Class="_Ir6zOKRuhlXHz-6q9rMs_l"/>
+  <Requirements:Requirement xmi:id="_ktFlumnXFjJqS2V-5hpJhL" id="FIN-REQ-12.1" text="The system shall queue every pan that passes verification for recirculation to band entry." base_Class="_P9U0OSDRlCCy2XaflpZPEI"/>
+  <Requirements:Requirement xmi:id="_plF4duAV6cMgJaj9QZMRA7" id="FIN-REQ-12.2" text="The system shall remove every pan that does not pass verification from the production cycle." base_Class="_kEosNeLJvFZJX_ucvqIDIT"/>
+  <Requirements:Requirement xmi:id="_H8xgTSUt2Qqzjn7JZ2yYGD" id="FIN-REQ-13" text="The system shall publish an event on the signal &quot;Log, warning, error and discard events&quot; for every discarded pan." base_Class="_ZFgE0_FbvIY3nXCZY72Co5"/>
+  <Requirements:Requirement xmi:id="_hwrwnZalgNKQ2cqK_L40Db" id="FIN-REQ-15" text="The system shall accept pans diverted by Thermal Processing through the signal &quot;Pan for washing&quot;." base_Class="_KBvwNsmJ8VpoAuXnm-sMkb"/>
+  <Requirements:Requirement xmi:id="_hTY0KLfdqqZ2CWD7jY87gs" id="FIN-REQ-14" text="The system shall keep the total number of pans in the production system at twice the number needed to fill the full production system." base_Class="_fzjVj-zG5eISJVAG7_rr0x"/>
+  <Requirements:Requirement xmi:id="_vk37d8qnHJdfou6fku4jbB" id="FIN-REQ-16" text="The system shall supply a clean pan to the depositing point when it receives the signal &quot;Pan request&quot;." base_Class="_iTANEBhAxQFknjLLlzjkXn"/>
+  <Requirements:Requirement xmi:id="_PT9vp_eDOXjDHD7N9eBw0k" id="FIN-REQ-17" text="The system shall report the current clean-pan stock level to Thermal Processing with each &quot;Clean pan supply&quot;." base_Class="_HlNfyeG6hf9qIJ8iDc574W"/>
+  <Requirements:Requirement xmi:id="_bfO8mN_3r3dNhe3LZoTUam" id="FIN-REQ-18" text="The system shall continue supplying clean pans from stock while the washing station is unavailable." base_Class="_pIHZcsDH6MkCySFwkeSLX1"/>
+  <Requirements:Requirement xmi:id="_y9vSVgrcpUra-8gqqdmQPf" id="FIN-REQ-19" text="The system shall resume washing after a fault only when it has received the signal &quot;Repair confirmed&quot; for the washing station and all conditions for continued washing are met." base_Class="_CEdf-8EELEyxyArrv-_ve0"/>
+  <Requirements:Requirement xmi:id="_J-zMQfFWRSuEqnoKhSKaWq" id="FIN-REQ-20.1" text="The system shall wash at an increased speed while pans are waiting after it has received the signal &quot;Repair confirmed&quot; for the washing station." base_Class="_rmYaREz-Gh6qcl-fKelylI"/>
+  <Requirements:Requirement xmi:id="_oOONk-_R3fJB1MZ1E89FSZ" id="FIN-REQ-20.2" text="The system shall return to normal washing speed once no backlog remains." base_Class="_tZhljRxha7i50u6Ie0OwsI"/>
+  <Requirements:Requirement xmi:id="_5R761SgwC_zrM-ms8MFQo4" id="FIN-REQ-20.3" text="The system shall log every change of washing speed." base_Class="_D5JvFN9sdwUAbwnierFWsA"/>
+  <Requirements:Requirement xmi:id="_Bd2LvkoO_fkIYP-2Dpr2SL" id="FIN-REQ-36" text="The system shall make each station controller publish a &quot;Machine status (heartbeat)&quot; at a regular interval." base_Class="_O0VqC4T_ruGjcTgJbhSK0t"/>
+  <Requirements:Requirement xmi:id="_6sI0rZhliFbj48NBsZ3KPE" id="FIN-REQ-37.1" text="The system shall continue processing the product already inside its stations when it receives a &quot;Band state change&quot; for a band halt." base_Class="_pK3b0qHaeiDReBxG_O8Y1u"/>
+  <Requirements:Requirement xmi:id="_pKAqbDRXBQq91Jw2hYEzN1" id="FIN-REQ-37.2" text="The system shall accept no new product when it receives a &quot;Band state change&quot; for a band halt." base_Class="_4yYVHw79pJJlDROoyF_F2o"/>
+  <Requirements:Requirement xmi:id="_4xFf79DRwCTt_QH-IPZ3OU" id="FIN-REQ-38.1" text="The system shall continue processing at the reduced band speed after a &quot;Band state change&quot; for a slow-down." base_Class="_2KBgvCG3QhXJg3Se1QsY2E"/>
+  <Requirements:Requirement xmi:id="_amsIHYeVhouwQMeZrEYowX" id="FIN-REQ-38.2" text="The system shall resume normal processing after a &quot;Band state change&quot; for a restart." base_Class="_0GiHr2-yYlYkpHWqTZ1a50"/>
+  <Requirements:Satisfy xmi:id="_78J3En0csFfTi2yOvTppqB" base_Abstraction="_1OmvAp0n3Q2sSK-SeP6lP-"/>
+  <Requirements:Satisfy xmi:id="_S7fhJAxpU1i7od00bpY2Su" base_Abstraction="_pGpY39yYS7zNRDvpf_0FSR"/>
+  <Requirements:Satisfy xmi:id="_oLR57HhtCL_yauk0LT_Y7g" base_Abstraction="_nIK6CKoxg6ZRmaFye9QS8z"/>
+  <Requirements:Satisfy xmi:id="_2C2imzsTma-ZpFXPRcVmVq" base_Abstraction="_02lMX1ip1EFJ8FP3RNnnHf"/>
+  <Requirements:Satisfy xmi:id="_Doi5KaX2R1VtXu7Ab0rGw2" base_Abstraction="_paCB14TQVoR1a1SAJwcXtF"/>
+  <Requirements:Satisfy xmi:id="_3y8qVKyH7xruPu4d97o6xF" base_Abstraction="_-GeoXbgP9YytpWjdgIMWP6"/>
+  <Requirements:Satisfy xmi:id="_FZKQcfib6ky12GQ5aFtMF4" base_Abstraction="_VzrhgUb4N2x8T0jH6EIQIk"/>
+  <Requirements:Satisfy xmi:id="_Bui8fsBP5w6dzdygG65FYC" base_Abstraction="_m97cNOvdGhxveVdI46e9fE"/>
+  <Requirements:Satisfy xmi:id="_uwsS1dTh0A1EzObzmUi4ek" base_Abstraction="_HkoHzuPHhxGTbe8oZxoKyk"/>
+  <Requirements:Satisfy xmi:id="_nVEGHhuBM03VQ3sMwTY0Vy" base_Abstraction="_9N72U5YOrq7zjL4B5eRfUZ"/>
+  <Requirements:Satisfy xmi:id="_br3u0858QTNpljE7B6LpZ5" base_Abstraction="_la_fboF7v5ucFvZABPVk3u"/>
+  <Requirements:Satisfy xmi:id="__ssmM6Adi2W0olfB7T_NB3" base_Abstraction="_2HJMlQHxdCVjjn3Ua0lkml"/>
+  <Requirements:Satisfy xmi:id="_7LymwfbNuwbv0K5CTSQX0Y" base_Abstraction="_N8mP45b80e6eq_rLq3_dJ9"/>
+  <Requirements:Satisfy xmi:id="_CVTeN5eqKfteyaBZtiqfWf" base_Abstraction="_g89Mq57KmvbtqpzHCMjYVN"/>
+  <Requirements:Satisfy xmi:id="_iPGcgL0UWxqckL6GubcGcq" base_Abstraction="_SB2Mvi0ySBmTv4hwEaRsJu"/>
+  <Requirements:Satisfy xmi:id="_M7lG6CmVyOmen1Jd7wDY_A" base_Abstraction="_-55jc_dJcyCp7cHL2FzUsR"/>
+  <Requirements:Satisfy xmi:id="_6esBqAktYkRSz6o2Mr1db0" base_Abstraction="_8jktkLlR9QNQ9XwFr7ohry"/>
+  <Requirements:Satisfy xmi:id="_2lqFZJrUN8QeBrJ18oDSTH" base_Abstraction="_rzu-yW3j7d_C-y6bY1PAq5"/>
+  <Requirements:Satisfy xmi:id="_fCNMGSYFKprCk7jRBRS5gj" base_Abstraction="_5pKIRk6EDETBJd6ve2NSa4"/>
+  <Requirements:Satisfy xmi:id="_QHZBhrWGPF3_ZQCeJ6LLEd" base_Abstraction="__Aq8y2M4BTGNpNvgG2otBI"/>
+  <Requirements:Satisfy xmi:id="_XDZRQLw4Q8WozHeCP4aw6X" base_Abstraction="_CQ6rHf_TDf0NEa1uw-3nna"/>
+  <Requirements:Satisfy xmi:id="_zzrG_svyd8LYmXuaIwP_uK" base_Abstraction="_1Zy4T0G2zjDzdTNfzR9SZ2"/>
+  <Requirements:Satisfy xmi:id="_r8C2TPiAqh6_8yE44j8b9K" base_Abstraction="_yI3ug2onWilcrin0kPMBNZ"/>
+  <Requirements:Satisfy xmi:id="_DS189ZmsqzedhdA1e3zdfN" base_Abstraction="_7QtKpFMjiprHGV_aNQPWGN"/>
+  <Requirements:Satisfy xmi:id="_ukh2z1hghG_Wd6FOyiN3rW" base_Abstraction="_I-hdbwFPPoOFZtIbcAnOT9"/>
+  <Requirements:Satisfy xmi:id="_IozOf_wjQKTTuy0cyf3nlm" base_Abstraction="_ccUBaHyXkcwTtLTEDy2_av"/>
+  <Requirements:Satisfy xmi:id="_5Wbw1s-u4B2ZA8TwveqlAo" base_Abstraction="_9_fhWj01xoL4EpK8l11YKZ"/>
+  <Requirements:Satisfy xmi:id="_h6Bs7MUszztPCxZa_rOpyE" base_Abstraction="_y5LSJ3n_VItoofcBWGRxt1"/>
+  <Requirements:Satisfy xmi:id="__zvNgqxM5XfyYlH5HJm24F" base_Abstraction="_QrYfUTgBB31IFiL1gMoPcX"/>
+  <Requirements:Satisfy xmi:id="_1QmuuJfWfuxyJauZaDHW00" base_Abstraction="_c4kJEkwvK8i12bzsEWIh5c"/>
+  <Requirements:Satisfy xmi:id="_nCjWr2nTX4sFsDGkITgelw" base_Abstraction="_ona80jyKH-PJfxZJok44-5"/>
+  <Requirements:Satisfy xmi:id="_-4tDIEQEbENwvcQfrOs_r7" base_Abstraction="_6GPExbiBsTuQpjTnwUxAYd"/>
+  <Requirements:Satisfy xmi:id="_hLpAGSbye6gJ2jMsHXDZlK" base_Abstraction="_wiroTIkTFgxGhNc0gXizZ7"/>
+  <Requirements:Satisfy xmi:id="_hTWndfNm6ZJbsfLJfNQPVg" base_Abstraction="_izeuhF6rbTx2AH8qhGIn88"/>
+  <Requirements:Satisfy xmi:id="_BffIiMJxM5EJZONgqcLsKl" base_Abstraction="_GrLzZHTVKQOjwCvJFN2HLG"/>
+  <Requirements:Satisfy xmi:id="_20JrOAOSs8RomieEeP1vL5" base_Abstraction="_8IZ2rsm5kKZW5qFdDl_TLU"/>
+  <Requirements:Satisfy xmi:id="_AAWP0DbCqiF2usFO-9lnW3" base_Abstraction="_6qRJT6mULEjgMA3Q2MNhDT"/>
+  <Requirements:Satisfy xmi:id="_fvej4zWc5tNcC41sg8cTxc" base_Abstraction="_I4boHLo5c2QKcMhZZMvDmY"/>
+  <Requirements:Satisfy xmi:id="_E5FkO8dwnawtz8NZFdkYzI" base_Abstraction="_XOm33a8V_t_gLfHSIPp4vI"/>
+  <Requirements:Satisfy xmi:id="_WuviraulHezbUpEwsHEPy-" base_Abstraction="_nf2ZEX9YcKs3P4etHqVPUa"/>
+  <Requirements:Satisfy xmi:id="_Pto6Q4P9p58l6PDkfYlkPc" base_Abstraction="_eu8KRS_XPbKTNYQ4slnN_g"/>
+  <Requirements:Satisfy xmi:id="_QSRo2dz0E90tEla1Qh7n8m" base_Abstraction="_PCcyiVdemek7k_J9xIAZKP"/>
+  <Requirements:Satisfy xmi:id="_lhPMMwvP3DEbbLRDs4hbxo" base_Abstraction="_vACPX0QUWzrAB24pfa7_rt"/>
+  <Requirements:Satisfy xmi:id="_4kVDoQIk7k8wLeXhYX_nYd" base_Abstraction="_HyxJ85PtXzxVSCGdg3AqqE"/>
+  <Requirements:Satisfy xmi:id="_UJR-STwJq09J-W-4thhYgP" base_Abstraction="_TMvgD2zfOUE7xOqU737DNv"/>
+  <Requirements:Satisfy xmi:id="_TiR5k3v5F6aLQ6SAEeQBiL" base_Abstraction="_8KmHe1aEkXv4luxWx6FIS8"/>
+  <Requirements:Satisfy xmi:id="_X08C-L1SawdUHayVwVTZDe" base_Abstraction="_ndnWtdG6SmShs8gieUPF8k"/>
+  <Requirements:Satisfy xmi:id="_g15zbV1hWd3BUISN8PLGF4" base_Abstraction="_TyuFBcrc4IPeXp46z3tc1o"/>
+  <Requirements:Satisfy xmi:id="_x-NdC8STFTl97HgvW1Oefm" base_Abstraction="_bQJWjjVeePskEd-YP-3DGs"/>
+  <Requirements:Satisfy xmi:id="_Cqac71UTEcp123Rtx79NGZ" base_Abstraction="_swT0YvP7K4FpRIiSgxS3gm"/>
+  <Requirements:Satisfy xmi:id="_mJ5lKt-BgXbt4bJnlwgeCt" base_Abstraction="_fAwmD_-pz8YLtJMhvsg_GU"/>
+  <Requirements:Satisfy xmi:id="_34Inq2LHBi5rw6NOgQC-Zt" base_Abstraction="_UxbBfBwWBeVQMc4ZOl-Xg5"/>
+  <Requirements:Satisfy xmi:id="_6SjSvmg5x6QYqstGn-axHK" base_Abstraction="_qTUELSH1cyCP8qlnoCKSgg"/>
+  <Requirements:Satisfy xmi:id="_vl7Xpos5fv8COKsqRpiDR4" base_Abstraction="_2jSDh1zUdLjY4rOsob6GNY"/>
+  <Requirements:Satisfy xmi:id="_bQwCkSqe0rnj__aCeLNb74" base_Abstraction="_M_TZz6xMgN0c7z7wNOxhPm"/>
+  <Requirements:Satisfy xmi:id="_HT7TwyEg79IFsAgyyiwHHY" base_Abstraction="_g8yUJc0n9fwdz3YObEMPEf"/>
+  <Requirements:Satisfy xmi:id="_hxlFILbf9bPhEHX_yvlrkj" base_Abstraction="_XRJSphDlBfkinc92C-wRX_"/>
+  <Requirements:Satisfy xmi:id="_FWN8MPHQyhWoNDiw6Ktu-y" base_Abstraction="__imfXP7ZCabD0m5lZtRX5z"/>
+  <Requirements:Satisfy xmi:id="_8fRVXT8JlrMqbye0Gs2kCm" base_Abstraction="_vj1XdH9KJTGwKhZzshQ0ac"/>
+  <Requirements:Satisfy xmi:id="_EyHMW4xhXsDf5lhaVSi8YF" base_Abstraction="_rkE-dNpN3TH54E2HLeeNuE"/>
+  <Requirements:Satisfy xmi:id="_l8vPMFLL0vPjKcWew3yrKx" base_Abstraction="_VuLig6ONWrPOil3DwPNla1"/>
+  <Requirements:Satisfy xmi:id="_IgS7CIR8943j8LC613DQl_" base_Abstraction="_e9PAIPZclx5gBS9Tqf4coB"/>
+  <Requirements:Satisfy xmi:id="_7aP40suAOfFi24GACzbdQB" base_Abstraction="_lenjEm-J_pwMuOZBvIjSN1"/>
+  <Requirements:Satisfy xmi:id="_Oq6ALqK7I-BzI3on06Y12N" base_Abstraction="_fFlmPSjINoMg5t8Cvnk1Dw"/>
+  <Requirements:Satisfy xmi:id="_xZ2XZqJ6QNCIjraWA2dT8K" base_Abstraction="_q_-1C8drEX9I3-80hl66cB"/>
+  <Requirements:Satisfy xmi:id="_qkb7E8z7OoqjiHUfsDOSkl" base_Abstraction="_B-CIKIqg_6SGNyMZb86sAJ"/>
+  <Requirements:Satisfy xmi:id="_az6X4FB8b-z_ZrfgyBaClc" base_Abstraction="_R65vWQlkzxWUZES92P6YW3"/>
+  <Requirements:Satisfy xmi:id="_ZyABiwQEusOShHbGDDk8UL" base_Abstraction="__oKr9ppHo5bGDX1y7_TccP"/>
+  <Requirements:Satisfy xmi:id="_0NvQ6tHfRH4fqcnpfoU3QJ" base_Abstraction="_z8Djv9inBRzxEobxnPreJs"/>
+  <Requirements:Satisfy xmi:id="_7AVKW4VYd0xqsZyBM0aNGd" base_Abstraction="_pfxNFysHhpcb-rwRmCP7KK"/>
+  <Requirements:Satisfy xmi:id="_bSz34xUT3i25DAb5vlYFpf" base_Abstraction="_gzQP_moW_1J9d-uhR5pm48"/>
+  <Requirements:Satisfy xmi:id="_2Y7sI5AqDtPbGEBRP10dku" base_Abstraction="_H5BJw6hAeBGnxsEzCtUxKm"/>
+  <Requirements:Satisfy xmi:id="_gVDtxmrbsJDV2jPvqm4tM0" base_Abstraction="_0bEI8-tnlMe7UC3mU_e_b-"/>
+  <Requirements:Satisfy xmi:id="_Z8DcYwkAw4RrsNxVbavixu" base_Abstraction="_zqGohy3Iw0tm2EHABi5slo"/>
+  <Requirements:Satisfy xmi:id="_UtK-CtNGIr3gpnCT4L2VK6" base_Abstraction="_PY1TpFYZPdbGUJ9G6AjZQH"/>
+  <Requirements:Satisfy xmi:id="_VoT6Jk4bdwSGzGNzvKB5c9" base_Abstraction="_4Va8Xij4P8Di0ce3kNWby9"/>
+  <Requirements:Satisfy xmi:id="_luEt2z3VnW-NHXELsTVn8C" base_Abstraction="_kQr-nN066fnTYvcQE5hwJo"/>
+  <Requirements:Satisfy xmi:id="_yL5tJOQFft9UqyOSmwYvn6" base_Abstraction="_labRrT9bZmQaFio-3UvkdR"/>
+  <Requirements:Satisfy xmi:id="_s_rT9xx3OoHduoBMQeS9Dn" base_Abstraction="_F9R0jbc3PMYao_aJvhfXG4"/>
+  <Requirements:Satisfy xmi:id="_mQuk4Nuj6mJQZ9CY9fXcWl" base_Abstraction="_q6lLjlsYHWEQqsJwhsuviU"/>
+  <Requirements:Satisfy xmi:id="_RkO0FD6h4LI8YBTd_tuyzT" base_Abstraction="_mLeD4G3th7PufDyMfFo0C2"/>
+  <Requirements:Satisfy xmi:id="_t9hFCvMlCT883NxXoBIzlv" base_Abstraction="_YwMek993nWlnWf1g-Qv9iN"/>
+  <Requirements:Satisfy xmi:id="_63umihJ22pxtvvHEOJ7BCJ" base_Abstraction="_CHchgVT0Mfp1UeCFS7zuH8"/>
+  <Requirements:Satisfy xmi:id="_-8QrfAFryi_fiQ_5qTeSix" base_Abstraction="_C1EjtufFyPR-4NouyblVV4"/>
+  <Requirements:Satisfy xmi:id="_lLJVxZH7fhQQIO0ai-3j8Z" base_Abstraction="_T7tpmn7TQvzpw42iTvMHNz"/>
+  <Requirements:Satisfy xmi:id="_OFcrWrsscx9WbfD83fHlBG" base_Abstraction="_pucGJ1SgRUZv9-yGB9_8ew"/>
+  <Requirements:Satisfy xmi:id="_WrdnxCFlkKAA-L5jJylvM-" base_Abstraction="_NiGI5z29SWqZt5_4P77ErO"/>
+  <Requirements:Satisfy xmi:id="_3TDWwdJUgvH7P6QSYIYxQA" base_Abstraction="_jDLLm3k4Gc4xJGEt8JkesO"/>
+  <Requirements:Satisfy xmi:id="_GRe0jWP-8UpXKasAFSHERt" base_Abstraction="_tF4ScnI2m_gcoHdx6R8GfO"/>
+  <Requirements:Satisfy xmi:id="_4GU48BdU96dT8qQJCgix6B" base_Abstraction="_GgOeQa-eFlstqNOgiNxtDG"/>
+  <Requirements:Satisfy xmi:id="__52M71MM7Zfb64fMWroOTT" base_Abstraction="_xgscZX-juvCULvpYYl-r_f"/>
+  <Requirements:Satisfy xmi:id="_Ex2UM-AHTRPcQRC4_vKmI6" base_Abstraction="_C1VnPZ5k1XKtxtcUKVM_4Z"/>
+  <Requirements:Satisfy xmi:id="_uYej80xe2XtHP8GON0CrRG" base_Abstraction="_CUIR6V7alSwz7Pna4tMKym"/>
+  <Requirements:Satisfy xmi:id="_FM78k3NKZ7GRl6smxPAWDP" base_Abstraction="_44iFxrFD3502723ERyWlPg"/>
+  <Requirements:Satisfy xmi:id="_SpKsmHlxTTSw-Ij6lhv3OG" base_Abstraction="_I2h4wxZA3XuAlgO-QwM6hn"/>
+  <Requirements:Satisfy xmi:id="_RzZwLL1oEbM2wkoGjnXwUu" base_Abstraction="_GicLBXWpGIcPbZ23EZGH0c"/>
+  <Requirements:Satisfy xmi:id="_92Yi4OVJcniNKcXKm7okiI" base_Abstraction="_xEndJtTQ6Py210kb3iUX4h"/>
+  <Requirements:Satisfy xmi:id="_7Q5wO3U7Y2edbRoZ06OWYD" base_Abstraction="_w74BcLP4k9zm7sqd1fTV-w"/>
+  <Requirements:Satisfy xmi:id="_XrTirvkScTceoJ_DZJpJYh" base_Abstraction="_6hgwu5sonWwLR-G0KLkh9z"/>
+  <Requirements:Satisfy xmi:id="_cmPXmEGkWEZu0exM8N_Obq" base_Abstraction="__4hxu3EvwLGIOue-7Dfzcy"/>
+  <Requirements:Satisfy xmi:id="_ptIgzfWrWavZmyhu4ZyORf" base_Abstraction="_at_HPaacPARgdYn1v-4lrF"/>
+  <Requirements:Satisfy xmi:id="_xX4iMGOPGvtxCLKzFMldAk" base_Abstraction="_QNyUGv3MSB_h327Lze_PE4"/>
+  <Requirements:Satisfy xmi:id="_eOEAuzDr1DK-4Nn1Qz0NCK" base_Abstraction="_24ydamuJdOjI1h2pbht9XW"/>
+  <Requirements:Satisfy xmi:id="_9sgbYmdwNVobUgHJHrJNta" base_Abstraction="_qg2mHe8vVVjTlTS9EWZl_h"/>
+  <Requirements:TestCase xmi:id="_V7_MbcgWkIOCjXbuvYWSfT" base_Behavior="_Sccr-TnvBC18Jw0LkggBMY"/>
+  <Requirements:TestCase xmi:id="_DhzMdml3yq3elcoMq6qxQN" base_Behavior="_9NRG3P9JsPRZ6s1uVkEH-B"/>
+  <Requirements:TestCase xmi:id="_NuDNhVgWt54e57JW9CDSzx" base_Behavior="_8bGGcyC_bBqy3BvHB6LRha"/>
+  <Requirements:TestCase xmi:id="_rh2Y4XqTXTrE5zYByOphcp" base_Behavior="_7H1h-2zl3VVsVCjYC2HNvP"/>
+  <Requirements:TestCase xmi:id="_4lFqR6MDQSiBznREVjy4au" base_Behavior="_aARvCAEJgyi9_mHVpHbk9g"/>
+  <Requirements:TestCase xmi:id="_psyGOsqzbjBLSaVPoyv-yy" base_Behavior="_SDL6FomD2VHFIw1j6HcQgY"/>
+  <Requirements:TestCase xmi:id="_g-SdiKs3QkPRV7m8Ccv6PL" base_Behavior="_w1TiGbBUQnDqCE9KuOsvYU"/>
+  <Requirements:TestCase xmi:id="_HtcFghhe3dZcP2rwvgAZ7r" base_Behavior="_vs2IKoTx1NtW9BrJ6nJgRB"/>
+  <Requirements:TestCase xmi:id="_z4rNHZA3GrBDTfMs_Wsppa" base_Behavior="_b2DPrqBcBmupy2Sxl5BaNB"/>
+  <Requirements:TestCase xmi:id="_Q4La3-x9bTMo3GJ1XACj3g" base_Behavior="_J1F-z4YC8BNgsj-7DqEfyc"/>
+  <Requirements:TestCase xmi:id="_dDa_GrjHzfr6rqIn46NEYW" base_Behavior="_iiHy8uPAEtqBiue-qdEpTu"/>
+  <Requirements:TestCase xmi:id="_6UV1EsO9epm1RXv8a0pBEp" base_Behavior="_tXJVo89Rz3tT8eyq5Am_As"/>
+  <Requirements:TestCase xmi:id="_gyeMdG3kg_tc9DGnUE0d2t" base_Behavior="_TSzb02-xS9TPD3684rzGCa"/>
+  <Requirements:TestCase xmi:id="_xfgu9-mqANm8gRXTMCXvtB" base_Behavior="_YXFX2dATH51F2z-3_4p_nR"/>
+  <Requirements:TestCase xmi:id="_XETD97QBl9JZZW3sILRGG2" base_Behavior="_6L0S37RljoAXBPGDt7Gc0R"/>
+  <Requirements:TestCase xmi:id="_NLoBI-RFK2sv7d4OPmUjVc" base_Behavior="_cWdK1BYipoMRIVdcqa_KNZ"/>
+  <Requirements:TestCase xmi:id="_Y9o2149DLMZrDz8el4T4x7" base_Behavior="_3pJ74tmd7IA1rNOE6bb_Bv"/>
+  <Requirements:TestCase xmi:id="_e_q9hLRumi2KhtX-6ToZ2F" base_Behavior="_cGlPrCUYmEoa_edLQZCkur"/>
+  <Requirements:TestCase xmi:id="_r8paCuRA2PplduT5DzbAYS" base_Behavior="_PY6miTbofQ23cWd-PrFJGM"/>
+  <Requirements:TestCase xmi:id="_yciq49kNG-wLBixWKWSyZd" base_Behavior="_nZju8I2ivXi_AK3ckIS6K5"/>
+  <Requirements:TestCase xmi:id="_zeJPuyocPf7RrikuwZ4Uw5" base_Behavior="_2hemGT3Lbi99d_EEtQcl68"/>
+  <Requirements:TestCase xmi:id="_vTzFonJK8QQNSy5ByG5PnD" base_Behavior="_i78om9I80XU4OEjmkoEl68"/>
+  <Requirements:TestCase xmi:id="_9YIQMMNhYq8HAczJGOdk94" base_Behavior="_caX3Cs3BrSCgQj32RqrM6J"/>
+  <Requirements:TestCase xmi:id="_J2AWCG_24PXqOF3ROweGHy" base_Behavior="_maNvFDX-jl72XW9xBk259Z"/>
+  <Requirements:TestCase xmi:id="_woiuFTSlzjI2LmGdvsO6Es" base_Behavior="_cLteRSCztC8rmDVKIZij4r"/>
+  <Requirements:TestCase xmi:id="_UEcun9A1ezBf9cShqaw2GY" base_Behavior="_lQBHWO5g0DpZmE2Lwbvfge"/>
+  <Requirements:TestCase xmi:id="_h327b5PIIz7UELbICJ_wVa" base_Behavior="_7eCxJlMrbcS6q6MAkZ-BxW"/>
+  <Requirements:TestCase xmi:id="_UaQHdmTG_1MJt0RsXS9SmA" base_Behavior="_wqB6eE2iyHql1jlIWJUoIL"/>
+  <Requirements:TestCase xmi:id="_lGD4qJdNjDL98UK7DRTyns" base_Behavior="_IjKQEFl8Eb-Zo2HPjUw8h_"/>
+  <Requirements:TestCase xmi:id="_voI0SEJyTfZNybwVwBVHh6" base_Behavior="_wdmce0Ol-ivwYKIBddSgrW"/>
+  <Requirements:TestCase xmi:id="_AyTsBoWNC5FSgEXZ-W0Kmd" base_Behavior="_bjVb4p0LPnjswqUQmp527Q"/>
+  <Requirements:TestCase xmi:id="_hvuDIW9oAawiNkeKQbMM5Q" base_Behavior="_QA-epNGnZkBM2mB0KtMvHH"/>
+  <Requirements:TestCase xmi:id="_8_gvyTHCrJ0ifKvRfn7HbI" base_Behavior="_IPcftC3ghaKUeClLFKMJWx"/>
+  <Requirements:TestCase xmi:id="_c5kv5YUvTts5S7XMfPLOa9" base_Behavior="_t9LJt97jnYSyAKQSjyiY90"/>
+  <Requirements:TestCase xmi:id="_bKmruZcqX4n4qyeTH70N7g" base_Behavior="_ZPcWWLQOiCVxQVGiSGC-tq"/>
+  <Requirements:TestCase xmi:id="_yGflKxRi-TWCuO3IQAtil7" base_Behavior="_TD8fZ8GJSL1wkshMSS6Chc"/>
+  <Requirements:TestCase xmi:id="_i6_BRIqotx6AD6Mne0Q2iI" base_Behavior="__aqruToswr5-5-6q2LrJ5N"/>
+  <Requirements:TestCase xmi:id="_htNqgTGhxeYzcKqF3wUAD1" base_Behavior="_fzuBYD8FkQxLag2v0CQ_NP"/>
+  <Requirements:TestCase xmi:id="_UlIyTYGeGaHet-TAYDbTCq" base_Behavior="_wQTS5-JKptuQd-2N6HOnUY"/>
+  <Requirements:TestCase xmi:id="_UdUYDBwb9rDBBfSIC1pGu8" base_Behavior="_2ZKYfydNZYYEYI--orkeHV"/>
+  <Requirements:TestCase xmi:id="_qDn_9Vf9z1KiBGkU6zF2RX" base_Behavior="_-DMQidQdbLrxgOjBOqSm7S"/>
+  <Requirements:TestCase xmi:id="_UxYensP9jdEMr2_cTDMx13" base_Behavior="_EjjSx8SAy-9kcXZA0-qk24"/>
+  <Requirements:TestCase xmi:id="_-qMtu4FAV-vQf4ZXXIC09C" base_Behavior="_hb0e9RoR7lcWiICuf-nEl7"/>
+  <Requirements:TestCase xmi:id="_mVihxto3TZdbNrjVCLqq6c" base_Behavior="_U7NJqFsq_GLpNV8GhcjCC9"/>
+  <Requirements:TestCase xmi:id="_jeb0BHw7bx5-gU_T78LpTc" base_Behavior="_xIMMQclUo26BJE9OrOTHNN"/>
+  <Requirements:TestCase xmi:id="_wQcvUabU3vgByyfFaXvA1v" base_Behavior="_U3u-tN2YkudZMmQHkZdGu1"/>
+  <Requirements:TestCase xmi:id="_0qgFb2VjuRuksO4FQp0836" base_Behavior="_-HaDqWLRXoR1U7Nu_jS0kb"/>
+  <Requirements:TestCase xmi:id="_bQcJ-Mi7XEwtKxfIs23IJz" base_Behavior="_YeIkd4F1eia3J5757fNUcS"/>
+  <Requirements:Verify xmi:id="_peamCqYKUkobnJn3BvssLu" base_Abstraction="_z46VtAZdSNOvcR1FF3EUZK"/>
+  <Requirements:Verify xmi:id="_c04Hr4EZS39llDiIcqV-vh" base_Abstraction="_ye68al9znm7rWjY8A-ZYS5"/>
+  <Requirements:Verify xmi:id="_L2FWIvSUM-2TtUj3yBzItb" base_Abstraction="_q-2-5I0vv7YkwGdRjWJ9fL"/>
+  <Requirements:Verify xmi:id="_Io4jbVs6ZHLpy36ioXNVOF" base_Abstraction="_nLTcPrOKT1zOY7JIoeOO0N"/>
+  <Requirements:Verify xmi:id="_DsTai27T-4gIgyfNpavV0v" base_Abstraction="_EtmjHZhAwn_ap5dVVLa9Fl"/>
+  <Requirements:Verify xmi:id="_15Cwd3k0xQIzGMNR0YcL8z" base_Abstraction="_kcF5GKNnuikREb2GBcvPbe"/>
+  <Requirements:Verify xmi:id="_5fuFTTEmh0dOaGNiiMm0P7" base_Abstraction="_gNGQC7PeHuHLDdjoS2-qlU"/>
+  <Requirements:Verify xmi:id="_6xDkmwa1RUeWXxHDU18DJO" base_Abstraction="_sT_8FaxDXBgwRrV_DB_SH-"/>
+  <Requirements:Verify xmi:id="_yasdTs4UiVOlk0a3kjQQEE" base_Abstraction="_3P1I3_NGYxh7KtkTKCzD-Y"/>
+  <Requirements:Verify xmi:id="_mMauURt77hklo4vcjgoDT7" base_Abstraction="_1dFMre-safIbNflO8I_n4d"/>
+  <Requirements:Verify xmi:id="_kOXs09YWUHRo6xNx5PbN6D" base_Abstraction="_doDluOURNT63Sd3m7EN8jI"/>
+  <Requirements:Verify xmi:id="_S2SjgvvdDJeqKf1s1pKvXj" base_Abstraction="_HdnNGsGKIChoy_mY6t82A0"/>
+  <Requirements:Verify xmi:id="_6n5jx4Zt4oolf3BN5lvtrz" base_Abstraction="_cp9iFBFdiz9WFNQvCDr3Wp"/>
+  <Requirements:Verify xmi:id="_LOmxP2yubaFvrW-armKtVm" base_Abstraction="_enqB1ZgCVf6mjtDp6Hyt2H"/>
+  <Requirements:Verify xmi:id="_4bf3nMoqx6QCqMK3uGHKzy" base_Abstraction="_Ua_HnxtRGs_OZNz4EGgvKr"/>
+  <Requirements:Verify xmi:id="_Jzvo1NCUqrWupnbV1T6Bpm" base_Abstraction="_f2UEHG6FqVJOao_hfpsxRu"/>
+  <Requirements:Verify xmi:id="_Z1rXyhFeu5aY4FMLQ87AkQ" base_Abstraction="_VHJmpXjxLRpoiX0eCEV7UW"/>
+  <Requirements:Verify xmi:id="_0snLRfw6bIe-L-uPUcq9HL" base_Abstraction="_-XJWDjkko4JfQOOr4hxCMi"/>
+  <Requirements:Verify xmi:id="_jXqEANs2AFksRs1G1r2kAi" base_Abstraction="_yliydC-Jnw3SokoZwPid1g"/>
+  <Requirements:Verify xmi:id="_6paC_Rh7_fpPyhMc4QO9iV" base_Abstraction="_s-nS2fWTdTOPpRi0bWQEpS"/>
+  <Requirements:Verify xmi:id="_Jq_n1xXIfn25Z4O_9jIHk_" base_Abstraction="_IBu9cdcE-O3JbdzR1yqiHT"/>
+  <Requirements:Verify xmi:id="_OI1OM6vjlIYGs8LR2NtsEU" base_Abstraction="_ItX5dDJjvAKvqwKyxrRKGn"/>
+  <Requirements:Verify xmi:id="_7RFkVEQ2XkI_eThfcEQ0H3" base_Abstraction="_AvKHe16VEkjDRXhr6IU4DY"/>
+  <Requirements:Verify xmi:id="_6D7j0sFLEK-1JoGA5FIvsx" base_Abstraction="_1WKyVjkwfZvYJ12Dn9Ez__"/>
+  <Requirements:Verify xmi:id="_vW3qW6gosAH8nRMJHTojEE" base_Abstraction="_XYEhiV8_lSjFYXwv0yEbDA"/>
+  <Requirements:Verify xmi:id="_1kgnLVNHKtwVGd4kiZ4k9B" base_Abstraction="_ODPrpCdkG5VCxgH07jOxB4"/>
+  <Requirements:Verify xmi:id="_44VtLK7MKcGzNOGdkAE_Yz" base_Abstraction="_Qt9MrUCJ5G9KjKqlSXEniQ"/>
+  <Requirements:Verify xmi:id="_mZb-vAMxAocXEioFKSpyMu" base_Abstraction="_mCg7BHH_tbt4MGgihaxGPc"/>
+  <Requirements:Verify xmi:id="_kOsb2FqvZEOIfjaYYq5sNP" base_Abstraction="_JVhVF5xIU_rhKdBs_Pl29o"/>
+  <Requirements:Verify xmi:id="_iNOm9WuxcpQ01fv7C5pSu8" base_Abstraction="_4JRlxNHqn04yn2HLCYr1k-"/>
+  <Requirements:Verify xmi:id="_mEeKqSd-vcru3hx-UpSLt6" base_Abstraction="_EU5rleJFRpilh8J6Oqxh5g"/>
+  <Requirements:Verify xmi:id="_h265c_J2Bj5HBQilIqHdH5" base_Abstraction="_0GSFzdmAJdn0I2xsMdF9e4"/>
+  <Requirements:Verify xmi:id="_lr1i6zGFDl2onhzCtqvUsP" base_Abstraction="_iAx8Uzrly9DZzjfOlBkY3r"/>
+  <Requirements:Verify xmi:id="_-tP-cUlfPI7k5S46VsS_7x" base_Abstraction="_zROwZTAQZO3id9VYuWN-nR"/>
+  <Requirements:Verify xmi:id="_1pb27T4tjF2yFy2p3DmHxA" base_Abstraction="_Wv3AcBIylvNs_dVaGAkXcv"/>
+  <Requirements:Verify xmi:id="_Jiux5nLgALMxNh5uNfWNSd" base_Abstraction="_bMtr5FQZOxZ3n312WXN4Pn"/>
+  <Requirements:Verify xmi:id="_3LKXad25cK0leh3zSOXwBy" base_Abstraction="_GO8l172wsvIWy6QTb4TXBy"/>
+  <Requirements:Verify xmi:id="_0kulYBlOnd0W1t46AuZsug" base_Abstraction="_dYSp6WRmKr25HxCXg3YLvt"/>
+  <Requirements:Verify xmi:id="_NFEsmDJBguTejw3pG0aJ26" base_Abstraction="_Y9a2gMW_nz0y0s3b2bkd2i"/>
+  <Requirements:Verify xmi:id="_1OH2_oV39IfvQW2rDUB0gs" base_Abstraction="_R-E91iiQ5nCGUWwJiz2XUi"/>
+  <Requirements:Verify xmi:id="_hRYNcU6gVw9TF9pLCxk6Eq" base_Abstraction="_B4C3zpF3OMzT1IIxU0_ZVo"/>
+  <Requirements:Verify xmi:id="_8oy6mq_ErzWNFeCc3mI44Z" base_Abstraction="_N_9MbjMtsa70en5oVKiFCa"/>
+  <Requirements:Verify xmi:id="_3NgRz5p-7rD3utmaz5QfPW" base_Abstraction="_0XR4YpZHcfmxrID9nM34DL"/>
+  <Requirements:Verify xmi:id="_a14IJiVhCjzjYtgerRP1x9" base_Abstraction="_LSA5NjgpNltmb9CoMMgTG3"/>
+  <Requirements:Verify xmi:id="_r9i8lrw_0Jmi6pq0AF_2ay" base_Abstraction="_72bncuVMSUt7KUxoen3JCi"/>
+  <Requirements:Verify xmi:id="_lexcesQMGfnuG1wk4Pmxa8" base_Abstraction="_h4FzdBDj3rDJAXzXWeML00"/>
+  <Requirements:Verify xmi:id="_ioh84jta9HEFQGfFtgKFRm" base_Abstraction="_F7snWYo93foN4haq7NT2o-"/>
+  <Requirements:Verify xmi:id="_qK780FzgLAwN2CYqIxDACh" base_Abstraction="_hHa9iCONaQi7pZpu_Wn_o_"/>
+  <Requirements:Verify xmi:id="_IBeG1imo72YLmWjIgEpKlj" base_Abstraction="_fxtsEcf_0-CwKKU7syXew3"/>
+  <Requirements:Verify xmi:id="_hSJgJw1BxdQPbHRB-SN42a" base_Abstraction="_LMu0YUIkl2Rj4-UH3weC4f"/>
+  <Requirements:Verify xmi:id="_x-4CFS8fDCa6fygH0JAdUp" base_Abstraction="_Lz8ZHhRCkURc6bDpV_HXW6"/>
+  <Requirements:Verify xmi:id="_3CCrJv6TX5Swy4AFcpw1Pr" base_Abstraction="_0-g6CBp_25oDvlQq57ll9Z"/>
+  <Requirements:Verify xmi:id="_xEc3O2aRcTjDn_wQ-EqZva" base_Abstraction="_JSVEm4PD0opr05YQNlixp5"/>
+  <Requirements:Verify xmi:id="_X2Kjs5pgOwu9s7VXvOHWkZ" base_Abstraction="_4sb1zkxQ4eVoPXvVv799In"/>
+  <Requirements:Verify xmi:id="_yB0tJcEAEvpXwEo3_ae6tf" base_Abstraction="_TuKVZrbLYAVnxFL78HHjG2"/>
+  <Requirements:Verify xmi:id="_oqZW25nr6H1Fz0E73qhYIz" base_Abstraction="_Suz7Y6zfwvfl-3vZhYEUJX"/>
+  <Requirements:Verify xmi:id="_6aRlOxWhz7IjY0d5g8qWiB" base_Abstraction="_ef-eLgWi0bGmpCKXXXuRAw"/>
+  <Requirements:Verify xmi:id="_q0rN8DNCwab4FNjsWnZCeV" base_Abstraction="_AML2wXt7nABgHlGe1l9fYO"/>
+  <Requirements:Verify xmi:id="_b-rVoGSvP7HO1RQ4r1_6QN" base_Abstraction="_NXoREoXODr47M2BCy8Clxw"/>
+  <Requirements:Verify xmi:id="_Yzex1HVtXU6XP14fmVPqq8" base_Abstraction="_RpJRW-SYTefQLHV1VqUmHm"/>
+  <Requirements:Verify xmi:id="_M1JvoovFKgFdQnogW3d5wT" base_Abstraction="_QfEapVgoPKiWlTyoq4tOZv"/>
+  <Requirements:Verify xmi:id="_fcMrVIWhiadpB-0wlK1axz" base_Abstraction="_6cVaQd8U9qZfIV-AFVx67M"/>
+  <Requirements:Verify xmi:id="_vEMlNoGuEzuV-VKJHPlRAs" base_Abstraction="__Wcs_lTfC7RL1DiF7UhQp2"/>
 </xmi:XMI>
