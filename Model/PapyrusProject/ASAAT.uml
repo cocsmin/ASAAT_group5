@@ -19,6 +19,9 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_5EGJYMBGEfGiqthpeiudKA">
       <importedPackage xmi:type="uml:Model" href="THM.uml#_XNJflI6ZUUm27gAMsm_S8Q"/>
     </packageImport>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_eXKMwNMKEfGVktM5bqmNpQ">
+      <importedPackage xmi:type="uml:Model" href="MON.uml#_tFpuwMSWEfG8fKg8yLcw1w"/>
+    </packageImport>
     <packagedElement xmi:type="uml:Class" xmi:id="_4ivN8MA0EfGhFcn1z0k66Q" name="Cake Factory">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_dNAWcMA1EfGhFcn1z0k66Q" name="bat" aggregation="composite" association="_dM9TIMA1EfGhFcn1z0k66Q">
         <type xmi:type="uml:Class" href="BAT.uml#_SONHJDr6YZnEzTIGyQROVL"/>
