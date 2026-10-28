@@ -33,7 +33,6 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Cawl8MSpEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Cawl8cSpEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_Ztli0M-XEfGqiL-AEFFLIg" name="targetSpeed" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_erkfwM-XEfGqiL-AEFFLIg" name="targetSpeed" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_mIHJ0M-XEfGqiL-AEFFLIg" name="sectionCommand" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_pTEp8M-XEfGqiL-AEFFLIg" name="transportFault" aggregation="composite"/>

@@ -56,6 +56,12 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ru3aENMLEfGVktM5bqmNpQ" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ru3aEdMLEfGVktM5bqmNpQ" name="LiteralUnlimitedNatural1" value="1"/>
       </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_o4pZENMLEfGVktM5bqmNpQ" name="band Transport" aggregation="composite">
+        <type xmi:type="uml:Class" href="BT.uml#_rh_68MSnEfG8fKg8yLcw1w"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_vLblwNMLEfGVktM5bqmNpQ" name="line Monitoring &amp; Health (MON)" aggregation="composite">
+        <type xmi:type="uml:Class" href="MON.uml#_7b6psMSWEfG8fKg8yLcw1w"/>
+      </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_dM9TIMA1EfGhFcn1z0k66Q" memberEnd="_dNAWcMA1EfGhFcn1z0k66Q _dNAWc8A1EfGhFcn1z0k66Q">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_dM_IUMA1EfGhFcn1z0k66Q" source="org.eclipse.papyrus">
