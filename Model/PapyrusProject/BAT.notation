@@ -20109,7 +20109,11 @@
       <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_OV2yoNFlEfGXJo2Tgk5muQ" id="(0.3305785123966942,0.0)"/>
       <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_N-h3wNFlEfGXJo2Tgk5muQ" id="(0.06896551724137931,1.0)"/>
     </edges>
-    <edges xmi:type="notation:Connector" xmi:id="_6vFx8NFlEfGXJo2Tgk5muQ" type="Transition_Edge" source="_8oU2YNFjEfGXJo2Tgk5muQ" target="_6dQF8NFjEfGXJo2Tgk5muQ">
+    <edges xmi:type="notation:Connector" xmi:id="_6vFx8NFlEfGXJo2Tgk5muQ" type="Transition_Edge" source="_8oU2YNFjEfGXJo2Tgk5muQ" target="_6dQF8NFjEfGXJo2Tgk5muQ" jumpLinkStatus="Below" jumpLinkType="Square">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tD01UNLlEfGry93w8brhPA" source="PapyrusCSSForceValue">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tD01UdLlEfGry93w8brhPA" key="jumpLinkStatus" value="true"/>
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_tZxQINLlEfGry93w8brhPA" key="jumpLinkType" value="true"/>
+      </eAnnotations>
       <children xmi:type="notation:DecorationNode" xmi:id="_6vGZANFlEfGXJo2Tgk5muQ" type="Transition_NameLabel">
         <styles xmi:type="notation:BooleanValueStyle" xmi:id="_-eD-ENFlEfGXJo2Tgk5muQ" name="IS_UPDATED_POSITION" booleanValue="true"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_6vGZAdFlEfGXJo2Tgk5muQ" x="-1" y="18"/>
