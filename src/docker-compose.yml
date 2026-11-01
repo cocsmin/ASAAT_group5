@@ -8,6 +8,11 @@
 #   named volume per service  outbox of undelivered events survives a restart (THM-REQ-77)
 #   non-root, read-only root  fast restart, small attack surface
 #   cpu and memory limits     a runaway service cannot starve the others
+#
+# Note: the restart policy restarts a crashed container, not one that was stopped
+# or killed by hand (`docker kill`, `docker stop`). Use FC27 on the dashboard to
+# crash a controller the way a real fault would.
+# Set MSSQL_SA_PASSWORD (for example in a .env file) to change the SQL password.
 x-service: &service
   restart: unless-stopped
   read_only: true
@@ -34,7 +39,7 @@ x-env: &env
   SIM_SPEED: "1"               # raise to run the factory faster
 
 x-sql: &sql
-  SQL_DSN: "sqlserver://sa:Cake_Factory1!@mssql:1433?database=cakefactory&encrypt=disable"
+  SQL_DSN: "sqlserver://sa:${MSSQL_SA_PASSWORD:-Cake_Factory1!}@mssql:1433?database=cakefactory&encrypt=disable"
 
 services:
   mosquitto:
@@ -53,11 +58,11 @@ services:
     restart: unless-stopped
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Cake_Factory1!"
+      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD:-Cake_Factory1!}"
     volumes: ["mssql-data:/var/opt/mssql"]
     ports: ["1433:1433"]
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Cake_Factory1!' -Q 'SELECT 1' || /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Cake_Factory1!' -Q 'SELECT 1'"]
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q 'SELECT 1' || /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -Q 'SELECT 1'"]
       interval: 10s
       timeout: 5s
       retries: 10

@@ -112,9 +112,10 @@ signals as implemented: [docs/signals.md](docs/signals.md).
 - Built and smoke-tested with `go run ./cmd/dev` (all five services, the
   dashboard, fault injection and repair). `go test ./...` covers the Sparkplug
   codec and the signal mapping.
-- **Not run:** `docker compose` and the SQL Server and MongoDB stores. They
-  compile, but they were not executed against real databases. The SQL Server
-  image is x86; on Apple silicon enable Rosetta emulation in Docker Desktop.
+- Run with Docker Desktop: all containers healthy, real SQL Server and MongoDB
+  used, a crashed container is restarted and takes up its cakes again (see
+  TODO.md). The SQL Server image is x86; on Apple silicon enable Rosetta
+  emulation in Docker Desktop.
 - The simulation compresses time: the 30 minutes of UC10 are 40 simulated
   seconds; durations are constants at the top of each service file.
 - The human inspector of UC4 is simulated (a 3 s delay, rejections via the UC4 injection button).

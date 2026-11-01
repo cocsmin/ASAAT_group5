@@ -79,7 +79,16 @@ func (s *MSSQL) Init(ctx context.Context) error {
 		return err
 	}
 	s.db = db
-	if _, err := db.ExecContext(ctx, schema); err != nil {
+	conn, err := db.Conn(ctx)
+	if err != nil {
+		return err
+	}
+	defer conn.Close()
+	if _, err := conn.ExecContext(ctx, "DECLARE @r INT; EXEC @r = sp_getapplock @Resource='cakefactory-init', @LockMode='Exclusive', @LockOwner='Session', @LockTimeout=30000; IF @r < 0 RAISERROR('init lock timeout',16,1)"); err != nil {
+		return err
+	}
+	defer conn.ExecContext(context.Background(), "EXEC sp_releaseapplock @Resource='cakefactory-init', @LockOwner='Session'")
+	if _, err := conn.ExecContext(ctx, schema); err != nil {
 		return err
 	}
 	return s.seed(ctx)

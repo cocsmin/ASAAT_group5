@@ -198,6 +198,7 @@ func (m *Monitor) onBirth(n *NodeState, p sparkplug.Payload) {
 	wasSilent := m.silent[n.ID]
 	m.mu.Unlock()
 	m.absorbHealth(n, p.Metrics)
+	m.closeContainerTicket(n.ID)
 	if restarted && !wasSilent {
 		m.N.Log("FC27", n.ID+" container is back: birth certificate received, last saved state loaded", "")
 		m.restoreNodeSections(n.ID)
@@ -315,7 +316,7 @@ func (m *Monitor) watchdog() {
 				m.silent[n.ID] = true
 				gone = append(gone, n)
 			}
-			if n.Status == "dead" && time.Since(n.deadAt) > 45*time.Second && !m.hasTicket(n.ID+"-container") {
+			if n.Status == "dead" && time.Since(n.deadAt) > 45*time.Second && !m.hasTicket(strings.ToLower(n.ID)+"-container") {
 				gone = append(gone, n)
 			}
 		}
@@ -331,6 +332,19 @@ func (m *Monitor) watchdog() {
 			}
 		}
 		m.push()
+	}
+}
+
+// closeContainerTicket closes the ticket of a container that did not restart
+// by itself once its birth certificate arrives: nobody has to confirm that.
+func (m *Monitor) closeContainerTicket(node string) {
+	machine := strings.ToLower(node) + "-container"
+	m.mu.Lock()
+	t, ok := m.tickets[machine]
+	delete(m.tickets, machine)
+	m.mu.Unlock()
+	if ok {
+		_ = m.sql.CloseTicket(m.Ctx, t.ID)
 	}
 }
 

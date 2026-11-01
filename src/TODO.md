@@ -55,18 +55,26 @@ where the diagrams are missing, wrong, or behind the implementation.
    detected at once in the simulation).
 5. **Time compression.** 30 minutes of UC10 are 40 simulated seconds.
 
-## Not verified **[person]**
+## Verified in Docker (1 Nov 2026, Docker Desktop on Windows 11)
 
-1. `docker compose up` was never run (Docker is not installed on the machine used).
-   Check the healthchecks (the `sqlcmd` path in the SQL Server image), the
-   read-only root with the `/data` volume, and the start order.
-2. The SQL Server store (`internal/store/sql_mssql.go`) and the MongoDB store
-   (`internal/store/pans_mongo.go`) compile but never ran against real databases.
-3. Recovery within 60 s (THM-REQ-73) and detection within 15 s (THM-REQ-72) are
-   not measured in the containers. The 7.5 s death-certificate time depends on the
-   broker (tested only with the embedded dev broker, keep-alive 15 s).
-4. Load assumption A1 (about 50 messages per second) is not checked against
-   Table II of the report.
+- `docker compose up --build`: all 8 containers become healthy; start order and
+  healthchecks work; read-only root with the `/data` volume works.
+- SQL Server store: schema, seed, reservations, orders, shipments, event log and
+  tickets written and read. A race between PLM and MON creating the schema is fixed
+  with an application lock.
+- MongoDB store: pan documents and node state written and read.
+- Crash of THM (real process exit): death certificate seen by MON after 0.4 s,
+  Docker restarted the container, birth seen after 0.8 s, 5 cakes on the band taken
+  up again (bounds: 15 s detection, 60 s recovery).
+- Frozen THM (`docker pause`): the broker declared it dead after 7.0 s (keep-alive
+  5 s), MON saw it return after `unpause`.
+
+Still to check **[person]**:
+
+1. Apple silicon: the SQL Server image is x86 and needs Rosetta emulation.
+2. Recovery of the other containers (only THM was crashed), a MON crash with real
+   databases, and a restart of the broker itself (accepted risk R1).
+3. Load assumption A1 (about 50 messages per second) against Table II of the report.
 
 ## Code gaps
 
@@ -88,9 +96,8 @@ where the diagrams are missing, wrong, or behind the implementation.
    caught only by the checks in the receivers (batch id, pan id).
 6. **PLM** keeps held orders in memory; after a PLM restart a held order is
    noticed again when BAT repeats its request, not before.
-7. **Security**: anonymous broker, no TLS, SQL Server password in the compose file,
-   dashboard without login. Security is not a stated quality attribute yet.
-8. Event log retention, backups of SQL Server and MongoDB, clustered broker
+7. Security is not a stated requirement and is not implemented (anonymous broker,
+   no TLS, no dashboard login).
    (accepted risk R1 in the lecture draft).
 9. Real equipment (PLC, OPC UA, cameras) is out of scope: all machines are
    simulated inside the services.

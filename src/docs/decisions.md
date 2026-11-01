@@ -150,7 +150,10 @@ PLM or MON state machine yet.
   duplicate filter is in memory, so a duplicate that arrives after the receiver
   restarted is handled by the checks in the receivers (batch id, pan id), not by
   the filter.
-- **Not run:** `docker compose`, the real SQL Server and MongoDB stores, the CI
-  pipeline. `cicd.yml` and the root `Dockerfile` are still the course template.
+- **Docker:** `docker compose up --build` was run with the real SQL Server and
+  MongoDB; see TODO.md for what was measured. `cicd.yml` and the root `Dockerfile`
+  are still the course template.
+- **Security** (TLS, broker access control, login) is not a stated requirement and
+  is not implemented.
 
 Everything still open, including the diagrams that need fixing, is in [../TODO.md](../TODO.md). The signals as implemented are in [signals.md](signals.md).
