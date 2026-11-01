@@ -1,0 +1,126 @@
+# Cake factory: one container per system (Go) plus MQTT broker, SQL Server and
+# MongoDB. Start with: docker compose up --build   then open http://localhost:8080
+#
+# Rules from the architecture decisions that this file implements:
+#   restart: unless-stopped   Docker restarts a crashed controller (FC27, THM-REQ-73)
+#   MQTT keep-alive 5 s       broker declares a dead node after 7.5 s (THM-REQ-72: 15 s)
+#   healthcheck + depends_on  start order without races
+#   named volume per service  outbox of undelivered events survives a restart (THM-REQ-77)
+#   non-root, read-only root  fast restart, small attack surface
+#   cpu and memory limits     a runaway service cannot starve the others
+x-service: &service
+  restart: unless-stopped
+  read_only: true
+  user: "65532:65532"
+  cap_drop: [ALL]
+  mem_limit: 128m
+  cpus: 0.5
+  healthcheck:
+    test: ["CMD", "wget", "-qO-", "http://localhost:8081/healthz"]
+    interval: 5s
+    timeout: 2s
+    retries: 5
+  depends_on:
+    mosquitto: { condition: service_healthy }
+    mongo: { condition: service_healthy }
+
+x-env: &env
+  MQTT_BROKER: tcp://mosquitto:1883
+  MQTT_KEEPALIVE_S: "5"
+  MONGO_URI: mongodb://mongo:27017
+  HEARTBEAT_SECONDS: "5"       # T_hb, one value for all slices
+  OUTBOX_DIR: /data
+  HEALTH_ADDR: ":8081"
+  SIM_SPEED: "1"               # raise to run the factory faster
+
+x-sql: &sql
+  SQL_DSN: "sqlserver://sa:Cake_Factory1!@mssql:1433?database=cakefactory&encrypt=disable"
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2
+    restart: unless-stopped
+    volumes: ["./deploy/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro"]
+    ports: ["1883:1883"]
+    healthcheck:
+      test: ["CMD-SHELL", "mosquitto_sub -h localhost -t '$$SYS/#' -C 1 -W 3 > /dev/null"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Cake_Factory1!"
+    volumes: ["mssql-data:/var/opt/mssql"]
+    ports: ["1433:1433"]
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P 'Cake_Factory1!' -Q 'SELECT 1' || /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Cake_Factory1!' -Q 'SELECT 1'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes: ["mongo-data:/data/db"]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  plm:
+    <<: *service
+    build: { context: ., args: { SERVICE: plm } }
+    environment: { <<: [*env, *sql], ORDER_SECONDS: "22" }
+    volumes: ["plm-data:/data"]
+    depends_on:
+      mosquitto: { condition: service_healthy }
+      mongo: { condition: service_healthy }
+      mssql: { condition: service_healthy }
+
+  bat:
+    <<: *service
+    build: { context: ., args: { SERVICE: bat } }
+    environment: { <<: *env }
+    volumes: ["bat-data:/data"]
+
+  thm:
+    <<: *service
+    build: { context: ., args: { SERVICE: thm } }
+    environment: { <<: *env }
+    volumes: ["thm-data:/data"]
+
+  fin:
+    <<: *service
+    build: { context: ., args: { SERVICE: fin } }
+    environment: { <<: *env, PAN_COUNT: "20", PALLET_SIZE: "6" }
+    volumes: ["fin-data:/data"]
+
+  mon:
+    <<: *service
+    build: { context: ., args: { SERVICE: mon } }
+    environment: { <<: [*env, *sql], HTTP_ADDR: ":8080" }
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+    volumes: ["mon-data:/data"]
+    ports: ["8080:8080"]
+    depends_on:
+      mosquitto: { condition: service_healthy }
+      mongo: { condition: service_healthy }
+      mssql: { condition: service_healthy }
+
+volumes:
+  mssql-data:
+  mongo-data:
+  plm-data:
+  bat-data:
+  thm-data:
+  fin-data:
+  mon-data:
