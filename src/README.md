@@ -7,28 +7,54 @@ when something goes wrong.
 
 ## Run it
 
-With Docker (the real deployment):
+All commands run in this folder (`src/`).
+
+**With Docker** (the real deployment; Docker Desktop must be running):
 
 ```bash
-docker compose up --build
+docker compose --profile demo up -d --build
 ```
 
-Without Docker (embedded MQTT broker, SQL data in memory, pan documents as JSON
-files under `data/`; needs only Go 1.25+):
+Wait about a minute until `docker compose ps` shows every container as `healthy`,
+then open the dashboard at <http://localhost:8080>. Stop everything with
+`docker compose --profile demo down`.
+
+The `demo` profile adds the small `ctl` container that lets the dashboard switch
+the parts on and off (see below). Without it (`docker compose up -d --build`) the
+factory and the rest of the dashboard work the same, only the Components card is
+off. `ctl` holds the Docker socket, which gives it control over your containers,
+so it is opt-in.
+
+**Without Docker** (embedded MQTT broker, SQL data in memory, pan documents as
+JSON files under `data/`; needs only Go 1.25+):
 
 ```bash
 go run ./cmd/dev
 ```
 
-Then open <http://localhost:8080>. Data under `data/` is wiped at every start (set `DEV_KEEP_DATA=1` to keep it). Set `DEV_RESTART_SECONDS=15` to keep a crashed service down for 15 s, to see how the others cope. Set `SIM_SPEED=3` to run the factory three
-times faster, and `HEARTBEAT_SECONDS=2` to detect silent nodes sooner.
+Open <http://localhost:8080>. Stop with Ctrl+C. Here the Components card works
+too (stop, start, restart; freezing needs Docker).
+
+Options (environment variables): `SIM_SPEED=3` runs the factory three times faster
+(Docker: `SIM_SPEED=3 docker compose ...`; PowerShell: `$env:SIM_SPEED="3"`),
+`HEARTBEAT_SECONDS=2` detects silent nodes sooner, `DEV_RESTART_SECONDS=15` keeps a
+crashed service down for 15 s in dev mode, `DEV_KEEP_DATA=1` keeps `data/` between
+dev runs (it is wiped at every start otherwise).
 
 ## Demonstrate and check
 
-Every failure case can be shown live and repeated: click it on the dashboard or run
-`go run ./cmd/scenario all` (crashes, a frozen node, the monitor down, a broker
-restart, all failure cases). See [docs/demo.md](docs/demo.md). The same scenarios
-run in the CI pipeline.
+The dashboard has two cards for this, and the same checks run from a terminal:
+
+- **Components**: switch each part off and on (stop, start, freeze, restart) and
+  watch the lanes, alerts and event log react: the broker, SQL Server, MongoDB
+  and the five systems.
+- **Test scenarios**: run a named check (crash a system, freeze a node, restart
+  the broker, switch a database off, every failure case) and read a live timeline
+  that ends in PASS or FAIL.
+- **Inject a failure case**: one button per failure case of the report.
+- Terminal: `go run ./cmd/scenario list` and `go run ./cmd/scenario all`.
+
+See [docs/demo.md](docs/demo.md). The same scenarios run in the CI pipeline.
 
 ## What you see
 

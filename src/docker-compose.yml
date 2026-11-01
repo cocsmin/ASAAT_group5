@@ -108,7 +108,7 @@ services:
   mon:
     <<: *service
     build: { context: ., args: { SERVICE: mon } }
-    environment: { <<: [*env, *sql], HTTP_ADDR: ":8080" }
+    environment: { <<: [*env, *sql], HTTP_ADDR: ":8080", CONTROL_URL: "http://ctl:8090" }
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
       interval: 5s
@@ -120,6 +120,24 @@ services:
       mosquitto: { condition: service_healthy }
       mongo: { condition: service_healthy }
       mssql: { condition: service_healthy }
+
+  # Component control for the dashboard (stop, start, freeze, restart each part).
+  # It holds the Docker socket, which gives it control over the host's containers,
+  # so it is opt-in:  docker compose --profile demo up -d
+  ctl:
+    profiles: ["demo"]
+    build: { context: ., args: { SERVICE: ctl } }
+    restart: unless-stopped
+    user: "0:0"
+    read_only: true
+    mem_limit: 64m
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+    environment: { CTL_ADDR: ":8090" }
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8090/healthz"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
 
 volumes:
   mssql-data:

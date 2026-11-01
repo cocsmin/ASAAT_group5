@@ -33,11 +33,11 @@ type snapshot struct {
 }
 
 func (m *Monitor) snapshot() snapshot {
-	tickets, _ := m.sql.Tickets(m.Ctx, 30)
 	m.mu.Lock()
 	defer m.mu.Unlock()
-	if tickets == nil {
-		tickets = []model.Ticket{}
+	tickets := append([]model.Ticket{}, m.recentTickets...)
+	if len(tickets) > 30 {
+		tickets = tickets[:30]
 	}
 	s := snapshot{Events: []model.LogEvent{}, Now: time.Now().UTC(), Hb: m.hb.Seconds(), Discards: map[string]int{}, Faults: model.FaultCatalog, Tickets: tickets}
 	for _, id := range model.Nodes {
@@ -83,7 +83,7 @@ func (m *Monitor) alerts() []Alert {
 		case "silent":
 			out = append(out, Alert{Level: "error", Title: n.ID + " is not responding", Detail: "no heartbeat received", Node: n.ID, At: n.LastSeen})
 		case "dead":
-			out = append(out, Alert{Level: "error", Title: n.ID + " container is down", Detail: "death certificate received; waiting for Docker to restart it", Node: n.ID, At: n.deadAt})
+			out = append(out, Alert{Level: "error", Title: n.ID + " container is down", Detail: "death certificate received; Docker restarts a crashed container, a stopped one needs Start in Components", Node: n.ID, At: n.deadAt})
 		}
 	}
 	for i := 1; i <= 5; i++ {
@@ -145,6 +145,7 @@ func (m *Monitor) serve(addr string) {
 	sub, _ := fs.Sub(webFS, "web")
 	mux := http.NewServeMux()
 	mux.Handle("/", http.FileServer(http.FS(sub)))
+	m.registerControl(mux)
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
 	mux.HandleFunc("/api/state", func(w http.ResponseWriter, _ *http.Request) { writeJSON(w, m.snapshot()) })
 	mux.HandleFunc("/api/pans", func(w http.ResponseWriter, r *http.Request) {

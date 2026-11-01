@@ -12,6 +12,7 @@ import (
 	"context"
 	"log"
 	"os"
+	"sync/atomic"
 	"time"
 
 	"cakefactory/internal/model"
@@ -53,7 +54,7 @@ type Pans interface {
 func Move(ctx context.Context, s Pans, id, station, status, note string, mutate func(*model.Pan)) model.Pan {
 	p, ok, err := s.Get(ctx, id)
 	if err != nil {
-		log.Printf("pans: get %s: %v", id, err)
+		warnPans("pans: document store not available (get %s): %v", id, err)
 	}
 	if !ok {
 		p = model.Pan{ID: id}
@@ -67,7 +68,7 @@ func Move(ctx context.Context, s Pans, id, station, status, note string, mutate 
 		mutate(&p)
 	}
 	if err := s.Save(ctx, p); err != nil {
-		log.Printf("pans: save %s: %v", id, err)
+		warnPans("pans: document store not available (save %s): %v", id, err)
 	}
 	return p
 }
@@ -120,4 +121,14 @@ func OpenPans(ctx context.Context) (Pans, error) {
 	}
 	log.Printf("MONGO_URI not set: storing pan documents as files in %s", dir)
 	return NewFilePans(dir)
+}
+
+var lastPansWarn atomic.Int64
+
+// warnPans logs a document store problem at most once every 5 s.
+func warnPans(format string, a ...any) {
+	now := time.Now().Unix()
+	if last := lastPansWarn.Load(); now-last >= 5 && lastPansWarn.CompareAndSwap(last, now) {
+		log.Printf(format, a...)
+	}
 }

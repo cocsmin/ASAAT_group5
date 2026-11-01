@@ -37,6 +37,17 @@ where the diagrams are missing, wrong, or behind the implementation.
 10. **Deployment view** is missing for the report: containers, broker, SQL Server,
     MongoDB, volumes. Draw it once the container granularity is decided.
 
+## Found by switching parts off live (fixed, kept as scenarios)
+
+- With SQL Server off the monitor stalled (it wrote every event to SQL on the same
+  worker that processes heartbeats), declared every node silent and halted the
+  line. Now the monitor's database writes run in the background, in order and
+  retried, and a node is "heard" when its message arrives. Scenario `sql-down`.
+- With MongoDB off every document save waited for the driver's 30 s default. Now
+  every call has a 3 s limit and the stations carry on. Scenario `mongo-down`.
+  While MongoDB is off the pan documents are not updated, so a crash in that window
+  rebuilds queues from stale documents (not covered).
+
 ## Decisions for the group
 
 1. **Container granularity.** Now one container per system. Two requirements
@@ -98,10 +109,12 @@ Still to check **[person]**:
    caught only by the checks in the receivers (batch id, pan id).
 6. **PLM** keeps held orders in memory; after a PLM restart a held order is
    noticed again when BAT repeats its request, not before.
-7. Security is not a stated requirement and is not implemented (anonymous broker,
+7. The `ctl` container (demo profile only) holds the Docker socket and can control
+   every container on the machine; it is not for production.
+8. Security is not a stated requirement and is not implemented (anonymous broker,
    no TLS, no dashboard login).
    (accepted risk R1 in the lecture draft).
-9. Real equipment (PLC, OPC UA, cameras) is out of scope: all machines are
+10. Real equipment (PLC, OPC UA, cameras) is out of scope: all machines are
    simulated inside the services.
 
 ## Report

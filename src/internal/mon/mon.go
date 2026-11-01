@@ -6,10 +6,12 @@
 package mon
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"cakefactory/internal/model"
@@ -62,21 +64,27 @@ type Alert struct {
 // Monitor is the line monitoring and health service.
 type Monitor struct {
 	*svc.Base
-	sql       store.SQL
-	hb        time.Duration
-	work      chan func()
-	mu        sync.Mutex
-	nodes     map[string]*NodeState
-	sections  [6]Section
-	events    []model.LogEvent
-	tickets   map[string]model.Ticket // open tickets by machine id
-	discards  map[string]int          // discards by node
-	silent    map[string]bool         // nodes handled as silent (FC28)
-	subs      map[chan []byte]struct{}
-	warnings  []Alert
-	haltNodes map[string]bool
-	seenEv    map[string]bool
-	seenOrder []string // nodes whose sections are halted because they went silent
+	sql           store.SQL
+	hb            time.Duration
+	work          chan func()
+	mu            sync.Mutex
+	nodes         map[string]*NodeState
+	sections      [6]Section
+	events        []model.LogEvent
+	tickets       map[string]model.Ticket // open tickets by machine id
+	discards      map[string]int          // discards by node
+	silent        map[string]bool         // nodes handled as silent (FC28)
+	subs          map[chan []byte]struct{}
+	warnings      []Alert
+	haltNodes     map[string]bool
+	seenEv        map[string]bool
+	sr            scenarioRunner
+	dbq           chan func() bool
+	evID          atomic.Int64
+	tkID          atomic.Int64
+	sqlTicket     map[int64]int64 // ticket id in memory -> row id in SQL
+	recentTickets []model.Ticket
+	seenOrder     []string // nodes whose sections are halted because they went silent
 }
 
 // Run starts the service.
@@ -90,7 +98,8 @@ func Run() {
 	m := &Monitor{Base: b, sql: sqlStore, hb: svc.EnvDur("HEARTBEAT_SECONDS", 5*time.Second),
 		work: make(chan func(), 2048), nodes: map[string]*NodeState{}, tickets: map[string]model.Ticket{},
 		discards: map[string]int{}, silent: map[string]bool{}, subs: map[chan []byte]struct{}{},
-		haltNodes: map[string]bool{}, seenEv: map[string]bool{}}
+		haltNodes: map[string]bool{}, seenEv: map[string]bool{},
+		dbq: make(chan func() bool, 20000), sqlTicket: map[int64]int64{}}
 	for _, id := range model.Nodes {
 		if id != model.MON {
 			m.nodes[id] = &NodeState{ID: id, Status: "unknown", Devices: map[string]DevState{}, Gauges: map[string]int64{}}
@@ -102,7 +111,11 @@ func Run() {
 		m.sections[i] = Section{ID: i, Name: names[i], Owner: owners[i], State: "run"}
 	}
 	m.loadHistory()
+	m.startDB()
 	m.N.OnRaw(func(t sparkplug.ParsedTopic, p sparkplug.Payload) {
+		if t.Type == sparkplug.NData || t.Type == sparkplug.NBirth || t.Type == sparkplug.DData || t.Type == sparkplug.DBirth {
+			m.touch(t.Edge)
+		}
 		m.work <- func() { m.onMessage(t, p) }
 	})
 	m.N.OnCommand(sig.FaultInjection, func(s sig.Signal) { m.injectLocal(s.Str("code")) })
@@ -114,16 +127,26 @@ func Run() {
 }
 
 func (m *Monitor) loadHistory() {
-	if evs, err := m.sql.Events(m.Ctx, 120); err == nil {
+	c, cancel := context.WithTimeout(m.Ctx, 5*time.Second)
+	defer cancel()
+	if evs, err := m.sql.Events(c, 120); err == nil {
 		for i := len(evs) - 1; i >= 0; i-- {
 			m.events = append(m.events, evs[i])
+			if evs[i].ID > m.evID.Load() {
+				m.evID.Store(evs[i].ID)
+			}
 			if evs[i].Severity == model.SevDiscard {
 				m.discards[evs[i].Node]++
 			}
 		}
 	}
-	if ts, err := m.sql.Tickets(m.Ctx, 200); err == nil {
+	if ts, err := m.sql.Tickets(c, 200); err == nil {
+		m.recentTickets = ts
 		for _, t := range ts {
+			m.sqlTicket[t.ID] = t.ID
+			if t.ID > m.tkID.Load() {
+				m.tkID.Store(t.ID)
+			}
 			if t.Status == "open" {
 				m.tickets[t.MachineID] = t
 			}
@@ -344,7 +367,7 @@ func (m *Monitor) closeContainerTicket(node string) {
 	delete(m.tickets, machine)
 	m.mu.Unlock()
 	if ok {
-		_ = m.sql.CloseTicket(m.Ctx, t.ID)
+		m.closeTicketRecord(t.ID)
 	}
 }
 
@@ -388,9 +411,8 @@ func (m *Monitor) handleEvent(from string, s sig.Signal) {
 		At: at, Node: from, Device: s.Str("device"), Severity: s.Str("severity"), Code: s.Str("code"),
 		Reason: s.Str("reason"), BatchID: s.Str("batchId"), MachineID: s.Str("machineId"), Maintenance: s.Bool("maintenance"),
 	}
-	if err := m.sql.InsertEvent(m.Ctx, &ev); err != nil {
-		log.Printf("event log: %v", err)
-	}
+	ev.ID = m.evID.Add(1)
+	m.persistEvent(ev)
 	m.mu.Lock()
 	m.events = append(m.events, ev)
 	if len(m.events) > 400 {
@@ -416,14 +438,28 @@ func (m *Monitor) openTicket(ev model.LogEvent) {
 		return
 	}
 	m.mu.Unlock()
-	t := model.Ticket{Node: nodeOf(ev.MachineID, ev.Node), MachineID: ev.MachineID, Reason: ev.Reason}
-	if err := m.sql.OpenTicket(m.Ctx, &t); err != nil {
-		log.Printf("ticket: %v", err)
-		return
-	}
+	t := model.Ticket{ID: m.tkID.Add(1), Opened: time.Now().UTC(), Status: "open",
+		Node: nodeOf(ev.MachineID, ev.Node), MachineID: ev.MachineID, Reason: ev.Reason}
 	m.mu.Lock()
 	m.tickets[ev.MachineID] = t
+	m.recentTickets = append([]model.Ticket{t}, m.recentTickets...)
+	if len(m.recentTickets) > 60 {
+		m.recentTickets = m.recentTickets[:60]
+	}
 	m.mu.Unlock()
+	m.dbDo(func() bool {
+		c, cancel := m.dbCtx()
+		defer cancel()
+		x := t
+		if err := m.sql.OpenTicket(c, &x); err != nil {
+			warnDB("monitor: database not available for tickets (will retry): %v", err)
+			return false
+		}
+		m.mu.Lock()
+		m.sqlTicket[t.ID] = x.ID
+		m.mu.Unlock()
+		return true
+	})
 }
 
 // Repair is called when Maintenance confirms a repair (dashboard button).
@@ -440,9 +476,7 @@ func (m *Monitor) Repair(ticketID int64) error {
 	if !found {
 		return fmt.Errorf("ticket %d is not open", ticketID)
 	}
-	if err := m.sql.CloseTicket(m.Ctx, ticketID); err != nil {
-		return err
-	}
+	m.closeTicketRecord(ticketID)
 	m.mu.Lock()
 	delete(m.tickets, tk.MachineID)
 	m.mu.Unlock()

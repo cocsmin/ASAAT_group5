@@ -97,6 +97,22 @@ td{padding:5px 6px;border-top:1px solid var(--line);vertical-align:top}
 .inj button{font-weight:500;font-size:12px;padding:3px 8px;text-align:left}
 .inj button b{font-family:ui-monospace,Menlo,monospace;margin-right:4px}
 details summary{cursor:pointer;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:650;margin-bottom:6px}
+/* components and scenarios */
+.comp{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.comp:first-child{border-top:0}
+.cdot{width:10px;height:10px;border-radius:50%;flex:none;background:var(--ok)}
+.comp.paused .cdot{background:var(--warn)} .comp.exited .cdot,.comp.created .cdot{background:var(--idle)} .comp.restarting .cdot{background:var(--warn);animation:pulse 1s infinite}
+.comp.exited .cname b,.comp.created .cname b{color:var(--muted)}
+.cname{min-width:0;flex:1} .cname b{font-size:13px} .cname small{display:block;color:var(--muted);font-size:11.5px;line-height:1.3}
+.cbtns{display:flex;gap:5px;flex:none;flex-wrap:wrap;justify-content:flex-end}
+.scn{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.scn:first-child{border-top:0}
+.scn .sname{flex:1;min-width:0} .scn .sname b{font:600 12.5px ui-monospace,Menlo,monospace} .scn .sname small{display:block;color:var(--muted);font-size:11.5px;line-height:1.3}
+button:disabled{opacity:.45;cursor:not-allowed}
+#scn-log{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:10px 0 0;max-height:300px;overflow:auto;font:11.5px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;display:none}
+#scn-log .pass{color:var(--ok);font-weight:700} #scn-log .fail{color:var(--bad);font-weight:700} #scn-log .hd{color:var(--accent);font-weight:700}
+.scn-top{display:flex;align-items:center;gap:8px;margin-top:8px}
+.note{color:var(--muted);font-size:12px;margin:0 0 8px}
 #toasts{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:20}
 .toast{background:var(--ink);color:var(--panel);padding:9px 14px;border-radius:10px;max-width:360px;box-shadow:0 6px 20px rgba(0,0,0,.25);font-size:13px}
 .toast.error{background:var(--bad);color:#fff}
@@ -149,6 +165,19 @@ details summary{cursor:pointer;font-size:12px;text-transform:uppercase;letter-sp
     <h2>Event log <span class="n">stored in SQL for traceability</span></h2>
     <div class="filters" id="filters"></div>
     <div id="events"></div>
+  </section>
+
+  <section class="card">
+    <h2>Components <span class="n">switch parts off and on, live</span></h2>
+    <p class="note">Stop or freeze a part and watch the lanes, alerts and event log react. Start it again to see the recovery.</p>
+    <div id="comps"><div class="empty">loading…</div></div>
+  </section>
+
+  <section class="card">
+    <h2>Test scenarios <span class="n">repeatable checks, live timeline</span></h2>
+    <div id="scn-list"><div class="empty">loading…</div></div>
+    <div class="scn-top"><button class="sm primary" id="scn-all" onclick="runScn('all')">Run all</button><span id="scn-res" class="pill"><i></i><span>idle</span></span></div>
+    <pre id="scn-log"></pre>
   </section>
 
   <section class="card">
@@ -329,6 +358,64 @@ async function renderPans(){
   }catch(e){}
 }
 
+const HINT = {
+  mosquitto: 'All messaging stops. Parts keep working alone, reconnect and repeat what was lost.',
+  mssql: 'No orders, reservations or event log can be stored. Back when started.',
+  mongo: 'Pan documents and saved state are unavailable. Back when started.',
+  plm: 'No new orders; batter preparation keeps working from reserved ingredients.',
+  bat: 'No new batter; the line slowly empties.',
+  thm: 'No depositing, baking or cooling; MON halts its band sections.',
+  fin: 'Cakes wait in the holding queues; clean pans stop coming back.',
+  mon: 'This dashboard. Stop it from a terminal: go run ./cmd/scenario mon-down'
+};
+const ALABEL = {stop:'Stop', start:'Start', pause:'Freeze', unpause:'Unfreeze', restart:'Restart'};
+const ATITLE = {stop:'Stop it (like switching it off)', start:'Start it again', pause:'Freeze the process: no keep-alive, the broker declares it dead', unpause:'Let it run again', restart:'Restart it'};
+let comps = null, scn = null;
+async function loadComps(){
+  try{ comps = await (await fetch('/api/components')).json(); }catch(e){ comps = null; }
+  renderComps();
+}
+function renderComps(){
+  const box = $('#comps');
+  if(!comps){ box.innerHTML = '<div class="empty">no answer from the monitor</div>'; return; }
+  if(!comps.available){ box.innerHTML = '<div class="empty">'+esc(comps.hint)+'</div>'; return; }
+  box.innerHTML = comps.items.map(c=>'<div class="comp '+esc(c.state)+'"><span class="cdot"></span><div class="cname"><b>'+esc(c.label)+'</b> <span class="tag">'+esc(c.state)+'</span><small>'+esc(HINT[c.name]||'')+'</small></div><div class="cbtns">'+
+    (c.locked ? '<span class="tag">locked</span>' : (c.actions||[]).map(a=>'<button class="sm '+(a==='start'||a==='unpause'?'primary':'')+'" title="'+esc(ATITLE[a]||a)+'" onclick="comp(\''+c.name+'\',\''+a+'\')">'+(ALABEL[a]||a)+'</button>').join(''))+'</div></div>').join('');
+}
+window.comp = async (name, action) => {
+  const r = await fetch('/api/components/'+name+'/'+action, {method:'POST'});
+  toast(r.ok ? name+': '+action : await r.text(), r.ok?'':'error');
+  setTimeout(loadComps, 500); setTimeout(loadComps, 2500);
+};
+async function loadScn(){
+  try{ scn = await (await fetch('/api/scenarios')).json(); }catch(e){ return; }
+  renderScn();
+}
+function renderScn(){
+  if(!scn) return;
+  const run = scn.run || {}, busy = !!run.running;
+  $('#scn-list').innerHTML = scn.items.map(i=>{
+    const why = i.selfStop ? 'It stops the monitor itself. Run it in a terminal: go run ./cmd/scenario '+i.name
+      : (!i.runnable ? (i.needsPause || (i.needs||[]).length ? 'Needs Docker (it switches a container that dev mode does not have): docker compose --profile demo up -d.' : 'Needs component control (docker compose --profile demo up -d).')+' Terminal: go run ./cmd/scenario '+i.name : '');
+    return '<div class="scn"><div class="sname"><b>'+esc(i.name)+'</b>'+(i.docker?' <span class="tag">switches parts</span>':'')+'<small>'+esc(i.desc)+(why?'<br><i>'+esc(why)+'</i>':'')+'</small></div>'+
+      '<button class="sm primary" '+((!i.runnable||busy)?'disabled':'')+' onclick="runScn(\''+i.name+'\')">Run</button></div>';
+  }).join('');
+  $('#scn-all').disabled = busy;
+  const res = $('#scn-res'), lines = run.lines || [];
+  res.className = 'pill ' + (busy ? 'warn' : run.result==='pass' ? 'ok' : run.result==='fail' ? 'bad' : '');
+  res.lastElementChild.textContent = busy ? 'running '+run.name+'…' : run.result==='pass' ? 'all passed' : run.result==='fail' ? 'something failed' : 'idle';
+  const log = $('#scn-log');
+  log.style.display = lines.length ? 'block' : 'none';
+  const atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 30;
+  log.innerHTML = lines.map(l=>{ const t = esc(l);
+    return /\bPASS\b/.test(l) ? '<span class="pass">'+t+'</span>' : /\bFAIL\b/.test(l) ? '<span class="fail">'+t+'</span>' : l.startsWith('== ') ? '<span class="hd">'+t+'</span>' : t; }).join('\n');
+  if(atEnd) log.scrollTop = log.scrollHeight;
+}
+window.runScn = async name => {
+  const r = await fetch('/api/scenarios/run', {method:'POST', body:JSON.stringify({name})});
+  if(!r.ok) toast(await r.text(), 'error');
+  loadScn();
+};
 function render(){
   status(); renderAttention(); renderLanes(); renderTickets(); renderEvents(); renderInject();
   booted = true;
@@ -339,12 +426,14 @@ function connect(){
   es.onopen = ()=>{ c.className='pill ok'; c.lastElementChild.textContent='live'; };
   es.onerror = ()=>{ c.className='pill bad'; c.lastElementChild.textContent='reconnecting…'; };
   es.addEventListener('snapshot', e=>{ snap = JSON.parse(e.data); render(); });
+  es.addEventListener('scenario', e=>{ if(scn){ scn.run = JSON.parse(e.data); renderScn(); } });
   es.addEventListener('event', e=>{
     const ev = JSON.parse(e.data);
     if(booted && ev.severity==='error') toast(`${ev.node} ${ev.code}: ${ev.reason}`, 'error');
   });
 }
-renderFilters(); connect(); setInterval(renderPans, 2000); renderPans();
+renderFilters(); connect(); loadComps(); loadScn(); setInterval(loadComps, 3000);
+ setInterval(renderPans, 2000); renderPans();
 </script>
 </body>
 </html>

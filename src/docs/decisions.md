@@ -153,6 +153,12 @@ PLM or MON state machine yet.
 - **Docker:** `docker compose up --build` was run with the real SQL Server and
   MongoDB; see TODO.md for what was measured. The CI pipeline
   (`.github/workflows/cicd.yml`) is new and has not run on GitHub yet.
+- **Component control.** The dashboard switches parts on and off through a
+  control service: the `ctl` container in Docker (opt-in profile `demo`, it holds
+  the Docker socket) or the dev launcher. The monitor cannot switch itself off.
+- **Database outages.** The monitor's health path does not touch the database: its
+  event and ticket writes are queued in the background. Document store calls time
+  out after 3 s.
 - **Security** (TLS, broker access control, login) is not a stated requirement and
   is not implemented.
 

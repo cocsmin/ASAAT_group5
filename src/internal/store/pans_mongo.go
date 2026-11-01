@@ -11,6 +11,10 @@ import (
 	"cakefactory/internal/model"
 )
 
+// opTimeout bounds every database call: with MongoDB down a station must carry
+// on after a moment instead of waiting for the driver's 30 s default.
+const opTimeout = 3 * time.Second
+
 // Mongo stores pan documents and node state snapshots in MongoDB.
 type Mongo struct {
 	pans  *mongo.Collection
@@ -21,7 +25,7 @@ type Mongo struct {
 func NewMongo(ctx context.Context, uri string) (*Mongo, error) {
 	cctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
-	c, err := mongo.Connect(cctx, options.Client().ApplyURI(uri))
+	c, err := mongo.Connect(cctx, options.Client().ApplyURI(uri).SetServerSelectionTimeout(2*time.Second))
 	if err != nil {
 		return nil, err
 	}
@@ -34,12 +38,16 @@ func NewMongo(ctx context.Context, uri string) (*Mongo, error) {
 
 // Save upserts a pan document.
 func (m *Mongo) Save(ctx context.Context, p model.Pan) error {
+	ctx, cancel := context.WithTimeout(ctx, opTimeout)
+	defer cancel()
 	_, err := m.pans.ReplaceOne(ctx, bson.M{"_id": p.ID}, p, options.Replace().SetUpsert(true))
 	return err
 }
 
 // Get loads one pan document.
 func (m *Mongo) Get(ctx context.Context, id string) (model.Pan, bool, error) {
+	ctx, cancel := context.WithTimeout(ctx, opTimeout)
+	defer cancel()
 	var p model.Pan
 	err := m.pans.FindOne(ctx, bson.M{"_id": id}).Decode(&p)
 	if err == mongo.ErrNoDocuments {
@@ -50,6 +58,8 @@ func (m *Mongo) Get(ctx context.Context, id string) (model.Pan, bool, error) {
 
 // List returns the most recently updated pans.
 func (m *Mongo) List(ctx context.Context, limit int) ([]model.Pan, error) {
+	ctx, cancel := context.WithTimeout(ctx, opTimeout)
+	defer cancel()
 	cur, err := m.pans.Find(ctx, bson.M{}, options.Find().SetSort(bson.M{"updated": -1}).SetLimit(int64(limit)))
 	if err != nil {
 		return nil, err
@@ -60,6 +70,8 @@ func (m *Mongo) List(ctx context.Context, limit int) ([]model.Pan, error) {
 
 // SaveState upserts a node snapshot.
 func (m *Mongo) SaveState(ctx context.Context, node string, state map[string]int64) error {
+	ctx, cancel := context.WithTimeout(ctx, opTimeout)
+	defer cancel()
 	_, err := m.state.ReplaceOne(ctx, bson.M{"_id": node}, bson.M{"_id": node, "state": state, "at": time.Now()},
 		options.Replace().SetUpsert(true))
 	return err
@@ -67,6 +79,8 @@ func (m *Mongo) SaveState(ctx context.Context, node string, state map[string]int
 
 // LoadState loads a node snapshot; a missing snapshot is not an error.
 func (m *Mongo) LoadState(ctx context.Context, node string) (map[string]int64, error) {
+	ctx, cancel := context.WithTimeout(ctx, opTimeout)
+	defer cancel()
 	var doc struct {
 		State map[string]int64 `bson:"state"`
 	}

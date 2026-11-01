@@ -99,7 +99,7 @@ jobs:
           done
           docker compose ps
       - name: Run the demo scenarios
-        run: go run ./cmd/scenario healthy crash-plm crash-bat crash-thm crash-fin freeze-thm mon-down broker-restart faults-system
+        run: go run ./cmd/scenario healthy crash-plm crash-bat crash-thm crash-fin freeze-thm mon-down broker-restart sql-down mongo-down faults-system
       - name: Show logs of the stack
         if: always()
         run: docker compose logs --no-color --tail=300
