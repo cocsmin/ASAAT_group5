@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/http"
 	"sort"
+	"strconv"
+	"strings"
 	"time"
 
 	"cakefactory/internal/model"
@@ -152,6 +154,36 @@ func (m *Monitor) serve(addr string) {
 			return
 		}
 		writeJSON(w, pans)
+	})
+	// Events with an id above ?since, oldest first (used by the demo scenarios).
+	mux.HandleFunc("/api/events", func(w http.ResponseWriter, r *http.Request) {
+		since, _ := strconv.ParseInt(r.URL.Query().Get("since"), 10, 64)
+		out := []model.LogEvent{}
+		m.mu.Lock()
+		for _, e := range m.events {
+			if e.ID > since {
+				out = append(out, e)
+			}
+		}
+		m.mu.Unlock()
+		writeJSON(w, out)
+	})
+	// How many pans exist and in which status (every pan must stay in the loop).
+	mux.HandleFunc("/api/pans/summary", func(w http.ResponseWriter, r *http.Request) {
+		all, err := m.Pans.List(r.Context(), 5000)
+		if err != nil {
+			http.Error(w, err.Error(), 500)
+			return
+		}
+		by := map[string]int{}
+		total := 0
+		for _, p := range all {
+			if strings.HasPrefix(p.ID, "PAN-") {
+				total++
+				by[p.Status]++
+			}
+		}
+		writeJSON(w, map[string]any{"total": total, "byStatus": by})
 	})
 	mux.HandleFunc("/api/stock", func(w http.ResponseWriter, r *http.Request) {
 		m.mu.Lock()

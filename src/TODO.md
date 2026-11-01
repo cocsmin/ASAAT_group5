@@ -69,23 +69,25 @@ where the diagrams are missing, wrong, or behind the implementation.
 - Frozen THM (`docker pause`): the broker declared it dead after 7.0 s (keep-alive
   5 s), MON saw it return after `unpause`.
 
+- Every other container crashed in turn (PLM, BAT, FIN), MON stopped while cakes are
+  discarded (no event lost), the MQTT broker restarted, THM frozen: all scenarios
+  in `docs/demo.md` pass against the real containers. They also run in CI.
+- Failure cases: all system-resolved cases and all Maintenance cases (error, ticket,
+  repair, recovery) pass with `go run ./cmd/scenario faults-system faults-maintenance`.
+
 Still to check **[person]**:
 
 1. Apple silicon: the SQL Server image is x86 and needs Rosetta emulation.
-2. Recovery of the other containers (only THM was crashed), a MON crash with real
-   databases, and a restart of the broker itself (accepted risk R1).
-3. Load assumption A1 (about 50 messages per second) against Table II of the report.
+2. Load assumption A1 (about 50 messages per second) against Table II of the report.
+3. The GitHub Actions pipeline has only been checked with actionlint and hadolint;
+   it has not run on GitHub yet (first push shows it).
 
 ## Code gaps
 
-1. **CI/CD**: `.github/workflows/cicd.yml` still has the template placeholders and
-   the root `Dockerfile` is the Node template. Replace with a matrix build over
-   the services (`src/Dockerfile` takes `--build-arg SERVICE=`), remove
-   `continue-on-error` from the test job, add hadolint and an integration test
-   that starts the stack and checks that an event arrives.
-2. **Tests**: only the Sparkplug codec and the signal mapping are tested. Add
-   integration tests with the embedded broker (restart a service, check that no
-   pan is lost or duplicated).
+1. **Tests**: unit tests cover only the Sparkplug codec and the signal mapping; the
+   behaviour is checked by the scenarios (`docs/demo.md`), not by Go tests.
+2. **Deployment**: the pipeline pushes images to ghcr.io but has no deploy job (no
+   target machine yet).
 3. **THM resume** continues a baking pan from zone 1 (so it bakes longer), loses
    the zone temperature offset, and treats buffered cakes as hot. A cake that was
    being deposited at the moment of the crash is not resumed.

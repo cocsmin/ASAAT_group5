@@ -151,8 +151,8 @@ PLM or MON state machine yet.
   restarted is handled by the checks in the receivers (batch id, pan id), not by
   the filter.
 - **Docker:** `docker compose up --build` was run with the real SQL Server and
-  MongoDB; see TODO.md for what was measured. `cicd.yml` and the root `Dockerfile`
-  are still the course template.
+  MongoDB; see TODO.md for what was measured. The CI pipeline
+  (`.github/workflows/cicd.yml`) is new and has not run on GitHub yet.
 - **Security** (TLS, broker access control, login) is not a stated requirement and
   is not implemented.
 

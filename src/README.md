@@ -23,6 +23,13 @@ go run ./cmd/dev
 Then open <http://localhost:8080>. Data under `data/` is wiped at every start (set `DEV_KEEP_DATA=1` to keep it). Set `DEV_RESTART_SECONDS=15` to keep a crashed service down for 15 s, to see how the others cope. Set `SIM_SPEED=3` to run the factory three
 times faster, and `HEARTBEAT_SECONDS=2` to detect silent nodes sooner.
 
+## Demonstrate and check
+
+Every failure case can be shown live and repeated: click it on the dashboard or run
+`go run ./cmd/scenario all` (crashes, a frozen node, the monitor down, a broker
+restart, all failure cases). See [docs/demo.md](docs/demo.md). The same scenarios
+run in the CI pipeline.
+
 ## What you see
 
 - **Needs attention**: every open fault, with a *Mark repaired* button for the

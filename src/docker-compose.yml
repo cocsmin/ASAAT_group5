@@ -36,7 +36,7 @@ x-env: &env
   HEARTBEAT_SECONDS: "5"       # T_hb, one value for all slices
   OUTBOX_DIR: /data
   HEALTH_ADDR: ":8081"
-  SIM_SPEED: "1"               # raise to run the factory faster
+  SIM_SPEED: "${SIM_SPEED:-1}" # raise (SIM_SPEED=3 docker compose up) to run the factory faster
 
 x-sql: &sql
   SQL_DSN: "sqlserver://sa:${MSSQL_SA_PASSWORD:-Cake_Factory1!}@mssql:1433?database=cakefactory&encrypt=disable"
