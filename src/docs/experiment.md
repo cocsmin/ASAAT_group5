@@ -24,7 +24,7 @@ main quality attribute", BAT, FIN and THM documents). It is the most critical
 > it, and the production outage and product loss it causes)
 > **from the point of view of** the production overseer
 > **in the context of** the simulated line (five systems, MQTT broker, SQL Server and
-> MongoDB) running in Docker Compose on one machine.
+> MongoDB; Band Transport became a sixth system after the run) running in Docker Compose on one machine.
 
 Questions and metrics:
 

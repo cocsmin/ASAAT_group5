@@ -1,9 +1,11 @@
-package mon
+package ui
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"strings"
@@ -45,7 +47,7 @@ func canPause(cs []component) bool {
 
 // runnable says whether a scenario can run from the dashboard right now.
 func runnable(i scenario.Info, cs []component, avail bool) bool {
-	if i.SelfStop || (i.Docker && !avail) || (i.NeedsPause && !canPause(cs)) {
+	if (i.Docker && !avail) || (i.NeedsPause && !canPause(cs)) {
 		return false
 	}
 	have := map[string]bool{}
@@ -109,11 +111,12 @@ type runState struct {
 }
 
 type scenarioRunner struct {
-	mu  sync.Mutex
-	run runState
+	mu     sync.Mutex
+	run    runState
+	cancel chan struct{}
 }
 
-func (m *Monitor) scenarioBase() string {
+func (m *Server) scenarioBase() string {
 	addr := os.Getenv("HTTP_ADDR")
 	if addr == "" {
 		addr = ":8080"
@@ -121,7 +124,7 @@ func (m *Monitor) scenarioBase() string {
 	return "http://127.0.0.1:" + addr[strings.LastIndex(addr, ":")+1:]
 }
 
-func (m *Monitor) snapshotRun() runState {
+func (m *Server) snapshotRun() runState {
 	m.sr.mu.Lock()
 	defer m.sr.mu.Unlock()
 	cp := m.sr.run
@@ -129,7 +132,7 @@ func (m *Monitor) snapshotRun() runState {
 	return cp
 }
 
-func (m *Monitor) runLine(l string) {
+func (m *Server) runLine(l string) {
 	m.sr.mu.Lock()
 	m.sr.run.Lines = append(m.sr.run.Lines, l)
 	m.sr.mu.Unlock()
@@ -137,8 +140,8 @@ func (m *Monitor) runLine(l string) {
 }
 
 // runScenarios runs the named scenarios one after the other, in the background.
-func (m *Monitor) runScenarios(names []string, avail bool) {
-	failed := 0
+func (m *Server) runScenarios(names []string, avail bool, cancel chan struct{}) {
+	failed, stopped := 0, false
 	var ctl func(string, string) error
 	if avail {
 		ctl = control
@@ -149,10 +152,23 @@ func (m *Monitor) runScenarios(names []string, avail bool) {
 	}
 	for _, n := range names {
 		m.runLine("")
+		select {
+		case <-cancel:
+			stopped = true
+		default:
+		}
+		if stopped {
+			break
+		}
 		m.runLine("== " + n + ": " + infos[n].Desc)
 		start := time.Now()
-		err := scenario.Run(n, scenario.Options{Base: m.scenarioBase(), Docker: avail, Control: ctl,
+		err := scenario.Run(n, scenario.Options{Base: m.scenarioBase(), Docker: avail, Control: ctl, Cancel: cancel,
 			Log: func(l string) { m.runLine("  " + l) }})
+		if errors.Is(err, scenario.ErrStopped) {
+			stopped = true
+			m.runLine("  STOPPED " + n)
+			break
+		}
 		if err != nil {
 			failed++
 			m.runLine("  FAIL " + n + ": " + err.Error())
@@ -161,17 +177,27 @@ func (m *Monitor) runScenarios(names []string, avail bool) {
 		m.runLine(fmt.Sprintf("  PASS %s (%.0fs)", n, time.Since(start).Seconds()))
 	}
 	m.runLine("")
+	if stopped && avail {
+		m.restoreStack()
+	}
 	m.sr.mu.Lock()
 	m.sr.run.Running = false
 	m.sr.run.Result = "pass"
+	if stopped {
+		m.sr.run.Result = "stopped"
+	}
 	if failed > 0 {
 		m.sr.run.Result = "fail"
 	}
 	m.sr.mu.Unlock()
+	if stopped {
+		m.runLine("stopped from the dashboard")
+		return
+	}
 	m.runLine(fmt.Sprintf("%d of %d scenarios failed", failed, len(names)))
 }
 
-func (m *Monitor) registerControl(mux *http.ServeMux) {
+func (m *Server) registerControl(mux *http.ServeMux) {
 	mux.HandleFunc("/api/components", func(w http.ResponseWriter, _ *http.Request) {
 		out := map[string]any{"available": false, "items": []component{}}
 		cs, err := components()
@@ -182,7 +208,7 @@ func (m *Monitor) registerControl(mux *http.ServeMux) {
 			return
 		}
 		for i := range cs {
-			if cs[i].Name == "mon" { // switching off the dashboard would cut this page
+			if cs[i].Name == "ui" { // switching off the dashboard would cut this page
 				cs[i].Locked, cs[i].Actions = true, nil
 			}
 		}
@@ -195,15 +221,15 @@ func (m *Monitor) registerControl(mux *http.ServeMux) {
 			http.Error(w, "POST /api/components/<name>/<action>", 400)
 			return
 		}
-		if parts[0] == "mon" {
-			http.Error(w, "the monitor cannot switch itself off from its own dashboard; use: go run ./cmd/scenario mon-down", 400)
+		if parts[0] == "ui" {
+			http.Error(w, "the dashboard cannot switch itself off from its own page", 400)
 			return
 		}
 		if err := control(parts[0], parts[1]); err != nil {
 			http.Error(w, err.Error(), 400)
 			return
 		}
-		m.N.Log("UC2", fmt.Sprintf("%s: %s from the dashboard", parts[0], parts[1]), "")
+		log.Printf("ui: %s %s", parts[1], parts[0])
 		writeJSON(w, map[string]bool{"ok": true})
 	})
 
@@ -219,6 +245,17 @@ func (m *Monitor) registerControl(mux *http.ServeMux) {
 			items = append(items, item{i, runnable(i, cs, avail)})
 		}
 		writeJSON(w, map[string]any{"available": avail, "items": items, "run": m.snapshotRun()})
+	})
+	mux.HandleFunc("/api/scenarios/stop", func(w http.ResponseWriter, r *http.Request) {
+		m.sr.mu.Lock()
+		defer m.sr.mu.Unlock()
+		if !m.sr.run.Running || m.sr.cancel == nil {
+			http.Error(w, "no scenario is running", 409)
+			return
+		}
+		close(m.sr.cancel)
+		m.sr.cancel = nil
+		writeJSON(w, map[string]bool{"ok": true})
 	})
 	mux.HandleFunc("/api/scenarios/run", func(w http.ResponseWriter, r *http.Request) {
 		var in struct {
@@ -252,9 +289,40 @@ func (m *Monitor) registerControl(mux *http.ServeMux) {
 			return
 		}
 		m.sr.run = runState{Name: in.Name, Running: true, Started: time.Now()}
+		cancel := make(chan struct{})
+		m.sr.cancel = cancel
 		m.sr.mu.Unlock()
 		m.broadcast("scenario", m.snapshotRun())
-		go m.runScenarios(names, avail)
+		go m.runScenarios(names, avail, cancel)
 		writeJSON(w, map[string]bool{"ok": true})
 	})
+}
+
+// restoreStack puts the components back the way a stopped scenario may have left
+// them: every container that is stopped or paused is started again.
+func (m *Server) restoreStack() {
+	cs, err := components()
+	if err != nil {
+		return
+	}
+	for _, c := range cs {
+		switch {
+		case c.State == "paused":
+			_ = control(c.Name, "unpause")
+		case c.State != "running" && c.Name != "ui" && hasAction(c, "start"):
+			_ = control(c.Name, "start")
+		default:
+			continue
+		}
+		m.runLine("  restored " + c.Name)
+	}
+}
+
+func hasAction(c component, a string) bool {
+	for _, x := range c.Actions {
+		if x == a {
+			return true
+		}
+	}
+	return false
 }

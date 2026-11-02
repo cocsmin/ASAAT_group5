@@ -16,7 +16,8 @@ signal goes through one message broker.
 | THM and FIN | pan request, pan for washing, clean pan supply, stop / resume pan admission, cooled cake | the pan loop and the cake handoff cross two systems |
 | FIN to PLM | pallet ready for shipment | the business layer learns what shipped |
 | all to MON | events (log, warning, error, discard), heartbeat | one place for health, traceability and Maintenance |
-| MON to all | band state change, repair confirmed | halt, slow-down and repair reach the right system within a second |
+| BT to THM, FIN, MON | band state change | halt, slow-down and restart reach the right system within a second |
+| MON to BT and the systems | section command, target speed (to BT); repair confirmed (to the owner) | the monitor decides, the band executes |
 
 Message flow diagram (system level):
 
@@ -29,7 +30,8 @@ Message flow diagram (system level):
         FIN <------ cooled cake, pan for washing, pan request ---------------+
          |  ----- clean pan supply, stop / resume pan admission ---------> THM
 
-   every system --- events, heartbeat ---> MON --- band state, repair confirmed ---> THM, FIN, BAT
+   every system --- events, heartbeat ---> MON --- section command, target speed ---> BT --- band state ---> THM, FIN, MON
+                                           MON --- repair confirmed ---> the system that owns the machine
    all of it travels through the MQTT broker (Mosquitto); MON also publishes the host STATE
 ```
 

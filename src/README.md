@@ -65,7 +65,7 @@ The dashboard has two cards for this, and the same checks run from a terminal:
 
 - **Components**: switch each part off and on (stop, start, freeze, restart) and
   watch the lanes, alerts and event log react: the broker, SQL Server, MongoDB
-  and the five systems.
+  and the six systems.
 - **Test scenarios**: run a named check (crash a system, freeze a node, restart
   the broker, switch a database off, every failure case) and read a live timeline
   that ends in PASS or FAIL.
@@ -89,7 +89,7 @@ See [docs/demo.md](docs/demo.md). The same scenarios run in the CI pipeline.
 
 - **Needs attention**: every open fault, with a *Mark repaired* button for the
   Maintenance Department. Green and quiet when the line is healthy.
-- **Production flow**: the five systems and their stages with live counts.
+- **Production flow**: the six systems and their stages with live counts.
   A stage turns amber when degraded and red when faulty. A lane turns red when
   its node is silent or its container died. Below it, the five band sections
   show *running*, *slow*, *halted* or *stopped*.
@@ -107,7 +107,9 @@ See [docs/demo.md](docs/demo.md). The same scenarios run in the CI pipeline.
 | `bat` | Batter Preparation | dosing, mixing, human inspection gate, batter handoff |
 | `thm` | Thermal Processing | depositing, baking zones, tunnel-exit check, cooling and buffer |
 | `fin` | Finishing & Packaging | depanning, quality inspection, wrap/carton, pallets, pan washing loop |
-| `mon` | Line Monitoring & Health + Band Transport | health detection, event log, tickets, band sections, dashboard |
+| `bt` | Band Transport | the five band sections (halt, slow-down, restart in order), speed monitoring, transport faults (FC19, FC20); tells THM, FIN and MON the state of the band |
+| `mon` | Line Monitoring & Health | health detection (heartbeats, death certificates), event log, tickets, commands to BT (no user interface) |
+| `ui` | Experiment dashboard | not a factory system: shows the flow, injects failures, switches parts, runs the scenarios; reads the Sparkplug messages, SQL Server and MongoDB itself, so it keeps working when MON is down |
 | `mosquitto`, `mssql`, `mongo` | infrastructure | message broker, relational store, document store |
 
 The decisions (see [docs/decisions.md](docs/decisions.md)): Sparkplug B over
@@ -144,7 +146,8 @@ for every subsystem, Go for everything.
 | UC3, UC4, FC3 to FC7 | `internal/bat` |
 | UC5/6, UC9, UC10, FC8 to FC18 | `internal/thm` |
 | UC11 to UC16, FC21 to FC26 | `internal/fin` |
-| UC2, FC19, FC20, FC27, FC28 | `internal/mon` (policy, band sections, watchdog), `internal/svc` (container recovery) |
+| FC19, FC20 | `internal/bt` (band sections, speed monitoring, transport faults) |
+| UC2, FC27, FC28 | `internal/mon` (policy, watchdog, commands to BT), `internal/svc` (container recovery) |
 
 Availability tactics from the report: **monitor** (heartbeats, death
 certificates, event policy in `mon`), **exception handling** (every failure case
@@ -161,8 +164,8 @@ internal/sig       named signals mapped to metrics
 internal/node      edge node: MQTT, LWT, births, heartbeat, events
 internal/svc       shared service plumbing: faults, repair, state snapshots
 internal/store     MSSQL and MongoDB stores plus in-memory/file fallbacks
-internal/{plm,bat,thm,fin,mon}  the five systems
-internal/mon/web   the dashboard (static, no build step)
+internal/{plm,bat,thm,fin,bt,mon}  the six systems
+internal/ui        the experiment dashboard (observer, control, static page in internal/ui/web)
 ```
 
 ## Troubleshooting
@@ -183,7 +186,7 @@ Open work, diagrams to fix and decisions for the group: [TODO.md](TODO.md). The
 signals as implemented: [docs/signals.md](docs/signals.md).
 
 
-- Built and smoke-tested with `go run ./cmd/dev` (all five services, the
+- Built and smoke-tested with `go run ./cmd/dev` (all six services, the
   dashboard, fault injection and repair). `go test ./...` covers the Sparkplug
   codec and the signal mapping.
 - Run with Docker Desktop: all containers healthy, real SQL Server and MongoDB

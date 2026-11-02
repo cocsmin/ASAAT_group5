@@ -50,7 +50,9 @@ var FaultCatalog = []FaultInfo{
 	{"FC27", FIN, "Controller container crashes", "System", 1},
 	{"FC28", FIN, "Controller stops responding", "Maintenance", 1},
 
-	{"FC19", MON, "Band section stops", "Maintenance", 1},
-	{"FC20", MON, "Band runs at the wrong speed", "System", 1},
-	{"FC20", MON, "Band wrong speed, correction fails", "Maintenance", 2},
+	{"FC19", BT, "Band section stops", "Maintenance", 1},
+	{"FC20", BT, "Band runs at the wrong speed", "System", 1},
+	{"FC20", BT, "Band wrong speed, correction fails", "Maintenance", 2},
+	{"FC27", BT, "Controller container crashes", "System", 1},
+	{"FC28", BT, "Controller stops responding", "Maintenance", 1},
 }

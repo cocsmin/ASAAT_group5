@@ -182,6 +182,19 @@ func (m *MemSQL) Events(_ context.Context, limit int) ([]model.LogEvent, error) 
 	return out, nil
 }
 
+// DiscardCounts counts the discard events by system.
+func (m *MemSQL) DiscardCounts(context.Context) (map[string]int, error) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	out := map[string]int{}
+	for _, e := range m.events {
+		if e.Severity == model.SevDiscard {
+			out[e.Node]++
+		}
+	}
+	return out, nil
+}
+
 // OpenTicket stores a ticket and assigns its id.
 func (m *MemSQL) OpenTicket(_ context.Context, t *model.Ticket) error {
 	m.mu.Lock()

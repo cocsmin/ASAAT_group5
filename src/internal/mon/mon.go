@@ -1,8 +1,9 @@
 // Package mon is the Line Monitoring & Health system plus band coordination.
 // It is the Sparkplug primary host application: it tracks node presence from
 // birth and death certificates, detects silent nodes from missing heartbeats,
-// stores every event in SQL, opens maintenance tickets, decides on halt or
-// slow-down of band sections and serves the dashboard.
+// stores every event in SQL, opens maintenance tickets and decides on halt or
+// slow-down of band sections. It has no user interface: the experiment dashboard
+// is the separate ui service. MON only answers a small read and repair API.
 package mon
 
 import (
@@ -17,7 +18,6 @@ import (
 	"cakefactory/internal/model"
 	"cakefactory/internal/node"
 	"cakefactory/internal/sig"
-	"cakefactory/internal/sim"
 	"cakefactory/internal/sparkplug"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
@@ -52,15 +52,6 @@ type Section struct {
 	State string `json:"state"` // run | slow | halt | fault
 }
 
-// Alert is something the production overseer should look at.
-type Alert struct {
-	Level  string    `json:"level"` // warning | error
-	Title  string    `json:"title"`
-	Detail string    `json:"detail"`
-	Node   string    `json:"node"`
-	At     time.Time `json:"at"`
-}
-
 // Monitor is the line monitoring and health service.
 type Monitor struct {
 	*svc.Base
@@ -74,11 +65,8 @@ type Monitor struct {
 	tickets       map[string]model.Ticket // open tickets by machine id
 	discards      map[string]int          // discards by node
 	silent        map[string]bool         // nodes handled as silent (FC28)
-	subs          map[chan []byte]struct{}
-	warnings      []Alert
 	haltNodes     map[string]bool
 	seenEv        map[string]bool
-	sr            scenarioRunner
 	dbq           chan func() bool
 	evID          atomic.Int64
 	tkID          atomic.Int64
@@ -97,7 +85,7 @@ func Run() {
 	}
 	m := &Monitor{Base: b, sql: sqlStore, hb: svc.EnvDur("HEARTBEAT_SECONDS", 5*time.Second),
 		work: make(chan func(), 2048), nodes: map[string]*NodeState{}, tickets: map[string]model.Ticket{},
-		discards: map[string]int{}, silent: map[string]bool{}, subs: map[chan []byte]struct{}{},
+		discards: map[string]int{}, silent: map[string]bool{},
 		haltNodes: map[string]bool{}, seenEv: map[string]bool{},
 		dbq: make(chan func() bool, 20000), sqlTicket: map[int64]int64{}}
 	for _, id := range model.Nodes {
@@ -105,10 +93,8 @@ func Run() {
 			m.nodes[id] = &NodeState{ID: id, Status: "unknown", Devices: map[string]DevState{}, Gauges: map[string]int64{}}
 		}
 	}
-	names := [6]string{"", "Depositing", "Baking tunnel", "Cooling", "Depanning & inspection", "Packaging"}
-	owners := [6]string{"", model.THM, model.THM, model.THM, model.FIN, model.FIN}
-	for i := 1; i <= 5; i++ {
-		m.sections[i] = Section{ID: i, Name: names[i], Owner: owners[i], State: "run"}
+	for i := 1; i <= 5; i++ { // the state comes from Band Transport ("Band state change")
+		m.sections[i] = Section{ID: i, Name: model.SectionName(i), Owner: model.SectionOwner(i), State: "run"}
 	}
 	m.loadHistory()
 	m.startDB()
@@ -118,12 +104,10 @@ func Run() {
 		}
 		m.work <- func() { m.onMessage(t, p) }
 	})
-	m.N.OnCommand(sig.FaultInjection, func(s sig.Signal) { m.injectLocal(s.Str("code"), s.Int("count")) })
 	m.Start()
 	go m.worker()
 	go m.watchdog()
-	go m.ticker()
-	m.serve(svc.Env("HTTP_ADDR", ":8080"))
+	m.serve(svc.Env("HTTP_ADDR", ":8082"))
 }
 
 func (m *Monitor) loadHistory() {
@@ -224,10 +208,11 @@ func (m *Monitor) onBirth(n *NodeState, p sparkplug.Payload) {
 	m.closeContainerTicket(n.ID)
 	if restarted && !wasSilent {
 		m.N.Log("FC27", n.ID+" container is back: birth certificate received, last saved state loaded", "")
-		m.restoreNodeSections(n.ID)
+		m.haltNodeSections(n.ID, false)
 	}
-	m.broadcastBand()
-	m.push()
+	if n.ID == model.BT { // a restarted Band Transport forgets the commands: repeat them
+		m.resendCommands()
+	}
 }
 
 func (m *Monitor) onDeath(n *NodeState) {
@@ -240,7 +225,6 @@ func (m *Monitor) onDeath(n *NodeState) {
 	m.mu.Unlock()
 	m.N.Warn("FC27", n.ID+" container died (NDEATH): Docker restarts it and it reloads its last state", "")
 	m.haltNodeSections(n.ID, true)
-	m.push()
 }
 
 func (m *Monitor) onDevice(n *NodeState, dev string, p sparkplug.Payload) {
@@ -257,7 +241,6 @@ func (m *Monitor) onDevice(n *NodeState, dev string, p sparkplug.Payload) {
 	n.Devices[dev] = st
 	n.LastSeen = time.Now()
 	m.mu.Unlock()
-	m.push()
 }
 
 // absorbHealth stores the heartbeat metrics of a node.
@@ -300,6 +283,10 @@ func (m *Monitor) onSignals(from string, p sparkplug.Payload) {
 			}
 		case sig.Events:
 			m.handleEvent(from, s)
+		case sig.BandState:
+			if from == model.BT {
+				m.onBand(s)
+			}
 		}
 	}
 }
@@ -354,7 +341,6 @@ func (m *Monitor) watchdog() {
 					n.ID, strings.ToLower(n.ID)+"-container"))
 			}
 		}
-		m.push()
 	}
 }
 
@@ -374,19 +360,6 @@ func (m *Monitor) closeContainerTicket(node string) {
 func (m *Monitor) hasTicket(machine string) bool {
 	_, ok := m.tickets[machine]
 	return ok
-}
-
-func (m *Monitor) ticker() {
-	t := time.NewTicker(time.Second)
-	defer t.Stop()
-	for {
-		select {
-		case <-m.Ctx.Done():
-			return
-		case <-t.C:
-			m.push()
-		}
-	}
 }
 
 // ---------------------------------------------------------------- events
@@ -421,14 +394,11 @@ func (m *Monitor) handleEvent(from string, s sig.Signal) {
 	switch ev.Severity {
 	case model.SevDiscard:
 		m.discards[from]++
-	case model.SevWarning:
-		m.warnings = append(m.warnings, Alert{Level: "warning", Title: ev.Reason, Detail: from + " · " + ev.Code, Node: from, At: time.Now()})
 	}
 	m.mu.Unlock()
 	if ev.Severity == model.SevError && ev.Maintenance && ev.MachineID != "" {
 		m.openTicket(ev)
 	}
-	m.pushEvent(ev)
 }
 
 func (m *Monitor) openTicket(ev model.LogEvent) {
@@ -481,24 +451,29 @@ func (m *Monitor) Repair(ticketID int64) error {
 	delete(m.tickets, tk.MachineID)
 	m.mu.Unlock()
 	m.N.Log("UC2", fmt.Sprintf("Maintenance repaired %s (ticket %d): repair confirmed", tk.MachineID, tk.ID), "")
-	if strings.HasPrefix(tk.MachineID, "mon-section-") {
-		var id int
-		fmt.Sscanf(tk.MachineID, "mon-section-%d", &id)
-		go m.sectionRepaired(id)
-	} else if strings.HasSuffix(tk.MachineID, "-container") {
+	if strings.HasSuffix(tk.MachineID, "-container") {
 		// nothing to command: the container must be started by an operator
 	} else {
 		m.N.Command(tk.Node, sig.New(sig.RepairConfirmed, "machineId", tk.MachineID, "repaired", true))
 	}
-	m.push()
 	return nil
+}
+
+// RepairMachine confirms the repair of the open ticket of a machine.
+func (m *Monitor) RepairMachine(machine string) error {
+	m.mu.Lock()
+	t, ok := m.tickets[machine]
+	m.mu.Unlock()
+	if !ok {
+		return fmt.Errorf("no open ticket for %s", machine)
+	}
+	return m.Repair(t.ID)
 }
 
 // Inject arms a failure case on a node.
 func (m *Monitor) Inject(node, code string, count int) error {
 	if node == model.MON {
-		m.injectLocal(code, count)
-		return nil
+		return fmt.Errorf("the monitor has no failure cases of its own; the band ones (FC19, FC20) belong to BT")
 	}
 	if _, ok := m.nodes[node]; !ok {
 		return fmt.Errorf("unknown node %q", node)
@@ -510,123 +485,74 @@ func (m *Monitor) Inject(node, code string, count int) error {
 
 // --------------------------------------------------------------- band
 
-// injectLocal handles the failure cases of the band itself.
-func (m *Monitor) injectLocal(code string, count int) {
-	sec := int(time.Now().UnixNano()/1000)%5 + 1
-	switch code {
-	case "FC19":
-		go m.sectionStops(sec)
-	case "FC20":
-		go m.wrongSpeed(sec, count < 2) // count 2: the correction fails and Maintenance is needed
-	}
-}
+// The band sections belong to the Band Transport system. The monitor shows what BT
+// reports ("Band state change") and, following the UC2 error flow, tells BT to halt
+// or restart the sections of a system that went silent or died.
 
-func (m *Monitor) setSection(i int, state string) {
+// onBand stores the state of the band sections that BT reports (D1..D5 carry the
+// detail, including "fault").
+func (m *Monitor) onBand(s sig.Signal) {
 	m.mu.Lock()
-	m.sections[i].State = state
+	for i := 1; i <= 5; i++ {
+		d := s.Str(fmt.Sprintf("D%d", i))
+		if d == "" {
+			d = s.Str(fmt.Sprintf("S%d", i))
+		}
+		if d != "" {
+			m.sections[i].State = d
+		}
+	}
 	m.mu.Unlock()
 }
 
-// sectionStops: the stopped section halts everything upstream; downstream
-// sections run until empty (FC19).
-// reportHalt follows the UC2 error flow: the monitor reports its halt (or
-// slow-down) intent to the Transport/Conveyor system and then reports the
-// production halt (or slow-down) to the overseer, who sees it on the dashboard.
-func (m *Monitor) reportHalt(kind, why string) {
+// reportHalt is the monitor's part of the UC2 error flow: it reports its halt
+// intent to the Transport/Conveyor system. Band Transport halts and reports the
+// production halt (or slow-down) to the overseer.
+func (m *Monitor) reportHalt(why string) {
 	m.N.Log("UC2", "halt intent reported to the band: "+why, "")
-	if kind == "slow" {
-		m.N.Warn("UC2", "production slow-down reported to the overseer: "+why, "")
-		return
-	}
-	m.N.Warn("UC2", "production halt reported to the overseer: "+why, "")
 }
 
-func (m *Monitor) sectionStops(i int) {
-	m.reportHalt("halt", fmt.Sprintf("section %d (%s) stopped", i, m.sections[i].Name))
-	m.setSection(i, "fault")
-	for u := 1; u < i; u++ {
-		m.setSection(u, "halt")
-	}
-	m.broadcastBand()
-	m.N.Emit(evt(model.SevError, "FC19", fmt.Sprintf("band section %d (%s) stopped: upstream sections halted, downstream run until empty", i, m.sections[i].Name),
-		m.sections[i].Owner, fmt.Sprintf("mon-section-%d", i)))
-	m.push()
-}
-
-func (m *Monitor) sectionRepaired(i int) {
-	m.setSection(i, "run")
-	m.broadcastBand()
-	m.N.Log("FC19", fmt.Sprintf("section %d restarted; upstream sections restart in order", i), "")
-	for u := i - 1; u >= 1; u-- {
-		if !sim.Sleep(m.Ctx, 1500*time.Millisecond) {
-			return
-		}
-		m.setSection(u, "run")
-		m.broadcastBand()
-	}
-	m.N.Log("FC19", "all band sections running again", "")
-	m.push()
-}
-
-// wrongSpeed is FC20: "System, then Maintenance". The monitor first tries to
-// correct the speed itself; when that does not work Maintenance is called.
-func (m *Monitor) wrongSpeed(i int, fixable bool) {
-	m.reportHalt("slow", fmt.Sprintf("section %d runs at the wrong speed", i))
-	m.setSection(i, "slow")
-	m.broadcastBand()
-	m.N.Warn("FC20", fmt.Sprintf("section %d runs at the wrong speed: speed correction requested", i), "")
-	if !sim.Sleep(m.Ctx, 10*time.Second) {
-		return
-	}
-	if !fixable {
-		m.N.Fault("FC20", fmt.Sprintf("section %d speed could not be corrected: Maintenance repairs the band drive", i), "",
-			m.sections[i].Name, fmt.Sprintf("mon-section-%d", i))
-		m.push()
-		return
-	}
-	m.setSection(i, "run")
-	m.broadcastBand()
-	m.N.Log("FC20", fmt.Sprintf("section %d speed corrected", i), "")
-	m.push()
-}
-
-// haltNodeSections halts or restores the sections of a node that went silent or died.
+// haltNodeSections asks BT to halt, or to restart, the sections of a system that
+// went silent or died.
 func (m *Monitor) haltNodeSections(node string, halt bool) {
-	if halt {
-		m.reportHalt("halt", node+" is not responding or its container is down")
+	owns := false
+	for i := 1; i <= 5; i++ {
+		owns = owns || model.SectionOwner(i) == node
+	}
+	if !owns {
+		return // PLM, BAT, BT and MON work on no band section
 	}
 	m.mu.Lock()
-	for i := 1; i <= 5; i++ {
-		if m.sections[i].Owner != node {
-			continue
-		}
-		switch {
-		case halt && m.sections[i].State == "run":
-			m.sections[i].State = "halt"
-		case !halt && m.sections[i].State == "halt":
-			m.sections[i].State = "run"
-		}
-	}
+	was := m.haltNodes[node]
+	m.haltNodes[node] = halt
 	m.mu.Unlock()
-	m.broadcastBand()
+	if halt && !was {
+		m.reportHalt(node + " is not responding or its container is down")
+	}
+	if halt == was && !halt {
+		return // nothing was halted: no command needed
+	}
+	state, why := "run", node+" is back"
+	if halt {
+		state, why = "halt", node+" is not responding or its container is down"
+	}
+	m.N.Command(model.BT, sig.New(sig.SectionCommand, "node", node, "state", state, "reason", why))
 }
 
-func (m *Monitor) restoreNodeSections(node string) { m.haltNodeSections(node, false) }
-
-// broadcastBand sends the Band state change signal to THM and FIN.
-func (m *Monitor) broadcastBand() {
+// resendCommands repeats the halts that are still in force, for a Band Transport
+// that has just restarted.
+func (m *Monitor) resendCommands() {
 	m.mu.Lock()
-	kv := []any{}
-	for i := 1; i <= 5; i++ {
-		st := m.sections[i].State
-		if st == "fault" {
-			st = "halt"
+	var nodes []string
+	for n, h := range m.haltNodes {
+		if h {
+			nodes = append(nodes, n)
 		}
-		kv = append(kv, fmt.Sprintf("S%d", i), st)
 	}
 	m.mu.Unlock()
-	s := sig.New(sig.BandState, kv...)
-	m.N.SetState(s) // THM and FIN receive it; it is repeated with every heartbeat
+	for _, n := range nodes {
+		m.N.Command(model.BT, sig.New(sig.SectionCommand, "node", n, "state", "halt", "reason", n+" is still not responding"))
+	}
 }
 
 // evt builds an error event that the monitor raises on behalf of a node.
@@ -637,7 +563,7 @@ func evt(sev, code, reason, device, machine string) node.Event {
 // nodeOf derives the owning node from a machine id such as thm-zone-2.
 func nodeOf(machine, fallback string) string {
 	prefix, _, _ := strings.Cut(machine, "-")
-	if p := strings.ToUpper(prefix); p == model.PLM || p == model.BAT || p == model.THM || p == model.FIN || p == model.MON {
+	if p := strings.ToUpper(prefix); p == model.PLM || p == model.BAT || p == model.THM || p == model.FIN || p == model.BT || p == model.MON {
 		return p
 	}
 	return fallback

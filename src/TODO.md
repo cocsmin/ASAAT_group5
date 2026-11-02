@@ -116,7 +116,20 @@ report are updated afterwards. **[person]** = needs Papyrus or Word.
 | U11 | Component control (`ctl`, demo profile) and the Test scenarios / Components cards | Deployment view: add the `ctl` container and the Docker socket; report: how the demonstrations are run |
 | U12 | The "no production without the monitor" rule is implemented through the Sparkplug `STATE` topic of the host | System IBD: add the `STATE` message between MON and every node (see item 1) |
 | U13 | PLM sends a production order again when batter preparation has not asked for its ingredients within 40 s (BAT may have restarted and lost it); BAT ignores an order id it already has | PLM state machine (order lifecycle: released, sent again, reserved, held; to be drawn); BAT document: "Production order and recipe targets" is idempotent on the order id; signal table (message id) |
+| U15 | Band transport is its own system (BT): sections, FC19 and FC20 moved from MON to BT; THM, FIN and MON take the band state from BT; MON sends BT "Section command" and "Target speed"; machine ids are `bt-section-N` | BT and MON models (ports, see team-review section 6), alignment baseline signal table (Band state change: BT to THM, FIN, MON; two new commands), THM and FIN interface tables (source of Band state change), FC19 and FC20 flows (actors: Band Transport, MON) |
+| U16 | The experiment dashboard is a separate container (`ui`), MON has no UI and only a small API (`/api/repair`, `/api/events`, `/api/tickets`, `/api/discards`); THM stops depositing as soon as section 1 is halted; scenarios can be stopped from the dashboard | Deployment view and container table (new `ui` container, MON without port 8080); MON model: the "overseer dashboard" device (see team-review section 2 item 16); THM state machine (depositing waits for the band, S1 halt, admission re-checked after a pan is taken) |
 | U14 | After a PLM restart the order numbers continue after the highest stored order (before: they restarted at PO-0001, BAT ignored the repeated ids and the line stalled; found by run 3 of the availability experiment, kept in `docs/experiment-aborted-run.csv`) | PLM state machine (order lifecycle: the order id is persistent); PLM document: "order ids are unique and never reused"; the experiment report (unexpected behaviour, first experiment run aborted and repeated) |
+
+## Papyrus models of BT and MON (branch MON-BT-Integration) against the code
+
+See docs/team-review.md section 6 for the port table. To do **[person]**:
+1. Add ports (or connectors) for the signals the code uses and the models lack: Band
+   state change (BT to THM, FIN, MON), events (all to MON), Repair confirmed (MON to
+   all), Section command and Target speed (MON to BT).
+2. Connect the parts in the main IBD (ASAAT.uml has the BT and MON parts, no
+   connectors).
+3. MON model: add the commands to BT; BT model: add the band state output.
+4. Pan Spacing & Position Tracking: decide whether it belongs in BT (see above).
 
 ## Decisions for the group
 
@@ -165,9 +178,8 @@ Still to check **[person]**:
 
 ## Code gaps
 
-0. **Band Transport system**: no separate service; MON does section coordination only.
-   Missing: Pan Spacing & Position Tracking (position and spacing per pan), real drive
-   supervision, a box for it in the live picture. Needs a group decision first
+0. **Pan Spacing & Position Tracking** (report, Band Transport) is not in the BT model and
+   not implemented. Needs a group decision first (docs/team-review.md section 4, item 0).
    (docs/team-review.md section 4, item 0).
 
 1. **Tests**: unit tests cover only the Sparkplug codec and the signal mapping; the

@@ -12,11 +12,23 @@ const (
 	BAT = "BAT"
 	THM = "THM"
 	FIN = "FIN"
+	BT  = "BT"
 	MON = "MON"
 )
 
 // Nodes lists every edge node in line order.
-var Nodes = []string{PLM, BAT, THM, FIN, MON}
+var Nodes = []string{PLM, BAT, THM, FIN, BT, MON}
+
+// The five independently drivable band sections of the Band Transport system and
+// the system whose stations sit on each section.
+var sectionNames = [6]string{"", "Depositing", "Baking tunnel", "Cooling", "Depanning & inspection", "Packaging"}
+var sectionOwners = [6]string{"", THM, THM, THM, FIN, FIN}
+
+// SectionName returns the name of band section i (1 to 5).
+func SectionName(i int) string { return sectionNames[i] }
+
+// SectionOwner returns the system that works on band section i (1 to 5).
+func SectionOwner(i int) string { return sectionOwners[i] }
 
 // Severities of the event signal.
 const (

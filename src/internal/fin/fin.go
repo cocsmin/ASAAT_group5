@@ -89,7 +89,7 @@ func Run() {
 	})
 	f.N.OnSignal(model.THM, sig.PanRequest, func(string, sig.Signal) { f.panReq <- struct{}{} })
 	f.N.OnSignal(model.THM, sig.PanForWashing, func(_ string, s sig.Signal) { f.enqueueWash(s.Str("panId")) })
-	f.N.OnSignal(model.MON, sig.BandState, func(_ string, s sig.Signal) {
+	f.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) {
 		mode := "run"
 		for i := 4; i <= 5; i++ {
 			switch s.Str(fmt.Sprintf("S%d", i)) {

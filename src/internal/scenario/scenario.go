@@ -9,7 +9,9 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -64,7 +66,11 @@ type env struct {
 	docker     bool
 	t0         time.Time
 	hc         *http.Client
+	cancel     <-chan struct{}
 }
+
+// ErrStopped is returned when a scenario is stopped from the dashboard.
+var ErrStopped = errors.New("stopped")
 
 func (e *env) logf(format string, a ...any) {
 	e.out(fmt.Sprintf("%6.1fs  %s", time.Since(e.t0).Seconds(), fmt.Sprintf(format, a...)))
@@ -161,6 +167,11 @@ func (e *env) compose(args ...string) error {
 func (e *env) waitFor(what string, timeout time.Duration, cond func() bool) (time.Duration, error) {
 	start := time.Now()
 	for time.Since(start) < timeout {
+		select {
+		case <-e.cancel:
+			return 0, ErrStopped
+		default:
+		}
 		if cond() {
 			return time.Since(start), nil
 		}
@@ -259,15 +270,18 @@ type scenario struct {
 
 func scenarios() []scenario {
 	list := []scenario{
-		{"healthy", "all five systems online and a pallet ships", false, healthy},
+		{"healthy", "all six systems online and a pallet ships", false, healthy},
 	}
-	for _, n := range []string{"PLM", "BAT", "THM", "FIN"} {
+	for _, n := range []string{"PLM", "BAT", "THM", "FIN", "BT"} {
 		n := n
 		list = append(list, scenario{"crash-" + strings.ToLower(n), "crash the " + n + " container (real process exit): detected, restarted, cakes and pans kept", false,
 			func(e *env) error { return crash(e, n) }})
 	}
 	list = append(list,
-		scenario{"freeze-thm", "freeze THM (no keep-alive): the broker declares it dead, MON halts, it returns", true, freeze},
+		scenario{"band-halt", "freeze THM: MON has Band Transport halt THM's three sections (the others keep running), they run again when THM returns", true, bandHalt},
+		scenario{"band-section-stop", "FC19: a band section stops, upstream halts, downstream runs, THM really stops depositing, the repair restarts the sections in order", false, bandSectionStop},
+		scenario{"bt-down", "stop Band Transport: the monitor shows the sections as unknown, THM and FIN keep their last state, BT returns and reports again", true, btDown},
+		scenario{"freeze-thm", "freeze THM (no keep-alive): the broker declares it dead, MON has BT halt its sections, it returns", true, freeze},
 		scenario{"mon-down", "stop MON while THM discards cakes: no event is lost, the line stops without the monitor", true, monDown},
 		scenario{"sql-down", "switch SQL Server off for 30 s: the monitor must not mistake it for a dead line", true,
 			func(e *env) error { return dbDown(e, "mssql", "SQL Server") }},
@@ -358,7 +372,7 @@ func freeze(e *env) error {
 		return fmt.Errorf("not detected within %s: %w", detectBound, err)
 	}
 	e.rec("detect_s", d.Seconds())
-	e.logf("broker declared THM dead after %.1fs, MON halted its band sections (bound %s)", d.Seconds(), detectBound)
+	e.logf("broker declared THM dead after %.1fs, MON told BT to halt its band sections (bound %s)", d.Seconds(), detectBound)
 	_ = time.Since(t0)
 	if err := e.act("unpause", "thm"); err != nil {
 		return err
@@ -397,7 +411,18 @@ func monDown(e *env) error {
 		return err
 	}
 	e.logf("MON started again")
-	if _, err := e.waitFor("MON answers", 90*time.Second, func() bool { _, err := e.state(); return err == nil }); err != nil {
+	if _, err := e.waitFor("MON online", 90*time.Second, func() bool {
+		st, err := e.state()
+		if err != nil {
+			return false
+		}
+		for _, n := range st.Nodes {
+			if n.ID == "MON" {
+				return n.Status == "online"
+			}
+		}
+		return false
+	}); err != nil {
 		return err
 	}
 	var got int
@@ -480,8 +505,8 @@ var maintenanceFaults = []fault{
 	{"FIN", "FC22", 1, "FC22", "error", "fin-depanner", "depanning machine breaks: cakes held"},
 	{"FIN", "FC23", 1, "FC23", "error", "fin-washer", "washing station breaks: clean pans used from stock"},
 	{"FIN", "FC25", 1, "FC25", "error", "fin-wrapper", "wrapping station breaks: holding area, pan admission stops"},
-	{"MON", "FC19", 1, "FC19", "error", "mon-section-", "a band section stops: upstream halts, downstream runs empty"},
-	{"MON", "FC20", 2, "FC20", "error", "mon-section-", "band speed wrong and the correction fails: Maintenance"},
+	{"BT", "FC19", 1, "FC19", "error", "bt-section-", "a band section stops: upstream halts, downstream runs empty"},
+	{"BT", "FC20", 2, "FC20", "error", "bt-section-", "band speed wrong and the correction fails: Maintenance"},
 	{"FIN", "FC24", 3, "FC24", "error", "fin-inspector", "the same quality check fails 3 times in a row: Maintenance"},
 	{"THM", "FC28", 1, "FC28", "error", "thm-controller", "controller stops responding: MON marks it faulty"},
 }
@@ -574,6 +599,7 @@ type Options struct {
 	Metric     func(name string, v float64)       // optional: receives measured values
 	Control    func(service, action string) error // optional: acts on a container
 	Log        func(string)                       // receives the timeline, one line at a time
+	Cancel     <-chan struct{}                    // optional: closed to stop the scenario
 }
 
 // Info describes one scenario.
@@ -592,7 +618,7 @@ var needs = map[string][]string{"sql-down": {"mssql"}, "mongo-down": {"mongo"}}
 func List() []Info {
 	var out []Info
 	for _, s := range scenarios() {
-		out = append(out, Info{Name: s.name, Desc: s.desc, Docker: s.docker, SelfStop: s.name == "mon-down", NeedsPause: s.name == "freeze-thm", Needs: needs[s.name]})
+		out = append(out, Info{Name: s.name, Desc: s.desc, Docker: s.docker, NeedsPause: s.name == "freeze-thm" || s.name == "band-halt", Needs: needs[s.name]})
 	}
 	return out
 }
@@ -615,7 +641,7 @@ func Run(name string, o Options) error {
 			return ErrNeedsDocker
 		}
 		e := &env{out: o.Log, metric: o.Metric, control: o.Control, base: o.Base, composeDir: o.ComposeDir, docker: o.Docker,
-			hc: &http.Client{Timeout: 5 * time.Second}, t0: time.Now()}
+			hc: &http.Client{Timeout: 5 * time.Second}, t0: time.Now(), cancel: o.Cancel}
 		if _, err := e.state(); err != nil {
 			return fmt.Errorf("cannot reach %s: %w", o.Base, err)
 		}
@@ -728,3 +754,195 @@ func coolingChain(e *env) error {
 	}
 	return e.flowResumes(180 * time.Second)
 }
+
+// sections returns the state of the five band sections as the monitor shows them.
+func (e *env) sections() []string {
+	st, err := e.state()
+	if err != nil {
+		return nil
+	}
+	out := make([]string, 0, 5)
+	for _, x := range st.Sections {
+		out = append(out, x.State)
+	}
+	return out
+}
+
+func (e *env) allSections(want string) bool {
+	sec := e.sections()
+	if len(sec) != 5 {
+		return false
+	}
+	for _, x := range sec {
+		if x != want {
+			return false
+		}
+	}
+	return true
+}
+
+// bandHalt freezes THM. The monitor must have Band Transport halt exactly the
+// sections THM works on (S1 to S3) and leave S4 and S5, and release them again
+// when THM is back (UC2 error flow).
+func bandHalt(e *env) error {
+	if err := e.settle(); err != nil {
+		return err
+	}
+	if _, err := e.waitFor("all sections running", 60*time.Second, func() bool { return e.allSections("run") }); err != nil {
+		return err
+	}
+	e.faultAt = time.Now()
+	if err := e.act("pause", "thm"); err != nil {
+		return err
+	}
+	e.logf("THM frozen")
+	d, err := e.waitFor("S1 to S3 halted by Band Transport", detectBound, func() bool {
+		sec := e.sections()
+		return len(sec) == 5 && sec[0] == "halt" && sec[1] == "halt" && sec[2] == "halt"
+	})
+	if err != nil {
+		_ = e.act("unpause", "thm")
+		return fmt.Errorf("the sections of THM were not halted: %w (now %v)", err, e.sections())
+	}
+	e.rec("detect_s", d.Seconds())
+	sec := e.sections()
+	if sec[3] != "run" || sec[4] != "run" {
+		_ = e.act("unpause", "thm")
+		return fmt.Errorf("sections of FIN must keep running, got %v", sec)
+	}
+	e.logf("S1 to S3 halted after %.1fs, S4 and S5 still run: %v", d.Seconds(), sec)
+	if err := e.act("unpause", "thm"); err != nil {
+		return err
+	}
+	d, err = e.waitFor("all sections run again", recoverBound, func() bool { return e.allSections("run") })
+	if err != nil {
+		return fmt.Errorf("sections not released after THM returned: %w (now %v)", err, e.sections())
+	}
+	e.rec("recover_s", d.Seconds())
+	e.logf("THM back, all sections run again after %.1fs", d.Seconds())
+	return e.flowResumes(180 * time.Second)
+}
+
+// bandSectionStop is FC19 seen from the band: the stopped section is "fault",
+// every section upstream is halted, every section downstream runs, THM stops
+// admitting pans while S1 is halted, and the repair restarts everything.
+func bandSectionStop(e *env) error {
+	if err := e.settle(); err != nil {
+		return err
+	}
+	if _, err := e.waitFor("all sections running", 60*time.Second, func() bool { return e.allSections("run") }); err != nil {
+		return err
+	}
+	if err := e.post("/api/inject", map[string]any{"node": "BT", "code": "FC19", "count": 1}); err != nil {
+		return err
+	}
+	var fault int
+	if _, err := e.waitFor("a section in state fault", 20*time.Second, func() bool {
+		for i, x := range e.sections() {
+			if x == "fault" {
+				fault = i + 1
+				return true
+			}
+		}
+		return false
+	}); err != nil {
+		return err
+	}
+	sec := e.sections()
+	for i, x := range sec {
+		n := i + 1
+		switch {
+		case n < fault && x != "halt":
+			return fmt.Errorf("section %d is upstream of the stopped section %d and must be halted, got %v", n, fault, sec)
+		case n > fault && x != "run":
+			return fmt.Errorf("section %d is downstream of the stopped section %d and must keep running, got %v", n, fault, sec)
+		}
+	}
+	e.logf("section %d stopped: upstream halted, downstream runs: %v", fault, sec)
+	// THM must stop depositing while S1 does not run.
+	time.Sleep(time.Duration(4) * time.Second / scenSpeed)
+	before := e.gauge("THM", "deposited")
+	time.Sleep(time.Duration(8) * time.Second / scenSpeed)
+	after := e.gauge("THM", "deposited")
+	if after > before+1 { // one pan that was already being filled may still finish
+		return fmt.Errorf("THM kept depositing (%d -> %d) while S1 was not running", before, after)
+	}
+	e.logf("THM deposits nothing while S1 is halted (pans filled stays %d)", after)
+	// Maintenance repairs it.
+	var tk ticket
+	if _, err := e.waitFor("a maintenance ticket for the section", 30*time.Second, func() bool {
+		st, err := e.state()
+		if err != nil {
+			return false
+		}
+		for _, x := range st.Tickets {
+			if x.Status == "open" && strings.HasPrefix(x.MachineID, "bt-section-") {
+				tk = x
+				return true
+			}
+		}
+		return false
+	}); err != nil {
+		return err
+	}
+	e.logf("Maintenance ticket %d for %s", tk.ID, tk.MachineID)
+	if err := e.post("/api/repair", map[string]any{"ticket": tk.ID}); err != nil {
+		return err
+	}
+	d, err := e.waitFor("all sections run again", recoverBound, func() bool { return e.allSections("run") })
+	if err != nil {
+		return fmt.Errorf("sections did not all restart: %w (now %v)", err, e.sections())
+	}
+	e.logf("repaired: sections restarted in order, all run after %.1fs", d.Seconds())
+	if _, err := e.waitFor("THM deposits again", 60*time.Second, func() bool { return e.gauge("THM", "deposited") > after }); err != nil {
+		return err
+	}
+	e.logf("THM deposits again")
+	return e.settle()
+}
+
+// btDown stops the Band Transport container. The monitor cannot know the state
+// of the sections then ("off"); THM and FIN keep the last band state they got.
+// When BT is back it reports again and everything runs.
+func btDown(e *env) error {
+	if err := e.settle(); err != nil {
+		return err
+	}
+	if _, err := e.waitFor("all sections running", 60*time.Second, func() bool { return e.allSections("run") }); err != nil {
+		return err
+	}
+	if err := e.act("stop", "bt"); err != nil {
+		return err
+	}
+	e.logf("Band Transport stopped")
+	d, err := e.waitFor("sections shown as unknown", detectBound, func() bool { return e.allSections("off") })
+	if err != nil {
+		_ = e.act("start", "bt")
+		return fmt.Errorf("sections should be unknown while BT is down: %w (now %v)", err, e.sections())
+	}
+	e.rec("detect_s", d.Seconds())
+	e.logf("the monitor shows the sections as unknown after %.1fs", d.Seconds())
+	time.Sleep(time.Duration(10) * time.Second / scenSpeed)
+	if err := e.act("start", "bt"); err != nil {
+		return err
+	}
+	d, err = e.waitFor("sections reported again", recoverBound, func() bool { return e.allSections("run") })
+	if err != nil {
+		return fmt.Errorf("BT did not report again: %w (now %v)", err, e.sections())
+	}
+	e.rec("recover_s", d.Seconds())
+	e.logf("Band Transport back: sections run, reported after %.1fs", d.Seconds())
+	if err := e.settle(); err != nil {
+		return err
+	}
+	return e.flowResumes(180 * time.Second)
+}
+
+// scenSpeed is the SIM_SPEED the factory runs with, so waits that are in
+// simulated seconds can be converted (the services read the same variable).
+var scenSpeed = func() time.Duration {
+	if v, err := strconv.Atoi(os.Getenv("SIM_SPEED")); err == nil && v > 0 {
+		return time.Duration(v)
+	}
+	return 1
+}()

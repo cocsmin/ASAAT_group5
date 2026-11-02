@@ -50,7 +50,7 @@ button:hover{border-color:var(--accent)}
 button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
 button.sm{padding:3px 8px;font-size:12px}
 /* flow */
-.lanes{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
 @media (max-width:900px){.lanes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .lane{border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--bg);position:relative}
 .lane.down{outline:2px solid var(--bad)}
@@ -69,7 +69,7 @@ button.sm{padding:3px 8px;font-size:12px}
 .band{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}
 .sec{padding:6px 8px;border-radius:8px;font-size:11.5px;background:var(--ok-bg);color:var(--ok);font-weight:600;line-height:1.25}
 .sec small{display:block;font-weight:500;opacity:.85}
-.sec.slow{background:var(--warn-bg);color:var(--warn)} .sec.halt{background:var(--idle-bg);color:var(--idle)} .sec.fault{background:var(--bad-bg);color:var(--bad)}
+.sec.off{background:var(--idle-bg);color:var(--idle);opacity:.7} .sec.slow{background:var(--warn-bg);color:var(--warn)} .sec.halt{background:var(--idle-bg);color:var(--idle)} .sec.fault{background:var(--bad-bg);color:var(--bad)}
 .flowlabel{font-size:11px;color:var(--muted);margin-top:6px}
 /* events */
 .filters{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
@@ -192,7 +192,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
   <section class="card">
     <h2>Test scenarios <span class="n">repeatable checks, live timeline</span></h2>
     <div id="scn-list"><div class="empty">loading…</div></div>
-    <div class="scn-top"><button class="sm primary" id="scn-all" onclick="runScn('all')">Run all</button><span id="scn-res" class="pill"><i></i><span>idle</span></span></div>
+    <div class="scn-top"><button class="sm primary" id="scn-all" onclick="runScn('all')">Run all</button><button class="sm" id="scn-stop" onclick="stopScn()" style="display:none">Stop</button><span id="scn-res" class="pill"><i></i><span>idle</span></span></div>
     <pre id="scn-log"></pre>
   </section>
 
@@ -241,6 +241,11 @@ const LANES = [
    {n:'Pan washing', d:['WashingStation'], c:g=>g.washQ, busy:true},
    {n:'Clean pan pool', d:['PanPool'], c:g=>g.pool, sub:g=>'ready for depositing'},
  ]},
+ {node:'BT', title:'Band Transport', stages:[
+   {n:'Section control', d:['SectionStatusSensor','ConveyorController'], c:g=>[1,2,3,4,5].filter(i=>(g['state'+i]||0)>0).length, sub:g=>'sections not running'},
+   {n:'Conveyor drive', d:['ConveyorDrive'], c:g=>null, sub:g=>'target '+(g.target??'–')+' cm/s'},
+   {n:'Speed monitoring', d:['SpeedSensor'], c:g=>null, sub:g=>[1,2,3,4,5].map(i=>g['speed'+i]??'–').join(' / ')+' cm/s'},
+ ]},
  {node:'MON', title:'Line Monitoring & Health', stages:[]},
 ];
 
@@ -260,10 +265,10 @@ function renderLanes(){
   $('#lanes').innerHTML = LANES.map(l=>{
     const n = nodes[l.node];
     if(l.node==='MON'){
-      const open = snap.tickets.filter(t=>t.status==='open').length;
-      return `<div class="lane"><h3>${esc(l.title)} <span class="id">MON</span></h3>
-        <div class="st">primary host · ${snap.nodes.filter(x=>x.status==='online').length}/${snap.nodes.length} nodes online</div>
-        ${snap.nodes.map(x=>`<div class="stage ${x.status==='online'?'':x.status==='unknown'?'idle':'bad'}"><div><div class="nm">${esc(x.id)} node</div>
+      const others = snap.nodes.filter(x=>x.id!=='MON'), monDown = n && n.status==='dead';
+      return `<div class="lane ${monDown?'down':''}"><h3>${esc(l.title)} <span class="id">MON</span></h3>
+        <div class="st" style="${monDown?'color:var(--bad);font-weight:600':''}">${monDown?'MONITOR OFFLINE: production paused':'primary host · '+others.filter(x=>x.status==='online').length+'/'+others.length+' nodes online'}</div>
+        ${others.map(x=>`<div class="stage ${x.status==='online'?'':x.status==='unknown'?'idle':'bad'}"><div><div class="nm">${esc(x.id)} node</div>
           <div class="dt">${x.status==='online'?'up '+x.uptime+' s'+(x.restarts?' · '+x.restarts+' restart(s)':''):esc(x.note||x.status)}</div></div></div>`).join('')}
       </div>`;
     }
@@ -283,7 +288,7 @@ function renderLanes(){
       }).join('')}
     </div>`;
   }).join('');
-  $('#band').innerHTML = snap.sections.map(s=>`<div class="sec ${s.state==='run'?'':s.state}">S${s.id} ${esc(s.name)}<small>${{run:'running',slow:'slow – wrong speed',halt:'halted',fault:'STOPPED – fault'}[s.state]}</small></div>`).join('');
+  $('#band').innerHTML = snap.sections.map(s=>`<div class="sec ${s.state==='run'?'':s.state}">S${s.id} ${esc(s.name)}<small>${{off:'unknown (BT not responding)',run:'running',slow:'slow – wrong speed',halt:'halted',fault:'STOPPED – fault'}[s.state]}</small></div>`).join('');
 }
 
 function renderAttention(){
@@ -381,9 +386,11 @@ const HINT = {
   mongo: 'Pan documents and saved state are unavailable. Back when started.',
   plm: 'No new orders; batter preparation keeps working from reserved ingredients.',
   bat: 'No new batter; the line slowly empties.',
-  thm: 'No depositing, baking or cooling; MON halts its band sections.',
+  thm: 'No depositing, baking or cooling; MON asks Band Transport to halt its band sections.',
+  bt: 'Sections stop being commanded; THM and FIN keep their last band state; MON shows the sections as unknown.',
   fin: 'Cakes wait in the holding queues; clean pans stop coming back.',
-  mon: 'This dashboard. Stop it from a terminal: go run ./cmd/scenario mon-down'
+  mon: 'No production without the monitor: nothing new is started, events wait in the outboxes. This dashboard keeps working and shows it.',
+  ui: 'This dashboard (not part of the factory).'
 };
 const ALABEL = {stop:'Stop', start:'Start', pause:'Freeze', unpause:'Unfreeze', restart:'Restart'};
 const ATITLE = {stop:'Stop it (like switching it off)', start:'Start it again', pause:'Freeze the process: no keep-alive, the broker declares it dead', unpause:'Let it run again', restart:'Restart it'};
@@ -394,7 +401,7 @@ async function loadComps(){
 }
 function renderComps(){
   const box = $('#comps');
-  if(!comps){ box.innerHTML = '<div class="empty">no answer from the monitor</div>'; return; }
+  if(!comps){ box.innerHTML = '<div class="empty">no answer from the dashboard service</div>'; return; }
   if(!comps.available){ box.innerHTML = '<div class="empty">'+esc(comps.hint)+'</div>'; return; }
   box.innerHTML = comps.items.map(c=>'<div class="comp '+esc(c.state)+'"><span class="cdot"></span><div class="cname"><b>'+esc(c.label)+'</b> <span class="tag">'+esc(c.state)+'</span><small>'+esc(HINT[c.name]||'')+'</small></div><div class="cbtns">'+
     (c.locked ? '<span class="tag">locked</span>' : (c.actions||[]).map(a=>'<button class="sm '+(a==='start'||a==='unpause'?'primary':'')+'" title="'+esc(ATITLE[a]||a)+'" onclick="comp(\''+c.name+'\',\''+a+'\')">'+(ALABEL[a]||a)+'</button>').join(''))+'</div></div>').join('');
@@ -412,15 +419,15 @@ function renderScn(){
   if(!scn) return;
   const run = scn.run || {}, busy = !!run.running;
   $('#scn-list').innerHTML = scn.items.map(i=>{
-    const why = i.selfStop ? 'It stops the monitor itself. Run it in a terminal: go run ./cmd/scenario '+i.name
-      : (!i.runnable ? (i.needsPause || (i.needs||[]).length ? 'Needs Docker (it switches a container that dev mode does not have): docker compose --profile demo up -d.' : 'Needs component control (docker compose --profile demo up -d).')+' Terminal: go run ./cmd/scenario '+i.name : '');
+    const why = !i.runnable ? (i.needsPause || (i.needs||[]).length ? 'Needs Docker (it switches a container that dev mode does not have): docker compose --profile demo up -d.' : 'Needs component control (docker compose --profile demo up -d).')+' Terminal: go run ./cmd/scenario '+i.name : '';
     return '<div class="scn"><div class="sname"><b>'+esc(i.name)+'</b>'+(i.docker?' <span class="tag">switches parts</span>':'')+'<small>'+esc(i.desc)+(why?'<br><i>'+esc(why)+'</i>':'')+'</small></div>'+
       '<button class="sm primary" '+((!i.runnable||busy)?'disabled':'')+' onclick="runScn(\''+i.name+'\')">Run</button></div>';
   }).join('');
   $('#scn-all').disabled = busy;
+  $('#scn-stop').style.display = busy ? '' : 'none';
   const res = $('#scn-res'), lines = run.lines || [];
-  res.className = 'pill ' + (busy ? 'warn' : run.result==='pass' ? 'ok' : run.result==='fail' ? 'bad' : '');
-  res.lastElementChild.textContent = busy ? 'running '+run.name+'…' : run.result==='pass' ? 'all passed' : run.result==='fail' ? 'something failed' : 'idle';
+  res.className = 'pill ' + (busy ? 'warn' : run.result==='pass' ? 'ok' : run.result==='fail' ? 'bad' : run.result==='stopped' ? 'warn' : '');
+  res.lastElementChild.textContent = busy ? 'running '+run.name+'…' : run.result==='pass' ? 'all passed' : run.result==='fail' ? 'something failed' : run.result==='stopped' ? 'stopped' : 'idle';
   const log = $('#scn-log');
   log.style.display = lines.length ? 'block' : 'none';
   const atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 30;
@@ -428,6 +435,10 @@ function renderScn(){
     return /\bPASS\b/.test(l) ? '<span class="pass">'+t+'</span>' : /\bFAIL\b/.test(l) ? '<span class="fail">'+t+'</span>' : l.startsWith('== ') ? '<span class="hd">'+t+'</span>' : t; }).join('\n');
   if(atEnd) log.scrollTop = log.scrollHeight;
 }
+window.stopScn = async () => {
+  const r = await fetch('/api/scenarios/stop', {method:'POST'});
+  toast(r.ok ? 'stopping, parts are being put back' : await r.text(), r.ok?'':'error');
+};
 window.runScn = async name => {
   const r = await fetch('/api/scenarios/run', {method:'POST', body:JSON.stringify({name})});
   if(!r.ok) toast(await r.text(), 'error');

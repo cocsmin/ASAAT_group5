@@ -26,15 +26,15 @@ run by a scenario and passes against the real containers.
 | FC16 | Cooling buffer: cooling is fixed | System | THM | follows the repair of FC15; `cooling-chain` |
 | FC17 | Cooling buffer: cake waited too long | System | THM | follows FC15 after the waiting limit; `cooling-chain` |
 | FC18 | Cooling buffer full | Maintenance (cooling fixed) | THM | follows FC15 when 8 cakes are held; `cooling-chain` |
-| FC19 | Band section stops | Maintenance | MON | button MON FC19; `faults-maintenance` |
-| FC20 | Band: wrong speed | System, then Maintenance | MON | button MON FC20 (corrected) and "correction fails" (ticket); `faults-maintenance` |
+| FC19 | Band section stops | Maintenance | BT | button BT FC19; `faults-maintenance` |
+| FC20 | Band: wrong speed | System, then Maintenance | BT | button BT FC20 (corrected) and "correction fails" (ticket); `faults-maintenance` |
 | FC21 | Depanning: cake stuck or broken | System | FIN | button FIN FC21; `faults-system` |
 | FC22 | Depanning machine breaks | Maintenance | FIN | button FIN FC22; `faults-maintenance` |
 | FC23 | Pan washing: washing station breaks | Maintenance | FIN | button FIN FC23; `faults-maintenance` |
 | FC24 | Quality inspection: defect, weight or metal | System; the same check failing repeatedly: Maintenance | FIN | button FIN FC24 and "same check fails 3 times"; `faults-system`, `faults-maintenance` |
 | FC25 | Wrapping station breaks | Maintenance | FIN | button FIN FC25; `faults-maintenance` |
 | FC26 | Cartoning: wrong case weight | System | FIN | button FIN FC26; `faults-system` |
-| FC27 | Controller (Docker container) crashes | System (Docker restarts it) | all | button FC27 on each system; `crash-plm`, `crash-bat`, `crash-thm`, `crash-fin` |
+| FC27 | Controller (Docker container) crashes | System (Docker restarts it) | all | button FC27 on each system; `crash-plm`, `crash-bat`, `crash-thm`, `crash-fin`, `crash-bt` |
 | FC28 | Any machine stops responding | Maintenance | all | button FC28 on each system; `freeze-thm` (frozen process) |
 
 Use-case alternatives: UC4 (the inspector rejects the batter, `faults-system`),

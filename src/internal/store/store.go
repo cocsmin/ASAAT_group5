@@ -36,6 +36,7 @@ type SQL interface {
 	// Line Monitoring & Health.
 	InsertEvent(ctx context.Context, e *model.LogEvent) error
 	Events(ctx context.Context, limit int) ([]model.LogEvent, error)
+	DiscardCounts(ctx context.Context) (map[string]int, error) // discarded cakes by system
 	OpenTicket(ctx context.Context, t *model.Ticket) error
 	CloseTicket(ctx context.Context, id int64) error
 	Tickets(ctx context.Context, limit int) ([]model.Ticket, error)

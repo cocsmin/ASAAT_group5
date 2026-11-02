@@ -5,7 +5,7 @@
 A medium-sized cake factory modelled as six systems (batter preparation, thermal
 processing, finishing and packaging, band transport, line monitoring and health,
 production and logistics). The architecture is implemented as a running simulation in
-Go: five services talking Sparkplug B over an MQTT broker, SQL Server and MongoDB for
+Go: six services talking Sparkplug B over an MQTT broker, SQL Server and MongoDB for
 data, Docker for deployment, and a live dashboard that shows the flow of cakes and what
 happens when something goes wrong. The main quality attribute is availability.
 

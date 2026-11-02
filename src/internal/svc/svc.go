@@ -68,7 +68,7 @@ func Run(id string, devices ...string) (*Base, context.CancelFunc) {
 	for _, d := range devices {
 		b.N.SetDevice(d, model.StateOK, "")
 	}
-	if addr := os.Getenv("HEALTH_ADDR"); addr != "" && id != model.MON {
+	if addr := os.Getenv("HEALTH_ADDR"); addr != "" {
 		go func() { // container health check for Docker Compose
 			mux := http.NewServeMux()
 			mux.HandleFunc("/healthz", func(w http.ResponseWriter, _ *http.Request) { w.Write([]byte("ok")) })

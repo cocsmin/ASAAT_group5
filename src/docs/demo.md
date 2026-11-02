@@ -10,15 +10,15 @@ the CI pipeline.
 
 Two cards on the right side of the dashboard do this without a terminal:
 
-- **Components** lists the broker, SQL Server, MongoDB and the five systems with a
+- **Components** lists the broker, SQL Server, MongoDB and the six systems with a
   state and buttons: *Stop*, *Start*, *Freeze* (the process stops answering, like
   a hung machine), *Unfreeze*, *Restart*. Each has a line that says what to expect.
-  The monitor itself is locked, because switching it off would cut the page you
-  are looking at (use the `mon-down` scenario in a terminal).
+  The monitor can be switched off here too (the dashboard is a separate container
+  and keeps showing what happens); only the dashboard itself is locked.
 - **Test scenarios** lists the scenarios below with a *Run* button and a *Run all*
   button. The timeline appears live and ends with PASS or FAIL. Scenarios that
-  switch containers need the control service; `mon-down` always runs in a
-  terminal.
+  switch containers need the control service. A *Stop* button ends a run and puts
+  every stopped or frozen part back.
 
 With Docker the control service is the `ctl` container, started with
 `docker compose --profile demo up -d --build`. With `go run ./cmd/dev` it is built
@@ -53,8 +53,8 @@ not need Docker still work (the ones marked `docker` are skipped).
 
 | Scenario | What happens to the factory | What it proves |
 |---|---|---|
-| `healthy` | nothing | all five systems online, a pallet ships |
-| `crash-plm`, `crash-bat`, `crash-thm`, `crash-fin` | the container exits like a real crash | the broker publishes the death certificate (Last Will) within 15 s (THM-REQ-72); Docker restarts the container and it is back within 60 s (THM-REQ-73); no pan is lost or duplicated; the line carries on |
+| `healthy` | nothing | all six systems online, a pallet ships |
+| `crash-plm`, `crash-bat`, `crash-thm`, `crash-fin`, `crash-bt` | the container exits like a real crash | the broker publishes the death certificate (Last Will) within 15 s (THM-REQ-72); Docker restarts the container and it is back within 60 s (THM-REQ-73); no pan is lost or duplicated; the line carries on |
 | `freeze-thm` | THM freezes and stops its keep-alive pings | the broker declares it dead on its own (about 7.5 s with a 5 s keep-alive), MON halts the band sections; it comes back when unfrozen |
 | `mon-down` | MON is stopped while THM discards cakes | no event is lost (THM-REQ-77: the events wait for MON and arrive after it restarts); the line does not run without the monitor (UC2 rule) |
 | `sql-down`, `mongo-down` | a database is switched off for 30 s | the monitor does not mistake a database outage for a dead line (no node declared dead, no band section halted), stations carry on, everything catches up when it returns |
@@ -76,7 +76,7 @@ UC14) so the output can be matched to the failure-case tables.
 3. Click `FC5` under BAT ("dosing fails several times in a row"): the doser locks
    out, "Needs attention" shows a red entry and a Maintenance ticket appears.
    Press *Mark repaired*: the doser resumes by itself.
-4. Click `FC19` under MON: a band section stops, upstream sections halt and
+4. Click `FC19` under BT: a band section stops, upstream sections halt and
    downstream runs empty, the bar below the flow shows it. Repair it and watch the
    sections restart in order.
 5. In a terminal: `go run ./cmd/scenario crash-thm`, and say what the timeline

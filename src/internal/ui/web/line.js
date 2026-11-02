@@ -23,6 +23,7 @@
     { id: 'pal',  t: 'Pallet',      n: 'FIN', x: 710,  y: 300, w: 100, d: ['PalletPacker'], b: function (g) { return g.palletFill || null; }, s: function (g) { return (g.pallets || 0) + ' pallets'; } },
     { id: 'shp',  t: 'Shipment',    n: 'PLM', x: 590,  y: 300, w: 100, d: ['TransportPlanner'], s: function (g) { return (g['cakes.shipped'] || 0) + ' cakes out'; } },
     { id: 'wash', t: 'Pan washing', n: 'FIN', x: 1070, y: 430, w: 100, d: ['WashingStation'], b: function (g) { return g.washQ || null; } },
+    { id: 'bt', t: 'Band Transport', n: 'BT', x: 170, y: 330, w: 250, d: ['ConveyorController', 'ConveyorDrive', 'SpeedSensor', 'SectionStatusSensor'], b: function (g) { var c = 0; for (var i = 1; i <= 5; i++) { if ((g['state' + i] || 0) > 0) { c++; } } return c || null; }, s: function (g) { return 'target ' + (g.target === undefined ? '–' : g.target) + ' cm/s · bars S1–S5'; } },
     { id: 'pool', t: 'Clean pans',  n: 'FIN', x: 830,  y: 430, w: 100, d: ['PanPool'], b: function (g) { return g.pool; }, s: function () { return 'ready'; }, pool: true }
   ];
   var H = 64;
@@ -180,7 +181,7 @@
       if (a === 'down' || z === 'down' || a === 'off' || z === 'off') { k = 'off'; }
       else if (sg.s) {
         var ss = secs[sg.s];
-        k = ss === 'run' ? 'run' : ss === 'slow' ? 'slow' : 'halt';
+        k = ss === 'run' ? 'run' : ss === 'slow' ? 'slow' : ss === 'off' ? 'off' : 'halt';
       }
       if (k === 'run' && (a === 'bad' || z === 'bad')) { k = 'halt'; }
       document.getElementById('vz-' + sg.id).setAttribute('class', 'vz-seg ' + sg.k + ' ' + k);
@@ -209,7 +210,7 @@
         var cls = n.status === 'online' ? 'ok' : n.status === 'unknown' ? '' : 'bad';
         var txt = n.status === 'online' ? 'online' : n.status === 'dead' ? 'container down' : n.status === 'silent' ? 'not responding' : 'waiting';
         return '<span class="pill ' + cls + '"><i></i><span>' + n.id + ' ' + txt + (n.restarts ? ' · ' + n.restarts + ' restart' + (n.restarts > 1 ? 's' : '') : '') + '</span></span>';
-      }).join('') + '<span class="pill ok"><i></i><span>MON (this page)</span></span>';
+      }).join('');
     }
   }
 

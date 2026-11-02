@@ -74,8 +74,10 @@ they equal real seconds; the experiment ran at 1.
 1. **PLM creates the batch id** with the order (`B0001`); a restarted batch gets a
    suffix (`B0001-2`) and its ingredient reservation `PO-0001-2`. Open item of the
    alignment baseline; in `decisions.md`, but the suffix rule is not.
-2. **Band state change goes to THM and FIN**, carries all five sections, and is sent
-   as ordinary data repeated every heartbeat (not as a command, not retained).
+2. **Band state change is sent by BT** to THM, FIN and MON, carries all five sections
+   (and the detail "fault" for MON), and is sent as ordinary data repeated every
+   heartbeat (not as a command, not retained). MON commands BT with "Section command"
+   and "Target speed".
 3. **PLM sends a heartbeat** although the alignment baseline says it sends none.
 4. **Every handoff signal carries a message id** and events an event id (not in any
    port description); receivers drop duplicates. Both are in `signals.md`.
@@ -104,6 +106,15 @@ they equal real seconds; the experiment ran at 1.
 14. **The exercise documents** (`communication.md`, `containers.md`, `languages.md`,
     `databases.md`, `experiment.md`) are drafts written by the assistant: check every
     claim, add your own sources, and make them fit the report template.
+16. **The dashboard is its own container (`ui`), not part of MON.** MON is the real
+    system (health, event log, tickets, commands to BT) and has no user interface; the
+    dashboard exists only for the experiments and for showing the demo. It reads the
+    Sparkplug messages, SQL Server and MongoDB itself and publishes the fault injections,
+    so it still shows the outage when MON is down. It calls MON only for "repair
+    confirmed" (the Maintenance action). The MON model's "overseer dashboard" device is
+    therefore **not** the page you see: [D] decide whether the real plant has an overseer
+    UI inside MON (then the model stays) or the dashboard is demo-only (then the model
+    needs a note).
 15. **Dev mode** (`go run ./cmd/dev`) keeps SQL data in memory and pans as JSON files,
     wipes `data/` at each start; it exists only so the factory runs without Docker.
 
@@ -130,17 +141,11 @@ they equal real seconds; the experiment ran at 1.
 
 ## 4. Known bugs and limits, not fixed [B]
 
-0. **Band Transport is not a system of its own.** The report has six systems; the
-   build has five services, and MON also does the band transport job (as the
-   alignment baseline says: "MON = Line Monitoring & Health and Band Transport").
-   Implemented: section coordination (five sections, halt upstream, run downstream
-   empty, restart in order, FC19), wrong speed (FC20), band state to THM and FIN.
-   Drive supervision exists only as the injected faults. **Pan Spacing & Position
-   Tracking is not implemented** (pans have a station, no position or spacing rule).
-   In the live picture the band is only five unlabeled bars (S1 to S5), so the system
-   looks missing. [D] Do we want a Band Transport container (or at least a box in the
-   picture) and the pan spacing subsystem?
-
+0. **Band Transport is now a system of its own** (branch MON-BT-Integration, models
+   `BT.uml` and `MON.uml`) and a sixth service in the code. Still open: **Pan Spacing &
+   Position Tracking**, which the report lists under Band Transport, is **not in the BT
+   model** and is not implemented (pans have a station, no position or spacing rule).
+   [D] Was it dropped on purpose? If not, it has to be added to the model and the code.
 1. **Crash while MongoDB is down**: the pan documents are not updated during the
    outage, so a restart in that window rebuilds queues from stale documents.
 2. **THM restart**: a resumed pan bakes from zone 1 again; a pan being filled at the
@@ -155,8 +160,7 @@ they equal real seconds; the experiment ran at 1.
 7. **FC28 per controller**, not per machine; **FC13** detected at once (no T_resp);
    **FC16** in-time release implemented but no scenario waits for it; **FC20**
    correction is a 10 s timer, there is no speed sensor.
-8. **Scenarios from the dashboard**: `mon-down` can only run in a terminal (it would
-   cut the page), and `freeze-thm`, `sql-down`, `mongo-down` need Docker (not in dev mode).
+8. **Scenarios from the dashboard**: `freeze-thm`, `band-halt`, `sql-down`, `mongo-down` need Docker (not in dev mode). The *Stop* button ends a run and restarts every part the scenario left stopped or frozen; a scenario that was stopped in the middle is not counted as passed or failed.
 9. **Experiment data** is from one machine at real speed, 10 runs per scenario, only
     crash and freeze; the aborted first run is kept on purpose.
 10. **Code**: unit tests cover only the Sparkplug codec and the signal mapping; the
@@ -183,7 +187,32 @@ they equal real seconds; the experiment ran at 1.
 8. **Several scenario outputs contain simulated numbers** (pans, cakes shipped) that
    are not factory-realistic; do not quote them as throughput.
 
-## 6. Where everything else is
+## 6. Papyrus models of BT and MON against the implementation
+
+Read from `Model/PapyrusProject/BT.uml`, `MON.uml` and `ASAAT.uml` (branch MON-BT-Integration).
+Implemented as the models describe: BT-AF-01 Section Control, BT-AF-02 Speed Monitoring,
+BT-AF-03 Transport Fault Handling and the devices conveyor controller, drive, speed
+sensor and section status sensor (as Sparkplug devices); MON-AF-01 Health Monitor,
+MON-AF-02 Event / Traceability Logger, MON-AF-03 Maintenance Manager, MON-AF-07
+Container Supervision, and the devices message bus (Mosquitto), log database (SQL
+Server) and overseer dashboard.
+
+| Papyrus port | Implemented as | Difference |
+|---|---|---|
+| BT in: targetSpeed | NCMD "Target speed" from MON | BT-only value; nobody sends it yet except by hand |
+| BT in: sectionCommand | NCMD "Section command" from MON | new signal name (sentence case), group to confirm |
+| BT out: transportFault | event signal, severity error, machine id `bt-section-N` | not a signal of its own |
+| BT out: controllerStatus | heartbeat | same thing, name differs |
+| MON in: sensorData, containerStatus | heartbeat, birth and death certificates | names differ |
+| MON out: healthStatus, healthAlert, maintenanceStatus | dashboard (alerts, tickets) | internal to MON, no outgoing signal |
+
+**Signals the code uses that the models have no port for [D]:** "Band state change"
+(BT out; THM, FIN and MON in), "Log, warning, error and discard events" (every system
+out, MON in), "Repair confirmed" (MON out; every system in), "Section command" and
+"Target speed" (see above). The main model (ASAAT.uml) has the parts but **no
+connectors yet**, so the system IBD cannot show these flows.
+
+## 7. Where everything else is
 
 [README.md](../README.md) (run it), [TODO.md](../TODO.md) (diagrams, code gaps, the
 U1 to U14 table of document updates), [failure-cases.md](failure-cases.md),

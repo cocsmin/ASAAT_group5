@@ -7,7 +7,8 @@ Docker Desktop.
 
 | Container | What | Why a container (isolation, environment, scalability) |
 |---|---|---|
-| `plm`, `bat`, `thm`, `fin`, `mon` | the five systems, one Go binary each | each system fails, restarts and is deployed on its own (report Tables I to VI, the "24/7 / deployability" column); Docker's restart policy is the recovery tactic of FC27 |
+| `ui` | experiment dashboard, not a factory system: reads the Sparkplug messages, SQL Server and MongoDB, publishes fault injections, calls MON only for "repair confirmed" | it must keep working when MON is stopped, so it is its own container; a real plant would not need it |
+| `plm`, `bat`, `thm`, `fin`, `bt`, `mon` | the six systems, one Go binary each | each system fails, restarts and is deployed on its own (report Tables I to VI, the "24/7 / deployability" column); Docker's restart policy is the recovery tactic of FC27 |
 | `mosquitto` | the MQTT broker | the bus is infrastructure with its own lifecycle |
 | `mssql`, `mongo` | the two databases (optional in the exercise, included) | stateful, with volumes, independent of the services |
 | `ctl` (profile `demo`) | switches the other containers on and off for the demonstration | opt-in, because it holds the Docker socket |
@@ -44,7 +45,7 @@ Settings and the requirement or quality attribute behind each:
 
 ## Two or more containers over a containerized bus, built and pushed by CI/CD
 
-Eight containers run and talk over the `mosquitto` container. The pipeline
+Nine containers run and talk over the `mosquitto` container. The pipeline
 (`.github/workflows/cicd.yml`) builds one image per system with a matrix and pushes
 them to `ghcr.io/<owner>/cake-factory-<system>`. The push runs on main or master
 only, so it has **not happened yet**: it needs the first merge (or a manual run on
@@ -64,6 +65,6 @@ the default branch). The pipeline passes `actionlint`; the Dockerfile passes
   image is x86; Apple silicon needs emulation).
 - **Scalability:** a stateless system could run several replicas behind the broker's
   shared subscriptions; not needed or tested here.
-- **Costs:** eight containers to build and watch (generated from one template); the
+- **Costs:** nine containers to build and watch (generated from one template); the
   broker and databases are shared dependencies; `ctl` needs the Docker socket and is
   for demonstrations only.

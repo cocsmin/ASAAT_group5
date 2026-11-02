@@ -122,7 +122,7 @@ func Run() {
 	t.N.OnSignal(model.FIN, sig.PanAdmission, func(_ string, s sig.Signal) {
 		t.setReason("fin", s.Str("reason"), s.Bool("stop"))
 	})
-	t.N.OnSignal(model.MON, sig.BandState, func(_ string, s sig.Signal) { t.onBand(s) })
+	t.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) { t.onBand(s) })
 	t.OnRepair(depositorMachine, func() {})
 	t.OnRepair(zoneMachine, t.zoneRepaired)
 	t.OnRepair(cameraMachine, func() {
@@ -167,7 +167,8 @@ func (t *THM) onBand(s sig.Signal) {
 	for i := 1; i <= 3; i++ {
 		t.slow[i].Store(mode == "slow")
 	}
-	t.setReason("band", "band halted by the monitor", mode == "halt")
+	t.gates[1].Set(s.Str("S1") != "halt") // the depositor works on section 1: a halted S1 stops it at once
+	t.setReason("band", "band halted: no new pans", mode == "halt")
 }
 
 // span waits for the band section to run and then simulates d of work.
@@ -329,6 +330,9 @@ func (t *THM) depositOne(b batch) bool {
 		}
 	}
 	t.N.SetDevice("PanPresenceEye", model.StateOK, "")
+	if !t.waitAdmission() { // a stop may have come while the pan was awaited
+		return false
+	}
 	if !t.span(1, depositTime) {
 		return false
 	}

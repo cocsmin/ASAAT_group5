@@ -18,14 +18,16 @@ learns the current value.
 | 7 | Clean pan supply | FIN to THM | reliable | panId (empty when none), stock |
 | 8 | Stop / resume pan admission | FIN to THM | state | stop, reason |
 | 9 | Cooled cake | THM to FIN | reliable | panId, batchId, temp |
-| 10 | Band state change | MON to THM, FIN | state | S1 to S5, each `run`, `slow` or `halt` |
+| 10 | Band state change | **BT** to THM, FIN, MON | state | S1 to S5, each `run`, `slow` or `halt` (`fault` is sent as `halt`); D1 to D5 with the detail incl. `fault` for the monitor |
 | 11 | Pallet ready for shipment | FIN to PLM | reliable | palletId, cakes, batches |
 | 12 | Log, warning, error and discard events | all to MON | outbox, QoS 1 | eventId, severity (`log`, `warning`, `error`, `discard`), code (UC or FC), reason, batchId, device, machineId, maintenance, time |
 | 13 | Machine status (heartbeat) | all to MON | QoS 0, every T_hb | uptime, `dev.<device>` states, `g.<gauge>` counters |
 | 14 | Repair confirmed | MON to the owning node | command, QoS 1 | machineId, repaired |
 
 Operations messages that are not part of the 14 and not in the diagrams:
-`Fault injection` (dashboard to a node, `NCMD`: code, count) and `Node Control`
+`Section command` (MON to BT, `NCMD`: node or section, state `run`/`slow`/`halt`, reason) and
+`Target speed` (MON to BT, `NCMD`: speed in cm/s), which are the "sectionCommand" and "targetSpeed"
+ports of the BT model; `Fault injection` (dashboard to a node, `NCMD`: code, count) and `Node Control`
 (Sparkplug rebirth request, `NCMD`).
 
 Differences to the alignment baseline to settle with the group:

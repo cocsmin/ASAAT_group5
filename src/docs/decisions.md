@@ -80,11 +80,11 @@ These close open items of the alignment baseline. Change them in one place each.
 |---|---|---|
 | Who creates the batch ID | PLM creates it with the production order (`B0001`); a re-started batch gets a suffix (`B0001-2`). It travels in every signal and pan document. | `internal/plm` |
 | Heartbeat interval | One value, `HEARTBEAT_SECONDS`, default 5 s. The monitor declares a node silent after three missed beats (so it is above the fault report latency P5). | `internal/svc`, `internal/mon` |
-| Who receives "Band state change" | THM and FIN, with the state of all five sections. | `internal/mon` |
+| Who sends and receives "Band state change" | **Band Transport (BT)** sends it to THM, FIN and MON, with the state of all five sections (the monitor additionally gets the detail "fault"). MON no longer owns the band; it sends BT the "Section command" (halt, slow, run) and "Target speed". | `internal/bt`, `internal/mon` |
 | Target weight and tolerance to FIN's weight check | Carried in the order signal (`fillTarget`, `fillTol`). | `internal/plm` |
 | "Repair confirmed" | Sent by `mon` when the Maintenance ticket is closed on the dashboard; carries `machineId`. | `internal/mon` |
 | Ingredient result for FC2 | `staged`: BAT continues with ingredients already at the batching station. | `internal/plm`, `internal/bat` |
-| Band section stop (FC19) | The stopped section halts all upstream sections; downstream sections keep running. After repair, upstream sections restart one by one. | `internal/mon` |
+| Band section stop (FC19) | The stopped section halts all upstream sections; downstream sections keep running. After repair, upstream sections restart one by one. | `internal/bt` |
 
 
 ## 6. Conformance with the diagrams and rules

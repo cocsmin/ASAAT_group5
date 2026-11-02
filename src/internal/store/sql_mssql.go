@@ -290,6 +290,25 @@ func (s *MSSQL) Events(ctx context.Context, limit int) ([]model.LogEvent, error)
 	return out, rows.Err()
 }
 
+// DiscardCounts counts the discard events by system.
+func (s *MSSQL) DiscardCounts(ctx context.Context) (map[string]int, error) {
+	rows, err := s.db.QueryContext(ctx, "SELECT node, COUNT(*) FROM dbo.event_log WHERE severity='discard' GROUP BY node")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := map[string]int{}
+	for rows.Next() {
+		var n string
+		var c int
+		if err := rows.Scan(&n, &c); err != nil {
+			return nil, err
+		}
+		out[n] = c
+	}
+	return out, rows.Err()
+}
+
 // OpenTicket stores a maintenance ticket.
 func (s *MSSQL) OpenTicket(ctx context.Context, t *model.Ticket) error {
 	t.Status, t.Opened = "open", time.Now().UTC()

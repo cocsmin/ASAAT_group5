@@ -12,7 +12,7 @@
 .vz-name{font:650 12.5px system-ui,sans-serif;fill:var(--ink)}
 .vz-sub{font:11px system-ui,sans-serif;fill:var(--muted)}
 .vz-stripe{fill:var(--idle)}
-.vz-stripe.g-PLM{fill:#6b7cff}.vz-stripe.g-BAT{fill:#d79a1f}.vz-stripe.g-THM{fill:#e2683c}.vz-stripe.g-FIN{fill:#2fa38a}
+.vz-stripe.g-PLM{fill:#6b7cff}.vz-stripe.g-BAT{fill:#d79a1f}.vz-stripe.g-THM{fill:#e2683c}.vz-stripe.g-FIN{fill:#2fa38a}.vz-stripe.g-BT{fill:#9a6bd1}
 .vz-st{transition:opacity .3s}
 .st-ok .vz-box{stroke:var(--ok)}
 .st-idle .vz-box{stroke:var(--idle)}
@@ -46,7 +46,7 @@
 @keyframes vz-travel{from{offset-distance:0%}to{offset-distance:100%}}
 
 /* band sections */
-.vz-band rect{fill:var(--ok)} .vz-band.b-slow rect{fill:var(--warn)} .vz-band.b-halt rect{fill:var(--idle)} .vz-band.b-fault rect{fill:var(--bad)}
+.vz-band rect{fill:var(--ok)} .vz-band.b-slow rect{fill:var(--warn)} .vz-band.b-halt rect{fill:var(--idle)} .vz-band.b-fault rect{fill:var(--bad)} .vz-band.b-off rect{fill:var(--idle);opacity:.4}
 .vz-band rect{opacity:.85}
 .vz-bandl{font:600 10px ui-monospace,monospace;fill:var(--muted);text-anchor:end}
 

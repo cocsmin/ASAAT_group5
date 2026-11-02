@@ -99,6 +99,12 @@ services:
     environment: { <<: *env }
     volumes: ["thm-data:/data"]
 
+  bt:
+    <<: *service
+    build: { context: ., args: { SERVICE: bt } }
+    environment: { <<: *env }
+    volumes: ["bt-data:/data"]
+
   fin:
     <<: *service
     build: { context: ., args: { SERVICE: fin } }
@@ -108,13 +114,24 @@ services:
   mon:
     <<: *service
     build: { context: ., args: { SERVICE: mon } }
-    environment: { <<: [*env, *sql], HTTP_ADDR: ":8080", CONTROL_URL: "http://ctl:8090" }
+    environment: { <<: [*env, *sql], HTTP_ADDR: ":8082" }
+    volumes: ["mon-data:/data"]
+    depends_on:
+      mosquitto: { condition: service_healthy }
+      mongo: { condition: service_healthy }
+      mssql: { condition: service_healthy }
+
+  # Experiment dashboard. Not part of the factory: it only watches it (Sparkplug
+  # messages, event log, pans) and runs the experiments. MON keeps working without it.
+  ui:
+    <<: *service
+    build: { context: ., args: { SERVICE: ui } }
+    environment: { <<: [*env, *sql], HTTP_ADDR: ":8080", MON_URL: "http://mon:8082", CONTROL_URL: "http://ctl:8090" }
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
       interval: 5s
       timeout: 2s
       retries: 5
-    volumes: ["mon-data:/data"]
     ports: ["8080:8080"]
     depends_on:
       mosquitto: { condition: service_healthy }
@@ -146,4 +163,5 @@ volumes:
   bat-data:
   thm-data:
   fin-data:
+  bt-data:
   mon-data:

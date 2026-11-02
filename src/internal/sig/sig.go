@@ -26,6 +26,8 @@ const (
 	Events          = "Log, warning, error and discard events"
 	Heartbeat       = "Machine status (heartbeat)"
 	RepairConfirmed = "Repair confirmed"
+	SectionCommand  = "Section command"
+	TargetSpeed     = "Target speed"
 	FaultInjection  = "Fault injection"
 	NodeControl     = "Node Control"
 )

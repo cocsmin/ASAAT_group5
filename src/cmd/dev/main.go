@@ -144,6 +144,8 @@ func main() {
 		{name: "bat", label: "Batter Preparation", kind: "app", binary: "bat" + ext},
 		{name: "thm", label: "Thermal Processing", kind: "app", binary: "thm" + ext},
 		{name: "fin", label: "Finishing & Packaging", kind: "app", binary: "fin" + ext},
+		{name: "bt", label: "Band Transport", kind: "app", binary: "bt" + ext},
+		{name: "ui", label: "Experiment dashboard", kind: "app", binary: "ui" + ext},
 	}
 	for _, s := range services {
 		s.wanted = true
