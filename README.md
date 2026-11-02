@@ -33,6 +33,7 @@ troubleshooting: [src/README.md](src/README.md).
 | the availability experiment (exercise 7): design and data | [src/docs/experiment.md](src/docs/experiment.md), [data](src/docs/experiment-results.csv) |
 | the automated checks | `cd src && go run ./cmd/scenario all`; the CI pipeline in [.github/workflows/cicd.yml](.github/workflows/cicd.yml) runs them |
 | what is still open or must be updated in the diagrams | [src/TODO.md](src/TODO.md) |
+| everything odd, unfixed, decided without the group or still to debate (time constraints too) | [src/docs/team-review.md](src/docs/team-review.md) |
 | the models (Papyrus, feature model, documents) | [Model/](Model/) |
 
 The rest of this file is the course template README.

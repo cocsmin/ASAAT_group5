@@ -1,5 +1,7 @@
 # TODO
 
+The discussion list for the team (time constraints, decisions taken without the group, known bugs, odd things) is in [docs/team-review.md](docs/team-review.md).
+
 Everything that is not done, not verified, or not mine to decide. Items marked
 **[person]** need a person or a tool that the implementation session did not have.
 
