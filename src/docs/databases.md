@@ -147,7 +147,7 @@ documents and the shipments by batch id; a full recall query is not implemented.
 | SQL Server (chosen) | ACID, joins, group's choice | Windows-centric, x86 image, licence |
 | PostgreSQL / MySQL | free, light | not the group's choice; equal fit technically |
 | MongoDB (chosen for pans) | document per pan, flexible, easy to inspect | no joins; weaker consistency across documents |
-| SQLite per service | no server, no network on the control path | each service has its own file; lecture draft's choice for service state |
+| SQLite per service | no server, no network on the control path | each service has its own file; no shared view of the data |
 | Redis | very fast | persistence needs care; no queries |
 | Cassandra | huge scale | far beyond the load; hard to operate |
 
@@ -164,6 +164,5 @@ documents and the shipments by batch id; a full recall query is not implemented.
   change.
 - **Scalability:** SQL Server and MongoDB both handle far more than 50 writes per
   second; not tested beyond the demo load. Single instances, no replication.
-- **Complexity:** two database technologies and two query styles (the lecture draft
-  warns about this). Accepted because the group decided it and the split is clean:
+- **Complexity:** two database technologies and two query styles. Accepted because the group decided it and the split is clean:
   relational data in SQL, traveling documents in MongoDB.

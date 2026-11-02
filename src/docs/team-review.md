@@ -111,10 +111,11 @@ they equal real seconds; the experiment ran at 1.
 
 1. **Container granularity**: one container per system (now) or split THM baking
    zone control (THM-REQ-74) and BAT dosing/mixing (BAT-NFR-06). Recommendation: those
-   two only. The lecture draft's separate health container is not needed.
-2. **Keep Sparkplug B/protobuf and SQL Server + MongoDB** even though the lecture draft
-   argued for MQTT 5 with JSON and SQLite + PostgreSQL. The group chose the first;
-   `decisions.md` says so, but the report must carry the justification.
+   two only. A separate health container is not needed.
+2. **The justification of the decisions already taken** (Sparkplug B on MQTT, SQL
+   Server for the main system, MongoDB for the pans, Go, Docker) has to be written in
+   the report; the drafts in `communication.md`, `databases.md`, `languages.md` and
+   `containers.md` are a starting point.
 3. **A "batter collected" acknowledgement** between THM and BAT (BAT Mixing and Handoff
    has it, the 14 signals do not).
 4. **BAT frame port "Fault event"**: internal or a 15th signal.
@@ -158,21 +159,17 @@ they equal real seconds; the experiment ran at 1.
    the report assumed). Which one should THM-REQ-72 really mean?
 3. **Same fault, different timing**: outage depends on where in the 22 s order cycle
    the fault lands, which is why p95 is much higher than the median.
-4. **The lecture draft** (on `requirement-diagrams`) proposes things we did not do:
-   JSON message schemas in `schemas/`, SQLite per service, PostgreSQL, a hybrid
-   container split, and states "MON not delivered". Decide whether the report
-   mentions the alternatives.
-5. **Line endings**: the repository has no `.gitattributes`; Git warns "LF will be
+4. **Line endings**: the repository has no `.gitattributes`; Git warns "LF will be
    replaced by CRLF" on Windows. Harmless, but files may show as fully changed for
    teammates on other systems.
-6. **Machine setup of whoever ran this**: Go and Docker Desktop were installed during
+5. **Machine setup of whoever ran this**: Go and Docker Desktop were installed during
    the session; the PC's lid and sleep settings were changed by hand for the
    experiment. Nothing in the repository depends on that.
-7. **`docs/decisions.md` section 6 (conformance table)** was written midway and
+6. **`docs/decisions.md` section 6 (conformance table)** was written midway and
    edited afterwards; re-read it against the code before using it in the report.
-8. **`go.mod` says Go 1.25** though it was created with a newer toolchain; the Docker
+7. **`go.mod` says Go 1.25** though it was created with a newer toolchain; the Docker
    build with `golang:1.25` works (verified), other versions are not tested.
-9. **Several scenario outputs contain simulated numbers** (pans, cakes shipped) that
+8. **Several scenario outputs contain simulated numbers** (pans, cakes shipped) that
    are not factory-realistic; do not quote them as throughput.
 
 ## 6. Where everything else is

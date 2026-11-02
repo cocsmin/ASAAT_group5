@@ -49,7 +49,7 @@ the points that matter for it.
 - **Performance:** ample for about 50 messages per second; the dashboard updates over
   server-sent events without a framework.
 - **Maintainability for a student team:** a small language that reads easily in
-  review, in line with the lecture draft's scoring.
+  review.
 
 ## Code snippet: one stage, same pattern in every system
 

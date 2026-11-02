@@ -12,7 +12,7 @@ where the diagrams are missing, wrong, or behind the implementation.
 
 1. **Cake Factory IBD** is empty. Add the message bus (Sparkplug B on an MQTT
    broker) and the MON part, and connect the frame ports of the slices to the bus
-   (lecture draft, finding 1).
+
 2. **BAT frame port "Fault event"** is not in the signal table. Make it internal
    (remove the frame port) or add it as a 15th signal.
 3. **MON has no document and no diagrams.** Needed: blocks, IBD and state machines
@@ -123,9 +123,9 @@ report are updated afterwards. **[person]** = needs Papyrus or Word.
 1. **Container granularity.** Now one container per system. Two requirements
    argue for more: THM-REQ-74 (baking zone control never interrupted by other
    deployments) and BAT-NFR-06 (dosing and mixing deploy independently). The
-   recommendation is those two splits only, plus one sentence in the report. The
-   lecture draft's separate health-reporting container is not needed (the broker
-   publishes the death certificate).
+   recommendation is those two splits only, plus one sentence in the report. A
+   separate health-reporting container is not needed (the broker publishes the death
+   certificate).
 2. **Batter collected acknowledgement** (diagram item 7).
 3. **PLM heartbeat**: keep it (the monitor then sees a dead PLM) or drop it
    (baseline).
@@ -183,7 +183,7 @@ Still to check **[person]**:
    every container on the machine; it is not for production.
 8. Security is not a stated requirement and is not implemented (anonymous broker,
    no TLS, no dashboard login).
-   (accepted risk R1 in the lecture draft).
+   (a single broker is an accepted risk).
 10. Real equipment (PLC, OPC UA, cameras) is out of scope: all machines are
    simulated inside the services.
 

@@ -49,8 +49,9 @@ them (FC27). Without Docker the same interface stores pans as JSON files.
 
 ## 3. Containerization
 
-**Decision: one Docker container per system (subsystem), not per component or
-device.** Docker, not Kubernetes.
+**Decided:** Docker (not Kubernetes). **Not decided:** how fine the containers are
+cut. The implementation currently runs **one container per system**, which is the
+simplest option; see "Known gaps" at the end.
 
 **Why.** The report's availability approach is to separate each system into a
 service in a container (`docker-compose.yml`). Five application containers plus
@@ -91,7 +92,7 @@ These close open items of the alignment baseline. Change them in one place each.
 Sources read: the Papyrus state machines on `state-machines-fin` (THM SM1 to SM5,
 FIN SM1 to SM5), the BAT state machines (Dosing, Mixing and Handoff, Reporting;
 commit `c003a9e` on `requirement-diagrams-BAT`), the use cases and failure cases
-of the report, the failure-case rules, and the lecture 6 draft ADRs. There is no
+of the report, the failure-case rules. There is no
 PLM or MON state machine yet.
 
 | Rule or diagram | Implemented as |
@@ -120,19 +121,18 @@ PLM or MON state machine yet.
 | Handoffs between systems survive a restart of the receiver | persistent sessions plus QoS 1 and a message id on Batter ready, Cooled cake, Pan for washing, Pallet ready, Clean pan supply, Pan request, both ingredient signals and the production order; receivers drop duplicates; state signals are QoS 1 and repeated every heartbeat |
 | FIN restart must not lose cakes or pans | FIN rebuilds its queues from the stored pan and cake documents (`fin.recover`); after depanning the cake has its own document; THM restores the pans FIN had supplied (`thm.restoreSupplied`). Tested by killing FIN, PLM and MON under load: 20 of 20 pans still accounted for, none duplicated |
 | PLM restart must not hang BAT | BAT repeats the ingredient request after 20 s; PLM answers a repeated request idempotently (SQL reservation check) |
-| Lecture ADR-2 configuration: restart policy, healthchecks, start order, volume per service, non-root, read-only root, limits | `docker-compose.yml` |
+| Container configuration: restart policy, healthchecks, start order, volume per service, non-root, read-only root, limits | `docker-compose.yml` |
 
 ### Known gaps (not implemented, or deliberately different)
 
-- **Container granularity.** One container per system. The lecture draft ADR-2
-  proposes a hybrid: critical functions alone (for example a separate
-  `thm-baking-zone-control` for THM-REQ-74) and Health Reporting separate from
-  what it monitors. This needs a group decision. Splitting later does not change
-  the topics, because machines are already Sparkplug devices.
-- **Different from the lecture drafts, on the group's decision:** Sparkplug B with
-  Protocol Buffers instead of MQTT 5 with JSON (ADR-1); SQL Server plus MongoDB
-  instead of SQLite plus PostgreSQL (ADR-4), so the event outbox is a file, not a
-  SQLite table.
+- **Container granularity (open).** One container per system. Splitting some
+  critical functions into their own containers (for example a separate baking zone
+  control for THM-REQ-74, or dosing and mixing for BAT-NFR-06) needs a group
+  decision. Splitting later does not change the topics, because machines are
+  already Sparkplug devices.
+- **Event outbox:** because the databases are SQL Server and MongoDB and the
+  control path must not depend on them, each system keeps its undelivered events in a
+  local file, not in a database table.
 - **BAT handoff.** The 14 signals have no "batter collected" acknowledgement, so
   batter only ages while depositing is stopped.
 - **THM restart.** Cakes in the tunnel and the cooling zone are taken up again and

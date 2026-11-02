@@ -40,7 +40,7 @@ Message flow diagram (system level):
 | Technology | Strength | Weakness for this factory |
 |---|---|---|
 | **MQTT with Sparkplug B** | broker pub/sub, Last Will, retained messages, birth/death certificates, defined topic and payload semantics, tiny footprint | one broker is a single point of failure (accepted risk) |
-| MQTT 5 with JSON (lecture draft) | same broker features, readable payloads | no shared semantics for presence and device state; we would define them ourselves |
+| MQTT 5 with JSON payloads | same broker features, readable payloads | no shared semantics for presence and device state; we would define them ourselves |
 | Apache Kafka | very high throughput, replay | quorum of brokers, heavy, no Last Will or retained value; throughput is not our problem **[judgement]** |
 | NATS JetStream | light, persistence | presence detection must be built; less common in industry |
 | RabbitMQ (AMQP) | routing, queues | exchanges and bindings add concepts; no built-in presence |
