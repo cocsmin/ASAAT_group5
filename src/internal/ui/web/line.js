@@ -228,7 +228,7 @@
   var SPEED = 80, pstate = {}, edgeCache = null;
   function segPoints(id, rev) {
     var p = document.querySelector('#vz-' + id + ' .vz-rail');
-    var len = p.getTotalLength(), n = Math.max(2, Math.ceil(len / 15)), out = [];
+    var len = p.getTotalLength(), n = Math.max(2, Math.ceil(len / 5)), out = [];
     for (var i = 0; i <= n; i++) { var q = p.getPointAtLength(len * i / n); out.push({ x: q.x, y: q.y }); }
     return rev ? out.reverse() : out;
   }
@@ -263,11 +263,27 @@
   function setTarget(id, g, w, x, y) {
     var ps = pstate[id];
     if (!ps) { ps = pstate[id] = { x: x, y: y, box: w.box || null, seg: w.seg || null, q: [], g: g }; g.setAttribute('transform', 'translate(' + x + ' ' + y + ')'); return; }
-    if (w.seg) { ps.seg = w.seg; ps.box = null; ps.q = [{ x: x, y: y }]; return; }
+    if (w.seg) { // in transit: walk the conveyor from where the pan is to where it should be by now
+      var sg = segById(w.seg), pts = segPoints(w.seg, false), ti = Math.round(w.f * (pts.length - 1));
+      if (ps.seg === w.seg) { ps.q = ps.q.concat(pts.slice(Math.min(ps.idx + 1, ti + 1), ti + 1)); }
+      else {
+        var lead = ps.box && ps.box !== sg.a ? route(ps.box, sg.a) : [];
+        ps.q = lead.concat([{ x: ps.x, y: pts[0].y }], pts.slice(0, ti + 1));
+      }
+      ps.idx = Math.max(ti, ps.seg === w.seg ? ps.idx : 0);
+      ps.seg = w.seg; ps.box = null; return;
+    }
+    var finish = ps.seg ? segPoints(ps.seg, false).slice(ps.idx + 1) : []; // first ride the conveyor to its end
     var from = ps.box || (ps.seg ? segById(ps.seg).z : null);
     if (ps.box !== w.box || ps.seg) {
-      ps.q = from ? route(from, w.box).concat([{ x: x, y: y }]) : [{ x: x, y: y }];
+      var pts = finish.concat(from ? route(from, w.box) : []);
+      if (pts.length) { // leave and enter the conveyor at right angles, never diagonally
+        var a = pts[0], b = pts[pts.length - 1];
+        ps.q = [{ x: ps.x, y: a.y }].concat(pts, [{ x: x, y: b.y }, { x: x, y: y }]);
+        if (ps.seg) { ps.q.shift(); }
+      } else { ps.q = [{ x: x, y: ps.y }, { x: x, y: y }]; }
       ps.box = w.box; ps.seg = null;
+    } else if (ps.q.length > 1) { ps.q[ps.q.length - 1] = { x: x, y: y }; // keep the route, only the slot at its end can change
     } else { ps.q = [{ x: x, y: y }]; }
   }
   var lastT = 0;
