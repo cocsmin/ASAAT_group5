@@ -130,6 +130,17 @@ they equal real seconds; the experiment ran at 1.
 
 ## 4. Known bugs and limits, not fixed [B]
 
+0. **Band Transport is not a system of its own.** The report has six systems; the
+   build has five services, and MON also does the band transport job (as the
+   alignment baseline says: "MON = Line Monitoring & Health and Band Transport").
+   Implemented: section coordination (five sections, halt upstream, run downstream
+   empty, restart in order, FC19), wrong speed (FC20), band state to THM and FIN.
+   Drive supervision exists only as the injected faults. **Pan Spacing & Position
+   Tracking is not implemented** (pans have a station, no position or spacing rule).
+   In the live picture the band is only five unlabeled bars (S1 to S5), so the system
+   looks missing. [D] Do we want a Band Transport container (or at least a box in the
+   picture) and the pan spacing subsystem?
+
 1. **Crash while MongoDB is down**: the pan documents are not updated during the
    outage, so a restart in that window rebuilds queues from stale documents.
 2. **THM restart**: a resumed pan bakes from zone 1 again; a pan being filled at the

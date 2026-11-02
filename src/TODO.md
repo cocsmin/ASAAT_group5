@@ -165,6 +165,11 @@ Still to check **[person]**:
 
 ## Code gaps
 
+0. **Band Transport system**: no separate service; MON does section coordination only.
+   Missing: Pan Spacing & Position Tracking (position and spacing per pan), real drive
+   supervision, a box for it in the live picture. Needs a group decision first
+   (docs/team-review.md section 4, item 0).
+
 1. **Tests**: unit tests cover only the Sparkplug codec and the signal mapping; the
    behaviour is checked by the scenarios (`docs/demo.md`), not by Go tests.
 2. **Deployment**: the pipeline pushes images to ghcr.io but has no deploy job (no
