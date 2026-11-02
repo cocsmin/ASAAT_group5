@@ -5,6 +5,24 @@ the architecture working: the six systems as services, Sparkplug B over MQTT
 between them, and a dashboard that shows the flow of cakes and what happens
 when something goes wrong.
 
+## Get it and install
+
+```bash
+git clone https://github.com/cocsmin/ASAAT_group5.git
+cd ASAAT_group5
+git checkout implementation/go-sparkplug-factory   # not needed once merged to master
+cd src
+```
+
+Install once:
+- **Docker Desktop**, running (Windows: needs WSL 2, run `wsl --install` in an
+  administrator PowerShell and restart).
+- **Go 1.25 or newer** (https://go.dev/dl): only for `go run ./cmd/dev`, the scenarios
+  and the experiment. The Docker route needs no Go.
+
+Needs internet and several minutes on the first `up --build` (images are downloaded).
+Ports 8080 (dashboard), 1883 (MQTT) and 1433 (SQL Server) must be free.
+
 ## Run it
 
 All commands run in this folder (`src/`).
@@ -146,6 +164,18 @@ internal/store     MSSQL and MongoDB stores plus in-memory/file fallbacks
 internal/{plm,bat,thm,fin,mon}  the five systems
 internal/mon/web   the dashboard (static, no build step)
 ```
+
+## Troubleshooting
+
+| Symptom | Cause and fix |
+|---|---|
+| `failed to connect to the docker API` | Docker Desktop is not running: start it and wait for "Engine running" |
+| the dashboard does not open | containers are still starting: wait until `docker compose ps` shows all as `healthy` |
+| the Components card says control is not running | start with `--profile demo` (the `ctl` container is opt-in) |
+| port already in use | stop what uses 8080, 1883 or 1433, or change the port in `docker-compose.yml` |
+| a container stays stopped after `docker kill` or `docker stop` | Docker restarts only crashes, not manual stops: use *Start* on the dashboard or the FC27 button |
+| SQL Server does not start on an Apple silicon Mac | the image is x86: enable emulation (Rosetta) in Docker Desktop |
+| `docker compose down -v` | also deletes the databases: a clean start |
 
 ## Status and limits
 
