@@ -223,6 +223,67 @@
     var len = p.getTotalLength();
     return p.getPointAtLength(len * Math.max(0, Math.min(1, f)));
   }
+  // Markers follow the conveyor paths: a route is found over the segments between
+  // two stations and walked point by point (no flying across the picture).
+  var SPEED = 80, pstate = {}, edgeCache = null;
+  function segPoints(id, rev) {
+    var p = document.querySelector('#vz-' + id + ' .vz-rail');
+    var len = p.getTotalLength(), n = Math.max(2, Math.ceil(len / 15)), out = [];
+    for (var i = 0; i <= n; i++) { var q = p.getPointAtLength(len * i / n); out.push({ x: q.x, y: q.y }); }
+    return rev ? out.reverse() : out;
+  }
+  function edges() {
+    if (edgeCache) { return edgeCache; }
+    edgeCache = [];
+    SEG.forEach(function (sg) {
+      if (sg.k === 'pan' || sg.k === 'cake' || sg.k === 'buf') {
+        edgeCache.push({ a: sg.a, z: sg.z, pts: segPoints(sg.id, false) });
+        if (sg.id === 'c16') { edgeCache.push({ a: sg.z, z: sg.a, pts: segPoints(sg.id, true) }); }
+      }
+    });
+    return edgeCache;
+  }
+  function route(from, to) { // list of points along the conveyors from one station to another
+    if (from === to) { return []; }
+    var es = edges(), prevE = {}, seen = {}, q = [from];
+    seen[from] = true;
+    while (q.length) {
+      var c = q.shift();
+      if (c === to) { break; }
+      es.forEach(function (e) { if (e.a === c && !seen[e.z]) { seen[e.z] = true; prevE[e.z] = e; q.push(e.z); } });
+    }
+    if (!seen[to]) { return []; }
+    var chain = [];
+    for (var c2 = to; c2 !== from; c2 = prevE[c2].a) { chain.unshift(prevE[c2]); }
+    var pts = [];
+    chain.forEach(function (e) { pts = pts.concat(e.pts); });
+    return pts;
+  }
+  function segById(id) { for (var i = 0; i < SEG.length; i++) { if (SEG[i].id === id) { return SEG[i]; } } }
+  function setTarget(id, g, w, x, y) {
+    var ps = pstate[id];
+    if (!ps) { ps = pstate[id] = { x: x, y: y, box: w.box || null, seg: w.seg || null, q: [], g: g }; g.setAttribute('transform', 'translate(' + x + ' ' + y + ')'); return; }
+    if (w.seg) { ps.seg = w.seg; ps.box = null; ps.q = [{ x: x, y: y }]; return; }
+    var from = ps.box || (ps.seg ? segById(ps.seg).z : null);
+    if (ps.box !== w.box || ps.seg) {
+      ps.q = from ? route(from, w.box).concat([{ x: x, y: y }]) : [{ x: x, y: y }];
+      ps.box = w.box; ps.seg = null;
+    } else { ps.q = [{ x: x, y: y }]; }
+  }
+  var lastT = 0;
+  function frame() { // a timer, not requestAnimationFrame: it keeps moving in a background tab too
+    var t = Date.now(), dt = Math.min(1.5, (t - (lastT || t)) / 1000); lastT = t;
+    Object.keys(pstate).forEach(function (id) {
+      var ps = pstate[id], step = SPEED * dt;
+      while (ps.q.length && step > 0) {
+        var n = ps.q[0], dx = n.x - ps.x, dy = n.y - ps.y, d = Math.sqrt(dx * dx + dy * dy);
+        if (d <= step) { ps.x = n.x; ps.y = n.y; ps.q.shift(); step -= d; }
+        else { ps.x += dx / d * step; ps.y += dy / d * step; step = 0; }
+      }
+      ps.g.setAttribute('transform', 'translate(' + ps.x.toFixed(1) + ' ' + ps.y.toFixed(1) + ')');
+    });
+  }
+  setInterval(frame, 40);
   var TRAVEL = 7000; // ms a pan needs to ride a conveyor segment
   // Where a pan is: a station (box id) or a conveyor segment with progress.
   function whereIs(p) {
@@ -277,15 +338,14 @@
         el('title', {}, g);
         if (isCake) { el('circle', { r: 6 }, g); } else { el('rect', { x: -7, y: -5, width: 14, height: 10, rx: 3 }, g); }
         el('text', { x: 0, y: 3, 'text-anchor': 'middle' }, g);
-        g.style.transform = 'translate(' + x + 'px,' + y + 'px)';
       }
-      g.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      setTarget(p.id, g, w, x, y);
       g.firstChild.textContent = p.id + ': ' + p.status + ' at ' + p.station + (p.fillWeight ? ' · ' + p.fillWeight.toFixed(0) + ' g' : '');
       g.children[1].setAttribute('fill', isCake ? '#c9793a' : (PCOL[p.status] || '#9aa4b2'));
       g.lastChild.textContent = isCake ? '' : p.id.replace(/^PAN-0*/, '');
     });
     Object.keys(panEls).forEach(function (id) {
-      if (!seen[id]) { var g = panEls[id]; if (g.parentNode) { g.parentNode.removeChild(g); } delete panEls[id]; }
+      if (!seen[id]) { var g = panEls[id]; if (g.parentNode) { g.parentNode.removeChild(g); } delete panEls[id]; delete pstate[id]; }
     });
   }
   var lastPans = [];

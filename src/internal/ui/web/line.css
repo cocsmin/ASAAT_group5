@@ -56,7 +56,6 @@
 @keyframes vz-rise{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-26px)}}
 @media (prefers-reduced-motion: reduce){.vz-dot,.st-bad .vz-box,.st-down .vz-box{animation:none}}
 
-.vz-pan{transition:transform 1.1s linear;pointer-events:all}
+.vz-pan{pointer-events:all}
 .vz-pan rect{stroke:rgba(0,0,0,.35);stroke-width:.8}
 .vz-pan text{font:600 7px ui-monospace,monospace;fill:#1b1f27;pointer-events:none}
-@media (prefers-reduced-motion: reduce){.vz-pan{transition:none}}
