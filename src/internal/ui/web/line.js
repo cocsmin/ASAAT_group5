@@ -81,7 +81,7 @@
       svg.removeChild(probe);
       var dur = Math.max(1.6, len / 55);
       var n = Math.max(1, Math.min(9, Math.round(len / 48)));
-      for (var i = 0; i < n && sg.k !== 'pan'; i++) { // pans are drawn from the real pan documents
+      for (var i = 0; i < n && sg.k === 'batter'; i++) { // pans and cakes are drawn from the real documents
         var d = el('circle', { r: sg.k === 'pan' ? 5 : 4.5, 'class': 'vz-dot' }, g);
         d.style.offsetPath = "path('" + sg.p + "')";
         d.style.setProperty('--d', dur + 's');
@@ -236,42 +236,53 @@
       case 'THM-CoolingBuffer': return { box: 'buf' };
       case 'THM-Cooling': return { box: 'cool' };
       case 'FIN-Depanning':
-        if (p.status === 'emptied') { return age < TRAVEL ? { seg: 'c13', f: age / TRAVEL } : { box: 'wash' }; }
-        return { box: 'dpn' };
+        // the empty pan rides to the washing station (emptied or depanned: both are queued for washing)
+        return age < TRAVEL ? { seg: 'c13', f: age / TRAVEL } : { box: 'wash' };
       case 'FIN-Washing': return { box: 'wash' };
     }
     return null;
   }
   var PCOL = { clean: '#9aa4b2', supplied: '#9aa4b2', filled: '#f3d98a', baking: '#e0832f', baked: '#c9793a', buffered: '#6aa5d8', cooling: '#4f8fd0', cooled: '#4f8fd0', depanned: '#b0b7c3', emptied: '#b0b7c3' };
+  // Cakes after depanning have their own document.
+  function cakeAt(p) {
+    var age = Date.now() - new Date(p.updated).getTime();
+    switch (p.status) {
+      case 'awaiting inspection': return { box: 'qua' };
+      case 'inspected': case 'wrapped': return { box: 'wrp' };
+      case 'packed': return age < 30000 ? { box: 'pal' } : null;
+    }
+    return null;
+  }
   function drawPans(pans) {
     if (!built) { return; }
     if (!panLayer) { panLayer = el('g', { id: 'vz-pans' }, svg); }
     var perBox = {}, seen = {};
-    pans.filter(function (p) { return /^PAN-/.test(p.id); }).sort(function (a, b) { return a.id < b.id ? -1 : 1; }).forEach(function (p) {
-      var w = whereIs(p);
+    pans.filter(function (p) { return /^(PAN|CAKE)-/.test(p.id); }).sort(function (a, b) { return a.id < b.id ? -1 : 1; }).forEach(function (p) {
+      var isCake = /^CAKE-/.test(p.id);
+      var w = isCake ? cakeAt(p) : whereIs(p);
       if (!w) { return; }
       var x, y;
       if (w.seg) { var pt = pointOn(w.seg, w.f); x = pt.x; y = pt.y; }
       else {
-        var st = byId(w.box), i = perBox[w.box] = (perBox[w.box] || 0) + 1, j = i - 1;
+        var st = byId(w.box), i = perBox[w.box] = (perBox[w.box] || 0) + 1, j = i - 1 + (isCake ? 0 : 0);
         var cols = Math.max(1, Math.floor((st.w - 12) / 17));
         x = st.x + 12 + (j % cols) * 17;
-        y = st.y + (w.box === 'bake' ? 66 : 38) + Math.floor(j / cols) * 14;
-        if (y > st.y + (st.h || 64) - 16) { y = st.y + (st.h || 64) - 16; }
+        y = st.y + (w.box === 'bake' ? 59 : 38) + Math.floor(j / cols) * 14; // the tunnel box keeps its zone temperatures above the pans
+        if (w.box !== 'bake' && y > st.y + (st.h || 64) - 16) { y = st.y + (st.h || 64) - 16; }
       }
       seen[p.id] = true;
       var g = panEls[p.id];
       if (!g) {
-        g = panEls[p.id] = el('g', { 'class': 'vz-pan' }, panLayer);
+        g = panEls[p.id] = el('g', { 'class': 'vz-pan' + (isCake ? ' cake' : '') }, panLayer);
         el('title', {}, g);
-        el('rect', { x: -7, y: -5, width: 14, height: 10, rx: 3 }, g);
+        if (isCake) { el('circle', { r: 6 }, g); } else { el('rect', { x: -7, y: -5, width: 14, height: 10, rx: 3 }, g); }
         el('text', { x: 0, y: 3, 'text-anchor': 'middle' }, g);
         g.style.transform = 'translate(' + x + 'px,' + y + 'px)';
       }
       g.style.transform = 'translate(' + x + 'px,' + y + 'px)';
       g.firstChild.textContent = p.id + ': ' + p.status + ' at ' + p.station + (p.fillWeight ? ' · ' + p.fillWeight.toFixed(0) + ' g' : '');
-      g.children[1].setAttribute('fill', PCOL[p.status] || '#9aa4b2');
-      g.lastChild.textContent = p.id.replace(/^PAN-0*/, '');
+      g.children[1].setAttribute('fill', isCake ? '#c9793a' : (PCOL[p.status] || '#9aa4b2'));
+      g.lastChild.textContent = isCake ? '' : p.id.replace(/^PAN-0*/, '');
     });
     Object.keys(panEls).forEach(function (id) {
       if (!seen[id]) { var g = panEls[id]; if (g.parentNode) { g.parentNode.removeChild(g); } delete panEls[id]; }
@@ -279,7 +290,7 @@
   }
   var lastPans = [];
   function pollPans() {
-    fetch('/api/pans').then(function (r) { return r.json(); }).then(function (p) { lastPans = p; drawPans(p); }).catch(function () {});
+    fetch('/api/pans?limit=400').then(function (r) { return r.json(); }).then(function (p) { lastPans = p; drawPans(p); }).catch(function () {});
   }
   setInterval(pollPans, 1000);
   setInterval(function () { drawPans(lastPans); }, 250);

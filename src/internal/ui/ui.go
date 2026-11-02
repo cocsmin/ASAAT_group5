@@ -401,7 +401,11 @@ func (s *Server) serve(addr string) {
 			writeJSON(w, []model.Pan{})
 			return
 		}
-		pans, err := ps.List(r.Context(), 40)
+		n := 40
+		if v, err := strconv.Atoi(r.URL.Query().Get("limit")); err == nil && v > 0 && v <= 1000 {
+			n = v
+		}
+		pans, err := ps.List(r.Context(), n)
 		if err != nil {
 			http.Error(w, err.Error(), 502)
 			return
