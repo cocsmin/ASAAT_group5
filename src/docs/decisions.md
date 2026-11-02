@@ -156,6 +156,13 @@ PLM or MON state machine yet.
 - **Component control.** The dashboard switches parts on and off through a
   control service: the `ctl` container in Docker (opt-in profile `demo`, it holds
   the Docker socket) or the dev launcher. The monitor cannot switch itself off.
+- **Lost orders.** An order that batter preparation received but had not yet started
+  is lost when it crashes. PLM sends an order again after 40 s without an ingredient
+  request, and BAT ignores an order id it already has. A batch lost in the middle
+  of dosing stays lost (a fault costs at most one batch, BAT-NFR-02).
+- **Inbound messages.** The MQTT client callback only queues a message; a worker
+  processes it. A blocking handler would otherwise stop the keep-alive and the node
+  would fall off the broker for good.
 - **Database outages.** The monitor's health path does not touch the database: its
   event and ticket writes are queued in the background. Document store calls time
   out after 3 s.

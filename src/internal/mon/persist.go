@@ -3,10 +3,13 @@ package mon
 import (
 	"context"
 	"log"
+	"strings"
 	"sync/atomic"
 	"time"
 
 	"cakefactory/internal/model"
+	"cakefactory/internal/sig"
+	"cakefactory/internal/sparkplug"
 )
 
 // The monitor writes its events and tickets to SQL in the background. The health
@@ -93,6 +96,24 @@ func (m *Monitor) closeTicketRecord(id int64) {
 		}
 		return true
 	})
+}
+
+// isHealth tells whether a message proves that the controller of a node is alive:
+// its birth certificate or a heartbeat. Handoff signals do not count: a controller
+// that stopped answering (FC28) may still be sending those.
+func isHealth(t sparkplug.ParsedTopic, p sparkplug.Payload) bool {
+	if t.Type == sparkplug.NBirth {
+		return true
+	}
+	if t.Type != sparkplug.NData {
+		return false
+	}
+	for _, mt := range p.Metrics {
+		if strings.HasPrefix(mt.Name, sig.Heartbeat+"/") {
+			return true
+		}
+	}
+	return false
 }
 
 // touch records that a node was heard from, when the message arrives, so a busy

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"time"
 
@@ -47,14 +48,23 @@ type BAT struct {
 	results    chan sig.Signal
 	depStopped atomic.Bool
 	failedRun  int // consecutive failed dose measurements
+	seenMu     sync.Mutex
+	seen       map[string]bool // order ids already received
 }
 
 // Run starts the service.
 func Run() {
 	b, cancel := svc.Run(model.BAT, "Doser", "LoadCell", "Mixer", "ConsistencySensor", "InspectionStation")
 	defer cancel()
-	t := &BAT{Base: b, orders: make(chan order, 16), results: make(chan sig.Signal, 16)}
+	t := &BAT{Base: b, orders: make(chan order, 256), results: make(chan sig.Signal, 256), seen: map[string]bool{}}
 	t.N.OnSignal(model.PLM, sig.OrderAndRecipe, func(_ string, s sig.Signal) {
+		t.seenMu.Lock()
+		dup := t.seen[s.Str("orderId")]
+		t.seen[s.Str("orderId")] = true
+		t.seenMu.Unlock()
+		if dup { // PLM sends an order again when it was not picked up
+			return
+		}
 		t.orders <- order{
 			id: s.Str("orderId"), batch: s.Str("batchId"), recipe: s.Str("recipe"),
 			items: plm.DecodeItems(s.Str("items")), mixSeconds: s.Int("mixSeconds"), tolPct: s.Float("doseTolPct"),

@@ -59,10 +59,12 @@ not need Docker still work (the ones marked `docker` are skipped).
 | `mon-down` | MON is stopped while THM discards cakes | no event is lost (THM-REQ-77: the events wait for MON and arrive after it restarts); the line does not run without the monitor (UC2 rule) |
 | `sql-down`, `mongo-down` | a database is switched off for 30 s | the monitor does not mistake a database outage for a dead line (no node declared dead, no band section halted), stations carry on, everything catches up when it returns |
 | `broker-restart` | the MQTT broker restarts, all connections drop | every node reconnects, repeats what was lost, the line continues |
+| `cooling-chain` | cooling stops and nobody repairs it for a while | the chain of the report: the buffer fills and reports it (FC18), cakes that wait too long are discarded (FC17), the repair releases or refuses the buffered cakes (FC16) |
 | `faults-system` | 16 failure cases that the system handles itself | each produces its event (warning or discard) and the line goes on |
 | `faults-maintenance` | 11 failure cases that need Maintenance | each produces an error and a ticket; the scenario confirms the repair like Maintenance would, and the factory recovers |
 
-Each failure case has the code of the report (FC1 to FC28, plus UC4, UC5, UC12,
+The table of all 28 failure cases and how each is triggered is in
+[failure-cases.md](failure-cases.md). Each failure case has the code of the report (FC1 to FC28, plus UC4, UC5, UC12,
 UC14) so the output can be matched to the failure-case tables.
 
 ## A short live demo (about 5 minutes)
@@ -95,8 +97,9 @@ Run on Docker Desktop (Windows 11) with `SIM_SPEED=3`; times are real seconds.
 | `sql-down` | PASS | 30 s without SQL Server: all nodes online, no band section halted, flow resumed after 27 s |
 | `mongo-down` | PASS | 30 s without MongoDB: all nodes online, no band section halted, flow resumed after 9 s |
 | `broker-restart` | PASS | nodes stayed online, 20 of 20 pans kept, flow resumed after 36 s (lost handoffs are repeated by BAT after 20 s) |
+| `cooling-chain` | PASS | FC15 after 3 s, buffer full (FC18) after 8 s, first cake discarded (FC17) after 6 s more, repair released the buffer (FC16) |
 | `faults-system` | PASS | 16 of 16 failure cases produced their event, 71 s in total, 20 of 20 pans kept |
-| `faults-maintenance` | PASS | 11 of 11: error event, ticket opened, repair confirmed, recovered; 52 s in total, 20 of 20 pans kept |
+| `faults-maintenance` | PASS | 13 of 13 (now with FC20 "System, then Maintenance" and the repeated FC24): error event, ticket opened, repair confirmed, recovered; 52 s in total, 20 of 20 pans kept |
 
 ## How the checks work (so you can extend them)
 

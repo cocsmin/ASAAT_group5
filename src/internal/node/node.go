@@ -71,6 +71,7 @@ type Node struct {
 	dupMu    sync.Mutex
 	dupSeen  map[string]bool
 	dupOrder []string
+	inq      chan func()
 }
 
 // New creates a node. Call Start to connect.
@@ -92,6 +93,7 @@ func New(cfg Config) *Node {
 		states:   map[string]sig.Signal{},
 		outNudge: make(chan struct{}, 1),
 		dupSeen:  map[string]bool{},
+		inq:      make(chan func(), 1<<16),
 	}
 	dir := os.Getenv("OUTBOX_DIR")
 	if dir == "" {
@@ -191,6 +193,7 @@ func (n *Node) Start(ctx context.Context) error {
 	n.c.Connect().Wait()
 	go n.heartbeatLoop(ctx)
 	go n.outboxLoop(ctx)
+	go n.dispatcher(ctx)
 	go func() {
 		<-ctx.Done()
 		n.shutdown()
@@ -218,9 +221,43 @@ func (n *Node) subscribe(c mqtt.Client) {
 	}
 }
 
-// onMessage must not block: handlers push work onto channels.
+// onMessage runs in the MQTT client's own goroutine and must return at once. A
+// handler that waits (for a full queue, say) would also keep the client from
+// answering keep-alives, and the node would drop off the broker and never come
+// back. So it only queues the message; one worker goroutine processes the
+// messages in order.
 func (n *Node) onMessage(_ mqtt.Client, m mqtt.Message) {
-	t, ok := sparkplug.ParseTopic(m.Topic())
+	topic, payload := m.Topic(), append([]byte(nil), m.Payload()...)
+	select {
+	case n.inq <- func() { n.dispatch(topic, payload) }:
+	default:
+		warnQueue("[%s] inbound queue full: dropping a message on %s", n.cfg.ID, topic)
+	}
+}
+
+func (n *Node) dispatcher(ctx context.Context) {
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case f := <-n.inq:
+			f()
+		}
+	}
+}
+
+var lastQueueWarn atomic.Int64
+
+func warnQueue(format string, a ...any) {
+	now := time.Now().Unix()
+	if last := lastQueueWarn.Load(); now-last >= 5 && lastQueueWarn.CompareAndSwap(last, now) {
+		log.Printf(format, a...)
+	}
+}
+
+// dispatch handles one received message.
+func (n *Node) dispatch(topic string, payload []byte) {
+	t, ok := sparkplug.ParseTopic(topic)
 	if !ok {
 		return
 	}
@@ -228,7 +265,7 @@ func (n *Node) onMessage(_ mqtt.Client, m mqtt.Message) {
 		if n.cfg.Host {
 			return
 		}
-		up := strings.Contains(string(m.Payload()), `"online":true`)
+		up := strings.Contains(string(payload), `"online":true`)
 		was := n.hostUp.Swap(up)
 		if up && !was {
 			n.birth() // primary host (re)started: publish births again
@@ -240,9 +277,9 @@ func (n *Node) onMessage(_ mqtt.Client, m mqtt.Message) {
 		}
 		return
 	}
-	p, err := sparkplug.Unmarshal(m.Payload())
+	p, err := sparkplug.Unmarshal(payload)
 	if err != nil {
-		log.Printf("[%s] bad payload on %s: %v", n.cfg.ID, m.Topic(), err)
+		log.Printf("[%s] bad payload on %s: %v", n.cfg.ID, topic, err)
 		return
 	}
 	if n.raw != nil {

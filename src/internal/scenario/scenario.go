@@ -261,6 +261,7 @@ func scenarios() []scenario {
 		scenario{"mongo-down", "switch MongoDB off for 30 s: stations carry on, documents catch up afterwards", true,
 			func(e *env) error { return dbDown(e, "mongo", "MongoDB") }},
 		scenario{"broker-restart", "restart the MQTT broker: every node reconnects, the line continues", true, brokerRestart},
+		scenario{"cooling-chain", "cooling stops: the buffer fills (FC18), cakes wait too long (FC17), the repair releases them (FC16)", false, coolingChain},
 		scenario{"faults-system", "failure cases that the system resolves itself (FC1 to FC26, UC4, UC5, UC12, UC14)", false,
 			func(e *env) error { return faults(e, systemFaults) }},
 		scenario{"faults-maintenance", "failure cases that need Maintenance: error, ticket, repair, recovery", false,
@@ -462,6 +463,8 @@ var maintenanceFaults = []fault{
 	{"FIN", "FC23", 1, "FC23", "error", "fin-washer", "washing station breaks: clean pans used from stock"},
 	{"FIN", "FC25", 1, "FC25", "error", "fin-wrapper", "wrapping station breaks: holding area, pan admission stops"},
 	{"MON", "FC19", 1, "FC19", "error", "mon-section-", "a band section stops: upstream halts, downstream runs empty"},
+	{"MON", "FC20", 2, "FC20", "error", "mon-section-", "band speed wrong and the correction fails: Maintenance"},
+	{"FIN", "FC24", 3, "FC24", "error", "fin-inspector", "the same quality check fails 3 times in a row: Maintenance"},
 	{"THM", "FC28", 1, "FC28", "error", "thm-controller", "controller stops responding: MON marks it faulty"},
 }
 
@@ -641,6 +644,66 @@ func dbDown(e *env, service, name string) error {
 		return fmt.Errorf("the line was halted while %s was off: %s", name, bad)
 	}
 	e.logf("30 s without %s: all nodes online, no band section halted", name)
+	if err := e.settle(); err != nil {
+		return err
+	}
+	return e.flowResumes(180 * time.Second)
+}
+
+// coolingChain follows FC15 through its consequences in the report: the cooling
+// buffer fills (FC18), cakes that wait too long are discarded (FC17), and once
+// cooling is repaired the buffered cakes are released (FC16).
+func coolingChain(e *env) error {
+	if err := e.settle(); err != nil {
+		return err
+	}
+	since := e.lastEventID()
+	if err := e.post("/api/inject", map[string]any{"node": "THM", "code": "FC15", "count": 1}); err != nil {
+		return err
+	}
+	e.logf("cooling is about to stop (FC15)")
+	steps := []struct {
+		what     string
+		code     string
+		severity string
+	}{
+		{"cooling stops, diverter raised, cakes go to the buffer", "FC15", "error"},
+		{"the buffer is full: new pans stop, cakes leaving the tunnel are diverted (FC18)", "FC18", "error"},
+		{"a cake waited too long in the buffer and is discarded (FC17)", "FC17", "discard"},
+	}
+	for _, st := range steps {
+		ev, d, err := e.waitEvent(since, 240*time.Second, st.what, func(x event) bool { return x.Code == st.code && x.Severity == st.severity })
+		if err != nil {
+			return err
+		}
+		e.logf("%s: %s (after %.0fs)", st.code, short(ev.Reason), d.Seconds())
+	}
+	var tk ticket
+	if _, err := e.waitFor("a maintenance ticket for the cooling", 30*time.Second, func() bool {
+		s, err := e.state()
+		if err != nil {
+			return false
+		}
+		for _, x := range s.Tickets {
+			if x.Status == "open" && strings.HasPrefix(x.MachineID, "thm-cooling") {
+				tk = x
+				return true
+			}
+		}
+		return false
+	}); err != nil {
+		return err
+	}
+	e.logf("Maintenance ticket %d opened for %s", tk.ID, tk.MachineID)
+	repaired := e.lastEventID()
+	if err := e.post("/api/repair", map[string]any{"ticket": tk.ID}); err != nil {
+		return err
+	}
+	if ev, _, err := e.waitEvent(repaired, 60*time.Second, "FC16 buffered cakes released", func(x event) bool { return x.Code == "FC16" }); err != nil {
+		return err
+	} else {
+		e.logf("FC16: %s", short(ev.Reason))
+	}
 	if err := e.settle(); err != nil {
 		return err
 	}

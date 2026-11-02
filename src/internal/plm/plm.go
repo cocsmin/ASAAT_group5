@@ -33,12 +33,47 @@ type PLM struct {
 	mu        sync.Mutex
 	orderNo   int
 	palletNo  int
-	sentOrder map[string]bool // orders sent, waiting for BAT's ingredient request
+	sentOrder map[string]pendingOrder // orders sent, waiting for BAT's ingredient request
 	held      map[string]model.Order
 	reqs      chan sig.Signal
 	pallets   chan sig.Signal
 	breakerAt time.Time // breaker open until this wall-clock time
 	probing   bool
+}
+
+// pendingOrder is an order that batter preparation has not yet picked up.
+type pendingOrder struct {
+	sig sig.Signal
+	at  time.Time
+}
+
+// resendLoop sends an order again when batter preparation has not asked for its
+// ingredients within 40 s. Batter preparation may have restarted and lost the
+// order it had only received; it ignores an order it already knows.
+func (p *PLM) resendLoop() {
+	t := time.NewTicker(sim.Scale(10 * time.Second))
+	defer t.Stop()
+	for {
+		select {
+		case <-p.Ctx.Done():
+			return
+		case <-t.C:
+		}
+		var again []pendingOrder
+		p.mu.Lock()
+		for id, po := range p.sentOrder {
+			if time.Since(po.at) > sim.Scale(40*time.Second) {
+				po.at = time.Now()
+				p.sentOrder[id] = po
+				again = append(again, po)
+			}
+		}
+		p.mu.Unlock()
+		for _, po := range again {
+			p.N.Warn("UC1", "order "+po.sig.Str("orderId")+" was not picked up by batter preparation: sent again", po.sig.Str("batchId"))
+			p.N.SendReliable(po.sig)
+		}
+	}
 }
 
 // Run starts the service.
@@ -49,8 +84,8 @@ func Run() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	p := &PLM{Base: b, sql: sqlStore, sentOrder: map[string]bool{}, held: map[string]model.Order{},
-		reqs: make(chan sig.Signal, 32), pallets: make(chan sig.Signal, 32)}
+	p := &PLM{Base: b, sql: sqlStore, sentOrder: map[string]pendingOrder{}, held: map[string]model.Order{},
+		reqs: make(chan sig.Signal, 1024), pallets: make(chan sig.Signal, 1024)}
 	p.orderNo = int(p.N.GaugeValue("orders.created"))
 	p.N.OnSignal(model.BAT, sig.IngredientReq, func(_ string, s sig.Signal) {
 		if s.Bool("request") {
@@ -60,6 +95,7 @@ func Run() {
 	p.N.OnSignal(model.FIN, sig.PalletReady, func(_ string, s sig.Signal) { p.pallets <- s })
 	p.Start()
 	go p.requestLoop()
+	go p.resendLoop()
 	go p.palletLoop()
 	go p.stockLoop()
 	p.orderLoop(svc.EnvDur("ORDER_SECONDS", 22*time.Second))
@@ -121,7 +157,6 @@ func (p *PLM) newOrder() {
 	p.mu.Lock()
 	p.orderNo++
 	id := fmt.Sprintf("PO-%04d", p.orderNo)
-	p.sentOrder[id] = true
 	p.mu.Unlock()
 	p.N.Gauge("orders.created", int64(p.orderNo))
 	o := model.Order{ID: id, Recipe: rec.Name, Status: "released", Created: time.Now().UTC()}
@@ -129,10 +164,14 @@ func (p *PLM) newOrder() {
 		log.Printf("save order: %v", err)
 	}
 	batch := "B" + strings.TrimPrefix(id, "PO-") // batch ID is created here, see ADR
-	p.N.SendReliable(sig.New(sig.OrderAndRecipe,
+	order := sig.New(sig.OrderAndRecipe,
 		"orderId", id, "batchId", batch, "recipe", rec.Name, "items", encodeItems(rec.Items),
 		"mixSeconds", int64(rec.MixSeconds), "doseTolPct", rec.DoseTolPct, "pansPerBatch", int64(rec.PansPerBatch),
-		"fillTarget", rec.FillTarget, "fillTol", rec.FillTol))
+		"fillTarget", rec.FillTarget, "fillTol", rec.FillTol)
+	p.mu.Lock()
+	p.sentOrder[id] = pendingOrder{sig: order, at: time.Now()}
+	p.mu.Unlock()
+	p.N.SendReliable(order)
 	p.N.Log("UC1", "production order "+id+" released to batter preparation", batch)
 }
 

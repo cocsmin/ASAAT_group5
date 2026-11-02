@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Cake Factory Control</title>
+<link rel="stylesheet" href="line.css">
 <style>
 :root{
   --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2230; --muted:#667085; --line:#e3e6ec;
@@ -142,6 +143,21 @@ button:disabled{opacity:.45;cursor:not-allowed}
     <div id="alerts"></div>
   </section>
 
+  <section class="card" id="line-card">
+    <h2>Live line <span class="n">batter, cakes and pans moving through the factory</span></h2>
+    <div id="nodechips"></div>
+    <svg id="lineviz" viewBox="0 0 1200 540" role="img" aria-label="Live picture of the production line"></svg>
+    <div class="legend">
+      <span><i style="background:#f3d98a"></i>batter</span>
+      <span><i style="background:#c9793a"></i>cakes</span>
+      <span><i style="background:var(--idle)"></i>empty pans returning</span>
+      <span><i style="background:var(--ok)"></i>running</span>
+      <span><i style="background:var(--warn)"></i>slow or degraded</span>
+      <span><i style="background:var(--bad)"></i>fault, halted or down</span>
+      <span>bars under the line: band sections S1 to S5</span>
+    </div>
+  </section>
+
   <section class="card">
     <h2>Production flow <span class="n">pan loop: washing → clean pool → depositing</span></h2>
     <div class="lanes" id="lanes"></div>
@@ -190,6 +206,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 </main>
 <div id="toasts"></div>
 
+<script src="line.js"></script>
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -417,7 +434,7 @@ window.runScn = async name => {
   loadScn();
 };
 function render(){
-  status(); renderAttention(); renderLanes(); renderTickets(); renderEvents(); renderInject();
+  status(); renderAttention(); renderLanes(); if (window.drawLine) { window.drawLine(snap); } renderTickets(); renderEvents(); renderInject();
   booted = true;
 }
 function connect(){

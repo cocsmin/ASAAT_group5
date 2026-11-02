@@ -34,7 +34,7 @@ var FaultCatalog = []FaultInfo{
 	{"FC12", THM, "Tunnel exit: cake under- or overcooked", "System", 1},
 	{"FC13", THM, "Tunnel exit: heat camera broken", "Maintenance", 1},
 	{"FC14", THM, "Cooling: cake still too hot", "System", 1},
-	{"FC15", THM, "Cooling stops working", "Maintenance", 1},
+	{"FC15", THM, "Cooling stops: cakes go to the buffer (then FC18 buffer full, FC17 cakes wait too long, FC16 repair releases them)", "Maintenance", 1},
 	{"FC27", THM, "Controller container crashes", "System", 1},
 	{"FC28", THM, "Controller stops responding", "Maintenance", 1},
 
@@ -44,6 +44,7 @@ var FaultCatalog = []FaultInfo{
 	{"UC12", FIN, "Washed pan is damaged", "System", 1},
 	{"FC23", FIN, "Washing station breaks", "Maintenance", 1},
 	{"FC24", FIN, "Quality inspection: defect, weight or metal", "System", 1},
+	{"FC24", FIN, "Same quality check fails 3 times in a row", "Maintenance", 3},
 	{"FC25", FIN, "Wrapping station breaks", "Maintenance", 1},
 	{"FC26", FIN, "Cartoning: wrong case weight", "System", 1},
 	{"FC27", FIN, "Controller container crashes", "System", 1},
@@ -51,4 +52,5 @@ var FaultCatalog = []FaultInfo{
 
 	{"FC19", MON, "Band section stops", "Maintenance", 1},
 	{"FC20", MON, "Band runs at the wrong speed", "System", 1},
+	{"FC20", MON, "Band wrong speed, correction fails", "Maintenance", 2},
 }

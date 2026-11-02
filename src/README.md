@@ -54,9 +54,18 @@ The dashboard has two cards for this, and the same checks run from a terminal:
 - **Inject a failure case**: one button per failure case of the report.
 - Terminal: `go run ./cmd/scenario list` and `go run ./cmd/scenario all`.
 
+All 28 failure cases and how to trigger each: [docs/failure-cases.md](docs/failure-cases.md).
+
 See [docs/demo.md](docs/demo.md). The same scenarios run in the CI pipeline.
 
 ## What you see
+
+- **Live line**: a picture of the whole factory. Batter, cakes and empty pans move
+  along the conveyor while a section runs and stop when it halts. Each station is
+  green when healthy, amber when degraded, red (pulsing, with a `!`) when faulty or
+  when its container is down, and shows what is wrong. The bars under the line
+  are the five band sections. A short red or green message rises from a station
+  when a cake is discarded or a pallet ships.
 
 - **Needs attention**: every open fault, with a *Mark repaired* button for the
   Maintenance Department. Green and quiet when the line is healthy.

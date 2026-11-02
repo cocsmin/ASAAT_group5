@@ -113,12 +113,12 @@ func Run() {
 	m.loadHistory()
 	m.startDB()
 	m.N.OnRaw(func(t sparkplug.ParsedTopic, p sparkplug.Payload) {
-		if t.Type == sparkplug.NData || t.Type == sparkplug.NBirth || t.Type == sparkplug.DData || t.Type == sparkplug.DBirth {
+		if isHealth(t, p) {
 			m.touch(t.Edge)
 		}
 		m.work <- func() { m.onMessage(t, p) }
 	})
-	m.N.OnCommand(sig.FaultInjection, func(s sig.Signal) { m.injectLocal(s.Str("code")) })
+	m.N.OnCommand(sig.FaultInjection, func(s sig.Signal) { m.injectLocal(s.Str("code"), s.Int("count")) })
 	m.Start()
 	go m.worker()
 	go m.watchdog()
@@ -497,7 +497,7 @@ func (m *Monitor) Repair(ticketID int64) error {
 // Inject arms a failure case on a node.
 func (m *Monitor) Inject(node, code string, count int) error {
 	if node == model.MON {
-		m.injectLocal(code)
+		m.injectLocal(code, count)
 		return nil
 	}
 	if _, ok := m.nodes[node]; !ok {
@@ -511,13 +511,13 @@ func (m *Monitor) Inject(node, code string, count int) error {
 // --------------------------------------------------------------- band
 
 // injectLocal handles the failure cases of the band itself.
-func (m *Monitor) injectLocal(code string) {
+func (m *Monitor) injectLocal(code string, count int) {
 	sec := int(time.Now().UnixNano()/1000)%5 + 1
 	switch code {
 	case "FC19":
 		go m.sectionStops(sec)
 	case "FC20":
-		go m.wrongSpeed(sec)
+		go m.wrongSpeed(sec, count < 2) // count 2: the correction fails and Maintenance is needed
 	}
 }
 
@@ -568,12 +568,20 @@ func (m *Monitor) sectionRepaired(i int) {
 	m.push()
 }
 
-func (m *Monitor) wrongSpeed(i int) {
+// wrongSpeed is FC20: "System, then Maintenance". The monitor first tries to
+// correct the speed itself; when that does not work Maintenance is called.
+func (m *Monitor) wrongSpeed(i int, fixable bool) {
 	m.reportHalt("slow", fmt.Sprintf("section %d runs at the wrong speed", i))
 	m.setSection(i, "slow")
 	m.broadcastBand()
 	m.N.Warn("FC20", fmt.Sprintf("section %d runs at the wrong speed: speed correction requested", i), "")
 	if !sim.Sleep(m.Ctx, 10*time.Second) {
+		return
+	}
+	if !fixable {
+		m.N.Fault("FC20", fmt.Sprintf("section %d speed could not be corrected: Maintenance repairs the band drive", i), "",
+			m.sections[i].Name, fmt.Sprintf("mon-section-%d", i))
+		m.push()
 		return
 	}
 	m.setSection(i, "run")

@@ -48,6 +48,53 @@ where the diagrams are missing, wrong, or behind the implementation.
   While MongoDB is off the pan documents are not updated, so a crash in that window
   rebuilds queues from stale documents (not covered).
 
+- A node whose message handler waited on a full internal queue (THM, with its
+  batter queue full while the line was halted) also stopped answering MQTT
+  keep-alives, dropped off the broker and never reconnected. Message handlers now
+  only queue the message and a worker processes them, and the internal queues are
+  larger. Found when a broker restart met a halted THM; no scenario reproduces it
+  on its own yet (a long halt with BAT producing, then a broker restart).
+- "Heard from" for the watchdog must be a heartbeat, not any message: a controller
+  that stopped answering (FC28) may still send handoff signals. Scenario
+  `faults-maintenance` (FC28) covers it.
+
+- After a BAT crash the flow once took 95 s instead of about 15 s: orders that BAT
+  had received but not started were lost with it and PLM waited for them. PLM now
+  sends them again (U13); confirmed by a resend event during repeated `crash-bat`
+  runs, all about 20 s. No scenario forces that exact timing.
+
+## Failure-case coverage
+
+All of FC1 to FC28 are implemented and run by a scenario (`docs/failure-cases.md`).
+Found and fixed while checking against the report: FC20 had no "then Maintenance"
+step, the repeated-failure rule for FC24 was random instead of reproducible, and
+FC18 (buffer full) was never reported as an event.
+
+Still simpler than the report: FC28 per controller instead of per machine, FC13
+detected at once (no T_resp), FC16 in-time release has no scenario of its own.
+
+## Fixes that change what the diagrams and documents should say
+
+Rule for the implementation work: every fix that changes behaviour, a signal or a
+data shape gets a line here, so the Papyrus models, the Word documents and the
+report are updated afterwards. **[person]** = needs Papyrus or Word.
+
+| # | Fix | Update **[person]** |
+|---|---|---|
+| U1 | FC20 is now "System, then Maintenance": the monitor first tries to correct the speed itself, and when that fails it opens a ticket for `mon-section-N` | MON document and diagrams (none yet); FC20 flow in the report already says "System, then Maintenance" and now matches |
+| U2 | FC24 repeated failure: the same quality check failing 3 times in a row calls Maintenance (machine `fin-inspector`), as the general failure-case rule says | FIN document: add a requirement; FIN SM1 (Inspection Flow): add the lockout after repeated rejects and its repair; FIN interface table (Repair confirmed also goes to the inspection) |
+| U3 | FC18: the buffer reports "full" the moment the 8th cake is held, stops new pans, and the exit diverts what still comes | THM SM4 T8 already says "report buffer full"; check that THM-REQ-48 and -57 name the event and the buffer-full device state |
+| U4 | UC5 alternative: the Weight-Checker is not calibrated, depositing waits for recalibration (guard of THM SM1 T1) | Report use case UC5 and UC6: add the alternative flow; THM SM1: add the "not calibrated" transition or state (today only the guard exists) |
+| U5 | BAT reserves ingredients again for a batch that replaces a discarded one (reservation id `<order>-<n>`) | BAT-REQ-03 says "once per order": reword to "per batch"; PLM document: reservations may carry a batch suffix |
+| U6 | Signals now carry a message id (handoffs) or an event id (events), are sent with QoS 1 over persistent sessions, and are deduplicated by the receiver; state signals repeat with every heartbeat | All interface tables in BAT, FIN, THM, PLM documents and the signal-port notes in the models; see `docs/signals.md` |
+| U7 | Liveness: a node counts as alive only through its birth certificate or heartbeat (not through other signals); the monitor declares it silent after 3 heartbeat intervals; the broker declares a frozen node dead after 1.5 x keep-alive (7.5 s) | THM-REQ-72 (15 s) text can cite both paths; MON document |
+| U8 | Monitor database outage: the monitor does not depend on the database for health detection; its writes queue and are retried | MON document (quality attribute scenario: availability when the database fails); report section on availability |
+| U9 | Restart recovery: FIN and THM rebuild queues from the stored pan and cake documents; THM resumes cakes on the band and restores the cooling buffer | THM, FIN and BAT state machines (FC27 behaviour, item 6 above); THM deployment table ("saved state") |
+| U10 | After depanning a cake has its own document (`CAKE-<batch>-<pan>`), the pan keeps its own | FIN document data description; data model and traceability (batch to pan to cake to pallet) in the report |
+| U11 | Component control (`ctl`, demo profile) and the Test scenarios / Components cards | Deployment view: add the `ctl` container and the Docker socket; report: how the demonstrations are run |
+| U12 | The "no production without the monitor" rule is implemented through the Sparkplug `STATE` topic of the host | System IBD: add the `STATE` message between MON and every node (see item 1) |
+| U13 | PLM sends a production order again when batter preparation has not asked for its ingredients within 40 s (BAT may have restarted and lost it); BAT ignores an order id it already has | PLM state machine (order lifecycle: released, sent again, reserved, held; to be drawn); BAT document: "Production order and recipe targets" is idempotent on the order id; signal table (message id) |
+
 ## Decisions for the group
 
 1. **Container granularity.** Now one container per system. Two requirements

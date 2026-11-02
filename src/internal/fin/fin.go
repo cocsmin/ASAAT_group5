@@ -74,8 +74,8 @@ func Run() {
 	defer cancel()
 	size, _ := strconv.Atoi(svc.Env("PALLET_SIZE", "6"))
 	f := &FIN{Base: b, palletSize: size,
-		cooled: make(chan cake, 128), toInspect: make(chan cake, 2), toWrap: make(chan cake, holdingCap),
-		toPallet: make(chan cake, 4), washQ: make(chan string, 128), panReq: make(chan struct{}, 64),
+		cooled: make(chan cake, 1024), toInspect: make(chan cake, 2), toWrap: make(chan cake, holdingCap),
+		toPallet: make(chan cake, 4), washQ: make(chan string, 1024), panReq: make(chan struct{}, 64),
 		stopped: map[string]bool{}, inWash: map[string]bool{}, inCooled: map[string]bool{}}
 	for i := range f.gates {
 		f.gates[i] = sim.NewGate()
@@ -271,6 +271,7 @@ func (f *FIN) depanner() {
 
 // inspector checks weight, appearance and metal (UC13, FC24).
 func (f *FIN) inspector() {
+	var sticky string // while a fault is armed the same check keeps failing
 	for {
 		var c cake
 		select {
@@ -283,7 +284,13 @@ func (f *FIN) inspector() {
 		}
 		reason := ""
 		if f.F.Take("FC24") {
-			reason = [...]string{"wrong weight", "visual defect", "metal contamination"}[time.Now().UnixNano()%3]
+			if sticky == "" {
+				sticky = [...]string{"wrong weight", "visual defect", "metal contamination"}[time.Now().UnixNano()%3]
+			}
+			reason = sticky
+			if !f.F.Armed("FC24") {
+				sticky = ""
+			}
 		}
 		if reason == "" {
 			f.mu.Lock()

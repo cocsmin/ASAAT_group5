@@ -93,7 +93,7 @@ func Run() {
 	b, cancel := svc.Run(model.THM, "Depositor", "PanPresenceEye", "CheckWeigher", "Zone1", "Zone2", "Zone3",
 		"HeatCamera", "CoolingControl", "CoolingBuffer")
 	defer cancel()
-	t := &THM{Base: b, batters: make(chan batch, 16), clean: make(chan string, 32), reasons: map[string]string{}, inClean: map[string]bool{}, seenBatch: map[string]bool{}}
+	t := &THM{Base: b, batters: make(chan batch, 1024), clean: make(chan string, 1024), reasons: map[string]string{}, inClean: map[string]bool{}, seenBatch: map[string]bool{}}
 	for i := range t.gates {
 		t.gates[i] = sim.NewGate()
 	}
@@ -507,6 +507,12 @@ func (t *THM) buffer(p pan, temp float64, why string) {
 	store.Move(t.Ctx, t.Pans, p.id, "THM-CoolingBuffer", "buffered", why, nil)
 	t.N.SetDevice("CoolingBuffer", model.StateWarn, fmt.Sprintf("%d cakes held", n))
 	t.N.Log("FC15", fmt.Sprintf("cake held in cooling buffer (%s), %d/%d", why, n, bufferCapacity), p.batch)
+	if n >= bufferCapacity { // FC18: report "buffer full" at once, stop new pans, the exit diverts what still comes
+		t.setReason("buffer", "cooling buffer full (FC18)", true)
+		t.N.SetDevice("CoolingBuffer", model.StateFault, "full")
+		t.N.Emit(node.Event{Severity: model.SevError, Code: "FC18", BatchID: p.batch,
+			Reason: fmt.Sprintf("cooling buffer full (%d/%d): new pans stopped, cakes leaving the tunnel are diverted to refuse", n, bufferCapacity)})
+	}
 }
 
 func (t *THM) coolingRepaired() {
