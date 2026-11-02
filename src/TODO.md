@@ -73,37 +73,25 @@ FC18 (buffer full) was never reported as an event.
 Still simpler than the report: FC28 per controller instead of per machine, FC13
 detected at once (no T_resp), FC16 in-time release has no scenario of its own.
 
-## Exercises 6 and 7: what is still missing
+## Exercises 6 and 7
 
-Checked against exercise_6.pdf (communication, containerization, languages, databases)
-and asaat_exercise_7.pdf (experiment for a quality attribute).
+Drafts written (edit them for the report, they are a starting point):
+`docs/communication.md`, `containers.md`, `languages.md`, `databases.md` (exercise 6) and
+`docs/experiment.md` with the data in `docs/experiment-results.csv` (exercise 7).
 
-**Exercise 7, experiment (largest gap)**
-1. No experiment design document. Needed: goal in the GQM template from the
-   literature, the quality attribute (availability), metrics (detection time, recovery
-   time, products lost per fault, availability %), scenarios, tools, environment.
-2. No structured data. The scenarios print a timeline but do not repeat runs or write
-   CSV. Needed: a runner mode that repeats each scenario N times and writes a CSV
-   (scenario, run, detection s, recovery s, pans kept, flow resumed s), plus notes on
-   unexpected behaviour (the 95 s BAT stall is one).
-3. Analysis is a later exercise; only collect the data.
-
-**Exercise 6, documents (code is done, write-ups are not)**
-4. Communication: a comparison of Sparkplug B/MQTT with alternatives (Kafka, NATS,
-   RabbitMQ, OPC UA), the protocol design, quality-attribute impact, and a diagram of
-   the message flow. `docs/signals.md` has the signal table only. The lecture draft ADR
-   argues MQTT 5 with JSON, so the justification for Sparkplug B must be written
-   separately.
-5. Containerization: per-component justification and quality-attribute impact. The
-   requirement "images built and pushed by CI/CD" is implemented in `cicd.yml` but
-   pushes only on main or master, so it has not happened yet.
-6. Languages: per system and subsystem justification with trade-offs. Note: the
-   dashboard is HTML and JavaScript, so "Go for everything" is not literally true;
-   say so in the document.
-7. Databases: per system and subsystem mapping (SQL Server for PLM data, orders,
-   event log and tickets; MongoDB for pan and cake documents and node state), the
-   trade-offs, and the optional data model or ER diagram (schema is in
-   `internal/store/sql_mssql.go`).
+Still open **[person]**:
+1. Exercise 6.1: the Papyrus diagram of the message flow with the bus (the text diagram
+   in communication.md is a placeholder); check the technology comparison and add
+   sources the group has read.
+2. Exercise 6.2: "images built and pushed by CI/CD" only happens on main or master;
+   it needs the first merge or a manual run on the default branch, and the ghcr
+   package settings (visibility).
+3. Exercise 6.4: the ER diagram is a Mermaid diagram in docs/databases.md (renders on GitHub); export it as an image for the report (mermaid.live) if needed.
+4. Exercise 7: the group decides the metrics and number of runs; the analysis is the
+   next exercise. The experiment covers crash and freeze only, on one machine at
+   real speed; the availability percentage of THM-REQ-71 is not computed yet.
+5. Scalability is asked for in the exercises and is not measured anywhere (one broker,
+   five nodes, about 20 pans).
 
 ## Fixes that change what the diagrams and documents should say
 
@@ -126,6 +114,7 @@ report are updated afterwards. **[person]** = needs Papyrus or Word.
 | U11 | Component control (`ctl`, demo profile) and the Test scenarios / Components cards | Deployment view: add the `ctl` container and the Docker socket; report: how the demonstrations are run |
 | U12 | The "no production without the monitor" rule is implemented through the Sparkplug `STATE` topic of the host | System IBD: add the `STATE` message between MON and every node (see item 1) |
 | U13 | PLM sends a production order again when batter preparation has not asked for its ingredients within 40 s (BAT may have restarted and lost it); BAT ignores an order id it already has | PLM state machine (order lifecycle: released, sent again, reserved, held; to be drawn); BAT document: "Production order and recipe targets" is idempotent on the order id; signal table (message id) |
+| U14 | After a PLM restart the order numbers continue after the highest stored order (before: they restarted at PO-0001, BAT ignored the repeated ids and the line stalled; found by run 3 of the availability experiment, kept in `docs/experiment-aborted-run.csv`) | PLM state machine (order lifecycle: the order id is persistent); PLM document: "order ids are unique and never reused"; the experiment report (unexpected behaviour, first experiment run aborted and repeated) |
 
 ## Decisions for the group
 

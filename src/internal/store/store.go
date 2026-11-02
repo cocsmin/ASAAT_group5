@@ -29,6 +29,7 @@ type SQL interface {
 	Restock(ctx context.Context, ingredient string, grams float64) error
 	Stock(ctx context.Context) ([]model.StockRow, error)
 	SaveOrder(ctx context.Context, o model.Order) error
+	LastOrderNo(ctx context.Context) (int, error) // highest PO-nnnn number stored, 0 if none
 	SetOrderStatus(ctx context.Context, id, status, note string) error
 	SaveShipment(ctx context.Context, s model.Shipment) error
 

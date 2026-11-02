@@ -56,6 +56,8 @@ The dashboard has two cards for this, and the same checks run from a terminal:
 
 All 28 failure cases and how to trigger each: [docs/failure-cases.md](docs/failure-cases.md).
 
+Write-ups for the course exercises: [communication](docs/communication.md), [containers](docs/containers.md), [languages](docs/languages.md), [databases](docs/databases.md), [availability experiment](docs/experiment.md). Collect the experiment data with `go run ./cmd/scenario experiment`.
+
 See [docs/demo.md](docs/demo.md). The same scenarios run in the CI pipeline.
 
 ## What you see

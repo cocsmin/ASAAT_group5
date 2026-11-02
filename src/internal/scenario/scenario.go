@@ -55,6 +55,8 @@ type state struct {
 }
 
 type env struct {
+	metric     func(name string, v float64)
+	faultAt    time.Time // when the fault of the running scenario was injected
 	out        func(string)
 	control    func(service, action string) error
 	base       string
@@ -218,10 +220,20 @@ func (e *env) settle() error {
 	return err
 }
 
+func (e *env) rec(name string, v float64) {
+	if e.metric != nil {
+		e.metric(name, v)
+	}
+}
+
 func (e *env) flowResumes(since time.Duration) error {
 	before := e.gauge("PLM", "cakes.shipped")
 	d, err := e.waitFor("a pallet is shipped again", since, func() bool { return e.gauge("PLM", "cakes.shipped") > before })
 	if err == nil {
+		e.rec("flow_resume_s", d.Seconds())
+		if !e.faultAt.IsZero() {
+			e.rec("outage_s", time.Since(e.faultAt).Seconds()) // production outage: fault until the next cake ships
+		}
 		e.logf("flow resumed: cakes shipped %d -> %d (after %.0fs)", before, e.gauge("PLM", "cakes.shipped"), d.Seconds())
 	}
 	return err
@@ -230,6 +242,7 @@ func (e *env) flowResumes(since time.Duration) error {
 // panLoop checks that no pan was lost or duplicated.
 func (e *env) panLoop(want int) error {
 	total, by := e.pans()
+	e.rec("pans_lost", float64(want-total))
 	e.logf("pans: %d in the loop %v", total, by)
 	if total != want {
 		return fmt.Errorf("pan count changed: %d, expected %d", total, want)
@@ -287,6 +300,7 @@ func crash(e *env, node string) error {
 	pans, _ := e.pans()
 	since := e.lastEventID()
 	t0 := time.Now()
+	e.faultAt = time.Now()
 	if err := e.post("/api/inject", map[string]any{"node": node, "code": "FC27", "count": 1}); err != nil {
 		return err
 	}
@@ -297,6 +311,7 @@ func crash(e *env, node string) error {
 	if err != nil {
 		return fmt.Errorf("not detected within %s: %w", detectBound, err)
 	}
+	e.rec("detect_s", d.Seconds())
 	e.logf("MON saw the death certificate after %.1fs (bound %s)", d.Seconds(), detectBound)
 	_, _, err = e.waitEvent(since, recoverBound, node+" back", func(x event) bool {
 		return x.Code == "FC27" && strings.HasPrefix(x.Reason, node+" container is back")
@@ -304,6 +319,7 @@ func crash(e *env, node string) error {
 	if err != nil {
 		return fmt.Errorf("not recovered within %s: %w", recoverBound, err)
 	}
+	e.rec("recover_s", time.Since(t0).Seconds())
 	e.logf("%s is back after %.1fs (bound %s)", node, time.Since(t0).Seconds(), recoverBound)
 	if ev, _ := e.events(since); len(ev) > 0 {
 		for _, x := range ev {
@@ -329,6 +345,7 @@ func freeze(e *env) error {
 	pans, _ := e.pans()
 	since := e.lastEventID()
 	t0 := time.Now()
+	e.faultAt = time.Now()
 	if err := e.act("pause", "thm"); err != nil {
 		return err
 	}
@@ -340,6 +357,7 @@ func freeze(e *env) error {
 		_ = e.act("unpause", "thm")
 		return fmt.Errorf("not detected within %s: %w", detectBound, err)
 	}
+	e.rec("detect_s", d.Seconds())
 	e.logf("broker declared THM dead after %.1fs, MON halted its band sections (bound %s)", d.Seconds(), detectBound)
 	_ = time.Since(t0)
 	if err := e.act("unpause", "thm"); err != nil {
@@ -553,6 +571,7 @@ type Options struct {
 	Base       string                             // dashboard address of MON
 	ComposeDir string                             // directory with docker-compose.yml
 	Docker     bool                               // containers can be controlled (docker compose or Control)
+	Metric     func(name string, v float64)       // optional: receives measured values
 	Control    func(service, action string) error // optional: acts on a container
 	Log        func(string)                       // receives the timeline, one line at a time
 }
@@ -595,7 +614,7 @@ func Run(name string, o Options) error {
 		if s.docker && !o.Docker {
 			return ErrNeedsDocker
 		}
-		e := &env{out: o.Log, control: o.Control, base: o.Base, composeDir: o.ComposeDir, docker: o.Docker,
+		e := &env{out: o.Log, metric: o.Metric, control: o.Control, base: o.Base, composeDir: o.ComposeDir, docker: o.Docker,
 			hc: &http.Client{Timeout: 5 * time.Second}, t0: time.Now()}
 		if _, err := e.state(); err != nil {
 			return fmt.Errorf("cannot reach %s: %w", o.Base, err)

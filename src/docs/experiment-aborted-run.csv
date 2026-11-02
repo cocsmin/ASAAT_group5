@@ -1,0 +1,5 @@
+timestamp,scenario,run,result,detect_s,recover_s,outage_s,flow_resume_s,pans_lost,error
+2026-11-02T06:05:56Z,crash-plm,1,pass,0.31,0.82,10.74,4.91,0.00,
+2026-11-02T06:06:16Z,crash-plm,2,pass,0.41,0.82,20.77,14.94,0.00,
+2026-11-02T06:09:22Z,crash-plm,3,fail,0.31,0.82,,,0.00,timeout after 3m0s waiting for: a pallet is shipped again
+2026-11-02T06:12:28Z,crash-plm,4,fail,0.41,0.82,,,0.00,timeout after 3m0s waiting for: a pallet is shipped again

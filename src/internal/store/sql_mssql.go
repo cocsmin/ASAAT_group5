@@ -221,6 +221,14 @@ func (s *MSSQL) Stock(ctx context.Context) ([]model.StockRow, error) {
 	return out, rows.Err()
 }
 
+// LastOrderNo returns the highest order number stored, so a restarted PLM never
+// issues an order id again.
+func (s *MSSQL) LastOrderNo(ctx context.Context) (int, error) {
+	var n int
+	err := s.db.QueryRowContext(ctx, "SELECT ISNULL(MAX(TRY_CAST(SUBSTRING(id, 4, 10) AS INT)), 0) FROM dbo.production_orders").Scan(&n)
+	return n, err
+}
+
 // SaveOrder stores a production order.
 func (s *MSSQL) SaveOrder(ctx context.Context, o model.Order) error {
 	_, err := s.db.ExecContext(ctx, "INSERT dbo.production_orders VALUES (@p1,@p2,@p3,@p4,@p5)",

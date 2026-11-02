@@ -11,10 +11,12 @@
 package main
 
 import (
+	"encoding/csv"
 	"errors"
 	"flag"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"cakefactory/internal/scenario"
@@ -24,7 +26,7 @@ func main() {
 	base := flag.String("url", "http://localhost:8080", "dashboard address of MON")
 	dir := flag.String("compose-dir", ".", "directory with docker-compose.yml")
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, "usage: scenario [flags] list | all | <name>...")
+		fmt.Fprintln(os.Stderr, "usage: scenario [flags] list | all | <name>... | experiment [-runs N] [-out file.csv] [name...]")
 		flag.PrintDefaults()
 	}
 	flag.Parse()
@@ -54,6 +56,10 @@ func main() {
 		desc[s.Name] = s.Desc
 	}
 	docker := scenario.HasDocker(*dir)
+	if args[0] == "experiment" {
+		experiment(args[1:], *base, *dir, docker)
+		return
+	}
 	failed := 0
 	for _, n := range names {
 		d, ok := desc[n]
@@ -76,6 +82,59 @@ func main() {
 		}
 	}
 	fmt.Printf("\n%d of %d scenarios failed\n", failed, len(names))
+	if failed > 0 {
+		os.Exit(1)
+	}
+}
+
+// experiment repeats the availability scenarios and writes one CSV row per run
+// (see docs/experiment.md). Default: every crash scenario and the frozen node.
+func experiment(args []string, base, dir string, docker bool) {
+	fs := flag.NewFlagSet("experiment", flag.ExitOnError)
+	runs := fs.Int("runs", 10, "runs per scenario")
+	out := fs.String("out", "experiment-results.csv", "CSV file to write")
+	_ = fs.Parse(args)
+	names := fs.Args()
+	if len(names) == 0 {
+		names = []string{"crash-plm", "crash-bat", "crash-thm", "crash-fin"}
+		if docker {
+			names = append(names, "freeze-thm")
+		}
+	}
+	file, err := os.Create(*out)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	defer file.Close()
+	w := csv.NewWriter(file)
+	cols := []string{"detect_s", "recover_s", "outage_s", "flow_resume_s", "pans_lost"}
+	_ = w.Write(append([]string{"timestamp", "scenario", "run", "result"}, append(cols, "error")...))
+	failed := 0
+	for _, n := range names {
+		for i := 1; i <= *runs; i++ {
+			vals := map[string]float64{}
+			err := scenario.Run(n, scenario.Options{Base: base, ComposeDir: dir, Docker: docker,
+				Metric: func(k string, v float64) { vals[k] = v }, Log: func(string) {}})
+			row := []string{time.Now().UTC().Format(time.RFC3339), n, strconv.Itoa(i), "pass"}
+			msg := ""
+			if err != nil {
+				row[3], msg = "fail", err.Error()
+				failed++
+			}
+			for _, c := range cols {
+				if v, ok := vals[c]; ok {
+					row = append(row, strconv.FormatFloat(v, 'f', 2, 64))
+				} else {
+					row = append(row, "")
+				}
+			}
+			_ = w.Write(append(row, msg))
+			w.Flush()
+			fmt.Printf("%-12s run %2d/%d  %s  %v\n", n, i, *runs, row[3], vals)
+		}
+	}
+	fmt.Printf("\nwrote %s (%d failed runs)\n", *out, failed)
 	if failed > 0 {
 		os.Exit(1)
 	}

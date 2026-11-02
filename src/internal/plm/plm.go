@@ -86,7 +86,6 @@ func Run() {
 	}
 	p := &PLM{Base: b, sql: sqlStore, sentOrder: map[string]pendingOrder{}, held: map[string]model.Order{},
 		reqs: make(chan sig.Signal, 1024), pallets: make(chan sig.Signal, 1024)}
-	p.orderNo = int(p.N.GaugeValue("orders.created"))
 	p.N.OnSignal(model.BAT, sig.IngredientReq, func(_ string, s sig.Signal) {
 		if s.Bool("request") {
 			p.reqs <- s
@@ -94,6 +93,15 @@ func Run() {
 	})
 	p.N.OnSignal(model.FIN, sig.PalletReady, func(_ string, s sig.Signal) { p.pallets <- s })
 	p.Start()
+	// Continue the order numbers after a restart. Taking the larger of the saved
+	// counter and the highest stored order avoids re-issuing an id that batter
+	// preparation already knows (it would ignore the order and the line would stall).
+	if n, err := sqlStore.LastOrderNo(b.Ctx); err == nil {
+		p.orderNo = n
+	}
+	if g := int(p.N.GaugeValue("orders.created")); g > p.orderNo {
+		p.orderNo = g
+	}
 	go p.requestLoop()
 	go p.resendLoop()
 	go p.palletLoop()

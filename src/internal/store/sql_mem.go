@@ -122,6 +122,20 @@ func (m *MemSQL) Stock(context.Context) ([]model.StockRow, error) {
 	return out, nil
 }
 
+// LastOrderNo returns the highest order number stored.
+func (m *MemSQL) LastOrderNo(context.Context) (int, error) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	max := 0
+	for id := range m.orders {
+		var n int
+		if _, err := fmt.Sscanf(id, "PO-%d", &n); err == nil && n > max {
+			max = n
+		}
+	}
+	return max, nil
+}
+
 // SaveOrder stores an order.
 func (m *MemSQL) SaveOrder(_ context.Context, o model.Order) error {
 	m.mu.Lock()
