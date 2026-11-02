@@ -57,7 +57,7 @@ not need Docker still work (the ones marked `docker` are skipped).
 | `crash-plm`, `crash-bat`, `crash-thm`, `crash-fin`, `crash-bt` | the container exits like a real crash | the broker publishes the death certificate (Last Will) within 15 s (THM-REQ-72); Docker restarts the container and it is back within 60 s (THM-REQ-73); no pan is lost or duplicated; the line carries on |
 | `freeze-thm` | THM freezes and stops its keep-alive pings | the broker declares it dead on its own (about 7.5 s with a 5 s keep-alive), MON halts the band sections; it comes back when unfrozen |
 | `mon-down` | MON is stopped while THM discards cakes | no event is lost (THM-REQ-77: the events wait for MON and arrive after it restarts); the line does not run without the monitor (UC2 rule) |
-| `sql-down`, `mongo-down` | a database is switched off for 30 s | the monitor does not mistake a database outage for a dead line (no node declared dead, no band section halted), stations carry on, everything catches up when it returns |
+| `sql-down` | SQL Server is switched off for 30 s | the monitor does not mistake a database outage for a dead line (no node declared dead, no band section halted), stations carry on, everything catches up when it returns |
 | `broker-restart` | the MQTT broker restarts, all connections drop | every node reconnects, repeats what was lost, the line continues |
 | `cooling-chain` | cooling stops and nobody repairs it for a while | the chain of the report: the buffer fills and reports it (FC18), cakes that wait too long are discarded (FC17), the repair releases or refuses the buffered cakes (FC16) |
 | `faults-system` | 16 failure cases that the system handles itself | each produces its event (warning or discard) and the line goes on |
@@ -95,7 +95,6 @@ Run on Docker Desktop (Windows 11) with `SIM_SPEED=3`; times are real seconds.
 | `freeze-thm` | PASS | broker declared THM dead after 5.8 s (bound 15 s), flow resumed |
 | `mon-down` | PASS | 4 of 4 discard events arrived after MON came back |
 | `sql-down` | PASS | 30 s without SQL Server: all nodes online, no band section halted, flow resumed after 27 s |
-| `mongo-down` | PASS | 30 s without MongoDB: all nodes online, no band section halted, flow resumed after 9 s |
 | `broker-restart` | PASS | nodes stayed online, 20 of 20 pans kept, flow resumed after 36 s (lost handoffs are repeated by BAT after 20 s) |
 | `cooling-chain` | PASS | FC15 after 3 s, buffer full (FC18) after 8 s, first cake discarded (FC17) after 6 s more, repair released the buffer (FC16) |
 | `faults-system` | PASS | 16 of 16 failure cases produced their event, 71 s in total, 20 of 20 pans kept |

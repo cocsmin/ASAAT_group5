@@ -81,7 +81,7 @@
       svg.removeChild(probe);
       var dur = Math.max(1.6, len / 55);
       var n = Math.max(1, Math.min(9, Math.round(len / 48)));
-      for (var i = 0; i < n; i++) {
+      for (var i = 0; i < n && sg.k !== 'pan'; i++) { // pans are drawn from the real pan documents
         var d = el('circle', { r: sg.k === 'pan' ? 5 : 4.5, 'class': 'vz-dot' }, g);
         d.style.offsetPath = "path('" + sg.p + "')";
         d.style.setProperty('--d', dur + 's');
@@ -213,6 +213,76 @@
       }).join('');
     }
   }
+
+  // ---- the real pans: one marker per pan document in MongoDB, placed by its station
+  var panLayer = null, panEls = {}, panSeen = {}, pathLen = {};
+  function pathOf(id) { for (var i = 0; i < SEG.length; i++) { if (SEG[i].id === id) { return SEG[i].p; } } }
+  function pointOn(id, f) {
+    var p = document.querySelector('#vz-' + id + ' .vz-rail');
+    if (!p) { return { x: 0, y: 0 }; }
+    var len = p.getTotalLength();
+    return p.getPointAtLength(len * Math.max(0, Math.min(1, f)));
+  }
+  var TRAVEL = 7000; // ms a pan needs to ride a conveyor segment
+  // Where a pan is: a station (box id) or a conveyor segment with progress.
+  function whereIs(p) {
+    var age = Date.now() - new Date(p.updated).getTime();
+    switch (p.station) {
+      case 'FIN-PanPool': return { box: 'pool' };
+      case 'FIN-PanSupply': return age < TRAVEL * 1.6 ? { seg: 'c15', f: age / (TRAVEL * 1.6) } : { box: 'dep' };
+      case 'THM-Depositing': return { box: 'dep' };
+      case 'THM-Baking': return { box: 'bake' };
+      case 'THM-TunnelExit': return { box: 'exit' };
+      case 'THM-CoolingBuffer': return { box: 'buf' };
+      case 'THM-Cooling': return { box: 'cool' };
+      case 'FIN-Depanning':
+        if (p.status === 'emptied') { return age < TRAVEL ? { seg: 'c13', f: age / TRAVEL } : { box: 'wash' }; }
+        return { box: 'dpn' };
+      case 'FIN-Washing': return { box: 'wash' };
+    }
+    return null;
+  }
+  var PCOL = { clean: '#9aa4b2', supplied: '#9aa4b2', filled: '#f3d98a', baking: '#e0832f', baked: '#c9793a', buffered: '#6aa5d8', cooling: '#4f8fd0', cooled: '#4f8fd0', depanned: '#b0b7c3', emptied: '#b0b7c3' };
+  function drawPans(pans) {
+    if (!built) { return; }
+    if (!panLayer) { panLayer = el('g', { id: 'vz-pans' }, svg); }
+    var perBox = {}, seen = {};
+    pans.filter(function (p) { return /^PAN-/.test(p.id); }).sort(function (a, b) { return a.id < b.id ? -1 : 1; }).forEach(function (p) {
+      var w = whereIs(p);
+      if (!w) { return; }
+      var x, y;
+      if (w.seg) { var pt = pointOn(w.seg, w.f); x = pt.x; y = pt.y; }
+      else {
+        var st = byId(w.box), i = perBox[w.box] = (perBox[w.box] || 0) + 1, j = i - 1;
+        var cols = Math.max(1, Math.floor((st.w - 12) / 17));
+        x = st.x + 12 + (j % cols) * 17;
+        y = st.y + (w.box === 'bake' ? 66 : 38) + Math.floor(j / cols) * 14;
+        if (y > st.y + (st.h || 64) - 16) { y = st.y + (st.h || 64) - 16; }
+      }
+      seen[p.id] = true;
+      var g = panEls[p.id];
+      if (!g) {
+        g = panEls[p.id] = el('g', { 'class': 'vz-pan' }, panLayer);
+        el('title', {}, g);
+        el('rect', { x: -7, y: -5, width: 14, height: 10, rx: 3 }, g);
+        el('text', { x: 0, y: 3, 'text-anchor': 'middle' }, g);
+        g.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      }
+      g.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      g.firstChild.textContent = p.id + ': ' + p.status + ' at ' + p.station + (p.fillWeight ? ' · ' + p.fillWeight.toFixed(0) + ' g' : '');
+      g.children[1].setAttribute('fill', PCOL[p.status] || '#9aa4b2');
+      g.lastChild.textContent = p.id.replace(/^PAN-0*/, '');
+    });
+    Object.keys(panEls).forEach(function (id) {
+      if (!seen[id]) { var g = panEls[id]; if (g.parentNode) { g.parentNode.removeChild(g); } delete panEls[id]; }
+    });
+  }
+  var lastPans = [];
+  function pollPans() {
+    fetch('/api/pans').then(function (r) { return r.json(); }).then(function (p) { lastPans = p; drawPans(p); }).catch(function () {});
+  }
+  setInterval(pollPans, 1000);
+  setInterval(function () { drawPans(lastPans); }, 250);
 
   window.drawLine = draw;
 })();

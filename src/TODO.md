@@ -46,7 +46,7 @@ where the diagrams are missing, wrong, or behind the implementation.
   line. Now the monitor's database writes run in the background, in order and
   retried, and a node is "heard" when its message arrives. Scenario `sql-down`.
 - With MongoDB off every document save waited for the driver's 30 s default. Now
-  every call has a 3 s limit and the stations carry on. Scenario `mongo-down`.
+  every call has a 3 s limit and the stations carry on. (The `mongo-down` scenario was dropped on the team's decision; Stop on the MongoDB component still shows it live.)
   While MongoDB is off the pan documents are not updated, so a crash in that window
   rebuilds queues from stale documents (not covered).
 

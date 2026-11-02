@@ -139,6 +139,13 @@ they equal real seconds; the experiment ran at 1.
 9. **Merge**: the branch `implementation/go-sparkplug-factory` is pushed, not merged,
    no pull request. The CI pipeline has never run on GitHub.
 
+10. **Role of MongoDB.** Said in chat: MongoDB only keeps data for the experiments, so the
+    `mongo-down` scenario was dropped. In the code it also holds the traveling pan
+    documents (traceability) and the saved node state that THM, BAT and FIN reload after a
+    restart. [D] Confirm that this is experiment data only. If yes, say so in the
+    databases document and the report; if no, bring `mongo-down` back (one line in
+    `internal/scenario/scenario.go`).
+
 ## 4. Known bugs and limits, not fixed [B]
 
 0. **Band Transport is now a system of its own** (branch MON-BT-Integration, models
@@ -160,7 +167,7 @@ they equal real seconds; the experiment ran at 1.
 7. **FC28 per controller**, not per machine; **FC13** detected at once (no T_resp);
    **FC16** in-time release implemented but no scenario waits for it; **FC20**
    correction is a 10 s timer, there is no speed sensor.
-8. **Scenarios from the dashboard**: `freeze-thm`, `band-halt`, `sql-down`, `mongo-down` need Docker (not in dev mode). The *Stop* button ends a run and restarts every part the scenario left stopped or frozen; a scenario that was stopped in the middle is not counted as passed or failed.
+8. **Scenarios from the dashboard**: `freeze-thm`, `band-halt`, `sql-down` need Docker; there is no `mongo-down` scenario any more (MongoDB is treated as experiment data, see section 3 [D]; the code still survives MongoDB being off, it was measured once, see docs/experiment.md) (not in dev mode). The *Stop* button ends a run and restarts every part the scenario left stopped or frozen; a scenario that was stopped in the middle is not counted as passed or failed.
 9. **Experiment data** is from one machine at real speed, 10 runs per scenario, only
     crash and freeze; the aborted first run is kept on purpose.
 10. **Code**: unit tests cover only the Sparkplug codec and the signal mapping; the

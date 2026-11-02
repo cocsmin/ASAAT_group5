@@ -285,8 +285,6 @@ func scenarios() []scenario {
 		scenario{"mon-down", "stop MON while THM discards cakes: no event is lost, the line stops without the monitor", true, monDown},
 		scenario{"sql-down", "switch SQL Server off for 30 s: the monitor must not mistake it for a dead line", true,
 			func(e *env) error { return dbDown(e, "mssql", "SQL Server") }},
-		scenario{"mongo-down", "switch MongoDB off for 30 s: stations carry on, documents catch up afterwards", true,
-			func(e *env) error { return dbDown(e, "mongo", "MongoDB") }},
 		scenario{"broker-restart", "restart the MQTT broker: every node reconnects, the line continues", true, brokerRestart},
 		scenario{"cooling-chain", "cooling stops: the buffer fills (FC18), cakes wait too long (FC17), the repair releases them (FC16)", false, coolingChain},
 		scenario{"faults-system", "failure cases that the system resolves itself (FC1 to FC26, UC4, UC5, UC12, UC14)", false,
@@ -612,7 +610,7 @@ type Info struct {
 	Needs      []string `json:"needs"`      // components that must exist (not in dev mode: mssql, mongo)
 }
 
-var needs = map[string][]string{"sql-down": {"mssql"}, "mongo-down": {"mongo"}}
+var needs = map[string][]string{"sql-down": {"mssql"}}
 
 // List returns the scenarios in the order they are run.
 func List() []Info {
