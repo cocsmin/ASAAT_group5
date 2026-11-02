@@ -73,6 +73,38 @@ FC18 (buffer full) was never reported as an event.
 Still simpler than the report: FC28 per controller instead of per machine, FC13
 detected at once (no T_resp), FC16 in-time release has no scenario of its own.
 
+## Exercises 6 and 7: what is still missing
+
+Checked against exercise_6.pdf (communication, containerization, languages, databases)
+and asaat_exercise_7.pdf (experiment for a quality attribute).
+
+**Exercise 7, experiment (largest gap)**
+1. No experiment design document. Needed: goal in the GQM template from the
+   literature, the quality attribute (availability), metrics (detection time, recovery
+   time, products lost per fault, availability %), scenarios, tools, environment.
+2. No structured data. The scenarios print a timeline but do not repeat runs or write
+   CSV. Needed: a runner mode that repeats each scenario N times and writes a CSV
+   (scenario, run, detection s, recovery s, pans kept, flow resumed s), plus notes on
+   unexpected behaviour (the 95 s BAT stall is one).
+3. Analysis is a later exercise; only collect the data.
+
+**Exercise 6, documents (code is done, write-ups are not)**
+4. Communication: a comparison of Sparkplug B/MQTT with alternatives (Kafka, NATS,
+   RabbitMQ, OPC UA), the protocol design, quality-attribute impact, and a diagram of
+   the message flow. `docs/signals.md` has the signal table only. The lecture draft ADR
+   argues MQTT 5 with JSON, so the justification for Sparkplug B must be written
+   separately.
+5. Containerization: per-component justification and quality-attribute impact. The
+   requirement "images built and pushed by CI/CD" is implemented in `cicd.yml` but
+   pushes only on main or master, so it has not happened yet.
+6. Languages: per system and subsystem justification with trade-offs. Note: the
+   dashboard is HTML and JavaScript, so "Go for everything" is not literally true;
+   say so in the document.
+7. Databases: per system and subsystem mapping (SQL Server for PLM data, orders,
+   event log and tickets; MongoDB for pan and cake documents and node state), the
+   trade-offs, and the optional data model or ER diagram (schema is in
+   `internal/store/sql_mssql.go`).
+
 ## Fixes that change what the diagrams and documents should say
 
 Rule for the implementation work: every fix that changes behaviour, a signal or a
