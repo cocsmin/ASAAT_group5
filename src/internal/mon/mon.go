@@ -106,6 +106,7 @@ func Run() {
 		m.work <- func() { m.onMessage(t, p) }
 	})
 	m.Start()
+	go m.releaseBand()
 	go m.worker()
 	go m.watchdog()
 	m.serve(svc.Env("HTTP_ADDR", ":8082"))
@@ -204,9 +205,13 @@ func (m *Monitor) onBirth(n *NodeState, p sparkplug.Payload) {
 		n.Restarts++
 	}
 	wasSilent := m.silent[n.ID]
+	halted := m.haltNodes[n.ID] // its sections were halted while it was away, also when this monitor never saw its first birth
 	m.mu.Unlock()
 	m.absorbHealth(n, p.Metrics)
 	m.closeContainerTicket(n.ID)
+	if halted && !restarted && !wasSilent {
+		m.haltNodeSections(n.ID, false)
+	}
 	if restarted && !wasSilent {
 		m.N.Log("FC27", n.ID+" container is back: birth certificate received, last saved state loaded", "")
 		m.haltNodeSections(n.ID, false)
@@ -564,4 +569,17 @@ func evt(sev, code, reason, device, machine string) node.Event {
 // nodeOf derives the owning node from a machine id such as thm-zone-2.
 func nodeOf(machine, fallback string) string {
 	return model.NodeOfMachine(machine, fallback)
+}
+
+// releaseBand runs when the monitor starts: a monitor that restarts has forgotten which
+// sections it had halted, while Band Transport keeps its commands. The monitor starts from
+// "nothing halted" and halts again what it finds wrong, so no section stays halted for a
+// station that came back while the monitor was away.
+func (m *Monitor) releaseBand() {
+	select {
+	case <-m.Ctx.Done():
+		return
+	case <-time.After(2 * time.Second):
+	}
+	m.N.Command(model.BT, sig.New(sig.SectionCommand, "section", int64(0), "state", "run", "reason", "monitor started"))
 }

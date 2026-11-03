@@ -15,6 +15,9 @@ import (
 	"cakefactory/internal/timing"
 )
 
+// loadCellScatter is the standard deviation of a weighing, as a fraction of the weight.
+const loadCellScatter = 0.0025
+
 // Dose is the dosing station. It takes the production orders, reserves the
 // ingredients, doses and weighs them, hands the batch to mixing and waits for the
 // result before it starts the next one (UC3, FC1 to FC5).
@@ -204,7 +207,7 @@ func (t *Dose) dose(o order, batch string) error {
 			if !sim.Sleep(t.Ctx, doseTime) {
 				return t.Ctx.Err()
 			}
-			measured := it.Grams * (1 + sim.Noise(0.004))
+			measured := it.Grams * (1 + sim.Noise(loadCellScatter))
 			switch {
 			case t.F.Take("FC5"):
 				measured = it.Grams * 0.9 // the doser keeps under-dosing

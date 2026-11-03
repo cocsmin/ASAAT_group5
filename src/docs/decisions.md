@@ -49,19 +49,18 @@ them (FC27). Without Docker the same interface stores pans as JSON files.
 
 ## 3. Containerization
 
-**Decided:** Docker (not Kubernetes). **Not decided:** how fine the containers are
-cut. The implementation currently runs **one container per system**, which is the
-simplest option; see "Known gaps" at the end.
+**Decided:** Docker (not Kubernetes), and **one container per station** (group
+decision, 3 Nov): 14 stations, Band Transport and the monitor, plus the broker and the
+two databases; see [stations.md](stations.md).
 
-**Why.** The report's availability approach is to separate each system into a
-service in a container (`docker-compose.yml`). Five application containers plus
-three infrastructure containers is easy to run and explain. A container per
-sensor or machine would multiply the number of processes without adding
-isolation that matters here: the unit that must fail, restart and deploy
-independently is the system (see the "24/7 / Deployability" columns of the
-report), and inside a system the machines are modelled as Sparkplug *devices*
-with their own health state. Docker's `restart: unless-stopped` is the recovery
-tactic of FC27, so Kubernetes would be overkill.
+**Why.** The report's availability approach is to separate the parts of the line into
+services in containers (`docker-compose.yml`). A station is the smallest unit that
+fails, restarts and deploys on its own with a visible effect on the line: a crashed
+cooling does not stop the baking tunnel. A container per sensor or machine would
+multiply the processes without adding isolation that matters here; inside a station the
+machines are modelled as Sparkplug *devices* with their own health state. Docker's
+`restart: unless-stopped` is the recovery tactic of FC27, so Kubernetes would be
+overkill.
 
 **Revisit if.** Real hardware connects through gateways that must be deployed
 separately. A gateway container per physical cell could be added without
@@ -119,17 +118,12 @@ PLM or MON state machine yet.
 | THM-REQ-72: stopped controller detected within 3 heartbeats | MON watchdog, plus NDEATH (Last Will) after 1.5 x the 5 s keep-alive |
 | THM-REQ-77: no lost discard events | event outbox (file, QoS 1, removed after the broker acknowledged, survives a sender restart) **and** a persistent MQTT session for MON, so the broker queues events while MON is down. Tested: 5 discards emitted while MON was down all reached MON's log after it restarted. MON drops duplicates by event id |
 | Handoffs between systems survive a restart of the receiver | persistent sessions plus QoS 1 and a message id on Batter ready, Cooled cake, Pan for washing, Pallet ready, Clean pan supply, Pan request, both ingredient signals and the production order; receivers drop duplicates; state signals are QoS 1 and repeated every heartbeat |
-| FIN restart must not lose cakes or pans | FIN rebuilds its queues from the stored pan and cake documents (`fin.recover`); after depanning the cake has its own document; THM restores the pans FIN had supplied (`thm.restoreSupplied`). Tested by killing FIN, PLM and MON under load: 20 of 20 pans still accounted for, none duplicated |
+| FIN restart must not lose cakes or pans | FIN rebuilds its queues from the stored pan and cake documents (`fin.recover`); after depanning the cake has its own document; THM restores the pans FIN had supplied (`thm.restoreSupplied`). Tested by killing FIN, PLM and MON under load: all pans still accounted for, none duplicated |
 | PLM restart must not hang BAT | BAT repeats the ingredient request after 20 s; PLM answers a repeated request idempotently (SQL reservation check) |
 | Container configuration: restart policy, healthchecks, start order, volume per service, non-root, read-only root, limits | `docker-compose.yml` |
 
 ### Known gaps (not implemented, or deliberately different)
 
-- **Container granularity (open).** One container per system. Splitting some
-  critical functions into their own containers (for example a separate baking zone
-  control for THM-REQ-74, or dosing and mixing for BAT-NFR-06) needs a group
-  decision. Splitting later does not change the topics, because machines are
-  already Sparkplug devices.
 - **Event outbox:** because the databases are SQL Server and MongoDB and the
   control path must not depend on them, each system keeps its undelivered events in a
   local file, not in a database table.
@@ -170,3 +164,27 @@ PLM or MON state machine yet.
   is not implemented.
 
 Everything still open, including the diagrams that need fixing, is in [../TODO.md](../TODO.md). The signals as implemented are in [signals.md](signals.md).
+
+## 7. Decisions of the group (log)
+
+Decisions the group has taken, so that the review list ([team-review.md](team-review.md))
+only holds what is still open. Newest last.
+
+**3 Nov**
+- The `mongo-down` scenario is dropped: MongoDB holds experiment data and the pan
+  documents, an outage does not stop production.
+- The implementation decides the time values and checks them for consistency. Result:
+  seconds instead of plant time (the report gives no real timings); UC10's 30 minutes are
+  40 s (a fixed factor of 45); T_hb is 5 s for every system; both the 15 s watchdog
+  (THM-REQ-72, the requirement) and the 5 s MQTT keep-alive (an extra) stay; THM-REQ-76 and
+  -78 (1 s) are not measured; availability counts the time the controller does not answer,
+  not the time until the line produces again. Shared values are in
+  `internal/timing/timing.go`, checked by `timing_test.go`.
+- PLM sends a heartbeat like every other system (the alignment baseline says it sends none:
+  the baseline has to be corrected).
+- The line should be full: 30 pans per batch, 60 pans in the loop, pallet 30 cakes.
+- One container per station instead of one per system (see [stations.md](stations.md)).
+- One branch, `implementation`; the CI pipeline is checked once everything is finished and
+  a pull request exists.
+- Realistic values for the simulation are chosen by the implementation and listed in
+  [assumptions.md](assumptions.md).

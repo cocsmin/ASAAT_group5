@@ -10,7 +10,7 @@ the CI pipeline.
 
 Two cards on the right side of the dashboard do this without a terminal:
 
-- **Components** lists the broker, SQL Server, MongoDB and the six systems with a
+- **Components** lists the broker, SQL Server, MongoDB and every factory container with a
   state and buttons: *Stop*, *Start*, *Freeze* (the process stops answering, like
   a hung machine), *Unfreeze*, *Restart*. Each has a line that says what to expect.
   The monitor can be switched off here too (the dashboard is a separate container
@@ -53,7 +53,7 @@ not need Docker still work (the ones marked `docker` are skipped).
 
 | Scenario | What happens to the factory | What it proves |
 |---|---|---|
-| `healthy` | nothing | all six systems online, a pallet ships |
+| `healthy` | nothing | all 16 factory containers online, a pallet ships |
 | `crash-plm-wh`, `crash-plm-ship`, `crash-bat-dose`, `crash-bat-mix`, `crash-bat-insp`, `crash-thm-dep`, `crash-thm-bake`, `crash-thm-exit`, `crash-thm-cool`, `crash-fin-dpn`, `crash-fin-qua`, `crash-fin-wrap`, `crash-fin-pal`, `crash-fin-wash`, `crash-bt` | the container exits like a real crash | the broker publishes the death certificate (Last Will) within 15 s (THM-REQ-72); Docker restarts the container and it is back within 60 s (THM-REQ-73); no pan is lost or duplicated; the line carries on |
 | `freeze-thm-bake` | the baking tunnel station freezes and stops its keep-alive pings | the broker declares it dead on its own (about 7.5 s with a 5 s keep-alive), MON halts its band section and the ones upstream; it comes back when unfrozen |
 | `mon-down` | MON is stopped while THM discards cakes | no event is lost (THM-REQ-77: the events wait for MON and arrive after it restarts); the line does not run without the monitor (UC2 rule) |
@@ -86,21 +86,25 @@ UC14) so the output can be matched to the failure-case tables.
 
 ## Measured results
 
-> These results were measured with one container per system (an earlier state of the branch implementation). Since then the scenarios have per-station names (crash-thm-bake, freeze-thm-bake, ...); these results are measured again for the station containers, see docs/stations.md.
-
-Run on Docker Desktop (Windows 11) with `SIM_SPEED=3`; times are real seconds.
+Run on Docker Desktop (Windows 11) with `SIM_SPEED=1` (real seconds), one container per station,
+3 Nov 2026: **26 of 26 scenarios passed** (the first scenario of the list ran before the later ones
+and the whole list took about 25 minutes). The numbers are one run, not a statistic; the
+availability experiment with ten runs per scenario is in [experiment.md](experiment.md).
 
 | Scenario | Result | Numbers |
 |---|---|---|
-| `healthy` | PASS | all nodes online, a pallet ships within 4 s |
-| `crash-plm` / `-bat` / `-thm` / `-fin` | PASS | death certificate after 0.4 s, back after 0.7 to 0.8 s (bounds 15 s and 60 s), 20 of 20 pans kept, flow resumed |
-| `freeze-thm-bake` | PASS | broker declared THM dead after 5.8 s (bound 15 s), flow resumed |
+| `healthy` | PASS | all containers online, a pallet ships |
+| `crash-<container>` for the 14 stations and `bt` | PASS | death certificate after 0.3 to 0.4 s (bound 15 s), container back after 0.9 to 1.1 s (bound 60 s), all 60 pans kept, flow resumed after 24 to 29 s; the depositing station needed 94 s (see team-review section 3, item 11) |
+| `freeze-thm-bake` | PASS | broker declared the station dead after 7.1 s (bound 15 s), flow resumed after 21 s |
+| `band-halt` | PASS | S1 and S2 halted after 7.3 s, S3 to S5 kept running, all sections ran again when the station returned |
+| `band-section-stop` | PASS | the stopped section is "fault", upstream halted, downstream runs, depositing really stops, the repair restarts the sections in order (4.6 s) |
+| `bt-down` | PASS | the sections show as unknown at once, they run again when BT is back |
 | `mon-down` | PASS | 4 of 4 discard events arrived after MON came back |
-| `sql-down` | PASS | 30 s without SQL Server: all nodes online, no band section halted, flow resumed after 27 s |
-| `broker-restart` | PASS | nodes stayed online, 20 of 20 pans kept, flow resumed after 36 s (lost handoffs are repeated by BAT after 20 s) |
-| `cooling-chain` | PASS | FC15 after 3 s, buffer full (FC18) after 8 s, first cake discarded (FC17) after 6 s more, repair released the buffer (FC16) |
-| `faults-system` | PASS | 16 of 16 failure cases produced their event, 71 s in total, 20 of 20 pans kept |
-| `faults-maintenance` | PASS | 13 of 13 (now with FC20 "System, then Maintenance" and the repeated FC24): error event, ticket opened, repair confirmed, recovered; 52 s in total, 20 of 20 pans kept |
+| `sql-down` | PASS | 30 s without SQL Server: all nodes online, no band section halted, flow resumed after 25 s |
+| `broker-restart` | PASS | all nodes online again after 4.5 s, 60 of 60 pans kept, flow resumed after 25 s |
+| `cooling-chain` | PASS | FC15 after 1 s, buffer full (FC18, 30 of 30) after 25 s, first cake discarded (FC17) 15 s later, repair released the buffer (FC16) |
+| `faults-system` | PASS | every failure case produced its event, all 60 pans kept |
+| `faults-maintenance` | PASS | every case: error event, ticket opened, repair confirmed, recovered within 2 to 18 s |
 
 ## How the checks work (so you can extend them)
 

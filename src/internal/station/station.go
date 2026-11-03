@@ -18,9 +18,10 @@ const (
 	// HandoverGrace is how long a handed-over pan waits before the next station adopts it
 	// from its document: the message wins, and a pan that is diverted at once is never taken up.
 	HandoverGrace = 3 * time.Second
-	// ReconcileEvery is how often a station looks for pans handed over without a message.
-	ReconcileEvery = 5 * time.Second
 )
+
+// ReconcileEvery is how often a station looks for pans handed over without a message.
+var ReconcileEvery = 5 * time.Second
 
 // Section is the band section a station works on: the station waits while the
 // section does not run and works at half speed while it is slowed down.

@@ -27,15 +27,15 @@ assumptions; time values that several systems share are in
 | A1 | One product only: "Vanilla sponge" | one recipe, seeded in SQL | `internal/store/sql_mem.go`, `sql_mssql.go` | Keep. The report describes one line, not a catalogue |
 | A2 | Pans per batch | 30 (was 6: the line stood empty most of the time) | recipe seed `PansPerBatch` | Keep. Depositing at 1 pan per second is busy for 30 s per batch, so the line carries about 17 pans at once |
 | A3 | Pans in the pan loop | 60 | `PAN_COUNT` in `docker-compose.yml` | Keep. About 17 are in the line, the rest wait clean in the pool |
-| A4 | Fill target and tolerance | 450 g +/- 5 g | recipe seed | Real value needed |
-| A5 | Dose tolerance | 2 % | recipe seed | Real value needed |
+| A4 | Fill target and tolerance of the batter in a pan | 450 g +/- 5 g (1.1 %) | recipe seed | Keep. Chosen, see section 5: well inside the legal tolerance of the packaged product |
+| A5 | Dose tolerance of every ingredient | 1 % (was 2 %); the load cell scatters 0.25 % | recipe seed, `internal/bat/dose.go` | Keep. Chosen, see section 5: industrial batching is accurate to about 0.3 to 1 % |
 | A6 | Ingredients and stock | recipe grams are 5 x the old ones (flour 5000 g for 30 pans); 45000 g of each ingredient at the start; restock after 15 s with 2 x the recipe + 25000 g | seed, `internal/plm/plm.go` | Keep. Same ratio as before: stock for about nine batches |
 | A7 | Mixing time | 6 s | recipe seed | Change only if needed |
 | A8 | A new order every 22 s, at most 2 not yet picked up | derived from the stage times | `internal/plm/plm.go` | Keep. It sets the pace of the whole line |
 | A9 | Pallet | 30 cakes | `PALLET_SIZE` | Keep (equals the pans per batch, so one batch fills one pallet) |
 | A10 | Trucks | three, assigned round-robin | `internal/plm/plm.go` | Keep. Nothing in the exercises depends on it |
 | A11 | Cake core temperature at the tunnel exit | 97 C +/- 0.5 C | `internal/thm/thm.go` (UC9 business rule) | Keep, it comes from the use case |
-| A12 | Temperature at which cakes may be packaged | 30 C ("room temperature") | `tSafe` in `internal/thm/thm.go` | Confirm |
+| A12 | Temperature at which cakes may be packaged | 30 C core temperature ("room temperature") | `tSafe` in `internal/thm/thm.go` | Confirm. No source found for a number, see section 5 |
 | A13 | Cooling buffer capacity | 30 pans (one batch) | `internal/thm/thm.go` | Change only if needed |
 | A14 | Holding area before packaging | 6 cakes | `internal/fin/fin.go` | Change only if needed |
 | A15 | Human inspection of the batter | simulated, 3 s, always "good" unless UC4 is injected | `internal/bat/bat.go` | Confirm. A button on the dashboard would make it real; only worth it if the demo needs it |
@@ -48,7 +48,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 
 | # | Assumption | Value | Recommendation |
 |---|---|---|---|
-| T1 | The simulation runs in seconds, not in plant time; Table II of the report gives no belt speed, baking time or throughput | seconds | Keep, and say so in the report |
+| T1 | The simulation runs in seconds, not in plant time; Table II of the report gives no belt speed, baking time or throughput | seconds | Keep, and say so in the report. Real baking and belt figures depend on the oven, the pan and the batter, so none is invented (section 5) |
 | T2 | UC10's 30 minutes (cooling failure to repair; buffer wait limit) are compressed | 40 s, a fixed factor of 45 | Keep |
 | T3 | Step times | depositing 1 s per pan; three baking zones 2 s each; exit check 0.5 s; cooling 4 s; depanning, inspection, wrapping, cartoning 1 s each; washing 0.6 s + drying 0.4 s (a continuous washer, 1 pan per second like every other FIN step); dosing 1.2 s per ingredient | Change only if needed. They are chosen so that the picture is watchable |
 | T4 | Heartbeat T_hb | 5 s for every system, PLM included | Keep. Decided by the group |
@@ -62,7 +62,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 
 | # | Assumption | Value | Recommendation |
 |---|---|---|---|
-| S1 | One container per station (14 stations, plus BT and MON), plus broker, SQL Server, MongoDB; the dashboard is a separate demo container | decided by the group (4 Nov), see stations.md | Keep |
+| S1 | One container per station (14 stations, plus BT and MON), plus broker, SQL Server, MongoDB; the dashboard is a separate demo container | decided by the group (3 Nov), see stations.md | Keep |
 | S2 | The dashboard (`ui`) is for the experiments and the demo, not part of the real plant | MON has no user interface | Confirm (see team-review section 2, item 16) |
 | S3 | MongoDB holds the traveling pan documents and the saved state of the nodes; the group treats it as experiment data | `mongo-down` scenario dropped | Keep |
 | S4 | "No production without the monitor": nothing new starts while MON is offline | THM admits no pans, BAT starts no batch, PLM releases no order | Confirm. It means a MON restart pauses the line |
@@ -83,9 +83,38 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | E4 | Runs | 10 per scenario, one machine, real speed (`SIM_SPEED=1`) | Keep |
 | E5 | THM-REQ-76 and -78 (stop new pans and react to the band within 1 s) are not measured | | Keep unmeasured unless the course asks for it |
 
-## 5. What needs a real value
+## 5. Where the realistic values come from
 
-Only these cannot be settled by the group alone: fill weight and tolerance (A4), dose
-tolerance (A5), the temperature for "room temperature" (A12) and, if the report is
-to show real throughput, belt speed and baking time (T1). Everything else is
-either kept as an assumption or can be changed in one place.
+The values that needed a real number were chosen by the implementation after a look at
+public sources. The sources are partial: they give orders of magnitude, not a standard
+for this plant, so the figures stay assumptions.
+
+- **Fill weight, 450 g +/- 5 g (A4).** The legal rule for prepackaged goods (EU directive
+  76/211/EEC) lets a single package of a nominal 300 to 500 g be short by at most 3 %,
+  which is 13.5 g for 450 g (table as reproduced by the [Austrian metrology
+  authority](https://bev.gv.at/en/Topics/Metrology-Service/Legal-Metrology/Prepackages.html);
+  the directive text is on [EUR-Lex](https://eur-lex.europa.eu/eli/dir/1976/211/oj) and
+  has been amended, check the current Annex I before quoting). The rule applies to the
+  packaged product, which weighs less than the batter after baking, so 5 g on the batter
+  is a conservative internal limit, not the legal one.
+- **Dose tolerance, 1 % (A5).** Vendor and trade material gives about 0.3 % for blending
+  bakery ingredients and +/- 0.25 % to +/- 1 % for dosing belt scales, and about 1 % for a
+  small liquid dose ([Baidu b2bwiki](https://b2bwiki.baidu.com/en/encyclopedic/weighing-and-batching-system),
+  [Baking Business](https://bakingbusiness.com/articles/52058-scaling-transfers-critical-to-minor-micro-ingredient-accuracy),
+  [Instrumentation.co.uk](https://www.instrumentation.co.uk/raising-accuracy-in-dosing-improves-product-quality-for-bakery/)).
+  The old 2 % was looser than any of them; 1 % is the upper end of the range, and the
+  simulated load cell scatters 0.25 %, so a normal weighing almost never fails and a
+  failure case is always an injected one.
+- **Cooling before packaging, 30 C (A12).** Sources agree that cakes must be cooled to a
+  stable core temperature before slicing and packaging and that packing too warm makes the
+  packaging warp and leak ([Buhler](https://www.buhlergroup.com/global/en/campaigns/NAM_Solutions_for_cake.html),
+  [Making.com](https://making.com/equipment/sponge-cake-cooling-tunnel)), but I found no
+  number. 30 C is a plausible round value near room temperature; it is the one value in
+  this list that nobody has backed with a source, and the group should confirm it.
+- **Baking time, belt speed, throughput (T1).** The same sources say that temperature and
+  belt speed are set together for each product, pan size and oven, so there is no single
+  real figure. Typical sponge cakes bake for tens of minutes; that is general knowledge,
+  not something the search confirmed. The simulation therefore stays in seconds (T1, T2)
+  and its throughput is not a plant figure.
+- **Core temperature at the tunnel exit, 97 C +/- 0.5 C (A11).** Comes from the use case,
+  not from a source.

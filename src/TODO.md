@@ -135,21 +135,10 @@ See docs/team-review.md section 6 for the port table. To do **[person]**:
 
 ## Decisions for the group
 
-1. **Container granularity.** Now one container per system. Two requirements
-   argue for more: THM-REQ-74 (baking zone control never interrupted by other
-   deployments) and BAT-NFR-06 (dosing and mixing deploy independently). The
-   recommendation is those two splits only, plus one sentence in the report. A
-   separate health-reporting container is not needed (the broker publishes the death
-   certificate).
-2. **Batter collected acknowledgement** (diagram item 7).
-3. **PLM heartbeat**: keep it (the monitor then sees a dead PLM) or drop it
-   (baseline).
-4. **Parameter values** are placeholders of the simulation and need agreement:
-   N_wrong = 3, P2 = 3, T_adjust = 4 s, T_hb = 5 s, P3 = 25 s, T_wait = 40 s
-   (stands for 30 min), buffer capacity 8, holding area 6, S_low = 2,
-   T_safe = 30 C, dose tolerance 2 %. T_resp is not used (a broken camera is
-   detected at once in the simulation).
-5. **Time compression.** 30 minutes of UC10 are 40 simulated seconds.
+The open decisions are in [docs/team-review.md](docs/team-review.md) section 1; the ones
+already taken are in [docs/decisions.md](docs/decisions.md) section 7; the parameter values
+and their reasons are in [docs/assumptions.md](docs/assumptions.md). T_resp is not used (a
+broken camera is detected at once in the simulation).
 
 ## Verified in Docker (1 Nov 2026, Docker Desktop on Windows 11)
 

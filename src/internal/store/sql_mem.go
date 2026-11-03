@@ -19,7 +19,7 @@ var SeedRecipe = model.Recipe{
 		{Ingredient: "butter", Grams: 1500},
 		{Ingredient: "milk", Grams: 1250},
 	},
-	MixSeconds: 6, DoseTolPct: 2, PansPerBatch: 30, FillTarget: 450, FillTol: 5,
+	MixSeconds: 6, DoseTolPct: 1, PansPerBatch: 30, FillTarget: 450, FillTol: 5,
 }
 
 // SeedStockGrams is the starting stock of every ingredient.

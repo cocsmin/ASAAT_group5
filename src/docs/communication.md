@@ -87,7 +87,7 @@ Deviations from the Sparkplug specification and why: see
   assumption A1) is far below what Mosquitto handles.
 - **Scalability:** more nodes mean more connections and topics, not code changes;
   a clustered broker would remove the single point of failure. Not tested beyond
-  five nodes and about 20 pans.
+  fifteen nodes and 60 pans.
 - **Costs:** the broker is a shared dependency (when it restarts every node
   reconnects, verified by the `broker-restart` scenario); Sparkplug adds birth and
   sequence rules; messages are binary, so tools need a Sparkplug decoder.

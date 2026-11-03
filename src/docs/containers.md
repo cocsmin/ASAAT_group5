@@ -14,7 +14,7 @@ Docker Desktop.
 | `mssql`, `mongo` | the two databases (optional in the exercise, included) | stateful, with volumes, independent of the services |
 | `ctl` (profile `demo`) | switches the other containers on and off for the demonstration | opt-in, because it holds the Docker socket |
 
-**Granularity: one container per station** (decided by the group, 4 Nov). Containers
+**Granularity: one container per station** (decided by the group, 3 Nov). Containers
 per machine would multiply processes without isolation that matters here; inside a
 station the machines are Sparkplug devices with their own health state. The split
 satisfies THM-REQ-74 (baking zone control never interrupted by other deployments) and
@@ -47,9 +47,9 @@ Settings and the requirement or quality attribute behind each:
 
 ## Two or more containers over a containerized bus, built and pushed by CI/CD
 
-Nine containers run and talk over the `mosquitto` container. The pipeline
-(`.github/workflows/cicd.yml`) builds one image per system with a matrix and pushes
-them to `ghcr.io/<owner>/cake-factory-<system>`. The push runs on main or master
+Nineteen containers run and talk over the `mosquitto` container (16 factory containers, the dashboard, the broker and the two databases). The pipeline
+(`.github/workflows/cicd.yml`) builds the images with a matrix (one image for all stations, plus BT, MON and the dashboard) and pushes
+them to `ghcr.io/<owner>/cake-factory-<image>`. The push runs on main or master
 only, so it has **not happened yet**: it needs the first merge (or a manual run on
 the default branch). The pipeline passes `actionlint`; the Dockerfile passes
 `hadolint`.
@@ -58,10 +58,10 @@ the default branch). The pipeline passes `actionlint`; the Dockerfile passes
 
 - **Availability:** a fault stays inside one container; crash detection in under a
   second, recovery in about a second (measured, see [experiment.md](experiment.md)).
-- **Deployability:** one image per system, built and pushed by CI; a system is
+- **Deployability:** one image for all stations (the station is chosen at start), built and pushed by CI; a station is
   redeployed without stopping the others (the line pauses only through the explicit
   "no production without the monitor" rule when MON itself is down).
-- **Modifiability:** the same Dockerfile and pipeline for every system; a new system
+- **Modifiability:** the same Dockerfile and pipeline for every station; a new system
   is a new `cmd/<name>` and one compose entry.
 - **Portability:** the same compose file runs on any machine with Docker (SQL Server
   image is x86; Apple silicon needs emulation).

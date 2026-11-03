@@ -30,6 +30,29 @@ Operations messages that are not part of the 14 and not in the diagrams:
 ports of the BT model; `Fault injection` (dashboard to a node, `NCMD`: code, count) and `Node Control`
 (Sparkplug rebirth request, `NCMD`).
 
+**Signals inside a system, between its stations** (not in the alignment baseline; they carry
+what used to be an internal transition, see [stations.md](stations.md)); all reliable:
+
+| Signal | From to | Fields |
+|---|---|---|
+| Batch to mixing | BAT-DOSE to BAT-MIX | batchId, orderId, mixSeconds, pans, fillTarget, fillTol |
+| Batter to inspection | BAT-MIX to BAT-INSP | same |
+| Batter rejected | BAT-INSP to BAT-MIX | same (another mixing cycle) |
+| Batch result | BAT-MIX or BAT-INSP to BAT-DOSE | batchId, result (`handed` or `discarded`) |
+| Pan to baking | THM-DEP to THM-BAKE | panId, batchId |
+| Pan to tunnel exit | THM-BAKE to THM-EXIT | panId, batchId, off (temperature offset picked up in a faulty zone) |
+| Pan to cooling | THM-EXIT to THM-COOL | panId, batchId, temp |
+| Cake to inspection | FIN-DPN to FIN-QUA | panId, batchId |
+| Cake to wrapping | FIN-QUA to FIN-WRAP | panId, batchId |
+| Cake to cartoning | FIN-WRAP to FIN-PAL | panId, batchId |
+
+The 14 signals above are sent by and to the station that does the work: "Batter ready"
+BAT-INSP to THM-DEP, "Depositing stopped / working again" THM-DEP to BAT-DOSE and BAT-INSP,
+"Cooled cake" THM-COOL to FIN-DPN, "Pan for washing" from THM-DEP, THM-BAKE (a pan found out of tolerance after a restart), THM-EXIT, THM-COOL and FIN-DPN to FIN-WASH, "Pan request" and "Clean pan supply"
+THM-DEP and FIN-WASH, "Stop / resume pan admission" from THM-BAKE, THM-COOL, FIN-WRAP and
+FIN-WASH to THM-DEP (and from THM-COOL to THM-EXIT: buffer full), "Pallet ready" FIN-PAL to
+PLM-SHIP, "Production order" and the ingredient exchange between PLM-WH and BAT-DOSE.
+
 Differences to the alignment baseline to settle with the group:
 - PLM also sends the heartbeat. The baseline says PLM sends none; the
   monitor needs it to see a dead PLM.

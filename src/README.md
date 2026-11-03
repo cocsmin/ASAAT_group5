@@ -177,7 +177,8 @@ internal/ui        the experiment dashboard (observer, control, static page in i
 | `failed to connect to the docker API` | Docker Desktop is not running: start it and wait for "Engine running" |
 | the dashboard does not open | containers are still starting: wait until `docker compose ps` shows all as `healthy` |
 | the Components card says control is not running | start with `--profile demo` (the `ctl` container is opt-in) |
-| port already in use | stop what uses 8080, 1883 or 1433, or change the port in `docker-compose.yml` |
+| port already in use | stop what uses 8080, 1883 or 1433, or change the port in `docker-compose.yml` (the dashboard port: `UI_PORT=8085 docker compose up -d ui`, then use `-url http://127.0.0.1:8085` with `go run ./cmd/scenario`) |
+| the dashboard does not answer on the host although the container is healthy | Docker Desktop on Windows sometimes leaves the published port stuck after many rebuilds: publish the dashboard on another port as above, or restart Docker Desktop |
 | a container stays stopped after `docker kill` or `docker stop` | Docker restarts only crashes, not manual stops: use *Start* on the dashboard or the FC27 button |
 | SQL Server does not start on an Apple silicon Mac | the image is x86: enable emulation (Rosetta) in Docker Desktop |
 | `docker compose down -v` | also deletes the databases: a clean start |
@@ -188,9 +189,10 @@ Open work, diagrams to fix and decisions for the group: [TODO.md](TODO.md). The
 signals as implemented: [docs/signals.md](docs/signals.md).
 
 
-- Built and smoke-tested with `go run ./cmd/dev` (all six services, the
-  dashboard, fault injection and repair). `go test ./...` covers the Sparkplug
-  codec and the signal mapping.
+- Dev mode (`go run ./cmd/dev`) was smoke-tested before the split into station containers
+  and has not been started since; it builds, but run it once before showing it. `go test ./...` covers the Sparkplug
+  codec, the signals, the timing relations, the model, the station helpers, node dispatch,
+  the stores, the dashboard observer, the band logic and the adoption of handed-over pans.
 - Run with Docker Desktop: all containers healthy, real SQL Server and MongoDB
   used, a crashed container is restarted and takes up its cakes again (see
   TODO.md). The SQL Server image is x86; on Apple silicon enable Rosetta

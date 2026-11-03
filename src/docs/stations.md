@@ -1,6 +1,6 @@
 # One container per station
 
-The group decided (4 Nov) to run every station in its own container instead of one
+The group decided (3 Nov) to run every station in its own container instead of one
 container per system. This page says what that means in the implementation. It is on
 the branch `implementation`.
 

@@ -45,9 +45,9 @@ chain, `cooling-chain`), UC2 (monitor flows, band halt and slow-down).
 
 ## Where the simulation is simpler than the report
 
-- **FC28** is modelled per system controller, not per individual machine: the
+- **FC28** is modelled per station controller (container), not per individual machine: the
   controller stops answering and the monitor marks it faulty and halts its band
-  sections. Individual devices (a sensor, a diverter) report their own state, but
+  section and the ones upstream. Individual devices (a sensor, a diverter) report their own state, but
   only the faults above make them fail.
 - **FC13**: the broken heat camera is detected immediately (the report's T_resp is
   not used).
