@@ -1,0 +1,37 @@
+
+== availability: watch the factory while it fails by itself (FAULT_RATE) and report availability, repairs and failures; -duration says how long
+     0.2s  watching the factory for 2h0m0s
+   301.0s  5m1s: line producing 100.0 %, 288 cakes shipped, 0 repairs open
+   601.9s  10m2s: line producing 100.0 %, 576 cakes shipped, 0 repairs open
+   902.8s  15m3s: line producing 100.0 %, 864 cakes shipped, 0 repairs open
+  1203.7s  20m4s: line producing 100.0 %, 1152 cakes shipped, 0 repairs open
+  1504.6s  25m4s: line producing 100.0 %, 1440 cakes shipped, 0 repairs open
+  1805.5s  30m5s: line producing 100.0 %, 1728 cakes shipped, 0 repairs open
+  2106.4s  35m6s: line producing 100.0 %, 2016 cakes shipped, 0 repairs open
+  2407.3s  40m7s: line producing 100.0 %, 2304 cakes shipped, 0 repairs open
+  2708.2s  45m8s: line producing 100.0 %, 2592 cakes shipped, 0 repairs open
+  3009.1s  50m9s: line producing 100.0 %, 2880 cakes shipped, 0 repairs open
+  3310.1s  55m10s: line producing 100.0 %, 3168 cakes shipped, 0 repairs open
+  3610.2s  1h0m10s: line producing 100.0 %, 3456 cakes shipped, 0 repairs open
+  3911.2s  1h5m11s: line producing 100.0 %, 3744 cakes shipped, 0 repairs open
+  4212.2s  1h10m12s: line producing 100.0 %, 4032 cakes shipped, 0 repairs open
+  4513.2s  1h15m13s: line producing 100.0 %, 4320 cakes shipped, 0 repairs open
+  4814.1s  1h20m14s: line producing 100.0 %, 4608 cakes shipped, 0 repairs open
+  5115.0s  1h25m15s: line producing 100.0 %, 4896 cakes shipped, 0 repairs open
+  5416.0s  1h30m16s: line producing 100.0 %, 5184 cakes shipped, 0 repairs open
+  5716.9s  1h35m17s: line producing 100.0 %, 5472 cakes shipped, 0 repairs open
+  6017.9s  1h40m18s: line producing 100.0 %, 5760 cakes shipped, 0 repairs open
+  6318.8s  1h45m19s: line producing 100.0 %, 6048 cakes shipped, 0 repairs open
+  6619.7s  1h50m20s: line producing 100.0 %, 6336 cakes shipped, 0 repairs open
+  6920.6s  1h55m20s: line producing 100.0 %, 6624 cakes shipped, 0 repairs open
+  7200.3s  7130 s watched (0 s without an answer from the dashboard)
+  7200.3s  container availability: mean 99.997 %, worst 99.986 % (BAT-DOSE)
+  7200.3s  line availability (a pallet leaves at least every 1m15s): 100.00 %
+  7200.3s  3 outages of a container, mean 1.0 s, longest 1.0 s
+  7200.3s  2 repairs by the crew, mean 53 s from the ticket to the confirmed repair
+  7200.3s  3444 cakes per hour (at most 3600: one pan per second)
+  7200.3s  events by code: FC1 warning x92, FC12 discard x21, FC14 warning x3, FC2 warning x5, FC20 warning x2, FC21 discard x13, FC22 error x1, FC23 error x1, FC23 warning x5, FC24 discard x17, FC24 warning x5, FC25 warning x30, FC26 warning x2, FC27 warning x10, FC3 warning x10, FC4 discard x2, FC7 warning x2, FC8 warning x1, FC9 discard x13, UC12 discard x1, UC14 discard x10, UC4 warning x13, UC5 warning x2
+  7200.4s  pans: 48 of 48 in the loop map[baking:6 clean:25 cooled:3 cooling:5 depanned:3 supplied:5 tunnel-exit:1]
+  PASS availability (7200s)
+
+0 of 1 scenarios failed
