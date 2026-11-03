@@ -12,6 +12,7 @@ import (
 	"cakefactory/internal/node"
 	"cakefactory/internal/sig"
 	"cakefactory/internal/sim"
+	"cakefactory/internal/station"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
 )
@@ -25,9 +26,9 @@ type bufItem struct {
 // Cool is the cooling station with its fallback buffer on a separate level.
 type Cool struct {
 	*svc.Base
-	sec  *section
-	adm  *admission
-	took *panSet
+	sec  *station.Section
+	adm  *station.Admission
+	took *station.PanSet
 
 	mu         sync.Mutex
 	buf        []bufItem
@@ -40,24 +41,24 @@ type Cool struct {
 func RunCool() {
 	b, cancel := svc.Run(model.THMCool, "CoolingControl", "CoolingBuffer")
 	defer cancel()
-	t := &Cool{Base: b, sec: newSection(3), took: newPanSet()}
-	t.adm = &admission{b: b}
+	t := &Cool{Base: b, sec: station.NewSection(3), took: station.NewPanSet()}
+	t.adm = &station.Admission{B: b}
 	t.N.OnSignal(model.THMExit, sig.PanToCooling, func(_ string, s sig.Signal) {
 		t.take(pan{id: s.Str("panId"), batch: s.Str("batchId")}, s.Float("temp"))
 	})
-	t.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) { t.sec.onBand(s) })
+	t.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) { t.sec.OnBand(s) })
 	t.OnRepair(coolingMachine, t.coolingRepaired)
 	t.restoreBuffered()
 	t.Start()
 	t.N.SetState(sig.New(sig.PanAdmission, "stop", false, "reason", "")) // after a restart the buffer may have room again
 	go t.releaseLoop()
 	go t.gaugeLoop()
-	reconcile(t.Base, t.adopt)
+	station.Reconcile(t.Base, t.adopt)
 	<-t.Ctx.Done()
 }
 
 func (t *Cool) take(p pan, temp float64) {
-	if t.took.add(p.id) {
+	if t.took.Add(p.id) {
 		go t.cool(p, temp)
 	}
 }
@@ -74,13 +75,13 @@ func (t *Cool) adopt() {
 		p := all[i]
 		c := pan{id: p.ID, batch: p.BatchID}
 		switch {
-		case p.Status == "baked" && p.Station == "THM-TunnelExit" && time.Since(p.Updated) > handoverGrace:
-			if !t.took.add(c.id) {
+		case p.Status == "baked" && p.Station == "THM-TunnelExit" && time.Since(p.Updated) > station.HandoverGrace:
+			if !t.took.Add(c.id) {
 				continue
 			}
 			go t.cool(c, p.CakeTemp)
 		case p.Status == "cooling" && p.Station == "THM-Cooling":
-			if !t.took.add(c.id) {
+			if !t.took.Add(c.id) {
 				continue
 			}
 			go t.cool(c, p.CakeTemp)
@@ -113,7 +114,7 @@ func (t *Cool) gaugeLoop() {
 // cool sends the cake through the cooling zone or, if cooling is out of
 // service or the cake is still too hot, into the cooling buffer.
 func (t *Cool) cool(p pan, temp float64) {
-	defer t.took.drop(p.id)
+	defer t.took.Drop(p.id)
 	if !t.F.Broken(coolingMachine) && t.F.Take("FC15") {
 		t.F.Break(coolingMachine)
 		t.mu.Lock()
@@ -128,7 +129,7 @@ func (t *Cool) cool(p pan, temp float64) {
 	}
 	t.inCooling.Add(1)
 	store.Move(t.Ctx, t.Pans, p.id, "THM-Cooling", "cooling", "", nil)
-	ok := t.sec.span(t.Base, coolingTime)
+	ok := t.sec.Span(t.Base, coolingTime)
 	t.inCooling.Add(-1)
 	if !ok {
 		return
@@ -166,7 +167,7 @@ func (t *Cool) buffer(p pan, temp float64, why string) {
 	if full {
 		t.N.Emit(node.Event{Severity: model.SevError, Code: "FC18", BatchID: p.batch,
 			Reason: "cooling buffer full: new pans stopped, cakes leaving the tunnel go to refuse"})
-		t.adm.set(true, "cooling buffer full (FC18)")
+		t.adm.Set(true, "cooling buffer full (FC18)")
 		divert(t.Base, p, "FC18", "cooling buffer full: cake diverted to refuse")
 		return
 	}
@@ -174,7 +175,7 @@ func (t *Cool) buffer(p pan, temp float64, why string) {
 	t.N.SetDevice("CoolingBuffer", model.StateWarn, fmt.Sprintf("%d cakes held", n))
 	t.N.Log("FC15", fmt.Sprintf("cake held in cooling buffer (%s), %d/%d", why, n, bufferCapacity), p.batch)
 	if n >= bufferCapacity { // FC18: report "buffer full" at once, stop new pans, the exit diverts what still comes
-		t.adm.set(true, "cooling buffer full (FC18)")
+		t.adm.Set(true, "cooling buffer full (FC18)")
 		t.N.SetDevice("CoolingBuffer", model.StateFault, "full")
 		t.N.Emit(node.Event{Severity: model.SevError, Code: "FC18", BatchID: p.batch,
 			Reason: fmt.Sprintf("cooling buffer full (%d/%d): new pans stopped, cakes leaving the tunnel are diverted to refuse", n, bufferCapacity)})
@@ -197,7 +198,7 @@ func (t *Cool) coolingRepaired() {
 		t.N.Log("FC16", "cooling repaired in time: diverter lowered, buffered cakes are released in arrival order and measured", "")
 	}
 	if n < bufferCapacity {
-		t.adm.set(false, "")
+		t.adm.Set(false, "")
 	}
 }
 
@@ -248,7 +249,7 @@ func (t *Cool) releaseLoop() {
 				t.N.SetDevice("CoolingBuffer", model.StateWarn, fmt.Sprintf("%d cakes held", n))
 			}
 			if n < bufferCapacity && !t.F.Broken(coolingMachine) {
-				t.adm.set(false, "")
+				t.adm.Set(false, "")
 			}
 		}
 	}

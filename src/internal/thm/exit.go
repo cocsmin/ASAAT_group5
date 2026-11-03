@@ -10,6 +10,7 @@ import (
 	"cakefactory/internal/model"
 	"cakefactory/internal/sig"
 	"cakefactory/internal/sim"
+	"cakefactory/internal/station"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
 )
@@ -17,8 +18,8 @@ import (
 // Exit is the tunnel exit station: the heat camera checks every cake.
 type Exit struct {
 	*svc.Base
-	sec        *section
-	took       *panSet
+	sec        *station.Section
+	took       *station.PanSet
 	bufferFull atomic.Bool // cooling reports that its buffer is full (FC18)
 }
 
@@ -26,23 +27,23 @@ type Exit struct {
 func RunExit() {
 	b, cancel := svc.Run(model.THMExit, "HeatCamera")
 	defer cancel()
-	t := &Exit{Base: b, sec: newSection(3), took: newPanSet()}
+	t := &Exit{Base: b, sec: station.NewSection(3), took: station.NewPanSet()}
 	t.N.OnSignal(model.THMBake, sig.PanToExit, func(_ string, s sig.Signal) {
 		t.take(pan{id: s.Str("panId"), batch: s.Str("batchId"), off: s.Float("off")})
 	})
 	t.N.OnSignal(model.THMCool, sig.PanAdmission, func(_ string, s sig.Signal) { t.bufferFull.Store(s.Bool("stop")) })
-	t.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) { t.sec.onBand(s) })
+	t.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) { t.sec.OnBand(s) })
 	t.OnRepair(cameraMachine, func() {
 		t.N.SetDevice("HeatCamera", model.StateOK, "")
 		t.N.Log("FC13", "heat camera repaired: normal checking resumes", "")
 	})
 	t.Start()
-	reconcile(t.Base, t.adopt)
+	station.Reconcile(t.Base, t.adopt)
 	<-t.Ctx.Done()
 }
 
 func (t *Exit) take(p pan) {
-	if t.took.add(p.id) {
+	if t.took.Add(p.id) {
 		go t.check(p)
 	}
 }
@@ -55,7 +56,7 @@ func (t *Exit) adopt() {
 	}
 	n := 0
 	for i := len(all) - 1; i >= 0; i-- {
-		if p := all[i]; p.Status == "tunnel-exit" && p.Station == "THM-Baking" && time.Since(p.Updated) > handoverGrace && t.took.add(p.ID) {
+		if p := all[i]; p.Status == "tunnel-exit" && p.Station == "THM-Baking" && time.Since(p.Updated) > station.HandoverGrace && t.took.Add(p.ID) {
 			go t.check(pan{id: p.ID, batch: p.BatchID})
 			n++
 		}
@@ -66,8 +67,8 @@ func (t *Exit) adopt() {
 }
 
 func (t *Exit) check(p pan) {
-	defer t.took.drop(p.id)
-	if !t.sec.span(t.Base, exitCheckTime) {
+	defer t.took.Drop(p.id)
+	if !t.sec.Span(t.Base, exitCheckTime) {
 		return
 	}
 	if t.F.Take("FC13") && !t.F.Broken(cameraMachine) {

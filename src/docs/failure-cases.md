@@ -34,8 +34,8 @@ run by a scenario and passes against the real containers.
 | FC24 | Quality inspection: defect, weight or metal | System; the same check failing repeatedly: Maintenance | FIN | button FIN FC24 and "same check fails 3 times"; `faults-system`, `faults-maintenance` |
 | FC25 | Wrapping station breaks | Maintenance | FIN | button FIN FC25; `faults-maintenance` |
 | FC26 | Cartoning: wrong case weight | System | FIN | button FIN FC26; `faults-system` |
-| FC27 | Controller (Docker container) crashes | System (Docker restarts it) | all | button FC27 on each system; `crash-plm`, `crash-bat`, `crash-thm`, `crash-fin`, `crash-bt` |
-| FC28 | Any machine stops responding | Maintenance | all | button FC28 on each system; `freeze-thm` (frozen process) |
+| FC27 | Controller (Docker container) crashes | System (Docker restarts it) | all | button FC27 on each system; `crash-plm-wh`, `crash-plm-ship`, `crash-bat-dose`, `crash-bat-mix`, `crash-bat-insp`, `crash-thm-dep`, `crash-thm-bake`, `crash-thm-exit`, `crash-thm-cool`, `crash-fin-dpn`, `crash-fin-qua`, `crash-fin-wrap`, `crash-fin-pal`, `crash-fin-wash`, `crash-bt` |
+| FC28 | Any machine stops responding | Maintenance | all | button FC28 on each system; `freeze-thm-bake` (frozen process) |
 
 Use-case alternatives: UC4 (the inspector rejects the batter, `faults-system`),
 UC5 (Weight-Checker not calibrated, `faults-system`), UC12 (damaged pan, and the

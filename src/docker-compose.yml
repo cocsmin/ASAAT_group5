@@ -77,21 +77,44 @@ services:
       timeout: 5s
       retries: 10
 
-  plm:
+  # Every system is split per station, one container each (one image, STATION picks the station).
+  plm-wh:
     <<: *service
-    build: { context: ., args: { SERVICE: plm } }
-    environment: { <<: [*env, *sql], ORDER_SECONDS: "22" }
-    volumes: ["plm-data:/data"]
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: [*env, *sql], STATION: plm-wh, ORDER_SECONDS: "22" }
+    volumes: ["plm-wh-data:/data"]
     depends_on:
       mosquitto: { condition: service_healthy }
       mongo: { condition: service_healthy }
       mssql: { condition: service_healthy }
 
-  bat:
+  plm-ship:
     <<: *service
-    build: { context: ., args: { SERVICE: bat } }
-    environment: { <<: *env }
-    volumes: ["bat-data:/data"]
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: [*env, *sql], STATION: plm-ship }
+    volumes: ["plm-ship-data:/data"]
+    depends_on:
+      mosquitto: { condition: service_healthy }
+      mongo: { condition: service_healthy }
+      mssql: { condition: service_healthy }
+
+  bat-dose:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: bat-dose }
+    volumes: ["bat-dose-data:/data"]
+
+  bat-mix:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: bat-mix }
+    volumes: ["bat-mix-data:/data"]
+
+  bat-insp:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: bat-insp }
+    volumes: ["bat-insp-data:/data"]
 
   # Thermal Processing is split per station, one container each (same image, STATION picks the station).
   thm-dep:
@@ -124,11 +147,36 @@ services:
     environment: { <<: *env }
     volumes: ["bt-data:/data"]
 
-  fin:
+  # Finishing & Packaging is split per station too.
+  fin-dpn:
     <<: *service
-    build: { context: ., args: { SERVICE: fin } }
-    environment: { <<: *env, PAN_COUNT: "60", PALLET_SIZE: "30" }
-    volumes: ["fin-data:/data"]
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: fin-dpn }
+    volumes: ["fin-dpn-data:/data"]
+
+  fin-qua:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: fin-qua }
+    volumes: ["fin-qua-data:/data"]
+
+  fin-wrap:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: fin-wrap }
+    volumes: ["fin-wrap-data:/data"]
+
+  fin-pal:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: fin-pal, PALLET_SIZE: "30" }
+    volumes: ["fin-pal-data:/data"]
+
+  fin-wash:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: fin-wash, PAN_COUNT: "60" }
+    volumes: ["fin-wash-data:/data"]
 
   mon:
     <<: *service
@@ -178,12 +226,19 @@ services:
 volumes:
   mssql-data:
   mongo-data:
-  plm-data:
-  bat-data:
+  plm-wh-data:
+  plm-ship-data:
+  bat-dose-data:
+  bat-mix-data:
+  bat-insp-data:
   thm-dep-data:
   thm-bake-data:
   thm-exit-data:
   thm-cool-data:
-  fin-data:
+  fin-dpn-data:
+  fin-qua-data:
+  fin-wrap-data:
+  fin-pal-data:
+  fin-wash-data:
   bt-data:
   mon-data:

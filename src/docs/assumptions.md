@@ -62,7 +62,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 
 | # | Assumption | Value | Recommendation |
 |---|---|---|---|
-| S1 | One container per system (PLM, BAT, THM, FIN, BT, MON), plus broker, SQL Server, MongoDB; the dashboard is a separate demo container | open group decision (container granularity) | Confirm. Recommendation in team-review section 3: split only THM zone control and BAT dosing/mixing, and only if the report argues for it |
+| S1 | One container per station (14 stations, plus BT and MON), plus broker, SQL Server, MongoDB; the dashboard is a separate demo container | decided by the group (4 Nov), see stations.md | Keep |
 | S2 | The dashboard (`ui`) is for the experiments and the demo, not part of the real plant | MON has no user interface | Confirm (see team-review section 2, item 16) |
 | S3 | MongoDB holds the traveling pan documents and the saved state of the nodes; the group treats it as experiment data | `mongo-down` scenario dropped | Keep |
 | S4 | "No production without the monitor": nothing new starts while MON is offline | THM admits no pans, BAT starts no batch, PLM releases no order | Confirm. It means a MON restart pauses the line |

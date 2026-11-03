@@ -272,7 +272,7 @@ func scenarios() []scenario {
 	list := []scenario{
 		{"healthy", "all six systems online and a pallet ships", false, healthy},
 	}
-	for _, n := range []string{"PLM", "BAT", "THM-DEP", "THM-BAKE", "THM-EXIT", "THM-COOL", "FIN", "BT"} {
+	for _, n := range []string{"PLM-WH", "PLM-SHIP", "BAT-DOSE", "BAT-MIX", "BAT-INSP", "THM-DEP", "THM-BAKE", "THM-EXIT", "THM-COOL", "FIN-DPN", "FIN-QUA", "FIN-WRAP", "FIN-PAL", "FIN-WASH", "BT"} {
 		n := n
 		list = append(list, scenario{"crash-" + strings.ToLower(n), "crash the " + n + " container (real process exit): detected, restarted, cakes and pans kept", false,
 			func(e *env) error { return crash(e, n) }})
@@ -475,37 +475,37 @@ type fault struct {
 }
 
 var systemFaults = []fault{
-	{"PLM", "FC1", 1, "FC1", "warning", "", "not enough ingredients: order held, Logistics notified, restock, order released"},
-	{"PLM", "FC2", 1, "FC2", "warning", "", "warehouse not responding: circuit breaker, work continues with staged ingredients"},
-	{"BAT", "FC3", 1, "FC3", "warning", "", "too little of an ingredient: missing amount requested, weighed again"},
-	{"BAT", "FC4", 1, "FC4", "discard", "", "too much of an ingredient: batch discarded, new batch"},
-	{"BAT", "UC4", 1, "UC4", "warning", "", "inspector rejects the batter: another mixing cycle"},
+	{"PLM-WH", "FC1", 1, "FC1", "warning", "", "not enough ingredients: order held, Logistics notified, restock, order released"},
+	{"PLM-WH", "FC2", 1, "FC2", "warning", "", "warehouse not responding: circuit breaker, work continues with staged ingredients"},
+	{"BAT-DOSE", "FC3", 1, "FC3", "warning", "", "too little of an ingredient: missing amount requested, weighed again"},
+	{"BAT-DOSE", "FC4", 1, "FC4", "discard", "", "too much of an ingredient: batch discarded, new batch"},
+	{"BAT-INSP", "UC4", 1, "UC4", "warning", "", "inspector rejects the batter: another mixing cycle"},
 	{"THM-DEP", "FC7", 1, "FC7", "warning", "", "depositing stops: new batches held"},
 	{"THM-DEP", "FC8", 1, "FC8", "warning", "", "no pan at depositing: batter held, pan requested"},
 	{"THM-DEP", "UC5", 1, "UC5", "warning", "", "Weight-Checker out of calibration: depositing waits"},
 	{"THM-DEP", "FC9", 1, "FC9", "discard", "", "wrong fill weight: pan diverted"},
 	{"THM-EXIT", "FC12", 1, "FC12", "discard", "", "cake under- or overcooked: diverted to refuse"},
 	{"THM-COOL", "FC14", 1, "FC14", "warning", "", "cake still too hot after cooling: more cooling, buffer"},
-	{"FIN", "FC21", 1, "FC21", "discard", "", "cake stuck or broken in the pan: rejected, pan washed"},
-	{"FIN", "UC12", 1, "UC12", "discard", "", "washed pan damaged: removed from the cycle"},
-	{"FIN", "FC24", 1, "FC24", "discard", "", "quality inspection rejects a cake (weight, visual or metal)"},
-	{"FIN", "UC14", 1, "UC14", "discard", "", "wrap or carton defective: refuse bin"},
-	{"FIN", "FC26", 1, "FC26", "warning", "", "wrong case weight: case set aside for a manual check"},
+	{"FIN-DPN", "FC21", 1, "FC21", "discard", "", "cake stuck or broken in the pan: rejected, pan washed"},
+	{"FIN-WASH", "UC12", 1, "UC12", "discard", "", "washed pan damaged: removed from the cycle"},
+	{"FIN-QUA", "FC24", 1, "FC24", "discard", "", "quality inspection rejects a cake (weight, visual or metal)"},
+	{"FIN-WRAP", "UC14", 1, "UC14", "discard", "", "wrap or carton defective: refuse bin"},
+	{"FIN-PAL", "FC26", 1, "FC26", "warning", "", "wrong case weight: case set aside for a manual check"},
 }
 
 var maintenanceFaults = []fault{
-	{"BAT", "FC5", 3, "FC5", "error", "bat-doser", "dosing fails 3 times in a row: doser locked out"},
-	{"BAT", "FC6", 1, "FC6", "error", "bat-mixer", "mixer breaks: batch discarded"},
+	{"BAT-DOSE", "FC5", 3, "FC5", "error", "bat-dose-doser", "dosing fails 3 times in a row: doser locked out"},
+	{"BAT-MIX", "FC6", 1, "FC6", "error", "bat-mix-mixer", "mixer breaks: batch discarded"},
 	{"THM-DEP", "FC10", 3, "FC10", "error", "thm-dep-depositor", "wrong fill 3 times in a row: depositing stopped"},
 	{"THM-BAKE", "FC11", 1, "FC11", "error", "thm-bake-zone-2", "baking zone temperature wrong: new pans stop, pans inside finish"},
 	{"THM-EXIT", "FC13", 1, "FC13", "error", "thm-exit-heatcamera", "heat camera broken: all cakes diverted"},
 	{"THM-COOL", "FC15", 1, "FC15", "error", "thm-cool-cooling", "cooling stops: diverter raised, cakes go to the buffer"},
-	{"FIN", "FC22", 1, "FC22", "error", "fin-depanner", "depanning machine breaks: cakes held"},
-	{"FIN", "FC23", 1, "FC23", "error", "fin-washer", "washing station breaks: clean pans used from stock"},
-	{"FIN", "FC25", 1, "FC25", "error", "fin-wrapper", "wrapping station breaks: holding area, pan admission stops"},
+	{"FIN-DPN", "FC22", 1, "FC22", "error", "fin-dpn-depanner", "depanning machine breaks: cakes held"},
+	{"FIN-WASH", "FC23", 1, "FC23", "error", "fin-wash-washer", "washing station breaks: clean pans used from stock"},
+	{"FIN-WRAP", "FC25", 1, "FC25", "error", "fin-wrap-wrapper", "wrapping station breaks: holding area, pan admission stops"},
 	{"BT", "FC19", 1, "FC19", "error", "bt-section-", "a band section stops: upstream halts, downstream runs empty"},
 	{"BT", "FC20", 2, "FC20", "error", "bt-section-", "band speed wrong and the correction fails: Maintenance"},
-	{"FIN", "FC24", 3, "FC24", "error", "fin-inspector", "the same quality check fails 3 times in a row: Maintenance"},
+	{"FIN-QUA", "FC24", 3, "FC24", "error", "fin-qua-inspector", "the same quality check fails 3 times in a row: Maintenance"},
 	{"THM-BAKE", "FC28", 1, "FC28", "error", "thm-bake-controller", "controller stops responding: MON marks it faulty"},
 }
 

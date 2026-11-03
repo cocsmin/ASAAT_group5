@@ -96,7 +96,7 @@ func experiment(args []string, base, dir string, docker bool) {
 	_ = fs.Parse(args)
 	names := fs.Args()
 	if len(names) == 0 {
-		names = []string{"crash-plm", "crash-bat", "crash-thm-dep", "crash-thm-bake", "crash-thm-exit", "crash-thm-cool", "crash-fin"}
+		names = []string{"crash-plm-wh", "crash-plm-ship", "crash-bat-dose", "crash-bat-mix", "crash-bat-insp", "crash-thm-dep", "crash-thm-bake", "crash-thm-exit", "crash-thm-cool", "crash-fin-dpn", "crash-fin-qua", "crash-fin-wrap", "crash-fin-pal", "crash-fin-wash"}
 		if docker {
 			names = append(names, "freeze-thm-bake")
 		}

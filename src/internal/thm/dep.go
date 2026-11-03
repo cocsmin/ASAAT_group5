@@ -12,6 +12,7 @@ import (
 	"cakefactory/internal/model"
 	"cakefactory/internal/sig"
 	"cakefactory/internal/sim"
+	"cakefactory/internal/station"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
 )
@@ -19,7 +20,7 @@ import (
 // Dep is the depositing station: it fills clean pans with batter.
 type Dep struct {
 	*svc.Base
-	sec     *section
+	sec     *station.Section
 	batters chan batch
 	clean   chan string
 	pending atomic.Int64 // pan requests not answered yet
@@ -41,9 +42,9 @@ type Dep struct {
 func RunDep() {
 	b, cancel := svc.Run(model.THMDep, "Depositor", "PanPresenceEye", "CheckWeigher")
 	defer cancel()
-	t := &Dep{Base: b, sec: newSection(1), batters: make(chan batch, 1024), clean: make(chan string, 1024),
+	t := &Dep{Base: b, sec: station.NewSection(1), batters: make(chan batch, 1024), clean: make(chan string, 1024),
 		reasons: map[string]string{}, inClean: map[string]bool{}, seenBatch: map[string]bool{}}
-	t.N.OnSignal(model.BAT, sig.BatterReady, func(_ string, s sig.Signal) {
+	t.N.OnSignal(model.BATInsp, sig.BatterReady, func(_ string, s sig.Signal) {
 		t.cmu.Lock()
 		dup := t.seenBatch[s.Str("batchId")]
 		t.seenBatch[s.Str("batchId")] = true
@@ -54,7 +55,7 @@ func RunDep() {
 		t.batters <- batch{id: s.Str("batchId"), pans: s.Int("pans"), target: s.Float("fillTarget"), tol: s.Float("fillTol")}
 		t.N.Gauge("queue", int64(len(t.batters)))
 	})
-	t.N.OnSignal(model.FIN, sig.CleanPanSupply, func(_ string, s sig.Signal) {
+	t.N.OnSignal(model.FINWash, sig.CleanPanSupply, func(_ string, s sig.Signal) {
 		t.pending.Add(-1)
 		t.lowStock.Store(s.Int("stock") <= 2)
 		if id := s.Str("panId"); id != "" {
@@ -68,8 +69,10 @@ func RunDep() {
 	// Stop / resume pan admission: from Finishing, and from the stations behind us.
 	t.N.OnSignal("", sig.PanAdmission, func(from string, s sig.Signal) {
 		switch from {
-		case model.FIN:
-			t.setReason("fin", s.Str("reason"), s.Bool("stop"))
+		case model.FINWrap:
+			t.setReason("wrap", s.Str("reason"), s.Bool("stop"))
+		case model.FINWash:
+			t.setReason("wash", s.Str("reason"), s.Bool("stop"))
 		case model.THMBake:
 			t.setReason("zone", s.Str("reason"), s.Bool("stop"))
 		case model.THMCool:
@@ -77,7 +80,7 @@ func RunDep() {
 		}
 	})
 	t.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) {
-		halted := t.sec.onBand(s) // the depositor works on section 1: a halted S1 stops it at once
+		halted := t.sec.OnBand(s) // the depositor works on section 1: a halted S1 stops it at once
 		t.setReason("band", "band halted: no new pans", halted)
 	})
 	t.OnRepair(depositorMachine, func() {})
@@ -199,7 +202,7 @@ func (t *Dep) depositOne(b batch) bool {
 			}
 		}()
 	}
-	if !t.waitAdmission() || !t.sec.gate.Wait(t.Ctx) {
+	if !t.waitAdmission() || !t.sec.Gate.Wait(t.Ctx) {
 		return false
 	}
 	if t.F.Take("UC5") { // SM1 T1 guard: the Weight-Checker must be calibrated before depositing
@@ -242,7 +245,7 @@ func (t *Dep) depositOne(b batch) bool {
 	if !t.waitAdmission() { // a stop may have come while the pan was awaited
 		return false
 	}
-	if !t.sec.span(t.Base, depositTime) {
+	if !t.sec.Span(t.Base, depositTime) {
 		return false
 	}
 	fill := b.target + sim.Noise(b.tol*0.3)

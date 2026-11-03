@@ -8,17 +8,19 @@ Docker Desktop.
 | Container | What | Why a container (isolation, environment, scalability) |
 |---|---|---|
 | `ui` | experiment dashboard, not a factory system: reads the Sparkplug messages, SQL Server and MongoDB, publishes fault injections, calls MON only for "repair confirmed" | it must keep working when MON is stopped, so it is its own container; a real plant would not need it |
-| `plm`, `bat`, `thm`, `fin`, `bt`, `mon` | the six systems, one Go binary each | each system fails, restarts and is deployed on its own (report Tables I to VI, the "24/7 / deployability" column); Docker's restart policy is the recovery tactic of FC27 |
+| `plm-wh`, `plm-ship`, `bat-dose`, `bat-mix`, `bat-insp`, `thm-dep`, `thm-bake`, `thm-exit`, `thm-cool`, `fin-dpn`, `fin-qua`, `fin-wrap`, `fin-pal`, `fin-wash` | the 14 stations, one image (`cmd/station`, `STATION=...`) | each station fails, restarts and is deployed on its own: a crashed cooling does not stop the baking tunnel (report Tables I to VI, the "24/7 / deployability" column); Docker's restart policy is the recovery tactic of FC27 |
+| `bt`, `mon` | Band Transport and the monitor, one Go binary each | the band sections are devices of BT, not stations; MON watches every container |
 | `mosquitto` | the MQTT broker | the bus is infrastructure with its own lifecycle |
 | `mssql`, `mongo` | the two databases (optional in the exercise, included) | stateful, with volumes, independent of the services |
 | `ctl` (profile `demo`) | switches the other containers on and off for the demonstration | opt-in, because it holds the Docker socket |
 
-**Granularity: one container per system.** Containers per machine would multiply
-processes without isolation that matters here; inside a system the machines are
-Sparkplug devices with their own health state. Two requirements argue for more
-containers: THM-REQ-74 (baking zone control never interrupted by other deployments)
-and BAT-NFR-06 (dosing and mixing deploy independently). They are not split yet;
-this is an open group decision (TODO.md, "Decisions for the group").
+**Granularity: one container per station** (decided by the group, 4 Nov). Containers
+per machine would multiply processes without isolation that matters here; inside a
+station the machines are Sparkplug devices with their own health state. The split
+satisfies THM-REQ-74 (baking zone control never interrupted by other deployments) and
+BAT-NFR-06 (dosing and mixing deploy independently) and gives every station its own
+failure and recovery. The price is 16 factory containers instead of 6 and ten more
+signals between the stations; see [stations.md](stations.md).
 
 No Kubernetes: Compose is enough for one host; orchestration is only needed for
 multi-host scheduling.

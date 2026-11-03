@@ -77,6 +77,10 @@ type Server struct {
 	logs   logSource
 	subs   map[chan []byte]struct{}
 	lastEv int64
+
+	lastEvents   []model.LogEvent // what the page shows while SQL Server does not answer
+	lastTickets  []model.Ticket
+	lastDiscards map[string]int
 	sr     scenarioRunner
 }
 
@@ -159,18 +163,41 @@ func (s *Server) snapshot() snapshot {
 		Events: []model.LogEvent{}, Tickets: []model.Ticket{}, Discards: map[string]int{}, Faults: model.FaultCatalog}
 	var recent []model.LogEvent
 	if src := s.source(); src != nil {
-		ctx, cancel := context.WithTimeout(s.ctx, 3*time.Second)
+		// The three reads run together and wait at most 1.5 s: with SQL Server off the page
+		// must still answer at once, so it shows the last values it read.
+		ctx, cancel := context.WithTimeout(s.ctx, 1500*time.Millisecond)
 		defer cancel()
-		if ev, err := src.Events(ctx, 80); err == nil {
-			snap.Events = ev
-			recent = ev
+		var wg sync.WaitGroup
+		var ev []model.LogEvent
+		var tk []model.Ticket
+		var d map[string]int
+		var eerr, terr, derr error
+		wg.Add(3)
+		go func() { defer wg.Done(); ev, eerr = src.Events(ctx, 80) }()
+		go func() { defer wg.Done(); tk, terr = src.Tickets(ctx, 30) }()
+		go func() { defer wg.Done(); d, derr = src.DiscardCounts(ctx) }()
+		wg.Wait()
+		s.mu.Lock()
+		if eerr == nil {
+			s.lastEvents = ev
 		}
-		if tk, err := src.Tickets(ctx, 30); err == nil && tk != nil {
-			snap.Tickets = tk
+		if terr == nil && tk != nil {
+			s.lastTickets = tk
 		}
-		if d, err := src.DiscardCounts(ctx); err == nil && d != nil {
-			snap.Discards = d
+		if derr == nil && d != nil {
+			s.lastDiscards = d
 		}
+		if s.lastEvents != nil {
+			snap.Events = s.lastEvents
+		}
+		if s.lastTickets != nil {
+			snap.Tickets = s.lastTickets
+		}
+		if s.lastDiscards != nil {
+			snap.Discards = s.lastDiscards
+		}
+		recent = snap.Events
+		s.mu.Unlock()
 	}
 	snap.Alerts = alerts(stations, secs, snap.Tickets, recent)
 	return snap

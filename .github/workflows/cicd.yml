@@ -99,7 +99,7 @@ jobs:
           done
           docker compose ps
       - name: Run the demo scenarios
-        run: go run ./cmd/scenario healthy crash-plm crash-bat crash-thm-dep crash-thm-bake crash-thm-exit crash-thm-cool crash-fin crash-bt freeze-thm-bake band-halt band-section-stop bt-down mon-down broker-restart sql-down cooling-chain faults-system faults-maintenance
+        run: go run ./cmd/scenario healthy crash-plm-wh crash-plm-ship crash-bat-dose crash-bat-mix crash-bat-insp crash-thm-dep crash-thm-bake crash-thm-exit crash-thm-cool crash-fin-dpn crash-fin-qua crash-fin-wrap crash-fin-pal crash-fin-wash crash-bt freeze-thm-bake band-halt band-section-stop bt-down mon-down broker-restart sql-down cooling-chain faults-system faults-maintenance
       - name: Show logs of the stack
         if: always()
         run: docker compose logs --no-color --tail=300
@@ -116,7 +116,7 @@ jobs:
       contents: read
     strategy:
       matrix:
-        service: [plm, bat, station, fin, bt, mon, ui]
+        service: [station, bt, mon, ui]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

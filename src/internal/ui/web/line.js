@@ -8,23 +8,23 @@
   // Stations: id, label, owner node, devices that decide the health, the number
   // shown on the badge, and a small line of text.
   var ST = [
-    { id: 'wh',   t: 'Warehouse',   n: 'PLM', x: 30,   y: 110, w: 100, d: ['WarehouseInventory', 'OrderScheduler', 'RecipeManager'], b: function (g) { return g['orders.held'] || null; }, s: function (g) { return g.breaker ? 'breaker open' : (g['orders.created'] || 0) + ' orders'; } },
-    { id: 'dos',  t: 'Dosing',      n: 'BAT', x: 160,  y: 110, w: 100, d: ['Doser', 'LoadCell'], b: function (g) { return g['stage.dosing'] || null; } },
-    { id: 'mix',  t: 'Mixing',      n: 'BAT', x: 290,  y: 110, w: 100, d: ['Mixer', 'ConsistencySensor'], b: function (g) { return g['stage.mixing'] || null; } },
-    { id: 'ins',  t: 'Inspection',  n: 'BAT', x: 420,  y: 110, w: 100, d: ['InspectionStation'], b: function (g) { return g['stage.inspection'] || null; }, s: function (g) { return g['stage.waiting'] ? 'batter waits' : 'human check'; } },
+    { id: 'wh',   t: 'Warehouse',   n: 'PLM', st: 'PLM-WH', x: 30,   y: 110, w: 100, d: ['WarehouseInventory', 'OrderScheduler', 'RecipeManager'], b: function (g) { return g['orders.held'] || null; }, s: function (g) { return g.breaker ? 'breaker open' : (g['orders.created'] || 0) + ' orders'; } },
+    { id: 'dos',  t: 'Dosing',      n: 'BAT', st: 'BAT-DOSE', x: 160,  y: 110, w: 100, d: ['Doser', 'LoadCell'], b: function (g) { return g['stage.dosing'] || null; } },
+    { id: 'mix',  t: 'Mixing',      n: 'BAT', st: 'BAT-MIX', x: 290,  y: 110, w: 100, d: ['Mixer', 'ConsistencySensor'], b: function (g) { return g['stage.mixing'] || null; } },
+    { id: 'ins',  t: 'Inspection',  n: 'BAT', st: 'BAT-INSP', x: 420,  y: 110, w: 100, d: ['InspectionStation'], b: function (g) { return g['stage.inspection'] || null; }, s: function (g) { return g['stage.waiting'] ? 'batter waits' : 'human check'; } },
     { id: 'dep',  t: 'Depositing',  n: 'THM', st: 'THM-DEP', x: 570,  y: 110, w: 100, d: ['Depositor', 'PanPresenceEye', 'CheckWeigher'], b: function (g) { return g.queue || null; }, s: function (g) { return (g.deposited || 0) + ' pans filled'; } },
     { id: 'bake', t: 'Baking tunnel', n: 'THM', st: 'THM-BAKE', x: 700, y: 110, w: 240, d: ['Zone1', 'Zone2', 'Zone3'], b: function (g) { return g.tunnel || null; }, zones: true },
     { id: 'exit', t: 'Exit check',  n: 'THM', st: 'THM-EXIT', x: 960,  y: 110, w: 90,  d: ['HeatCamera'], b: function (g) { return null; }, s: function (g) { return '97 °C ± 0.5'; } },
     { id: 'cool', t: 'Cooling',     n: 'THM', st: 'THM-COOL', x: 1070, y: 110, w: 100, d: ['CoolingControl'], b: function (g) { return g.cooling || null; } },
     { id: 'buf',  t: 'Cooling buffer', n: 'THM', st: 'THM-COOL', x: 945, y: 205, w: 105, h: 44, d: ['CoolingBuffer'], b: function (g) { return g.buffer || null; } },
-    { id: 'dpn',  t: 'Depanning',   n: 'FIN', x: 1070, y: 300, w: 100, d: ['Depanner', 'VisionPicker'], b: function (g) { return g.depanQ || null; } },
-    { id: 'qua',  t: 'Quality check', n: 'FIN', x: 950, y: 300, w: 100, d: ['Checkweigher', 'VisionCamera', 'MetalDetector'], s: function (g) { return (g.rejected || 0) + ' rejected'; } },
-    { id: 'wrp',  t: 'Wrap + carton', n: 'FIN', x: 830, y: 300, w: 100, d: ['Wrapper', 'Cartoner', 'CaseCheckweigher', 'HoldingArea'], b: function (g) { return g.holding || null; } },
-    { id: 'pal',  t: 'Pallet',      n: 'FIN', x: 710,  y: 300, w: 100, d: ['PalletPacker'], b: function (g) { return g.palletFill || null; }, s: function (g) { return (g.pallets || 0) + ' pallets'; } },
-    { id: 'shp',  t: 'Shipment',    n: 'PLM', x: 590,  y: 300, w: 100, d: ['TransportPlanner'], s: function (g) { return (g['cakes.shipped'] || 0) + ' cakes out'; } },
-    { id: 'wash', t: 'Pan washing', n: 'FIN', x: 1070, y: 430, w: 100, d: ['WashingStation'], b: function (g) { return g.washQ || null; } },
+    { id: 'dpn',  t: 'Depanning',   n: 'FIN', st: 'FIN-DPN', x: 1070, y: 300, w: 100, d: ['Depanner', 'VisionPicker'], b: function (g) { return g.depanQ || null; } },
+    { id: 'qua',  t: 'Quality check', n: 'FIN', st: 'FIN-QUA', x: 950, y: 300, w: 100, d: ['Checkweigher', 'VisionCamera', 'MetalDetector'], s: function (g) { return (g.rejected || 0) + ' rejected'; } },
+    { id: 'wrp',  t: 'Wrap + carton', n: 'FIN', st: 'FIN-WRAP', x: 830, y: 300, w: 100, d: ['Wrapper', 'HoldingArea'], b: function (g) { return g.holding || null; } },
+    { id: 'pal',  t: 'Pallet',      n: 'FIN', st: 'FIN-PAL', x: 710,  y: 300, w: 100, d: ['Cartoner', 'CaseCheckweigher', 'PalletPacker'], b: function (g) { return g.palletFill || null; }, s: function (g) { return (g.pallets || 0) + ' pallets'; } },
+    { id: 'shp',  t: 'Shipment',    n: 'PLM', st: 'PLM-SHIP', x: 590,  y: 300, w: 100, d: ['TransportPlanner'], s: function (g) { return (g['cakes.shipped'] || 0) + ' cakes out'; } },
+    { id: 'wash', t: 'Pan washing', n: 'FIN', st: 'FIN-WASH', x: 1070, y: 430, w: 100, d: ['WashingStation'], b: function (g) { return g.washQ || null; } },
     { id: 'bt', t: 'Band Transport', n: 'BT', x: 170, y: 330, w: 250, d: ['ConveyorController', 'ConveyorDrive', 'SpeedSensor', 'SectionStatusSensor'], b: function (g) { var c = 0; for (var i = 1; i <= 5; i++) { if ((g['state' + i] || 0) > 0) { c++; } } return c || null; }, s: function (g) { return 'target ' + (g.target === undefined ? '–' : g.target) + ' cm/s · bars S1–S5'; } },
-    { id: 'pool', t: 'Clean pans',  n: 'FIN', x: 830,  y: 430, w: 100, d: ['PanPool'], b: function (g) { return g.pool; }, s: function () { return 'ready'; }, pool: true }
+    { id: 'pool', t: 'Clean pans',  n: 'FIN', st: 'FIN-WASH', x: 830,  y: 430, w: 100, d: ['PanPool'], b: function (g) { return g.pool; }, s: function () { return 'ready'; }, pool: true }
   ];
   var H = 64;
   function byId(id) { for (var i = 0; i < ST.length; i++) { if (ST[i].id === id) { return ST[i]; } } }

@@ -1,11 +1,8 @@
-// Package bat is the Batter Preparation system: ingredient intake and dosing,
-// mixing control, the human inspection gate and the batter handoff.
 package bat
 
 import (
 	"fmt"
 	"math"
-	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -18,47 +15,26 @@ import (
 	"cakefactory/internal/timing"
 )
 
-// Parameters (simulated time), see the BAT document.
-const (
-	maxFailedDoses  = 3                 // P2
-	maxBatterWait   = timing.BatterWait // P3
-	doseTime        = 1200 * time.Millisecond
-	inspectionTime  = 3 * time.Second
-	doserMachine    = "bat-doser"
-	mixerMachine    = "bat-mixer"
-	stageDosing     = "stage.dosing"
-	stageMixing     = "stage.mixing"
-	stageInspection = "stage.inspection"
-	stageWaiting    = "stage.waiting"
-)
-
-type order struct {
-	id, batch, recipe string
-	items             []model.Item
-	mixSeconds        int
-	tolPct            float64
-	pans              int
-	fillTarget        float64
-	fillTol           float64
-}
-
-// BAT is the batter preparation service.
-type BAT struct {
+// Dose is the dosing station. It takes the production orders, reserves the
+// ingredients, doses and weighs them, hands the batch to mixing and waits for the
+// result before it starts the next one (UC3, FC1 to FC5).
+type Dose struct {
 	*svc.Base
 	orders     chan order
-	results    chan sig.Signal
+	results    chan sig.Signal // ingredient reservation results from PLM
+	batchDone  chan sig.Signal // "Batch result" from mixing or inspection
 	depStopped atomic.Bool
 	failedRun  int // consecutive failed dose measurements
 	seenMu     sync.Mutex
 	seen       map[string]bool // order ids already received
 }
 
-// Run starts the service.
-func Run() {
-	b, cancel := svc.Run(model.BAT, "Doser", "LoadCell", "Mixer", "ConsistencySensor", "InspectionStation")
+// RunDose starts the dosing station.
+func RunDose() {
+	b, cancel := svc.Run(model.BATDose, "Doser", "LoadCell")
 	defer cancel()
-	t := &BAT{Base: b, orders: make(chan order, 256), results: make(chan sig.Signal, 256), seen: map[string]bool{}}
-	t.N.OnSignal(model.PLM, sig.OrderAndRecipe, func(_ string, s sig.Signal) {
+	t := &Dose{Base: b, orders: make(chan order, 256), results: make(chan sig.Signal, 256), batchDone: make(chan sig.Signal, 256), seen: map[string]bool{}}
+	t.N.OnSignal(model.PLMWh, sig.OrderAndRecipe, func(_ string, s sig.Signal) {
 		t.seenMu.Lock()
 		dup := t.seen[s.Str("orderId")]
 		t.seen[s.Str("orderId")] = true
@@ -72,11 +48,12 @@ func Run() {
 			pans: s.Int("pansPerBatch"), fillTarget: s.Float("fillTarget"), fillTol: s.Float("fillTol"),
 		}
 	})
-	t.N.OnSignal(model.PLM, sig.IngredientReq, func(_ string, s sig.Signal) {
+	t.N.OnSignal(model.PLMWh, sig.IngredientReq, func(_ string, s sig.Signal) {
 		if !s.Bool("request") {
 			t.results <- s
 		}
 	})
+	t.N.OnSignal("", sig.BatchResult, func(_ string, s sig.Signal) { t.batchDone <- s })
 	t.N.OnSignal(model.THMDep, sig.DepositingState, func(_ string, s sig.Signal) {
 		if t.depStopped.Swap(s.Bool("stopped")) == s.Bool("stopped") {
 			return // state signals are repeated with every heartbeat
@@ -88,13 +65,11 @@ func Run() {
 		}
 	})
 	t.Start()
-	for _, g := range []string{stageDosing, stageMixing, stageInspection, stageWaiting} {
-		t.N.Gauge(g, 0)
-	}
+	t.N.Gauge(stageDosing, 0)
 	t.loop()
 }
 
-func (t *BAT) loop() {
+func (t *Dose) loop() {
 	for {
 		select {
 		case <-t.Ctx.Done():
@@ -108,7 +83,7 @@ func (t *BAT) loop() {
 // ingredients waits for the reservation result of an order. It sends the
 // request first when asked and repeats it when PLM does not answer within
 // 20 s (PLM may have restarted). PLM answers a repeated request idempotently.
-func (t *BAT) ingredients(o order, sendFirst bool) (sig.Signal, bool) {
+func (t *Dose) ingredients(o order, sendFirst bool) (sig.Signal, bool) {
 	send := func() {
 		t.N.SendReliable(sig.New(sig.IngredientReq, "request", true, "orderId", o.id, "batchId", o.batch,
 			"items", encode(o.items)))
@@ -134,7 +109,7 @@ func (t *BAT) ingredients(o order, sendFirst bool) (sig.Signal, bool) {
 // reserve asks production management for the ingredients of a batch and waits
 // for the confirmation (Dosing state machine: Reserving). Dosing does not start
 // before the request is confirmed.
-func (t *BAT) reserve(o order) bool {
+func (t *Dose) reserve(o order) bool {
 	r, ok := t.ingredients(o, true)
 	if !ok {
 		return false
@@ -153,7 +128,7 @@ func (t *BAT) reserve(o order) bool {
 	return true
 }
 
-func (t *BAT) process(o order) {
+func (t *Dose) process(o order) {
 	if !t.reserve(o) {
 		return
 	}
@@ -187,31 +162,39 @@ func (t *BAT) process(o order) {
 	}
 }
 
-func encode(items []model.Item) string {
-	parts := make([]string, len(items))
-	for i, it := range items {
-		parts[i] = fmt.Sprintf("%s:%g", it.Ingredient, it.Grams)
-	}
-	return strings.Join(parts, ";")
-}
-
-// makeBatch runs dosing, mixing and inspection. done is true when the batter
-// was handed over, false when the batch was discarded (a new one is started).
-// cont is false when the service is shutting down.
-func (t *BAT) makeBatch(o order, batch string) (done, cont bool) {
+// makeBatch doses the batch, hands it to mixing and waits for the result. done is
+// true when the batter was handed over to depositing, false when the batch was
+// discarded (a new one is started). cont is false when the service is shutting down.
+func (t *Dose) makeBatch(o order, batch string) (done, cont bool) {
 	if t.dose(o, batch) != nil {
 		return false, t.Ctx.Err() == nil
 	}
-	if err := t.mix(o, batch); err != nil {
-		return false, t.Ctx.Err() == nil
+	for len(t.batchDone) > 0 { // results of earlier, given-up batches
+		<-t.batchDone
 	}
-	return t.handOff(o, batch)
+	t.N.SendReliable(sig.New(sig.BatchToMix, job{batch: batch, order: o.id, mixSeconds: o.mixSeconds, pans: o.pans,
+		fillTarget: o.fillTarget, fillTol: o.fillTol}.fields()...))
+	lost := time.After(sim.Scale(batchLostAfter))
+	for {
+		select {
+		case <-t.Ctx.Done():
+			return false, false
+		case r := <-t.batchDone:
+			if r.Str("batchId") != batch {
+				continue
+			}
+			return r.Str("result") == "handed", true
+		case <-lost:
+			t.N.Warn("FC27", "no result for batch "+batch+" from mixing or inspection (a station restarted?): batch given up", batch)
+			return false, true
+		}
+	}
 }
 
 type dosed struct{ error }
 
 // dose dispenses and weighs every ingredient (UC3, FC3, FC4, FC5).
-func (t *BAT) dose(o order, batch string) error {
+func (t *Dose) dose(o order, batch string) error {
 	t.N.Gauge(stageDosing, 1)
 	defer t.N.Gauge(stageDosing, 0)
 	t.failedRun = 0
@@ -263,7 +246,7 @@ func (t *BAT) dose(o order, batch string) error {
 
 // lockout stops dosing after repeated failed measurements (FC5) and waits for
 // Maintenance.
-func (t *BAT) lockout(o order, batch, ing string) error {
+func (t *Dose) lockout(o order, batch, ing string) error {
 	t.F.Break(doserMachine)
 	t.N.SetDevice("Doser", model.StateFault, "locked out after repeated dose failures")
 	t.N.Discard("FC5", "batch discarded: dosing stopped", batch)
@@ -276,75 +259,4 @@ func (t *BAT) lockout(o order, batch, ing string) error {
 	t.N.SetDevice("LoadCell", model.StateOK, "")
 	t.N.Log("FC5", "doser repaired: dosing resumes", batch)
 	return dosed{fmt.Errorf("restart after repair")}
-}
-
-// mix runs the mixing cycle with consistency monitoring (UC4, FC6).
-func (t *BAT) mix(o order, batch string) error {
-	t.N.Gauge(stageMixing, 1)
-	defer t.N.Gauge(stageMixing, 0)
-	t.N.SetDevice("Mixer", model.StateOK, "mixing")
-	defer func() {
-		if !t.F.Broken(mixerMachine) {
-			t.N.SetDevice("Mixer", model.StateOK, "")
-		}
-	}()
-	for {
-		d := time.Duration(o.mixSeconds) * time.Second
-		step := d / 6
-		for i := 0; i < 6; i++ {
-			if !sim.Sleep(t.Ctx, step) {
-				return t.Ctx.Err()
-			}
-			if t.F.Take("FC6") {
-				t.F.Break(mixerMachine)
-				t.N.SetDevice("Mixer", model.StateFault, "mixer broke")
-				t.N.Discard("FC6", "mixer broke: batch in the mixer discarded", batch)
-				t.N.Fault("FC6", "mixer broke during the mixing cycle", batch, "Mixer", mixerMachine)
-				if !t.WaitRepaired(mixerMachine) {
-					return t.Ctx.Err()
-				}
-				t.N.Log("FC6", "mixer repaired: mixing resumes", batch)
-				return dosed{fmt.Errorf("restart after repair")}
-			}
-			t.N.SetDevice("ConsistencySensor", model.StateOK, fmt.Sprintf("viscosity %.1f", 60+float64(i)*3+sim.Noise(0.4)))
-		}
-		// Human inspection gate.
-		t.N.Gauge(stageMixing, 0)
-		t.N.Gauge(stageInspection, 1)
-		t.N.SetDevice("InspectionStation", model.StateOK, "inspector checking batter")
-		sim.Sleep(t.Ctx, inspectionTime)
-		t.N.Gauge(stageInspection, 0)
-		t.N.SetDevice("InspectionStation", model.StateOK, "")
-		if t.F.Take("UC4") {
-			t.N.Warn("UC4", "inspector marked batter not good: another mixing cycle starts immediately", batch)
-			t.N.Gauge(stageMixing, 1)
-			continue
-		}
-		t.N.Log("UC4", "inspector marked batter good", batch)
-		return nil
-	}
-}
-
-// handOff signals the batter to Thermal Processing, holding it while depositing
-// is stopped and discarding it once it has waited longer than P3 (FC7).
-func (t *BAT) handOff(o order, batch string) (done, cont bool) {
-	waited := time.Duration(0)
-	t.N.Gauge(stageWaiting, 0)
-	for t.depStopped.Load() {
-		t.N.Gauge(stageWaiting, 1)
-		if !sim.Sleep(t.Ctx, time.Second) {
-			return false, false
-		}
-		waited += time.Second
-		if waited > maxBatterWait {
-			t.N.Gauge(stageWaiting, 0)
-			t.N.Discard("FC7", fmt.Sprintf("batter waited %.0f s (limit %.0f s): discarded", waited.Seconds(), maxBatterWait.Seconds()), batch)
-			return false, true
-		}
-	}
-	t.N.Gauge(stageWaiting, 0)
-	t.N.SendReliable(sig.New(sig.BatterReady, "batchId", batch, "orderId", o.id, "pans", int64(o.pans),
-		"fillTarget", o.fillTarget, "fillTol", o.fillTol))
-	t.N.Log("UC4", fmt.Sprintf("batter ready: %d pans worth handed to thermal processing", o.pans), batch)
-	return true, true
 }

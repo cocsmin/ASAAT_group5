@@ -11,6 +11,7 @@ import (
 	"cakefactory/internal/model"
 	"cakefactory/internal/sig"
 	"cakefactory/internal/sim"
+	"cakefactory/internal/station"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
 )
@@ -18,9 +19,9 @@ import (
 // Bake is the baking tunnel station: three heating zones on band section 2.
 type Bake struct {
 	*svc.Base
-	sec  *section
-	adm  *admission
-	took *panSet
+	sec  *station.Section
+	adm  *station.Admission
+	took *station.PanSet
 
 	mu        sync.Mutex
 	zoneOff   [4]float64
@@ -33,35 +34,35 @@ type Bake struct {
 func RunBake() {
 	b, cancel := svc.Run(model.THMBake, "Zone1", "Zone2", "Zone3")
 	defer cancel()
-	t := &Bake{Base: b, sec: newSection(2), took: newPanSet()}
-	t.adm = &admission{b: b}
+	t := &Bake{Base: b, sec: station.NewSection(2), took: station.NewPanSet()}
+	t.adm = &station.Admission{B: b}
 	t.N.OnSignal(model.THMDep, sig.PanToBaking, func(_ string, s sig.Signal) {
 		t.take(pan{id: s.Str("panId"), batch: s.Str("batchId")})
 	})
-	t.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) { t.sec.onBand(s) })
+	t.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) { t.sec.OnBand(s) })
 	t.OnRepair(zoneMachine, t.zoneRepaired)
 	t.Start()
 	t.N.SetState(sig.New(sig.PanAdmission, "stop", false, "reason", "")) // after a restart the zone is no longer flagged
 	go t.zoneLoop()
 	go t.gaugeLoop()
-	reconcile(t.Base, t.adopt)
+	station.Reconcile(t.Base, t.adopt)
 	<-t.Ctx.Done()
 }
 
 // take starts a pan through the tunnel unless it is already in it.
 func (t *Bake) take(p pan) {
-	if t.took.add(p.id) {
+	if t.took.Add(p.id) {
 		go t.bake(p)
 	}
 }
 
 // bake moves a pan through the three zones and hands it to the tunnel exit.
 func (t *Bake) bake(p pan) {
-	defer t.took.drop(p.id)
+	defer t.took.Drop(p.id)
 	t.inTunnel.Add(1)
 	store.Move(t.Ctx, t.Pans, p.id, "THM-Baking", "baking", "", nil)
 	for z := 1; z <= 3; z++ {
-		if !t.sec.span(t.Base, zoneTransit) {
+		if !t.sec.Span(t.Base, zoneTransit) {
 			t.inTunnel.Add(-1)
 			return
 		}
@@ -88,18 +89,18 @@ func (t *Bake) adopt() {
 		p := all[i]
 		c := pan{id: p.ID, batch: p.BatchID}
 		switch {
-		case p.Status == "filled" && p.Station == "THM-Depositing" && time.Since(p.Updated) > handoverGrace:
-			if !t.took.add(c.id) {
+		case p.Status == "filled" && p.Station == "THM-Depositing" && time.Since(p.Updated) > station.HandoverGrace:
+			if !t.took.Add(c.id) {
 				continue
 			}
 			if math.Abs(p.FillWeight-store.SeedRecipe.FillTarget) > store.SeedRecipe.FillTol {
-				t.took.drop(c.id)
+				t.took.Drop(c.id)
 				divert(t.Base, c, "FC9", fmt.Sprintf("restart: fill weight %.1f g was out of tolerance: pan diverted", p.FillWeight))
 				continue
 			}
 			go t.bake(c)
 		case p.Status == "baking" && p.Station == "THM-Baking":
-			if !t.took.add(c.id) {
+			if !t.took.Add(c.id) {
 				continue
 			}
 			go t.bake(c) // the pan continues through the zones
@@ -160,7 +161,7 @@ func (t *Bake) zoneLoop() {
 		}
 		if faultNow {
 			t.N.SetDevice("Zone2", model.StateFault, "still out of range after adjustment")
-			t.adm.set(true, "baking zone 2 faulty (FC11)")
+			t.adm.Set(true, "baking zone 2 faulty (FC11)")
 			t.N.Fault("FC11", "zone 2 still out of range after adjustment: flagged faulty, new pans stopped; pans inside finish and are checked at the exit",
 				"", "Zone2", zoneMachine)
 		}
@@ -173,6 +174,6 @@ func (t *Bake) zoneRepaired() {
 	t.zoneFault = false
 	t.mu.Unlock()
 	t.N.SetDevice("Zone2", model.StateOK, "")
-	t.adm.set(false, "")
+	t.adm.Set(false, "")
 	t.N.Log("FC11", "zone 2 repaired: depositing resumes", "")
 }

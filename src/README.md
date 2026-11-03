@@ -103,14 +103,16 @@ See [docs/demo.md](docs/demo.md). The same scenarios run in the CI pipeline.
 
 | Container | System | Owns |
 |---|---|---|
-| `plm` | Production & Logistics Management | orders, recipes, stock and reservations, shipments (SQL) |
-| `bat` | Batter Preparation | dosing, mixing, human inspection gate, batter handoff |
-| `thm` | Thermal Processing | depositing, baking zones, tunnel-exit check, cooling and buffer |
-| `fin` | Finishing & Packaging | depanning, quality inspection, wrap/carton, pallets, pan washing loop |
+| `plm-wh`, `plm-ship` | Production & Logistics Management | orders, recipes, stock and reservations (SQL); shipments |
+| `bat-dose`, `bat-mix`, `bat-insp` | Batter Preparation | dosing; mixing; human inspection gate and batter handoff |
+| `thm-dep`, `thm-bake`, `thm-exit`, `thm-cool` | Thermal Processing | depositing; baking zones; tunnel-exit check; cooling and buffer |
+| `fin-dpn`, `fin-qua`, `fin-wrap`, `fin-pal`, `fin-wash` | Finishing & Packaging | depanning; quality inspection; wrapping; cartoning and pallets; pan washing and pool |
 | `bt` | Band Transport | the five band sections (halt, slow-down, restart in order), speed monitoring, transport faults (FC19, FC20); tells THM, FIN and MON the state of the band |
 | `mon` | Line Monitoring & Health | health detection (heartbeats, death certificates), event log, tickets, commands to BT (no user interface) |
 | `ui` | Experiment dashboard | not a factory system: shows the flow, injects failures, switches parts, runs the scenarios; reads the Sparkplug messages, SQL Server and MongoDB itself, so it keeps working when MON is down |
 | `mosquitto`, `mssql`, `mongo` | infrastructure | message broker, relational store, document store |
+
+Every station is its own container, all built from one image (`STATION=...`); see [docs/stations.md](docs/stations.md).
 
 The decisions (see [docs/decisions.md](docs/decisions.md)): Sparkplug B over
 MQTT, SQL Server for the main system, MongoDB for the traveling pans, Docker

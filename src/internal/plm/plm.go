@@ -1,5 +1,6 @@
-// Package plm is the Production & Logistics Management system: orders and
-// scheduling, recipes, warehouse and inventory (SQL), transport and shipment.
+// Package plm is the Production & Logistics Management system, split in two
+// containers: PLM-WH (orders and scheduling, recipes, warehouse and inventory in
+// SQL) and PLM-SHIP (transport planning and shipment, ship.go).
 package plm
 
 import (
@@ -33,11 +34,9 @@ type PLM struct {
 
 	mu        sync.Mutex
 	orderNo   int
-	palletNo  int
 	sentOrder map[string]pendingOrder // orders sent, waiting for BAT's ingredient request
 	held      map[string]model.Order
 	reqs      chan sig.Signal
-	pallets   chan sig.Signal
 	breakerAt time.Time // breaker open until this wall-clock time
 	probing   bool
 }
@@ -77,22 +76,21 @@ func (p *PLM) resendLoop() {
 	}
 }
 
-// Run starts the service.
-func Run() {
-	b, cancel := svc.Run(model.PLM, "OrderScheduler", "RecipeManager", "WarehouseInventory", "TransportPlanner")
+// RunWh starts the orders and warehouse station.
+func RunWh() {
+	b, cancel := svc.Run(model.PLMWh, "OrderScheduler", "RecipeManager", "WarehouseInventory")
 	defer cancel()
 	sqlStore, err := store.OpenSQL(b.Ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
 	p := &PLM{Base: b, sql: sqlStore, sentOrder: map[string]pendingOrder{}, held: map[string]model.Order{},
-		reqs: make(chan sig.Signal, 1024), pallets: make(chan sig.Signal, 1024)}
-	p.N.OnSignal(model.BAT, sig.IngredientReq, func(_ string, s sig.Signal) {
+		reqs: make(chan sig.Signal, 1024)}
+	p.N.OnSignal(model.BATDose, sig.IngredientReq, func(_ string, s sig.Signal) {
 		if s.Bool("request") {
 			p.reqs <- s
 		}
 	})
-	p.N.OnSignal(model.FIN, sig.PalletReady, func(_ string, s sig.Signal) { p.pallets <- s })
 	p.Start()
 	// Continue the order numbers after a restart. Taking the larger of the saved
 	// counter and the highest stored order avoids re-issuing an id that batter
@@ -105,7 +103,6 @@ func Run() {
 	}
 	go p.requestLoop()
 	go p.resendLoop()
-	go p.palletLoop()
 	go p.stockLoop()
 	p.orderLoop(svc.EnvDur("ORDER_SECONDS", 22*time.Second))
 }
@@ -330,29 +327,6 @@ func (p *PLM) scheduleProbe() {
 			p.N.Log("FC2", "test request succeeded: circuit breaker closed", "")
 		}
 	}()
-}
-
-func (p *PLM) palletLoop() {
-	vehicles := []string{"Truck 1", "Truck 2", "Truck 3"}
-	for {
-		select {
-		case <-p.Ctx.Done():
-			return
-		case s := <-p.pallets:
-			p.mu.Lock()
-			p.palletNo++
-			v := vehicles[p.palletNo%len(vehicles)]
-			p.mu.Unlock()
-			cakes := s.Int("cakes")
-			sh := model.Shipment{PalletID: s.Str("palletId"), Cakes: cakes, Batches: s.Str("batches"), Vehicle: v, At: time.Now().UTC()}
-			if err := p.sql.SaveShipment(p.Ctx, sh); err != nil {
-				log.Printf("save shipment: %v", err)
-			}
-			p.N.AddGauge("pallets.shipped", 1)
-			p.N.AddGauge("cakes.shipped", int64(cakes))
-			p.N.Log("UC16", fmt.Sprintf("pallet %s (%d cakes) assigned to %s and dispatched", sh.PalletID, cakes, v), s.Str("batches"))
-		}
-	}
 }
 
 func (p *PLM) stockLoop() {

@@ -29,8 +29,30 @@ const (
 	THMCool = "THM-COOL" // cooling and its fallback buffer
 )
 
+// Station nodes of Finishing & Packaging.
+const (
+	FINDpn  = "FIN-DPN"  // depanning
+	FINQua  = "FIN-QUA"  // quality inspection
+	FINWrap = "FIN-WRAP" // wrapping and the holding area in front of it
+	FINPal  = "FIN-PAL"  // cartoning, case check and pallets
+	FINWash = "FIN-WASH" // pan washing, the clean-pan pool and the pan supply to depositing
+)
+
+// Station nodes of Production & Logistics Management.
+const (
+	PLMWh   = "PLM-WH"   // orders, recipes, warehouse and inventory
+	PLMShip = "PLM-SHIP" // transport planning and shipment
+)
+
+// Station nodes of Batter Preparation.
+const (
+	BATDose = "BAT-DOSE" // order intake, ingredient reservation and dosing
+	BATMix  = "BAT-MIX"  // mixing
+	BATInsp = "BAT-INSP" // human inspection gate and the batter handoff
+)
+
 // Nodes lists every edge node (every container that talks Sparkplug) in line order.
-var Nodes = []string{PLM, BAT, THMDep, THMBake, THMExit, THMCool, FIN, BT, MON}
+var Nodes = []string{PLMWh, PLMShip, BATDose, BATMix, BATInsp, THMDep, THMBake, THMExit, THMCool, FINDpn, FINQua, FINWrap, FINPal, FINWash, BT, MON}
 
 // Systems lists the systems in line order.
 var Systems = []string{PLM, BAT, THM, FIN, BT, MON}
@@ -73,7 +95,7 @@ var sectionNames = [6]string{"", "Depositing", "Baking tunnel", "Cooling", "Depa
 var sectionOwners = [6]string{"", THM, THM, THM, FIN, FIN}
 
 // sectionNodes lists the nodes that work on each band section.
-var sectionNodes = [6][]string{nil, {THMDep}, {THMBake}, {THMExit, THMCool}, {FIN}, {FIN}}
+var sectionNodes = [6][]string{nil, {THMDep}, {THMBake}, {THMExit, THMCool}, {FINDpn, FINQua}, {FINWrap, FINPal}}
 
 // OwnsSection reports whether node works on band section i (1 to 5).
 func OwnsSection(node string, i int) bool {

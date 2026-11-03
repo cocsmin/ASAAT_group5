@@ -22,7 +22,7 @@ import (
 )
 
 // Order and kind of the components in the dashboard.
-var order = []string{"mosquitto", "mssql", "mongo", "plm", "bat", "thm-dep", "thm-bake", "thm-exit", "thm-cool", "fin", "bt", "mon", "ui"}
+var order = []string{"mosquitto", "mssql", "mongo", "plm-wh", "plm-ship", "bat-dose", "bat-mix", "bat-insp", "thm-dep", "thm-bake", "thm-exit", "thm-cool", "fin-dpn", "fin-qua", "fin-wrap", "fin-pal", "fin-wash", "bt", "mon", "ui"}
 
 type component struct {
 	Name    string   `json:"name"`
@@ -36,8 +36,8 @@ type component struct {
 
 var labels = map[string]string{
 	"mosquitto": "MQTT broker (Sparkplug B)", "mssql": "SQL Server", "mongo": "MongoDB",
-	"plm": "Production & Logistics", "bat": "Batter Preparation", "thm-dep": "THM Depositing", "thm-bake": "THM Baking tunnel", "thm-exit": "THM Tunnel exit check", "thm-cool": "THM Cooling and buffer",
-	"fin": "Finishing & Packaging", "bt": "Band Transport", "mon": "Line Monitoring & Health", "ui": "Experiment dashboard",
+	"plm-wh": "PLM Orders and warehouse", "plm-ship": "PLM Shipment", "bat-dose": "BAT Dosing", "bat-mix": "BAT Mixing", "bat-insp": "BAT Inspection", "thm-dep": "THM Depositing", "thm-bake": "THM Baking tunnel", "thm-exit": "THM Tunnel exit check", "thm-cool": "THM Cooling and buffer",
+	"fin-dpn": "FIN Depanning", "fin-qua": "FIN Quality check", "fin-wrap": "FIN Wrapping", "fin-pal": "FIN Cartoning and pallets", "fin-wash": "FIN Pan washing and pool", "bt": "Band Transport", "mon": "Line Monitoring & Health", "ui": "Experiment dashboard",
 }
 
 type docker struct {

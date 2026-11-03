@@ -153,9 +153,10 @@ they equal real seconds; the experiment ran at 1.
 
 ## 3. Decisions waiting for the group [D]
 
-1. **Container granularity**: one container per system (now) or split THM baking
-   zone control (THM-REQ-74) and BAT dosing/mixing (BAT-NFR-06). Recommendation: those
-   two only. A separate health container is not needed.
+1. ~~Container granularity~~ **decided by the group (4 Nov): one container per station**,
+   done on the branch `implementation/per-station-containers` (see stations.md). Still to
+   decide: is this branch the one we hand in, and are the Papyrus models redrawn per
+   station (TODO U18)?
 2. **The justification of the decisions already taken** (Sparkplug B on MQTT, SQL
    Server for the main system, MongoDB for the pans, Go, Docker) has to be written in
    the report; the drafts in `communication.md`, `databases.md`, `languages.md` and
