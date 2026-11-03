@@ -154,9 +154,9 @@ they equal real seconds; the experiment ran at 1.
 ## 3. Decisions waiting for the group [D]
 
 1. ~~Container granularity~~ **decided by the group (4 Nov): one container per station**,
-   done on the branch `implementation/per-station-containers` (see stations.md). Still to
-   decide: is this branch the one we hand in, and are the Papyrus models redrawn per
-   station (TODO U18)?
+   done on the branch `implementation` (see stations.md). Still to decide: whether the
+   Papyrus models name the station handoffs inside each system (TODO U18); the logical
+   models stay valid.
 2. **The justification of the decisions already taken** (Sparkplug B on MQTT, SQL
    Server for the main system, MongoDB for the pans, Go, Docker) has to be written in
    the report; the drafts in `communication.md`, `databases.md`, `languages.md` and
@@ -170,7 +170,7 @@ they equal real seconds; the experiment ran at 1.
    a small test (more pans, more messages) or only discuss it?
 8. **Security** is not a stated quality attribute; broker is anonymous, no TLS, SQL
    password in the compose file with a demo default.
-9. **Merge**: the branch `implementation/go-sparkplug-factory` is pushed, not merged,
+9. **Merge**: the branch `implementation` is pushed, not merged,
    no pull request. The CI pipeline has never run on GitHub.
 
 10. **Role of MongoDB.** The group decided (3 Nov) to drop the `mongo-down` scenario ("not

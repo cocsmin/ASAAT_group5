@@ -86,7 +86,7 @@ UC14) so the output can be matched to the failure-case tables.
 
 ## Measured results
 
-> These results were measured with one container per system (branch implementation/go-sparkplug-factory). On the branch with one container per station the scenarios have per-station names (crash-thm-bake, freeze-thm-bake, ...); the results of that branch are measured again after the split, see docs/stations.md.
+> These results were measured with one container per system (an earlier state of the branch implementation). Since then the scenarios have per-station names (crash-thm-bake, freeze-thm-bake, ...); these results are measured again for the station containers, see docs/stations.md.
 
 Run on Docker Desktop (Windows 11) with `SIM_SPEED=3`; times are real seconds.
 

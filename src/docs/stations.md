@@ -2,8 +2,7 @@
 
 The group decided (4 Nov) to run every station in its own container instead of one
 container per system. This page says what that means in the implementation. It is on
-the branch `implementation/per-station-containers`; the branch
-`implementation/go-sparkplug-factory` still has one container per system.
+the branch `implementation`.
 
 ## The containers
 
@@ -92,8 +91,11 @@ is diverted at once is never taken up.
 ## What it costs and what it gives
 
 - 16 containers and about 2 GB of memory for the factory (128 MB each) instead of 6.
-- 10 more signals, and the Papyrus models of PLM, BAT, THM and FIN no longer match the
-  code: their internal state machines are now spread over several nodes (see TODO).
+- 10 more messages, all **inside** a system: they carry what used to be an internal
+  transition of that system's state machine (a pan going from depositing to baking). The
+  logical diagrams (system IBD, the state machines, the 14 signals between systems) still
+  describe the behaviour; only the deployment view has to show the containers, and each
+  system's internal ports can name the handoffs (see TODO U18).
 - A station can now fail alone: a crash of the cooling does not stop the baking tunnel;
   the neighbours keep their last state, MON halts only the sections that need it. That
   is the benefit the group wanted for the containerization exercise.

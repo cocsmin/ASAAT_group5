@@ -10,7 +10,7 @@ when something goes wrong.
 ```bash
 git clone https://github.com/cocsmin/ASAAT_group5.git
 cd ASAAT_group5
-git checkout implementation/go-sparkplug-factory   # not needed once merged to master
+git checkout implementation   # not needed once merged to master
 cd src
 ```
 
