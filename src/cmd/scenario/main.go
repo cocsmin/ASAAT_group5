@@ -6,7 +6,7 @@
 // need Docker too.
 //
 //	go run ./cmd/scenario list
-//	go run ./cmd/scenario healthy crash-thm
+//	go run ./cmd/scenario healthy crash-thm-bake
 //	go run ./cmd/scenario all
 package main
 
@@ -96,9 +96,9 @@ func experiment(args []string, base, dir string, docker bool) {
 	_ = fs.Parse(args)
 	names := fs.Args()
 	if len(names) == 0 {
-		names = []string{"crash-plm", "crash-bat", "crash-thm", "crash-fin"}
+		names = []string{"crash-plm", "crash-bat", "crash-thm-dep", "crash-thm-bake", "crash-thm-exit", "crash-thm-cool", "crash-fin"}
 		if docker {
-			names = append(names, "freeze-thm")
+			names = append(names, "freeze-thm-bake")
 		}
 	}
 	file, err := os.Create(*out)

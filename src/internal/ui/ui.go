@@ -53,7 +53,8 @@ type Alert struct {
 type snapshot struct {
 	Now      time.Time         `json:"now"`
 	Hb       float64           `json:"heartbeatSeconds"`
-	Nodes    []NodeState       `json:"nodes"`
+	Nodes    []NodeState       `json:"nodes"`    // one per system (merged from its stations)
+	Stations []NodeState       `json:"stations"` // one per container
 	Sections []Section         `json:"sections"`
 	Alerts   []Alert           `json:"alerts"`
 	Events   []model.LogEvent  `json:"events"`
@@ -153,8 +154,8 @@ func (s *Server) poke() {
 // ---------------------------------------------------------------- snapshot
 
 func (s *Server) snapshot() snapshot {
-	nodes, secs, _ := s.obs.snapshot()
-	snap := snapshot{Now: time.Now().UTC(), Hb: s.hb.Seconds(), Nodes: nodes, Sections: secs,
+	nodes, stations, secs, _ := s.obs.snapshot()
+	snap := snapshot{Now: time.Now().UTC(), Hb: s.hb.Seconds(), Nodes: nodes, Stations: stations, Sections: secs,
 		Events: []model.LogEvent{}, Tickets: []model.Ticket{}, Discards: map[string]int{}, Faults: model.FaultCatalog}
 	var recent []model.LogEvent
 	if src := s.source(); src != nil {
@@ -171,7 +172,7 @@ func (s *Server) snapshot() snapshot {
 			snap.Discards = d
 		}
 	}
-	snap.Alerts = alerts(nodes, secs, snap.Tickets, recent)
+	snap.Alerts = alerts(stations, secs, snap.Tickets, recent)
 	return snap
 }
 

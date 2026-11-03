@@ -22,7 +22,7 @@ import (
 )
 
 // Order and kind of the components in the dashboard.
-var order = []string{"mosquitto", "mssql", "mongo", "plm", "bat", "thm", "fin", "bt", "mon", "ui"}
+var order = []string{"mosquitto", "mssql", "mongo", "plm", "bat", "thm-dep", "thm-bake", "thm-exit", "thm-cool", "fin", "bt", "mon", "ui"}
 
 type component struct {
 	Name    string   `json:"name"`
@@ -36,7 +36,7 @@ type component struct {
 
 var labels = map[string]string{
 	"mosquitto": "MQTT broker (Sparkplug B)", "mssql": "SQL Server", "mongo": "MongoDB",
-	"plm": "Production & Logistics", "bat": "Batter Preparation", "thm": "Thermal Processing",
+	"plm": "Production & Logistics", "bat": "Batter Preparation", "thm-dep": "THM Depositing", "thm-bake": "THM Baking tunnel", "thm-exit": "THM Tunnel exit check", "thm-cool": "THM Cooling and buffer",
 	"fin": "Finishing & Packaging", "bt": "Band Transport", "mon": "Line Monitoring & Health", "ui": "Experiment dashboard",
 }
 

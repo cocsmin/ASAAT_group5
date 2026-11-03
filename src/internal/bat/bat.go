@@ -77,7 +77,7 @@ func Run() {
 			t.results <- s
 		}
 	})
-	t.N.OnSignal(model.THM, sig.DepositingState, func(_ string, s sig.Signal) {
+	t.N.OnSignal(model.THMDep, sig.DepositingState, func(_ string, s sig.Signal) {
 		if t.depStopped.Swap(s.Bool("stopped")) == s.Bool("stopped") {
 			return // state signals are repeated with every heartbeat
 		}

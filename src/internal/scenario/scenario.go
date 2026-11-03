@@ -272,16 +272,16 @@ func scenarios() []scenario {
 	list := []scenario{
 		{"healthy", "all six systems online and a pallet ships", false, healthy},
 	}
-	for _, n := range []string{"PLM", "BAT", "THM", "FIN", "BT"} {
+	for _, n := range []string{"PLM", "BAT", "THM-DEP", "THM-BAKE", "THM-EXIT", "THM-COOL", "FIN", "BT"} {
 		n := n
 		list = append(list, scenario{"crash-" + strings.ToLower(n), "crash the " + n + " container (real process exit): detected, restarted, cakes and pans kept", false,
 			func(e *env) error { return crash(e, n) }})
 	}
 	list = append(list,
-		scenario{"band-halt", "freeze THM: MON has Band Transport halt THM's three sections (the others keep running), they run again when THM returns", true, bandHalt},
+		scenario{"band-halt", "freeze the baking tunnel: MON has Band Transport halt its section and everything upstream (S1, S2), the sections behind it keep running, they run again when it returns", true, bandHalt},
 		scenario{"band-section-stop", "FC19: a band section stops, upstream halts, downstream runs, THM really stops depositing, the repair restarts the sections in order", false, bandSectionStop},
 		scenario{"bt-down", "stop Band Transport: the monitor shows the sections as unknown, THM and FIN keep their last state, BT returns and reports again", true, btDown},
-		scenario{"freeze-thm", "freeze THM (no keep-alive): the broker declares it dead, MON has BT halt its sections, it returns", true, freeze},
+		scenario{"freeze-thm-bake", "freeze the baking tunnel station (no keep-alive): the broker declares it dead, MON has BT halt its sections, it returns", true, freeze},
 		scenario{"mon-down", "stop MON while THM discards cakes: no event is lost, the line stops without the monitor", true, monDown},
 		scenario{"sql-down", "switch SQL Server off for 30 s: the monitor must not mistake it for a dead line", true,
 			func(e *env) error { return dbDown(e, "mssql", "SQL Server") }},
@@ -358,26 +358,26 @@ func freeze(e *env) error {
 	since := e.lastEventID()
 	t0 := time.Now()
 	e.faultAt = time.Now()
-	if err := e.act("pause", "thm"); err != nil {
+	if err := e.act("pause", "thm-bake"); err != nil {
 		return err
 	}
-	e.logf("THM frozen (no keep-alive pings)")
-	_, d, err := e.waitEvent(since, detectBound, "THM declared dead", func(x event) bool {
-		return x.Code == "FC27" && strings.HasPrefix(x.Reason, "THM container died")
+	e.logf("THM-BAKE frozen (no keep-alive pings)")
+	_, d, err := e.waitEvent(since, detectBound, "THM-BAKE declared dead", func(x event) bool {
+		return x.Code == "FC27" && strings.HasPrefix(x.Reason, "THM-BAKE container died")
 	})
 	if err != nil {
-		_ = e.act("unpause", "thm")
+		_ = e.act("unpause", "thm-bake")
 		return fmt.Errorf("not detected within %s: %w", detectBound, err)
 	}
 	e.rec("detect_s", d.Seconds())
-	e.logf("broker declared THM dead after %.1fs, MON told BT to halt its band sections (bound %s)", d.Seconds(), detectBound)
+	e.logf("broker declared THM-BAKE dead after %.1fs, MON told BT to halt its band sections (bound %s)", d.Seconds(), detectBound)
 	_ = time.Since(t0)
-	if err := e.act("unpause", "thm"); err != nil {
+	if err := e.act("unpause", "thm-bake"); err != nil {
 		return err
 	}
 	e.logf("THM unfrozen")
-	if _, _, err := e.waitEvent(since, recoverBound, "THM back", func(x event) bool {
-		return x.Code == "FC27" && strings.HasPrefix(x.Reason, "THM container is back")
+	if _, _, err := e.waitEvent(since, recoverBound, "THM-BAKE back", func(x event) bool {
+		return x.Code == "FC27" && strings.HasPrefix(x.Reason, "THM-BAKE container is back")
 	}); err != nil {
 		return err
 	}
@@ -397,7 +397,7 @@ func monDown(e *env) error {
 		return err
 	}
 	before := e.lastEventID()
-	if err := e.post("/api/inject", map[string]any{"node": "THM", "code": "FC12", "count": 4}); err != nil {
+	if err := e.post("/api/inject", map[string]any{"node": "THM-EXIT", "code": "FC12", "count": 4}); err != nil {
 		return err
 	}
 	if err := e.act("stop", "mon"); err != nil {
@@ -480,12 +480,12 @@ var systemFaults = []fault{
 	{"BAT", "FC3", 1, "FC3", "warning", "", "too little of an ingredient: missing amount requested, weighed again"},
 	{"BAT", "FC4", 1, "FC4", "discard", "", "too much of an ingredient: batch discarded, new batch"},
 	{"BAT", "UC4", 1, "UC4", "warning", "", "inspector rejects the batter: another mixing cycle"},
-	{"THM", "FC7", 1, "FC7", "warning", "", "depositing stops: new batches held"},
-	{"THM", "FC8", 1, "FC8", "warning", "", "no pan at depositing: batter held, pan requested"},
-	{"THM", "UC5", 1, "UC5", "warning", "", "Weight-Checker out of calibration: depositing waits"},
-	{"THM", "FC9", 1, "FC9", "discard", "", "wrong fill weight: pan diverted"},
-	{"THM", "FC12", 1, "FC12", "discard", "", "cake under- or overcooked: diverted to refuse"},
-	{"THM", "FC14", 1, "FC14", "warning", "", "cake still too hot after cooling: more cooling, buffer"},
+	{"THM-DEP", "FC7", 1, "FC7", "warning", "", "depositing stops: new batches held"},
+	{"THM-DEP", "FC8", 1, "FC8", "warning", "", "no pan at depositing: batter held, pan requested"},
+	{"THM-DEP", "UC5", 1, "UC5", "warning", "", "Weight-Checker out of calibration: depositing waits"},
+	{"THM-DEP", "FC9", 1, "FC9", "discard", "", "wrong fill weight: pan diverted"},
+	{"THM-EXIT", "FC12", 1, "FC12", "discard", "", "cake under- or overcooked: diverted to refuse"},
+	{"THM-COOL", "FC14", 1, "FC14", "warning", "", "cake still too hot after cooling: more cooling, buffer"},
 	{"FIN", "FC21", 1, "FC21", "discard", "", "cake stuck or broken in the pan: rejected, pan washed"},
 	{"FIN", "UC12", 1, "UC12", "discard", "", "washed pan damaged: removed from the cycle"},
 	{"FIN", "FC24", 1, "FC24", "discard", "", "quality inspection rejects a cake (weight, visual or metal)"},
@@ -496,17 +496,17 @@ var systemFaults = []fault{
 var maintenanceFaults = []fault{
 	{"BAT", "FC5", 3, "FC5", "error", "bat-doser", "dosing fails 3 times in a row: doser locked out"},
 	{"BAT", "FC6", 1, "FC6", "error", "bat-mixer", "mixer breaks: batch discarded"},
-	{"THM", "FC10", 3, "FC10", "error", "thm-depositor", "wrong fill 3 times in a row: depositing stopped"},
-	{"THM", "FC11", 1, "FC11", "error", "thm-zone-2", "baking zone temperature wrong: new pans stop, pans inside finish"},
-	{"THM", "FC13", 1, "FC13", "error", "thm-heatcamera", "heat camera broken: all cakes diverted"},
-	{"THM", "FC15", 1, "FC15", "error", "thm-cooling", "cooling stops: diverter raised, cakes go to the buffer"},
+	{"THM-DEP", "FC10", 3, "FC10", "error", "thm-dep-depositor", "wrong fill 3 times in a row: depositing stopped"},
+	{"THM-BAKE", "FC11", 1, "FC11", "error", "thm-bake-zone-2", "baking zone temperature wrong: new pans stop, pans inside finish"},
+	{"THM-EXIT", "FC13", 1, "FC13", "error", "thm-exit-heatcamera", "heat camera broken: all cakes diverted"},
+	{"THM-COOL", "FC15", 1, "FC15", "error", "thm-cool-cooling", "cooling stops: diverter raised, cakes go to the buffer"},
 	{"FIN", "FC22", 1, "FC22", "error", "fin-depanner", "depanning machine breaks: cakes held"},
 	{"FIN", "FC23", 1, "FC23", "error", "fin-washer", "washing station breaks: clean pans used from stock"},
 	{"FIN", "FC25", 1, "FC25", "error", "fin-wrapper", "wrapping station breaks: holding area, pan admission stops"},
 	{"BT", "FC19", 1, "FC19", "error", "bt-section-", "a band section stops: upstream halts, downstream runs empty"},
 	{"BT", "FC20", 2, "FC20", "error", "bt-section-", "band speed wrong and the correction fails: Maintenance"},
 	{"FIN", "FC24", 3, "FC24", "error", "fin-inspector", "the same quality check fails 3 times in a row: Maintenance"},
-	{"THM", "FC28", 1, "FC28", "error", "thm-controller", "controller stops responding: MON marks it faulty"},
+	{"THM-BAKE", "FC28", 1, "FC28", "error", "thm-bake-controller", "controller stops responding: MON marks it faulty"},
 }
 
 func faults(e *env, list []fault) error {
@@ -616,7 +616,7 @@ var needs = map[string][]string{"sql-down": {"mssql"}}
 func List() []Info {
 	var out []Info
 	for _, s := range scenarios() {
-		out = append(out, Info{Name: s.name, Desc: s.desc, Docker: s.docker, NeedsPause: s.name == "freeze-thm" || s.name == "band-halt", Needs: needs[s.name]})
+		out = append(out, Info{Name: s.name, Desc: s.desc, Docker: s.docker, NeedsPause: s.name == "freeze-thm-bake" || s.name == "band-halt", Needs: needs[s.name]})
 	}
 	return out
 }
@@ -701,7 +701,7 @@ func coolingChain(e *env) error {
 		return err
 	}
 	since := e.lastEventID()
-	if err := e.post("/api/inject", map[string]any{"node": "THM", "code": "FC15", "count": 1}); err != nil {
+	if err := e.post("/api/inject", map[string]any{"node": "THM-COOL", "code": "FC15", "count": 1}); err != nil {
 		return err
 	}
 	e.logf("cooling is about to stop (FC15)")
@@ -728,7 +728,7 @@ func coolingChain(e *env) error {
 			return false
 		}
 		for _, x := range s.Tickets {
-			if x.Status == "open" && strings.HasPrefix(x.MachineID, "thm-cooling") {
+			if x.Status == "open" && strings.HasPrefix(x.MachineID, "thm-cool-cooling") {
 				tk = x
 				return true
 			}
@@ -779,9 +779,10 @@ func (e *env) allSections(want string) bool {
 	return true
 }
 
-// bandHalt freezes THM. The monitor must have Band Transport halt exactly the
-// sections THM works on (S1 to S3) and leave S4 and S5, and release them again
-// when THM is back (UC2 error flow).
+// bandHalt freezes the baking tunnel station. The monitor must have Band Transport halt
+// its section (S2) and, because a stopped section stops everything upstream, S1; the
+// sections behind it keep running; they are released again when the station is back
+// (UC2 error flow).
 func bandHalt(e *env) error {
 	if err := e.settle(); err != nil {
 		return err
@@ -790,34 +791,34 @@ func bandHalt(e *env) error {
 		return err
 	}
 	e.faultAt = time.Now()
-	if err := e.act("pause", "thm"); err != nil {
+	if err := e.act("pause", "thm-bake"); err != nil {
 		return err
 	}
-	e.logf("THM frozen")
-	d, err := e.waitFor("S1 to S3 halted by Band Transport", detectBound, func() bool {
+	e.logf("THM-BAKE frozen")
+	d, err := e.waitFor("S1 and S2 halted by Band Transport", detectBound, func() bool {
 		sec := e.sections()
-		return len(sec) == 5 && sec[0] == "halt" && sec[1] == "halt" && sec[2] == "halt"
+		return len(sec) == 5 && sec[0] == "halt" && sec[1] == "halt"
 	})
 	if err != nil {
-		_ = e.act("unpause", "thm")
-		return fmt.Errorf("the sections of THM were not halted: %w (now %v)", err, e.sections())
+		_ = e.act("unpause", "thm-bake")
+		return fmt.Errorf("the baking tunnel section and the ones upstream were not halted: %w (now %v)", err, e.sections())
 	}
 	e.rec("detect_s", d.Seconds())
 	sec := e.sections()
-	if sec[3] != "run" || sec[4] != "run" {
-		_ = e.act("unpause", "thm")
-		return fmt.Errorf("sections of FIN must keep running, got %v", sec)
+	if sec[2] != "run" || sec[3] != "run" || sec[4] != "run" {
+		_ = e.act("unpause", "thm-bake")
+		return fmt.Errorf("the sections behind the baking tunnel must keep running, got %v", sec)
 	}
-	e.logf("S1 to S3 halted after %.1fs, S4 and S5 still run: %v", d.Seconds(), sec)
-	if err := e.act("unpause", "thm"); err != nil {
+	e.logf("S1 and S2 halted after %.1fs, S3 to S5 still run: %v", d.Seconds(), sec)
+	if err := e.act("unpause", "thm-bake"); err != nil {
 		return err
 	}
 	d, err = e.waitFor("all sections run again", recoverBound, func() bool { return e.allSections("run") })
 	if err != nil {
-		return fmt.Errorf("sections not released after THM returned: %w (now %v)", err, e.sections())
+		return fmt.Errorf("sections not released after THM-BAKE returned: %w (now %v)", err, e.sections())
 	}
 	e.rec("recover_s", d.Seconds())
-	e.logf("THM back, all sections run again after %.1fs", d.Seconds())
+	e.logf("THM-BAKE back, all sections run again after %.1fs", d.Seconds())
 	return e.flowResumes(180 * time.Second)
 }
 

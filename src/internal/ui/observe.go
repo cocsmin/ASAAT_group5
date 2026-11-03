@@ -29,6 +29,7 @@ type NodeState struct {
 	Restarts int                 `json:"restarts"`
 	Uptime   int64               `json:"uptime"`
 	Note     string              `json:"note"`
+	Stations []string            `json:"stations,omitempty"` // the containers of a system that is split per station
 	Devices  map[string]DevState `json:"devices"`
 	Gauges   map[string]int64    `json:"gauges"`
 	born     bool
@@ -222,11 +223,70 @@ func (o *observer) watch(done <-chan struct{}) {
 	}
 }
 
-// snapshot returns copies of the nodes (MON included, from the host STATE
-// message) and of the sections.
-func (o *observer) snapshot() ([]NodeState, []Section, bool) {
+// snapshot returns copies of the systems (a system split per station is merged from
+// its stations), of the stations (every container, MON included from the host
+// STATE message) and of the sections.
+func (o *observer) snapshot() (systems, stations []NodeState, secs []Section, up bool) {
 	o.mu.Lock()
 	defer o.mu.Unlock()
+	stations = o.stationList()
+	by := map[string]NodeState{}
+	for _, n := range stations {
+		by[n.ID] = n
+	}
+	for _, sys := range model.Systems {
+		ids := model.StationsOf(sys)
+		if len(ids) == 1 {
+			systems = append(systems, by[ids[0]])
+			continue
+		}
+		systems = append(systems, mergeStations(sys, ids, by))
+	}
+	btUp := o.nodes[model.BT].Status == "online"
+	for i := 1; i <= 5; i++ {
+		s := o.sections[i]
+		if !btUp {
+			s.State = "off"
+		}
+		secs = append(secs, s)
+	}
+	return systems, stations, secs, o.hostUp || !o.hostSeen
+}
+
+// mergeStations makes one NodeState of a system from its stations: the worst status,
+// the devices together, the gauges added up.
+func mergeStations(sys string, ids []string, by map[string]NodeState) NodeState {
+	m := NodeState{ID: sys, Status: "online", Devices: map[string]DevState{}, Gauges: map[string]int64{}, Stations: ids}
+	rank := map[string]int{"online": 0, "unknown": 1, "silent": 2, "dead": 3}
+	for i, id := range ids {
+		n := by[id]
+		if rank[n.Status] > rank[m.Status] {
+			m.Status = n.Status
+		}
+		if n.Status != "online" {
+			if m.Note != "" {
+				m.Note += "; "
+			}
+			m.Note += id + " " + n.Status
+		}
+		m.Restarts += n.Restarts
+		if i == 0 || n.Uptime < m.Uptime {
+			m.Uptime = n.Uptime
+		}
+		if n.LastSeen.After(m.LastSeen) {
+			m.LastSeen = n.LastSeen
+		}
+		for k, v := range n.Devices {
+			m.Devices[k] = v
+		}
+		for k, v := range n.Gauges {
+			m.Gauges[k] += v
+		}
+	}
+	return m
+}
+
+func (o *observer) stationList() []NodeState {
 	var out []NodeState
 	for _, id := range model.Nodes {
 		if id == model.MON {
@@ -254,14 +314,5 @@ func (o *observer) snapshot() ([]NodeState, []Section, bool) {
 		}
 		out = append(out, cp)
 	}
-	btUp := o.nodes[model.BT].Status == "online"
-	var secs []Section
-	for i := 1; i <= 5; i++ {
-		s := o.sections[i]
-		if !btUp {
-			s.State = "off"
-		}
-		secs = append(secs, s)
-	}
-	return out, secs, o.hostUp || !o.hostSeen
+	return out
 }

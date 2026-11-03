@@ -93,11 +93,30 @@ services:
     environment: { <<: *env }
     volumes: ["bat-data:/data"]
 
-  thm:
+  # Thermal Processing is split per station, one container each (same image, STATION picks the station).
+  thm-dep:
     <<: *service
-    build: { context: ., args: { SERVICE: thm } }
-    environment: { <<: *env }
-    volumes: ["thm-data:/data"]
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: thm-dep }
+    volumes: ["thm-dep-data:/data"]
+
+  thm-bake:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: thm-bake }
+    volumes: ["thm-bake-data:/data"]
+
+  thm-exit:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: thm-exit }
+    volumes: ["thm-exit-data:/data"]
+
+  thm-cool:
+    <<: *service
+    build: { context: ., args: { SERVICE: station } }
+    environment: { <<: *env, STATION: thm-cool }
+    volumes: ["thm-cool-data:/data"]
 
   bt:
     <<: *service
@@ -161,7 +180,10 @@ volumes:
   mongo-data:
   plm-data:
   bat-data:
-  thm-data:
+  thm-dep-data:
+  thm-bake-data:
+  thm-exit-data:
+  thm-cool-data:
   fin-data:
   bt-data:
   mon-data:

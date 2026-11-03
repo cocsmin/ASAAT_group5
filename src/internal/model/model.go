@@ -1,12 +1,17 @@
 // Package model holds the data types shared between services and stores.
 package model
 
-import "time"
+import (
+	"strings"
+	"time"
+)
 
 // Group is the Sparkplug group id of the whole factory.
 const Group = "CakeFactory"
 
-// Node ids (Sparkplug edge nodes), one per system.
+// Systems of the factory. A system is one or more containers (Sparkplug edge
+// nodes): a system that is split per station has one node per station, named
+// <SYSTEM>-<STATION>, and the system id itself is only a group name.
 const (
 	PLM = "PLM"
 	BAT = "BAT"
@@ -16,13 +21,69 @@ const (
 	MON = "MON"
 )
 
-// Nodes lists every edge node in line order.
-var Nodes = []string{PLM, BAT, THM, FIN, BT, MON}
+// Station nodes of Thermal Processing: one container each.
+const (
+	THMDep  = "THM-DEP"  // depositing
+	THMBake = "THM-BAKE" // baking tunnel, three zones
+	THMExit = "THM-EXIT" // tunnel exit check
+	THMCool = "THM-COOL" // cooling and its fallback buffer
+)
+
+// Nodes lists every edge node (every container that talks Sparkplug) in line order.
+var Nodes = []string{PLM, BAT, THMDep, THMBake, THMExit, THMCool, FIN, BT, MON}
+
+// Systems lists the systems in line order.
+var Systems = []string{PLM, BAT, THM, FIN, BT, MON}
+
+// SystemOf returns the system a node belongs to ("THM-BAKE" is part of "THM").
+func SystemOf(node string) string {
+	s, _, _ := strings.Cut(node, "-")
+	return s
+}
+
+// StationsOf returns the edge nodes of a system, in line order.
+func StationsOf(system string) []string {
+	var out []string
+	for _, n := range Nodes {
+		if SystemOf(n) == system {
+			out = append(out, n)
+		}
+	}
+	return out
+}
+
+// NodeOfMachine returns the node that a machine id ("thm-bake-zone-2") belongs to:
+// the longest node id that is a prefix of it, or fallback.
+func NodeOfMachine(machine, fallback string) string {
+	best := ""
+	for _, n := range Nodes {
+		if p := strings.ToLower(n) + "-"; strings.HasPrefix(machine, p) && len(n) > len(best) {
+			best = n
+		}
+	}
+	if best == "" {
+		return fallback
+	}
+	return best
+}
 
 // The five independently drivable band sections of the Band Transport system and
 // the system whose stations sit on each section.
 var sectionNames = [6]string{"", "Depositing", "Baking tunnel", "Cooling", "Depanning & inspection", "Packaging"}
 var sectionOwners = [6]string{"", THM, THM, THM, FIN, FIN}
+
+// sectionNodes lists the nodes that work on each band section.
+var sectionNodes = [6][]string{nil, {THMDep}, {THMBake}, {THMExit, THMCool}, {FIN}, {FIN}}
+
+// OwnsSection reports whether node works on band section i (1 to 5).
+func OwnsSection(node string, i int) bool {
+	for _, n := range sectionNodes[i] {
+		if n == node {
+			return true
+		}
+	}
+	return false
+}
 
 // SectionName returns the name of band section i (1 to 5).
 func SectionName(i int) string { return sectionNames[i] }

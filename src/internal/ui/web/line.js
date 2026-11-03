@@ -12,11 +12,11 @@
     { id: 'dos',  t: 'Dosing',      n: 'BAT', x: 160,  y: 110, w: 100, d: ['Doser', 'LoadCell'], b: function (g) { return g['stage.dosing'] || null; } },
     { id: 'mix',  t: 'Mixing',      n: 'BAT', x: 290,  y: 110, w: 100, d: ['Mixer', 'ConsistencySensor'], b: function (g) { return g['stage.mixing'] || null; } },
     { id: 'ins',  t: 'Inspection',  n: 'BAT', x: 420,  y: 110, w: 100, d: ['InspectionStation'], b: function (g) { return g['stage.inspection'] || null; }, s: function (g) { return g['stage.waiting'] ? 'batter waits' : 'human check'; } },
-    { id: 'dep',  t: 'Depositing',  n: 'THM', x: 570,  y: 110, w: 100, d: ['Depositor', 'PanPresenceEye', 'CheckWeigher'], b: function (g) { return g.queue || null; }, s: function (g) { return (g.deposited || 0) + ' pans filled'; } },
-    { id: 'bake', t: 'Baking tunnel', n: 'THM', x: 700, y: 110, w: 240, d: ['Zone1', 'Zone2', 'Zone3'], b: function (g) { return g.tunnel || null; }, zones: true },
-    { id: 'exit', t: 'Exit check',  n: 'THM', x: 960,  y: 110, w: 90,  d: ['HeatCamera'], b: function (g) { return null; }, s: function (g) { return '97 °C ± 0.5'; } },
-    { id: 'cool', t: 'Cooling',     n: 'THM', x: 1070, y: 110, w: 100, d: ['CoolingControl'], b: function (g) { return g.cooling || null; } },
-    { id: 'buf',  t: 'Cooling buffer', n: 'THM', x: 945, y: 205, w: 105, h: 44, d: ['CoolingBuffer'], b: function (g) { return g.buffer || null; } },
+    { id: 'dep',  t: 'Depositing',  n: 'THM', st: 'THM-DEP', x: 570,  y: 110, w: 100, d: ['Depositor', 'PanPresenceEye', 'CheckWeigher'], b: function (g) { return g.queue || null; }, s: function (g) { return (g.deposited || 0) + ' pans filled'; } },
+    { id: 'bake', t: 'Baking tunnel', n: 'THM', st: 'THM-BAKE', x: 700, y: 110, w: 240, d: ['Zone1', 'Zone2', 'Zone3'], b: function (g) { return g.tunnel || null; }, zones: true },
+    { id: 'exit', t: 'Exit check',  n: 'THM', st: 'THM-EXIT', x: 960,  y: 110, w: 90,  d: ['HeatCamera'], b: function (g) { return null; }, s: function (g) { return '97 °C ± 0.5'; } },
+    { id: 'cool', t: 'Cooling',     n: 'THM', st: 'THM-COOL', x: 1070, y: 110, w: 100, d: ['CoolingControl'], b: function (g) { return g.cooling || null; } },
+    { id: 'buf',  t: 'Cooling buffer', n: 'THM', st: 'THM-COOL', x: 945, y: 205, w: 105, h: 44, d: ['CoolingBuffer'], b: function (g) { return g.buffer || null; } },
     { id: 'dpn',  t: 'Depanning',   n: 'FIN', x: 1070, y: 300, w: 100, d: ['Depanner', 'VisionPicker'], b: function (g) { return g.depanQ || null; } },
     { id: 'qua',  t: 'Quality check', n: 'FIN', x: 950, y: 300, w: 100, d: ['Checkweigher', 'VisionCamera', 'MetalDetector'], s: function (g) { return (g.rejected || 0) + ' rejected'; } },
     { id: 'wrp',  t: 'Wrap + carton', n: 'FIN', x: 830, y: 300, w: 100, d: ['Wrapper', 'Cartoner', 'CaseCheckweigher', 'HoldingArea'], b: function (g) { return g.holding || null; } },
@@ -141,6 +141,8 @@
     if (!built && !build()) { return; }
     var nodes = {};
     snap.nodes.forEach(function (n) { nodes[n.id] = n; });
+    var stn = {};
+    (snap.stations || []).forEach(function (n) { stn[n.id] = n; }); // stations: the health of a box is the health of its own container
     var secs = {};
     snap.sections.forEach(function (s) { secs[s.id] = s.state; });
     var state = {};
@@ -148,7 +150,7 @@
     ST.forEach(function (s) {
       var n = nodes[s.n];
       var g = n ? n.gauges : {};
-      var st = stState(n, s.d);
+      var st = stState((s.st && stn[s.st]) || n, s.d);
       state[s.id] = st.k;
       var box = document.getElementById('vz-st-' + s.id);
       var busy = s.b && s.b(g) > 0 && (st.k === 'ok' || st.k === 'idle');
@@ -206,7 +208,7 @@
     // node chips above the picture
     var chips = document.getElementById('nodechips');
     if (chips) {
-      chips.innerHTML = snap.nodes.map(function (n) {
+      chips.innerHTML = (snap.stations || snap.nodes).map(function (n) {
         var cls = n.status === 'online' ? 'ok' : n.status === 'unknown' ? '' : 'bad';
         var txt = n.status === 'online' ? 'online' : n.status === 'dead' ? 'container down' : n.status === 'silent' ? 'not responding' : 'waiting';
         return '<span class="pill ' + cls + '"><i></i><span>' + n.id + ' ' + txt + (n.restarts ? ' · ' + n.restarts + ' restart' + (n.restarts > 1 ? 's' : '') : '') + '</span></span>';
@@ -308,7 +310,7 @@
       case 'FIN-PanPool': return { box: 'pool' };
       case 'FIN-PanSupply': return age < TRAVEL * 1.6 ? { seg: 'c15', f: age / (TRAVEL * 1.6) } : { box: 'dep' };
       case 'THM-Depositing': return { box: 'dep' };
-      case 'THM-Baking': return { box: 'bake' };
+      case 'THM-Baking': return { box: p.status === 'tunnel-exit' ? 'exit' : 'bake' };
       case 'THM-TunnelExit': return { box: 'exit' };
       case 'THM-CoolingBuffer': return { box: 'buf' };
       case 'THM-Cooling': return { box: 'cool' };
@@ -319,7 +321,7 @@
     }
     return null;
   }
-  var PCOL = { clean: '#9aa4b2', supplied: '#9aa4b2', filled: '#f3d98a', baking: '#e0832f', baked: '#c9793a', buffered: '#6aa5d8', cooling: '#4f8fd0', cooled: '#4f8fd0', depanned: '#b0b7c3', emptied: '#b0b7c3' };
+  var PCOL = { clean: '#9aa4b2', supplied: '#9aa4b2', filled: '#f3d98a', baking: '#e0832f', baked: '#c9793a', 'tunnel-exit': '#c9793a', buffered: '#6aa5d8', cooling: '#4f8fd0', cooled: '#4f8fd0', depanned: '#b0b7c3', emptied: '#b0b7c3' };
   // Cakes after depanning have their own document.
   function cakeAt(p) {
     var age = Date.now() - new Date(p.updated).getTime();

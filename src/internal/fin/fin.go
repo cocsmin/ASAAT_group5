@@ -80,15 +80,15 @@ func Run() {
 	for i := range f.gates {
 		f.gates[i] = sim.NewGate()
 	}
-	f.N.OnSignal(model.THM, sig.CooledCake, func(_ string, s sig.Signal) {
+	f.N.OnSignal(model.THMCool, sig.CooledCake, func(_ string, s sig.Signal) {
 		if s.Float("temp") > 30 { // only cakes released at a safe temperature are accepted (FIN-REQ-02)
 			f.N.Warn("UC10", "cake not released at a safe temperature: not accepted", s.Str("batchId"))
 			return
 		}
 		f.enqueueCooled(cake{pan: s.Str("panId"), batch: s.Str("batchId")})
 	})
-	f.N.OnSignal(model.THM, sig.PanRequest, func(string, sig.Signal) { f.panReq <- struct{}{} })
-	f.N.OnSignal(model.THM, sig.PanForWashing, func(_ string, s sig.Signal) { f.enqueueWash(s.Str("panId")) })
+	f.N.OnSignal(model.THMDep, sig.PanRequest, func(string, sig.Signal) { f.panReq <- struct{}{} })
+	f.N.OnSignal("", sig.PanForWashing, func(_ string, s sig.Signal) { f.enqueueWash(s.Str("panId")) })
 	f.N.OnSignal(model.BT, sig.BandState, func(_ string, s sig.Signal) {
 		mode := "run"
 		for i := 4; i <= 5; i++ {

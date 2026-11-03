@@ -518,7 +518,7 @@ func (m *Monitor) reportHalt(why string) {
 func (m *Monitor) haltNodeSections(node string, halt bool) {
 	owns := false
 	for i := 1; i <= 5; i++ {
-		owns = owns || model.SectionOwner(i) == node
+		owns = owns || model.OwnsSection(node, i)
 	}
 	if !owns {
 		return // PLM, BAT, BT and MON work on no band section
@@ -563,9 +563,5 @@ func evt(sev, code, reason, device, machine string) node.Event {
 
 // nodeOf derives the owning node from a machine id such as thm-zone-2.
 func nodeOf(machine, fallback string) string {
-	prefix, _, _ := strings.Cut(machine, "-")
-	if p := strings.ToUpper(prefix); p == model.PLM || p == model.BAT || p == model.THM || p == model.FIN || p == model.BT || p == model.MON {
-		return p
-	}
-	return fallback
+	return model.NodeOfMachine(machine, fallback)
 }

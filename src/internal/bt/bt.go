@@ -99,11 +99,22 @@ func (t *BT) restore() {
 	}
 }
 
+// haltedBehind reports whether a section downstream of i is halted by command: a stopped
+// section stops everything upstream of it (the same rule as for a stopped section, FC19).
+func (t *BT) haltedBehind(i int) bool {
+	for j := i + 1; j <= 5; j++ {
+		if t.cmd[j] == "halt" {
+			return true
+		}
+	}
+	return false
+}
+
 func (t *BT) effective(i int) int {
 	switch {
 	case t.fault[i]:
 		return stFault
-	case t.hold[i] || t.cmd[i] == "halt":
+	case t.hold[i] || t.cmd[i] == "halt" || t.haltedBehind(i):
 		return stHalt
 	case t.slow[i] || t.cmd[i] == "slow":
 		return stSlow
@@ -170,7 +181,7 @@ func (t *BT) onSectionCommand(s sig.Signal) {
 	var which []int
 	for i := 1; i <= 5; i++ {
 		switch {
-		case s.Str("node") != "" && model.SectionOwner(i) == s.Str("node"):
+		case s.Str("node") != "" && model.OwnsSection(s.Str("node"), i):
 			which = append(which, i)
 		case s.Str("node") == "" && (s.Int("section") == i || s.Int("section") == 0):
 			which = append(which, i)

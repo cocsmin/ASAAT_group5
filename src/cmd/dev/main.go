@@ -41,6 +41,7 @@ type service struct {
 	label   string
 	kind    string
 	binary  string
+	station string // STATION for the shared station binary
 	mu      sync.Mutex
 	wanted  bool // false after a deliberate stop
 	running bool
@@ -96,6 +97,9 @@ func (s *service) loop(ctx context.Context, bin string, env []string) {
 		cctx, cancel := context.WithCancel(ctx)
 		cmd := exec.CommandContext(cctx, filepath.Join(bin, s.binary))
 		cmd.Env, cmd.Stdout, cmd.Stderr = env, os.Stdout, os.Stderr
+		if s.station != "" {
+			cmd.Env = append(append([]string(nil), env...), "STATION="+s.station)
+		}
 		s.mu.Lock()
 		s.cancel, s.running = cancel, true
 		s.mu.Unlock()
@@ -142,14 +146,22 @@ func main() {
 		{name: "mon", label: "Line Monitoring & Health", kind: "app", binary: "mon" + ext},
 		{name: "plm", label: "Production & Logistics", kind: "app", binary: "plm" + ext},
 		{name: "bat", label: "Batter Preparation", kind: "app", binary: "bat" + ext},
-		{name: "thm", label: "Thermal Processing", kind: "app", binary: "thm" + ext},
+		{name: "thm-dep", label: "THM Depositing", kind: "app", binary: "station" + ext, station: "thm-dep"},
+		{name: "thm-bake", label: "THM Baking tunnel", kind: "app", binary: "station" + ext, station: "thm-bake"},
+		{name: "thm-exit", label: "THM Tunnel exit check", kind: "app", binary: "station" + ext, station: "thm-exit"},
+		{name: "thm-cool", label: "THM Cooling and buffer", kind: "app", binary: "station" + ext, station: "thm-cool"},
 		{name: "fin", label: "Finishing & Packaging", kind: "app", binary: "fin" + ext},
 		{name: "bt", label: "Band Transport", kind: "app", binary: "bt" + ext},
 		{name: "ui", label: "Experiment dashboard", kind: "app", binary: "ui" + ext},
 	}
+	built := map[string]bool{}
 	for _, s := range services {
 		s.wanted = true
 		pkg := strings.TrimSuffix(s.binary, ext)
+		if built[pkg] {
+			continue
+		}
+		built[pkg] = true
 		cmd := exec.CommandContext(ctx, "go", "build", "-o", filepath.Join(bin, s.binary), "./cmd/"+pkg)
 		cmd.Stdout, cmd.Stderr = os.Stdout, os.Stderr
 		if err := cmd.Run(); err != nil {
