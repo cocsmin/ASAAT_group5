@@ -18,6 +18,7 @@ import (
 	"cakefactory/internal/sim"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
+	"cakefactory/internal/timing"
 )
 
 // Parameters (simulated time and degrees Celsius).
@@ -28,7 +29,7 @@ const (
 	zoneTransit    = 2 * time.Second
 	exitCheckTime  = 500 * time.Millisecond
 	coolingTime    = 4 * time.Second
-	maxBufferWait  = 40 * time.Second // stands for the 30 minutes of UC10
+	maxBufferWait  = timing.BufferWait // stands for the 30 minutes of UC10
 	bufferCapacity = 8
 	tSafe          = 30.0
 	bakeTarget     = 97.0

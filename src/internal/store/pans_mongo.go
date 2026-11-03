@@ -9,11 +9,12 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"cakefactory/internal/model"
+	"cakefactory/internal/timing"
 )
 
 // opTimeout bounds every database call: with MongoDB down a station must carry
 // on after a moment instead of waiting for the driver's 30 s default.
-const opTimeout = 3 * time.Second
+const opTimeout = timing.DBTimeout
 
 // Mongo stores pan documents and node state snapshots in MongoDB.
 type Mongo struct {

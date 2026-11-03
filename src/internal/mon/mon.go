@@ -21,6 +21,7 @@ import (
 	"cakefactory/internal/sparkplug"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
+	"cakefactory/internal/timing"
 )
 
 // DevState is the last reported state of one device.
@@ -83,7 +84,7 @@ func Run() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	m := &Monitor{Base: b, sql: sqlStore, hb: svc.EnvDur("HEARTBEAT_SECONDS", 5*time.Second),
+	m := &Monitor{Base: b, sql: sqlStore, hb: svc.EnvDur("HEARTBEAT_SECONDS", timing.Heartbeat),
 		work: make(chan func(), 2048), nodes: map[string]*NodeState{}, tickets: map[string]model.Ticket{},
 		discards: map[string]int{}, silent: map[string]bool{},
 		haltNodes: map[string]bool{}, seenEv: map[string]bool{},
@@ -317,7 +318,7 @@ func (m *Monitor) watchdog() {
 			return
 		case <-t.C:
 		}
-		limit := 3 * m.hb
+		limit := timing.WatchdogMisses * m.hb
 		var gone []*NodeState
 		m.mu.Lock()
 		for _, n := range m.nodes {
@@ -326,7 +327,7 @@ func (m *Monitor) watchdog() {
 				m.silent[n.ID] = true
 				gone = append(gone, n)
 			}
-			if n.Status == "dead" && time.Since(n.deadAt) > 45*time.Second && !m.hasTicket(strings.ToLower(n.ID)+"-container") {
+			if n.Status == "dead" && time.Since(n.deadAt) > timing.MonDeadAfter && !m.hasTicket(strings.ToLower(n.ID)+"-container") {
 				gone = append(gone, n)
 			}
 		}

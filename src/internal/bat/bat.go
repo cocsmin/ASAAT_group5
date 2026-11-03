@@ -15,12 +15,13 @@ import (
 	"cakefactory/internal/sig"
 	"cakefactory/internal/sim"
 	"cakefactory/internal/svc"
+	"cakefactory/internal/timing"
 )
 
 // Parameters (simulated time), see the BAT document.
 const (
-	maxFailedDoses  = 3                // P2
-	maxBatterWait   = 25 * time.Second // P3
+	maxFailedDoses  = 3                 // P2
+	maxBatterWait   = timing.BatterWait // P3
 	doseTime        = 1200 * time.Millisecond
 	inspectionTime  = 3 * time.Second
 	doserMachine    = "bat-doser"
@@ -123,7 +124,7 @@ func (t *BAT) ingredients(o order, sendFirst bool) (sig.Signal, bool) {
 			if r.Str("orderId") == o.id {
 				return r, true
 			}
-		case <-time.After(sim.Scale(20 * time.Second)):
+		case <-time.After(sim.Scale(timing.IngredientRetry)):
 			t.N.Warn("FC2", "no answer from production management: ingredient request repeated", o.batch)
 			send()
 		}

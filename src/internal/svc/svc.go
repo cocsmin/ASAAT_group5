@@ -19,6 +19,7 @@ import (
 	"cakefactory/internal/sig"
 	"cakefactory/internal/sim"
 	"cakefactory/internal/store"
+	"cakefactory/internal/timing"
 )
 
 // Base is embedded by every subsystem.
@@ -92,7 +93,7 @@ func (b *Base) Start() {
 		log.Fatal(err)
 	}
 	go func() {
-		t := time.NewTicker(3 * time.Second)
+		t := time.NewTicker(timing.StateSnapshot)
 		defer t.Stop()
 		for {
 			select {

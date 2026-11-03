@@ -16,13 +16,14 @@ import (
 	"cakefactory/internal/sim"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
+	"cakefactory/internal/timing"
 )
 
 // Timing, in simulated time.
 const (
-	warehouseTimeout = 2 * time.Second  // request timeout toward the warehouse
-	breakerWindow    = 15 * time.Second // circuit breaker stays open this long
-	restockDelay     = 15 * time.Second // Logistics restocks after being notified
+	warehouseTimeout = timing.WarehouseTimeout // request timeout toward the warehouse
+	breakerWindow    = timing.BreakerOpen      // circuit breaker stays open this long
+	restockDelay     = 15 * time.Second        // Logistics restocks after being notified
 )
 
 // PLM is the Production & Logistics Management service.
@@ -62,7 +63,7 @@ func (p *PLM) resendLoop() {
 		var again []pendingOrder
 		p.mu.Lock()
 		for id, po := range p.sentOrder {
-			if time.Since(po.at) > sim.Scale(40*time.Second) {
+			if time.Since(po.at) > sim.Scale(timing.OrderResend) {
 				po.at = time.Now()
 				p.sentOrder[id] = po
 				again = append(again, po)

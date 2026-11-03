@@ -9,11 +9,14 @@ Legend: **[D]** needs a group decision. **[W]** was decided by the implementatio
 (you may want to veto it). **[B]** known bug or limit, not fixed. **[?]** something
 odd that is worth a look.
 
-## 1. Time constraints (still to be debated)
+## 1. Time constraints (decided 3 Nov, the group asked the implementation to decide)
 
-None of the values below was agreed by the group except those in the first block,
-which come from the documents. Everything else is a placeholder chosen so that the
-simulation is watchable. All durations are *simulated* seconds: with `SIM_SPEED=1`
+The group let the implementation decide the times and check them for consistency. The
+answers are in "Decisions" at the end of this section. Every value that more than one
+system depends on now lives in `internal/timing/timing.go`, and
+`internal/timing/timing_test.go` (run by CI with `go test ./...`) fails when a relation
+between them breaks. The tables below list every value; the ones marked [W] are
+assumptions made so that the simulation is watchable, not facts about a real plant. All durations are *simulated* seconds: with `SIM_SPEED=1`
 they equal real seconds; the experiment ran at 1.
 
 **From the documents (check that they are right)**
@@ -52,22 +55,50 @@ they equal real seconds; the experiment ran at 1.
 | MON | node marked "dead" and escalated after 45 s without restart; FC20 wrong speed corrected after 10 s; sections restart 1.5 s apart | |
 | all | state snapshot every 3 s; event outbox retried every second; database calls time out after 3 s | |
 
-**Questions for the group [D]**
-1. Are the real timings of the line known? Table II of the report gives no numbers
-   for belt speed, baking time or throughput. The simulation uses seconds; a real
-   tunnel bakes for tens of minutes. Do we keep seconds and say so, or scale?
-2. How to present 30 minutes (UC10) that is 40 s here: a documented factor (1 min =
-   1.33 s) or a configurable parameter?
-3. T_hb: 5 s everywhere, or shorter for the 24/7-critical THM and longer for BAT and
-   PLM (which are not 24/7-critical)?
-4. Is 7.5 s detection from the keep-alive enough, or should the heartbeat alone
-   (15 s) be the requirement, since both exist now?
-5. THM-REQ-76 and -78 (1 s): do we want them measured in a second experiment?
-6. 99.5 % availability (THM-REQ-71): which fault rate do we assume? The experiment
-   shows detection and recovery are about 1 s; the production outage (10 to 60 s) is
-   dominated by the line refilling, so the answer depends on what counts as downtime:
-   the controller, or the line producing.
-7. Dose tolerance 2 %, fill 450 +/- 5 g, T_safe 30 C, pallet of 6: real values?
+**Decisions (3 Nov)**
+1. **Seconds, not real plant time.** The simulation runs in seconds; Table II of the
+   report gives no real numbers (belt speed, baking time, throughput), so none are
+   invented. `SIM_SPEED` speeds the whole production up or down.
+2. **UC10's 30 minutes = 40 s, a fixed documented factor of 45** (one simulated second
+   stands for 45 real seconds; `timing.Compression`, checked by the test). Not a
+   parameter: a parameter would let the two UC10 rules (buffer wait, refuse or recool)
+   disagree. Only these two UC10 values are compressed; the other production times are
+   short because a watchable line needs them short, not because of this factor.
+3. **T_hb = 5 s for every system**, including PLM (see decision 4 below and section 2).
+   No per-system values: the monitor would need a table and a mistake would show up as
+   a false "silent" alarm.
+4. **Both detections stay.** The requirement is THM-REQ-72 (15 s = 3 x T_hb, the MON
+   watchdog). The MQTT keep-alive (5 s, dead after 7.5 s) is faster and sends the
+   death certificate; it is an extra, not the requirement.
+5. **THM-REQ-76 and -78 (1 s) are not measured now.** They need a second experiment
+   with a timer inside THM; listed as optional in TODO.
+6. **Availability (THM-REQ-71, 99.5 %) counts the controller, not the line.** Downtime
+   is the time the controller does not answer (measured about 1 s per crash). The time
+   until the line produces again (10 to 60 s, the line refilling) is reported next to
+   it as "production recovery", not as downtime. Assumed fault rate: one fault per
+   hour, which gives about 99.97 % for a 1 s outage. This is an assumption to name in
+   the report.
+7. **Dose tolerance 2 %, fill 450 +/- 5 g, T_safe 30 C, pallet of 6 stay as assumed
+   values** until someone has real ones. Dose tolerance, fill target and tolerance are in the recipe
+   seed (SQL), the pallet size and pan count are environment variables, T_safe is a
+   constant in `internal/thm/thm.go`.
+
+**Consistency check (done 3 Nov)**
+- Supervision timers (heartbeat, keep-alive, timeouts, 45 s escalation) are wall-clock;
+  production times and every handoff timer (batter wait, ingredient retry, order
+  resend, buffer wait, breaker, restock) are simulated time (`sim.Scale`). That split
+  is deliberate and now written down in `internal/timing`.
+- Found and fixed: the same values were typed in several files (5 s heartbeat in two,
+  3 s database timeout in three, 20 s and 40 s in the retry paths). They are now one
+  constant each.
+- The test checks: 3 x T_hb <= 15 s; the broker's 7.5 s <= 15 s; events and state are
+  saved at least as often as the heartbeat; the 45 s escalation is after detection and
+  before THM-REQ-73's 60 s; PLM resends an order only after BAT had two ingredient
+  retries (40 >= 2 x 20); the warehouse breaker (2 s) trips before the 3 s database
+  timeout; the compression factor gives exactly 30 minutes.
+- Not covered by the test (inside one system only): FIN, THM and BT step times. Only
+  spot-checked by reading the code, not proven: no step time was found that is longer
+  than the timer of the system that waits for it.
 
 ## 2. Decisions taken by the implementation, not (fully) in the docs [W]
 
@@ -78,7 +109,7 @@ they equal real seconds; the experiment ran at 1.
    (and the detail "fault" for MON), and is sent as ordinary data repeated every
    heartbeat (not as a command, not retained). MON commands BT with "Section command"
    and "Target speed".
-3. **PLM sends a heartbeat** although the alignment baseline says it sends none.
+3. **PLM sends a heartbeat** like every other system. **Decided by the group (3 Nov):** yes. The alignment baseline (PLM sends none) has to be corrected [W: Papyrus]. Item 3.5 below is closed.
 4. **Every handoff signal carries a message id** and events an event id (not in any
    port description); receivers drop duplicates. Both are in `signals.md`.
 5. **Two extra messages** outside the 14 signals: `Fault injection` (demo) and `Node
@@ -130,7 +161,7 @@ they equal real seconds; the experiment ran at 1.
 3. **A "batter collected" acknowledgement** between THM and BAT (BAT Mixing and Handoff
    has it, the 14 signals do not).
 4. **BAT frame port "Fault event"**: internal or a 15th signal.
-5. **Whether PLM sends a heartbeat** (see 2.3).
+5. ~~Whether PLM sends a heartbeat~~ decided 3 Nov: yes (see 2.3).
 6. **Which failure cases are measured** in the experiment beyond crash and freeze.
 7. **Scalability**: the exercises ask for it; nothing is built or measured. Do we add
    a small test (more pans, more messages) or only discuss it?
@@ -139,8 +170,8 @@ they equal real seconds; the experiment ran at 1.
 9. **Merge**: the branch `implementation/go-sparkplug-factory` is pushed, not merged,
    no pull request. The CI pipeline has never run on GitHub.
 
-10. **Role of MongoDB.** Said in chat: MongoDB only keeps data for the experiments, so the
-    `mongo-down` scenario was dropped. In the code it also holds the traveling pan
+10. **Role of MongoDB.** The group decided (3 Nov) to drop the `mongo-down` scenario ("not
+    relevant for our experiment"). It is dropped. In the code it also holds the traveling pan
     documents (traceability) and the saved node state that THM, BAT and FIN reload after a
     restart. [D] Confirm that this is experiment data only. If yes, say so in the
     databases document and the report; if no, bring `mongo-down` back (one line in

@@ -22,6 +22,7 @@ import (
 	"cakefactory/internal/model"
 	"cakefactory/internal/sig"
 	"cakefactory/internal/sparkplug"
+	"cakefactory/internal/timing"
 )
 
 // Config configures a node.
@@ -77,10 +78,10 @@ type Node struct {
 // New creates a node. Call Start to connect.
 func New(cfg Config) *Node {
 	if cfg.Heartbeat <= 0 {
-		cfg.Heartbeat = 5 * time.Second
+		cfg.Heartbeat = timing.Heartbeat
 	}
 	if cfg.KeepAlive <= 0 {
-		cfg.KeepAlive = 5 * time.Second
+		cfg.KeepAlive = timing.KeepAlive
 	}
 	n := &Node{
 		cfg:      cfg,

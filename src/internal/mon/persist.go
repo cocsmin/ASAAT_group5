@@ -10,6 +10,7 @@ import (
 	"cakefactory/internal/model"
 	"cakefactory/internal/sig"
 	"cakefactory/internal/sparkplug"
+	"cakefactory/internal/timing"
 )
 
 // The monitor writes its events and tickets to SQL in the background. The health
@@ -28,7 +29,7 @@ func warnDB(format string, a ...any) {
 }
 
 func (m *Monitor) dbCtx() (context.Context, context.CancelFunc) {
-	return context.WithTimeout(m.Ctx, 3*time.Second)
+	return context.WithTimeout(m.Ctx, timing.DBTimeout)
 }
 
 func (m *Monitor) startDB() {
