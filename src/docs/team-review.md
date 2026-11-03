@@ -5,6 +5,8 @@ or decided without it being written down elsewhere. Go through it together and
 cross out what you accept. Items that need a Papyrus or Word change are also in
 [TODO.md](../TODO.md); this file is the discussion list.
 
+All assumptions in one list: [assumptions.md](assumptions.md).
+
 Legend: **[D]** needs a group decision. **[W]** was decided by the implementation
 (you may want to veto it). **[B]** known bug or limit, not fixed. **[?]** something
 odd that is worth a look.
