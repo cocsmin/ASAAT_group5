@@ -48,8 +48,9 @@ type state struct {
 	Sections []struct {
 		State string `json:"state"`
 	} `json:"sections"`
-	Nodes   []nodeState `json:"nodes"`
-	Tickets []ticket    `json:"tickets"`
+	Nodes    []nodeState `json:"nodes"`
+	Stations []nodeState `json:"stations"`
+	Tickets  []ticket    `json:"tickets"`
 	Alerts  []struct {
 		Level string `json:"level"`
 		Title string `json:"title"`
@@ -67,6 +68,7 @@ type env struct {
 	t0         time.Time
 	hc         *http.Client
 	cancel     <-chan struct{}
+	duration   time.Duration
 }
 
 // ErrStopped is returned when a scenario is stopped from the dashboard.
@@ -282,6 +284,17 @@ func scenarios() []scenario {
 		scenario{"band-section-stop", "FC19: a band section stops, upstream halts, downstream runs, THM really stops depositing, the repair restarts the sections in order", false, bandSectionStop},
 		scenario{"bt-down", "stop Band Transport: the monitor shows the sections as unknown, THM and FIN keep their last state, BT returns and reports again", true, btDown},
 		scenario{"freeze-thm-bake", "freeze the baking tunnel station (no keep-alive): the broker declares it dead, MON has BT halt its sections, it returns", true, freeze},
+		scenario{"freeze-two-stations", "freeze the baking tunnel and the wrapping station together: both are declared dead, MON has BT halt the whole band (S5 halted halts everything behind it), both return and the band runs again", true,
+			func(e *env) error {
+				return freezeMany(e, []string{"THM-BAKE", "FIN-WRAP"}, func(sec []string) bool { return allEqual(sec, "halt") })
+			}},
+		scenario{"freeze-three-stations", "freeze the tunnel exit, the cooling and the mixing station together: S1 to S3 halted, S4 and S5 keep running (mixing owns no section), all three return", true,
+			func(e *env) error {
+				return freezeMany(e, []string{"THM-EXIT", "THM-COOL", "BAT-MIX"}, func(sec []string) bool {
+					return len(sec) == 5 && sec[0] == "halt" && sec[1] == "halt" && sec[2] == "halt" && sec[3] == "run" && sec[4] == "run"
+				})
+			}},
+		scenario{"availability", "watch the factory while it fails by itself (FAULT_RATE) and report availability, repairs and failures; -duration says how long", false, availability},
 		scenario{"mon-down", "stop MON while THM discards cakes: no event is lost, the line stops without the monitor", true, monDown},
 		scenario{"sql-down", "switch SQL Server off for 30 s: the monitor must not mistake it for a dead line", true,
 			func(e *env) error { return dbDown(e, "mssql", "SQL Server") }},
@@ -598,6 +611,7 @@ type Options struct {
 	Control    func(service, action string) error // optional: acts on a container
 	Log        func(string)                       // receives the timeline, one line at a time
 	Cancel     <-chan struct{}                    // optional: closed to stop the scenario
+	Duration   time.Duration                      // how long the availability scenario watches
 }
 
 // Info describes one scenario.
@@ -607,7 +621,8 @@ type Info struct {
 	Docker     bool     `json:"docker"`     // controls containers
 	SelfStop   bool     `json:"selfStop"`   // stops the dashboard itself: run it from a terminal
 	NeedsPause bool     `json:"needsPause"` // freezes a process: needs Docker
-	Needs      []string `json:"needs"`      // components that must exist (not in dev mode: mssql, mongo)
+	Needs      []string `json:"needs"`      // components that must exist (the databases)
+	Long       bool     `json:"long"`       // runs as long as asked: not part of "run all"
 }
 
 var needs = map[string][]string{"sql-down": {"mssql"}}
@@ -616,7 +631,7 @@ var needs = map[string][]string{"sql-down": {"mssql"}}
 func List() []Info {
 	var out []Info
 	for _, s := range scenarios() {
-		out = append(out, Info{Name: s.name, Desc: s.desc, Docker: s.docker, NeedsPause: s.name == "freeze-thm-bake" || s.name == "band-halt", Needs: needs[s.name]})
+		out = append(out, Info{Name: s.name, Desc: s.desc, Docker: s.docker, Long: longRunning[s.name], NeedsPause: s.name == "freeze-thm-bake" || s.name == "band-halt" || strings.HasPrefix(s.name, "freeze-t"), Needs: needs[s.name]})
 	}
 	return out
 }
@@ -639,7 +654,7 @@ func Run(name string, o Options) error {
 			return ErrNeedsDocker
 		}
 		e := &env{out: o.Log, metric: o.Metric, control: o.Control, base: o.Base, composeDir: o.ComposeDir, docker: o.Docker,
-			hc: &http.Client{Timeout: 5 * time.Second}, t0: time.Now(), cancel: o.Cancel}
+			hc: &http.Client{Timeout: 5 * time.Second}, t0: time.Now(), cancel: o.Cancel, duration: o.Duration}
 		if _, err := e.state(); err != nil {
 			return fmt.Errorf("cannot reach %s: %w", o.Base, err)
 		}
@@ -945,3 +960,88 @@ var scenSpeed = func() time.Duration {
 	}
 	return 1
 }()
+
+func allEqual(sec []string, want string) bool {
+	if len(sec) != 5 {
+		return false
+	}
+	for _, x := range sec {
+		if x != want {
+			return false
+		}
+	}
+	return true
+}
+
+// freezeMany freezes several stations at once (no keep-alive pings). The broker declares each
+// dead, MON halts the band sections they work on and every section upstream; expect says which
+// section states are right. Then all stations return, the sections run again and the line
+// produces; no pan may be lost.
+func freezeMany(e *env, nodes []string, expect func([]string) bool) error {
+	if err := e.settle(); err != nil {
+		return err
+	}
+	if _, err := e.waitFor("all sections running", 60*time.Second, func() bool { return e.allSections("run") }); err != nil {
+		return err
+	}
+	pans, _ := e.pans()
+	since := e.lastEventID()
+	e.faultAt = time.Now()
+	service := func(n string) string { return strings.ToLower(n) }
+	unfreeze := func() {
+		for _, n := range nodes {
+			_ = e.act("unpause", service(n))
+		}
+	}
+	for _, n := range nodes {
+		if err := e.act("pause", service(n)); err != nil {
+			unfreeze()
+			return err
+		}
+	}
+	e.logf("%s frozen together", strings.Join(nodes, ", "))
+	var worst time.Duration
+	for _, n := range nodes {
+		n := n
+		_, d, err := e.waitEvent(since, detectBound, n+" declared dead", func(x event) bool {
+			return x.Code == "FC27" && strings.HasPrefix(x.Reason, n+" container died")
+		})
+		if err != nil {
+			unfreeze()
+			return fmt.Errorf("%s was not detected within %s: %w", n, detectBound, err)
+		}
+		if d > worst {
+			worst = d
+		}
+	}
+	e.rec("detect_s", worst.Seconds())
+	e.logf("all %d declared dead after %.1fs (bound %s)", len(nodes), worst.Seconds(), detectBound)
+	if _, err := e.waitFor("the right sections halted", detectBound, func() bool { return expect(e.sections()) }); err != nil {
+		now := e.sections()
+		unfreeze()
+		return fmt.Errorf("sections are %v: %w", now, err)
+	}
+	e.logf("sections while they are away: %v", e.sections())
+	unfreeze()
+	for _, n := range nodes {
+		n := n
+		if _, _, err := e.waitEvent(since, recoverBound, n+" back", func(x event) bool {
+			return x.Code == "FC27" && strings.HasPrefix(x.Reason, n+" container is back")
+		}); err != nil {
+			return fmt.Errorf("%s did not come back within %s: %w", n, recoverBound, err)
+		}
+	}
+	d, err := e.waitFor("all sections run again", recoverBound, func() bool { return e.allSections("run") })
+	if err != nil {
+		return fmt.Errorf("sections not released: %w (now %v)", err, e.sections())
+	}
+	e.rec("recover_s", d.Seconds())
+	e.logf("all back, sections run again after %.1fs", d.Seconds())
+	if err := e.settle(); err != nil {
+		return err
+	}
+	if err := e.panLoop(pans); err != nil {
+		return err
+	}
+	return e.flowResumes(180 * time.Second)
+}

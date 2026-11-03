@@ -134,7 +134,7 @@ func (t *Cool) cool(p pan, temp float64) {
 	if !ok {
 		return
 	}
-	temp = 24 + sim.Noise(1.2)
+	temp = model.CoolMean + sim.Noise(model.CoolSigma)
 	if t.F.Take("FC14") {
 		temp = 38
 	}
@@ -235,7 +235,7 @@ func (t *Cool) releaseLoop() {
 			divert(t.Base, it.pan, "FC17", fmt.Sprintf("cake waited %.0f s in the cooling buffer (limit %.0f s): discarded", sim.Unscale(time.Since(it.since)).Seconds(), maxBufferWait.Seconds()))
 		}
 		for _, it := range ready { // released cake is measured: cool again or send on
-			temp := 24 + (it.temp-24)*math.Exp(-sim.Unscale(time.Since(it.since)).Seconds()/20)
+			temp := model.CoolMean + (it.temp-model.CoolMean)*math.Exp(-sim.Unscale(time.Since(it.since)).Seconds()/20)
 			if temp > tSafe {
 				go t.cool(it.pan, temp)
 			} else {

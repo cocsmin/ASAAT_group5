@@ -16,8 +16,7 @@ import (
 )
 
 // component is one switchable part of the stack, as the control service
-// reports it (docker compose: the ctl container; go run ./cmd/dev: the dev
-// launcher).
+// reports it (the ctl container of docker compose).
 type component struct {
 	Name    string   `json:"name"`
 	Label   string   `json:"label"`
@@ -202,7 +201,7 @@ func (m *Server) registerControl(mux *http.ServeMux) {
 		out := map[string]any{"available": false, "items": []component{}}
 		cs, err := components()
 		if err != nil {
-			out["hint"] = "Component control is not running. With Docker start the stack with: docker compose --profile demo up -d. With go run ./cmd/dev it is built in."
+			out["hint"] = "Component control is not running. With Docker start the stack with: docker compose --profile demo up -d."
 			out["error"] = err.Error()
 			writeJSON(w, out)
 			return
@@ -270,7 +269,7 @@ func (m *Server) registerControl(mux *http.ServeMux) {
 		var names []string
 		for _, i := range scenario.List() {
 			runnable := runnable(i, cs, avail)
-			if in.Name == "all" && runnable || in.Name == i.Name {
+			if in.Name == "all" && runnable && !i.Long || in.Name == i.Name {
 				if !runnable {
 					http.Error(w, i.Name+" cannot run from the dashboard: use go run ./cmd/scenario "+i.Name, 400)
 					return

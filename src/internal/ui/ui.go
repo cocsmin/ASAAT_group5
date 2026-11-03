@@ -107,6 +107,9 @@ func Run() {
 	go s.obs.watch(ctx.Done())
 	go s.openStores()
 	go s.pushLoop()
+	if secs, err := strconv.ParseFloat(os.Getenv("CREW_SECONDS"), 64); err == nil && secs > 0 {
+		go s.crew(time.Duration(secs * float64(time.Second)))
+	}
 	s.serve(env("HTTP_ADDR", ":8080"))
 }
 
@@ -119,20 +122,14 @@ func (s *Server) openStores() {
 		s.pans = pans
 		s.mu.Unlock()
 	}
-	if os.Getenv("SQL_DSN") != "" {
-		sql, err := store.OpenSQL(s.ctx)
-		if err == nil {
-			s.mu.Lock()
-			s.logs = sql
-			s.mu.Unlock()
-			log.Printf("ui: reading the event log from SQL Server")
-		}
+	sql, err := store.OpenSQL(s.ctx)
+	if err != nil {
 		return
 	}
 	s.mu.Lock()
-	s.logs = &monLog{base: s.monURL, hc: &http.Client{Timeout: 4 * time.Second}}
+	s.logs = sql
 	s.mu.Unlock()
-	log.Printf("ui: no SQL_DSN, reading the event log through the monitor at %s", s.monURL)
+	log.Printf("ui: reading the event log from SQL Server")
 }
 
 func (s *Server) source() logSource {
@@ -497,39 +494,4 @@ func (s *Server) serve(addr string) {
 	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
-}
-
-// monLog reads the event log through the monitor's read API (used when there is no
-// SQL Server, for example with go run ./cmd/dev).
-type monLog struct {
-	base string
-	hc   *http.Client
-}
-
-func (m *monLog) get(ctx context.Context, path string, v any) error {
-	req, _ := http.NewRequestWithContext(ctx, http.MethodGet, m.base+path, nil)
-	r, err := m.hc.Do(req)
-	if err != nil {
-		return err
-	}
-	defer r.Body.Close()
-	if r.StatusCode != 200 {
-		return fmt.Errorf("monitor: %s", r.Status)
-	}
-	return json.NewDecoder(r.Body).Decode(v)
-}
-
-func (m *monLog) Events(ctx context.Context, limit int) ([]model.LogEvent, error) {
-	var out []model.LogEvent
-	return out, m.get(ctx, fmt.Sprintf("/api/events?limit=%d", limit), &out)
-}
-
-func (m *monLog) Tickets(ctx context.Context, limit int) ([]model.Ticket, error) {
-	var out []model.Ticket
-	return out, m.get(ctx, fmt.Sprintf("/api/tickets?limit=%d", limit), &out)
-}
-
-func (m *monLog) DiscardCounts(ctx context.Context) (map[string]int, error) {
-	out := map[string]int{}
-	return out, m.get(ctx, "/api/discards", &out)
 }

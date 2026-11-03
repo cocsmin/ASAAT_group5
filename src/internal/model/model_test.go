@@ -1,8 +1,10 @@
 package model
 
 import (
+	"math/rand"
 	"strings"
 	"testing"
+	"time"
 )
 
 func TestSystemOfAndStationsOf(t *testing.T) {
@@ -112,6 +114,13 @@ func TestEveryContainerCanCrashAndFreeze(t *testing.T) {
 	}
 }
 
+func TestACooledCakeIsFarBelowTheLimitForPackaging(t *testing.T) {
+	// a normal cake must never be refused by Finishing: the cooling mean is at least 4 scatters below the limit
+	if TSafe-CoolMean < 4*CoolSigma {
+		t.Fatalf("limit %.1f, cooling mean %.1f, scatter %.1f", TSafe, CoolMean, CoolSigma)
+	}
+}
+
 func TestMachineIdsStartWithTheirStation(t *testing.T) {
 	// the scenarios and the repair routing rely on this naming
 	for _, m := range []string{"thm-dep-depositor", "thm-bake-zone-2", "thm-exit-heatcamera", "thm-cool-cooling",
@@ -119,6 +128,81 @@ func TestMachineIdsStartWithTheirStation(t *testing.T) {
 		node := NodeOfMachine(m, "")
 		if node == "" || !strings.HasPrefix(m, strings.ToLower(node)+"-") {
 			t.Errorf("machine %s does not map to a station (got %q)", m, node)
+		}
+	}
+}
+
+func TestChaosIsOffWithoutARate(t *testing.T) {
+	always := func() float64 { return 0 }
+	if got := ChaosDue(THMBake, 0, 1, time.Second, always); len(got) != 0 {
+		t.Fatalf("FAULT_RATE 0 means no random failures, got %v", got)
+	}
+	if got := ChaosDue(THMBake, 1, 1, 0, always); len(got) != 0 {
+		t.Fatal("no time, no failures")
+	}
+}
+
+func TestChaosOnlyHitsTheNodeItIsAskedFor(t *testing.T) {
+	for _, f := range ChaosDue(THMBake, 1, 1, time.Hour, func() float64 { return 0 }) {
+		if f.Node != THMBake {
+			t.Fatalf("%s belongs to %s", f.Code, f.Node)
+		}
+	}
+	if len(ChaosDue(THMBake, 1, 1, time.Hour, func() float64 { return 0 })) == 0 {
+		t.Fatal("with a roll of 0 every failure case of the node happens")
+	}
+	if got := ChaosDue("UNKNOWN", 1, 1, time.Hour, func() float64 { return 0 }); len(got) != 0 {
+		t.Fatal("an unknown node has no failure cases")
+	}
+}
+
+func TestChaosRateIsAPoissonRate(t *testing.T) {
+	// a long run second by second: the number of failures of a node is close to the sum of its rates
+	r := rand.New(rand.NewSource(7))
+	hours := 1000.0
+	n := 0
+	for i := 0; i < int(hours*3600); i++ {
+		n += len(ChaosDue(THMDep, 1, 1, time.Second, r.Float64))
+	}
+	want := 0.0
+	for _, f := range FaultCatalog {
+		if f.Node == THMDep {
+			want += f.PerHour * hours
+		}
+	}
+	if float64(n) < 0.95*want || float64(n) > 1.05*want {
+		t.Fatalf("%d failures in %.0f hours, the rates say about %.0f", n, hours, want)
+	}
+}
+
+func TestChaosScalesWithRateAndSimulationSpeed(t *testing.T) {
+	count := func(mult, speed float64) int {
+		r := rand.New(rand.NewSource(3))
+		n := 0
+		for i := 0; i < 400000; i++ {
+			n += len(ChaosDue(FINWash, mult, speed, time.Second, r.Float64))
+		}
+		return n
+	}
+	base := count(1, 1)
+	if base == 0 {
+		t.Fatal("setup: no failure in the base run")
+	}
+	if x := count(4, 1); float64(x) < 3.4*float64(base) || float64(x) > 4.6*float64(base) {
+		t.Errorf("4 times the rate: %d against %d", x, base)
+	}
+	if x := count(1, 4); float64(x) < 3.4*float64(base) || float64(x) > 4.6*float64(base) {
+		t.Errorf("4 times the speed lives through 4 times the hours: %d against %d", x, base)
+	}
+}
+
+func TestEveryFailureCaseHasARate(t *testing.T) {
+	for _, f := range FaultCatalog {
+		if f.PerHour <= 0 {
+			t.Errorf("%s of %s has no rate", f.Code, f.Node)
+		}
+		if f.Resolved == "Maintenance" && f.PerHour > 0.5 {
+			t.Errorf("%s needs Maintenance but happens %.2f times an hour: machines do not break that often", f.Code, f.PerHour)
 		}
 	}
 }

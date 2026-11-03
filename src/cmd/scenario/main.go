@@ -1,5 +1,5 @@
 // Command scenario runs the demonstrations and checks of the cake factory
-// against a running stack (docker compose up, or go run ./cmd/dev). Each
+// against a running stack (docker compose up). Each
 // scenario does something that goes wrong, prints a timeline of what the factory
 // does about it, and ends with PASS or FAIL, so the same run can be shown to
 // others and repeated by anyone. The dashboard can run the ones that do not
@@ -25,6 +25,7 @@ import (
 func main() {
 	base := flag.String("url", "http://localhost:8080", "dashboard address of MON")
 	dir := flag.String("compose-dir", ".", "directory with docker-compose.yml")
+	duration := flag.Duration("duration", 30*time.Minute, "how long the availability scenario watches")
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, "usage: scenario [flags] list | all | <name>... | experiment [-runs N] [-out file.csv] [name...]")
 		flag.PrintDefaults()
@@ -46,7 +47,9 @@ func main() {
 	var names []string
 	if args[0] == "all" {
 		for _, s := range all {
-			names = append(names, s.Name)
+			if !s.Long {
+				names = append(names, s.Name)
+			}
 		}
 	} else {
 		names = args
@@ -69,7 +72,7 @@ func main() {
 		}
 		fmt.Printf("\n== %s: %s\n", n, d)
 		start := time.Now()
-		err := scenario.Run(n, scenario.Options{Base: *base, ComposeDir: *dir, Docker: docker,
+		err := scenario.Run(n, scenario.Options{Base: *base, ComposeDir: *dir, Docker: docker, Duration: *duration,
 			Log: func(l string) { fmt.Println("  " + l) }})
 		switch {
 		case errors.Is(err, scenario.ErrNeedsDocker):
@@ -91,14 +94,14 @@ func main() {
 // (see docs/experiment.md). Default: every crash scenario and the frozen node.
 func experiment(args []string, base, dir string, docker bool) {
 	fs := flag.NewFlagSet("experiment", flag.ExitOnError)
-	runs := fs.Int("runs", 10, "runs per scenario")
+	runs := fs.Int("runs", 20, "runs per scenario")
 	out := fs.String("out", "experiment-results.csv", "CSV file to write")
 	_ = fs.Parse(args)
 	names := fs.Args()
 	if len(names) == 0 {
-		names = []string{"crash-plm-wh", "crash-plm-ship", "crash-bat-dose", "crash-bat-mix", "crash-bat-insp", "crash-thm-dep", "crash-thm-bake", "crash-thm-exit", "crash-thm-cool", "crash-fin-dpn", "crash-fin-qua", "crash-fin-wrap", "crash-fin-pal", "crash-fin-wash"}
+		names = []string{"crash-plm-wh", "crash-plm-ship", "crash-bat-dose", "crash-bat-mix", "crash-bat-insp", "crash-thm-dep", "crash-thm-bake", "crash-thm-exit", "crash-thm-cool", "crash-fin-dpn", "crash-fin-qua", "crash-fin-wrap", "crash-fin-pal", "crash-fin-wash", "crash-bt"}
 		if docker {
-			names = append(names, "freeze-thm-bake")
+			names = append(names, "freeze-thm-bake", "freeze-two-stations", "freeze-three-stations")
 		}
 	}
 	file, err := os.Create(*out)

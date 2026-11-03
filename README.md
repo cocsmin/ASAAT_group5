@@ -17,8 +17,7 @@ docker compose --profile demo up -d --build
 ```
 
 Then open <http://localhost:8080>. Stop with `docker compose --profile demo down`.
-Without Docker: `go run ./cmd/dev` (needs Go 1.25+). Full instructions, options and
-troubleshooting: [src/README.md](src/README.md).
+Full instructions, options and troubleshooting: [src/README.md](src/README.md).
 
 **What to look at**
 

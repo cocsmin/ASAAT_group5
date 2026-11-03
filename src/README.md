@@ -17,8 +17,8 @@ cd src
 Install once:
 - **Docker Desktop**, running (Windows: needs WSL 2, run `wsl --install` in an
   administrator PowerShell and restart).
-- **Go 1.25 or newer** (https://go.dev/dl): only for `go run ./cmd/dev`, the scenarios
-  and the experiment. The Docker route needs no Go.
+- **Go 1.25 or newer** (https://go.dev/dl): only for the scenarios, the experiment and
+  the unit tests. Running the factory needs no Go.
 
 Needs internet and several minutes on the first `up --build` (images are downloaded).
 Ports 8080 (dashboard), 1883 (MQTT) and 1433 (SQL Server) must be free.
@@ -43,21 +43,9 @@ factory and the rest of the dashboard work the same, only the Components card is
 off. `ctl` holds the Docker socket, which gives it control over your containers,
 so it is opt-in.
 
-**Without Docker** (embedded MQTT broker, SQL data in memory, pan documents as
-JSON files under `data/`; needs only Go 1.25+):
-
-```bash
-go run ./cmd/dev
-```
-
-Open <http://localhost:8080>. Stop with Ctrl+C. Here the Components card works
-too (stop, start, restart; freezing needs Docker).
-
 Options (environment variables): `SIM_SPEED=3` runs the factory three times faster
 (Docker: `SIM_SPEED=3 docker compose ...`; PowerShell: `$env:SIM_SPEED="3"`),
-`HEARTBEAT_SECONDS=2` detects silent nodes sooner, `DEV_RESTART_SECONDS=15` keeps a
-crashed service down for 15 s in dev mode, `DEV_KEEP_DATA=1` keeps `data/` between
-dev runs (it is wiped at every start otherwise).
+`HEARTBEAT_SECONDS=2` detects silent nodes sooner.
 
 ## Demonstrate and check
 
@@ -160,7 +148,7 @@ returns cakes in arrival order).
 ### Layout
 
 ```
-cmd/<service>      one main per container (plus devbroker and dev launcher)
+cmd/<service>      one main per image: station (all stations), bt, mon, ui, ctl; scenario
 internal/sparkplug Sparkplug B payload and topic codec
 internal/sig       named signals mapped to metrics
 internal/node      edge node: MQTT, LWT, births, heartbeat, events
@@ -189,8 +177,7 @@ Open work, diagrams to fix and decisions for the group: [TODO.md](TODO.md). The
 signals as implemented: [docs/signals.md](docs/signals.md).
 
 
-- Dev mode (`go run ./cmd/dev`) was smoke-tested before the split into station containers
-  and has not been started since; it builds, but run it once before showing it. `go test ./...` covers the Sparkplug
+- `go test ./...` covers the Sparkplug
   codec, the signals, the timing relations, the model, the station helpers, node dispatch,
   the stores, the dashboard observer, the band logic and the adoption of handed-over pans.
 - Run with Docker Desktop: all containers healthy, real SQL Server and MongoDB

@@ -45,7 +45,7 @@ func RunWash() {
 		f.catchup.Store(true)
 		f.N.Warn("FC23", "washing station repaired: speed increased to work off the backlog", "")
 	})
-	f.seedPans(svc.Env("PAN_COUNT", "60"))
+	f.seedPans(svc.Env("PAN_COUNT", "48"))
 	f.Start()
 	f.adm.Reset()
 	go f.gaugeLoop()

@@ -32,7 +32,7 @@ type Pal struct {
 func RunPal() {
 	b, cancel := svc.Run(model.FINPal, "Cartoner", "CaseCheckweigher", "PalletPacker")
 	defer cancel()
-	size, _ := strconv.Atoi(svc.Env("PALLET_SIZE", "30"))
+	size, _ := strconv.Atoi(svc.Env("PALLET_SIZE", "24"))
 	f := &Pal{Base: b, sec: station.NewSection(5), took: station.NewPanSet(), palletSize: size, toPallet: make(chan cake, 1024)}
 	f.N.OnSignal(model.FINWrap, sig.CakeToCartoning, func(_ string, s sig.Signal) {
 		f.enqueue(cake{pan: s.Str("panId"), batch: s.Str("batchId")})

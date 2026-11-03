@@ -14,9 +14,8 @@ is worth a look.
 
 1. **The assumptions marked "Confirm" in [assumptions.md](assumptions.md)**: the
    demo-only dashboard (S2), the rule "no production without the monitor" (S4, a MON
-   restart pauses the line), the Sparkplug deviations (S8), the 25 s batter wait (T7), the
-   fault rate behind the availability figure (E2), and the temperature for "room
-   temperature" (A12).
+   restart pauses the line), the Sparkplug deviations (S8), the 25 s batter wait (T7), and
+   the fault rate behind the availability figure (E2).
 2. **A "batter collected" acknowledgement** from depositing to batter preparation. The BAT
    state machine Mixing and Handoff waits for it; none of the 14 signals carries it.
    Option A: a 15th signal, so BAT can free its station and send again if it never comes.
@@ -79,10 +78,6 @@ is worth a look.
 13. **The exercise documents** (`communication.md`, `containers.md`, `languages.md`,
     `databases.md`, `experiment.md`) are drafts written by the assistant: check every
     claim, add your own sources, and make them fit the report template.
-14. **Dev mode** (`go run ./cmd/dev`) runs every container as a local process, keeps SQL data
-    in memory and pans as JSON files, and wipes `data/` at each start. It exists so the
-    factory can be shown without Docker; the scenarios that switch containers or freeze a
-    process need Docker.
 
 ## 3. Known bugs and limits, not fixed [B]
 
@@ -90,12 +85,13 @@ is worth a look.
    a restart in that window rebuilds from stale documents.
 2. **THM restarts**: a pan inside the tunnel bakes from zone 1 again after the baking
    station restarts; a pan being filled at the moment of the depositing crash is not
-   resumed; buffered cakes come back as "hot" (60 C).
+   resumed (the batches waiting for depositing are saved and do come back); buffered cakes come
+   back as "hot" (60 C).
 3. **A BAT batch lives in three containers** (dosing, mixing, inspection). If mixing or
-   inspection restarts, the batch it held is gone and dosing, which waits for the result,
-   gives it up after 120 s (`batchLostAfter`, an assumption) and starts a new batch. The
-   ingredients of the lost batch are already used up (they are taken from stock 3 s after
-   the reservation). Before the split the same restart lost the batch at once.
+   inspection restarts, the batch it held is gone; dosing, which waits for the result,
+   discards it after 120 s (`batchLostAfter`, an assumption; food safety: nothing of unknown
+   age is used) and starts a new batch. The ingredients are already used up. So a restart
+   costs about two minutes of batter. Before the split the same restart lost the batch at once.
 4. **Duplicate filter is in memory**: after a receiver restart a duplicate is caught only by
    the receivers' own checks (batch id, pan id, order id).
 5. **PLM keeps held orders in memory**; after a restart a held order is noticed again when
@@ -108,18 +104,14 @@ is worth a look.
 8. **Backpressure between the FIN stations is gone**: quality inspection no longer waits when
    the holding area in front of wrapping is full; the holding area grows and wrapping asks
    depositing to stop.
-9. **Experiment data** is from one machine at real speed, 10 runs per scenario, only crash
-   and freeze, from before Band Transport and the station split; the aborted first run is
-   kept on purpose. A new run is still to be made.
+9. **Experiment data** is from one machine, simulated station times, one fault at a time (plus
+   two scenarios with several stations); see experiment.md for what the numbers can and cannot
+   say.
 10. **Tests**: unit tests cover the codec, signals, timing, model, station helpers, node
-    dispatch, stores, dashboard observer, band logic and the adoption of handed-over pans.
-    The behaviour of a whole line is checked by the scenarios, which need a running stack.
-    The main loop of every station is not unit-tested (it needs a broker or a long
-    simulation).
-11. **A crash of the depositing station loses the batter it was queued with**: batches handed over
-    by inspection wait in its memory. In the scenario the line produced again only after 94 s
-    (24 to 29 s for every other station). A fix would be to keep the batches in the station's
-    saved state or to resend them from BAT-INSP.
+    dispatch, stores, the dashboard observer, band logic, the adoption of handed-over pans, the
+    depositing queue, the monitor's birth handling and the wiring of the model, the
+    station program and the compose file. They run in CI. The main loop of every station is
+    not unit-tested (it needs a broker or a long simulation); the scenarios cover it.
 
 ## 4. Odd things worth a look [?]
 

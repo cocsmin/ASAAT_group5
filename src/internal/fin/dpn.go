@@ -29,7 +29,7 @@ func RunDpn() {
 	defer cancel()
 	f := &Dpn{Base: b, sec: station.NewSection(4), took: station.NewPanSet(), cooled: make(chan cake, 1024)}
 	f.N.OnSignal(model.THMCool, sig.CooledCake, func(_ string, s sig.Signal) {
-		if s.Float("temp") > 30 { // only cakes released at a safe temperature are accepted (FIN-REQ-02)
+		if s.Float("temp") > model.TSafe { // only cakes released at a safe temperature are accepted (FIN-REQ-02)
 			f.N.Warn("UC10", "cake not released at a safe temperature: not accepted", s.Str("batchId"))
 			return
 		}

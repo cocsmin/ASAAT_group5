@@ -20,9 +20,8 @@ Two cards on the right side of the dashboard do this without a terminal:
   switch containers need the control service. A *Stop* button ends a run and puts
   every stopped or frozen part back.
 
-With Docker the control service is the `ctl` container, started with
-`docker compose --profile demo up -d --build`. With `go run ./cmd/dev` it is built
-into the launcher (no freezing there).
+The control service is the `ctl` container, started with
+`docker compose --profile demo up -d --build`.
 
 ## From a terminal
 
@@ -46,8 +45,6 @@ into the launcher (no freezing there).
    go run ./cmd/scenario all
    ```
 
-Without Docker, `go run ./cmd/dev` starts the factory and the scenarios that do
-not need Docker still work (the ones marked `docker` are skipped).
 
 ## The scenarios
 
@@ -55,6 +52,7 @@ not need Docker still work (the ones marked `docker` are skipped).
 |---|---|---|
 | `healthy` | nothing | all 16 factory containers online, a pallet ships |
 | `crash-plm-wh`, `crash-plm-ship`, `crash-bat-dose`, `crash-bat-mix`, `crash-bat-insp`, `crash-thm-dep`, `crash-thm-bake`, `crash-thm-exit`, `crash-thm-cool`, `crash-fin-dpn`, `crash-fin-qua`, `crash-fin-wrap`, `crash-fin-pal`, `crash-fin-wash`, `crash-bt` | the container exits like a real crash | the broker publishes the death certificate (Last Will) within 15 s (THM-REQ-72); Docker restarts the container and it is back within 60 s (THM-REQ-73); no pan is lost or duplicated; the line carries on |
+| `freeze-two-stations`, `freeze-three-stations` | the baking tunnel and the wrapping station freeze together; the tunnel exit, the cooling and the mixing station freeze together | each is declared dead, MON halts the union of their sections and everything upstream (the whole band in the first case, S1 to S3 in the second, mixing owns no section), they all return, the sections run again, no pan is lost |
 | `freeze-thm-bake` | the baking tunnel station freezes and stops its keep-alive pings | the broker declares it dead on its own (about 7.5 s with a 5 s keep-alive), MON halts its band section and the ones upstream; it comes back when unfrozen |
 | `mon-down` | MON is stopped while THM discards cakes | no event is lost (THM-REQ-77: the events wait for MON and arrive after it restarts); the line does not run without the monitor (UC2 rule) |
 | `sql-down` | SQL Server is switched off for 30 s | the monitor does not mistake a database outage for a dead line (no node declared dead, no band section halted), stations carry on, everything catches up when it returns |

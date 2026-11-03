@@ -187,4 +187,13 @@ only holds what is still open. Newest last.
 - One branch, `implementation`; the CI pipeline is checked once everything is finished and
   a pull request exists.
 - Realistic values for the simulation are chosen by the implementation and listed in
-  [assumptions.md](assumptions.md).
+  [assumptions.md](assumptions.md); the group may change any number.
+- Dev mode (`go run ./cmd/dev`) is removed: Docker is the only way to run the factory.
+- A batch that is lost when a BAT station restarts is discarded (food safety: nothing of
+  unknown age is used) and a new one is made.
+- Unit tests run in CI and a failing test fails the pull request (to block merging, the
+  check must be marked required in the repository settings).
+- 24 pans per batch, 48 pans in the loop, pallet and buffer of 24 (see assumptions.md
+  section 6); the cooling limit is 28 C.
+- The case of several stations failing at once is covered by two scenarios
+  (`freeze-two-stations`, `freeze-three-stations`).

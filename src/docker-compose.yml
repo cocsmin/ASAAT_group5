@@ -36,6 +36,7 @@ x-env: &env
   HEARTBEAT_SECONDS: "5"       # T_hb, one value for all slices
   OUTBOX_DIR: /data
   HEALTH_ADDR: ":8081"
+  FAULT_RATE: "${FAULT_RATE:-0}" # 0: the factory only fails when a fault is injected; 1: the failure rates of the catalog; 5: five times as many
   SIM_SPEED: "${SIM_SPEED:-1}" # raise (SIM_SPEED=3 docker compose up) to run the factory faster
 
 x-sql: &sql
@@ -169,13 +170,13 @@ services:
   fin-pal:
     <<: *service
     build: { context: ., args: { SERVICE: station } }
-    environment: { <<: *env, STATION: fin-pal, PALLET_SIZE: "30" }
+    environment: { <<: *env, STATION: fin-pal, PALLET_SIZE: "24" }
     volumes: ["fin-pal-data:/data"]
 
   fin-wash:
     <<: *service
     build: { context: ., args: { SERVICE: station } }
-    environment: { <<: *env, STATION: fin-wash, PAN_COUNT: "60" }
+    environment: { <<: *env, STATION: fin-wash, PAN_COUNT: "48" }
     volumes: ["fin-wash-data:/data"]
 
   mon:
@@ -193,7 +194,7 @@ services:
   ui:
     <<: *service
     build: { context: ., args: { SERVICE: ui } }
-    environment: { <<: [*env, *sql], HTTP_ADDR: ":8080", MON_URL: "http://mon:8082", CONTROL_URL: "http://ctl:8090" }
+    environment: { <<: [*env, *sql], HTTP_ADDR: ":8080", CREW_SECONDS: "${CREW_SECONDS:-0}", MON_URL: "http://mon:8082", CONTROL_URL: "http://ctl:8090" }
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
       interval: 5s

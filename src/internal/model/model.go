@@ -113,6 +113,15 @@ func SectionName(i int) string { return sectionNames[i] }
 // SectionOwner returns the system that works on band section i (1 to 5).
 func SectionOwner(i int) string { return sectionOwners[i] }
 
+// Cooling. A cake may be packaged once its core is at room temperature (UC10). Cooling brings it
+// to CoolMean with a scatter of CoolSigma; TSafe is the limit above which Finishing refuses it.
+// Depositing, cooling and depanning all use these values, so they cannot disagree.
+const (
+	TSafe     = 28.0 // core temperature in C up to which a cooled cake is accepted for packaging
+	CoolMean  = 24.0 // core temperature in C after cooling
+	CoolSigma = 1.0  // scatter of that temperature
+)
+
 // Severities of the event signal.
 const (
 	SevLog     = "log"
@@ -139,7 +148,7 @@ type Step struct {
 }
 
 // Pan is the document that travels from station to station. In MongoDB it is
-// one document in the pans collection; in dev mode it is one JSON file.
+// one document in the pans collection; without MongoDB (tests) it is one JSON file.
 type Pan struct {
 	ID         string    `json:"id" bson:"_id"`
 	BatchID    string    `json:"batchId" bson:"batchId"`

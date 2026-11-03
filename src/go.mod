@@ -5,7 +5,6 @@ go 1.25.0
 require (
 	github.com/eclipse/paho.mqtt.golang v1.4.3
 	github.com/microsoft/go-mssqldb v1.11.2
-	github.com/mochi-mqtt/server/v2 v2.7.9
 	go.mongodb.org/mongo-driver v1.17.10
 )
 
@@ -17,7 +16,6 @@ require (
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/klauspost/compress v1.16.7 // indirect
 	github.com/montanaflynn/stats v0.7.1 // indirect
-	github.com/rs/xid v1.4.0 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/xdg-go/pbkdf2 v1.0.0 // indirect
 	github.com/xdg-go/scram v1.1.2 // indirect
@@ -27,5 +25,4 @@ require (
 	golang.org/x/net v0.58.0 // indirect
 	golang.org/x/sync v0.22.0 // indirect
 	golang.org/x/text v0.41.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

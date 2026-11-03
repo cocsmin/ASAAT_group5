@@ -429,7 +429,7 @@ function renderScn(){
   if(!scn) return;
   const run = scn.run || {}, busy = !!run.running;
   $('#scn-list').innerHTML = scn.items.map(i=>{
-    const why = !i.runnable ? (i.needsPause || (i.needs||[]).length ? 'Needs Docker (it switches a container that dev mode does not have): docker compose --profile demo up -d.' : 'Needs component control (docker compose --profile demo up -d).')+' Terminal: go run ./cmd/scenario '+i.name : '';
+    const why = !i.runnable ? (i.needsPause || (i.needs||[]).length ? 'Needs component control (docker compose --profile demo up -d).' : 'Needs component control (docker compose --profile demo up -d).')+' Terminal: go run ./cmd/scenario '+i.name : '';
     return '<div class="scn"><div class="sname"><b>'+esc(i.name)+'</b>'+(i.docker?' <span class="tag">switches parts</span>':'')+'<small>'+esc(i.desc)+(why?'<br><i>'+esc(why)+'</i>':'')+'</small></div>'+
       '<button class="sm primary" '+((!i.runnable||busy)?'disabled':'')+' onclick="runScn(\''+i.name+'\')">Run</button></div>';
   }).join('');

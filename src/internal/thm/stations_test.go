@@ -177,3 +177,78 @@ func TestMachineIdsOfTheStationsMatchTheirOwnNodes(t *testing.T) {
 		}
 	}
 }
+
+func newDep(b *svc.Base) *Dep {
+	return &Dep{Base: b, sec: station.NewSection(1), batters: make(chan batch, 16), clean: make(chan string, 16),
+		reasons: map[string]string{}, inClean: map[string]bool{}, seenBatch: map[string]bool{}, pend: map[string]*queued{}}
+}
+
+func waitSaved(t *testing.T, pans store.Pans, want int64) {
+	t.Helper()
+	deadline := time.After(2 * time.Second)
+	for {
+		if st, _ := pans.LoadState(context.Background(), queueKey); st["B0007.left"] == want {
+			return
+		}
+		select {
+		case <-deadline:
+			st, _ := pans.LoadState(context.Background(), queueKey)
+			t.Fatalf("saved queue: %v, want left=%d", st, want)
+		case <-time.After(10 * time.Millisecond):
+		}
+	}
+}
+
+func TestDepositingQueueSurvivesARestart(t *testing.T) {
+	b, pans := testBase(t, model.THMDep)
+	d := newDep(b)
+	d.enqueue(batch{id: "B0007", pans: 24, target: 450, tol: 5})
+	d.enqueue(batch{id: "B0008", pans: 24, target: 450, tol: 5})
+	for i := 0; i < 10; i++ { // ten pans of the first batch are filled
+		d.consumed("B0007")
+	}
+	waitSaved(t, pans, 14)
+
+	// the station restarts: a new process reads the saved queue
+	b2 := &svc.Base{ID: model.THMDep, Ctx: b.Ctx, N: node.New(node.Config{ID: model.THMDep}), F: sim.NewFaults(), Pans: pans}
+	d2 := newDep(b2)
+	d2.restoreQueue()
+	if len(d2.batters) != 2 {
+		t.Fatalf("both batches come back, got %d", len(d2.batters))
+	}
+	first := <-d2.batters
+	if first.id != "B0007" || first.pans != 14 || first.target != 450 || first.tol != 5 {
+		t.Fatalf("the first batch continues with the pans still to fill: %+v", first)
+	}
+	if second := <-d2.batters; second.id != "B0008" || second.pans != 24 {
+		t.Fatalf("second batch: %+v", second)
+	}
+	if !d2.seenBatch["B0007"] {
+		t.Fatal("a batch that comes back must not be accepted again when inspection resends it")
+	}
+}
+
+func TestFinishedBatchLeavesTheSavedQueue(t *testing.T) {
+	b, pans := testBase(t, model.THMDep)
+	d := newDep(b)
+	d.enqueue(batch{id: "B0007", pans: 2, target: 450, tol: 5})
+	d.consumed("B0007")
+	d.consumed("B0007")
+	deadline := time.After(2 * time.Second)
+	for {
+		if st, _ := pans.LoadState(context.Background(), queueKey); len(st) == 0 {
+			break
+		}
+		select {
+		case <-deadline:
+			t.Fatal("a finished batch must not stay in the saved queue")
+		case <-time.After(10 * time.Millisecond):
+		}
+	}
+	b2 := &svc.Base{ID: model.THMDep, Ctx: b.Ctx, N: node.New(node.Config{ID: model.THMDep}), F: sim.NewFaults(), Pans: pans}
+	d2 := newDep(b2)
+	d2.restoreQueue()
+	if len(d2.batters) != 0 {
+		t.Fatal("nothing to take up after a finished batch")
+	}
+}

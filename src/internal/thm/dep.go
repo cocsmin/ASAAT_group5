@@ -36,14 +36,26 @@ type Dep struct {
 
 	lastLowStock time.Time
 	lowStock     atomic.Bool
+
+	qmu    sync.Mutex
+	pend   map[string]*queued // batches received and not yet deposited, saved so a restart does not lose them
+	saveMu sync.Mutex
 }
+
+// queued is a batch that is waiting or being deposited.
+type queued struct {
+	batch
+	left int // pans of the batch still to deposit
+}
+
+const queueKey = model.THMDep + ".queue"
 
 // RunDep starts the depositing station.
 func RunDep() {
 	b, cancel := svc.Run(model.THMDep, "Depositor", "PanPresenceEye", "CheckWeigher")
 	defer cancel()
 	t := &Dep{Base: b, sec: station.NewSection(1), batters: make(chan batch, 1024), clean: make(chan string, 1024),
-		reasons: map[string]string{}, inClean: map[string]bool{}, seenBatch: map[string]bool{}}
+		reasons: map[string]string{}, inClean: map[string]bool{}, seenBatch: map[string]bool{}, pend: map[string]*queued{}}
 	t.N.OnSignal(model.BATInsp, sig.BatterReady, func(_ string, s sig.Signal) {
 		t.cmu.Lock()
 		dup := t.seenBatch[s.Str("batchId")]
@@ -52,8 +64,7 @@ func RunDep() {
 		if dup {
 			return
 		}
-		t.batters <- batch{id: s.Str("batchId"), pans: s.Int("pans"), target: s.Float("fillTarget"), tol: s.Float("fillTol")}
-		t.N.Gauge("queue", int64(len(t.batters)))
+		t.enqueue(batch{id: s.Str("batchId"), pans: s.Int("pans"), target: s.Float("fillTarget"), tol: s.Float("fillTol")})
 	})
 	t.N.OnSignal(model.FINWash, sig.CleanPanSupply, func(_ string, s sig.Signal) {
 		t.pending.Add(-1)
@@ -93,6 +104,7 @@ func RunDep() {
 		}
 	})
 	t.restoreSupplied()
+	t.restoreQueue()
 	t.Start()
 	go t.panRefill()
 	go t.gaugeLoop()
@@ -187,6 +199,7 @@ func (t *Dep) depositor() {
 				if !t.depositOne(b) {
 					return
 				}
+				t.consumed(b.id)
 			}
 		}
 	}
@@ -335,5 +348,71 @@ func (t *Dep) restoreSupplied() {
 	}
 	if n > 0 {
 		log.Printf("[%s] restored %d supplied pans from the stored documents", t.ID, n)
+	}
+}
+
+// enqueue puts a batch in the queue and saves the queue.
+func (t *Dep) enqueue(b batch) {
+	t.qmu.Lock()
+	t.pend[b.id] = &queued{batch: b, left: b.pans}
+	t.qmu.Unlock()
+	t.batters <- b
+	t.N.Gauge("queue", int64(len(t.batters)))
+	t.saveQueue()
+}
+
+// consumed notes that one pan of the batch has been used (deposited, or diverted).
+func (t *Dep) consumed(id string) {
+	t.qmu.Lock()
+	if q := t.pend[id]; q != nil {
+		q.left--
+		if q.left <= 0 {
+			delete(t.pend, id)
+		}
+	}
+	t.qmu.Unlock()
+	t.saveQueue()
+}
+
+// saveQueue writes the batches that are still to be deposited to the document store. Before
+// this, a crash of the depositing station lost the batter that inspection had handed over and
+// the line stood still for more than a minute; now a restart loses at most the pan in hand.
+func (t *Dep) saveQueue() {
+	go func() {
+		t.saveMu.Lock() // one write at a time, and each write takes the queue as it is now: the last write is the newest
+		defer t.saveMu.Unlock()
+		t.qmu.Lock()
+		m := map[string]int64{}
+		for id, q := range t.pend {
+			m[id+".left"] = int64(q.left)
+			m[id+".target10"] = int64(q.target*10 + 0.5)
+			m[id+".tol10"] = int64(q.tol*10 + 0.5)
+		}
+		t.qmu.Unlock()
+		_ = t.Pans.SaveState(t.Ctx, queueKey, m)
+	}()
+}
+
+// restoreQueue puts the batches back that were waiting when this container stopped.
+func (t *Dep) restoreQueue() {
+	st, err := t.Pans.LoadState(t.Ctx, queueKey)
+	if err != nil || len(st) == 0 {
+		return
+	}
+	var ids []string
+	for k := range st {
+		if id, ok := strings.CutSuffix(k, ".left"); ok && st[k] > 0 {
+			ids = append(ids, id)
+		}
+	}
+	sort.Strings(ids)
+	for _, id := range ids {
+		b := batch{id: id, pans: int(st[id+".left"]), target: float64(st[id+".target10"]) / 10, tol: float64(st[id+".tol10"]) / 10}
+		t.seenBatch[id] = true
+		t.pend[id] = &queued{batch: b, left: b.pans}
+		t.batters <- b
+	}
+	if len(ids) > 0 {
+		log.Printf("[%s] %d batches taken up again from the saved queue", t.ID, len(ids))
 	}
 }

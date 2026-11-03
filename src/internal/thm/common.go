@@ -11,6 +11,7 @@ package thm
 import (
 	"time"
 
+	"cakefactory/internal/model"
 	"cakefactory/internal/sig"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
@@ -26,8 +27,8 @@ const (
 	exitCheckTime  = 500 * time.Millisecond
 	coolingTime    = 4 * time.Second
 	maxBufferWait  = timing.BufferWait // stands for the 30 minutes of UC10
-	bufferCapacity = 30
-	tSafe          = 30.0
+	bufferCapacity = 24
+	tSafe          = model.TSafe
 	bakeTarget     = 97.0
 	bakeTol        = 0.5
 

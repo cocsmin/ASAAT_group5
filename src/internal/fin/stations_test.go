@@ -89,7 +89,7 @@ func TestWrappingAdoptsInspectedCakes(t *testing.T) {
 
 func TestPalletStationAdoptsWrappedCakes(t *testing.T) {
 	b, pans := testBase(t, model.FINPal)
-	s := &Pal{Base: b, sec: station.NewSection(5), took: station.NewPanSet(), toPallet: make(chan cake, 16), palletSize: 30}
+	s := &Pal{Base: b, sec: station.NewSection(5), took: station.NewPanSet(), toPallet: make(chan cake, 16), palletSize: 24}
 	put(t, pans, "CAKE-B0001-PAN-001", "PAN-001", "FIN-Wrapping", "wrapped", 10*time.Second)
 	put(t, pans, "CAKE-B0001-PAN-002", "PAN-002", "FIN-Wrapping", "refused", 10*time.Second)
 	put(t, pans, "CAKE-B0001-PAN-003", "PAN-003", "FIN-Pallet", "packed", 10*time.Second)
@@ -161,7 +161,7 @@ func TestMachineIdsOfTheStationsMatchTheirOwnNodes(t *testing.T) {
 }
 
 func TestHoldingAreaIsSmallerThanAPallet(t *testing.T) {
-	if holdingCap >= 30 {
+	if holdingCap >= 24 {
 		t.Fatal("the holding area in front of wrapping is a short queue, not a pallet")
 	}
 }

@@ -92,6 +92,7 @@ func (b *Base) Start() {
 	if err := b.N.Start(b.Ctx); err != nil {
 		log.Fatal(err)
 	}
+	go b.chaos()
 	go func() {
 		t := time.NewTicker(timing.StateSnapshot)
 		defer t.Stop()

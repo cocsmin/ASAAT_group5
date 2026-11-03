@@ -1,4 +1,3 @@
-# Assumptions
 
 Everything the simulation assumes because the report, the Papyrus models or the
 course material give no value. Nothing here is a fact about a real plant. Use this
@@ -25,18 +24,18 @@ assumptions; time values that several systems share are in
 | # | Assumption | Value | Where | Recommendation |
 |---|---|---|---|---|
 | A1 | One product only: "Vanilla sponge" | one recipe, seeded in SQL | `internal/store/sql_mem.go`, `sql_mssql.go` | Keep. The report describes one line, not a catalogue |
-| A2 | Pans per batch | 30 (was 6: the line stood empty most of the time) | recipe seed `PansPerBatch` | Keep. Depositing at 1 pan per second is busy for 30 s per batch, so the line carries about 17 pans at once |
-| A3 | Pans in the pan loop | 60 | `PAN_COUNT` in `docker-compose.yml` | Keep. About 17 are in the line, the rest wait clean in the pool |
+| A2 | Pans per batch | 24 (was 6, then 30) | recipe seed `PansPerBatch` | Keep. Chosen from the cycle times, see section 6: the batter of the next batch takes about 17 s, depositing a batch takes 24 s, so depositing never waits and a failed batch loses little |
+| A3 | Pans in the pan loop | 48 | `PAN_COUNT` in `docker-compose.yml` | Keep. About 17 are on the line at a time, a full cooling buffer holds 24 more, the rest wait clean in the pool |
 | A4 | Fill target and tolerance of the batter in a pan | 450 g +/- 5 g (1.1 %) | recipe seed | Keep. Chosen, see section 5: well inside the legal tolerance of the packaged product |
 | A5 | Dose tolerance of every ingredient | 1 % (was 2 %); the load cell scatters 0.25 % | recipe seed, `internal/bat/dose.go` | Keep. Chosen, see section 5: industrial batching is accurate to about 0.3 to 1 % |
-| A6 | Ingredients and stock | recipe grams are 5 x the old ones (flour 5000 g for 30 pans); 45000 g of each ingredient at the start; restock after 15 s with 2 x the recipe + 25000 g | seed, `internal/plm/plm.go` | Keep. Same ratio as before: stock for about nine batches |
+| A6 | Ingredients and stock | recipe grams per pan as before (flour 4000 g for 24 pans); 36000 g of each ingredient at the start; restock after 15 s with 2 x the recipe + 20000 g | seed, `internal/plm/plm.go` | Keep. Stock for about nine batches |
 | A7 | Mixing time | 6 s | recipe seed | Change only if needed |
 | A8 | A new order every 22 s, at most 2 not yet picked up | derived from the stage times | `internal/plm/plm.go` | Keep. It sets the pace of the whole line |
-| A9 | Pallet | 30 cakes | `PALLET_SIZE` | Keep (equals the pans per batch, so one batch fills one pallet) |
+| A9 | Pallet | 24 cakes | `PALLET_SIZE` | Keep (equals the pans per batch, so one batch fills one pallet) |
 | A10 | Trucks | three, assigned round-robin | `internal/plm/plm.go` | Keep. Nothing in the exercises depends on it |
 | A11 | Cake core temperature at the tunnel exit | 97 C +/- 0.5 C | `internal/thm/thm.go` (UC9 business rule) | Keep, it comes from the use case |
-| A12 | Temperature at which cakes may be packaged | 30 C core temperature ("room temperature") | `tSafe` in `internal/thm/thm.go` | Confirm. No source found for a number, see section 5 |
-| A13 | Cooling buffer capacity | 30 pans (one batch) | `internal/thm/thm.go` | Change only if needed |
+| A12 | Core temperature up to which a cooled cake is accepted for packaging | 28 C (was 30); cooling brings a cake to 24 C with a scatter of 1 C | `model.TSafe`, `CoolMean`, `CoolSigma`, used by cooling and depanning | Keep. Chosen, see section 5: ambient plus a few degrees; a normal cake is 4 scatters below the limit and is never refused |
+| A13 | Cooling buffer capacity | 24 pans (one batch) | `internal/thm/common.go` | Keep |
 | A14 | Holding area before packaging | 6 cakes | `internal/fin/fin.go` | Change only if needed |
 | A15 | Human inspection of the batter | simulated, 3 s, always "good" unless UC4 is injected | `internal/bat/bat.go` | Confirm. A button on the dashboard would make it real; only worth it if the demo needs it |
 
@@ -78,9 +77,9 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | # | Assumption | Value | Recommendation |
 |---|---|---|---|
 | E1 | Availability counts the time the controller does not answer, not the time the line takes to produce again | about 1 s per crash; production recovery reported next to it | Keep |
-| E2 | Assumed fault rate | one fault per hour, giving about 99.97 % for a 1 s outage | Confirm and name it in the report |
-| E3 | Which faults are measured | container crash and frozen process; the Band Transport crash is in the scenario list but its rerun is still to do | Keep |
-| E4 | Runs | 10 per scenario, one machine, real speed (`SIM_SPEED=1`) | Keep |
+| E2 | Failures are random, not scheduled: every failure case has a rate per hour of operation of its container (the `PerHour` column of the fault catalog); `FAULT_RATE` multiplies all rates | 3 an hour for a wrong fill weight, 0.1 an hour for a machine that breaks, 0.1 an hour for a container crash, and so on (about 32 failures an hour over the whole factory at rate 1, most of them handled by the system itself) | Confirm. The rates are chosen, not measured; the group may change any number in `internal/model/faults.go` |
+| E3 | Which faults are measured | every container crashing alone, the baking tunnel frozen, several stations frozen together, and a long run in which the factory fails by itself | Keep |
+| E4 | Runs | 15 per scenario for the single faults; one run of 2 hours with the random failures at twice the catalog rates (the same as 4 hours of the catalog); one machine, real speed (`SIM_SPEED=1`) | Keep |
 | E5 | THM-REQ-76 and -78 (stop new pans and react to the band within 1 s) are not measured | | Keep unmeasured unless the course asks for it |
 
 ## 5. Where the realistic values come from
@@ -105,12 +104,13 @@ for this plant, so the figures stay assumptions.
   The old 2 % was looser than any of them; 1 % is the upper end of the range, and the
   simulated load cell scatters 0.25 %, so a normal weighing almost never fails and a
   failure case is always an injected one.
-- **Cooling before packaging, 30 C (A12).** Sources agree that cakes must be cooled to a
+- **Cooling before packaging, 28 C (A12).** Sources agree that cakes must be cooled to a
   stable core temperature before slicing and packaging and that packing too warm makes the
   packaging warp and leak ([Buhler](https://www.buhlergroup.com/global/en/campaigns/NAM_Solutions_for_cake.html),
   [Making.com](https://making.com/equipment/sponge-cake-cooling-tunnel)), but I found no
-  number. 30 C is a plausible round value near room temperature; it is the one value in
-  this list that nobody has backed with a source, and the group should confirm it.
+  number. UC10 only says "room temperature". The value is chosen: a packing hall at 20 to 25 C
+  plus a margin of a few degrees, 28 C. It has no source and the group may change it in one
+  place (`model.TSafe`); the cooling mean (24 C) and scatter (1 C) are assumptions too.
 - **Baking time, belt speed, throughput (T1).** The same sources say that temperature and
   belt speed are set together for each product, pan size and oven, so there is no single
   real figure. Typical sponge cakes bake for tens of minutes; that is general knowledge,
@@ -118,3 +118,42 @@ for this plant, so the figures stay assumptions.
   and its throughput is not a plant figure.
 - **Core temperature at the tunnel exit, 97 C +/- 0.5 C (A11).** Comes from the use case,
   not from a source.
+
+## 6. How the batch and pan numbers were chosen
+
+Every station of the line works at one pan per second (depositing, depanning, quality check,
+wrapping, cartoning, washing), so the line carries at most 3600 pans per hour and is balanced:
+no station is faster than the others. Measured in the scenarios, the line ships about 1.1 pans
+per second, which is that limit.
+
+- **Pans per batch (24).** Preparing the next batch (dosing 5 x 1.2 s, mixing 6 s, inspection
+  3 s, hand-over) takes about 17 s. Depositing a batch of N pans takes N s. If N is below 17
+  depositing waits for batter; above it batter prepared early waits (up to 25 s, P3). 24 keeps
+  depositing busy with a margin of about 40 percent and no batter waiting too long. A batch
+  of 30 gave the same throughput but lost more when a batch failed (a discarded batch is
+  24 pans instead of 30) and needed more pans in the loop.
+- **Pans in the loop (48).** At one pan per second a pan spends about 14 to 17 s on the line,
+  so about 17 pans are on the line. During a cooling failure the buffer holds up to 24 more
+  (FC15 to FC18). 17 + 24 = 41, and a few clean pans must be left in the pool: 48.
+- **Throughput cannot be raised by a larger batch.** Only a faster slowest station would raise
+  it; all station times are assumptions (T3), so this is not an optimisation of a real plant.
+
+## 7. Random failures and the maintenance crew
+
+Real failures are random: nothing breaks on a timer. The factory therefore has a random mode:
+
+- `FAULT_RATE` (default 0 = nothing fails by itself, which the scenarios need): every container
+  makes each of its failure cases happen at random, as a Poisson process with the rate in the fault
+  catalog (`PerHour`) times `FAULT_RATE`. A faster simulation (`SIM_SPEED`) lives through more
+  hours per second, so the rates scale with it.
+- `CREW_SECONDS` (default 0 = a person presses "Mark repaired"): the dashboard container plays
+  the maintenance crew and repairs every open ticket after a random time of 0.5 to 1.5 times
+  `CREW_SECONDS` of simulated time.
+- The rates are orders of magnitude, not data from a plant: failures that the system handles itself
+  (a wrong fill weight, an overcooked cake, a rejected batter) happen several times an hour;
+  failures that need Maintenance (a machine breaks, the cooling stops) every ten hours of
+  operation of that machine; a container crash every ten hours; a container that stops answering
+  every fifty hours. At rate 1 that is about 32 failures an hour over the 16 containers, of which about
+  1.4 need Maintenance.
+- Start it with `FAULT_RATE=2 CREW_SECONDS=40 docker compose --profile demo up -d` and read the
+  result with `go run ./cmd/scenario -duration 2h availability` (see [experiment.md](experiment.md)).

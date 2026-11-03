@@ -188,7 +188,7 @@ func (t *Dose) makeBatch(o order, batch string) (done, cont bool) {
 			}
 			return r.Str("result") == "handed", true
 		case <-lost:
-			t.N.Warn("FC27", "no result for batch "+batch+" from mixing or inspection (a station restarted?): batch given up", batch)
+			t.N.Discard("FC27", "no result for batch "+batch+" from mixing or inspection (a station restarted?): batch discarded, a new one is started", batch)
 			return false, true
 		}
 	}
