@@ -96,10 +96,22 @@ func (s *MSSQL) Init(ctx context.Context) error {
 
 func (s *MSSQL) seed(ctx context.Context) error {
 	var n int
-	if err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM dbo.recipes").Scan(&n); err != nil || n > 0 {
+	if err := s.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM dbo.recipes").Scan(&n); err != nil {
 		return err
 	}
 	r := SeedRecipe
+	if n > 0 { // an older database: bring the recipe up to the seed values (stock is left alone)
+		if _, err := s.db.ExecContext(ctx, "UPDATE dbo.recipes SET mix_seconds=@p2, dose_tol_pct=@p3, pans_per_batch=@p4, fill_target=@p5, fill_tol=@p6 WHERE name=@p1",
+			r.Name, r.MixSeconds, r.DoseTolPct, r.PansPerBatch, r.FillTarget, r.FillTol); err != nil {
+			return err
+		}
+		for _, it := range r.Items {
+			if _, err := s.db.ExecContext(ctx, "UPDATE dbo.recipe_items SET grams=@p3 WHERE recipe=@p1 AND ingredient=@p2", r.Name, it.Ingredient, it.Grams); err != nil {
+				return err
+			}
+		}
+		return nil
+	}
 	if _, err := s.db.ExecContext(ctx, "INSERT dbo.recipes VALUES (@p1,@p2,@p3,@p4,@p5,@p6)",
 		r.Name, r.MixSeconds, r.DoseTolPct, r.PansPerBatch, r.FillTarget, r.FillTol); err != nil {
 		return err

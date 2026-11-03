@@ -343,9 +343,10 @@
       else {
         var st = byId(w.box), i = perBox[w.box] = (perBox[w.box] || 0) + 1, j = i - 1 + (isCake ? 0 : 0);
         var cols = Math.max(1, Math.floor((st.w - 12) / 17));
+        var rows = w.box === 'bake' || (st.h || 64) < 50 ? 1 : 2;
+        if (j >= cols * rows) { return; } // the box is full: the badge on it still shows the real count
         x = st.x + 12 + (j % cols) * 17;
-        y = st.y + (w.box === 'bake' ? 59 : 38) + Math.floor(j / cols) * 14; // the tunnel box keeps its zone temperatures above the pans
-        if (w.box !== 'bake' && y > st.y + (st.h || 64) - 16) { y = st.y + (st.h || 64) - 16; }
+        y = st.y + (w.box === 'bake' ? 59 : 36) + Math.floor(j / cols) * 12; // the tunnel box keeps its zone temperatures above the pans
       }
       seen[p.id] = true;
       var g = panEls[p.id];

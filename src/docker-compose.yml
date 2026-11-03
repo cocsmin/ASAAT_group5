@@ -108,7 +108,7 @@ services:
   fin:
     <<: *service
     build: { context: ., args: { SERVICE: fin } }
-    environment: { <<: *env, PAN_COUNT: "20", PALLET_SIZE: "6" }
+    environment: { <<: *env, PAN_COUNT: "60", PALLET_SIZE: "30" }
     volumes: ["fin-data:/data"]
 
   mon:

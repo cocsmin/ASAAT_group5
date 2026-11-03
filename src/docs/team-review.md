@@ -53,7 +53,7 @@ they equal real seconds; the experiment ran at 1.
 | THM | exit check 0.5 s, cooling 4 s, buffer capacity 8, buffer wait limit 40 s | FC14 to FC18 |
 | THM | depositing jam lasts 30 s (FC7), no-pan wait 4 s (FC8), recalibration 6 s (UC5) | injected faults |
 | FIN | depanning, inspection, wrapping, cartoning 1 s each, washing 2 s + drying 1 s | |
-| FIN | holding area 6 cakes, 3 rejects of the same check call Maintenance, pallet = 6 cakes, 20 pans | |
+| FIN | holding area 6 cakes, 3 rejects of the same check call Maintenance, pallet = 30 cakes, 60 pans | |
 | MON | node marked "dead" and escalated after 45 s without restart; FC20 wrong speed corrected after 10 s; sections restart 1.5 s apart | |
 | all | state snapshot every 3 s; event outbox retried every second; database calls time out after 3 s | |
 
@@ -126,7 +126,7 @@ they equal real seconds; the experiment ran at 1.
 8. **Inspector is simulated** (3 s, "good"). The real human gate is a button nobody
    built; do we want one on the dashboard?
 9. **A cake gets its own document** (`CAKE-<batch>-<pan>`) after depanning.
-10. **One order, 6 pans, one recipe ("Vanilla sponge") with seed ingredients and stock
+10. **One order, 30 pans (was 6, raised on 4 Nov because the line was empty most of the time; the pan loop is 60 pans, the pallet 30 cakes, the buffer 30, washing 1 pan per second), one recipe ("Vanilla sponge") with seed ingredients and stock
     of 9000 g each**; trucks are assigned round-robin among three. All invented.
 11. **Dashboard buttons play Maintenance**: *Mark repaired* confirms any repair; there
     is no login and no role. The `ctl` container (demo profile) can control every

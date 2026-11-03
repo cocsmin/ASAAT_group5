@@ -25,18 +25,18 @@ assumptions; time values that several systems share are in
 | # | Assumption | Value | Where | Recommendation |
 |---|---|---|---|---|
 | A1 | One product only: "Vanilla sponge" | one recipe, seeded in SQL | `internal/store/sql_mem.go`, `sql_mssql.go` | Keep. The report describes one line, not a catalogue |
-| A2 | Pans per batch | 6 | recipe seed `PansPerBatch` | Keep for now. If the group wants a bigger line, change the seed together with the ingredient grams and the stock (A6); do not add a setting |
-| A3 | Pans in the pan loop | 20 | `PAN_COUNT` in `docker-compose.yml` | Keep. About three batches fit in the line at once |
+| A2 | Pans per batch | 30 (was 6: the line stood empty most of the time) | recipe seed `PansPerBatch` | Keep. Depositing at 1 pan per second is busy for 30 s per batch, so the line carries about 17 pans at once |
+| A3 | Pans in the pan loop | 60 | `PAN_COUNT` in `docker-compose.yml` | Keep. About 17 are in the line, the rest wait clean in the pool |
 | A4 | Fill target and tolerance | 450 g +/- 5 g | recipe seed | Real value needed |
 | A5 | Dose tolerance | 2 % | recipe seed | Real value needed |
-| A6 | Ingredients and stock | 9000 g of each ingredient at the start; restock after 15 s with 2 x the recipe + 5000 g | seed, `internal/plm/plm.go` | Keep. Only needs to be large enough that stock rarely runs out |
+| A6 | Ingredients and stock | recipe grams are 5 x the old ones (flour 5000 g for 30 pans); 45000 g of each ingredient at the start; restock after 15 s with 2 x the recipe + 25000 g | seed, `internal/plm/plm.go` | Keep. Same ratio as before: stock for about nine batches |
 | A7 | Mixing time | 6 s | recipe seed | Change only if needed |
 | A8 | A new order every 22 s, at most 2 not yet picked up | derived from the stage times | `internal/plm/plm.go` | Keep. It sets the pace of the whole line |
-| A9 | Pallet | 6 cakes | `PALLET_SIZE` | Keep (equals the pans per batch, so one batch fills one pallet) |
+| A9 | Pallet | 30 cakes | `PALLET_SIZE` | Keep (equals the pans per batch, so one batch fills one pallet) |
 | A10 | Trucks | three, assigned round-robin | `internal/plm/plm.go` | Keep. Nothing in the exercises depends on it |
 | A11 | Cake core temperature at the tunnel exit | 97 C +/- 0.5 C | `internal/thm/thm.go` (UC9 business rule) | Keep, it comes from the use case |
 | A12 | Temperature at which cakes may be packaged | 30 C ("room temperature") | `tSafe` in `internal/thm/thm.go` | Confirm |
-| A13 | Cooling buffer capacity | 8 pans | `internal/thm/thm.go` | Change only if needed |
+| A13 | Cooling buffer capacity | 30 pans (one batch) | `internal/thm/thm.go` | Change only if needed |
 | A14 | Holding area before packaging | 6 cakes | `internal/fin/fin.go` | Change only if needed |
 | A15 | Human inspection of the batter | simulated, 3 s, always "good" unless UC4 is injected | `internal/bat/bat.go` | Confirm. A button on the dashboard would make it real; only worth it if the demo needs it |
 
@@ -50,7 +50,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 |---|---|---|---|
 | T1 | The simulation runs in seconds, not in plant time; Table II of the report gives no belt speed, baking time or throughput | seconds | Keep, and say so in the report |
 | T2 | UC10's 30 minutes (cooling failure to repair; buffer wait limit) are compressed | 40 s, a fixed factor of 45 | Keep |
-| T3 | Step times | depositing 1 s per pan; three baking zones 2 s each; exit check 0.5 s; cooling 4 s; depanning, inspection, wrapping, cartoning 1 s each; washing 2 s + drying 1 s; dosing 1.2 s per ingredient | Change only if needed. They are chosen so that the picture is watchable |
+| T3 | Step times | depositing 1 s per pan; three baking zones 2 s each; exit check 0.5 s; cooling 4 s; depanning, inspection, wrapping, cartoning 1 s each; washing 0.6 s + drying 0.4 s (a continuous washer, 1 pan per second like every other FIN step); dosing 1.2 s per ingredient | Change only if needed. They are chosen so that the picture is watchable |
 | T4 | Heartbeat T_hb | 5 s for every system, PLM included | Keep. Decided by the group |
 | T5 | Detection of a stopped controller | 15 s (3 x T_hb, THM-REQ-72); the MQTT keep-alive (5 s, dead after 7.5 s) is an extra and faster | Keep |
 | T6 | A container that does not restart by itself | escalated to Maintenance after 45 s (THM-REQ-73 allows 60 s) | Keep |

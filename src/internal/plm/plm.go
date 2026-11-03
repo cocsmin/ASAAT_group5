@@ -295,7 +295,7 @@ func (p *PLM) restock(id, batch string, items []model.Item, reason string) {
 		return
 	}
 	for _, it := range items {
-		_ = p.sql.Restock(p.Ctx, it.Ingredient, 2*it.Grams+5000)
+		_ = p.sql.Restock(p.Ctx, it.Ingredient, 2*it.Grams+25000)
 	}
 	p.N.Log("FC1", "Logistics restocked ingredients ("+reason+")", batch)
 	p.reserve(id, batch, items, false)

@@ -13,17 +13,17 @@ import (
 var SeedRecipe = model.Recipe{
 	Name: "Vanilla sponge",
 	Items: []model.Item{
-		{Ingredient: "flour", Grams: 1000},
-		{Ingredient: "sugar", Grams: 500},
-		{Ingredient: "eggs", Grams: 400},
-		{Ingredient: "butter", Grams: 300},
-		{Ingredient: "milk", Grams: 250},
+		{Ingredient: "flour", Grams: 5000},
+		{Ingredient: "sugar", Grams: 2500},
+		{Ingredient: "eggs", Grams: 2000},
+		{Ingredient: "butter", Grams: 1500},
+		{Ingredient: "milk", Grams: 1250},
 	},
-	MixSeconds: 6, DoseTolPct: 2, PansPerBatch: 6, FillTarget: 450, FillTol: 5,
+	MixSeconds: 6, DoseTolPct: 2, PansPerBatch: 30, FillTarget: 450, FillTol: 5,
 }
 
 // SeedStockGrams is the starting stock of every ingredient.
-const SeedStockGrams = 9000
+const SeedStockGrams = 45000
 
 // MemSQL is an in-memory SQL stand-in for running without Docker.
 type MemSQL struct {

@@ -22,8 +22,8 @@ const (
 	inspectTime = 1 * time.Second
 	wrapTime    = 1 * time.Second
 	cartonTime  = 1 * time.Second
-	washTime    = 2 * time.Second
-	dryTime     = 1 * time.Second
+	washTime    = 600 * time.Millisecond
+	dryTime     = 400 * time.Millisecond
 	holdingCap  = 6 // holding area in front of wrapping
 	maxRejects  = 3 // consecutive rejects before Maintenance is called
 
@@ -72,7 +72,7 @@ func Run() {
 	b, cancel := svc.Run(model.FIN, "Depanner", "VisionPicker", "Checkweigher", "VisionCamera", "MetalDetector",
 		"Wrapper", "Cartoner", "CaseCheckweigher", "PalletPacker", "WashingStation", "PanPool", "HoldingArea")
 	defer cancel()
-	size, _ := strconv.Atoi(svc.Env("PALLET_SIZE", "6"))
+	size, _ := strconv.Atoi(svc.Env("PALLET_SIZE", "30"))
 	f := &FIN{Base: b, palletSize: size,
 		cooled: make(chan cake, 1024), toInspect: make(chan cake, 2), toWrap: make(chan cake, holdingCap),
 		toPallet: make(chan cake, 4), washQ: make(chan string, 1024), panReq: make(chan struct{}, 64),
@@ -125,7 +125,7 @@ func Run() {
 		f.N.SetDevice("Checkweigher", model.StateOK, "")
 		f.N.Log("FC24", "inspection equipment checked and repaired", "")
 	})
-	f.seedPans(svc.Env("PAN_COUNT", "20"))
+	f.seedPans(svc.Env("PAN_COUNT", "60"))
 	f.Start()
 	for _, fn := range []func(){f.depanner, f.inspector, f.wrapper, f.palletiser, f.washer, f.supplier, f.gaugeLoop} {
 		go fn()
