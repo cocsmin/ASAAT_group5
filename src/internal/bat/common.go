@@ -11,11 +11,15 @@ package bat
 
 import (
 	"fmt"
+	"log"
+	"sort"
 	"strings"
+	"sync"
 	"time"
 
 	"cakefactory/internal/model"
 	"cakefactory/internal/sig"
+	"cakefactory/internal/svc"
 	"cakefactory/internal/timing"
 )
 
@@ -69,4 +73,79 @@ func encode(items []model.Item) string {
 		parts[i] = fmt.Sprintf("%s:%g", it.Ingredient, it.Grams)
 	}
 	return strings.Join(parts, ";")
+}
+
+// jobQueue keeps the batches a station has received and not finished in the document store, so
+// that a restart of the station does not lose them: it takes them up again and works on them.
+// (Before, dosing waited two minutes for a batch that a restarted mixing or inspection station
+// had forgotten.) The order id is not saved: it is "PO-" plus the number of the batch id.
+type jobQueue struct {
+	b      *svc.Base
+	key    string
+	mu     sync.Mutex
+	jobs   map[string]job
+	saveMu sync.Mutex
+}
+
+func newJobQueue(b *svc.Base, key string) *jobQueue {
+	return &jobQueue{b: b, key: key, jobs: map[string]job{}}
+}
+
+// add notes a received batch.
+func (q *jobQueue) add(j job) {
+	q.mu.Lock()
+	q.jobs[j.batch] = j
+	q.mu.Unlock()
+	q.save()
+}
+
+// done forgets a batch that has been passed on or discarded.
+func (q *jobQueue) done(batch string) {
+	q.mu.Lock()
+	delete(q.jobs, batch)
+	q.mu.Unlock()
+	q.save()
+}
+
+func (q *jobQueue) save() {
+	go func() {
+		q.saveMu.Lock() // one write at a time, each takes the queue as it is now: the last write is the newest
+		defer q.saveMu.Unlock()
+		q.mu.Lock()
+		m := map[string]int64{}
+		for id, j := range q.jobs {
+			m[id+".pans"] = int64(j.pans)
+			m[id+".mix"] = int64(j.mixSeconds)
+			m[id+".target10"] = int64(j.fillTarget*10 + 0.5)
+			m[id+".tol10"] = int64(j.fillTol*10 + 0.5)
+		}
+		q.mu.Unlock()
+		_ = q.b.Pans.SaveState(q.b.Ctx, q.key, m)
+	}()
+}
+
+// restore returns the batches that were waiting when the station stopped, oldest first.
+func (q *jobQueue) restore() []job {
+	st, err := q.b.Pans.LoadState(q.b.Ctx, q.key)
+	if err != nil || len(st) == 0 {
+		return nil
+	}
+	var ids []string
+	for k := range st {
+		if id, ok := strings.CutSuffix(k, ".pans"); ok {
+			ids = append(ids, id)
+		}
+	}
+	sort.Strings(ids)
+	var out []job
+	for _, id := range ids {
+		j := job{batch: id, order: "PO-" + strings.TrimPrefix(id, "B"), pans: int(st[id+".pans"]), mixSeconds: int(st[id+".mix"]),
+			fillTarget: float64(st[id+".target10"]) / 10, fillTol: float64(st[id+".tol10"]) / 10}
+		q.jobs[id] = j
+		out = append(out, j)
+	}
+	if len(out) > 0 {
+		log.Printf("[%s] %d batches taken up again from the saved queue", q.b.ID, len(out))
+	}
+	return out
 }

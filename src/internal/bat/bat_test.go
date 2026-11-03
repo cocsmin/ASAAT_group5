@@ -1,12 +1,16 @@
 package bat
 
 import (
+	"context"
 	"testing"
+	"time"
 
 	"cakefactory/internal/model"
+	"cakefactory/internal/node"
 	"cakefactory/internal/plm"
 	"cakefactory/internal/sig"
 	"cakefactory/internal/store"
+	"cakefactory/internal/svc"
 )
 
 func TestJobSurvivesTheTripOverTheBus(t *testing.T) {
@@ -57,5 +61,72 @@ func TestNormalWeighingAlmostNeverFailsTheDoseTolerance(t *testing.T) {
 	// a failure case must be an injected one: the tolerance is at least 3.5 standard deviations of the load cell
 	if store.SeedRecipe.DoseTolPct < 3.5*loadCellScatter*100 {
 		t.Fatalf("dose tolerance %.2f %% is too tight for a load cell that scatters %.2f %%", store.SeedRecipe.DoseTolPct, loadCellScatter*100)
+	}
+}
+
+func queueBase(t *testing.T) *svc.Base {
+	t.Helper()
+	pans, err := store.NewFilePans(t.TempDir())
+	if err != nil {
+		t.Fatal(err)
+	}
+	ctx, cancel := context.WithCancel(context.Background())
+	t.Cleanup(func() { time.Sleep(200 * time.Millisecond) })
+	t.Cleanup(cancel)
+	return &svc.Base{ID: model.BATMix, Ctx: ctx, N: node.New(node.Config{ID: model.BATMix}), Pans: pans}
+}
+
+func waitQueue(t *testing.T, b *svc.Base, key string, want int) {
+	t.Helper()
+	deadline := time.After(2 * time.Second)
+	for {
+		if st, _ := b.Pans.LoadState(context.Background(), key); len(st) == want {
+			return
+		}
+		select {
+		case <-deadline:
+			st, _ := b.Pans.LoadState(context.Background(), key)
+			t.Fatalf("saved queue has %d values, want %d: %v", len(st), want, st)
+		case <-time.After(10 * time.Millisecond):
+		}
+	}
+}
+
+func TestBatchesSurviveARestartOfMixingOrInspection(t *testing.T) {
+	b := queueBase(t)
+	q := newJobQueue(b, "BAT-MIX.queue")
+	q.add(job{batch: "B0007", order: "PO-0007", mixSeconds: 6, pans: 24, fillTarget: 450, fillTol: 5})
+	q.add(job{batch: "B0008-2", order: "PO-0008-2", mixSeconds: 6, pans: 24, fillTarget: 450, fillTol: 5})
+	waitQueue(t, b, "BAT-MIX.queue", 8)
+
+	again := newJobQueue(b, "BAT-MIX.queue") // the station restarts
+	got := again.restore()
+	if len(got) != 2 || got[0].batch != "B0007" || got[1].batch != "B0008-2" {
+		t.Fatalf("both batches come back in order: %+v", got)
+	}
+	if got[0].order != "PO-0007" || got[1].order != "PO-0008-2" {
+		t.Fatalf("the order id follows from the batch id, also after a restarted batch: %+v", got)
+	}
+	if got[0].pans != 24 || got[0].mixSeconds != 6 || got[0].fillTarget != 450 || got[0].fillTol != 5 {
+		t.Fatalf("the batch keeps its targets: %+v", got[0])
+	}
+}
+
+func TestFinishedBatchLeavesTheQueue(t *testing.T) {
+	b := queueBase(t)
+	q := newJobQueue(b, "BAT-INSP.queue")
+	q.add(job{batch: "B0007", pans: 24, mixSeconds: 6, fillTarget: 450, fillTol: 5})
+	q.add(job{batch: "B0008", pans: 24, mixSeconds: 6, fillTarget: 450, fillTol: 5})
+	q.done("B0007")
+	waitQueue(t, b, "BAT-INSP.queue", 4)
+	got := newJobQueue(b, "BAT-INSP.queue").restore()
+	if len(got) != 1 || got[0].batch != "B0008" {
+		t.Fatalf("only the unfinished batch comes back: %+v", got)
+	}
+}
+
+func TestEmptyQueueRestoresNothing(t *testing.T) {
+	if got := newJobQueue(queueBase(t), "BAT-MIX.queue").restore(); len(got) != 0 {
+		t.Fatalf("nothing saved, nothing restored: %+v", got)
 	}
 }

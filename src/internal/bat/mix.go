@@ -16,6 +16,7 @@ import (
 type Mix struct {
 	*svc.Base
 	jobs chan job
+	q    *jobQueue
 }
 
 // RunMix starts the mixing station.
@@ -23,11 +24,15 @@ func RunMix() {
 	b, cancel := svc.Run(model.BATMix, "Mixer", "ConsistencySensor")
 	defer cancel()
 	t := &Mix{Base: b, jobs: make(chan job, 256)}
-	t.N.OnSignal(model.BATDose, sig.BatchToMix, func(_ string, s sig.Signal) { t.jobs <- jobOf(s) })
+	t.q = newJobQueue(b, model.BATMix+".queue")
+	t.N.OnSignal(model.BATDose, sig.BatchToMix, func(_ string, s sig.Signal) { t.take(jobOf(s)) })
 	t.N.OnSignal(model.BATInsp, sig.BatterRejected, func(_ string, s sig.Signal) { // another mixing cycle starts immediately
 		t.N.Warn("UC4", "inspector marked batter not good: another mixing cycle starts immediately", s.Str("batchId"))
-		t.jobs <- jobOf(s)
+		t.take(jobOf(s))
 	})
+	for _, j := range t.q.restore() {
+		t.jobs <- j
+	}
 	t.Start()
 	t.N.Gauge(stageMixing, 0)
 	for {
@@ -40,9 +45,16 @@ func RunMix() {
 	}
 }
 
+// take notes a batch in the saved queue and queues it for mixing.
+func (t *Mix) take(j job) {
+	t.q.add(j)
+	t.jobs <- j
+}
+
 // mix runs one mixing cycle and passes the batter on, or discards the batch when
 // the mixer breaks.
 func (t *Mix) mix(j job) {
+	defer t.q.done(j.batch)
 	t.N.Gauge(stageMixing, 1)
 	defer t.N.Gauge(stageMixing, 0)
 	t.N.SetDevice("Mixer", model.StateOK, "mixing")

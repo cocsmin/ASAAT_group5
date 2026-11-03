@@ -104,11 +104,10 @@ is diverted at once is never taken up.
 
 ## Open points
 
-- **A BAT batch lives in three containers.** As before, a restart loses the batch the
-  restarted part was working on (the earlier notes cite BAT-NFR-02 for dosing). The
-  difference: dosing keeps waiting for the result of a batch that mixing or inspection
-  lost, and gives it up after 120 s (`batchLostAfter`, an assumption) before it starts
-  a new one, so a restart of mixing or inspection costs up to two minutes of batter.
+- **A BAT batch lives in three containers.** Mixing and inspection save every batch they receive
+  and take it up again after a restart. Only a batch that dosing was still dosing when dosing
+  restarted is lost (as before), and dosing discards a batch whose result never comes back
+  after 120 s (`batchLostAfter`, an assumption).
 - **Backpressure is gone** between the stations of FIN: quality inspection no longer
   waits when the holding area in front of wrapping is full; the holding area simply
   grows and FIN-WRAP asks depositing to stop.

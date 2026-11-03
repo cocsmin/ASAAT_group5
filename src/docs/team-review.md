@@ -87,11 +87,12 @@ is worth a look.
    station restarts; a pan being filled at the moment of the depositing crash is not
    resumed (the batches waiting for depositing are saved and do come back); buffered cakes come
    back as "hot" (60 C).
-3. **A BAT batch lives in three containers** (dosing, mixing, inspection). If mixing or
-   inspection restarts, the batch it held is gone; dosing, which waits for the result,
-   discards it after 120 s (`batchLostAfter`, an assumption; food safety: nothing of unknown
-   age is used) and starts a new batch. The ingredients are already used up. So a restart
-   costs about two minutes of batter. Before the split the same restart lost the batch at once.
+3. **A BAT batch lives in three containers** (dosing, mixing, inspection). Mixing and inspection save
+   every batch they receive and take it up again after a restart (it is mixed or inspected
+   again, a few seconds lost). A batch is still lost when dosing restarts while it is dosing (the
+   order was already taken from PLM, so it is not sent again; BAT-NFR-02 allows that) and when a
+   message is lost for good: dosing then discards the batch after 120 s (`batchLostAfter`, an
+   assumption; food safety: nothing of unknown age is used) and starts a new one.
 4. **Duplicate filter is in memory**: after a receiver restart a duplicate is caught only by
    the receivers' own checks (batch id, pan id, order id).
 5. **PLM keeps held orders in memory**; after a restart a held order is noticed again when

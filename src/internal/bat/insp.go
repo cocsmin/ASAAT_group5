@@ -16,6 +16,7 @@ import (
 type Insp struct {
 	*svc.Base
 	jobs       chan job
+	q          *jobQueue
 	depStopped atomic.Bool
 }
 
@@ -24,8 +25,16 @@ func RunInsp() {
 	b, cancel := svc.Run(model.BATInsp, "InspectionStation")
 	defer cancel()
 	t := &Insp{Base: b, jobs: make(chan job, 256)}
-	t.N.OnSignal(model.BATMix, sig.BatterToInspect, func(_ string, s sig.Signal) { t.jobs <- jobOf(s) })
+	t.q = newJobQueue(b, model.BATInsp+".queue")
+	t.N.OnSignal(model.BATMix, sig.BatterToInspect, func(_ string, s sig.Signal) {
+		j := jobOf(s)
+		t.q.add(j)
+		t.jobs <- j
+	})
 	t.N.OnSignal(model.THMDep, sig.DepositingState, func(_ string, s sig.Signal) { t.depStopped.Store(s.Bool("stopped")) })
+	for _, j := range t.q.restore() {
+		t.jobs <- j
+	}
 	t.Start()
 	t.N.Gauge(stageInspection, 0)
 	t.N.Gauge(stageWaiting, 0)
@@ -40,6 +49,7 @@ func RunInsp() {
 }
 
 func (t *Insp) inspect(j job) {
+	defer t.q.done(j.batch)
 	t.N.Gauge(stageInspection, 1)
 	t.N.SetDevice("InspectionStation", model.StateOK, "inspector checking batter")
 	sim.Sleep(t.Ctx, inspectionTime)
