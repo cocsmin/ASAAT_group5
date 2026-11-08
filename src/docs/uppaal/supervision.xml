@@ -35,7 +35,7 @@ broadcast chan crash, birth, ndeath, escalate;
 <init ref="Broker_Alive"/>
 <transition><source ref="Broker_Alive"/><target ref="Broker_Alive"/><label kind="synchronisation" x="355" y="-75">hb?</label><label kind="assignment" x="355" y="-59">y = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
 <transition><source ref="Broker_Alive"/><target ref="Broker_Notify"/><label kind="synchronisation" x="49" y="60">crash?</label></transition>
-<transition><source ref="Broker_Notify"/><target ref="Broker_Dead"/><label kind="synchronisation" x="-136" y="-7">ndeath!</label></transition>
+<transition><source ref="Broker_Notify"/><target ref="Broker_Dead"/><label kind="synchronisation" x="-236" y="0">ndeath!</label></transition>
 <transition><source ref="Broker_Alive"/><target ref="Broker_Dead"/><label kind="guard" x="-1" y="-55">y &gt;= DEADAFTER</label><label kind="synchronisation" x="-1" y="-39">ndeath!</label><nail x="55" y="-35"/></transition>
 <transition><source ref="Broker_Dead"/><target ref="Broker_Alive"/><label kind="synchronisation" x="31" y="-55">birth?</label><label kind="assignment" x="31" y="-39">y = 0</label><nail x="55" y="-35"/></transition>
 </template>
@@ -48,7 +48,7 @@ broadcast chan crash, birth, ndeath, escalate;
 <init ref="MON_Watching"/>
 <transition><source ref="MON_Watching"/><target ref="MON_Failed"/><label kind="synchronisation" x="67" y="118">ndeath?</label><label kind="assignment" x="67" y="134">z = 0</label><nail x="95" y="138"/></transition>
 <transition><source ref="MON_Failed"/><target ref="MON_Watching"/><label kind="synchronisation" x="71" y="133">birth?</label><nail x="95" y="138"/></transition>
-<transition><source ref="MON_Failed"/><target ref="MON_Escalated"/><label kind="guard" x="-136" y="-14">z &gt;= ESCALATE</label><label kind="synchronisation" x="-136" y="2">escalate!</label></transition>
+<transition><source ref="MON_Failed"/><target ref="MON_Escalated"/><label kind="guard" x="-284" y="0">z &gt;= ESCALATE</label><label kind="synchronisation" x="-284" y="16">escalate!</label></transition>
 </template>
 <template>
 <name>Docker</name>

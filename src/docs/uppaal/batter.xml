@@ -18,10 +18,10 @@ chan deposit_ok;
 <location id="Batch_Deposited" x="-243" y="-118"><name x="-263" y="-100">Deposited</name></location>
 <location id="Batch_Discarded" x="93" y="-190"><name x="73" y="-172">Discarded</name></location>
 <init ref="Batch_Mixing"/>
-<transition><source ref="Batch_Mixing"/><target ref="Batch_Inspecting"/><label kind="guard" x="211" y="81">x &gt;= MIX</label><label kind="assignment" x="211" y="97">x = 0</label></transition>
+<transition><source ref="Batch_Mixing"/><target ref="Batch_Inspecting"/><label kind="guard" x="224" y="108">x &gt;= MIX</label><label kind="assignment" x="224" y="124">x = 0</label></transition>
 <transition><source ref="Batch_Inspecting"/><target ref="Batch_Waiting"/><label kind="guard" x="-113" y="112">x &gt;= INSP</label><label kind="assignment" x="-113" y="128">x = 0</label></transition>
-<transition><source ref="Batch_Waiting"/><target ref="Batch_Deposited"/><label kind="synchronisation" x="-229" y="-7">deposit_ok?</label></transition>
-<transition><source ref="Batch_Waiting"/><target ref="Batch_Discarded"/><label kind="guard" x="-61" y="-43">x &gt;= P3</label></transition>
+<transition><source ref="Batch_Waiting"/><target ref="Batch_Deposited"/><label kind="synchronisation" x="-361" y="0">deposit_ok?</label></transition>
+<transition><source ref="Batch_Waiting"/><target ref="Batch_Discarded"/><label kind="guard" x="-158" y="-65">x &gt;= P3</label></transition>
 </template>
 <template>
 <name>Dep</name>

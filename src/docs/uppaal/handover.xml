@@ -16,7 +16,7 @@ chan handoff, deliver;
 <location id="Sender_Signalled" x="-150" y="-173"><name x="-170" y="-155">Signalled</name></location>
 <init ref="Sender_Idle"/>
 <transition><source ref="Sender_Idle"/><target ref="Sender_Stored"/><label kind="assignment" x="-7" y="60">stored = true, a = 0</label></transition>
-<transition><source ref="Sender_Stored"/><target ref="Sender_Signalled"/><label kind="synchronisation" x="-136" y="-7">handoff!</label></transition>
+<transition><source ref="Sender_Stored"/><target ref="Sender_Signalled"/><label kind="synchronisation" x="-244" y="0">handoff!</label></transition>
 </template>
 <template>
 <name>Message</name>
@@ -26,8 +26,8 @@ chan handoff, deliver;
 <location id="Message_Lost" x="-300" y="0"><name x="-320" y="18">Lost</name></location>
 <location id="Message_Delivered" x="0" y="-200"><name x="-20" y="-182">Delivered</name></location>
 <init ref="Message_Idle"/>
-<transition><source ref="Message_Idle"/><target ref="Message_Flight"/><label kind="synchronisation" x="164" y="86">handoff?</label><label kind="assignment" x="164" y="102">m = 0</label></transition>
-<transition><source ref="Message_Flight"/><target ref="Message_Delivered"/><label kind="synchronisation" x="14" y="-7">deliver!</label></transition>
+<transition><source ref="Message_Idle"/><target ref="Message_Flight"/><label kind="synchronisation" x="175" y="117">handoff?</label><label kind="assignment" x="175" y="133">m = 0</label></transition>
+<transition><source ref="Message_Flight"/><target ref="Message_Delivered"/><label kind="synchronisation" x="0" y="0">deliver!</label></transition>
 <transition><source ref="Message_Flight"/><target ref="Message_Lost"/></transition>
 </template>
 <template>

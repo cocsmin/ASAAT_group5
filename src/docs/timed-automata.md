@@ -140,7 +140,7 @@ drops.
 | T-P1 heartbeat 5 s | Node, edge `Online` to `Online` | invariant `x <= HB` and guard `x == HB` |
 | T-RC1 detection 15 s | Broker invariant, MON | proven by the query `A[] MON.Failed imply ...` below |
 | T-RC2 recovery 60 s | Node, Docker, MON | `ESCALATE` guard on MON; query bounds restart plus birth |
-| T-RC3 stop within 1 s | Band section | invariant `x <= 1` in `Halted` |
+| T-RC3 stop within 1 s | Band section | invariant `x <= 1` in `Pass` |
 | T-RC4 batter 25 s | Batter | invariant `x <= P3` in `Waiting` |
 | T-RC6 batch lost 120 s | `Lost` timer | guard `z >= LOST` |
 | T-RC7 handover 3 s | Handover | guard `x >= GRACE`, invariant `x <= GRACE + RECONCILE` |

@@ -42,7 +42,13 @@ function template(t) {
       const flat = Math.abs(b[0] - a[0]) > 1.5 * Math.abs(b[1] - a[1]);
       if (m > 1) { lx = lx - 8; ly = ly + 30 - 8; }
       if (flat) { lx = Math.round((lx + (m > 1 ? 0 : -10)) - (m > 1 ? w / 2 : w / 2)); ly = ly + 30 - 15 * lines.length - 12; }
-      else if (m === 1) { lx = lx + 6; ly = ly + 30 - 7 * lines.length; }
+      else if (m === 1) {
+        // steep single edge: put the label beside the line, on the side away from the centre of the layout
+        const mxm = (a[0] + b[0]) / 2, mym = (a[1] + b[1]) / 2, l = Math.hypot(mxm, mym) || 1;
+        const ox = mxm / l, oy = mym / l;
+        lx = Math.round(mxm + ox * 30 - (ox < 0 ? w : 0));
+        ly = Math.round(mym + oy * 30 - (oy < 0 ? 16 * lines.length : 0));
+      }
     }
     let ky = ly;
     const put = (kind, v) => { if (v) { s += `<label kind="${kind}" x="${lx}" y="${ky}">${esc(v)}</label>`; ky += 16; } };
