@@ -81,7 +81,7 @@ type Server struct {
 	lastEvents   []model.LogEvent // what the page shows while SQL Server does not answer
 	lastTickets  []model.Ticket
 	lastDiscards map[string]int
-	sr     scenarioRunner
+	sr           scenarioRunner
 }
 
 func env(k, def string) string {

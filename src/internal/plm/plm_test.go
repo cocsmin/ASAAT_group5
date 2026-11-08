@@ -23,4 +23,3 @@ func TestDecodeItemsIgnoresGarbage(t *testing.T) {
 		t.Fatal("an empty list decodes to nothing")
 	}
 }
-

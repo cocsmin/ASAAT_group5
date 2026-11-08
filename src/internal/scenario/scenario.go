@@ -51,7 +51,7 @@ type state struct {
 	Nodes    []nodeState `json:"nodes"`
 	Stations []nodeState `json:"stations"`
 	Tickets  []ticket    `json:"tickets"`
-	Alerts  []struct {
+	Alerts   []struct {
 		Level string `json:"level"`
 		Title string `json:"title"`
 	} `json:"alerts"`
