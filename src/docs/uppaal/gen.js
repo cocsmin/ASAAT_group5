@@ -30,8 +30,9 @@ function template(t) {
       nails = `<nail x="${a[0] + 45}" y="${a[1] - h}"/><nail x="${a[0] - 45}" y="${a[1] - h}"/>`;
       lx = a[0] + 55; ly = a[1] - h - 20;
     } else {
-      const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1;
-      const off = (k - (m - 1) / 2) * 110;
+      // perpendicular of the canonical direction, so edges in opposite directions bend to opposite sides
+      const fwd = e.from < e.to, dx = fwd ? b[0] - a[0] : a[0] - b[0], dy = fwd ? b[1] - a[1] : a[1] - b[1], len = Math.hypot(dx, dy) || 1;
+      const off = (k - (m - 1) / 2) * 120;
       const nx = Math.round((a[0] + b[0]) / 2 - (dy / len) * off), ny = Math.round((a[1] + b[1]) / 2 + (dx / len) * off);
       if (m > 1) nails = `<nail x="${nx}" y="${ny}"/>`;
       lx = nx + 8; ly = ny - 30;

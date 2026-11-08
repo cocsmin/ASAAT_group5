@@ -22,8 +22,8 @@ broadcast chan crash, birth, ndeath, escalate;
 <init ref="Node_Online"/>
 <transition><source ref="Node_Starting"/><target ref="Node_Online"/><label kind="synchronisation" x="49" y="60">birth!</label></transition>
 <transition><source ref="Node_Online"/><target ref="Node_Online"/><label kind="guard" x="-95" y="98">x &gt;= HB</label><label kind="synchronisation" x="-95" y="114">hb!</label><label kind="assignment" x="-95" y="130">x = 0</label><nail x="-105" y="118"/><nail x="-195" y="118"/></transition>
-<transition><source ref="Node_Online"/><target ref="Node_Down"/><label kind="synchronisation" x="-205" y="-8">crash?</label><nail x="-205" y="0"/></transition>
-<transition><source ref="Node_Online"/><target ref="Node_Down"/><label kind="synchronisation" x="-95" y="-8">freeze?</label><nail x="-95" y="0"/></transition>
+<transition><source ref="Node_Online"/><target ref="Node_Down"/><label kind="synchronisation" x="-90" y="-8">crash?</label><nail x="-90" y="0"/></transition>
+<transition><source ref="Node_Online"/><target ref="Node_Down"/><label kind="synchronisation" x="-210" y="-8">freeze?</label><nail x="-210" y="0"/></transition>
 <transition><source ref="Node_Down"/><target ref="Node_Starting"/><label kind="synchronisation" x="41" y="-128">restart?</label><label kind="assignment" x="41" y="-112">x = 0</label></transition>
 </template>
 <template>
@@ -36,8 +36,8 @@ broadcast chan crash, birth, ndeath, escalate;
 <transition><source ref="Broker_Alive"/><target ref="Broker_Alive"/><label kind="synchronisation" x="355" y="-75">hb?</label><label kind="assignment" x="355" y="-59">y = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
 <transition><source ref="Broker_Alive"/><target ref="Broker_Notify"/><label kind="synchronisation" x="49" y="60">crash?</label></transition>
 <transition><source ref="Broker_Notify"/><target ref="Broker_Dead"/><label kind="synchronisation" x="-236" y="0">ndeath!</label></transition>
-<transition><source ref="Broker_Alive"/><target ref="Broker_Dead"/><label kind="guard" x="-1" y="-55">y &gt;= DEADAFTER</label><label kind="synchronisation" x="-1" y="-39">ndeath!</label><nail x="55" y="-35"/></transition>
-<transition><source ref="Broker_Dead"/><target ref="Broker_Alive"/><label kind="synchronisation" x="31" y="-55">birth?</label><label kind="assignment" x="31" y="-39">y = 0</label><nail x="55" y="-35"/></transition>
+<transition><source ref="Broker_Alive"/><target ref="Broker_Dead"/><label kind="guard" x="-3" y="-50">y &gt;= DEADAFTER</label><label kind="synchronisation" x="-3" y="-34">ndeath!</label><nail x="53" y="-30"/></transition>
+<transition><source ref="Broker_Dead"/><target ref="Broker_Alive"/><label kind="synchronisation" x="73" y="-163">birth?</label><label kind="assignment" x="73" y="-147">y = 0</label><nail x="97" y="-143"/></transition>
 </template>
 <template>
 <name>MON</name>
@@ -46,8 +46,8 @@ broadcast chan crash, birth, ndeath, escalate;
 <location id="MON_Failed" x="-150" y="173"><name x="-170" y="191">Failed</name><label kind="invariant" x="-170" y="209">z &lt;= ESCALATE</label></location>
 <location id="MON_Escalated" x="-150" y="-173"><name x="-170" y="-155">Escalated</name></location>
 <init ref="MON_Watching"/>
-<transition><source ref="MON_Watching"/><target ref="MON_Failed"/><label kind="synchronisation" x="67" y="118">ndeath?</label><label kind="assignment" x="67" y="134">z = 0</label><nail x="95" y="138"/></transition>
-<transition><source ref="MON_Failed"/><target ref="MON_Watching"/><label kind="synchronisation" x="71" y="133">birth?</label><nail x="95" y="138"/></transition>
+<transition><source ref="MON_Watching"/><target ref="MON_Failed"/><label kind="synchronisation" x="25" y="10">ndeath?</label><label kind="assignment" x="25" y="26">z = 0</label><nail x="53" y="30"/></transition>
+<transition><source ref="MON_Failed"/><target ref="MON_Watching"/><label kind="synchronisation" x="73" y="138">birth?</label><nail x="97" y="143"/></transition>
 <transition><source ref="MON_Failed"/><target ref="MON_Escalated"/><label kind="guard" x="-284" y="0">z &gt;= ESCALATE</label><label kind="synchronisation" x="-284" y="16">escalate!</label></transition>
 </template>
 <template>
@@ -56,8 +56,8 @@ broadcast chan crash, birth, ndeath, escalate;
 <location id="Docker_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
 <location id="Docker_Restarting" x="-300" y="0"><name x="-320" y="18">Restarting</name><label kind="invariant" x="-320" y="36">d &lt;= RDMAX</label></location>
 <init ref="Docker_Idle"/>
-<transition><source ref="Docker_Idle"/><target ref="Docker_Restarting"/><label kind="synchronisation" x="-28" y="35">ndeath?</label><label kind="assignment" x="-28" y="51">d = 0</label><nail x="0" y="55"/></transition>
-<transition><source ref="Docker_Restarting"/><target ref="Docker_Idle"/><label kind="guard" x="-40" y="35">d &gt;= RDMIN</label><label kind="synchronisation" x="-40" y="51">restart!</label><nail x="0" y="55"/></transition>
+<transition><source ref="Docker_Idle"/><target ref="Docker_Restarting"/><label kind="synchronisation" x="-28" y="40">ndeath?</label><label kind="assignment" x="-28" y="56">d = 0</label><nail x="0" y="60"/></transition>
+<transition><source ref="Docker_Restarting"/><target ref="Docker_Idle"/><label kind="guard" x="-40" y="-80">d &gt;= RDMIN</label><label kind="synchronisation" x="-40" y="-64">restart!</label><nail x="0" y="-60"/></transition>
 </template>
 <template>
 <name>Env</name>
@@ -65,8 +65,8 @@ broadcast chan crash, birth, ndeath, escalate;
 <location id="Env_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
 <location id="Env_Faulted" x="-300" y="0"><name x="-320" y="18">Faulted</name></location>
 <init ref="Env_Idle"/>
-<transition><source ref="Env_Idle"/><target ref="Env_Faulted"/><label kind="synchronisation" x="-24" y="35">crash!</label><label kind="assignment" x="-24" y="51">t = 0</label><nail x="0" y="55"/></transition>
-<transition><source ref="Env_Idle"/><target ref="Env_Faulted"/><label kind="synchronisation" x="-28" y="-75">freeze!</label><label kind="assignment" x="-28" y="-59">t = 0</label><nail x="0" y="-55"/></transition>
+<transition><source ref="Env_Idle"/><target ref="Env_Faulted"/><label kind="synchronisation" x="-24" y="-80">crash!</label><label kind="assignment" x="-24" y="-64">t = 0</label><nail x="0" y="-60"/></transition>
+<transition><source ref="Env_Idle"/><target ref="Env_Faulted"/><label kind="synchronisation" x="-28" y="40">freeze!</label><label kind="assignment" x="-28" y="56">t = 0</label><nail x="0" y="60"/></transition>
 </template>
 <system>system Node, Broker, MON, Docker, Env;</system>
 </nta>

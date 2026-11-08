@@ -30,8 +30,8 @@ chan deposit_ok;
 <location id="Dep_Blocked" x="-300" y="0"><name x="-320" y="18">Blocked</name><label kind="invariant" x="-320" y="36">y &lt;= BLOCKMAX</label></location>
 <init ref="Dep_Open"/>
 <transition><source ref="Dep_Open"/><target ref="Dep_Open"/><label kind="synchronisation" x="355" y="-75">deposit_ok!</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
-<transition><source ref="Dep_Open"/><target ref="Dep_Blocked"/><label kind="assignment" x="-20" y="50">y = 0</label><nail x="0" y="55"/></transition>
-<transition><source ref="Dep_Blocked"/><target ref="Dep_Open"/><label kind="assignment" x="-20" y="50">y = 0</label><nail x="0" y="55"/></transition>
+<transition><source ref="Dep_Open"/><target ref="Dep_Blocked"/><label kind="assignment" x="-20" y="-65">y = 0</label><nail x="0" y="-60"/></transition>
+<transition><source ref="Dep_Blocked"/><target ref="Dep_Open"/><label kind="assignment" x="-20" y="55">y = 0</label><nail x="0" y="60"/></transition>
 </template>
 <template>
 <name>Tick</name>

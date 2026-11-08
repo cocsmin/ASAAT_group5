@@ -22,8 +22,8 @@ clock t;
 <location id="Section_Pass" x="-150" y="173"><name x="-170" y="191">Pass</name><label kind="invariant" x="-170" y="209">x &lt;= HOP</label></location>
 <location id="Section_Stopped" x="-150" y="-173"><name x="-170" y="-155">Stopped</name></location>
 <init ref="Section_Running"/>
-<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="63" y="118">halt[i]?</label><label kind="assignment" x="63" y="134">x = 0</label><nail x="95" y="138"/></transition>
-<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="23" y="15">stop[i]?</label><label kind="assignment" x="23" y="31">x = 0</label><nail x="55" y="35"/></transition>
+<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="21" y="10">halt[i]?</label><label kind="assignment" x="21" y="26">x = 0</label><nail x="53" y="30"/></transition>
+<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="65" y="123">stop[i]?</label><label kind="assignment" x="65" y="139">x = 0</label><nail x="97" y="143"/></transition>
 <transition><source ref="Section_Pass"/><target ref="Section_Stopped"/><label kind="synchronisation" x="-308" y="0">stop[i&gt;0?i-1:N]!</label><label kind="assignment" x="-308" y="16">nstopped++</label></transition>
 <transition><source ref="Section_Stopped"/><target ref="Section_Running"/><label kind="synchronisation" x="33" y="-128">release?</label><label kind="assignment" x="33" y="-112">nstopped--</label></transition>
 </template>

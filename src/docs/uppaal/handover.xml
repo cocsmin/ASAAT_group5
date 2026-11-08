@@ -36,8 +36,8 @@ chan handoff, deliver;
 <location id="Receiver_Idle" x="300" y="0"><name x="280" y="18">Idle</name><label kind="invariant" x="280" y="36">r &lt;= RECONCILE</label></location>
 <location id="Receiver_Adopted" x="-300" y="0"><name x="-320" y="18">Adopted</name></location>
 <init ref="Receiver_Idle"/>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="synchronisation" x="-56" y="35">deliver?</label><label kind="assignment" x="-56" y="51">adopted = true</label><nail x="0" y="55"/></transition>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="guard" x="-152" y="-75">stored &amp;&amp; a &gt;= GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="-152" y="-59">adopted = true</label><nail x="0" y="-55"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="synchronisation" x="-56" y="-80">deliver?</label><label kind="assignment" x="-56" y="-64">adopted = true</label><nail x="0" y="-60"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="guard" x="-152" y="40">stored &amp;&amp; a &gt;= GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="-152" y="56">adopted = true</label><nail x="0" y="60"/></transition>
 <transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="355" y="-75">!stored &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="355" y="-59">r = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
 <transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="355" y="-160">stored &amp;&amp; a &lt; GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="355" y="-144">r = 0</label><nail x="345" y="-140"/><nail x="255" y="-140"/></transition>
 </template>
