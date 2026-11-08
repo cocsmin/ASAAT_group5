@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<nta>
+<declaration>const int MIX = 6;       // recipe MixSeconds
+const int INSP = 3;       // inspection
+const int P3 = 25;        // batter waits at most this for depositing (FC7)
+const int LOST = 120;     // a batch not finished by now is given up
+const int BLOCKMAX = 60;  // depositing may stay stopped this long (estimated)
+clock g;                  // age of the batch
+chan deposit_ok;
+</declaration>
+<template>
+<name>Batch</name>
+<declaration>clock x;</declaration>
+<location id="Batch_Mixing" x="220" y="0"><name x="200" y="-30">Mixing</name><label kind="invariant" x="200" y="15">x &lt;= MIX</label></location>
+<location id="Batch_Inspecting" x="68" y="143"><name x="48" y="113">Inspecting</name><label kind="invariant" x="48" y="158">x &lt;= INSP</label></location>
+<location id="Batch_Waiting" x="-178" y="88"><name x="-198" y="58">Waiting</name><label kind="invariant" x="-198" y="103">x &lt;= P3</label></location>
+<location id="Batch_Deposited" x="-178" y="-88"><name x="-198" y="-118">Deposited</name></location>
+<location id="Batch_Discarded" x="68" y="-143"><name x="48" y="-173">Discarded</name></location>
+<init ref="Batch_Mixing"/>
+<transition><source ref="Batch_Mixing"/><target ref="Batch_Inspecting"/><label kind="guard" x="154" y="52">x &gt;= MIX</label><label kind="assignment" x="154" y="82">x = 0</label></transition>
+<transition><source ref="Batch_Inspecting"/><target ref="Batch_Waiting"/><label kind="guard" x="-45" y="110">x &gt;= INSP</label><label kind="assignment" x="-45" y="140">x = 0</label></transition>
+<transition><source ref="Batch_Waiting"/><target ref="Batch_Deposited"/><label kind="synchronisation" x="-168" y="23">deposit_ok?</label></transition>
+<transition><source ref="Batch_Waiting"/><target ref="Batch_Discarded"/><label kind="guard" x="-45" y="-5">x &gt;= P3</label></transition>
+</template>
+<template>
+<name>Dep</name>
+<declaration>clock y;</declaration>
+<location id="Dep_Open" x="220" y="0"><name x="200" y="-30">Open</name></location>
+<location id="Dep_Blocked" x="-220" y="0"><name x="-240" y="-30">Blocked</name><label kind="invariant" x="-240" y="15">y &lt;= BLOCKMAX</label></location>
+<init ref="Dep_Open"/>
+<transition><source ref="Dep_Open"/><target ref="Dep_Open"/><label kind="synchronisation" x="220" y="-65">deposit_ok!</label><nail x="260" y="-50"/><nail x="180" y="-50"/></transition>
+<transition><source ref="Dep_Open"/><target ref="Dep_Blocked"/><label kind="assignment" x="10" y="24">y = 0</label></transition>
+<transition><source ref="Dep_Blocked"/><target ref="Dep_Open"/><label kind="assignment" x="10" y="38">y = 0</label></transition>
+</template>
+<template>
+<name>Tick</name>
+<declaration></declaration>
+<location id="Tick_On" x="220" y="0"><name x="200" y="-30">On</name></location>
+<init ref="Tick_On"/>
+<transition><source ref="Tick_On"/><target ref="Tick_On"/><nail x="260" y="-50"/><nail x="180" y="-50"/></transition>
+</template>
+<system>system Batch, Dep, Tick;</system>
+</nta>

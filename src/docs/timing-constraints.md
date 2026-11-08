@@ -47,7 +47,7 @@ requirement in the report) or the design level (the value chosen in the implemen
 | T-P2 | Periodic | MQTT keep-alive | one every 5 s | 5 s | design | `timing.KeepAlive` |
 | T-P3 | Periodic | state snapshot of a node | one every 3 s | 3 s | design | `timing.StateSnapshot` |
 | T-P4 | Periodic | station reconcile pass | one every 5 s | 5 s | design | `station.ReconcileEvery` |
-| T-P5 | Periodic | PLM order | one order per cycle | about 22 s in the first experiment; since then given by the order cycle in the recipe | design | `plm` package |
+| T-P5 | Periodic | PLM order | one order per cycle | 22 s (`ORDER_SECONDS`, default in `internal/plm/plm.go` and `docker-compose.yml`); estimated, the plant value is unknown | design | `plm` package |
 | T-SP1 | Sporadic | a pan enters depositing | at least one pan time apart | 1 s, one pan per second | design | `thm.depositTime` |
 | T-SP2 | Sporadic | failure case FC1 to FC28 | arbitrary in the plant; random in the simulation with a rate per hour | about 32 per hour in total at `FAULT_RATE=1` | design | `model.FaultCatalog`, `PerHour` |
 | T-EX1 | Execution time | dosing one ingredient | 1.2 s | design | `bat` package |

@@ -38,6 +38,5 @@ Draft for the report. The group decides; each choice has a reason.
 ## 4. Limits
 
 - The models are not generated from the code. They are hand-made and can drift.
-- The UPPAAL files are not machine-checked in this repository (UPPAAL is not part of the
-  CI); the group has to run the queries.
+- The UPPAAL models in `docs/uppaal/` were checked with `verifyta`; the check is not part of the CI.
 - One machine, simulated process times: proven bounds hold for the model's parameters only.

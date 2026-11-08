@@ -1,10 +1,11 @@
 # Exercise 8, D3: Semantic anchoring in timed automata
 
-Draft for the report. The models are written as tables so they can be typed into UPPAAL
-without redrawing; they were not run in UPPAAL (see the limits at the end). Clocks are
-in seconds. `x`, `y`, `z` are local clocks. `!` sends and `?` receives on a channel.
+Draft for the report. The models are in UPPAAL 5.0 and were checked with `verifyta`: see
+[uppaal/](uppaal/). The tables below describe the same automata in words. Clocks are in
+seconds. All timing values that the plant does not give are estimated by the group
+(restart time, message delay, how long depositing may stay stopped). `x`, `y`, `z` are local clocks. `!` sends and `?` receives on a channel.
 
-Time constants (`internal/timing`): `HB = 5`, `KA = 5`, `DETECT = 15`, `RESTORE = 60`,
+Time constants (`internal/timing`): `HB = 5`, `KA = 5` (the broker declares a node dead after 1.5 x 5 s = 7.5 s, rounded up to `DEADAFTER = 8`), `DETECT = 15`, `RESTORE = 60`,
 `ESCALATE = 45`, `P3 = 25`, `LOST = 120`, `GRACE = 3`, `RECONCILE = 5`.
 
 ## D3.1 Intra-behaviour: one TA per function block
@@ -147,29 +148,44 @@ Each constraint is an invariant (it forces the system to move on) or a guard (it
 the move back). Reaction constraints that span several automata (T-RC1, T-RC2) are not
 written into one automaton. They are properties of the NTA, checked with a query.
 
-### Queries (UPPAAL)
+### Machine-checked models
 
-```
-A[] not deadlock
-A[] (Node(1).Down and Broker(1).Alive) imply Broker(1).y <= 7.5
-MON.Failed --> MON.Watching or MON.Escalated          // leads-to: it never stays failed
-A[] MON.Failed imply MON.z <= ESCALATE
-A[] Section(1).Halted imply Section(1).x <= 1
-A[] Batch.Waiting imply Batch.x <= P3
-A[] not (Batch.Deposited and Batch.Discarded)
-E<> Batch.Discarded                                    // the discard path is reachable
-A[] Receiver.Idle imply Sender.x <= GRACE + RECONCILE
-```
+| File | Model | Queries | Result |
+|---|---|---|---|
+| `uppaal/supervision.xml` | Node, Broker, MON, Docker, Env | 8 | all satisfied |
+| `uppaal/band.xml` | five Sections, Env, MON | 7 | all satisfied |
+| `uppaal/batter.xml` | Batch, Dep | 7 | all satisfied |
+| `uppaal/handover.xml` | Sender, Message, Receiver | 4 | all satisfied |
 
-A detection bound for the whole chain is best checked with an observer clock `t` that is
-reset at `crash[1]` and tested in `ndeath[1]`: `A[] MON.Failed imply t <= DETECT`.
+Run (from `src/docs/uppaal`): `node gen.js` writes the models and `.q` files,
+`verifyta -q supervision.xml supervision.q` checks them. `gen.js` is the source; edit it, not the XML.
+
+What the queries prove, with the estimated parameters:
+
+- **Supervision.** A silent node is known to MON within 8 s (`DEADAFTER`), inside the 15 s
+  limit. A node is back within 60 s (a restart takes at most 30 s, estimated). MON never
+  escalates (45 s). Every failure ends in recovery (leads-to). No deadlock.
+- **Band.** A halt reaches every upstream section within N x 1 s = 5 s, each section hands it on
+  within 1 s. A section is released only after its owner is back. After the release no section
+  stays stopped.
+- **Batter.** The batter never waits longer than P3 = 25 s. A batch finishes within
+  6 + 3 + 25 = 34 s, far inside the 120 s limit. Deposited and discarded exclude each other. The
+  discard path is reachable.
+- **Handover.** A stored document is taken up within GRACE + RECONCILE = 8 s, also when the
+  message is lost.
+
+**Negative controls** (to show the queries can fail): with a restart time of up to 60 s the
+60 s recovery query and the no-escalation query fail; with a batch limit of 30 s instead of
+120 s the LOST query fails.
 
 ## Limits
 
-- The models are hand-written from the code and the documents. They were not run in
-  UPPAAL here (no UPPAAL in the CI); the group should type them in and run the queries,
-  and correct the tables if a query fails.
-- Time is simulated seconds. Production TAs would use `SIM_SPEED = 1`; the supervision
-  values are wall-clock.
-- The Docker restart delay `d` is an assumption (5 to 30 s). The measured value is much
-  lower, so the bounds proven are safe, not tight.
+- The models are hand-written from the code and documents and are not generated from the
+  code, so they can drift. The UPPAAL check is not part of the CI.
+- Each model has one node, one fault and one batch; several faults at once are not covered.
+- Time is simulated seconds; the supervision values are wall-clock.
+- The restart delay (1 to 30 s), message delay (1 s), and the time depositing may stay stopped
+  (60 s) are estimates. The measured restart is at most 1.2 s, so the proven bounds are safe,
+  not tight.
+- The band model lets MON release only when every upstream section has confirmed it is
+  stopped. That is an assumption about MON, not proven from the code.
