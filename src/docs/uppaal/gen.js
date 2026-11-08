@@ -5,7 +5,7 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, 
 
 function template(t) {
   const n = t.locs.length;
-  const pos = (i) => [Math.round(220 * Math.cos((2 * Math.PI * i) / n)), Math.round(150 * Math.sin((2 * Math.PI * i) / n))];
+  const pos = (i) => [Math.round(300 * Math.cos((2 * Math.PI * i) / n)), Math.round(200 * Math.sin((2 * Math.PI * i) / n))];
   let s = `<template>\n<name>${t.name}</name>\n`;
   if (t.params) s += `<parameter>${esc(t.params)}</parameter>\n`;
   s += `<declaration>${esc(t.decl || "")}</declaration>\n`;
@@ -17,16 +17,31 @@ function template(t) {
     s += `</location>\n`;
   });
   s += `<init ref="${t.name}_${t.init}"/>\n`;
-  t.trans.forEach((e, i) => {
+  const pairKey = (e) => [e.from, e.to].sort().join("|");
+  const groups = {};
+  t.trans.forEach((e) => { (groups[pairKey(e)] = groups[pairKey(e)] || []).push(e); });
+  t.trans.forEach((e) => {
     s += `<transition><source ref="${t.name}_${e.from}"/><target ref="${t.name}_${e.to}"/>`;
+    const g = groups[pairKey(e)], k = g.indexOf(e), m = g.length;
     const a = pos(t.locs.findIndex((l) => l.n === e.from)), b = pos(t.locs.findIndex((l) => l.n === e.to));
-    const mx = Math.round((a[0] + b[0]) / 2) + (e.from === e.to ? 0 : 10), my = Math.round((a[1] + b[1]) / 2) - (e.from === e.to ? 60 : 0) + i * 14 - 20;
-    if (e.select) s += `<label kind="select" x="${mx}" y="${my - 15}">${esc(e.select)}</label>`;
-    if (e.guard) s += `<label kind="guard" x="${mx}" y="${my}">${esc(e.guard)}</label>`;
-    if (e.sync) s += `<label kind="synchronisation" x="${mx}" y="${my + 15}">${esc(e.sync)}</label>`;
-    if (e.assign) s += `<label kind="assignment" x="${mx}" y="${my + 30}">${esc(e.assign)}</label>`;
-    if (e.from === e.to) s += `<nail x="${a[0] + 40}" y="${a[1] - 50}"/><nail x="${a[0] - 40}" y="${a[1] - 50}"/>`;
-    s += `</transition>\n`;
+    let lx, ly, nails = "";
+    if (e.from === e.to) {
+      const h = 55 + k * 85;
+      nails = `<nail x="${a[0] + 45}" y="${a[1] - h}"/><nail x="${a[0] - 45}" y="${a[1] - h}"/>`;
+      lx = a[0] + 55; ly = a[1] - h - 20;
+    } else {
+      const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1;
+      const off = (k - (m - 1) / 2) * 110;
+      const nx = Math.round((a[0] + b[0]) / 2 - (dy / len) * off), ny = Math.round((a[1] + b[1]) / 2 + (dx / len) * off);
+      if (m > 1) nails = `<nail x="${nx}" y="${ny}"/>`;
+      lx = nx + 8; ly = ny - 30;
+    }
+    if (e.select) s += `<label kind="select" x="${lx}" y="${ly - 15}">${esc(e.select)}</label>`;
+    if (e.guard) s += `<label kind="guard" x="${lx}" y="${ly}">${esc(e.guard)}</label>`;
+    if (e.sync) s += `<label kind="synchronisation" x="${lx}" y="${ly + 15}">${esc(e.sync)}</label>`;
+    if (e.assign) s += `<label kind="assignment" x="${lx}" y="${ly + 30}">${esc(e.assign)}</label>`;
+    s += nails + `</transition>
+`;
   });
   return s + `</template>\n`;
 }
