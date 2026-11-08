@@ -11,8 +11,8 @@ function template(t) {
   s += `<declaration>${esc(t.decl || "")}</declaration>\n`;
   t.locs.forEach((l, i) => {
     const [x, y] = pos(i);
-    s += `<location id="${t.name}_${l.n}" x="${x}" y="${y}"><name x="${x - 20}" y="${y - 30}">${l.n}</name>`;
-    if (l.inv) s += `<label kind="invariant" x="${x - 20}" y="${y + 15}">${esc(l.inv)}</label>`;
+    s += `<location id="${t.name}_${l.n}" x="${x}" y="${y}"><name x="${x - 20}" y="${y + 18}">${l.n}</name>`;
+    if (l.inv) s += `<label kind="invariant" x="${x - 20}" y="${y + 36}">${esc(l.inv)}</label>`;
     if (l.committed) s += `<committed/>`;
     s += `</location>\n`;
   });
@@ -36,10 +36,17 @@ function template(t) {
       if (m > 1) nails = `<nail x="${nx}" y="${ny}"/>`;
       lx = nx + 8; ly = ny - 30;
     }
-    if (e.select) s += `<label kind="select" x="${lx}" y="${ly - 15}">${esc(e.select)}</label>`;
-    if (e.guard) s += `<label kind="guard" x="${lx}" y="${ly}">${esc(e.guard)}</label>`;
-    if (e.sync) s += `<label kind="synchronisation" x="${lx}" y="${ly + 15}">${esc(e.sync)}</label>`;
-    if (e.assign) s += `<label kind="assignment" x="${lx}" y="${ly + 30}">${esc(e.assign)}</label>`;
+    const lines = [e.select, e.guard, e.sync, e.assign].filter(Boolean);
+    const w = 8 * Math.max(...lines.map((x) => x.length), 1);
+    if (e.from !== e.to) {
+      const flat = Math.abs(b[0] - a[0]) > 1.5 * Math.abs(b[1] - a[1]);
+      if (m > 1) { lx = lx - 8; ly = ly + 30 - 8; }
+      if (flat) { lx = Math.round((lx + (m > 1 ? 0 : -10)) - (m > 1 ? w / 2 : w / 2)); ly = ly + 30 - 15 * lines.length - 12; }
+      else if (m === 1) { lx = lx + 6; ly = ly + 30 - 7 * lines.length; }
+    }
+    let ky = ly;
+    const put = (kind, v) => { if (v) { s += `<label kind="${kind}" x="${lx}" y="${ky}">${esc(v)}</label>`; ky += 16; } };
+    put("select", e.select); put("guard", e.guard); put("synchronisation", e.sync); put("assignment", e.assign);
     s += nails + `</transition>
 `;
   });
@@ -115,7 +122,8 @@ model("band", `const int N = 5;          // sections S1..S5, index 0 is the most
 const int HOP = 1;        // T-RC3: every section reacts within 1 s
 const int RDMIN = 1, RDMAX = 30; // owner restart, estimated
 typedef int[0,N-1] id_t;
-chan halt[N], stop[N];
+chan halt[N];
+broadcast chan stop[N+1];   // stop[N] is the sink of the most upstream section
 broadcast chan release;
 bool ownerUp[N] = {true,true,true,true,true};
 bool faulted = false, released = false;
@@ -124,14 +132,11 @@ int nstopped = 0;
 clock t;
 `, [
   { name: "Section", params: "const id_t i", decl: "clock x;", init: "Running",
-    locs: [{ n: "Running" }, { n: "Halted", inv: "x <= HOP" }, { n: "Relay", inv: "x <= HOP" }, { n: "Stopped" }],
+    locs: [{ n: "Running" }, { n: "Pass", inv: "x <= HOP" }, { n: "Stopped" }],
     trans: [
-      { from: "Running", to: "Halted", sync: "halt[i]?", assign: "x = 0" },
-      { from: "Running", to: "Relay", sync: "stop[i]?", assign: "x = 0" },
-      { from: "Halted", to: "Stopped", guard: "i > 0", sync: "stop[i>0?i-1:0]!", assign: "nstopped++" },
-      { from: "Halted", to: "Stopped", guard: "i == 0", assign: "nstopped++" },
-      { from: "Relay", to: "Stopped", guard: "i > 0", sync: "stop[i>0?i-1:0]!", assign: "nstopped++" },
-      { from: "Relay", to: "Stopped", guard: "i == 0", assign: "nstopped++" },
+      { from: "Running", to: "Pass", sync: "halt[i]?", assign: "x = 0" },
+      { from: "Running", to: "Pass", sync: "stop[i]?", assign: "x = 0" },
+      { from: "Pass", to: "Stopped", sync: "stop[i>0?i-1:N]!", assign: "nstopped++" },
       { from: "Stopped", to: "Running", sync: "release?", assign: "nstopped--" } ] },
   { name: "Env", decl: "", init: "Idle",
     locs: [{ n: "Idle" }, { n: "Down", inv: "t <= RDMAX" }, { n: "Back" }],
@@ -144,7 +149,7 @@ clock t;
 ], "system Section, Env, MON;", [
   ["no deadlock", "A[] not deadlock"],
   ["the halt spreads upstream within N hops of 1 s", "A[] (faulted && !released && t > N * HOP) imply nstopped == hk + 1"],
-  ["a section never stays halted longer than 1 s before it passes the halt on", "A[] forall (i : id_t) Section(i).Halted imply Section(i).x <= HOP"],
+  ["a section passes the halt on within 1 s", "A[] forall (i : id_t) Section(i).Pass imply Section(i).x <= HOP"],
   ["never released before the owner is back", "A[] released imply ownerUp[hk]"],
   ["after the release nothing stays stopped", "A[] released imply nstopped == 0"],
   ["no more stopped sections than are upstream", "A[] nstopped <= hk + 1"],

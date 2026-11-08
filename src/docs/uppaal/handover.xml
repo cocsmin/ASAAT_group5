@@ -11,40 +11,40 @@ chan handoff, deliver;
 <template>
 <name>Sender</name>
 <declaration></declaration>
-<location id="Sender_Idle" x="300" y="0"><name x="280" y="-30">Idle</name></location>
-<location id="Sender_Stored" x="-150" y="173"><name x="-170" y="143">Stored</name><committed/></location>
-<location id="Sender_Signalled" x="-150" y="-173"><name x="-170" y="-203">Signalled</name></location>
+<location id="Sender_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
+<location id="Sender_Stored" x="-150" y="173"><name x="-170" y="191">Stored</name><committed/></location>
+<location id="Sender_Signalled" x="-150" y="-173"><name x="-170" y="-155">Signalled</name></location>
 <init ref="Sender_Idle"/>
-<transition><source ref="Sender_Idle"/><target ref="Sender_Stored"/><label kind="assignment" x="83" y="87">stored = true, a = 0</label></transition>
-<transition><source ref="Sender_Stored"/><target ref="Sender_Signalled"/><label kind="synchronisation" x="-142" y="-15">handoff!</label></transition>
+<transition><source ref="Sender_Idle"/><target ref="Sender_Stored"/><label kind="assignment" x="-7" y="60">stored = true, a = 0</label></transition>
+<transition><source ref="Sender_Stored"/><target ref="Sender_Signalled"/><label kind="synchronisation" x="-136" y="-7">handoff!</label></transition>
 </template>
 <template>
 <name>Message</name>
 <declaration>clock m;</declaration>
-<location id="Message_Idle" x="300" y="0"><name x="280" y="-30">Idle</name></location>
-<location id="Message_Flight" x="0" y="200"><name x="-20" y="170">Flight</name><label kind="invariant" x="-20" y="215">m &lt;= DELMAX</label></location>
-<location id="Message_Lost" x="-300" y="0"><name x="-320" y="-30">Lost</name></location>
-<location id="Message_Delivered" x="0" y="-200"><name x="-20" y="-230">Delivered</name></location>
+<location id="Message_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
+<location id="Message_Flight" x="0" y="200"><name x="-20" y="218">Flight</name><label kind="invariant" x="-20" y="236">m &lt;= DELMAX</label></location>
+<location id="Message_Lost" x="-300" y="0"><name x="-320" y="18">Lost</name></location>
+<location id="Message_Delivered" x="0" y="-200"><name x="-20" y="-182">Delivered</name></location>
 <init ref="Message_Idle"/>
-<transition><source ref="Message_Idle"/><target ref="Message_Flight"/><label kind="synchronisation" x="158" y="85">handoff?</label><label kind="assignment" x="158" y="100">m = 0</label></transition>
-<transition><source ref="Message_Flight"/><target ref="Message_Delivered"/><label kind="synchronisation" x="8" y="-15">deliver!</label></transition>
+<transition><source ref="Message_Idle"/><target ref="Message_Flight"/><label kind="synchronisation" x="164" y="86">handoff?</label><label kind="assignment" x="164" y="102">m = 0</label></transition>
+<transition><source ref="Message_Flight"/><target ref="Message_Delivered"/><label kind="synchronisation" x="14" y="-7">deliver!</label></transition>
 <transition><source ref="Message_Flight"/><target ref="Message_Lost"/></transition>
 </template>
 <template>
 <name>Receiver</name>
 <declaration>clock r;</declaration>
-<location id="Receiver_Idle" x="300" y="0"><name x="280" y="-30">Idle</name><label kind="invariant" x="280" y="15">r &lt;= RECONCILE</label></location>
-<location id="Receiver_Adopted" x="-300" y="0"><name x="-320" y="-30">Adopted</name></location>
+<location id="Receiver_Idle" x="300" y="0"><name x="280" y="18">Idle</name><label kind="invariant" x="280" y="36">r &lt;= RECONCILE</label></location>
+<location id="Receiver_Adopted" x="-300" y="0"><name x="-320" y="18">Adopted</name></location>
 <init ref="Receiver_Idle"/>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="synchronisation" x="8" y="40">deliver?</label><label kind="assignment" x="8" y="55">adopted = true</label><nail x="0" y="55"/></transition>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="guard" x="8" y="-85">stored &amp;&amp; a &gt;= GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="8" y="-55">adopted = true</label><nail x="0" y="-55"/></transition>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="355" y="-75">!stored &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="355" y="-45">r = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="355" y="-160">stored &amp;&amp; a &lt; GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="355" y="-130">r = 0</label><nail x="345" y="-140"/><nail x="255" y="-140"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="synchronisation" x="-56" y="35">deliver?</label><label kind="assignment" x="-56" y="51">adopted = true</label><nail x="0" y="55"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="guard" x="-152" y="-75">stored &amp;&amp; a &gt;= GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="-152" y="-59">adopted = true</label><nail x="0" y="-55"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="355" y="-75">!stored &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="355" y="-59">r = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="355" y="-160">stored &amp;&amp; a &lt; GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="355" y="-144">r = 0</label><nail x="345" y="-140"/><nail x="255" y="-140"/></transition>
 </template>
 <template>
 <name>Tick</name>
 <declaration></declaration>
-<location id="Tick_On" x="300" y="0"><name x="280" y="-30">On</name></location>
+<location id="Tick_On" x="300" y="0"><name x="280" y="18">On</name></location>
 <init ref="Tick_On"/>
 <transition><source ref="Tick_On"/><target ref="Tick_On"/><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
 </template>

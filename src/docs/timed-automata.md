@@ -66,19 +66,22 @@ Channels: `ndeath?`, `birth?`, `escalate!`, `released!`.
 
 ### Band section (one TA per section S1 to S5)
 
-Channels: `halt?`, `release?`, `stop_upstream!`.
+Channels: `halt[i]?` (the owner of section i failed), `stop[i]?` and `stop[i-1]!` (the halt
+passes to the section upstream; `stop` is a broadcast so the most upstream section can send
+to a sink), `release?`.
 
 | Location | Invariant | Meaning |
 |---|---|---|
 | `Running` | none | |
-| `Halted` | `x <= 1` | the upstream stop must be sent within 1 s (T-RC3) |
-| `Stopped` | none | upstream told to stop |
+| `Pass` | `x <= 1` | the halt must be passed on within 1 s (T-RC3) |
+| `Stopped` | none | stopped and upstream told |
 
 | From | To | Guard | Sync | Update |
 |---|---|---|---|---|
-| `Running` | `Halted` | | `halt?` | `x = 0` |
-| `Halted` | `Stopped` | | `stop_upstream!` | |
-| `Stopped` | `Running` | | `release?` | |
+| `Running` | `Pass` | | `halt[i]?` (own halt) | `x = 0` |
+| `Running` | `Pass` | | `stop[i]?` (halt from downstream) | `x = 0` |
+| `Pass` | `Stopped` | | `stop[i-1]!` | `nstopped++` |
+| `Stopped` | `Running` | | `release?` | `nstopped--` |
 
 ### Batter (BAT-INSP and THM-DEP combined as one batch automaton)
 

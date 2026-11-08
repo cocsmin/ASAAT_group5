@@ -4,8 +4,8 @@ A[] not deadlock
 //the halt spreads upstream within N hops of 1 s
 A[] (faulted && !released && t > N * HOP) imply nstopped == hk + 1
 
-//a section never stays halted longer than 1 s before it passes the halt on
-A[] forall (i : id_t) Section(i).Halted imply Section(i).x <= HOP
+//a section passes the halt on within 1 s
+A[] forall (i : id_t) Section(i).Pass imply Section(i).x <= HOP
 
 //never released before the owner is back
 A[] released imply ownerUp[hk]

@@ -12,31 +12,31 @@ chan deposit_ok;
 <template>
 <name>Batch</name>
 <declaration>clock x;</declaration>
-<location id="Batch_Mixing" x="300" y="0"><name x="280" y="-30">Mixing</name><label kind="invariant" x="280" y="15">x &lt;= MIX</label></location>
-<location id="Batch_Inspecting" x="93" y="190"><name x="73" y="160">Inspecting</name><label kind="invariant" x="73" y="205">x &lt;= INSP</label></location>
-<location id="Batch_Waiting" x="-243" y="118"><name x="-263" y="88">Waiting</name><label kind="invariant" x="-263" y="133">x &lt;= P3</label></location>
-<location id="Batch_Deposited" x="-243" y="-118"><name x="-263" y="-148">Deposited</name></location>
-<location id="Batch_Discarded" x="93" y="-190"><name x="73" y="-220">Discarded</name></location>
+<location id="Batch_Mixing" x="300" y="0"><name x="280" y="18">Mixing</name><label kind="invariant" x="280" y="36">x &lt;= MIX</label></location>
+<location id="Batch_Inspecting" x="93" y="190"><name x="73" y="208">Inspecting</name><label kind="invariant" x="73" y="226">x &lt;= INSP</label></location>
+<location id="Batch_Waiting" x="-243" y="118"><name x="-263" y="136">Waiting</name><label kind="invariant" x="-263" y="154">x &lt;= P3</label></location>
+<location id="Batch_Deposited" x="-243" y="-118"><name x="-263" y="-100">Deposited</name></location>
+<location id="Batch_Discarded" x="93" y="-190"><name x="73" y="-172">Discarded</name></location>
 <init ref="Batch_Mixing"/>
-<transition><source ref="Batch_Mixing"/><target ref="Batch_Inspecting"/><label kind="guard" x="205" y="65">x &gt;= MIX</label><label kind="assignment" x="205" y="95">x = 0</label></transition>
-<transition><source ref="Batch_Inspecting"/><target ref="Batch_Waiting"/><label kind="guard" x="-67" y="124">x &gt;= INSP</label><label kind="assignment" x="-67" y="154">x = 0</label></transition>
-<transition><source ref="Batch_Waiting"/><target ref="Batch_Deposited"/><label kind="synchronisation" x="-235" y="-15">deposit_ok?</label></transition>
-<transition><source ref="Batch_Waiting"/><target ref="Batch_Discarded"/><label kind="guard" x="-67" y="-66">x &gt;= P3</label></transition>
+<transition><source ref="Batch_Mixing"/><target ref="Batch_Inspecting"/><label kind="guard" x="211" y="81">x &gt;= MIX</label><label kind="assignment" x="211" y="97">x = 0</label></transition>
+<transition><source ref="Batch_Inspecting"/><target ref="Batch_Waiting"/><label kind="guard" x="-113" y="112">x &gt;= INSP</label><label kind="assignment" x="-113" y="128">x = 0</label></transition>
+<transition><source ref="Batch_Waiting"/><target ref="Batch_Deposited"/><label kind="synchronisation" x="-229" y="-7">deposit_ok?</label></transition>
+<transition><source ref="Batch_Waiting"/><target ref="Batch_Discarded"/><label kind="guard" x="-61" y="-43">x &gt;= P3</label></transition>
 </template>
 <template>
 <name>Dep</name>
 <declaration>clock y;</declaration>
-<location id="Dep_Open" x="300" y="0"><name x="280" y="-30">Open</name></location>
-<location id="Dep_Blocked" x="-300" y="0"><name x="-320" y="-30">Blocked</name><label kind="invariant" x="-320" y="15">y &lt;= BLOCKMAX</label></location>
+<location id="Dep_Open" x="300" y="0"><name x="280" y="18">Open</name></location>
+<location id="Dep_Blocked" x="-300" y="0"><name x="-320" y="18">Blocked</name><label kind="invariant" x="-320" y="36">y &lt;= BLOCKMAX</label></location>
 <init ref="Dep_Open"/>
-<transition><source ref="Dep_Open"/><target ref="Dep_Open"/><label kind="synchronisation" x="355" y="-60">deposit_ok!</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
-<transition><source ref="Dep_Open"/><target ref="Dep_Blocked"/><label kind="assignment" x="8" y="55">y = 0</label><nail x="0" y="55"/></transition>
-<transition><source ref="Dep_Blocked"/><target ref="Dep_Open"/><label kind="assignment" x="8" y="55">y = 0</label><nail x="0" y="55"/></transition>
+<transition><source ref="Dep_Open"/><target ref="Dep_Open"/><label kind="synchronisation" x="355" y="-75">deposit_ok!</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
+<transition><source ref="Dep_Open"/><target ref="Dep_Blocked"/><label kind="assignment" x="-20" y="50">y = 0</label><nail x="0" y="55"/></transition>
+<transition><source ref="Dep_Blocked"/><target ref="Dep_Open"/><label kind="assignment" x="-20" y="50">y = 0</label><nail x="0" y="55"/></transition>
 </template>
 <template>
 <name>Tick</name>
 <declaration></declaration>
-<location id="Tick_On" x="300" y="0"><name x="280" y="-30">On</name></location>
+<location id="Tick_On" x="300" y="0"><name x="280" y="18">On</name></location>
 <init ref="Tick_On"/>
 <transition><source ref="Tick_On"/><target ref="Tick_On"/><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
 </template>
