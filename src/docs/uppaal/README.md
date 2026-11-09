@@ -584,8 +584,6 @@ the sender, it would be easy to forget.
 
 ![Receiver template](img/handover-receiver.png)
 
-*This picture is zoomed out so that the long labels fit.*
-
 - `Idle` has the invariant `r <= RECONCILE`: at least every 5 s the station scans the documents.
 - `deliver?` → `Adopted` at once: the message arrived, take up the document.
 - The long arrow at the bottom is the safety net: at a scan (`r >= RECONCILE`), if a document is
