@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
   <uml:Model xmi:id="_0VBAQL83EfGK09TLxcHe5g" name="Production and Logistics Management (PLM)">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_0hy4AL83EfGK09TLxcHe5g">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -7,7 +7,7 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_0iSnQL83EfGK09TLxcHe5g">
       <importedPackage xmi:type="uml:Package" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
     </packageImport>
-    <packagedElement xmi:type="uml:Class" xmi:id="_GC5h0L85EfGK09TLxcHe5g" name="Production and Logistics Management (PLM)">
+    <packagedElement xmi:type="uml:Class" xmi:id="_GC5h0L85EfGK09TLxcHe5g" name="Production and Logistics Management (PLM)" classifierBehavior="_EK3N0NEvEfGZ44KCKtLvcQ">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_sBIsQ788EfGK09TLxcHe5g" name="plm-af-02" type="_QgI8wL85EfGK09TLxcHe5g" aggregation="composite" association="_sBIsQL88EfGK09TLxcHe5g">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3jhC8L8_EfGK09TLxcHe5g" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3jhC8b8_EfGK09TLxcHe5g" name="LiteralUnlimitedNatural1" value="1"/>
@@ -80,6 +80,92 @@
         <end xmi:type="uml:ConnectorEnd" xmi:id="_kKUb0L9OEfGK09TLxcHe5g" role="_Y2-1cL9FEfGK09TLxcHe5g"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_kKUb0b9OEfGK09TLxcHe5g" partWithPort="_uLlxob88EfGK09TLxcHe5g" role="_9B6SYL9MEfGK09TLxcHe5g"/>
       </ownedConnector>
+      <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_EK3N0NEvEfGZ44KCKtLvcQ" name="StateMachine22">
+        <region xmi:type="uml:Region" xmi:id="_IJAeYNEvEfGZ44KCKtLvcQ" name="Region1">
+          <transition xmi:type="uml:Transition" xmi:id="_2FkRoNEvEfGZ44KCKtLvcQ" source="_d0laANEvEfGZ44KCKtLvcQ" target="_hhS8UNEvEfGZ44KCKtLvcQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_13GvUNFlEfGZ44KCKtLvcQ" name="request recipe target data"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_3RcO4NEvEfGZ44KCKtLvcQ" source="_hhS8UNEvEfGZ44KCKtLvcQ" target="_THm58NEvEfGZ44KCKtLvcQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_d1IHkNFmEfGZ44KCKtLvcQ" name="send Production order and recipe targets to BAT"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_P0d4wNEwEfGZ44KCKtLvcQ" source="_m06yENEvEfGZ44KCKtLvcQ" target="_xOgcENEvEfGZ44KCKtLvcQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_M1nskNExEfGZ44KCKtLvcQ" guard="_tP5pwNE1EfGZ44KCKtLvcQ" source="_xOgcENEvEfGZ44KCKtLvcQ" target="_GJTlkNExEfGZ44KCKtLvcQ">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_tP5pwNE1EfGZ44KCKtLvcQ" name="">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_tP634NE1EfGZ44KCKtLvcQ">
+                <language>Natural language</language>
+                <body>stock >= requested</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_OS9NQNExEfGZ44KCKtLvcQ" guard="_t4cwINE4EfGZ44KCKtLvcQ" source="_xOgcENEvEfGZ44KCKtLvcQ" target="_JCk4wNExEfGZ44KCKtLvcQ">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_t4cwINE4EfGZ44KCKtLvcQ" name="">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_t4cwIdE4EfGZ44KCKtLvcQ">
+                <language>Natural language</language>
+                <body>stock &lt; requested</body>
+              </specification>
+            </ownedRule>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_O2x0wNFtEfGZ44KCKtLvcQ" name="publish missing ingredients error; / return insufficient stock result to BAT"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_U62HQNExEfGZ44KCKtLvcQ" source="_JCk4wNExEfGZ44KCKtLvcQ" target="_m06yENEvEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_lOfdoNFtEfGZ44KCKtLvcQ" name="" event="_nt1N4NFtEfGZ44KCKtLvcQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_hXZukNExEfGZ44KCKtLvcQ" source="_GJTlkNExEfGZ44KCKtLvcQ" target="_pexBANFiEfGZ44KCKtLvcQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_leI6cNExEfGZ44KCKtLvcQ" source="_cQ_1cNExEfGZ44KCKtLvcQ" target="_THm58NEvEfGZ44KCKtLvcQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_fezMYNFsEfGZ44KCKtLvcQ" name="send reservation result confirmation to BAT"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_NtXMENFhEfGZ44KCKtLvcQ" source="_QpKhkNEvEfGZ44KCKtLvcQ" target="_d0laANEvEfGZ44KCKtLvcQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_tFJHQNFhEfGZ44KCKtLvcQ" source="_THm58NEvEfGZ44KCKtLvcQ" target="_m06yENEvEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_57fuoNFhEfGZ44KCKtLvcQ" name="Trigger1" event="_8NQ88NFhEfGZ44KCKtLvcQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_MzONINFjEfGZ44KCKtLvcQ" source="_pexBANFiEfGZ44KCKtLvcQ" target="_cQ_1cNExEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_2XZKMNFrEfGZ44KCKtLvcQ" name="Trigger1" event="_4kmooNFrEfGZ44KCKtLvcQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_RuMAYNFlEfGZ44KCKtLvcQ" source="_m06yENEvEfGZ44KCKtLvcQ" target="_X-BRoNFjEfGZ44KCKtLvcQ">
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_ytcIUNFoEfGZ44KCKtLvcQ" name="send reservation response: use staged ingredients"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_mrwfINFoEfGZ44KCKtLvcQ" name="Trigger1" event="_o0aNsNFoEfGZ44KCKtLvcQ"/>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_T2WmwNFlEfGZ44KCKtLvcQ" source="_X-BRoNFjEfGZ44KCKtLvcQ" target="_THm58NEvEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_--0oINFtEfGZ44KCKtLvcQ" name="Trigger1" event="_A-30UNFuEfGZ44KCKtLvcQ"/>
+          </transition>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_QpKhkNEvEfGZ44KCKtLvcQ" name="Initial"/>
+          <subvertex xmi:type="uml:State" xmi:id="_THm58NEvEfGZ44KCKtLvcQ" name="Idle">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_DWkiwNEyEfGZ44KCKtLvcQ" name="await incoming ingredient requests"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="__dKBMNExEfGZ44KCKtLvcQ" name="set system state to ready"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_d0laANEvEfGZ44KCKtLvcQ" name="Scheduling_Order">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__IQ50NEyEfGZ44KCKtLvcQ" name="assign schedule ID and set order status to pending"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4RG0wNEyEfGZ44KCKtLvcQ" name="create new production order"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_hhS8UNEvEfGZ44KCKtLvcQ" name="Fetching_recipe_targets">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_ukqIINEzEfGZ44KCKtLvcQ" name="extract target parameters for order"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_cPLloNEzEfGZ44KCKtLvcQ" name="query recipe database"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_m06yENEvEfGZ44KCKtLvcQ" name="Veryfing_Inventory">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_kdmjINE0EfGZ44KCKtLvcQ" name="calculate requested versus available stock"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_hHsXQNE0EfGZ44KCKtLvcQ" name="enforce organic ingredient rule"/>
+          </subvertex>
+          <subvertex xmi:type="uml:Pseudostate" xmi:id="_xOgcENEvEfGZ44KCKtLvcQ" name="StockCheck" kind="choice"/>
+          <subvertex xmi:type="uml:State" xmi:id="_GJTlkNExEfGZ44KCKtLvcQ" name="Reserving_Ingredients">
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4mwF4NE4EfGZ44KCKtLvcQ" name="lock required ingredient quantities"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_JCk4wNExEfGZ44KCKtLvcQ" name="Holding_Order">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_bxFFoNE5EfGZ44KCKtLvcQ" name="await inventory replenishment"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_YvXoINE5EfGZ44KCKtLvcQ" name="suspend active production order"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_cQ_1cNExEfGZ44KCKtLvcQ" name="Updating_Inventory">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_OzhqENE5EfGZ44KCKtLvcQ" name="compile order and recipe targets"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_L3Np8NE5EfGZ44KCKtLvcQ" name="deduct withdrawn quantities from total warehouse stock"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_pexBANFiEfGZ44KCKtLvcQ" name="Waiting_For_Withdrawal">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_oG6uMNFrEfGZ44KCKtLvcQ" name="await physical ingredient retrieval"/>
+          </subvertex>
+          <subvertex xmi:type="uml:State" xmi:id="_X-BRoNFjEfGZ44KCKtLvcQ" name="Communication_Suspended">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Qz5ToNFrEfGZ44KCKtLvcQ" name="monitor warehouse responsiveness"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_OQC20NFrEfGZ44KCKtLvcQ" name="log WMS unresponsiveness"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_UqfKsNFrEfGZ44KCKtLvcQ" name="restore warehouse communication"/>
+          </subvertex>
+        </region>
+      </ownedBehavior>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_QGj_IL85EfGK09TLxcHe5g" name="Order and Scheduling Manager (PLM-AF-01)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_cFXAgL9GEfGK09TLxcHe5g" name="Ingredient request and reservation result" aggregation="composite"/>
@@ -159,6 +245,108 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_xsgToL88EfGK09TLxcHe5g" name="plm" type="_GC5h0L85EfGK09TLxcHe5g" association="_xsdQUL88EfGK09TLxcHe5g"/>
     </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_VvH0UMyFEfG0tpuZPTrJ-Q" name="PLM-REQ-01" visibility="package"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ES-boMyHEfG-B8dhrKvttQ" name="PLM-REQ-02"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Ex-r0MyHEfG-B8dhrKvttQ" name="PLM-REQ-03"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_FIfuYMyHEfG-B8dhrKvttQ" name="PLM-REQ-04"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GrrYYMyHEfG-B8dhrKvttQ" name="PLM-REQ-05"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_HCnRsMyHEfG-B8dhrKvttQ" name="PLM-REQ-06"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Fm66UMyIEfG-B8dhrKvttQ" name="PLM-REQ-07"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_GhBLEMyIEfG-B8dhrKvttQ" name="PLM-REQ-08"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_HHFskMyIEfG-B8dhrKvttQ" name="PLM-REQ-09"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_WZnbcMyIEfG-B8dhrKvttQ" name="PLM-REQ-10"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_XbPQgMyIEfG-B8dhrKvttQ" name="PLM-REQ-11"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_YMg8cMyIEfG-B8dhrKvttQ" name="PLM-REQ-12"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nn8IoMyIEfG-B8dhrKvttQ" name="PLM-REQ-13"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_oGUGsMyIEfG-B8dhrKvttQ" name="PLM-REQ-14"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_xr9yUMyIEfG-B8dhrKvttQ" name="PLM-REQ-15"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_yIL0QMyIEfG-B8dhrKvttQ" name="PLM-REQ-16"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_7478oMyIEfG-B8dhrKvttQ" name="PLM-REQ-17"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_8oX1gMyIEfG-B8dhrKvttQ" name="PLM-REQ-18"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_ZOahgMyMEfG-B8dhrKvttQ" name="UC1"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_ibackMyMEfG-B8dhrKvttQ" name="FC1"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_o8-FEMyMEfG-B8dhrKvttQ" name="FC2"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_s57p4MyMEfG-B8dhrKvttQ" name="FC16"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_CN1P4MyOEfG-B8dhrKvttQ" name="" client="_QGj_IL85EfGK09TLxcHe5g" supplier="_VvH0UMyFEfG0tpuZPTrJ-Q"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Nu3DEMyOEfG-B8dhrKvttQ" name="" client="_QGj_IL85EfGK09TLxcHe5g" supplier="_Ex-r0MyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_TqFEUMyOEfG-B8dhrKvttQ" name="" client="_QGj_IL85EfGK09TLxcHe5g" supplier="_XbPQgMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_WJ-1QMyOEfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_nn8IoMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_XlLn8MyOEfG-B8dhrKvttQ" name="" client="_QGj_IL85EfGK09TLxcHe5g" supplier="_oGUGsMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_hIXOYMyOEfG-B8dhrKvttQ" name="" client="_QGj_IL85EfGK09TLxcHe5g" supplier="_xr9yUMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_isTGUMyOEfG-B8dhrKvttQ" name="" client="_QGj_IL85EfGK09TLxcHe5g" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_cd508MyPEfG-B8dhrKvttQ" name="" client="_QgI8wL85EfGK09TLxcHe5g" supplier="_ES-boMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_9pZwgMyPEfG-B8dhrKvttQ" name="" client="_ksPpsL85EfGK09TLxcHe5g" supplier="_FIfuYMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_-sSw4MyPEfG-B8dhrKvttQ" name="" client="_ksPpsL85EfGK09TLxcHe5g" supplier="_GrrYYMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="__qqdoMyPEfG-B8dhrKvttQ" name="" client="_ksPpsL85EfGK09TLxcHe5g" supplier="_HCnRsMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Agw_MMyQEfG-B8dhrKvttQ" name="" client="_ksPpsL85EfGK09TLxcHe5g" supplier="_Fm66UMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Bypd0MyQEfG-B8dhrKvttQ" name="" client="_ksPpsL85EfGK09TLxcHe5g" supplier="_GhBLEMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_EG1G8MyQEfG-B8dhrKvttQ" name="" client="_ksPpsL85EfGK09TLxcHe5g" supplier="_HHFskMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_G0sbYMyQEfG-B8dhrKvttQ" name="" client="_ksPpsL85EfGK09TLxcHe5g" supplier="_WZnbcMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_RgvHUMyQEfG-B8dhrKvttQ" name="" client="_qsvzkL85EfGK09TLxcHe5g" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_SefJAMyQEfG-B8dhrKvttQ" name="" client="_qsvzkL85EfGK09TLxcHe5g" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_UDSjoMyQEfG-B8dhrKvttQ" name="" client="_vo-dAL85EfGK09TLxcHe5g" supplier="_YMg8cMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_3KdhsMyQEfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_6wsokMyQEfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_CuWboMyREfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g _ZOahgMyMEfG-B8dhrKvttQ" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_HWj84MyREfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_K-YYIMyREfG-B8dhrKvttQ" name="" client="_o8-FEMyMEfG-B8dhrKvttQ" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Z76ucMyREfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_l09ZAMyREfG-B8dhrKvttQ" name="" client="_ZOahgMyMEfG-B8dhrKvttQ" supplier="_HCnRsMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_m_9MgMyREfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_Fm66UMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_oiLNMMyREfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_GhBLEMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_vuwIoMyREfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_HHFskMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_wrLUoMyREfG-B8dhrKvttQ" name="" client="_ibackMyMEfG-B8dhrKvttQ" supplier="_WZnbcMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_-frmUMyREfG-B8dhrKvttQ" name="" client="_ibackMyMEfG-B8dhrKvttQ" supplier="_YMg8cMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_At8NoMySEfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_IPvyMMySEfG-B8dhrKvttQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Rkc3wMySEfG-B8dhrKvttQ" name="" client="_o8-FEMyMEfG-B8dhrKvttQ" supplier="_oGUGsMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_S2RE8MySEfG-B8dhrKvttQ" name="" client="_o8-FEMyMEfG-B8dhrKvttQ" supplier="_xr9yUMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_UKEPIMySEfG-B8dhrKvttQ" name="" client="_o8-FEMyMEfG-B8dhrKvttQ" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_X0hHoMySEfG-B8dhrKvttQ" name="" client="_s57p4MyMEfG-B8dhrKvttQ" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Y_nBwMySEfG-B8dhrKvttQ" name="" client="_s57p4MyMEfG-B8dhrKvttQ" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_2tg24M7IEfG6Z-2Eqxj-FQ" name="PLM-TC-01 Verify production order and recipe creation"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_O3QWsM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-03 Verify inventory level updating"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_T6YSUM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-02 Verify ingredient reservation processing"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_XVegMM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-04 Verify insufficient stock hold"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_aUz_IM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-05 Verify stockout logistics alert"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_hDalIM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-06 Verify warehouse communication suspension"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_le_YkM7MEfG6Z-2Eqxj-FQ" name="PLM-TC-07 Verify local stock fallback instruction"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_oVr44M7MEfG6Z-2Eqxj-FQ" name="PLM-TC-08 Verify transport assignment on pallet ready"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_26aGkM7MEfG6Z-2Eqxj-FQ" name="" client="_2tg24M7IEfG6Z-2Eqxj-FQ" supplier="_VvH0UMyFEfG0tpuZPTrJ-Q"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_8fF3IM7MEfG6Z-2Eqxj-FQ" name="" client="_2tg24M7IEfG6Z-2Eqxj-FQ" supplier="_ES-boMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_C8EhoM7NEfG6Z-2Eqxj-FQ" name="" client="_2tg24M7IEfG6Z-2Eqxj-FQ" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_PhuakM7NEfG6Z-2Eqxj-FQ" name="" client="_T6YSUM7MEfG6Z-2Eqxj-FQ" supplier="_FIfuYMyHEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_QZGHcM7NEfG6Z-2Eqxj-FQ" name="" client="_T6YSUM7MEfG6Z-2Eqxj-FQ" supplier="_GhBLEMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_RTCAIM7NEfG6Z-2Eqxj-FQ" name="" client="_T6YSUM7MEfG6Z-2Eqxj-FQ" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_a1Ch4M7NEfG6Z-2Eqxj-FQ" name="" client="_O3QWsM7MEfG6Z-2Eqxj-FQ" supplier="_Fm66UMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_m40c0M7NEfG6Z-2Eqxj-FQ" name="" client="_XVegMM7MEfG6Z-2Eqxj-FQ" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_pXhT4M7NEfG6Z-2Eqxj-FQ" name="" client="_XVegMM7MEfG6Z-2Eqxj-FQ" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_31Z5wM7NEfG6Z-2Eqxj-FQ" name="" client="_XVegMM7MEfG6Z-2Eqxj-FQ" supplier="_HHFskMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_S0ZPwM7OEfG6Z-2Eqxj-FQ" name="" client="_aUz_IM7MEfG6Z-2Eqxj-FQ" supplier="_YMg8cMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_czrjYM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_hcm2UM7OEfG6Z-2Eqxj-FQ" name="" client="_hDalIM7MEfG6Z-2Eqxj-FQ" supplier="_0VBAQL83EfGK09TLxcHe5g"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_jDrh0M7OEfG6Z-2Eqxj-FQ" name="" client="_hDalIM7MEfG6Z-2Eqxj-FQ" supplier="_xr9yUMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_paqSAM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_trl7sM7OEfG6Z-2Eqxj-FQ" name="" client="_oVr44M7MEfG6Z-2Eqxj-FQ" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_vMl0YM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="_exLdANCeEfG-6PPhNNbUSQ" name="StateMachine115">
+      <region xmi:type="uml:Region" xmi:id="_iJKFcNCeEfG-6PPhNNbUSQ" name="Region1"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_iBGCsNCrEfG-6PPhNNbUSQ" name="Internal stock request" signal="_tTu0kNCrEfG-6PPhNNbUSQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_tTu0kNCrEfG-6PPhNNbUSQ" name="Internal stock request"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_oyoEENCvEfG-6PPhNNbUSQ" name="" signal="_rFfekNCvEfG-6PPhNNbUSQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_rFfekNCvEfG-6PPhNNbUSQ" name="Withdrawal confirmation"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_crjOANEyEfGZ44KCKtLvcQ" name="" signal="_i-ucQNEyEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_i-ucQNEyEfGZ44KCKtLvcQ" name="Ingredient request"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_8NQ88NFhEfGZ44KCKtLvcQ" name="SignalEvent1" signal="_i-ucQNEyEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_o0aNsNFoEfGZ44KCKtLvcQ" name="SignalEvent2" signal="_qqdwYNFoEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_qqdwYNFoEfGZ44KCKtLvcQ" name="wms_timeout"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_4kmooNFrEfGZ44KCKtLvcQ" name="" signal="_8KhmcNFrEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_8KhmcNFrEfGZ44KCKtLvcQ" name="Withdrawal confirmation"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_nt1N4NFtEfGZ44KCKtLvcQ" name="SignalEvent3" signal="_pF07kNFtEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_pF07kNFtEfGZ44KCKtLvcQ" name="Restock signal"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_A-30UNFuEfGZ44KCKtLvcQ" name="" signal="_DZmxYNFuEfGZ44KCKtLvcQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_DZmxYNFuEfGZ44KCKtLvcQ" name="wms_responsive_confirmation"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_0cBAIL83EfGK09TLxcHe5g">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_0cI78L83EfGK09TLxcHe5g" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#/"/>
@@ -249,4 +437,84 @@
   <Blocks:NestedConnectorEnd xmi:id="_Z8xpwb9OEfGK09TLxcHe5g" base_Element="_Z8xCsL9OEfGK09TLxcHe5g" propertyPath="_w5-qg788EfGK09TLxcHe5g" base_ConnectorEnd="_Z8xCsL9OEfGK09TLxcHe5g"/>
   <Blocks:NestedConnectorEnd xmi:id="_Z8yQ0L9OEfGK09TLxcHe5g" base_Element="_Z8xpwL9OEfGK09TLxcHe5g" propertyPath="_sxz7QL88EfGK09TLxcHe5g" base_ConnectorEnd="_Z8xpwL9OEfGK09TLxcHe5g"/>
   <Blocks:NestedConnectorEnd xmi:id="_kKUb0r9OEfGK09TLxcHe5g" base_Element="_kKUb0b9OEfGK09TLxcHe5g" propertyPath="_uLlxob88EfGK09TLxcHe5g" base_ConnectorEnd="_kKUb0b9OEfGK09TLxcHe5g"/>
+  <Requirements:Requirement xmi:id="_VvwtgMyFEfG0tpuZPTrJ-Q" base_NamedElement="_VvH0UMyFEfG0tpuZPTrJ-Q" id="PLM-REQ-01" text="The system shall create and schedule production orders for new batter mixing processes" base_Class="_VvH0UMyFEfG0tpuZPTrJ-Q"/>
+  <Requirements:Requirement xmi:id="_ETWPEMyHEfG-B8dhrKvttQ" base_NamedElement="_ES-boMyHEfG-B8dhrKvttQ" id="PLM-REQ-02" text="The system shall maintain recipe definitions and target parameters used by production stations" base_Class="_ES-boMyHEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_EyGnoMyHEfG-B8dhrKvttQ" base_NamedElement="_Ex-r0MyHEfG-B8dhrKvttQ" id="PLM-REQ-03" text="The system shall initiate production by sending the &quot;Production order and recipe targets&quot; signal to BAT" base_Class="_Ex-r0MyHEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_FIl1AMyHEfG-B8dhrKvttQ" base_NamedElement="_FIfuYMyHEfG-B8dhrKvttQ" id="PLM-REQ-04" text="The system shall process incoming &quot;Ingredient request and reservation result&quot; signals." base_Class="_FIfuYMyHEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_Grvp0MyHEfG-B8dhrKvttQ" base_NamedElement="_GrrYYMyHEfG-B8dhrKvttQ" id="PLM-REQ-05" text="The system shall verify that requested ingredients are in stock and reserve the required quantities." base_Class="_GrrYYMyHEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_HCvNgMyHEfG-B8dhrKvttQ" base_NamedElement="_HCnRsMyHEfG-B8dhrKvttQ" id="PLM-REQ-06" text="The system shall enforce the business rule that only organic ingredients may be used." base_Class="_HCnRsMyHEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_Fm_LwMyIEfG-B8dhrKvttQ" base_NamedElement="_Fm66UMyIEfG-B8dhrKvttQ" id="PLM-REQ-07" text="The system shall update warehouse inventory numbers when ingredients are collected." base_Class="_Fm66UMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_GhIf0MyIEfG-B8dhrKvttQ" base_NamedElement="_GhBLEMyIEfG-B8dhrKvttQ" id="PLM-REQ-08" text="The system shall return a confirmation signal “Ingredient request and reservation result” for a successful reservation." base_Class="_GhBLEMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_HHMaQMyIEfG-B8dhrKvttQ" base_NamedElement="_HHFskMyIEfG-B8dhrKvttQ" id="PLM-REQ-09" text="The system shall detect when there is insufficient stock to fulfill a reservation request" base_Class="_HHFskMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_WZtiEMyIEfG-B8dhrKvttQ" base_NamedElement="_WZnbcMyIEfG-B8dhrKvttQ" id="PLM-REQ-10" text="The system shall return an insufficient stock &quot;Ingredient request and reservation result&quot; signal when a reservation fails" base_Class="_WZnbcMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_XbUwEMyIEfG-B8dhrKvttQ" base_NamedElement="_XbPQgMyIEfG-B8dhrKvttQ" id="PLM-REQ-11" text="The system shall hold the active production order if an ingredient reservation fails due to insufficient stock." base_Class="_XbPQgMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_YMl08MyIEfG-B8dhrKvttQ" base_NamedElement="_YMg8cMyIEfG-B8dhrKvttQ" id="PLM-REQ-12" text="The system shall publish a &quot;Log, warning, error and discard events&quot; signal to notify Logistics of the missing ingredients." base_Class="_YMg8cMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_nn8vsMyIEfG-B8dhrKvttQ" base_NamedElement="_nn8IoMyIEfG-B8dhrKvttQ" id="PLM-REQ-13" text="The system shall release the held production order only after the required ingredients are restocked and successfully reserved" base_Class="_nn8IoMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_oGY_MMyIEfG-B8dhrKvttQ" base_NamedElement="_oGUGsMyIEfG-B8dhrKvttQ" id="PLM-REQ-14" text="The system shall monitor requests to the Warehouse Management System for timeouts." base_Class="_oGUGsMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_xsCDwMyIEfG-B8dhrKvttQ" base_NamedElement="_xr9yUMyIEfG-B8dhrKvttQ" id="PLM-REQ-15" text="The system shall suspend communication with the warehouse during periods of unresponsiveness and automatically restore communication only once the warehouse is confirmed to be responsive." base_Class="_xr9yUMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_yIQFsMyIEfG-B8dhrKvttQ" base_NamedElement="_yIL0QMyIEfG-B8dhrKvttQ" id="PLM-REQ-16" text="The system shall send an &quot;Ingredient request and reservation result&quot; signal instructing the batching station to continue using already-staged ingredients while warehouse communication is suspended" base_Class="_yIL0QMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_75BcMMyIEfG-B8dhrKvttQ" base_NamedElement="_7478oMyIEfG-B8dhrKvttQ" id="PLM-REQ-17" text="The system shall receive the signal &quot;Pallet ready for shipment&quot; from Finishing &amp; Packaging" base_Class="_7478oMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Requirement xmi:id="_8oa40MyIEfG-B8dhrKvttQ" base_NamedElement="_8oX1gMyIEfG-B8dhrKvttQ" id="PLM-REQ-18" text="The system shall assign transport vehicles or slots and coordinate delivery of finished pallets after receiving the ready signal" base_Class="_8oX1gMyIEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_CN_A4MyOEfG-B8dhrKvttQ" base_DirectedRelationship="_CN1P4MyOEfG-B8dhrKvttQ" base_Abstraction="_CN1P4MyOEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_Nu77kMyOEfG-B8dhrKvttQ" base_DirectedRelationship="_Nu3DEMyOEfG-B8dhrKvttQ" base_Abstraction="_Nu3DEMyOEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_TqNnMMyOEfG-B8dhrKvttQ" base_DirectedRelationship="_TqFEUMyOEfG-B8dhrKvttQ" base_Abstraction="_TqFEUMyOEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_WKDGsMyOEfG-B8dhrKvttQ" base_DirectedRelationship="_WJ-1QMyOEfG-B8dhrKvttQ" base_Abstraction="_WJ-1QMyOEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_XlS8sMyOEfG-B8dhrKvttQ" base_DirectedRelationship="_XlLn8MyOEfG-B8dhrKvttQ" base_Abstraction="_XlLn8MyOEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_hIct8MyOEfG-B8dhrKvttQ" base_DirectedRelationship="_hIXOYMyOEfG-B8dhrKvttQ" base_Abstraction="_hIXOYMyOEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_isbpMMyOEfG-B8dhrKvttQ" base_DirectedRelationship="_isTGUMyOEfG-B8dhrKvttQ" base_Abstraction="_isTGUMyOEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_ceC-4MyPEfG-B8dhrKvttQ" base_DirectedRelationship="_cd508MyPEfG-B8dhrKvttQ" base_Abstraction="_cd508MyPEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_9pi6cMyPEfG-B8dhrKvttQ" base_DirectedRelationship="_9pZwgMyPEfG-B8dhrKvttQ" base_Abstraction="_9pZwgMyPEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_-sbTwMyPEfG-B8dhrKvttQ" base_DirectedRelationship="_-sSw4MyPEfG-B8dhrKvttQ" base_Abstraction="_-sSw4MyPEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="__qtg8MyPEfG-B8dhrKvttQ" base_DirectedRelationship="__qqdoMyPEfG-B8dhrKvttQ" base_Abstraction="__qqdoMyPEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_Ag1QoMyQEfG-B8dhrKvttQ" base_DirectedRelationship="_Agw_MMyQEfG-B8dhrKvttQ" base_Abstraction="_Agw_MMyQEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_ByynwMyQEfG-B8dhrKvttQ" base_DirectedRelationship="_Bypd0MyQEfG-B8dhrKvttQ" base_Abstraction="_Bypd0MyQEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_EG9p0MyQEfG-B8dhrKvttQ" base_DirectedRelationship="_EG1G8MyQEfG-B8dhrKvttQ" base_Abstraction="_EG1G8MyQEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_G0u3oMyQEfG-B8dhrKvttQ" base_DirectedRelationship="_G0sbYMyQEfG-B8dhrKvttQ" base_Abstraction="_G0sbYMyQEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_Rg2cEMyQEfG-B8dhrKvttQ" base_DirectedRelationship="_RgvHUMyQEfG-B8dhrKvttQ" base_Abstraction="_RgvHUMyQEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_SehlQMyQEfG-B8dhrKvttQ" base_DirectedRelationship="_SefJAMyQEfG-B8dhrKvttQ" base_Abstraction="_SefJAMyQEfG-B8dhrKvttQ"/>
+  <Requirements:Satisfy xmi:id="_UDbtkMyQEfG-B8dhrKvttQ" base_DirectedRelationship="_UDSjoMyQEfG-B8dhrKvttQ" base_Abstraction="_UDSjoMyQEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_3KmEkMyQEfG-B8dhrKvttQ" base_DirectedRelationship="_3KdhsMyQEfG-B8dhrKvttQ" base_Abstraction="_3KdhsMyQEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_6w0kYMyQEfG-B8dhrKvttQ" base_DirectedRelationship="_6wsokMyQEfG-B8dhrKvttQ" base_Abstraction="_6wsokMyQEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_CugMoMyREfG-B8dhrKvttQ" base_DirectedRelationship="_CuWboMyREfG-B8dhrKvttQ" base_Abstraction="_CuWboMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_HWo1YMyREfG-B8dhrKvttQ" base_DirectedRelationship="_HWj84MyREfG-B8dhrKvttQ" base_Abstraction="_HWj84MyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_K-cCgMyREfG-B8dhrKvttQ" base_DirectedRelationship="_K-YYIMyREfG-B8dhrKvttQ" base_Abstraction="_K-YYIMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_Z7_m8MyREfG-B8dhrKvttQ" base_DirectedRelationship="_Z76ucMyREfG-B8dhrKvttQ" base_Abstraction="_Z76ucMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_l1F74MyREfG-B8dhrKvttQ" base_DirectedRelationship="_l09ZAMyREfG-B8dhrKvttQ" base_Abstraction="_l09ZAMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_nADTIMyREfG-B8dhrKvttQ" base_DirectedRelationship="_m_9MgMyREfG-B8dhrKvttQ" base_Abstraction="_m_9MgMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_oiTJAMyREfG-B8dhrKvttQ" base_DirectedRelationship="_oiLNMMyREfG-B8dhrKvttQ" base_Abstraction="_oiLNMMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_vu4rgMyREfG-B8dhrKvttQ" base_DirectedRelationship="_vuwIoMyREfG-B8dhrKvttQ" base_Abstraction="_vuwIoMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_wrYI8MyREfG-B8dhrKvttQ" base_DirectedRelationship="_wrLUoMyREfG-B8dhrKvttQ" base_Abstraction="_wrLUoMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_-f1XUMyREfG-B8dhrKvttQ" base_DirectedRelationship="_-frmUMyREfG-B8dhrKvttQ" base_Abstraction="_-frmUMyREfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_AuEwgMySEfG-B8dhrKvttQ" base_DirectedRelationship="_At8NoMySEfG-B8dhrKvttQ" base_Abstraction="_At8NoMySEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_IP0DoMySEfG-B8dhrKvttQ" base_DirectedRelationship="_IPvyMMySEfG-B8dhrKvttQ" base_Abstraction="_IPvyMMySEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_RkmBsMySEfG-B8dhrKvttQ" base_DirectedRelationship="_Rkc3wMySEfG-B8dhrKvttQ" base_Abstraction="_Rkc3wMySEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_S2aO4MySEfG-B8dhrKvttQ" base_DirectedRelationship="_S2RE8MySEfG-B8dhrKvttQ" base_Abstraction="_S2RE8MySEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_UKK80MySEfG-B8dhrKvttQ" base_DirectedRelationship="_UKEPIMySEfG-B8dhrKvttQ" base_Abstraction="_UKEPIMySEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_X0pqgMySEfG-B8dhrKvttQ" base_DirectedRelationship="_X0hHoMySEfG-B8dhrKvttQ" base_Abstraction="_X0hHoMySEfG-B8dhrKvttQ"/>
+  <Requirements:Refine xmi:id="_Y_qFEMySEfG-B8dhrKvttQ" base_DirectedRelationship="_Y_nBwMySEfG-B8dhrKvttQ" base_Abstraction="_Y_nBwMySEfG-B8dhrKvttQ"/>
+  <Requirements:TestCase xmi:id="_2tx8oM7IEfG6Z-2Eqxj-FQ" base_Behavior="_2tg24M7IEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_O3iqkM7MEfG6Z-2Eqxj-FQ" base_Behavior="_O3QWsM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_T6j4gM7MEfG6Z-2Eqxj-FQ" base_Behavior="_T6YSUM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_XVnqIM7MEfG6Z-2Eqxj-FQ" base_Behavior="_XVegMM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_aVDPsM7MEfG6Z-2Eqxj-FQ" base_Behavior="_aUz_IM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_hDnZcM7MEfG6Z-2Eqxj-FQ" base_Behavior="_hDalIM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_lfH7cM7MEfG6Z-2Eqxj-FQ" base_Behavior="_le_YkM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:TestCase xmi:id="_oVz0sM7MEfG6Z-2Eqxj-FQ" base_Behavior="_oVr44M7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_26mT0M7MEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_26aGkM7MEfG6Z-2Eqxj-FQ" base_Abstraction="_26aGkM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_8fUgoM7MEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_8fF3IM7MEfG6Z-2Eqxj-FQ" base_Abstraction="_8fF3IM7MEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_C8LPUM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_C8EhoM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_C8EhoM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_Ph29cM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_PhuakM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_PhuakM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_QZRGkM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_QZGHcM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_QZGHcM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_RTIGwM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_RTCAIM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_RTCAIM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_a1IogM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_a1Ch4M7NEfG6Z-2Eqxj-FQ" base_Abstraction="_a1Ch4M7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_m48_sM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_m40c0M7NEfG6Z-2Eqxj-FQ" base_Abstraction="_m40c0M7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_pXp2wM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_pXhT4M7NEfG6Z-2Eqxj-FQ" base_Abstraction="_pXhT4M7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_31mHAM7NEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_31Z5wM7NEfG6Z-2Eqxj-FQ" base_Abstraction="_31Z5wM7NEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_S0jn0M7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_S0ZPwM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_S0ZPwM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_czzfMM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_czrjYM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_czrjYM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_hcycgM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_hcm2UM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_hcm2UM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_jDwaUM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_jDrh0M7OEfG6Z-2Eqxj-FQ" base_Abstraction="_jDrh0M7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_pa0DAM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_paqSAM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_paqSAM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_trywAM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_trl7sM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_trl7sM7OEfG6Z-2Eqxj-FQ"/>
+  <Requirements:Verify xmi:id="_vMtwMM7OEfG6Z-2Eqxj-FQ" base_DirectedRelationship="_vMl0YM7OEfG6Z-2Eqxj-FQ" base_Abstraction="_vMl0YM7OEfG6Z-2Eqxj-FQ"/>
 </xmi:XMI>
