@@ -125,7 +125,6 @@
 				<feature mandatory="true" name="MON-FEAT-03 Maintenance Management"/>
 				<and mandatory="true" name="MON-FEAT-04 Band Coordination">
 					<feature mandatory="true" name="MON-FEAT-05 Band Speed Supervision"/>
-					<feature mandatory="true" name="MON-FEAT-06 Pan Position &amp; Spacing Tracking"/>
 				</and>
 				<feature mandatory="true" name="MON-FEAT-07 Container Recovery"/>
 			</and>

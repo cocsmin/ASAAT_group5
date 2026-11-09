@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<nta>
+<declaration>// seconds; estimated where the plant value is unknown
+const int HB = 5;          // heartbeat T_hb
+const int DEADAFTER = 8;   // broker: 1.5 x keep-alive 5 s = 7.5 s, rounded up
+const int DETECT = 15;     // THM-REQ-72
+const int RESTORE = 60;    // THM-REQ-73
+const int ESCALATE = 45;   // MON escalates after this
+const int RDMIN = 1;       // Docker restart takes at least this
+const int RDMAX = 30;      // estimated upper bound of a restart
+clock t;                   // observer: time since the fault
+chan hb, restart;
+broadcast chan crash, freeze, birth, ndeath, escalate;
+</declaration>
+<template>
+<name>Node</name>
+<declaration>clock x;</declaration>
+<location id="Node_Starting" x="300" y="0"><name x="280" y="18">Starting</name><label kind="invariant" x="280" y="36">x &lt;= 1</label></location>
+<location id="Node_Online" x="-150" y="173"><name x="-170" y="191">Online</name><label kind="invariant" x="-170" y="209">x &lt;= HB</label></location>
+<location id="Node_Down" x="-150" y="-173"><name x="-170" y="-155">Down</name></location>
+<init ref="Node_Online"/>
+<transition><source ref="Node_Starting"/><target ref="Node_Online"/><label kind="synchronisation" x="39" y="58">birth!</label></transition>
+<transition><source ref="Node_Online"/><target ref="Node_Online"/><label kind="guard" x="-261" y="123">x &gt;= HB</label><label kind="synchronisation" x="-261" y="139">hb!</label><label kind="assignment" x="-261" y="155">x = 0</label><nail x="-105" y="118"/><nail x="-195" y="118"/></transition>
+<transition><source ref="Node_Online"/><target ref="Node_Down"/><label kind="synchronisation" x="-87" y="3">crash?</label><nail x="-90" y="0"/></transition>
+<transition><source ref="Node_Online"/><target ref="Node_Down"/><label kind="synchronisation" x="-278" y="4">freeze?</label><nail x="-210" y="0"/></transition>
+<transition><source ref="Node_Down"/><target ref="Node_Starting"/><label kind="synchronisation" x="26" y="-72">restart?</label><label kind="assignment" x="26" y="-56">x = 0</label></transition>
+</template>
+<template>
+<name>Broker</name>
+<declaration>clock y;</declaration>
+<location id="Broker_Alive" x="300" y="0"><name x="280" y="18">Alive</name><label kind="invariant" x="280" y="36">y &lt;= DEADAFTER</label></location>
+<location id="Broker_Notify" x="-150" y="173"><name x="-170" y="191">Notify</name><committed/></location>
+<location id="Broker_Dead" x="-150" y="-173"><name x="-170" y="-155">Dead</name></location>
+<init ref="Broker_Alive"/>
+<transition><source ref="Broker_Alive"/><target ref="Broker_Alive"/><label kind="synchronisation" x="276" y="-121">hb?</label><label kind="assignment" x="276" y="-105">y = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
+<transition><source ref="Broker_Alive"/><target ref="Broker_Alive"/><label kind="synchronisation" x="272" y="-176">birth?</label><label kind="assignment" x="272" y="-160">y = 0</label><nail x="345" y="-140"/><nail x="255" y="-140"/></transition>
+<transition><source ref="Broker_Alive"/><target ref="Broker_Notify"/><label kind="synchronisation" x="39" y="58">crash?</label></transition>
+<transition><source ref="Broker_Notify"/><target ref="Broker_Dead"/><label kind="synchronisation" x="-146" y="-8">ndeath!</label></transition>
+<transition><source ref="Broker_Alive"/><target ref="Broker_Dead"/><label kind="guard" x="-12" y="-19">y &gt;= DEADAFTER</label><label kind="synchronisation" x="-12" y="-3">ndeath!</label><nail x="53" y="-30"/></transition>
+<transition><source ref="Broker_Dead"/><target ref="Broker_Alive"/><label kind="synchronisation" x="71" y="-182">birth?</label><label kind="assignment" x="71" y="-166">y = 0</label><nail x="97" y="-143"/></transition>
+</template>
+<template>
+<name>MON</name>
+<declaration>clock z;</declaration>
+<location id="MON_Watching" x="300" y="0"><name x="280" y="18">Watching</name></location>
+<location id="MON_Failed" x="-150" y="173"><name x="-170" y="191">Failed</name><label kind="invariant" x="-170" y="209">z &lt;= ESCALATE</label></location>
+<location id="MON_Escalated" x="-150" y="-173"><name x="-170" y="-155">Escalated</name></location>
+<init ref="MON_Watching"/>
+<transition><source ref="MON_Watching"/><target ref="MON_Failed"/><label kind="synchronisation" x="18" y="-10">ndeath?</label><label kind="assignment" x="18" y="6">z = 0</label><nail x="53" y="30"/></transition>
+<transition><source ref="MON_Failed"/><target ref="MON_Watching"/><label kind="synchronisation" x="70" y="150">birth?</label><nail x="97" y="143"/></transition>
+<transition><source ref="MON_Failed"/><target ref="MON_Escalated"/><label kind="guard" x="-146" y="-16">z &gt;= ESCALATE</label><label kind="synchronisation" x="-146" y="0">escalate!</label></transition>
+</template>
+<template>
+<name>Docker</name>
+<declaration>clock d;</declaration>
+<location id="Docker_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
+<location id="Docker_Restarting" x="-300" y="0"><name x="-320" y="18">Restarting</name><label kind="invariant" x="-320" y="36">d &lt;= RDMAX</label></location>
+<init ref="Docker_Idle"/>
+<transition><source ref="Docker_Idle"/><target ref="Docker_Restarting"/><label kind="synchronisation" x="-18" y="131">crash?</label><label kind="assignment" x="-18" y="147">d = 0</label><nail x="0" y="120"/></transition>
+<transition><source ref="Docker_Idle"/><target ref="Docker_Restarting"/><label kind="synchronisation" x="-32" y="-36">freeze?</label><label kind="assignment" x="-32" y="-20">d = 0</label><nail x="0" y="0"/></transition>
+<transition><source ref="Docker_Restarting"/><target ref="Docker_Idle"/><label kind="guard" x="-58" y="-169">d &gt;= RDMIN</label><label kind="synchronisation" x="-58" y="-153">restart!</label><nail x="0" y="-120"/></transition>
+</template>
+<template>
+<name>Env</name>
+<declaration></declaration>
+<location id="Env_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
+<location id="Env_Faulted" x="-300" y="0"><name x="-320" y="18">Faulted</name></location>
+<init ref="Env_Idle"/>
+<transition><source ref="Env_Idle"/><target ref="Env_Faulted"/><label kind="synchronisation" x="-24" y="-101">crash!</label><label kind="assignment" x="-24" y="-85">t = 0</label><nail x="0" y="-60"/></transition>
+<transition><source ref="Env_Idle"/><target ref="Env_Faulted"/><label kind="synchronisation" x="-27" y="70">freeze!</label><label kind="assignment" x="-27" y="86">t = 0</label><nail x="0" y="60"/></transition>
+</template>
+<system>system Node, Broker, MON, Docker, Env;</system>
+</nta>

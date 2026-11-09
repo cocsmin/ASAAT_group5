@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Blocks="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks" xmlns:Requirements="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/papyrus/sysml/1.6/SysML/Blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks http://www.eclipse.org/papyrus/sysml/1.6/SysML/Requirements http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements">
+  <uml:Model xmi:id="_tFpuwMSWEfG8fKg8yLcw1w" name="Line Monitoring &amp; Health (MON)">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_tKnHQMSWEfG8fKg8yLcw1w">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_7b6psMSWEfG8fKg8yLcw1w" name="Line Monitoring &amp; Health (MON)">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_3ihg0MSXEfG8fKg8yLcw1w" name="mon-af-01 health monitor" type="_FRbWQMSXEfG8fKg8yLcw1w" aggregation="composite" association="_3ifEkMSXEfG8fKg8yLcw1w">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4gjPUMSXEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4gp9AMSXEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_Cf074sSYEfG8fKg8yLcw1w" name="mon-fd-01 message bus" type="_eKHuIMSXEfG8fKg8yLcw1w" aggregation="composite" association="_Cf0U0MSYEfG8fKg8yLcw1w">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DTWqkMSYEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DTXRoMSYEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_EWN1wsSYEfG8fKg8yLcw1w" name="mon-af-02 event / traceability logger" type="_Li_a8MSXEfG8fKg8yLcw1w" aggregation="composite" association="_EWNOsMSYEfG8fKg8yLcw1w">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_E9OLYMSYEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_E9OLYcSYEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_FrXq0sSYEfG8fKg8yLcw1w" name="mon-fd-02 log database" type="_iwFzsMSXEfG8fKg8yLcw1w" aggregation="composite" association="_FrXDwMSYEfG8fKg8yLcw1w">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GYG1AMSYEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_GYG1AcSYEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_HITi4sSYEfG8fKg8yLcw1w" name="mon-af-03 maintenance manager" type="_UNH5gMSXEfG8fKg8yLcw1w" aggregation="composite" association="_HIS70MSYEfG8fKg8yLcw1w">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IE6VEMSYEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IE6VEcSYEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_I5ksMsSYEfG8fKg8yLcw1w" name="mon-fd-03 overseer dashboard" type="_oOJX0MSXEfG8fKg8yLcw1w" aggregation="composite" association="_I5kFIMSYEfG8fKg8yLcw1w">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ji25wMSYEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ji25wcSYEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_KPO3kMSYEfG8fKg8yLcw1w" name="mon-af-07 container supervision" type="_ZkoJsMSXEfG8fKg8yLcw1w" aggregation="composite" association="_KPOQgMSYEfG8fKg8yLcw1w">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_K7SFQMSYEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_K7SFQcSYEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_DOdv0Mx1EfGjU5susPnx8g" name="sensorData" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_Q2OmAMx1EfGjU5susPnx8g" name="containerStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_tvj-ANH1EfGKVdaTCg46lw" name="healthStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_wShC8NH1EfGKVdaTCg46lw" name="healthAlert" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_0ILs8NH1EfGKVdaTCg46lw" name="maintenanceStatus" aggregation="composite"/>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_S5M_0Mx0EfGjU5susPnx8g" name="logEntry">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_S5ON8Mx0EfGjU5susPnx8g" partWithPort="_EWN1wsSYEfG8fKg8yLcw1w" role="_LpYjIMx0EfGjU5susPnx8g"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_S5O1AMx0EfGjU5susPnx8g" partWithPort="_FrXq0sSYEfG8fKg8yLcw1w" role="_N8cx8Mx0EfGjU5susPnx8g"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_q_zzcMx0EfGjU5susPnx8g" name="eventData">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_q_0agMx0EfGjU5susPnx8g" partWithPort="_Cf074sSYEfG8fKg8yLcw1w" role="_kdCC8Mx0EfGjU5susPnx8g"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_q_1BkMx0EfGjU5susPnx8g" partWithPort="_EWN1wsSYEfG8fKg8yLcw1w" role="_omcIUMx0EfGjU5susPnx8g"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_HEls0Mx1EfGjU5susPnx8g" name="sensorData">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_HEmT4Mx1EfGjU5susPnx8g" role="_DOdv0Mx1EfGjU5susPnx8g"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_HEm68Mx1EfGjU5susPnx8g" partWithPort="_3ihg0MSXEfG8fKg8yLcw1w" role="_Ee3nwMx1EfGjU5susPnx8g"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_dUGb8Mx1EfGjU5susPnx8g" name="containerStatus">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_dUHDAMx1EfGjU5susPnx8g" partWithPort="_KPO3kMSYEfG8fKg8yLcw1w" role="_YsySkMx1EfGjU5susPnx8g"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_dUHqEMx1EfGjU5susPnx8g" role="_Q2OmAMx1EfGjU5susPnx8g"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_3uEjoNH3EfGKVdaTCg46lw" name="Connector17">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_3uFxwNH3EfGKVdaTCg46lw" partWithPort="_3ihg0MSXEfG8fKg8yLcw1w" role="_kF1VkNHzEfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_3uFxwdH3EfGKVdaTCg46lw" partWithPort="_EWN1wsSYEfG8fKg8yLcw1w" role="_2SbB0NHzEfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_9aNnENH3EfGKVdaTCg46lw" name="Connector18">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_9aNnEdH3EfGKVdaTCg46lw" partWithPort="_3ihg0MSXEfG8fKg8yLcw1w" role="_pJh48NHzEfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_9aNnEtH3EfGKVdaTCg46lw" partWithPort="_EWN1wsSYEfG8fKg8yLcw1w" role="_5gNMcNHzEfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_lwS6ANH4EfGKVdaTCg46lw" name="Connector19">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_lwThENH4EfGKVdaTCg46lw" partWithPort="_3ihg0MSXEfG8fKg8yLcw1w" role="_pJh48NHzEfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_lwUIINH4EfGKVdaTCg46lw" partWithPort="_HITi4sSYEfG8fKg8yLcw1w" role="_BLXhUNH0EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_8dLhoNH4EfGKVdaTCg46lw" name="Connector20">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_8dMIsNH4EfGKVdaTCg46lw" partWithPort="_HITi4sSYEfG8fKg8yLcw1w" role="_D3ko4NH0EfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_8dMvwNH4EfGKVdaTCg46lw" partWithPort="_Cf074sSYEfG8fKg8yLcw1w" role="_CUG1kNH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_SZF_UNH5EfGKVdaTCg46lw" name="Connector21">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_SZGmYNH5EfGKVdaTCg46lw" partWithPort="_HITi4sSYEfG8fKg8yLcw1w" role="_G1d9YNH0EfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_SZGmYdH5EfGKVdaTCg46lw" partWithPort="_Cf074sSYEfG8fKg8yLcw1w" role="_EPK0ENH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_ihipkNH5EfGKVdaTCg46lw" name="Connector22">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_ihj3sNH5EfGKVdaTCg46lw" partWithPort="_KPO3kMSYEfG8fKg8yLcw1w" role="_wIBfoNH0EfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_ihj3sdH5EfGKVdaTCg46lw" partWithPort="_Cf074sSYEfG8fKg8yLcw1w" role="_9rj9INH0EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_Cd5RcNH6EfGKVdaTCg46lw" name="Connector23">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_Cd54gNH6EfGKVdaTCg46lw" partWithPort="_EWN1wsSYEfG8fKg8yLcw1w" role="_7mZyQMx0EfGjU5susPnx8g"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_Cd6fkNH6EfGKVdaTCg46lw" partWithPort="_FrXq0sSYEfG8fKg8yLcw1w" role="_LzDcQNH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_LoIMYNH6EfGKVdaTCg46lw" name="Connector24">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_LoJagNH6EfGKVdaTCg46lw" partWithPort="_FrXq0sSYEfG8fKg8yLcw1w" role="_ODQkUNH1EfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_LoJagdH6EfGKVdaTCg46lw" partWithPort="_I5ksMsSYEfG8fKg8yLcw1w" role="_dVc8ANH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_WI6DgNH6EfGKVdaTCg46lw" name="Connector25">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_WI7RoNH6EfGKVdaTCg46lw" partWithPort="_FrXq0sSYEfG8fKg8yLcw1w" role="_P54uwNH1EfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_WI7RodH6EfGKVdaTCg46lw" partWithPort="_I5ksMsSYEfG8fKg8yLcw1w" role="_fY-S8NH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_e2ZYENH6EfGKVdaTCg46lw" name="Connector26">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_e2amMNH6EfGKVdaTCg46lw" partWithPort="_HITi4sSYEfG8fKg8yLcw1w" role="_G1d9YNH0EfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_e2amMdH6EfGKVdaTCg46lw" partWithPort="_I5ksMsSYEfG8fKg8yLcw1w" role="_bK03gNH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_mP248NH6EfGKVdaTCg46lw" name="Connector27">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_mP3gANH6EfGKVdaTCg46lw" partWithPort="_3ihg0MSXEfG8fKg8yLcw1w" role="_kF1VkNHzEfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_mP3gAdH6EfGKVdaTCg46lw" partWithPort="_I5ksMsSYEfG8fKg8yLcw1w" role="_Uv2YINH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_wqJtkNH6EfGKVdaTCg46lw" name="Connector28">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_wqK7sNH6EfGKVdaTCg46lw" partWithPort="_KPO3kMSYEfG8fKg8yLcw1w" role="_YsySkMx1EfGjU5susPnx8g"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_wqK7sdH6EfGKVdaTCg46lw" partWithPort="_I5ksMsSYEfG8fKg8yLcw1w" role="_YgfYMNH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_4wlpMNH6EfGKVdaTCg46lw" name="Connector29">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_4wmQQNH6EfGKVdaTCg46lw" partWithPort="_3ihg0MSXEfG8fKg8yLcw1w" role="_kF1VkNHzEfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_4wm3UNH6EfGKVdaTCg46lw" role="_tvj-ANH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_EX1ZINH7EfGKVdaTCg46lw" name="Connector30">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_EX2nQNH7EfGKVdaTCg46lw" partWithPort="_3ihg0MSXEfG8fKg8yLcw1w" role="_pJh48NHzEfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_EX2nQdH7EfGKVdaTCg46lw" role="_wShC8NH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_fFd5YNH7EfGKVdaTCg46lw" name="Connector31">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_fFd5YdH7EfGKVdaTCg46lw" partWithPort="_HITi4sSYEfG8fKg8yLcw1w" role="_G1d9YNH0EfGKVdaTCg46lw"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_fFd5YtH7EfGKVdaTCg46lw" role="_0ILs8NH1EfGKVdaTCg46lw"/>
+      </ownedConnector>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_FRbWQMSXEfG8fKg8yLcw1w" name="MON-AF-01 Health Monitor">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_Ee3nwMx1EfGjU5susPnx8g" name="sensorData" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kF1VkNHzEfGKVdaTCg46lw" name="healthStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_pJh48NHzEfGKVdaTCg46lw" name="healthAlert" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_TRLWgNH8EfGKVdaTCg46lw" name="featureID" visibility="public">
+        <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_MhlAENH-EfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-01"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Li_a8MSXEfG8fKg8yLcw1w" name="MON-AF-02 Event / Traceability Logger">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_LpYjIMx0EfGjU5susPnx8g" name="logEntry" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_omcIUMx0EfGjU5susPnx8g" name="eventData" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_7mZyQMx0EfGjU5susPnx8g" name="traceabilityData" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_2SbB0NHzEfGKVdaTCg46lw" name="healthStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_5gNMcNHzEfGKVdaTCg46lw" name="healthAlert" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_ZQPrENH-EfGKVdaTCg46lw" name="featureID" visibility="public">
+        <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_jh5hENH-EfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-02"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_UNH5gMSXEfG8fKg8yLcw1w" name="MON-AF-03 Maintenance Manager">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_BLXhUNH0EfGKVdaTCg46lw" name="healthAlert" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_D3ko4NH0EfGKVdaTCg46lw" name="maintenanceRequest" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_G1d9YNH0EfGKVdaTCg46lw" name="maintenanceStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_43lsQNH-EfGKVdaTCg46lw" name="featureID" visibility="public">
+        <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_95xzwNH-EfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-03"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ZkoJsMSXEfG8fKg8yLcw1w" name="MON-AF-07 Container Supervision">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_YsySkMx1EfGjU5susPnx8g" name="containerStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_wIBfoNH0EfGKVdaTCg46lw" name="containerAlert" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_z6wxcNH0EfGKVdaTCg46lw" name="containerHealth" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_K-1lgNH_EfGKVdaTCg46lw" name="featureID" visibility="public">
+        <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_SSDUcNH_EfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-04"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_eKHuIMSXEfG8fKg8yLcw1w" name="MON-FD-01 Message Bus">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kdCC8Mx0EfGjU5susPnx8g" name="eventData" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_7DOo8NH0EfGKVdaTCg46lw" name="healthAlert" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_9rj9INH0EfGKVdaTCg46lw" name="containerAlert" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_CUG1kNH1EfGKVdaTCg46lw" name="maintenanceRequest" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_EPK0ENH1EfGKVdaTCg46lw" name="maintenanceStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_cPz-ENH_EfGKVdaTCg46lw" name="featureID" visibility="public">
+        <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_g9sCcNH_EfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-05"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_iwFzsMSXEfG8fKg8yLcw1w" name="MON-FD-02 Log Database">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_N8cx8Mx0EfGjU5susPnx8g" name="logEntry" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_LzDcQNH1EfGKVdaTCg46lw" name="traceabilityData" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ODQkUNH1EfGKVdaTCg46lw" name="logQuery" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_P54uwNH1EfGKVdaTCg46lw" name="logResult" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_nNQjENH_EfGKVdaTCg46lw" name="featureID" visibility="public">
+        <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_rEprYNH_EfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-06"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_oOJX0MSXEfG8fKg8yLcw1w" name="MON-FD-03 Overseer Dashboard">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_Uv2YINH1EfGKVdaTCg46lw" name="healthStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_YgfYMNH1EfGKVdaTCg46lw" name="containerStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_bK03gNH1EfGKVdaTCg46lw" name="maintenanceStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_dVc8ANH1EfGKVdaTCg46lw" name="logQuery" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_fY-S8NH1EfGKVdaTCg46lw" name="logResult" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_9RyxQNH_EfGKVdaTCg46lw" name="featureID" visibility="public">
+        <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_B80V8NIAEfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-07"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_3ifEkMSXEfG8fKg8yLcw1w" memberEnd="_3ihg0MSXEfG8fKg8yLcw1w _3iiu8cSXEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3igSsMSXEfG8fKg8yLcw1w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3ig5wMSXEfG8fKg8yLcw1w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_3iiu8cSXEfG8fKg8yLcw1w" name="" type="_7b6psMSWEfG8fKg8yLcw1w" association="_3ifEkMSXEfG8fKg8yLcw1w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Cf0U0MSYEfG8fKg8yLcw1w" memberEnd="_Cf074sSYEfG8fKg8yLcw1w _Cf075cSYEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Cf074MSYEfG8fKg8yLcw1w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Cf074cSYEfG8fKg8yLcw1w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_Cf075cSYEfG8fKg8yLcw1w" name="" type="_7b6psMSWEfG8fKg8yLcw1w" association="_Cf0U0MSYEfG8fKg8yLcw1w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_EWNOsMSYEfG8fKg8yLcw1w" memberEnd="_EWN1wsSYEfG8fKg8yLcw1w _EWOc0sSYEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_EWN1wMSYEfG8fKg8yLcw1w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_EWN1wcSYEfG8fKg8yLcw1w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_EWOc0sSYEfG8fKg8yLcw1w" name="" type="_7b6psMSWEfG8fKg8yLcw1w" association="_EWNOsMSYEfG8fKg8yLcw1w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_FrXDwMSYEfG8fKg8yLcw1w" memberEnd="_FrXq0sSYEfG8fKg8yLcw1w _FrYR4sSYEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_FrXq0MSYEfG8fKg8yLcw1w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_FrXq0cSYEfG8fKg8yLcw1w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_FrYR4sSYEfG8fKg8yLcw1w" name="" type="_7b6psMSWEfG8fKg8yLcw1w" association="_FrXDwMSYEfG8fKg8yLcw1w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_HIS70MSYEfG8fKg8yLcw1w" memberEnd="_HITi4sSYEfG8fKg8yLcw1w _HITi5cSYEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_HITi4MSYEfG8fKg8yLcw1w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_HITi4cSYEfG8fKg8yLcw1w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_HITi5cSYEfG8fKg8yLcw1w" name="" type="_7b6psMSWEfG8fKg8yLcw1w" association="_HIS70MSYEfG8fKg8yLcw1w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_I5kFIMSYEfG8fKg8yLcw1w" memberEnd="_I5ksMsSYEfG8fKg8yLcw1w _I5ksNcSYEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_I5ksMMSYEfG8fKg8yLcw1w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_I5ksMcSYEfG8fKg8yLcw1w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_I5ksNcSYEfG8fKg8yLcw1w" name="" type="_7b6psMSWEfG8fKg8yLcw1w" association="_I5kFIMSYEfG8fKg8yLcw1w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_KPOQgMSYEfG8fKg8yLcw1w" memberEnd="_KPO3kMSYEfG8fKg8yLcw1w _KPO3k8SYEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_KPOQgcSYEfG8fKg8yLcw1w" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_KPOQgsSYEfG8fKg8yLcw1w" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_KPO3k8SYEfG8fKg8yLcw1w" name="" type="_7b6psMSWEfG8fKg8yLcw1w" association="_KPOQgMSYEfG8fKg8yLcw1w"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ZFiTENICEfGKVdaTCg46lw" name="MON-REQ-01 Equipment Health Monitoring"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_K5Dw0NIDEfGKVdaTCg46lw" name="MON-REQ-02 Event &amp; Traceability Logging"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_bsQBMNIDEfGKVdaTCg46lw" name="MON-REQ-03 Maintenance Management"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_lDMicNIDEfGKVdaTCg46lw" name="MON-REQ-04 Container Supervision"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_z2q90NIDEfGKVdaTCg46lw" name="MON-REQ-05 Message Bus"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_PIS78NIEEfGKVdaTCg46lw" name="MON-REQ-06 Log Database"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ZheWQNIEEfGKVdaTCg46lw" name="MON-REQ-07 Overseer Dashboard"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_JDay8NIFEfGKVdaTCg46lw" name="" client="_FRbWQMSXEfG8fKg8yLcw1w" supplier="_ZFiTENICEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_dtPWoNIFEfGKVdaTCg46lw" name="" client="_Li_a8MSXEfG8fKg8yLcw1w" supplier="_K5Dw0NIDEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_mbHFsNIFEfGKVdaTCg46lw" name="" client="_UNH5gMSXEfG8fKg8yLcw1w" supplier="_bsQBMNIDEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_vZXaINIFEfGKVdaTCg46lw" name="" client="_ZkoJsMSXEfG8fKg8yLcw1w" supplier="_lDMicNIDEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_0cR6YNIFEfGKVdaTCg46lw" name="" client="_eKHuIMSXEfG8fKg8yLcw1w" supplier="_z2q90NIDEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_32xEQNIFEfGKVdaTCg46lw" name="" client="_iwFzsMSXEfG8fKg8yLcw1w" supplier="_PIS78NIEEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:AssociationClass" xmi:id="_4_7rwNIFEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_ICxY0NIGEfGKVdaTCg46lw" name="" client="_oOJX0MSXEfG8fKg8yLcw1w" supplier="_ZheWQNIEEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_6l60UNIUEfGKVdaTCg46lw" name="MON-REQ-00 Monitoring System"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_QlwvwNIVEfGKVdaTCg46lw" name="DeriveReqt43" client="_ZFiTENICEfGKVdaTCg46lw" supplier="_6l60UNIUEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_L2Cb0NIWEfGKVdaTCg46lw" name="" client="_K5Dw0NIDEfGKVdaTCg46lw" supplier="_6l60UNIUEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_NIoFENIWEfGKVdaTCg46lw" name="" client="_bsQBMNIDEfGKVdaTCg46lw" supplier="_6l60UNIUEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_PvFJ8NIWEfGKVdaTCg46lw" name="" client="_lDMicNIDEfGKVdaTCg46lw" supplier="_6l60UNIUEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_WLIAUNIWEfGKVdaTCg46lw" name="" client="_z2q90NIDEfGKVdaTCg46lw" supplier="_6l60UNIUEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_X-yWUNIWEfGKVdaTCg46lw" name="" client="_PIS78NIEEfGKVdaTCg46lw" supplier="_6l60UNIUEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_bSgw4NIWEfGKVdaTCg46lw" name="" client="_ZheWQNIEEfGKVdaTCg46lw" supplier="_6l60UNIUEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_tChO0NIWEfGKVdaTCg46lw" name="Activity50"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_vLuXANIWEfGKVdaTCg46lw" name="MON-TC-01 Equipment Health Alert Test"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="__6LRUNIWEfGKVdaTCg46lw" name="" client="_vLuXANIWEfGKVdaTCg46lw" supplier="_ZFiTENICEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_Np04MNIXEfGKVdaTCg46lw" name="MON-TC-02 Event Logging Test"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_P3SOQNIXEfGKVdaTCg46lw" name="" client="_Np04MNIXEfGKVdaTCg46lw" supplier="_K5Dw0NIDEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_XF6YINIXEfGKVdaTCg46lw" name="MON-TC-03 Maintenance Request Test"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_Y5mjUNIXEfGKVdaTCg46lw" name="" client="_XF6YINIXEfGKVdaTCg46lw" supplier="_bsQBMNIDEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_gvyccNIXEfGKVdaTCg46lw" name="MON-TC-04 Container Supervision Test"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_kC9dYNIXEfGKVdaTCg46lw" name="" client="_gvyccNIXEfGKVdaTCg46lw" supplier="_lDMicNIDEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_sWINcNIXEfGKVdaTCg46lw" name="MON-TC-05 Message Bus Communication Test"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_ucrDMNIXEfGKVdaTCg46lw" name="" client="_sWINcNIXEfGKVdaTCg46lw" supplier="_z2q90NIDEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_ywGAMNIXEfGKVdaTCg46lw" name="MON-TC-06 Log Database Test"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_0c1O0NIXEfGKVdaTCg46lw" name="" client="_ywGAMNIXEfGKVdaTCg46lw" supplier="_PIS78NIEEfGKVdaTCg46lw"/>
+    <packagedElement xmi:type="uml:Activity" xmi:id="_3uTmoNIXEfGKVdaTCg46lw" name="MON-TC-07 Overseer Dashboard Test"/>
+    <packagedElement xmi:type="uml:Abstraction" xmi:id="_5rpdENIXEfGKVdaTCg46lw" name="" client="_3uTmoNIXEfGKVdaTCg46lw" supplier="_ZheWQNIEEfGKVdaTCg46lw"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tIQ94MSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tIVPUMSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKcIIMSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKdWQMSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//activities"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Activities"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKjc4MSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKkD8MSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//allocations"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Allocations"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKkD8cSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKkD8sSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//blocks"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Blocks"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKkrAMSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKkrAcSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//constraintblocks"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_ConstraintBlocks"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKkrAsSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKlSEMSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//deprecatedelements"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_DeprecatedElements"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKlSEcSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKlSEsSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//modelelements"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_ModelElements"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKlSE8SWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKl5IMSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//portsandflows"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Ports_u0026Flows"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKl5IcSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKl5IsSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.6/SysML#//requirements"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://SysML16_PROFILES/SysML.profile.uml#SysML.package_packagedElement_Requirements"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_tKmgMMSWEfG8fKg8yLcw1w">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_tKmgMcSWEfG8fKg8yLcw1w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Blocks:Block xmi:id="_7cIFEMSWEfG8fKg8yLcw1w" base_Class="_7b6psMSWEfG8fKg8yLcw1w"/>
+  <Blocks:Block xmi:id="_FRfnsMSXEfG8fKg8yLcw1w" base_Class="_FRbWQMSXEfG8fKg8yLcw1w"/>
+  <Blocks:Block xmi:id="_LjCeQMSXEfG8fKg8yLcw1w" base_Class="_Li_a8MSXEfG8fKg8yLcw1w"/>
+  <Blocks:Block xmi:id="_UNMK8MSXEfG8fKg8yLcw1w" base_Class="_UNH5gMSXEfG8fKg8yLcw1w"/>
+  <Blocks:Block xmi:id="_ZkrNAMSXEfG8fKg8yLcw1w" base_Class="_ZkoJsMSXEfG8fKg8yLcw1w"/>
+  <Blocks:Block xmi:id="_eKKxcMSXEfG8fKg8yLcw1w" base_Class="_eKHuIMSXEfG8fKg8yLcw1w"/>
+  <Blocks:Block xmi:id="_iwIP8MSXEfG8fKg8yLcw1w" base_Class="_iwFzsMSXEfG8fKg8yLcw1w"/>
+  <Blocks:Block xmi:id="_oOL0EMSXEfG8fKg8yLcw1w" base_Class="_oOJX0MSXEfG8fKg8yLcw1w"/>
+  <Blocks:NestedConnectorEnd xmi:id="_S5PcEMx0EfGjU5susPnx8g" base_Element="_S5ON8Mx0EfGjU5susPnx8g" propertyPath="_EWN1wsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_S5ON8Mx0EfGjU5susPnx8g"/>
+  <Blocks:NestedConnectorEnd xmi:id="_S5QqMMx0EfGjU5susPnx8g" base_Element="_S5O1AMx0EfGjU5susPnx8g" propertyPath="_FrXq0sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_S5O1AMx0EfGjU5susPnx8g"/>
+  <Blocks:NestedConnectorEnd xmi:id="_q_1Bkcx0EfGjU5susPnx8g" base_Element="_q_0agMx0EfGjU5susPnx8g" propertyPath="_Cf074sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_q_0agMx0EfGjU5susPnx8g"/>
+  <Blocks:NestedConnectorEnd xmi:id="_q_1ooMx0EfGjU5susPnx8g" base_Element="_q_1BkMx0EfGjU5susPnx8g" propertyPath="_EWN1wsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_q_1BkMx0EfGjU5susPnx8g"/>
+  <Blocks:NestedConnectorEnd xmi:id="_HEm68cx1EfGjU5susPnx8g" base_Element="_HEm68Mx1EfGjU5susPnx8g" propertyPath="_3ihg0MSXEfG8fKg8yLcw1w" base_ConnectorEnd="_HEm68Mx1EfGjU5susPnx8g"/>
+  <Blocks:NestedConnectorEnd xmi:id="_dUHqEcx1EfGjU5susPnx8g" base_Element="_dUHDAMx1EfGjU5susPnx8g" propertyPath="_KPO3kMSYEfG8fKg8yLcw1w" base_ConnectorEnd="_dUHDAMx1EfGjU5susPnx8g"/>
+  <Blocks:NestedConnectorEnd xmi:id="_3uFxwtH3EfGKVdaTCg46lw" base_Element="_3uFxwNH3EfGKVdaTCg46lw" propertyPath="_3ihg0MSXEfG8fKg8yLcw1w" base_ConnectorEnd="_3uFxwNH3EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_3uGY0NH3EfGKVdaTCg46lw" base_Element="_3uFxwdH3EfGKVdaTCg46lw" propertyPath="_EWN1wsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_3uFxwdH3EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_9aNnE9H3EfGKVdaTCg46lw" base_Element="_9aNnEdH3EfGKVdaTCg46lw" propertyPath="_3ihg0MSXEfG8fKg8yLcw1w" base_ConnectorEnd="_9aNnEdH3EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_9aNnFNH3EfGKVdaTCg46lw" base_Element="_9aNnEtH3EfGKVdaTCg46lw" propertyPath="_EWN1wsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_9aNnEtH3EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_lwUIIdH4EfGKVdaTCg46lw" base_Element="_lwThENH4EfGKVdaTCg46lw" propertyPath="_3ihg0MSXEfG8fKg8yLcw1w" base_ConnectorEnd="_lwThENH4EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_lwUIItH4EfGKVdaTCg46lw" base_Element="_lwUIINH4EfGKVdaTCg46lw" propertyPath="_HITi4sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_lwUIINH4EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_8dMvwdH4EfGKVdaTCg46lw" base_Element="_8dMIsNH4EfGKVdaTCg46lw" propertyPath="_HITi4sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_8dMIsNH4EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_8dMvwtH4EfGKVdaTCg46lw" base_Element="_8dMvwNH4EfGKVdaTCg46lw" propertyPath="_Cf074sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_8dMvwNH4EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_SZGmYtH5EfGKVdaTCg46lw" base_Element="_SZGmYNH5EfGKVdaTCg46lw" propertyPath="_HITi4sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_SZGmYNH5EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_SZHNcNH5EfGKVdaTCg46lw" base_Element="_SZGmYdH5EfGKVdaTCg46lw" propertyPath="_Cf074sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_SZGmYdH5EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_ihj3stH5EfGKVdaTCg46lw" base_Element="_ihj3sNH5EfGKVdaTCg46lw" propertyPath="_KPO3kMSYEfG8fKg8yLcw1w" base_ConnectorEnd="_ihj3sNH5EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_ihkewNH5EfGKVdaTCg46lw" base_Element="_ihj3sdH5EfGKVdaTCg46lw" propertyPath="_Cf074sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_ihj3sdH5EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_Cd6fkdH6EfGKVdaTCg46lw" base_Element="_Cd54gNH6EfGKVdaTCg46lw" propertyPath="_EWN1wsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_Cd54gNH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_Cd6fktH6EfGKVdaTCg46lw" base_Element="_Cd6fkNH6EfGKVdaTCg46lw" propertyPath="_FrXq0sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_Cd6fkNH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_LoJagtH6EfGKVdaTCg46lw" base_Element="_LoJagNH6EfGKVdaTCg46lw" propertyPath="_FrXq0sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_LoJagNH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_LoJag9H6EfGKVdaTCg46lw" base_Element="_LoJagdH6EfGKVdaTCg46lw" propertyPath="_I5ksMsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_LoJagdH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_WI7RotH6EfGKVdaTCg46lw" base_Element="_WI7RoNH6EfGKVdaTCg46lw" propertyPath="_FrXq0sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_WI7RoNH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_WI74sNH6EfGKVdaTCg46lw" base_Element="_WI7RodH6EfGKVdaTCg46lw" propertyPath="_I5ksMsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_WI7RodH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_e2amMtH6EfGKVdaTCg46lw" base_Element="_e2amMNH6EfGKVdaTCg46lw" propertyPath="_HITi4sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_e2amMNH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_e2bNQNH6EfGKVdaTCg46lw" base_Element="_e2amMdH6EfGKVdaTCg46lw" propertyPath="_I5ksMsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_e2amMdH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_mP4HENH6EfGKVdaTCg46lw" base_Element="_mP3gANH6EfGKVdaTCg46lw" propertyPath="_3ihg0MSXEfG8fKg8yLcw1w" base_ConnectorEnd="_mP3gANH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_mP4HEdH6EfGKVdaTCg46lw" base_Element="_mP3gAdH6EfGKVdaTCg46lw" propertyPath="_I5ksMsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_mP3gAdH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_wqK7stH6EfGKVdaTCg46lw" base_Element="_wqK7sNH6EfGKVdaTCg46lw" propertyPath="_KPO3kMSYEfG8fKg8yLcw1w" base_ConnectorEnd="_wqK7sNH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_wqLiwNH6EfGKVdaTCg46lw" base_Element="_wqK7sdH6EfGKVdaTCg46lw" propertyPath="_I5ksMsSYEfG8fKg8yLcw1w" base_ConnectorEnd="_wqK7sdH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_4wm3UdH6EfGKVdaTCg46lw" base_Element="_4wmQQNH6EfGKVdaTCg46lw" propertyPath="_3ihg0MSXEfG8fKg8yLcw1w" base_ConnectorEnd="_4wmQQNH6EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_EX2nQtH7EfGKVdaTCg46lw" base_Element="_EX2nQNH7EfGKVdaTCg46lw" propertyPath="_3ihg0MSXEfG8fKg8yLcw1w" base_ConnectorEnd="_EX2nQNH7EfGKVdaTCg46lw"/>
+  <Blocks:NestedConnectorEnd xmi:id="_fFd5Y9H7EfGKVdaTCg46lw" base_Element="_fFd5YdH7EfGKVdaTCg46lw" propertyPath="_HITi4sSYEfG8fKg8yLcw1w" base_ConnectorEnd="_fFd5YdH7EfGKVdaTCg46lw"/>
+  <Requirements:Requirement xmi:id="_ZFvHYNICEfGKVdaTCg46lw" base_NamedElement="_ZFiTENICEfGKVdaTCg46lw" id="MON-REQ-01" text="The MON subsystem shall monitor equipment health using sensor data and provide health status information and alerts when abnormal conditions are detected." base_Class="_ZFiTENICEfGKVdaTCg46lw"/>
+  <Requirements:Requirement xmi:id="_K5G0INIDEfGKVdaTCg46lw" base_NamedElement="_K5Dw0NIDEfGKVdaTCg46lw" id="MON-REQ-02" text="The MON subsystem shall record production events, equipment status changes, and traceability information to support operational monitoring and historical analysis." base_Class="_K5Dw0NIDEfGKVdaTCg46lw"/>
+  <Requirements:Requirement xmi:id="_bsTEgNIDEfGKVdaTCg46lw" base_NamedElement="_bsQBMNIDEfGKVdaTCg46lw" id="MON-REQ-03" text="The MON subsystem shall support maintenance management by generating maintenance requests based on equipment health alerts and tracking the status of maintenance activities." base_Class="_bsQBMNIDEfGKVdaTCg46lw"/>
+  <Requirements:Requirement xmi:id="_lDO-sNIDEfGKVdaTCg46lw" base_NamedElement="_lDMicNIDEfGKVdaTCg46lw" id="MON-REQ-04" text="The MON subsystem shall monitor container status and health, detect abnormal container conditions, and generate alerts when intervention is required." base_Class="_lDMicNIDEfGKVdaTCg46lw"/>
+  <Requirements:Requirement xmi:id="_z2szANIDEfGKVdaTCg46lw" base_NamedElement="_z2q90NIDEfGKVdaTCg46lw" id="MON-REQ-05" text="The MON subsystem shall provide a message bus to exchange event data, health alerts, container alerts, maintenance requests, and maintenance status information between its components." base_Class="_z2q90NIDEfGKVdaTCg46lw"/>
+  <Requirements:Requirement xmi:id="_PIV_QNIEEfGKVdaTCg46lw" base_NamedElement="_PIS78NIEEfGKVdaTCg46lw" id="MON-REQ-06" text="The MON subsystem shall store event logs and traceability data in a database and support the retrieval of historical records in response to log queries." base_Class="_PIS78NIEEfGKVdaTCg46lw"/>
+  <Requirements:Requirement xmi:id="_ZhgygNIEEfGKVdaTCg46lw" base_NamedElement="_ZheWQNIEEfGKVdaTCg46lw" id="MON-REQ-7" text="The MON subsystem shall provide an overseer dashboard to display equipment health status, container status, maintenance status, and historical log information retrieved from the database." base_Class="_ZheWQNIEEfGKVdaTCg46lw"/>
+  <Requirements:Satisfy xmi:id="_JDfrcNIFEfGKVdaTCg46lw" base_DirectedRelationship="_JDay8NIFEfGKVdaTCg46lw" base_Abstraction="_JDay8NIFEfGKVdaTCg46lw"/>
+  <Requirements:Satisfy xmi:id="_dtRy4NIFEfGKVdaTCg46lw" base_DirectedRelationship="_dtPWoNIFEfGKVdaTCg46lw" base_Abstraction="_dtPWoNIFEfGKVdaTCg46lw"/>
+  <Requirements:Satisfy xmi:id="_mbJh8NIFEfGKVdaTCg46lw" base_DirectedRelationship="_mbHFsNIFEfGKVdaTCg46lw" base_Abstraction="_mbHFsNIFEfGKVdaTCg46lw"/>
+  <Requirements:Satisfy xmi:id="_vZZ2YNIFEfGKVdaTCg46lw" base_DirectedRelationship="_vZXaINIFEfGKVdaTCg46lw" base_Abstraction="_vZXaINIFEfGKVdaTCg46lw"/>
+  <Requirements:Satisfy xmi:id="_0cUWoNIFEfGKVdaTCg46lw" base_DirectedRelationship="_0cR6YNIFEfGKVdaTCg46lw" base_Abstraction="_0cR6YNIFEfGKVdaTCg46lw"/>
+  <Requirements:Satisfy xmi:id="_32zggNIFEfGKVdaTCg46lw" base_DirectedRelationship="_32xEQNIFEfGKVdaTCg46lw" base_Abstraction="_32xEQNIFEfGKVdaTCg46lw"/>
+  <Requirements:Satisfy xmi:id="_IC0cINIGEfGKVdaTCg46lw" base_DirectedRelationship="_ICxY0NIGEfGKVdaTCg46lw" base_Abstraction="_ICxY0NIGEfGKVdaTCg46lw"/>
+  <Requirements:Requirement xmi:id="_6l_s0NIUEfGKVdaTCg46lw" base_NamedElement="_6l60UNIUEfGKVdaTCg46lw" id="MON-REQ-00" text="The MON subsystem shall provide monitoring, event logging, maintenance support, container supervision, and operational information management for the cake production system." base_Class="_6l60UNIUEfGKVdaTCg46lw"/>
+  <Requirements:DeriveReqt xmi:id="_QlzzENIVEfGKVdaTCg46lw" base_DirectedRelationship="_QlwvwNIVEfGKVdaTCg46lw" base_Abstraction="_QlwvwNIVEfGKVdaTCg46lw"/>
+  <Requirements:DeriveReqt xmi:id="_L2JJgNIWEfGKVdaTCg46lw" base_DirectedRelationship="_L2Cb0NIWEfGKVdaTCg46lw" base_Abstraction="_L2Cb0NIWEfGKVdaTCg46lw"/>
+  <Requirements:DeriveReqt xmi:id="_NIs9kNIWEfGKVdaTCg46lw" base_DirectedRelationship="_NIoFENIWEfGKVdaTCg46lw" base_Abstraction="_NIoFENIWEfGKVdaTCg46lw"/>
+  <Requirements:DeriveReqt xmi:id="_PvINQNIWEfGKVdaTCg46lw" base_DirectedRelationship="_PvFJ8NIWEfGKVdaTCg46lw" base_Abstraction="_PvFJ8NIWEfGKVdaTCg46lw"/>
+  <Requirements:DeriveReqt xmi:id="_WLLDoNIWEfGKVdaTCg46lw" base_DirectedRelationship="_WLIAUNIWEfGKVdaTCg46lw" base_Abstraction="_WLIAUNIWEfGKVdaTCg46lw"/>
+  <Requirements:DeriveReqt xmi:id="_X-2AsNIWEfGKVdaTCg46lw" base_DirectedRelationship="_X-yWUNIWEfGKVdaTCg46lw" base_Abstraction="_X-yWUNIWEfGKVdaTCg46lw"/>
+  <Requirements:DeriveReqt xmi:id="_bSj0MNIWEfGKVdaTCg46lw" base_DirectedRelationship="_bSgw4NIWEfGKVdaTCg46lw" base_Abstraction="_bSgw4NIWEfGKVdaTCg46lw"/>
+  <Requirements:TestCase xmi:id="_tCmHUNIWEfGKVdaTCg46lw" base_Behavior="_tChO0NIWEfGKVdaTCg46lw"/>
+  <Requirements:TestCase xmi:id="_vLxaUNIWEfGKVdaTCg46lw" base_Behavior="_vLuXANIWEfGKVdaTCg46lw"/>
+  <Requirements:Verify xmi:id="__6OUoNIWEfGKVdaTCg46lw" base_DirectedRelationship="__6LRUNIWEfGKVdaTCg46lw" base_Abstraction="__6LRUNIWEfGKVdaTCg46lw"/>
+  <Requirements:TestCase xmi:id="_Np37gNIXEfGKVdaTCg46lw" base_Behavior="_Np04MNIXEfGKVdaTCg46lw"/>
+  <Requirements:Verify xmi:id="_P3VRkNIXEfGKVdaTCg46lw" base_DirectedRelationship="_P3SOQNIXEfGKVdaTCg46lw" base_Abstraction="_P3SOQNIXEfGKVdaTCg46lw"/>
+  <Requirements:TestCase xmi:id="_XF9bcNIXEfGKVdaTCg46lw" base_Behavior="_XF6YINIXEfGKVdaTCg46lw"/>
+  <Requirements:Verify xmi:id="_Y5pmoNIXEfGKVdaTCg46lw" base_DirectedRelationship="_Y5mjUNIXEfGKVdaTCg46lw" base_Abstraction="_Y5mjUNIXEfGKVdaTCg46lw"/>
+  <Requirements:TestCase xmi:id="_gv2G0NIXEfGKVdaTCg46lw" base_Behavior="_gvyccNIXEfGKVdaTCg46lw"/>
+  <Requirements:Verify xmi:id="_kDAgsNIXEfGKVdaTCg46lw" base_DirectedRelationship="_kC9dYNIXEfGKVdaTCg46lw" base_Abstraction="_kC9dYNIXEfGKVdaTCg46lw"/>
+  <Requirements:TestCase xmi:id="_sWNtANIXEfGKVdaTCg46lw" base_Behavior="_sWINcNIXEfGKVdaTCg46lw"/>
+  <Requirements:Verify xmi:id="_ucuGgNIXEfGKVdaTCg46lw" base_DirectedRelationship="_ucrDMNIXEfGKVdaTCg46lw" base_Abstraction="_ucrDMNIXEfGKVdaTCg46lw"/>
+  <Requirements:TestCase xmi:id="_ywJDgNIXEfGKVdaTCg46lw" base_Behavior="_ywGAMNIXEfGKVdaTCg46lw"/>
+  <Requirements:Verify xmi:id="_0c3rENIXEfGKVdaTCg46lw" base_DirectedRelationship="_0c1O0NIXEfGKVdaTCg46lw" base_Abstraction="_0c1O0NIXEfGKVdaTCg46lw"/>
+  <Requirements:TestCase xmi:id="_3uWp8NIXEfGKVdaTCg46lw" base_Behavior="_3uTmoNIXEfGKVdaTCg46lw"/>
+  <Requirements:Verify xmi:id="_5rsgYNIXEfGKVdaTCg46lw" base_DirectedRelationship="_5rpdENIXEfGKVdaTCg46lw" base_Abstraction="_5rpdENIXEfGKVdaTCg46lw"/>
+</xmi:XMI>

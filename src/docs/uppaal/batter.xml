@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<nta>
+<declaration>const int MIX = 6;       // recipe MixSeconds
+const int INSP = 3;       // inspection
+const int P3 = 25;        // batter waits at most this for depositing to work again (FC7)
+const int POLL = 1;       // BAT-INSP looks at the state once a second, so it discards after P3 + POLL
+const int LOST = 120;     // dosing gives up a batch that is not finished by now
+const int STALE = 6;      // BAT-INSP's copy of the state is at most this old (heartbeat 5 s + delivery 1 s, estimated)
+const int BLOCKMAX = 60;  // depositing may stay stopped this long (estimated)
+const int DEPSTART = 24;  // a queued batter waits at most this for depositing to take it up: it may sit behind the previous batch, PansPerBatch 24 x depositTime 1 s
+clock g;                  // age of the batch
+clock h;                  // time since the inspector approved the batter
+bool stopped = false;     // depositing is really stopped
+bool seen = false;        // BAT-INSP's copy of that state
+bool queued = false;      // "Batter ready" has reached depositing
+bool faultDone = false;   // one stop only
+bool deposited = false;
+chan ready;               // Batter ready (reliable, no acknowledgement)
+</declaration>
+<template>
+<name>Batch</name>
+<declaration>clock x;</declaration>
+<location id="Batch_Mixing" x="300" y="0"><name x="280" y="18">Mixing</name><label kind="invariant" x="280" y="36">x &lt;= MIX</label></location>
+<location id="Batch_Inspecting" x="93" y="190"><name x="73" y="208">Inspecting</name><label kind="invariant" x="73" y="226">x &lt;= INSP</label></location>
+<location id="Batch_Handed" x="-243" y="118"><name x="-263" y="136">Handed</name></location>
+<location id="Batch_Holding" x="-243" y="-118"><name x="-263" y="-100">Holding</name><label kind="invariant" x="-263" y="-82">x &lt;= P3 + POLL</label></location>
+<location id="Batch_Discarded" x="93" y="-190"><name x="73" y="-172">Discarded</name></location>
+<init ref="Batch_Mixing"/>
+<transition><source ref="Batch_Mixing"/><target ref="Batch_Inspecting"/><label kind="guard" x="132" y="49">x &gt;= MIX</label><label kind="assignment" x="132" y="65">x = 0</label></transition>
+<transition><source ref="Batch_Inspecting"/><target ref="Batch_Holding"/><label kind="guard" x="-105" y="-29">x &gt;= INSP &amp;&amp; seen</label><label kind="assignment" x="-105" y="-13">x = 0, h = 0</label></transition>
+<transition><source ref="Batch_Inspecting"/><target ref="Batch_Handed"/><label kind="guard" x="-163" y="173">x &gt;= INSP &amp;&amp; !seen</label><label kind="synchronisation" x="-163" y="189">ready!</label><label kind="assignment" x="-163" y="205">h = 0</label></transition>
+<transition><source ref="Batch_Holding"/><target ref="Batch_Handed"/><label kind="guard" x="-304" y="-16">!seen</label><label kind="synchronisation" x="-304" y="0">ready!</label></transition>
+<transition><source ref="Batch_Holding"/><target ref="Batch_Discarded"/><label kind="guard" x="-164" y="-131">seen &amp;&amp; x &gt;= P3 + POLL</label></transition>
+</template>
+<template>
+<name>Dep</name>
+<declaration>clock y, q;</declaration>
+<location id="Dep_Open" x="0" y="-110"><name x="-20" y="-92">Open</name></location>
+<location id="Dep_OpenQ" x="0" y="190"><name x="-20" y="208">OpenQ</name><label kind="invariant" x="-20" y="226">q &lt;= DEPSTART</label></location>
+<location id="Dep_Blocked" x="-380" y="40"><name x="-400" y="58">Blocked</name><label kind="invariant" x="-400" y="76">y &lt;= BLOCKMAX</label></location>
+<location id="Dep_Took" x="260" y="190"><name x="240" y="208">Took</name><committed/></location>
+<location id="Dep_Done" x="260" y="-110"><name x="240" y="-92">Done</name></location>
+<init ref="Dep_Open"/>
+<transition><source ref="Dep_Open"/><target ref="Dep_OpenQ"/><label kind="synchronisation" x="4" y="24">ready?</label><label kind="assignment" x="4" y="40">queued = true, q = 0</label></transition>
+<transition><source ref="Dep_Blocked"/><target ref="Dep_Blocked"/><label kind="synchronisation" x="-438" y="-51">ready?</label><label kind="assignment" x="-438" y="-35">queued = true</label><nail x="-335" y="-15"/><nail x="-425" y="-15"/></transition>
+<transition><source ref="Dep_Open"/><target ref="Dep_Blocked"/><label kind="guard" x="-367" y="-188">!faultDone</label><label kind="assignment" x="-367" y="-172">stopped = true, y = 0</label><nail x="-212" y="-91"/></transition>
+<transition><source ref="Dep_OpenQ"/><target ref="Dep_Blocked"/><label kind="guard" x="-324" y="195">!faultDone</label><label kind="assignment" x="-324" y="211">stopped = true, y = 0</label><nail x="-168" y="59"/></transition>
+<transition><source ref="Dep_Blocked"/><target ref="Dep_Open"/><label kind="guard" x="-427" y="-145">y &gt;= 1 &amp;&amp; !queued</label><label kind="assignment" x="-427" y="-129">stopped = false, faultDone = true</label><nail x="-168" y="21"/></transition>
+<transition><source ref="Dep_Blocked"/><target ref="Dep_OpenQ"/><label kind="guard" x="-458" y="251">y &gt;= 1 &amp;&amp; queued</label><label kind="assignment" x="-458" y="267">stopped = false, faultDone = true, q = 0</label><nail x="-212" y="171"/></transition>
+<transition><source ref="Dep_OpenQ"/><target ref="Dep_Took"/><label kind="assignment" x="60" y="194">deposited = true</label></transition>
+<transition><source ref="Dep_Took"/><target ref="Dep_Done"/></transition>
+</template>
+<template>
+<name>Copy</name>
+<declaration>clock w;</declaration>
+<location id="Copy_Sync" x="300" y="0"><name x="280" y="18">Sync</name><label kind="invariant" x="280" y="36">w &lt;= STALE</label></location>
+<init ref="Copy_Sync"/>
+<transition><source ref="Copy_Sync"/><target ref="Copy_Sync"/><label kind="guard" x="209" y="-91">w &gt;= 1</label><label kind="assignment" x="209" y="-75">seen = stopped, w = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
+</template>
+<template>
+<name>Tick</name>
+<declaration></declaration>
+<location id="Tick_On" x="300" y="0"><name x="280" y="18">On</name></location>
+<init ref="Tick_On"/>
+<transition><source ref="Tick_On"/><target ref="Tick_On"/><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
+</template>
+<system>system Batch, Dep, Copy, Tick;</system>
+</nta>
