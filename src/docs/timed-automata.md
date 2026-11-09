@@ -1,7 +1,8 @@
 # Exercise 8, D3: Semantic anchoring in timed automata
 
 Draft for the report. The models are in UPPAAL 5.0 and were checked with `verifyta`: see
-[uppaal/](uppaal/). The tables below describe the same automata in words. Clocks are in
+[uppaal/](uppaal/). A beginner's guide to the diagrams (no prior knowledge needed) is
+[uppaal/README.md](uppaal/README.md). The tables below describe the same automata in words. Clocks are in
 seconds. All timing values that the plant does not give are estimated by the group
 (restart time, message delay, how long depositing may stay stopped). `x`, `y`, `z` are local clocks. `!` sends and `?` receives on a channel.
 
