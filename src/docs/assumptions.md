@@ -24,7 +24,7 @@ assumptions; time values that several systems share are in
 | # | Assumption | Value | Where | Recommendation |
 |---|---|---|---|---|
 | A1 | One product only: "Vanilla sponge" | one recipe, seeded in SQL | `internal/store/sql_mem.go`, `sql_mssql.go` | Keep. The report describes one line, not a catalogue |
-| A2 | Pans per batch | 24 (was 6, then 30) | recipe seed `PansPerBatch` | Keep. Chosen from the cycle times, see section 6: the batter of the next batch takes about 17 s, depositing a batch takes 24 s, so depositing never waits and a failed batch loses little |
+| A2 | Pans per batch | 24 (was 6, then 30) | recipe seed `PansPerBatch` | Keep. Chosen from the cycle times, see section 6: the batter of the next batch takes about 20 s (17 s plus the 3 s withdrawal, T8), depositing a batch takes 24 s, so depositing never waits and a failed batch loses little |
 | A3 | Pans in the pan loop | 48 | `PAN_COUNT` in `docker-compose.yml` | Keep. About 17 are on the line at a time, a full cooling buffer holds 24 more, the rest wait clean in the pool |
 | A4 | Fill target and tolerance of the batter in a pan | 450 g +/- 5 g (1.1 %) | recipe seed | Keep. Chosen, see section 5: well inside the legal tolerance of the packaged product |
 | A5 | Dose tolerance of every ingredient | 1 % (was 2 %); the load cell scatters 0.25 % | recipe seed, `internal/bat/dose.go` | Keep. Chosen, see section 5: industrial batching is accurate to about 0.3 to 1 % |
@@ -54,7 +54,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | T5 | Detection of a stopped controller | 15 s (3 x T_hb, THM-REQ-72); the MQTT keep-alive (5 s, dead after 7.5 s) is an extra and faster | Keep |
 | T6 | A container that does not restart by itself | escalated to Maintenance after 45 s (THM-REQ-73 allows 60 s) | Keep |
 | T7 | Batter that waits too long for depositing to work again is discarded | 25 s (BAT parameter P3); BAT-INSP checks once a second, so 26 s; counted before the handoff only (`team-review.md`, section 3, item 11) | Confirm |
-| T8 | Retries | ingredient request repeated after 20 s; order sent again after 40 s; every database call times out after 3 s; event outbox retried every second; state saved every 3 s | Keep. The test in `internal/timing` checks that they fit together |
+| T8 | Retries | ingredient request repeated after 20 s; the ingredients are collected 3 s after the reservation; a held order is restocked after 15 s; order sent again after 40 s; every database call times out after 3 s; event outbox retried every second; state saved every 3 s | Keep. The test in `internal/timing` checks that they fit together |
 | T9 | Faults the system repairs by itself, injected for the demo | depositing jam 30 s; no-pan wait 4 s; recalibration 6 s; wrong speed corrected after 10 s; band sections restart 1.5 s apart | Keep |
 
 ## 3. Architecture and operation
@@ -127,7 +127,7 @@ no station is faster than the others. Measured in the scenarios, the line ships 
 per second, which is that limit.
 
 - **Pans per batch (24).** Preparing the next batch (dosing 5 x 1.2 s, mixing 6 s, inspection
-  3 s, hand-over) takes about 17 s. Depositing a batch of N pans takes N s. If N is below 17
+  3 s, hand-over, and the 3 s in which PLM collects the ingredients) takes about 20 s. Depositing a batch of N pans takes N s. If N is below 20
   depositing waits for batter; above it batter prepared early waits (up to 25 s, P3). 24 keeps
   depositing busy with a margin of about 40 percent and no batter waiting too long. A batch
   of 30 gave the same throughput but lost more when a batch failed (a discarded batch is

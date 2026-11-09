@@ -10,7 +10,7 @@ learns the current value.
 | # | Signal | From to | Kind | Fields |
 |---|---|---|---|---|
 | 1 | Production order and recipe targets | PLM to BAT | reliable | orderId, batchId, recipe, items (`ingredient:grams;...`), mixSeconds, doseTolPct, pansPerBatch, fillTarget, fillTol |
-| 2 | Ingredient request and reservation result | BAT and PLM, both ways | reliable | request (true = BAT asks), orderId, batchId, items; reply: result (`confirmed`, `insufficient`, `staged`), reason |
+| 2 | Ingredient request and reservation result | BAT and PLM, both ways | reliable | request (true = BAT asks), orderId, batchId, items; reply: result (`confirmed`, sent after the withdrawal, 3 s after the reservation; `insufficient`, while the order is held; `staged`, when the warehouse does not answer), reason |
 | 3 | Batter ready | BAT to THM | reliable | batchId, orderId, pans, fillTarget, fillTol |
 | 4 | Depositing stopped / working again | THM to BAT | state | stopped, reason |
 | 5 | Pan request | THM to FIN | reliable | message |

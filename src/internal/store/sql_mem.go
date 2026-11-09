@@ -144,6 +144,14 @@ func (m *MemSQL) SaveOrder(_ context.Context, o model.Order) error {
 	return nil
 }
 
+// Order returns a stored order (used by the tests).
+func (m *MemSQL) Order(id string) (model.Order, bool) {
+	m.mu.Lock()
+	defer m.mu.Unlock()
+	o, ok := m.orders[id]
+	return o, ok
+}
+
 // SetOrderStatus updates an order.
 func (m *MemSQL) SetOrderStatus(_ context.Context, id, status, note string) error {
 	m.mu.Lock()

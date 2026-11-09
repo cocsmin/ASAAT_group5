@@ -210,6 +210,36 @@ Against the requirements (a first reading; the analysis is the next exercise):
 | no product lost | `pans_lost` = 0 in 269 runs; one run is the artefact above | met |
 | availability 99.5 % (THM-REQ-71) | 99.997 % mean over 2 h at doubled rates | met in this run |
 
+### 5.1 Re-run of the two PLM-related crash scenarios after the PLM change (9 Nov)
+
+PLM-WH was changed to follow the state machine of the Papyrus model (`decisions.md`, 9 Nov): BAT is
+confirmed after the withdrawal, about 3 s later than before. The scenarios `crash-plm-wh` and
+`crash-bat-dose` were run again, 15 runs each, on the rebuilt `plm-wh` (the other 15 containers were
+built from the earlier code, which they share with this version except for PLM-WH). Data:
+[experiment-results-plm-after.csv](experiment-results-plm-after.csv). **30 of 30 runs passed.**
+
+| scenario | runs | passed | metric | min | median | mean | p95 | max |
+|---|---|---|---|---|---|---|---|---|
+| crash-plm-wh | 15 | 15 | detect_s | 0.32 | 0.32 | 0.34 | 0.42 | 0.43 |
+| crash-plm-wh | 15 | 15 | recover_s | 0.85 | 0.98 | 0.98 | 1.13 | 1.20 |
+| crash-plm-wh | 15 | 15 | outage_s | 23.90 | 24.85 | 25.10 | 24.91 | 29.86 |
+| crash-plm-wh | 15 | 15 | flow_resume_s | 17.51 | 18.68 | 18.95 | 18.92 | 23.80 |
+| crash-plm-wh | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-bat-dose | 15 | 15 | detect_s | 0.32 | 0.32 | 0.33 | 0.33 | 0.43 |
+| crash-bat-dose | 15 | 15 | recover_s | 0.86 | 0.91 | 0.94 | 1.08 | 1.09 |
+| crash-bat-dose | 15 | 15 | outage_s | 24.72 | 24.78 | 24.80 | 24.91 | 24.92 |
+| crash-bat-dose | 15 | 15 | flow_resume_s | 18.46 | 18.62 | 18.65 | 18.84 | 18.91 |
+| crash-bat-dose | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+
+What it says: detection (at most 0.43 s) and recovery (at most 1.20 s) are the same as in section 5, no
+pan was lost, and the line resumes after about 18.6 s as before. One `crash-plm-wh` run took 29.9 s until the
+outage ended and 23.8 s until the flow resumed, about 5 s more than the rest. The outage depends on where in the
+22 s order cycle the crash falls (section 6); whether the 3 s withdrawal adds to it was not checked. It is one run in
+fifteen and it was not investigated further. What it does not say:
+the other 16 scenarios, the faults `faults-system` and the 2 h availability run were not repeated with the new
+code (the first run of `faults-system` with FC1 and FC2, `healthy` and `sql-down` passed, but they are not
+measurements). The availability figure of section 5 is from the earlier code.
+
 ## 6. Observations and unexpected behaviour
 
 1. **The outage is about 25 s for almost every container**, much longer than detection or

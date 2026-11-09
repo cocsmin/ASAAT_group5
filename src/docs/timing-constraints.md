@@ -61,6 +61,9 @@ requirement in the report) or the design level (the value chosen in the implemen
 | T-D2 | Delay | event delivery | retried every 1 s until acknowledged | design | `timing.EventRetry` |
 | T-D3 | Delay | request to the warehouse (FC2) | at most 2 s; the circuit breaker stays open for 15 s | design | `timing.WarehouseTimeout`, `timing.BreakerOpen` |
 | T-D4 | Delay | ingredient request repeated | after 20 s | design | `timing.IngredientRetry` |
+| T-D5 | Delay | PLM: the ingredients are collected (Withdrawal confirmation, internal) | 3 s after the reservation; BAT is confirmed only after it | design | `plm.withdrawalTime` |
+| T-D6 | Delay | PLM: Logistics restocks a held order (Restock signal, internal) | 15 s after the order was held | design | `plm.restockDelay` |
+| T-D7 | Delay | PLM: test request while Communication_Suspended | every 15 s until the warehouse answers | design | `timing.BreakerOpen` |
 | T-OR1 | Order | handoffs | a handoff signal for a pan arrives after its document is stored, never before | design | `signals.md` |
 | T-OR2 | Order | MON birth and halt release | a section is released only after the birth of its owner | design | `mon.onBirth` |
 
@@ -89,6 +92,7 @@ confirm.
 | TIM-06 | A handed-over document that no message announced shall be taken up within 8 s (3 s grace plus one 5 s pass). | T-RC7 |
 | TIM-07 | A database call shall never block a station for more than 3 s. | T-D1 |
 | TIM-08 | After a band halt every upstream station shall stop taking new pans within 1 s. | T-RC3 |
+| TIM-09 | An ingredient request of BAT shall get its final answer ("confirmed" or "staged") within 18 s (15 s restock plus 3 s withdrawal), before BAT repeats it after 20 s. | T-D4, T-D5, T-D6 |
 
 ## 6. What the experiment says
 

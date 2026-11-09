@@ -8,8 +8,8 @@ run by a scenario and passes against the real containers.
 
 | FC | Failure | Resolved by (report) | Where | Trigger |
 |---|---|---|---|---|
-| FC1 | Warehouse: not enough ingredients | System, Logistics notified | PLM, BAT | button PLM FC1; `faults-system` |
-| FC2 | Warehouse system not responding | System (circuit breaker) | PLM | button PLM FC2; `faults-system` |
+| FC1 | Warehouse: not enough ingredients | System, Logistics notified (Holding_Order, restock after 15 s, checked again, then withdrawal) | PLM, BAT | button PLM FC1; `faults-system` |
+| FC2 | Warehouse system not responding | System (wms_timeout after 2 s, Communication_Suspended with the circuit breaker, test request every 15 s) | PLM | button PLM FC2; `faults-system` |
 | FC3 | Dosing: too little of an ingredient | System | BAT | button BAT FC3; `faults-system` |
 | FC4 | Dosing: too much of an ingredient | System | BAT | button BAT FC4; `faults-system` |
 | FC5 | Dosing fails several times in a row | Maintenance | BAT | button BAT FC5 (3 failures); `faults-maintenance` |
