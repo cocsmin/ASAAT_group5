@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<nta>
+<declaration>// seconds, as in internal/plm and internal/timing
+const int ORDER = 22;      // ORDER_SECONDS: a new production order every cycle
+const int WITHDRAW = 3;    // the ingredients are collected: Withdrawal confirmation
+const int RESTOCK = 15;    // Logistics restocks: Restock signal
+const int BREAKER = 15;    // the circuit breaker stays open this long (timing.BreakerOpen)
+const int WTO = 2;         // a request to the warehouse that takes longer is a wms_timeout
+const int RETRY = 20;      // BAT repeats an ingredient request that is not answered (timing.IngredientRetry)
+const int MAXOUT = 2;      // orders sent that BAT has not asked ingredients for
+const int DOWNMAX = 40;    // the warehouse does not answer for at most this long (estimated)
+int orders = 0;            // orders sent that BAT has not asked ingredients for yet (the map of sent orders)
+int made = 0;              // orders created in the current order cycle
+bool withdrawn = false;    // a withdrawal has been booked
+bool gotConfirm = false;   // BAT has been confirmed
+bool due = true;           // the order cycle ran out (the first order is due at once)
+bool lowStock = false;     // not enough stock: FC1
+bool wmsDown = false;      // the warehouse does not answer: FC2
+clock age, up;             // age: time since BAT's first request, up: time since the warehouse answers again
+urgent broadcast chan req;
+broadcast chan confirmed, insufficient, staged;
+</declaration>
+<template>
+<name>Plm</name>
+<declaration>clock t, w, h, b;</declaration>
+<location id="Plm_Idle" x="-530" y="-170"><name x="-550" y="-152">Idle</name></location>
+<location id="Plm_Back" x="-150" y="-170"><name x="-170" y="-152">Back</name><committed/></location>
+<location id="Plm_Verifying" x="-530" y="0"><name x="-550" y="18">Verifying</name><committed/></location>
+<location id="Plm_TimingOut" x="110" y="0"><name x="90" y="18">TimingOut</name><label kind="invariant" x="90" y="36">t &lt;= WTO</label></location>
+<location id="Plm_Waiting" x="-150" y="0"><name x="-170" y="18">Waiting</name><label kind="invariant" x="-170" y="36">w &lt;= WITHDRAW</label></location>
+<location id="Plm_Holding" x="-530" y="180"><name x="-550" y="198">Holding</name><label kind="invariant" x="-550" y="216">h &lt;= RESTOCK</label></location>
+<location id="Plm_HoldAns" x="-340" y="300"><name x="-360" y="318">HoldAns</name><committed/></location>
+<location id="Plm_Suspended" x="110" y="180"><name x="90" y="198">Suspended</name><label kind="invariant" x="90" y="216">b &lt;= BREAKER</label></location>
+<location id="Plm_SusAns" x="110" y="320"><name x="90" y="338">SusAns</name><committed/></location>
+<init ref="Plm_Idle"/>
+<transition><source ref="Plm_Idle"/><target ref="Plm_Back"/><label kind="guard" x="-365" y="-52">due</label><nail x="-340" y="-60"/></transition>
+<transition><source ref="Plm_Back"/><target ref="Plm_Idle"/><label kind="guard" x="-427" y="-206">due &amp;&amp; orders &lt; MAXOUT</label><label kind="assignment" x="-427" y="-190">due = false, orders++, made++</label><nail x="-340" y="-170"/></transition>
+<transition><source ref="Plm_Back"/><target ref="Plm_Idle"/><label kind="guard" x="-412" y="-358">!(due &amp;&amp; orders &lt; MAXOUT)</label><label kind="assignment" x="-412" y="-342">due = false</label><nail x="-340" y="-280"/></transition>
+<transition><source ref="Plm_Idle"/><target ref="Plm_Verifying"/><label kind="synchronisation" x="-574" y="-93">req?</label></transition>
+<transition><source ref="Plm_Verifying"/><target ref="Plm_TimingOut"/><label kind="guard" x="-245" y="96">wmsDown</label><label kind="assignment" x="-245" y="112">t = 0</label><nail x="-150" y="100"/></transition>
+<transition><source ref="Plm_Verifying"/><target ref="Plm_Holding"/><label kind="guard" x="-749" y="19">!wmsDown &amp;&amp; lowStock</label><label kind="synchronisation" x="-749" y="35">insufficient!</label><label kind="assignment" x="-749" y="51">h = 0</label><nail x="-585" y="90"/></transition>
+<transition><source ref="Plm_Verifying"/><target ref="Plm_Waiting"/><label kind="guard" x="-431" y="-36">!wmsDown &amp;&amp; !lowStock</label><label kind="assignment" x="-431" y="-20">w = 0</label></transition>
+<transition><source ref="Plm_TimingOut"/><target ref="Plm_Suspended"/><label kind="guard" x="114" y="66">t &gt;= WTO</label><label kind="synchronisation" x="114" y="82">staged!</label><label kind="assignment" x="114" y="98">b = 0</label></transition>
+<transition><source ref="Plm_Waiting"/><target ref="Plm_Back"/><label kind="guard" x="-60" y="-109">w &gt;= WITHDRAW</label><label kind="synchronisation" x="-60" y="-93">confirmed!</label><label kind="assignment" x="-60" y="-77">withdrawn = true</label></transition>
+<transition><source ref="Plm_Waiting"/><target ref="Plm_Waiting"/><label kind="synchronisation" x="-147" y="-75">req?</label><nail x="-105" y="-55"/><nail x="-195" y="-55"/></transition>
+<transition><source ref="Plm_Holding"/><target ref="Plm_Verifying"/><label kind="guard" x="-484" y="112">h &gt;= RESTOCK</label><label kind="assignment" x="-484" y="128">lowStock = false</label><nail x="-475" y="90"/></transition>
+<transition><source ref="Plm_Holding"/><target ref="Plm_HoldAns"/><label kind="synchronisation" x="-506" y="292">req?</label><nail x="-464" y="287"/></transition>
+<transition><source ref="Plm_HoldAns"/><target ref="Plm_Holding"/><label kind="synchronisation" x="-415" y="155">insufficient!</label><nail x="-406" y="193"/></transition>
+<transition><source ref="Plm_Suspended"/><target ref="Plm_Back"/><label kind="guard" x="-50" y="-58">b &gt;= BREAKER &amp;&amp; !wmsDown</label></transition>
+<transition><source ref="Plm_Suspended"/><target ref="Plm_Suspended"/><label kind="guard" x="-128" y="187">b &gt;= BREAKER &amp;&amp; wmsDown</label><label kind="assignment" x="-128" y="203">b = 0</label><nail x="155" y="125"/><nail x="65" y="125"/></transition>
+<transition><source ref="Plm_Suspended"/><target ref="Plm_SusAns"/><label kind="synchronisation" x="16" y="227">req?</label><nail x="55" y="250"/></transition>
+<transition><source ref="Plm_SusAns"/><target ref="Plm_Suspended"/><label kind="synchronisation" x="160" y="263">staged!</label><nail x="165" y="250"/></transition>
+</template>
+<template>
+<name>Bat</name>
+<declaration>clock c;</declaration>
+<location id="Bat_Ready" x="300" y="0"><name x="280" y="18">Ready</name></location>
+<location id="Bat_Waiting" x="-150" y="173"><name x="-170" y="191">Waiting</name><label kind="invariant" x="-170" y="209">c &lt;= RETRY</label></location>
+<location id="Bat_Retry" x="-150" y="-173"><name x="-170" y="-155">Retry</name><committed/></location>
+<init ref="Bat_Ready"/>
+<transition><source ref="Bat_Ready"/><target ref="Bat_Waiting"/><label kind="guard" x="86" y="240">orders &gt; 0</label><label kind="synchronisation" x="86" y="256">req!</label><label kind="assignment" x="86" y="272">orders--, c = 0, age = 0</label><nail x="118" y="199"/></transition>
+<transition><source ref="Bat_Waiting"/><target ref="Bat_Ready"/><label kind="synchronisation" x="-28" y="131">confirmed?</label><label kind="assignment" x="-28" y="147">gotConfirm = true</label><nail x="75" y="87"/></transition>
+<transition><source ref="Bat_Waiting"/><target ref="Bat_Ready"/><label kind="synchronisation" x="24" y="-11">staged?</label><nail x="32" y="-26"/></transition>
+<transition><source ref="Bat_Waiting"/><target ref="Bat_Waiting"/><label kind="synchronisation" x="-298" y="140">insufficient?</label><label kind="assignment" x="-298" y="156">c = 0</label><nail x="-105" y="118"/><nail x="-195" y="118"/></transition>
+<transition><source ref="Bat_Waiting"/><target ref="Bat_Retry"/><label kind="guard" x="-193" y="10">c &gt;= RETRY</label><nail x="-90" y="0"/></transition>
+<transition><source ref="Bat_Retry"/><target ref="Bat_Waiting"/><label kind="synchronisation" x="-264" y="-26">req!</label><label kind="assignment" x="-264" y="-10">c = 0</label><nail x="-210" y="0"/></transition>
+</template>
+<template>
+<name>Clock</name>
+<declaration>clock c;</declaration>
+<location id="Clock_Run" x="300" y="0"><name x="280" y="18">Run</name><label kind="invariant" x="280" y="36">c &lt;= ORDER</label></location>
+<init ref="Clock_Run"/>
+<transition><source ref="Clock_Run"/><target ref="Clock_Run"/><label kind="guard" x="184" y="-91">c &gt;= ORDER</label><label kind="assignment" x="184" y="-75">due = true, made = 0, c = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
+</template>
+<template>
+<name>Stock</name>
+<declaration></declaration>
+<location id="Stock_Normal" x="300" y="0"><name x="280" y="18">Normal</name></location>
+<location id="Stock_Short" x="-300" y="0"><name x="-320" y="18">Short</name></location>
+<init ref="Stock_Normal"/>
+<transition><source ref="Stock_Normal"/><target ref="Stock_Short"/><label kind="assignment" x="-66" y="-20">lowStock = true</label></transition>
+</template>
+<template>
+<name>Wms</name>
+<declaration>clock x;</declaration>
+<location id="Wms_Answers" x="300" y="0"><name x="280" y="18">Answers</name></location>
+<location id="Wms_Silent" x="-150" y="173"><name x="-170" y="191">Silent</name><label kind="invariant" x="-170" y="209">x &lt;= DOWNMAX</label></location>
+<location id="Wms_Back" x="-150" y="-173"><name x="-170" y="-155">Back</name></location>
+<init ref="Wms_Answers"/>
+<transition><source ref="Wms_Answers"/><target ref="Wms_Silent"/><label kind="assignment" x="-32" y="37">wmsDown = true, x = 0</label></transition>
+<transition><source ref="Wms_Silent"/><target ref="Wms_Back"/><label kind="assignment" x="-146" y="-8">wmsDown = false, up = 0</label></transition>
+</template>
+<system>system Plm, Bat, Clock, Stock, Wms;</system>
+</nta>

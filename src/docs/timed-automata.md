@@ -142,6 +142,52 @@ sends `handoff!` (the message). Receiver: `Idle`, `Adopted`. Edges: `handoff?` t
 `Adopted`; or, when the message is lost, after `GRACE` the reconcile pass takes the document
 (`x >= GRACE` and a pass every `RECONCILE`), invariant `x <= GRACE + RECONCILE`.
 
+### PLM-WH (the order and warehouse state machine)
+
+The code is the state machine of the Papyrus model (`internal/plm/machine.go`, PLM StateMachine22),
+one goroutine handling one event at a time. Constants: `ORDER = 22`, `WITHDRAW = 3` (the ingredients are
+collected), `RESTOCK = 15` (Logistics restocks), `BREAKER = 15`, `WTO = 2` (warehouse timeout),
+`RETRY = 20` (BAT repeats an unanswered request), `MAXOUT = 2`, `DOWNMAX = 40` (the warehouse stays
+silent at most this long, estimated). Channels: `req` (urgent broadcast, BAT to PLM), `confirmed`,
+`insufficient`, `staged` (broadcast, PLM to BAT).
+
+**Plm**:
+
+| Location | Invariant | Meaning (state of the diagram) |
+|---|---|---|
+| `Idle` | none | Idle: waits for an ingredient request or for the order cycle |
+| `Back` | committed | entry of Idle: a due order is created (Scheduling_Order, Fetching_recipe_targets) or dropped |
+| `Verifying` | committed | Verifying_Inventory and the StockCheck choice |
+| `TimingOut` | `t <= WTO` | the warehouse does not answer (wms_timeout is coming) |
+| `Waiting` | `w <= WITHDRAW` | Reserving_Ingredients, then Waiting_For_Withdrawal |
+| `Holding` | `h <= RESTOCK` | Holding_Order |
+| `HoldAns` | committed | answers a repeated request while holding |
+| `Suspended` | `b <= BREAKER` | Communication_Suspended |
+| `SusAns` | committed | answers a request with "staged" while suspended |
+
+| From | To | Guard | Sync | Update |
+|---|---|---|---|---|
+| `Idle` | `Back` | `due` | | |
+| `Back` | `Idle` | `due && orders < MAXOUT` | | `due = false, orders++, made++` (the order is created and sent) |
+| `Back` | `Idle` | `!(due && orders < MAXOUT)` | | `due = false` (nothing due, or BAT has two orders: the cycle is dropped) |
+| `Idle` | `Verifying` | | `req?` | |
+| `Verifying` | `TimingOut` | `wmsDown` | | `t = 0` |
+| `Verifying` | `Holding` | `!wmsDown && lowStock` | `insufficient!` | `h = 0` |
+| `Verifying` | `Waiting` | `!wmsDown && !lowStock` | | `w = 0` |
+| `TimingOut` | `Suspended` | `t >= WTO` | `staged!` | `b = 0` |
+| `Waiting` | `Back` | `w >= WITHDRAW` | `confirmed!` | `withdrawn = true` |
+| `Waiting` | `Waiting` | | `req?` | (a repeated request: the answer is on its way) |
+| `Holding` | `Verifying` | `h >= RESTOCK` | | `lowStock = false` |
+| `Holding` | `HoldAns`, back | | `req?`, then `insufficient!` | |
+| `Suspended` | `Back` | `b >= BREAKER && !wmsDown` | | (the test request succeeds) |
+| `Suspended` | `Suspended` | `b >= BREAKER && wmsDown` | | `b = 0` (test again later) |
+| `Suspended` | `SusAns`, back | | `req?`, then `staged!` | |
+
+**Bat** (BAT-DOSE asking for ingredients): `Ready`, `Waiting` (`c <= RETRY`), `Retry` (committed). It
+sends `req!` for an order it holds, waits for `confirmed`, `staged` or `insufficient` (it then keeps
+waiting), and repeats the request after `RETRY`. **Clock** sets `due` every `ORDER`. **Stock** makes
+the stock too low once (FC1). **Wms** makes the warehouse silent once, for at most `DOWNMAX` (FC2).
+
 ## D3.2 Inter-behaviour: networks of timed automata
 
 NTA 1, supervision: `Node(i)` x N, `Broker(i)` x N, `MON`, `Docker`, `Env`.
@@ -176,6 +222,9 @@ a query on the clock `g` (the dosing timer itself is not modelled).
 NTA 4, handover: `Sender`, `Receiver`, a lossy `Message` automaton that either delivers or
 drops.
 
+NTA 5, PLM-WH: `Plm`, `Bat`, `Clock`, `Stock`, `Wms`. `Bat` and `Plm` meet on `req` and on the three
+answers; `Stock` and `Wms` only change `lowStock` and `wmsDown`, and `Clock` only sets `due`.
+
 ## D3.3 How the timing constraints enter the automata
 
 | Constraint | Where in the TA | How |
@@ -189,6 +238,10 @@ drops.
 | T-RC7 handover 3 s | Handover | guard `x >= GRACE`, invariant `x <= GRACE + RECONCILE` |
 | T-EX* execution times | Station TAs | invariant `x <= d` and guard `x >= d` |
 | T-OR2 release after birth | Band NTA | `release` edge guarded by `owner_online` |
+| T-P5 order cycle 22 s | PLM NTA, `Clock` | invariant `c <= ORDER`, guard `c >= ORDER`; at most one order per cycle (`made <= 1`) |
+| T-D3 warehouse timeout 2 s, breaker 15 s | PLM NTA, `TimingOut`, `Suspended` | invariants `t <= WTO`, `b <= BREAKER` |
+| T-D4 ingredient request repeated after 20 s | PLM NTA, `Bat` | invariant `c <= RETRY` in `Waiting` |
+| T-D5 withdrawal 3 s, T-D6 restock 15 s | PLM NTA, `Plm` | invariants `w <= WITHDRAW` in `Waiting`, `h <= RESTOCK` in `Holding` |
 
 Each constraint is an invariant (it forces the system to move on) or a guard (it holds
 the move back). Reaction constraints that span several automata (T-RC1, T-RC2) are not
@@ -202,6 +255,7 @@ written into one automaton. They are properties of the NTA, checked with a query
 | `uppaal/band.xml` | five Sections, Env, MON | 7 | all satisfied |
 | `uppaal/batter.xml` | Batch, Dep, Copy | 11 | all satisfied (two of them are reachability findings, see below) |
 | `uppaal/handover.xml` | Sender, Message, Receiver | 4 | all satisfied |
+| `uppaal/plm.xml` | Plm, Bat, Clock, Stock, Wms | 13 | all satisfied |
 
 Run (from `src/docs/uppaal`): `node gen.js` writes the models and `.q` files,
 `verifyta -q supervision.xml supervision.q` checks them. `gen.js` is the source; edit it, not the XML.
@@ -227,11 +281,18 @@ What the queries prove, with the estimated parameters:
   (`internal/thm`). The proposed fix, with no new signal, is in `team-review.md` section 3.
 - **Handover.** A stored document is taken up within GRACE + RECONCILE = 8 s, also when the
   message is lost.
+- **PLM-WH.** BAT has at most two orders it has not asked ingredients for; at most one order is
+  created per order cycle (a cycle that ends while the machine is busy is taken up when it is Idle
+  again, never more); BAT is confirmed only after a withdrawal was booked; BAT gets its final answer
+  ("confirmed" or "staged") within RESTOCK + WITHDRAW = 18 s, which is below the 20 s after which it
+  repeats the request (the bound is tight: 17 s fails); a held order is always resolved; a suspension
+  ends within BREAKER + WTO = 17 s after the warehouse answers again; no deadlock.
 
 **Negative controls** (to show the queries can fail): with a restart time of up to 60 s the
 60 s recovery query and the no-escalation query fail; with a batch limit of 30 s instead of
 120 s the two LOST queries of the batter model fail; with depositing blocked for up to 120 s
-instead of 60 s the query "a batter is deposited before dosing gives the batch up" fails.
+instead of 60 s the query "a batter is deposited before dosing gives the batch up" fails; in the PLM
+model a restock time of 25 s or a withdrawal time of 30 s makes the 18 s answer query fail.
 
 ## Limits
 
@@ -246,6 +307,13 @@ instead of 60 s the query "a batter is deposited before dosing gives the batch u
   chooses option A of `team-review.md` (a 15th signal "Batter collected"), `Batch` waits for
   that signal instead of reading `seen`, and the model has to be changed. The race to watch
   then is the acknowledgement in flight while BAT discards at `P3`.
+- The PLM model has one BAT that asks for one order at a time, anonymous orders (no ids), one stock
+  shortage and one warehouse silence. A restart of PLM-WH is not modelled: the reservation is in
+  the database, BAT repeats its request and `Reserve` gives the same answer (unit test
+  `TestRestartWhileWaitingForTheWithdrawalLosesNothing`). The recipe that cannot be read, the
+  resend of an order after 40 s and the monitor-offline gate are covered by unit tests, not by the model.
+  The state `Verifying_Inventory` and the StockCheck choice are one atomic database call in the
+  code. The model has no `Tick` (it never ends) and the diagram spells the state `Veryfing_Inventory`.
 - The delivery delay of "Batter ready" is not modelled (the signal is QoS 1 with a persistent
   session, so it arrives; a message lost for good is caught by the 120 s timer of dosing).
   BAT-INSP leaves `Holding` at once when the copy says working again; the code looks once a second.

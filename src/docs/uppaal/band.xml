@@ -22,10 +22,10 @@ clock t;
 <location id="Section_Pass" x="-150" y="173"><name x="-170" y="191">Pass</name><label kind="invariant" x="-170" y="209">x &lt;= HOP</label></location>
 <location id="Section_Stopped" x="-150" y="-173"><name x="-170" y="-155">Stopped</name></location>
 <init ref="Section_Running"/>
-<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="21" y="10">halt[i]?</label><label kind="assignment" x="21" y="26">x = 0</label><nail x="53" y="30"/></transition>
-<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="65" y="123">stop[i]?</label><label kind="assignment" x="65" y="139">x = 0</label><nail x="97" y="143"/></transition>
-<transition><source ref="Section_Pass"/><target ref="Section_Stopped"/><label kind="synchronisation" x="-308" y="0">stop[i&gt;0?i-1:N]!</label><label kind="assignment" x="-308" y="16">nstopped++</label></transition>
-<transition><source ref="Section_Stopped"/><target ref="Section_Running"/><label kind="synchronisation" x="33" y="-128">release?</label><label kind="assignment" x="33" y="-112">nstopped--</label></transition>
+<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="13" y="-10">halt[i]?</label><label kind="assignment" x="13" y="6">x = 0</label><nail x="53" y="30"/></transition>
+<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="63" y="151">stop[i]?</label><label kind="assignment" x="63" y="167">x = 0</label><nail x="97" y="143"/></transition>
+<transition><source ref="Section_Pass"/><target ref="Section_Stopped"/><label kind="synchronisation" x="-146" y="-16">stop[i&gt;0?i-1:N]!</label><label kind="assignment" x="-146" y="0">nstopped++</label></transition>
+<transition><source ref="Section_Stopped"/><target ref="Section_Running"/><label kind="synchronisation" x="17" y="-70">release?</label><label kind="assignment" x="17" y="-54">nstopped--</label></transition>
 </template>
 <template>
 <name>Env</name>
@@ -34,8 +34,8 @@ clock t;
 <location id="Env_Down" x="-150" y="173"><name x="-170" y="191">Down</name><label kind="invariant" x="-170" y="209">t &lt;= RDMAX</label></location>
 <location id="Env_Back" x="-150" y="-173"><name x="-170" y="-155">Back</name></location>
 <init ref="Env_Idle"/>
-<transition><source ref="Env_Idle"/><target ref="Env_Down"/><label kind="select" x="-123" y="30">k : id_t</label><label kind="synchronisation" x="-123" y="46">halt[k]!</label><label kind="assignment" x="-123" y="62">hk = k, ownerUp[k] = false, faulted = true, t = 0</label></transition>
-<transition><source ref="Env_Down"/><target ref="Env_Back"/><label kind="guard" x="-324" y="0">t &gt;= RDMIN</label><label kind="assignment" x="-324" y="16">ownerUp[hk] = true</label></transition>
+<transition><source ref="Env_Idle"/><target ref="Env_Down"/><label kind="select" x="-98" y="157">k : id_t</label><label kind="synchronisation" x="-98" y="173">halt[k]!</label><label kind="assignment" x="-98" y="189">hk = k, ownerUp[k] = false, faulted = true, t = 0</label></transition>
+<transition><source ref="Env_Down"/><target ref="Env_Back"/><label kind="guard" x="-146" y="-16">t &gt;= RDMIN</label><label kind="assignment" x="-146" y="0">ownerUp[hk] = true</label></transition>
 </template>
 <template>
 <name>MON</name>
@@ -43,7 +43,7 @@ clock t;
 <location id="MON_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
 <location id="MON_Done" x="-300" y="0"><name x="-320" y="18">Done</name></location>
 <init ref="MON_Idle"/>
-<transition><source ref="MON_Idle"/><target ref="MON_Done"/><label kind="guard" x="-178" y="-57">faulted &amp;&amp; ownerUp[hk] &amp;&amp; nstopped == hk + 1</label><label kind="synchronisation" x="-178" y="-41">release!</label><label kind="assignment" x="-178" y="-25">released = true</label></transition>
+<transition><source ref="MON_Idle"/><target ref="MON_Done"/><label kind="guard" x="-188" y="-52">faulted &amp;&amp; ownerUp[hk] &amp;&amp; nstopped == hk + 1</label><label kind="synchronisation" x="-188" y="-36">release!</label><label kind="assignment" x="-188" y="-20">released = true</label></transition>
 </template>
 <template>
 <name>Tick</name>

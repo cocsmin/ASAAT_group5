@@ -1,14 +1,14 @@
 # The UPPAAL diagrams explained from zero
 
 This guide is for someone who has never seen UPPAAL and does not know our system. After
-reading it you should be able to open any of the four models, read the diagram, understand
+reading it you should be able to open any of the five models, read the diagram, understand
 what the queries prove, and know what the models do **not** prove.
 
 Contents: [1. The system](#1-the-system-in-two-minutes) ·
 [2. Timed automata](#2-timed-automata-in-five-minutes) ·
 [3. Queries](#3-queries-how-uppaal-checks-a-claim) ·
 [4. Why the diagrams look like this](#4-why-the-diagrams-look-like-this) ·
-[5. The four models](#5-the-four-models) · [6. Results and limits](#6-what-the-results-mean-and-their-limits) ·
+[5. The models](#5-the-models) · [6. Results and limits](#6-what-the-results-mean-and-their-limits) ·
 [7. How to use the files](#7-how-to-open-run-and-change-the-models) · [8. Glossary](#8-glossary)
 
 ---
@@ -174,18 +174,21 @@ You will notice the layout looks mechanical. That is on purpose.
 - **Several edges between the same two locations bend to opposite sides**, so two arrows going
   in opposite directions do not lie on top of each other.
 - **Self-loops** (an edge from a location to itself) are stacked above the location.
-- **Labels** are placed beside their edge. Colours are UPPAAL's: green guard, teal
-  synchronisation, blue update, olive select, purple invariant.
-- **Every model except `supervision` has a tiny `Tick` template**: one location with a loop to
+- **Labels** are placed by a small search in `gen.js`: for every edge it tries boxes beside the edge and keeps
+  the one that overlaps the fewest other labels, location names, circles and edges. Colours are UPPAAL's:
+  green guard, teal synchronisation, blue update, olive select, purple invariant.
+- **Every model except `supervision` and `plm` has a tiny `Tick` template**: one location with a loop to
   itself. UPPAAL calls a state with no way forward a *deadlock*. When a model has finished its
   story, it would count as a deadlock and `A[] not deadlock` would fail for a boring reason.
-  `Tick` lets time keep passing.
+  `Tick` lets time keep passing. The two exceptions never end (the heartbeat and the order cycle go on
+  for ever), and in `plm` a `Tick` that takes no time would let an infinite run stand still and spoil the
+  "leads-to" queries.
 
 ---
 
-## 5. The four models
+## 5. The models
 
-Each model is one file (`supervision.xml`, `band.xml`, `batter.xml`, `handover.xml`). Each file
+Each model is one file (`supervision.xml`, `band.xml`, `batter.xml`, `handover.xml`, `plm.xml`). Each file
 contains several **diagrams**, one per template. The pictures below are screenshots from the
 UPPAAL editor. In every picture, read the circles as states, the arrows as transitions, and the
 coloured text as in the table of section 2.
@@ -218,6 +221,7 @@ and only talk through channels. There are four reasons for splitting it:
 | Band | `Section` (×5), `MON` | `Env` (injects the fault), `Tick` |
 | Batter | `Batch` (BAT-INSP), `Dep` (THM-DEP) | `Copy` (state signal delay), `Tick` |
 | Handover | `Sender`, `Receiver` | `Message` (the network, may lose), `Tick` |
+| PLM-WH | `Plm` (the state machine), `Bat` (BAT-DOSE asking for ingredients) | `Clock` (the order cycle), `Stock` (the stock gets too low), `Wms` (the warehouse stops answering) |
 
 ### Why each model has this cast, and not more
 
@@ -231,6 +235,7 @@ can answer it.
 | Supervision | Is a stopped station noticed within 15 s and back within 60 s? | `Node` (what fails), `Broker` (it issues the death certificate), `MON` (the requirement is about what MON knows, and it escalates), `Docker` (the time to restart is part of the 60 s), `Env` (the fault) | Pans, batter, band. Nothing in the timing of detection and restart depends on what the station produces. |
 | Band | Does a halt reach every upstream section in time, and is it released only after the owner is back? | `Section` ×5 (the chain), `Env` (which owner fails), `MON` (it decides the release) | `Node`, `Broker` and `Docker`. How fast a failure is **noticed** is already proved in the supervision model, so this model starts at "the owner has failed". The owner's restart is reduced to one interval, 1 to 30 s, inside `Env`. |
 | Batter | Can batter wait for depositing for too long? | `Batch` (BAT-INSP), `Dep` (THM-DEP), `Copy` (BAT's delayed knowledge of `Dep`) | `MON`, `Docker` and a separate `Env`. MON is not part of the handoff. The only fault is depositing being stopped, and that is built into `Dep` itself (`Blocked`, once). A stop does not restart the container, so there is no Docker; the stop time is only the estimated limit `BLOCKMAX`. |
+| PLM-WH | Does BAT always get its answer in time, and are orders neither lost nor created in bursts? | `Plm` (the code under test), `Bat` (it waits for the answers and repeats its request after 20 s), `Clock` (the 22 s order cycle), `Stock` and `Wms` (the two failures FC1 and FC2) | `MON` (production stops without it, but that is a guard in one line), `Docker` and a restart of PLM-WH (the reservation is in the database; BAT repeats its request; a unit test covers it), the real SQL and the pans. |
 | Handover | Is a lost message harmless? | `Sender`, `Receiver`, `Message` (it can lose) | `MON`, `Docker`, `Env`. The only fault is the lost message, and that is the `Lost` branch of `Message`. |
 
 Three things follow from this:
@@ -599,6 +604,113 @@ the message is lost; and both the "lost then reconciled" and the "delivered" pat
 
 ---
 
+### 5.5 PLM-WH (`plm.xml`): is BAT always answered in time?
+
+**The story.** PLM-WH is the order and warehouse part of PLM. Its code (`internal/plm/machine.go`) is the
+state machine of the Papyrus model: one goroutine handles one event at a time, in the state the machine is
+in. Every 22 s it creates a production order and sends it to BAT. BAT-DOSE then asks for the ingredients.
+PLM checks the stock and the organic rule and locks the ingredients, waits 3 s for the withdrawal, books
+it and only then confirms to BAT. If the stock is too low it holds the order, tells BAT "insufficient",
+and Logistics restocks 15 s later. If the warehouse does not answer within 2 s, PLM opens a circuit
+breaker, answers "staged" (BAT continues with the ingredients it has) and tests the warehouse every 15 s.
+
+**Parameters:**
+
+| Name | Value | Meaning |
+|---|---|---|
+| `ORDER` | 22 | Order cycle (`ORDER_SECONDS`). |
+| `WITHDRAW` | 3 | The ingredients are collected: the internal signal "Withdrawal confirmation". |
+| `RESTOCK` | 15 | Logistics restocks a held order: the internal signal "Restock signal". |
+| `BREAKER` | 15 | The circuit breaker stays open; then the warehouse is tested again. |
+| `WTO` | 2 | A request to the warehouse that takes longer is a `wms_timeout`. |
+| `RETRY` | 20 | BAT repeats an ingredient request that was not answered. |
+| `MAXOUT` | 2 | PLM sends no new order while BAT has two it has not started. |
+| `DOWNMAX` | 40 | The warehouse stays silent at most this long, *estimated*. |
+
+Variables: `orders` (orders sent that BAT has not started), `due` (the order cycle ran out), `lowStock` (FC1),
+`wmsDown` (FC2), `made` (orders created in this cycle), `withdrawn` and `gotConfirm` (for the queries).
+`req` is an urgent broadcast channel (BAT to PLM); `confirmed`, `insufficient` and `staged` are broadcast
+channels (PLM to BAT). A broadcast never blocks the sender, so a request that arrives while PLM cannot take it is
+lost, and BAT's repeat after 20 s covers that, as in the code.
+
+#### Plm (the state machine)
+
+![Plm template](img/plm-plm.png)
+
+*This is the largest diagram. The table of every edge is in `timed-automata.md` (D3.1, PLM-WH).*
+
+- **`Idle`** is the start (double circle). Two things can happen: `req?` (BAT asks) leads to `Verifying`; or the
+  order cycle ran out (`due`) and the machine goes to `Back`.
+- **`Back`** (committed) is "arriving in Idle". If an order is due and BAT has fewer than two, the order is
+  created and sent (`orders++, made++`; in the diagram these are Scheduling_Order and
+  Fetching_recipe_targets). If not, the cycle is dropped. Either way the machine is `Idle` again at once.
+- **`Verifying`** (committed) is Verifying_Inventory with its StockCheck choice. Three ways out: the warehouse is
+  silent (`wmsDown`) to `TimingOut`; the stock is too low to `Holding` and "insufficient" is sent; otherwise to `Waiting`.
+- **`Waiting`** is Reserving_Ingredients and Waiting_For_Withdrawal. The invariant `w <= WITHDRAW` and the guard
+  `w >= WITHDRAW` make it wait exactly 3 s. Then `confirmed!` is sent and the machine goes back through `Back`.
+  A repeated request in the meantime is ignored (the loop `req?`).
+- **`Holding`** is Holding_Order. After `RESTOCK` the stock is back (`lowStock = false`) and the machine verifies
+  again. A repeated request is answered "insufficient" (through the committed `HoldAns`).
+- **`TimingOut`** waits the 2 s of the timeout and then sends "staged" and enters **`Suspended`** (Communication_Suspended).
+  There every request is answered "staged" (`SusAns`), and every 15 s the warehouse is tested: if it answers
+  the machine goes to `Back` (wms_responsive_confirmation), if not it waits another 15 s.
+
+*Why it is its own diagram:* it is the code under test and the only part that is a station. Everything
+else around it is an assumption or a stimulus.
+
+#### Bat (BAT-DOSE asking for ingredients)
+
+![Bat template](img/plm-bat.png)
+
+- `Ready` to `Waiting`: BAT holds an order (`orders > 0`), takes it (`orders--`) and sends `req!`. The edge is
+  urgent, so BAT asks at once.
+- In `Waiting` it accepts `confirmed?` and `staged?` (back to `Ready`, done) or `insufficient?` (it keeps waiting and
+  starts its 20 s again). If nothing comes for `RETRY` it goes through the committed `Retry` and sends `req!` again.
+
+*Why it is its own diagram:* BAT is another system. It is here only because the answers of PLM have a meaning
+for it: "confirmed" and "staged" end its wait, "insufficient" does not.
+
+#### Clock, Stock and Wms (the surroundings)
+
+![Clock template](img/plm-clock.png)
+
+![Stock template](img/plm-stock.png)
+
+![Wms template](img/plm-wms.png)
+
+- **Clock**: every `ORDER` seconds it sets `due`. It is the `ORDER_SECONDS` timer.
+- **Stock**: once, at any moment, the stock becomes too low (`lowStock = true`). This is the failure case FC1.
+- **Wms**: once, at any moment, the warehouse stops answering (`wmsDown = true`) for at most `DOWNMAX` seconds
+  and then answers again (`up = 0` starts a clock that the last query uses). This is the failure case FC2.
+
+*Why each is its own diagram:* they are not part of PLM. They are the world the state machine has to live in.
+Keeping them apart shows what is assumed (one shortage, one silence of at most 40 s) and lets the
+queries cover every moment at which they can happen.
+
+**What the queries prove** (13, all satisfied):
+
+- No deadlock; BAT has at most 2 orders it has not started (`A[] orders <= MAXOUT`); at most one order is created
+  per order cycle (`A[] made <= 1`): a cycle that ends while the machine is busy is taken up when it is `Idle`
+  again, never twice.
+- BAT is confirmed only after a withdrawal was booked (`A[] gotConfirm imply withdrawn`).
+- **BAT gets its final answer within 18 s** (`A[] Bat.Waiting imply age <= 18`). The worst case is a held order:
+  15 s restock plus 3 s withdrawal. It is below the 20 s after which BAT repeats its request. The bound is
+  tight: with 17 s the query fails, and with a restock time of 25 s or a withdrawal time of 30 s it fails
+  as well (negative controls).
+- A held order is always resolved (`Plm.Holding --> Plm.Idle`), a suspension always ends (`Plm.Suspended --> Plm.Idle`),
+  and BAT is always answered in the end (`Bat.Waiting --> Bat.Ready`).
+- After the warehouse answers again, PLM resumes within `BREAKER + WTO` = 17 s (the suspension may have begun just
+  before the warehouse came back).
+- Reachability: an order can be held, communication can be suspended, BAT can be confirmed, also after
+  a shortage and a silence of the warehouse.
+
+**Not in the model** (covered by unit tests in `internal/plm/machine_test.go`): a restart of PLM-WH (the reservation
+is in the database, BAT repeats its request, `Reserve` gives the same answer), a recipe that cannot be read
+(the order is cancelled), the resend of an order that BAT did not pick up after 40 s, and the rule that no order is
+created while the monitor is offline. The model has one BAT and no order ids.
+
+---
+
 ## 6. What the results mean, and their limits
 
 | Model | Queries | Result |
@@ -607,6 +719,7 @@ the message is lost; and both the "lost then reconciled" and the "delivered" pat
 | `band.xml` | 7 | all satisfied |
 | `batter.xml` | 11 | all satisfied (two of them are the findings above) |
 | `handover.xml` | 4 | all satisfied |
+| `plm.xml` | 13 | all satisfied (bounds tight, negative controls fail) |
 
 **What this gives us.** For the modelled parts, the timing claims hold for **every** possible
 behaviour within the stated parameters, not only for the runs we happened to try. The
@@ -644,6 +757,7 @@ verifyta -q supervision.xml supervision.q
 verifyta -q band.xml band.q
 verifyta -q batter.xml batter.q
 verifyta -q handover.xml handover.q
+verifyta -q plm.xml plm.q
 ```
 
 On Windows `verifyta` is at `C:\Program Files\UPPAAL-5.0.0\app\bin\verifyta.exe`. Every line
@@ -689,6 +803,8 @@ Related documents: `docs/timing-constraints.md` (D1, which rules exist), `docs/v
 | **Broadcast channel** | A channel with one sender and any number of receivers; the sender never waits. |
 | **Committed location** | A location where time may not pass; used for steps that happen instantly. |
 | **Deadlock** | A state from which nothing can ever happen again. |
+| **Urgent channel** | A channel whose transitions must be taken without any delay as soon as they are possible. |
+| **Leads-to** | A query `p --> q`: whenever `p` holds, `q` follows later. |
 | **Query** | A claim about the model that UPPAAL checks (`A[]`, `E<>`, `-->`). |
 | **Negative control** | Changing a number to make a query fail, to show that the query can fail. |
 | **Heartbeat** | A "still alive" message every 5 s. |

@@ -15,8 +15,8 @@ chan handoff, deliver;
 <location id="Sender_Stored" x="-150" y="173"><name x="-170" y="191">Stored</name><committed/></location>
 <location id="Sender_Signalled" x="-150" y="-173"><name x="-170" y="-155">Signalled</name></location>
 <init ref="Sender_Idle"/>
-<transition><source ref="Sender_Idle"/><target ref="Sender_Stored"/><label kind="assignment" x="-7" y="60">stored = true, a = 0</label></transition>
-<transition><source ref="Sender_Stored"/><target ref="Sender_Signalled"/><label kind="synchronisation" x="-244" y="0">handoff!</label></transition>
+<transition><source ref="Sender_Idle"/><target ref="Sender_Stored"/><label kind="assignment" x="-27" y="39">stored = true, a = 0</label></transition>
+<transition><source ref="Sender_Stored"/><target ref="Sender_Signalled"/><label kind="synchronisation" x="-146" y="-8">handoff!</label></transition>
 </template>
 <template>
 <name>Message</name>
@@ -26,20 +26,20 @@ chan handoff, deliver;
 <location id="Message_Lost" x="-300" y="0"><name x="-320" y="18">Lost</name></location>
 <location id="Message_Delivered" x="0" y="-200"><name x="-20" y="-182">Delivered</name></location>
 <init ref="Message_Idle"/>
-<transition><source ref="Message_Idle"/><target ref="Message_Flight"/><label kind="synchronisation" x="175" y="117">handoff?</label><label kind="assignment" x="175" y="133">m = 0</label></transition>
-<transition><source ref="Message_Flight"/><target ref="Message_Delivered"/><label kind="synchronisation" x="0" y="0">deliver!</label></transition>
+<transition><source ref="Message_Idle"/><target ref="Message_Flight"/><label kind="synchronisation" x="92" y="53">handoff?</label><label kind="assignment" x="92" y="69">m = 0</label></transition>
+<transition><source ref="Message_Flight"/><target ref="Message_Delivered"/><label kind="synchronisation" x="4" y="-8">deliver!</label></transition>
 <transition><source ref="Message_Flight"/><target ref="Message_Lost"/></transition>
 </template>
 <template>
 <name>Receiver</name>
 <declaration>clock r;</declaration>
-<location id="Receiver_Idle" x="300" y="0"><name x="280" y="18">Idle</name><label kind="invariant" x="280" y="36">r &lt;= RECONCILE</label></location>
+<location id="Receiver_Idle" x="150" y="0"><name x="130" y="18">Idle</name><label kind="invariant" x="130" y="36">r &lt;= RECONCILE</label></location>
 <location id="Receiver_Adopted" x="-300" y="0"><name x="-320" y="18">Adopted</name></location>
 <init ref="Receiver_Idle"/>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="synchronisation" x="-56" y="-80">deliver?</label><label kind="assignment" x="-56" y="-64">adopted = true</label><nail x="0" y="-60"/></transition>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="guard" x="-152" y="40">stored &amp;&amp; a &gt;= GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="-152" y="56">adopted = true</label><nail x="0" y="60"/></transition>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="355" y="-75">!stored &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="355" y="-59">r = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
-<transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="355" y="-160">stored &amp;&amp; a &lt; GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="355" y="-144">r = 0</label><nail x="345" y="-140"/><nail x="255" y="-140"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="synchronisation" x="-128" y="-110">deliver?</label><label kind="assignment" x="-128" y="-94">adopted = true</label><nail x="-75" y="-60"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Adopted"/><label kind="guard" x="-222" y="103">stored &amp;&amp; a &gt;= GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="-222" y="119">adopted = true</label><nail x="-75" y="60"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="171" y="0">!stored &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="171" y="16">r = 0</label><nail x="195" y="-55"/><nail x="105" y="-55"/></transition>
+<transition><source ref="Receiver_Idle"/><target ref="Receiver_Idle"/><label kind="guard" x="-8" y="-176">stored &amp;&amp; a &lt; GRACE &amp;&amp; r &gt;= RECONCILE</label><label kind="assignment" x="-8" y="-160">r = 0</label><nail x="195" y="-140"/><nail x="105" y="-140"/></transition>
 </template>
 <template>
 <name>Tick</name>
