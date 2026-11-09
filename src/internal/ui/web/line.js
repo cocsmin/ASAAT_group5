@@ -270,6 +270,11 @@
       if (ps.seg === w.seg) { ps.q = ps.q.concat(pts.slice(Math.min(ps.idx + 1, ti + 1), ti + 1)); }
       else {
         var lead = ps.box && ps.box !== sg.a ? route(ps.box, sg.a) : [];
+        if (!lead.length && Math.hypot(ps.x - pts[0].x, ps.y - pts[0].y) > 60) {
+          // the pan is not on the way to this conveyor (a status was skipped): it appears at the
+          // start of the conveyor instead of flying across the picture
+          ps.x = pts[0].x; ps.y = pts[0].y;
+        }
         ps.q = lead.concat([{ x: ps.x, y: pts[0].y }], pts.slice(0, ti + 1));
       }
       ps.idx = Math.max(ti, ps.seg === w.seg ? ps.idx : 0);
@@ -283,6 +288,8 @@
         var a = pts[0], b = pts[pts.length - 1];
         ps.q = [{ x: ps.x, y: a.y }].concat(pts, [{ x: x, y: b.y }, { x: x, y: y }]);
         if (ps.seg) { ps.q.shift(); }
+      } else if (Math.hypot(ps.x - x, ps.y - y) > 80) { // no conveyor leads there: appear, do not fly
+        ps.x = x; ps.y = y; ps.q = [];
       } else { ps.q = [{ x: x, y: ps.y }, { x: x, y: y }]; }
       ps.box = w.box; ps.seg = null;
     } else if (ps.q.length > 1) { ps.q[ps.q.length - 1] = { x: x, y: y }; // keep the route, only the slot at its end can change
@@ -295,6 +302,14 @@
       var ps = pstate[id], step = SPEED * dt;
       while (ps.q.length && step > 0) {
         var n = ps.q[0], dx = n.x - ps.x, dy = n.y - ps.y, d = Math.sqrt(dx * dx + dy * dy);
+        if (Math.abs(dx) > 4 && Math.abs(dy) > 4) {
+          // two route pieces that do not meet (leaving a station, joining the next conveyor, a pan
+          // that skipped a status): never fly across the picture, turn a corner first and keep the
+          // direction the pan was already moving in
+          ps.q.unshift(ps.dir === 'v' ? { x: ps.x, y: n.y } : { x: n.x, y: ps.y });
+          continue;
+        }
+        ps.dir = Math.abs(dx) >= Math.abs(dy) ? 'h' : 'v';
         if (d <= step) { ps.x = n.x; ps.y = n.y; ps.q.shift(); step -= d; }
         else { ps.x += dx / d * step; ps.y += dy / d * step; step = 0; }
       }

@@ -150,7 +150,38 @@ See docs/team-review.md section 6 for the port table. To do **[person]**:
 2. Connect the parts in the main IBD (ASAAT.uml has the BT and MON parts, no
    connectors).
 3. MON model: add the commands to BT; BT model: add the band state output.
-4. Pan Spacing & Position Tracking: decide whether it belongs in BT (see above).
+4. **Pan Spacing & Position Tracking is dropped (decided 9 Nov).** Already removed from
+   `Model/FeatureModel` (`model.xml`, `configs/default.xml` and the SVG: feature MON-FEAT-06;
+   the other feature ids keep their numbers). Still to do in the Papyrus models **[person]**:
+   - `MON.uml`: the class "MON-FD-02 Log Database" has `featureID` = MON-FEAT-06, which no
+     longer exists. Change it to MON-FEAT-02 (Traceability & Event Logging), or to the feature
+     the group means.
+   - Look in BT, MON and the main model (ASAAT.uml), in the requirement diagrams and in the
+     report for any block, requirement, port or use case about pan position or pan spacing,
+     and remove it. The code, the signals and `docs/` have nothing of it.
+5. **BAT frame port "Fault event" (decided 9 Nov)**: the teammate who owns the BAT diagram
+   fixes the port. In the code there is no separate signal: a BAT fault leaves as signal 12
+   (log, warning, error and discard events), so the port is an output of signal 12 or internal.
+
+## PLM state machine (PR #7, branch requirement-diagrams-PLM) against the code
+
+The code now follows the diagram (`internal/plm/machine.go`, `docs/decisions.md` 9 Nov). To do in the diagram **[person]**:
+1. Idle to Scheduling_Order on a timer (the order cycle, 22 s), guard: BAT holds fewer than two orders and the
+   monitor is online. The first order is created at once when the monitor is online (Initial).
+2. Self transitions: in Waiting_For_Withdrawal the repeated "Ingredient request" is ignored; in Holding_Order
+   it is answered "insufficient"; in Communication_Suspended it is answered "staged".
+   A request for another order that arrives while the machine is busy waits until it is Idle.
+3. Time events: after 3 s the internal "Withdrawal confirmation"; after 15 s the internal "Restock signal";
+   wms_timeout after 2 s; in Communication_Suspended a test request every 15 s (the circuit breaker stays open 15 s).
+4. The order is created with status `pending`, then `released` when it is sent; `reserved`, `withdrawn`, `held`,
+   `cancelled` (a recipe that cannot be read) are the other statuses. A recipe that cannot be read: no order is sent.
+5. An order that BAT did not pick up (no ingredient request) is sent again after 40 s. Order ids continue after a
+   restart (U14).
+6. Updating_Inventory: "compile order and recipe targets" is redundant, the order and recipe targets are already
+   sent in Fetching_recipe_targets.
+7. Verifying_Inventory, the StockCheck choice and the lock in Reserving_Ingredients are one atomic call to SQL in
+   the code; the diagram can keep the three steps.
+8. Fix the spelling "Veryfing_Inventory" and remove the empty `StateMachine115`.
 
 ## Decisions for the group
 
@@ -187,10 +218,6 @@ Still to check **[person]**:
    it has not run on GitHub yet (first push shows it).
 
 ## Code gaps
-
-0. **Pan Spacing & Position Tracking** (report, Band Transport) is not in the BT model and
-   not implemented. Needs a group decision first (docs/team-review.md section 4, item 0).
-   (docs/team-review.md section 4, item 0).
 
 1. **Tests**: unit tests cover only the Sparkplug codec and the signal mapping; the
    behaviour is checked by the scenarios (`docs/demo.md`), not by Go tests.

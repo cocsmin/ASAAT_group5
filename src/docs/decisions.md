@@ -220,3 +220,31 @@ Claude, the group still has to confirm them)
   (24 pans of 1 s per batch).
 - Known limit, not fixed: P3 (25 s) is checked before the handoff only; a batter can be deposited
   up to 108 s after approval, 3 s before dosing gives up (team-review section 3, item 11).
+
+**9 Nov** (group review notes, taken in the same session)
+- BAT frame port "Fault event" (team-review section 1, item 3): a teammate fixes it in the BAT
+  diagram. The code has no separate signal; a BAT fault leaves as signal 12.
+- Pan Spacing & Position Tracking (item 4) is dropped for good and removed everywhere: the
+  documents, the feature model (MON-FEAT-06 in `Model/FeatureModel`) and, still to do by a
+  teammate, the Papyrus models (see [../TODO.md](../TODO.md)).
+- Dashboard: pans no longer fly diagonally across the picture. When two route pieces do not meet
+  they turn a corner; a pan that skipped a status appears at the start of its conveyor.
+
+**9 Nov** (PLM-WH follows the state machine of PR #7, `requirement-diagrams-PLM`; taken with Elena)
+- PLM-WH is now that state machine (`internal/plm/machine.go`, one event at a time). The state names are the
+  ones of the diagram. Changes in behaviour, all in [timing-constraints.md](timing-constraints.md) (T-D5 to T-D7, TIM-09):
+  - BAT is confirmed after the withdrawal (3 s after the reservation, the internal "Withdrawal confirmation"),
+    no longer right after the reservation. BAT prepares a batch about 3 s slower (A2 in assumptions.md).
+  - A held order is restocked after 15 s (the internal "Restock signal") and goes through the same check
+    again; if it is still short it is held again and asks for the next restock (before it stayed held).
+  - A request to the warehouse that fails (the injected FC2, or a real SQL error or timeout) is a wms_timeout:
+    Communication_Suspended, "staged" answers, a test request every 15 s until the warehouse answers (before: one test).
+  - A new order is created only when the machine is Idle; an order cycle that ended while it was busy is taken up
+    when it is Idle again. No new orders while Communication_Suspended.
+  - Order status: pending, released, reserved, withdrawn, held, cancelled (a recipe that cannot be read).
+- Deviation, on purpose: Verifying_Inventory, the StockCheck choice and the lock of Reserving_Ingredients are one
+  atomic SQL transaction (`Reserve`); splitting them would add a race and a second query for no gain.
+- The diagram needs the changes listed in [../TODO.md](../TODO.md) (the owner of the PLM diagram does them).
+- UPPAAL: a new model `plm.xml` (13 queries, all satisfied). The supervision, band, batter and handover models
+  do not change: PLM is one node among the others for supervision, and neither the band, the batter handoff nor
+  the station handover involve PLM-WH.

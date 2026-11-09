@@ -28,12 +28,13 @@ is worth a look.
    duplicate filter and the 120 s timer of dosing already cover a lost message; an
    acknowledgement would add a race (the acknowledgement in flight while BAT discards at P3).
    Switch to A only if BAT must resend after a depositing crash.
-3. **BAT frame port "Fault event"**: internal or a signal. In the code a BAT fault already
-   leaves as signal 12 (log, warning, error and discard events), so a separate signal would
-   duplicate it. Recommendation: internal, shown as an output of signal 12.
-4. **Pan Spacing & Position Tracking** (report, Band Transport) is not in the BT model and
-   not implemented (a pan has a station, no position or spacing rule). Dropped on purpose?
-   If not, it has to be added to the model and the code.
+3. ~~**BAT frame port "Fault event"**~~ **Decided (9 Nov): a teammate fixes the port in the
+   BAT diagram.** In the code a BAT fault already leaves as signal 12 (log, warning, error
+   and discard events), so there is no separate signal; the diagram has to match
+   ([decisions.md](decisions.md) section 7).
+4. ~~**Pan Spacing & Position Tracking**~~ **Decided (9 Nov): dropped, removed everywhere.** It
+   was never implemented. It is removed from the documents and from the feature model
+   (MON-FEAT-06); what is left to remove in the diagrams is in [TODO.md](../TODO.md).
 5. **The overseer dashboard in the MON model.** The page you see is demo-only (its own
    container). Does the real plant have an overseer UI inside MON (the model stays) or not
    (the model needs a note)?
@@ -82,7 +83,11 @@ is worth a look.
 12. **CI**: the root `Dockerfile` (Node template) was deleted, the deploy job and all
     `continue-on-error` were removed, images are pushed per image (stations, BT, MON, ui) to
     `ghcr.io/<owner>/cake-factory-<image>` only from main or master.
-13. **The exercise documents** (`communication.md`, `containers.md`, `languages.md`,
+13. **PLM-WH is now the state machine of PR #7** (9 Nov). Visible changes: BAT is confirmed about 3 s later
+    (after the withdrawal), a held order that is restocked but still short is held again, no new orders while
+    the warehouse does not answer (Communication_Suspended), and the order status has new values. You may veto
+    any of it; the list of what the diagram still needs is in [TODO.md](../TODO.md).
+14. **The exercise documents** (`communication.md`, `containers.md`, `languages.md`,
     `databases.md`, `experiment.md`) are drafts written by the assistant: check every
     claim, add your own sources, and make them fit the report template.
 
