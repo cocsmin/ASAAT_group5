@@ -21,7 +21,7 @@ requirement in the report) or the design level (the value chosen in the implemen
 | EC4 Order to cake | PLM releases an order | the cakes of that order are shipped | PLM, BAT, THM, FIN, BT, PLM-SHIP |
 | EC5 Band stop | a band section halts | every station upstream stops taking new pans | BT, THM, FIN |
 | EC6 Cooling failure | a cooling failure is reported | the cakes are re-cooled or refused (UC10) | THM-COOL, FIN-DPN |
-| EC7 Batter handoff | the batter is approved at inspection | depositing starts, or the batter is discarded | BAT-INSP, THM-DEP |
+| EC7 Batter handoff | the batter is approved at inspection | the batter is handed to depositing ("Batter ready"), or discarded; there is no acknowledgement, BAT does not see when depositing starts | BAT-INSP, THM-DEP |
 | EC8 Handover | a station hands a pan or cake document to the next station | the next station has taken it up | any two neighbouring stations |
 
 ## 2. Event-chain constraints
@@ -31,7 +31,7 @@ requirement in the report) or the design level (the value chosen in the implemen
 | T-RC1 | Reaction | EC1 | detected within 3 heartbeat intervals | at most 15 s; the broker's keep-alive finds a frozen node after 7.5 s; a crash at once (measured at most 0.43 s) | analysis and design | THM-REQ-72, `timing.DetectLimit`, `timing.KeepAlive` |
 | T-RC2 | Reaction | EC2 | back in normal operation after the cause is removed | at most 60 s; a container that has not restarted after 45 s goes to Maintenance | analysis and design | THM-REQ-73, `timing.RestoreLimit`, `timing.MonDeadAfter` |
 | T-RC3 | Reaction | EC5 | stop new pans after a band halt | at most 1 s | analysis | THM-REQ-76 and -78 (not measured) |
-| T-RC4 | Reaction | EC7 | batter that waits for depositing is discarded | after 25 s (parameter P3) | design | `timing.BatterWait`, FC7 |
+| T-RC4 | Reaction | EC7 | batter that waits for depositing to work again is discarded | after 25 s (parameter P3), looked at once a second, so after 26 s; counted before the handoff only, after it nothing limits the wait (`team-review.md`, section 3) | design | `timing.BatterWait`, FC7, `bat.handOff` |
 | T-RC5 | Reaction | EC6 | decide refuse or re-cool after a cooling failure | 30 min in the plant, 40 s in the simulation (factor 45) | analysis and design | UC10, `timing.BufferWait` |
 | T-RC6 | Reaction | EC4 | a batch whose result does not come back is given up | after 120 s, which is longer than mixing plus inspection plus P3 (unit test) | design | `batchLostAfter`, FC27 |
 | T-RC7 | Reaction | EC8 | a station takes up a handed-over document that the message did not deliver | after 3 s grace, checked every 5 s | design | `station.HandoverGrace`, `station.ReconcileEvery` |
@@ -84,7 +84,7 @@ confirm.
 | TIM-01 | Every node shall send a heartbeat every 5 s. | T-P1 |
 | TIM-02 | MON shall detect a stopped node within 15 s. | T-RC1, THM-REQ-72 |
 | TIM-03 | A stopped container shall be back in normal operation within 60 s after the cause is removed, and escalated to Maintenance after 45 s without a restart. | T-RC2, THM-REQ-73 |
-| TIM-04 | Batter that has waited 25 s for depositing shall be discarded. | T-RC4 |
+| TIM-04 | Batter that has waited 25 s for depositing to work again shall be discarded. | T-RC4 |
 | TIM-05 | A batch that has not come back after 120 s shall be discarded. | T-RC6 |
 | TIM-06 | A handed-over document that no message announced shall be taken up within 8 s (3 s grace plus one 5 s pass). | T-RC7 |
 | TIM-07 | A database call shall never block a station for more than 3 s. | T-D1 |
@@ -93,4 +93,6 @@ confirm.
 ## 6. What the experiment says
 
 Detection at most 0.43 s (crash) and 7.06 s (freeze), recovery at most 1.19 s, 270 runs
-(`experiment.md`). T-RC3 and T-OS1 are not measured.
+(`experiment.md`). T-RC3 and T-OS1 are not measured. T-RC4 holds before the handoff; the UPPAAL
+batter model shows a batter can be deposited up to 70 s after approval (estimated stop time),
+see `team-review.md` section 3.

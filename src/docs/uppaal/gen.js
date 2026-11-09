@@ -5,7 +5,7 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, 
 
 function template(t) {
   const n = t.locs.length;
-  const pos = (i) => [Math.round(300 * Math.cos((2 * Math.PI * i) / n)), Math.round(200 * Math.sin((2 * Math.PI * i) / n))];
+  const pos = (i) => t.locs[i].at || [Math.round(300 * Math.cos((2 * Math.PI * i) / n)), Math.round(200 * Math.sin((2 * Math.PI * i) / n))]; // `at` places a location by hand
   let s = `<template>\n<name>${t.name}</name>\n`;
   if (t.params) s += `<parameter>${esc(t.params)}</parameter>\n`;
   s += `<declaration>${esc(t.decl || "")}</declaration>\n`;
@@ -163,36 +163,61 @@ clock t;
   ["release is reachable", "E<> released"],
 ]);
 
-// 3. Batter: inspection, waiting for depositing (P3 = 25 s), batch lost limit (120 s).
+// 3. Batter: inspection, hold while depositing is stopped (P3 = 25 s), batch lost limit (120 s).
+// Models the code: BAT-INSP reads its own copy of the "Depositing stopped" state, holds the batter
+// while the copy says stopped, discards it after P3, otherwise sends "Batter ready" and is done.
+// There is no acknowledgement from depositing (decision: docs/team-review.md section 1, item 2, option B).
 model("batter", `const int MIX = 6;       // recipe MixSeconds
 const int INSP = 3;       // inspection
-const int P3 = 25;        // batter waits at most this for depositing (FC7)
-const int LOST = 120;     // a batch not finished by now is given up
+const int P3 = 25;        // batter waits at most this for depositing to work again (FC7)
+const int POLL = 1;       // BAT-INSP looks at the state once a second, so it discards after P3 + POLL
+const int LOST = 120;     // dosing gives up a batch that is not finished by now
+const int STALE = 6;      // BAT-INSP's copy of the state is at most this old (heartbeat 5 s + delivery 1 s, estimated)
 const int BLOCKMAX = 60;  // depositing may stay stopped this long (estimated)
+const int DEPSTART = 5;   // depositing takes up a queued batter within this when it admits pans (estimated)
 clock g;                  // age of the batch
-chan deposit_ok;
+clock h;                  // time since the inspector approved the batter
+bool stopped = false;     // depositing is really stopped
+bool seen = false;        // BAT-INSP's copy of that state
+bool queued = false;      // "Batter ready" has reached depositing
+bool faultDone = false;   // one stop only
+bool deposited = false;
+chan ready;               // Batter ready (reliable, no acknowledgement)
 `, [
   { name: "Batch", decl: "clock x;", init: "Mixing",
-    locs: [{ n: "Mixing", inv: "x <= MIX" }, { n: "Inspecting", inv: "x <= INSP" }, { n: "Waiting", inv: "x <= P3" }, { n: "Deposited" }, { n: "Discarded" }],
+    locs: [{ n: "Mixing", inv: "x <= MIX" }, { n: "Inspecting", inv: "x <= INSP" }, { n: "Handed" }, { n: "Holding", inv: "x <= P3 + POLL" }, { n: "Discarded" }],
     trans: [
       { from: "Mixing", to: "Inspecting", guard: "x >= MIX", assign: "x = 0" },
-      { from: "Inspecting", to: "Waiting", guard: "x >= INSP", assign: "x = 0" },
-      { from: "Waiting", to: "Deposited", sync: "deposit_ok?" },
-      { from: "Waiting", to: "Discarded", guard: "x >= P3" } ] },
-  { name: "Dep", decl: "clock y;", init: "Open",
-    locs: [{ n: "Open" }, { n: "Blocked", inv: "y <= BLOCKMAX" }],
+      { from: "Inspecting", to: "Holding", guard: "x >= INSP && seen", assign: "x = 0, h = 0" },
+      { from: "Inspecting", to: "Handed", guard: "x >= INSP && !seen", sync: "ready!", assign: "h = 0" },
+      { from: "Holding", to: "Handed", guard: "!seen", sync: "ready!" },
+      { from: "Holding", to: "Discarded", guard: "seen && x >= P3 + POLL" } ] },
+  { name: "Dep", decl: "clock y, q;", init: "Open",
+    locs: [{ n: "Open", at: [0, -110] }, { n: "OpenQ", inv: "q <= DEPSTART", at: [0, 190] }, { n: "Blocked", inv: "y <= BLOCKMAX", at: [-380, 40] }, { n: "Took", committed: true, at: [380, 190] }, { n: "Done", at: [380, -110] }],
     trans: [
-      { from: "Open", to: "Open", sync: "deposit_ok!" },
-      { from: "Open", to: "Blocked", assign: "y = 0" },
-      { from: "Blocked", to: "Open", assign: "y = 0" } ] },
-], "system Batch, Dep;", [
+      { from: "Open", to: "OpenQ", sync: "ready?", assign: "queued = true, q = 0" },
+      { from: "Blocked", to: "Blocked", sync: "ready?", assign: "queued = true" },
+      { from: "Open", to: "Blocked", guard: "!faultDone", assign: "stopped = true, y = 0" },
+      { from: "OpenQ", to: "Blocked", guard: "!faultDone", assign: "stopped = true, y = 0" },
+      { from: "Blocked", to: "Open", guard: "y >= 1 && !queued", assign: "stopped = false, faultDone = true" },
+      { from: "Blocked", to: "OpenQ", guard: "y >= 1 && queued", assign: "stopped = false, faultDone = true, q = 0" },
+      { from: "OpenQ", to: "Took", assign: "deposited = true" },
+      { from: "Took", to: "Done" } ] },
+  { name: "Copy", decl: "clock w;", init: "Sync",
+    locs: [{ n: "Sync", inv: "w <= STALE" }],
+    trans: [{ from: "Sync", to: "Sync", guard: "w >= 1", assign: "seen = stopped, w = 0" }] },
+], "system Batch, Dep, Copy;", [
   ["no deadlock", "A[] not deadlock"],
-  ["T-RC4: batter never waits longer than P3", "A[] Batch.Waiting imply Batch.x <= P3"],
-  ["T-RC6: the batch is finished well before the LOST limit", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Waiting) imply g <= LOST"],
-  ["the longest path is MIX + INSP + P3", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Waiting) imply g <= MIX + INSP + P3"],
-  ["deposited and discarded exclude each other", "A[] not (Batch.Deposited && Batch.Discarded)"],
+  ["T-RC4: before the handoff the batter holds at most P3 + POLL", "A[] Batch.Holding imply Batch.x <= P3 + POLL"],
+  ["BAT's side of the batch is finished within MIX + INSP + P3 + POLL", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= MIX + INSP + P3 + POLL"],
+  ["T-RC6: and so well before the LOST limit", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= LOST"],
+  ["T-RC6: a batter is deposited before dosing gives the batch up", "A[] Dep.Took imply g <= LOST"],
+  ["from approval to deposit at most DEPSTART + BLOCKMAX + DEPSTART (70 s), more than P3", "A[] Dep.Took imply h <= 2 * DEPSTART + BLOCKMAX"],
+  ["deposited and discarded exclude each other", "A[] not (Batch.Discarded && deposited)"],
   ["the discard path is reachable", "E<> Batch.Discarded"],
-  ["the deposit path is reachable", "E<> Batch.Deposited"],
+  ["the deposit path is reachable", "E<> Dep.Took"],
+  ["FINDING: the state copy can be stale, a batter is handed to depositing while it is stopped", "E<> (Batch.Handed && stopped)"],
+  ["FINDING: after the handoff nothing limits the wait, a batter is deposited more than P3 + POLL after approval", "E<> (Dep.Took && h > P3 + POLL)"],
 ]);
 
 // 4. Handover: document stored, signal may be lost, reconcile pass adopts after the grace.

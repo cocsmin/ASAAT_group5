@@ -29,8 +29,27 @@ where the diagrams are missing, wrong, or behind the implementation.
    need the behaviour "restart, reload saved state, take up cakes and pans again
    from the stored documents".
 7. **BAT Mixing and Handoff** has `batchCollected`, which is not one of the 14
-   signals. Either add a signal or remove the event and let the timer start when
-   depositing stops (what the code does).
+   signals. **DECIDED (proposed 2026-11-09, group to confirm): option B, remove it.**
+   The code (`internal/bat/insp.go`, `handOff`), the UPPAAL batter model
+   (`docs/uppaal/batter.xml`) and the documents already follow B; only Papyrus changes.
+   Why: the 14-signal interface and the measured experiment stay valid, and a lost
+   "Batter ready" is already covered (QoS 1, persistent session, saved queue in THM-DEP,
+   duplicate filter, the 120 s timer of dosing). See `docs/team-review.md` section 1, item 2.
+   **To do in Papyrus (BAT state machine "Mixing and Handoff"):**
+   - delete the event/trigger `batchCollected` and the state or transition that waits for it;
+   - after the inspector approves the batter, check the depositing state (the last
+     "Depositing stopped / working again" received): if working, send "Batter ready" and
+     the batch is done for BAT;
+   - if stopped, enter a state `Holding` with a time event `after(P3)`, P3 = 25 s
+     (`timing.BatterWait`); on "working again" leave it and send "Batter ready"; when the
+     timer ends, discard the batter (event FC7) and report "Batch result" = discarded;
+   - keep the 14 signals and the ports of BAT and THM as they are (no new port).
+   **Open, optional (code):** P3 is checked before the handoff only; nothing in THM-DEP
+   discards a queued batter (found with UPPAAL, `docs/team-review.md` section 3, item 11).
+   If the group wants it fixed: add the already-waited time to "Batter ready" and let
+   THM-DEP discard a batter whose total wait passes P3. If the group chooses option A
+   instead (a 15th signal "Batter collected"), the code, `docs/signals.md`, the port tables,
+   the Word document and the UPPAAL batter model (`gen.js`) all change.
 8. **State machines live on branches** (`state-machines-fin`,
    `requirement-diagrams-BAT`) and are not on master. Merge them.
 9. **Signal descriptions**: Band state change carries five sections (S1 to S5);

@@ -83,22 +83,45 @@ to a sink), `release?`.
 | `Pass` | `Stopped` | | `stop[i-1]!` | `nstopped++` |
 | `Stopped` | `Running` | | `release?` | `nstopped--` |
 
-### Batter (BAT-INSP and THM-DEP combined as one batch automaton)
+### Batter handoff (BAT-INSP, THM-DEP and BAT-INSP's copy of the depositing state)
 
-Channels: `approved?`, `deposit_ok?`, `discard!`, `deposited!`.
+This follows the implementation and the decision in `team-review.md` (section 1, item 2,
+option B): there is **no acknowledgement** from depositing to batter preparation. BAT-INSP
+reads its own copy of the state signal "Depositing stopped / working again". While the copy
+says stopped it holds the batter; after `P3` (plus one polling second) it discards it.
+Otherwise it sends "Batter ready" and is done with the batch.
+
+Constants: `MIX = 6`, `INSP = 3`, `P3 = 25`, `POLL = 1` (the code looks at the state once a
+second, so it discards after 26 s), `LOST = 120`, `STALE = 6` (the copy is at most one
+heartbeat plus one delivery old, estimated), `BLOCKMAX = 60` (depositing stays stopped at
+most this long, estimated), `DEPSTART = 5` (depositing takes up a queued batter within this
+when it admits pans, estimated). Clocks: `g` age of the batch, `h` time since approval.
+Channel: `ready` (Batter ready).
+
+**Batch** (BAT-INSP):
 
 | Location | Invariant | Meaning |
 |---|---|---|
-| `Inspecting` | `x <= 3` | inspection takes 3 s |
-| `Waiting` | `x <= P3` | waits for depositing to start |
-| `Deposited` | none | |
-| `Discarded` | none | |
+| `Mixing` | `x <= MIX` | mixing |
+| `Inspecting` | `x <= INSP` | inspection takes 3 s |
+| `Holding` | `x <= P3 + POLL` | the copy says depositing is stopped, the batter waits |
+| `Handed` | none | "Batter ready" sent, BAT is done |
+| `Discarded` | none | waited too long |
 
 | From | To | Guard | Sync | Update |
 |---|---|---|---|---|
-| `Inspecting` | `Waiting` | `x == 3` | `approved?` | `x = 0` |
-| `Waiting` | `Deposited` | | `deposit_ok?` | |
-| `Waiting` | `Discarded` | `x >= P3` | `discard!` | |
+| `Mixing` | `Inspecting` | `x >= MIX` | | `x = 0` |
+| `Inspecting` | `Holding` | `x >= INSP && seen` | | `x = 0, h = 0` |
+| `Inspecting` | `Handed` | `x >= INSP && !seen` | `ready!` | `h = 0` |
+| `Holding` | `Handed` | `!seen` | `ready!` | |
+| `Holding` | `Discarded` | `seen && x >= P3 + POLL` | | |
+
+**Dep** (THM-DEP): `Open`, `OpenQ` (a batter is queued, invariant `q <= DEPSTART`),
+`Blocked` (invariant `y <= BLOCKMAX`), `Took` (committed: the batter is taken up), `Done`.
+It accepts `ready?` in `Open` and `Blocked` (it queues the batter whatever its state). It
+can stop once (`stopped = true`) and starts again after at least 1 s. `OpenQ` to `Took` sets
+`deposited`. **Copy**: one location with invariant `w <= STALE`; every 1 to 6 s it sets
+`seen = stopped`. This is the state signal, repeated with every heartbeat.
 
 ### Station handover (sender and receiver)
 
@@ -127,8 +150,9 @@ NTA 2, band: `Section(1..5)`, `Station(i)`, `MON`. Channels: `halt[s]`, `release
 `stop_upstream[s]`. A halt of section s is forwarded to every section below s (one
 `stop_upstream` each); MON sends `release[s]` only after `birth` of the owner (T-OR2).
 
-NTA 3, batter: `Batch`, `THM-DEP` (accepts `deposit_ok` or not, with a stop flag), `Lost`
-timer for the 120 s limit.
+NTA 3, batter: `Batch`, `Dep`, `Copy` (the state copy). `Batch` and `Dep` meet only on `ready`;
+`Batch` sees `Dep` only through the delayed copy `seen`. The 120 s limit of dosing is checked as
+a query on the clock `g` (the dosing timer itself is not modelled).
 
 NTA 4, handover: `Sender`, `Receiver`, a lossy `Message` automaton that either delivers or
 drops.
@@ -141,8 +165,8 @@ drops.
 | T-RC1 detection 15 s | Broker invariant, MON | proven by the query `A[] MON.Failed imply ...` below |
 | T-RC2 recovery 60 s | Node, Docker, MON | `ESCALATE` guard on MON; query bounds restart plus birth |
 | T-RC3 stop within 1 s | Band section | invariant `x <= 1` in `Pass` |
-| T-RC4 batter 25 s | Batter | invariant `x <= P3` in `Waiting` |
-| T-RC6 batch lost 120 s | `Lost` timer | guard `z >= LOST` |
+| T-RC4 batter 25 s | Batch | invariant `x <= P3 + POLL` in `Holding` and guard `x >= P3 + POLL` on the discard; covers the wait **before** the handoff only (see Limits) |
+| T-RC6 batch lost 120 s | queries on the clock `g` | `g <= LOST` while the batch is with BAT and when the batter is deposited; the dosing timer itself is not modelled |
 | T-RC7 handover 3 s | Handover | guard `x >= GRACE`, invariant `x <= GRACE + RECONCILE` |
 | T-EX* execution times | Station TAs | invariant `x <= d` and guard `x >= d` |
 | T-OR2 release after birth | Band NTA | `release` edge guarded by `owner_online` |
@@ -157,7 +181,7 @@ written into one automaton. They are properties of the NTA, checked with a query
 |---|---|---|---|
 | `uppaal/supervision.xml` | Node, Broker, MON, Docker, Env | 8 | all satisfied |
 | `uppaal/band.xml` | five Sections, Env, MON | 7 | all satisfied |
-| `uppaal/batter.xml` | Batch, Dep | 7 | all satisfied |
+| `uppaal/batter.xml` | Batch, Dep, Copy | 11 | all satisfied (two of them are reachability findings, see below) |
 | `uppaal/handover.xml` | Sender, Message, Receiver | 4 | all satisfied |
 
 Run (from `src/docs/uppaal`): `node gen.js` writes the models and `.q` files,
@@ -171,15 +195,24 @@ What the queries prove, with the estimated parameters:
 - **Band.** A halt reaches every upstream section within N x 1 s = 5 s, each section hands it on
   within 1 s. A section is released only after its owner is back. After the release no section
   stays stopped.
-- **Batter.** The batter never waits longer than P3 = 25 s. A batch finishes within
-  6 + 3 + 25 = 34 s, far inside the 120 s limit. Deposited and discarded exclude each other. The
-  discard path is reachable.
+- **Batter.** Before the handoff the batter holds at most P3 + POLL = 26 s. BAT's side of a batch
+  is finished within 6 + 3 + 26 = 35 s, far inside the 120 s limit. A batter is always deposited
+  before dosing gives the batch up (`g <= LOST`, with the estimated `BLOCKMAX`). Deposited and
+  discarded exclude each other. Both end states are reachable.
+- **Batter, two findings** (queries that are satisfied and show a weakness, not a proof of
+  safety). (1) The state copy can be stale: a batter can be handed to depositing while
+  depositing is already stopped (`E<> Batch.Handed && stopped`). Depositing queues it, so
+  nothing is lost. (2) After the handoff nothing in the code limits the wait: a batter can be
+  deposited more than `P3 + POLL` after approval, at most `DEPSTART + BLOCKMAX + DEPSTART` = 70 s
+  with the estimates. `P3` is checked in BAT-INSP only; THM-DEP does not discard queued batter
+  (`internal/thm`). The proposed fix, with no new signal, is in `team-review.md` section 3.
 - **Handover.** A stored document is taken up within GRACE + RECONCILE = 8 s, also when the
   message is lost.
 
 **Negative controls** (to show the queries can fail): with a restart time of up to 60 s the
 60 s recovery query and the no-escalation query fail; with a batch limit of 30 s instead of
-120 s the LOST query fails.
+120 s the two LOST queries of the batter model fail; with depositing blocked for up to 120 s
+instead of 60 s the query "a batter is deposited before dosing gives the batch up" fails.
 
 ## Limits
 
@@ -190,5 +223,12 @@ What the queries prove, with the estimated parameters:
 - The restart delay (1 to 30 s), message delay (1 s), and the time depositing may stay stopped
   (60 s) are estimates. The measured restart is at most 1.2 s, so the proven bounds are safe,
   not tight.
+- The batter model has no acknowledgement from depositing, as in the code. If the group
+  chooses option A of `team-review.md` (a 15th signal "Batter collected"), `Batch` waits for
+  that signal instead of reading `seen`, and the model has to be changed. The race to watch
+  then is the acknowledgement in flight while BAT discards at `P3`.
+- The delivery delay of "Batter ready" is not modelled (the signal is QoS 1 with a persistent
+  session, so it arrives; a message lost for good is caught by the 120 s timer of dosing).
+  BAT-INSP leaves `Holding` at once when the copy says working again; the code looks once a second.
 - The band model lets MON release only when every upstream section has confirmed it is
   stopped. That is an assumption about MON, not proven from the code.

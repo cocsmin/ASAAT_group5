@@ -21,6 +21,13 @@ is worth a look.
    Option A: a 15th signal, so BAT can free its station and send again if it never comes.
    Option B: remove the waiting step from the BAT diagram. Recommendation: B unless BAT must
    resend after a depositing crash.
+   **Proposed: B (to confirm by the group).** The code, the UPPAAL batter model and the
+   documents already follow B; only the Papyrus BAT state machine changes (steps in
+   [TODO.md](../TODO.md) item 7). Reasons: the 14-signal interface stays; the measured
+   experiment stays valid; a persistent QoS 1 handoff, the saved queue of depositing, the
+   duplicate filter and the 120 s timer of dosing already cover a lost message; an
+   acknowledgement would add a race (the acknowledgement in flight while BAT discards at P3).
+   Switch to A only if BAT must resend after a depositing crash.
 3. **BAT frame port "Fault event"**: internal or a signal. In the code a BAT fault already
    leaves as signal 12 (log, warning, error and discard events), so a separate signal would
    duplicate it. Recommendation: internal, shown as an output of signal 12.
@@ -113,6 +120,17 @@ is worth a look.
     depositing queue, the monitor's birth handling and the wiring of the model, the
     station program and the compose file. They run in CI. The main loop of every station is
     not unit-tested (it needs a broker or a long simulation); the scenarios cover it.
+
+11. **P3 is checked before the handoff only.** BAT-INSP discards a batter that waited more
+    than P3 (25 s, looked at once a second) while depositing is stopped. After "Batter ready"
+    is sent, THM-DEP queues the batter and nothing discards it, so a batter can wait in the
+    queue as long as depositing stays stopped (FC7). The UPPAAL batter model shows it: with the
+    estimated stop time of 60 s a batter is deposited up to 70 s after approval, and the
+    state copy of BAT can be stale by a heartbeat. Proposed fix with no new signal: "Batter
+    ready" carries how long the batter has already waited; THM-DEP discards a queued batter
+    whose total wait would pass P3 when it takes it up, and reports `Batch result` "discarded"
+    (an existing signal that dosing already reads). Not done: it changes tested code and the
+    experiment. Decide: fix, or state the limit in the report.
 
 ## 4. Odd things worth a look [?]
 

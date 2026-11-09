@@ -53,7 +53,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | T4 | Heartbeat T_hb | 5 s for every system, PLM included | Keep. Decided by the group |
 | T5 | Detection of a stopped controller | 15 s (3 x T_hb, THM-REQ-72); the MQTT keep-alive (5 s, dead after 7.5 s) is an extra and faster | Keep |
 | T6 | A container that does not restart by itself | escalated to Maintenance after 45 s (THM-REQ-73 allows 60 s) | Keep |
-| T7 | Batter that waits too long for depositing is discarded | 25 s (BAT parameter P3) | Confirm |
+| T7 | Batter that waits too long for depositing to work again is discarded | 25 s (BAT parameter P3); BAT-INSP checks once a second, so 26 s; counted before the handoff only (`team-review.md`, section 3, item 11) | Confirm |
 | T8 | Retries | ingredient request repeated after 20 s; order sent again after 40 s; every database call times out after 3 s; event outbox retried every second; state saved every 3 s | Keep. The test in `internal/timing` checks that they fit together |
 | T9 | Faults the system repairs by itself, injected for the demo | depositing jam 30 s; no-pan wait 4 s; recalibration 6 s; wrong speed corrected after 10 s; band sections restart 1.5 s apart | Keep |
 
