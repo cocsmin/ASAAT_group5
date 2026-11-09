@@ -92,7 +92,7 @@ availability experiment with ten runs per scenario is in [experiment.md](experim
 | Scenario | Result | Numbers |
 |---|---|---|
 | `healthy` | PASS | all containers online, a pallet ships |
-| `crash-<container>` for the 14 stations and `bt` | PASS | death certificate after 0.3 to 0.4 s (bound 15 s), container back after 0.9 to 1.1 s (bound 60 s), all 60 pans kept, flow resumed after 24 to 29 s; the depositing station needed 94 s (see team-review section 3, item 11) |
+| `crash-<container>` for the 14 stations and `bt` | PASS | death certificate after 0.3 to 0.4 s (bound 15 s), container back after 0.9 to 1.1 s (bound 60 s), all 60 pans kept, flow resumed after 24 to 29 s; the depositing station needed 94 s (an earlier run; the 15-run figures for it are in `experiment.md`) |
 | `freeze-thm-bake` | PASS | broker declared the station dead after 7.1 s (bound 15 s), flow resumed after 21 s |
 | `band-halt` | PASS | S1 and S2 halted after 7.3 s, S3 to S5 kept running, all sections ran again when the station returned |
 | `band-section-stop` | PASS | the stopped section is "fault", upstream halted, downstream runs, depositing really stops, the repair restarts the sections in order (4.6 s) |

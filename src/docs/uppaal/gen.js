@@ -78,8 +78,8 @@ const int ESCALATE = 45;   // MON escalates after this
 const int RDMIN = 1;       // Docker restart takes at least this
 const int RDMAX = 30;      // estimated upper bound of a restart
 clock t;                   // observer: time since the fault
-chan hb, restart, freeze;
-broadcast chan crash, birth, ndeath, escalate;
+chan hb, restart;
+broadcast chan crash, freeze, birth, ndeath, escalate;
 `, [
   { name: "Node", decl: "clock x;", init: "Online",
     locs: [{ n: "Starting", inv: "x <= 1" }, { n: "Online", inv: "x <= HB" }, { n: "Down" }],
@@ -93,6 +93,7 @@ broadcast chan crash, birth, ndeath, escalate;
     locs: [{ n: "Alive", inv: "y <= DEADAFTER" }, { n: "Notify", committed: true }, { n: "Dead" }],
     trans: [
       { from: "Alive", to: "Alive", sync: "hb?", assign: "y = 0" },
+      { from: "Alive", to: "Alive", sync: "birth?", assign: "y = 0" }, // a (re)connection is traffic too
       { from: "Alive", to: "Notify", sync: "crash?" },
       { from: "Notify", to: "Dead", sync: "ndeath!" },
       { from: "Alive", to: "Dead", guard: "y >= DEADAFTER", sync: "ndeath!" },
@@ -106,7 +107,8 @@ broadcast chan crash, birth, ndeath, escalate;
   { name: "Docker", decl: "clock d;", init: "Idle",
     locs: [{ n: "Idle" }, { n: "Restarting", inv: "d <= RDMAX" }],
     trans: [
-      { from: "Idle", to: "Restarting", sync: "ndeath?", assign: "d = 0" },
+      { from: "Idle", to: "Restarting", sync: "crash?", assign: "d = 0" },
+      { from: "Idle", to: "Restarting", sync: "freeze?", assign: "d = 0" },
       { from: "Restarting", to: "Idle", guard: "d >= RDMIN", sync: "restart!" } ] },
   { name: "Env", init: "Idle",
     locs: [{ n: "Idle" }, { n: "Faulted" }],
@@ -174,7 +176,7 @@ const int POLL = 1;       // BAT-INSP looks at the state once a second, so it di
 const int LOST = 120;     // dosing gives up a batch that is not finished by now
 const int STALE = 6;      // BAT-INSP's copy of the state is at most this old (heartbeat 5 s + delivery 1 s, estimated)
 const int BLOCKMAX = 60;  // depositing may stay stopped this long (estimated)
-const int DEPSTART = 5;   // depositing takes up a queued batter within this when it admits pans (estimated)
+const int DEPSTART = 24;  // a queued batter waits at most this for depositing to take it up: it may sit behind the previous batch, PansPerBatch 24 x depositTime 1 s
 clock g;                  // age of the batch
 clock h;                  // time since the inspector approved the batter
 bool stopped = false;     // depositing is really stopped
@@ -212,7 +214,7 @@ chan ready;               // Batter ready (reliable, no acknowledgement)
   ["BAT's side of the batch is finished within MIX + INSP + P3 + POLL", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= MIX + INSP + P3 + POLL"],
   ["T-RC6: and so well before the LOST limit", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= LOST"],
   ["T-RC6: a batter is deposited before dosing gives the batch up", "A[] Dep.Took imply g <= LOST"],
-  ["from approval to deposit at most DEPSTART + BLOCKMAX + DEPSTART (70 s), more than P3", "A[] Dep.Took imply h <= 2 * DEPSTART + BLOCKMAX"],
+  ["from approval to deposit at most DEPSTART + BLOCKMAX + DEPSTART (108 s), more than P3", "A[] Dep.Took imply h <= 2 * DEPSTART + BLOCKMAX"],
   ["deposited and discarded exclude each other", "A[] not (Batch.Discarded && deposited)"],
   ["the discard path is reachable", "E<> Batch.Discarded"],
   ["the deposit path is reachable", "E<> Dep.Took"],

@@ -10,8 +10,8 @@ const int ESCALATE = 45;   // MON escalates after this
 const int RDMIN = 1;       // Docker restart takes at least this
 const int RDMAX = 30;      // estimated upper bound of a restart
 clock t;                   // observer: time since the fault
-chan hb, restart, freeze;
-broadcast chan crash, birth, ndeath, escalate;
+chan hb, restart;
+broadcast chan crash, freeze, birth, ndeath, escalate;
 </declaration>
 <template>
 <name>Node</name>
@@ -34,6 +34,7 @@ broadcast chan crash, birth, ndeath, escalate;
 <location id="Broker_Dead" x="-150" y="-173"><name x="-170" y="-155">Dead</name></location>
 <init ref="Broker_Alive"/>
 <transition><source ref="Broker_Alive"/><target ref="Broker_Alive"/><label kind="synchronisation" x="355" y="-75">hb?</label><label kind="assignment" x="355" y="-59">y = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
+<transition><source ref="Broker_Alive"/><target ref="Broker_Alive"/><label kind="synchronisation" x="355" y="-160">birth?</label><label kind="assignment" x="355" y="-144">y = 0</label><nail x="345" y="-140"/><nail x="255" y="-140"/></transition>
 <transition><source ref="Broker_Alive"/><target ref="Broker_Notify"/><label kind="synchronisation" x="49" y="60">crash?</label></transition>
 <transition><source ref="Broker_Notify"/><target ref="Broker_Dead"/><label kind="synchronisation" x="-236" y="0">ndeath!</label></transition>
 <transition><source ref="Broker_Alive"/><target ref="Broker_Dead"/><label kind="guard" x="-3" y="-50">y &gt;= DEADAFTER</label><label kind="synchronisation" x="-3" y="-34">ndeath!</label><nail x="53" y="-30"/></transition>
@@ -56,8 +57,9 @@ broadcast chan crash, birth, ndeath, escalate;
 <location id="Docker_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
 <location id="Docker_Restarting" x="-300" y="0"><name x="-320" y="18">Restarting</name><label kind="invariant" x="-320" y="36">d &lt;= RDMAX</label></location>
 <init ref="Docker_Idle"/>
-<transition><source ref="Docker_Idle"/><target ref="Docker_Restarting"/><label kind="synchronisation" x="-28" y="40">ndeath?</label><label kind="assignment" x="-28" y="56">d = 0</label><nail x="0" y="60"/></transition>
-<transition><source ref="Docker_Restarting"/><target ref="Docker_Idle"/><label kind="guard" x="-40" y="-80">d &gt;= RDMIN</label><label kind="synchronisation" x="-40" y="-64">restart!</label><nail x="0" y="-60"/></transition>
+<transition><source ref="Docker_Idle"/><target ref="Docker_Restarting"/><label kind="synchronisation" x="-24" y="100">crash?</label><label kind="assignment" x="-24" y="116">d = 0</label><nail x="0" y="120"/></transition>
+<transition><source ref="Docker_Idle"/><target ref="Docker_Restarting"/><label kind="synchronisation" x="-28" y="-20">freeze?</label><label kind="assignment" x="-28" y="-4">d = 0</label><nail x="0" y="0"/></transition>
+<transition><source ref="Docker_Restarting"/><target ref="Docker_Idle"/><label kind="guard" x="-40" y="-140">d &gt;= RDMIN</label><label kind="synchronisation" x="-40" y="-124">restart!</label><nail x="0" y="-120"/></transition>
 </template>
 <template>
 <name>Env</name>

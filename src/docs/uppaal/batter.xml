@@ -8,7 +8,7 @@ const int POLL = 1;       // BAT-INSP looks at the state once a second, so it di
 const int LOST = 120;     // dosing gives up a batch that is not finished by now
 const int STALE = 6;      // BAT-INSP's copy of the state is at most this old (heartbeat 5 s + delivery 1 s, estimated)
 const int BLOCKMAX = 60;  // depositing may stay stopped this long (estimated)
-const int DEPSTART = 5;   // depositing takes up a queued batter within this when it admits pans (estimated)
+const int DEPSTART = 24;  // a queued batter waits at most this for depositing to take it up: it may sit behind the previous batch, PansPerBatch 24 x depositTime 1 s
 clock g;                  // age of the batch
 clock h;                  // time since the inspector approved the batter
 bool stopped = false;     // depositing is really stopped

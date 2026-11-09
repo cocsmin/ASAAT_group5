@@ -125,8 +125,11 @@ is worth a look.
     than P3 (25 s, looked at once a second) while depositing is stopped. After "Batter ready"
     is sent, THM-DEP queues the batter and nothing discards it, so a batter can wait in the
     queue as long as depositing stays stopped (FC7). The UPPAAL batter model shows it: with the
-    estimated stop time of 60 s a batter is deposited up to 70 s after approval, and the
-    state copy of BAT can be stale by a heartbeat. Proposed fix with no new signal: "Batter
+    estimated stop time of 60 s a batter is deposited up to 108 s after approval (24 s
+    behind the previous batch of 24 pans, the stop, 24 s again), only 3 s before dosing gives
+    the batch up at 120 s; the jam FC7 alone clears after 30 s in the code, longer stops come
+    from the other stop reasons (full holding area, band halted, monitor offline). The
+    state copy of BAT can also be stale by a heartbeat. Proposed fix with no new signal: "Batter
     ready" carries how long the batter has already waited; THM-DEP discards a queued batter
     whose total wait would pass P3 when it takes it up, and reports `Batch result` "discarded"
     (an existing signal that dosing already reads). Not done: it changes tested code and the

@@ -30,7 +30,7 @@ requirement in the report) or the design level (the value chosen in the implemen
 |---|---|---|---|---|---|---|
 | T-RC1 | Reaction | EC1 | detected within 3 heartbeat intervals | at most 15 s; the broker's keep-alive finds a frozen node after 7.5 s; a crash at once (measured at most 0.43 s) | analysis and design | THM-REQ-72, `timing.DetectLimit`, `timing.KeepAlive` |
 | T-RC2 | Reaction | EC2 | back in normal operation after the cause is removed | at most 60 s; a container that has not restarted after 45 s goes to Maintenance | analysis and design | THM-REQ-73, `timing.RestoreLimit`, `timing.MonDeadAfter` |
-| T-RC3 | Reaction | EC5 | stop new pans after a band halt | at most 1 s | analysis | THM-REQ-76 and -78 (not measured) |
+| T-RC3 | Reaction | EC5 | stop new pans after a band halt | at most 1 s; in the code Band Transport derives the halt of every upstream section in the same step (`bt.effective`), so the real value is far below 1 s | analysis | THM-REQ-76 and -78 (not measured) |
 | T-RC4 | Reaction | EC7 | batter that waits for depositing to work again is discarded | after 25 s (parameter P3), looked at once a second, so after 26 s; counted before the handoff only, after it nothing limits the wait (`team-review.md`, section 3) | design | `timing.BatterWait`, FC7, `bat.handOff` |
 | T-RC5 | Reaction | EC6 | decide refuse or re-cool after a cooling failure | 30 min in the plant, 40 s in the simulation (factor 45) | analysis and design | UC10, `timing.BufferWait` |
 | T-RC6 | Reaction | EC4 | a batch whose result does not come back is given up | after 120 s, which is longer than mixing plus inspection plus P3 (unit test) | design | `batchLostAfter`, FC27 |
@@ -94,5 +94,5 @@ confirm.
 
 Detection at most 0.43 s (crash) and 7.06 s (freeze), recovery at most 1.19 s, 270 runs
 (`experiment.md`). T-RC3 and T-OS1 are not measured. T-RC4 holds before the handoff; the UPPAAL
-batter model shows a batter can be deposited up to 70 s after approval (estimated stop time),
+batter model shows a batter can be deposited up to 108 s after approval (24 s behind the previous batch, a stop of 60 s that is estimated, 24 s again; only 3 s inside the 120 s limit of dosing),
 see `team-review.md` section 3.

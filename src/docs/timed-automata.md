@@ -13,7 +13,9 @@ Time constants (`internal/timing`): `HB = 5`, `KA = 5` (the broker declares a no
 
 ### Node (any station)
 
-Channels: `hb!`, `birth!`, `crash?` (from the environment), `restart?` (from Docker).
+Channels: `hb!`, `birth!`, `crash?` and `freeze?` (from the environment), `restart?` (from Docker).
+`hb!` stands for the node's regular traffic: the status message to MON and the MQTT
+keep-alive ping, both every 5 s in the code (`timing.Heartbeat`, `timing.KeepAlive`).
 
 | Location | Invariant | Meaning |
 |---|---|---|
@@ -23,34 +25,41 @@ Channels: `hb!`, `birth!`, `crash?` (from the environment), `restart?` (from Doc
 
 | From | To | Guard | Sync | Update |
 |---|---|---|---|---|
-| `Starting` | `Online` | | `birth!` | `x = 0` |
-| `Online` | `Online` | `x == HB` | `hb!` | `x = 0` |
+| `Starting` | `Online` | | `birth!` | |
+| `Online` | `Online` | `x >= HB` | `hb!` | `x = 0` |
 | `Online` | `Down` | | `crash?` | |
+| `Online` | `Down` | | `freeze?` | |
 | `Down` | `Starting` | | `restart?` | `x = 0` |
 
 ### Broker (death certificate)
 
-Channels: `hb?` (any node traffic), `ndeath!`.
+Channels: `hb?` (any node traffic), `crash?` (the connection closes), `ndeath!`.
 
 | Location | Invariant | Meaning |
 |---|---|---|
-| `Alive` | `y <= KA * 3 / 2` | the node's keep-alive is running |
+| `Alive` | `y <= DEADAFTER` | the node's keep-alive is running |
+| `Notify` | committed | the connection closed, the Last Will is sent at once |
 | `Dead` | none | |
 
 | From | To | Guard | Sync | Update |
 |---|---|---|---|---|
 | `Alive` | `Alive` | | `hb?` | `y = 0` |
-| `Alive` | `Dead` | `y >= KA` | `ndeath!` | |
+| `Alive` | `Alive` | | `birth?` | `y = 0` |
+| `Alive` | `Notify` | | `crash?` | |
+| `Notify` | `Dead` | | `ndeath!` | |
+| `Alive` | `Dead` | `y >= DEADAFTER` | `ndeath!` | |
 | `Dead` | `Alive` | | `birth?` | `y = 0` |
 
-The invariant `y <= 7.5` forces the broker to declare the node dead within 7.5 s of its
-last message. A crash is faster: the Last Will fires when the connection closes, so the
-`Alive` to `Dead` edge can also be taken as soon as `crash` happens (a committed location
-in the NTA).
+The invariant `y <= DEADAFTER` forces the broker to declare the node dead after 1.5 x the 5 s
+keep-alive = 7.5 s without any traffic (rounded up to 8 in the model). A crash is faster: the Last
+Will fires when the connection closes, so the broker goes through the committed `Notify` and sends
+`ndeath!` as soon as `crash` happens.
 
 ### MON (supervisor)
 
-Channels: `ndeath?`, `birth?`, `escalate!`, `released!`.
+Channels: `ndeath?`, `birth?`, `escalate!`. The model has only the death-certificate path. The
+code has a second one, the watchdog of MON (3 missed heartbeats = 15 s, FC28), which is slower and
+so does not change the proven bound.
 
 | Location | Invariant | Meaning |
 |---|---|---|
@@ -63,7 +72,9 @@ Channels: `ndeath?`, `birth?`, `escalate!`, `released!`.
 | `Watching` | `Failed` | | `ndeath?` | `z = 0` |
 | `Failed` | `Watching` | | `birth?` | |
 | `Failed` | `Escalated` | `z >= ESCALATE` | `escalate!` | |
-| `Escalated` | `Watching` | | `repaired?` | |
+
+`Escalated` has no way out in the model (the repair by Maintenance is not modelled; the query
+`A[] not MON.Escalated` says it is never reached).
 
 ### Band section (one TA per section S1 to S5)
 
@@ -95,8 +106,8 @@ Otherwise it sends "Batter ready" and is done with the batch.
 Constants: `MIX = 6`, `INSP = 3`, `P3 = 25`, `POLL = 1` (the code looks at the state once a
 second, so it discards after 26 s), `LOST = 120`, `STALE = 6` (the copy is at most one
 heartbeat plus one delivery old, estimated), `BLOCKMAX = 60` (depositing stays stopped at
-most this long, estimated), `DEPSTART = 5` (depositing takes up a queued batter within this
-when it admits pans, estimated). Clocks: `g` age of the batch, `h` time since approval.
+most this long, estimated), `DEPSTART = 24` (a queued batter waits at most this long for
+depositing to take it up: it can sit behind the previous batch, 24 pans of 1 s each, from the code). Clocks: `g` age of the batch, `h` time since approval.
 Channel: `ready` (Batter ready).
 
 **Batch** (BAT-INSP):
@@ -137,15 +148,22 @@ NTA 1, supervision: `Node(i)` x N, `Broker(i)` x N, `MON`, `Docker`, `Env`.
 
 | Channel | From | To | Kind |
 |---|---|---|---|
-| `crash[i]` | Env | Node i, Broker i | broadcast (committed edge) |
+| `crash[i]` | Env | Node i, Broker i, Docker | broadcast (committed edge in the broker) |
+| `freeze[i]` | Env | Node i, Docker | broadcast |
 | `restart[i]` | Docker | Node i | binary |
 | `hb[i]` | Node i | Broker i | binary |
 | `birth[i]` | Node i | Broker i, MON | broadcast |
-| `ndeath[i]` | Broker i | MON | binary |
+| `ndeath[i]` | Broker i | MON | broadcast |
 | `escalate`, `repaired` | MON, Env | | binary |
 
-Docker is a small TA: `Idle` to `Restarting` after a delay `d` with `5 <= d <= 30` (assumed
-restart time; the experiment measured at most 1.2 s), then `restart[i]!`.
+Docker is a small TA: `Idle` to `Restarting` when it hears `crash` or `freeze` (the fault itself,
+not MON and not the death certificate), then after a delay `d` with `1 <= d <= 30` (assumed; the
+experiment measured at most 1.2 s for a crash) `restart[i]!`. This follows the code for a crash: the
+restart policy of Docker (`restart: unless-stopped`) restarts the container when the process exits,
+without waiting for MON. For a freeze (`docker pause`) Docker does nothing; the scenario unpauses the
+container. So for a freeze the delay is an assumption about how long the pause lasts, not a property
+of the code. The broker also counts a `birth` as traffic (it resets its keep-alive clock `y`), so a
+node that returns before the broker has declared it dead is not declared dead afterwards.
 
 NTA 2, band: `Section(1..5)`, `Station(i)`, `MON`. Channels: `halt[s]`, `release[s]`,
 `stop_upstream[s]`. A halt of section s is forwarded to every section below s (one
@@ -162,7 +180,7 @@ drops.
 
 | Constraint | Where in the TA | How |
 |---|---|---|
-| T-P1 heartbeat 5 s | Node, edge `Online` to `Online` | invariant `x <= HB` and guard `x == HB` |
+| T-P1 heartbeat 5 s | Node, edge `Online` to `Online` | invariant `x <= HB` and guard `x >= HB` |
 | T-RC1 detection 15 s | Broker invariant, MON | proven by the query `A[] MON.Failed imply ...` below |
 | T-RC2 recovery 60 s | Node, Docker, MON | `ESCALATE` guard on MON; query bounds restart plus birth |
 | T-RC3 stop within 1 s | Band section | invariant `x <= 1` in `Pass` |
@@ -204,7 +222,7 @@ What the queries prove, with the estimated parameters:
   safety). (1) The state copy can be stale: a batter can be handed to depositing while
   depositing is already stopped (`E<> Batch.Handed && stopped`). Depositing queues it, so
   nothing is lost. (2) After the handoff nothing in the code limits the wait: a batter can be
-  deposited more than `P3 + POLL` after approval, at most `DEPSTART + BLOCKMAX + DEPSTART` = 70 s
+  deposited more than `P3 + POLL` after approval, at most `DEPSTART + BLOCKMAX + DEPSTART` = 108 s
   with the estimates. `P3` is checked in BAT-INSP only; THM-DEP does not discard queued batter
   (`internal/thm`). The proposed fix, with no new signal, is in `team-review.md` section 3.
 - **Handover.** A stored document is taken up within GRACE + RECONCILE = 8 s, also when the

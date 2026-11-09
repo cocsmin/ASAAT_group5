@@ -13,7 +13,7 @@ A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= LOST
 //T-RC6: a batter is deposited before dosing gives the batch up
 A[] Dep.Took imply g <= LOST
 
-//from approval to deposit at most DEPSTART + BLOCKMAX + DEPSTART (70 s), more than P3
+//from approval to deposit at most DEPSTART + BLOCKMAX + DEPSTART (108 s), more than P3
 A[] Dep.Took imply h <= 2 * DEPSTART + BLOCKMAX
 
 //deposited and discarded exclude each other
