@@ -62,9 +62,9 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | # | Assumption | Value | Recommendation |
 |---|---|---|---|
 | S1 | One container per station (14 stations, plus BT and MON), plus broker, SQL Server, MongoDB; the dashboard is a separate demo container | decided by the group (3 Nov), see stations.md | Keep |
-| S2 | The dashboard (`ui`) is for the experiments and the demo, not part of the real plant | MON has no user interface | Confirm (see team-review section 2, item 16) |
+| S2 | The dashboard (`ui`) is for the experiments and the demo, not part of the real plant | MON has no user interface | Confirmed by the group (9 Nov) |
 | S3 | MongoDB holds the traveling pan documents and the saved state of the nodes; the group treats it as experiment data | `mongo-down` scenario dropped | Keep |
-| S4 | "No production without the monitor": nothing new starts while MON is offline | THM admits no pans, BAT starts no batch, PLM releases no order | Confirm. It means a MON restart pauses the line |
+| S4 | Without the monitor no new batch is started; the line finishes what it has | PLM releases no order and BAT-DOSE starts no batch; the batches already made go on through mixing, depositing, baking, cooling and finishing | Confirmed by the group (9 Nov): the line continues, only no new batches are created |
 | S5 | The broker is anonymous, no TLS; SQL Server uses a development password | security is not a stated quality attribute | Keep, and name it in the report as out of scope |
 | S6 | The dashboard buttons play Maintenance: anyone can confirm a repair; no login, no role | | Keep for the demo |
 | S7 | The `ctl` container (demo profile) can control every container on the machine through the Docker socket | opt-in | Keep, opt-in only |

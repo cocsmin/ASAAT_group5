@@ -158,7 +158,7 @@ func (m *machine) idle() {
 
 // schedule is Idle to Scheduling_Order to Fetching_recipe_targets and back to Idle: a new
 // production order is created and sent to BAT. It is not created while BAT is busy with two
-// orders or while the monitor is offline (no production without the monitor).
+// orders or while the monitor is offline (no new batch without the monitor).
 func (m *machine) schedule() {
 	if len(m.sent) >= maxOutstanding || !m.h.Online() {
 		return

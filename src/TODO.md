@@ -22,9 +22,10 @@ where the diagrams are missing, wrong, or behind the implementation.
 4. **PLM has no state machines.** Needed: order lifecycle (released, reserved,
    held), the circuit breaker toward the warehouse (closed, open, test request),
    shipments.
-5. **Rule "production may not run without the Monitor" (UC2) is not in any state
-   machine.** Add a stop reason "monitor offline" to THM SM1 (admission), a hold
-   to BAT Mixing and Handoff, and a gate to PLM order release.
+5. **Rule "without the Monitor no new batch is started" (UC2, S4) is not in any state
+   machine.** Add a gate to PLM order release (no order while the monitor is offline) and a
+   hold to BAT dosing (no new batch). Decided 9 Nov: THM depositing is **not** stopped; the
+   line finishes the batches it has.
 6. **Container recovery (FC27) is modelled in no state machine.** THM, FIN and BAT
    need the behaviour "restart, reload saved state, take up cakes and pans again
    from the stored documents".

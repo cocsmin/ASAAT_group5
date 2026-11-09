@@ -248,3 +248,10 @@ Claude, the group still has to confirm them)
 - UPPAAL: a new model `plm.xml` (13 queries, all satisfied). The supervision, band, batter and handover models
   do not change: PLM is one node among the others for supervision, and neither the band, the batter handoff nor
   the station handover involve PLM-WH.
+
+**9 Nov** (assumptions confirmed by the group)
+- S2: the dashboard is for the experiments and the demo, not part of the real plant. Confirmed.
+- S4: without the monitor the production line **continues**, but **no new batches are created**. In the code:
+  PLM releases no order and BAT-DOSE starts no batch while MON is offline (as before); THM-DEP no longer has
+  a "monitor offline" stop reason, so it keeps depositing the pans of batches that already exist (before, a
+  MON restart stopped depositing too). The dashboard alert says "no new batches are started".

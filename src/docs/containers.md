@@ -59,8 +59,8 @@ the default branch). The pipeline passes `actionlint`; the Dockerfile passes
 - **Availability:** a fault stays inside one container; crash detection in under a
   second, recovery in about a second (measured, see [experiment.md](experiment.md)).
 - **Deployability:** one image for all stations (the station is chosen at start), built and pushed by CI; a station is
-  redeployed without stopping the others (the line pauses only through the explicit
-  "no production without the monitor" rule when MON itself is down).
+  redeployed without stopping the others (when MON itself is down the line only stops starting new batches,
+  assumption S4, and finishes what it has).
 - **Modifiability:** the same Dockerfile and pipeline for every station; a new system
   is a new `cmd/<name>` and one compose entry.
 - **Portability:** the same compose file runs on any machine with Docker (SQL Server

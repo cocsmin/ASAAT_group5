@@ -110,7 +110,7 @@ func New(cfg Config) *Node {
 }
 
 // HostOnline reports whether the primary host application (MON) is online.
-// The report requires that production may not run without the monitor.
+// No new batch is started without the monitor; the line finishes what it has.
 func (n *Node) HostOnline() bool { return n.cfg.Host || n.hostUp.Load() }
 
 // OnHost registers a callback for changes of the primary host's state.

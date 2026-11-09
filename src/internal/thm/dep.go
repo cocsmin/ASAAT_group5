@@ -95,14 +95,8 @@ func RunDep() {
 		t.setReason("band", "band halted: no new pans", halted)
 	})
 	t.OnRepair(depositorMachine, func() {})
-	// The report requires that production may not run without the monitor.
-	t.setReason("monitor", "monitor offline: production may not run without it", true)
-	t.N.OnHost(func(on bool) {
-		t.setReason("monitor", "monitor offline: production may not run without it", !on)
-		if !on {
-			t.N.Warn("UC2", "monitor went offline: no new pans are admitted", "")
-		}
-	})
+	// Without the monitor no new batch is started (PLM releases no order, BAT-DOSE starts no batch),
+	// but the line finishes what it has: depositing keeps admitting the pans of batches already made.
 	t.restoreSupplied()
 	t.restoreQueue()
 	t.Start()

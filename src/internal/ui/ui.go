@@ -212,8 +212,8 @@ func alerts(nodes []NodeState, secs []Section, tickets []model.Ticket, events []
 	for _, n := range nodes {
 		switch {
 		case n.ID == model.MON && n.Status == "dead":
-			out = append(out, Alert{Level: "error", Title: "Monitor is offline: production is paused",
-				Detail: "no new orders, batches or pans are started; events wait for it and arrive when it is back", Node: n.ID, At: time.Now()})
+			out = append(out, Alert{Level: "error", Title: "Monitor is offline: no new batches are started",
+				Detail: "the line finishes the batches it has; no new order or batch is started; events wait for the monitor and arrive when it is back", Node: n.ID, At: time.Now()})
 		case n.Status == "silent":
 			out = append(out, Alert{Level: "error", Title: n.ID + " is not responding", Detail: "no heartbeat received", Node: n.ID, At: n.LastSeen})
 		case n.Status == "dead" && n.ID != model.MON:

@@ -12,10 +12,10 @@ is worth a look.
 
 ## 1. Decisions waiting for the group [D]
 
-1. **The assumptions marked "Confirm" in [assumptions.md](assumptions.md)**: the
-   demo-only dashboard (S2), the rule "no production without the monitor" (S4, a MON
-   restart pauses the line), the Sparkplug deviations (S8), the 25 s batter wait (T7), and
-   the fault rate behind the availability figure (E2).
+1. **The assumptions marked "Confirm" in [assumptions.md](assumptions.md)**: the Sparkplug
+   deviations (S8), the 25 s batter wait (T7), and the fault rate behind the availability
+   figure (E2). S2 (the demo-only dashboard) and S4 are confirmed (9 Nov); for S4 the line
+   keeps going without the monitor and only no new batches are created.
 2. **A "batter collected" acknowledgement** from depositing to batter preparation. The BAT
    state machine Mixing and Handoff waits for it; none of the 14 signals carries it.
    Option A: a 15th signal, so BAT can free its station and send again if it never comes.
@@ -133,7 +133,7 @@ is worth a look.
     estimated stop time of 60 s a batter is deposited up to 108 s after approval (24 s
     behind the previous batch of 24 pans, the stop, 24 s again), only 3 s before dosing gives
     the batch up at 120 s; the jam FC7 alone clears after 30 s in the code, longer stops come
-    from the other stop reasons (full holding area, band halted, monitor offline). The
+    from the other stop reasons (full holding area, band halted). The
     state copy of BAT can also be stale by a heartbeat. Proposed fix with no new signal: "Batter
     ready" carries how long the batter has already waited; THM-DEP discards a queued batter
     whose total wait would pass P3 when it takes it up, and reports `Batch result` "discarded"

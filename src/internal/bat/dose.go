@@ -148,7 +148,7 @@ func (t *Dose) process(o order) {
 			}
 		}
 		// Hold new batches while depositing is stopped.
-		for t.depStopped.Load() || !t.N.HostOnline() { // no production without the monitor
+		for t.depStopped.Load() || !t.N.HostOnline() { // no new batch without the monitor
 			if !sim.Sleep(t.Ctx, time.Second) {
 				return
 			}

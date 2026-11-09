@@ -140,7 +140,7 @@ func TestNoOrderWhileBATHasTwoOrCheckOnlyWhenTheMonitorIsOnline(t *testing.T) {
 	h.online = false
 	m.handle(event{kind: evOrderTimer})
 	if len(h.orders()) != 0 {
-		t.Fatal("no production without the monitor")
+		t.Fatal("no new order without the monitor")
 	}
 	h.online = true
 	m.handle(event{kind: evOrderTimer})

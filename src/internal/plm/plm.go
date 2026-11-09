@@ -93,7 +93,7 @@ func RunWh() {
 // timers posts the order cycle (the first order at once, when the monitor is online) and the
 // check for orders that batter preparation did not pick up.
 func (p *PLM) timers(every time.Duration) {
-	for !p.N.HostOnline() { // production may not run without the monitor
+	for !p.N.HostOnline() { // no new batch without the monitor
 		if !sim.Sleep(p.Ctx, time.Second) {
 			return
 		}

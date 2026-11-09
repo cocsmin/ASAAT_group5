@@ -295,7 +295,7 @@ func scenarios() []scenario {
 				})
 			}},
 		scenario{"availability", "watch the factory while it fails by itself (FAULT_RATE) and report availability, repairs and failures; -duration says how long", false, availability},
-		scenario{"mon-down", "stop MON while THM discards cakes: no event is lost, the line stops without the monitor", true, monDown},
+		scenario{"mon-down", "stop MON while THM discards cakes: no event is lost, no new batch starts without the monitor, the line finishes what it has", true, monDown},
 		scenario{"sql-down", "switch SQL Server off for 30 s: the monitor must not mistake it for a dead line", true,
 			func(e *env) error { return dbDown(e, "mssql", "SQL Server") }},
 		scenario{"broker-restart", "restart the MQTT broker: every node reconnects, the line continues", true, brokerRestart},

@@ -462,7 +462,7 @@ more sections stopped than are upstream; release is reachable.
 depositing (THM-DEP). Depositing can be **stopped**: for a jam (FC7, which clears by itself after
 30 s in the code), or because a station behind it asks it to stop (the baking zone, the cooling
 buffer, the holding area before wrapping, no clean pans), or because the band section S1 is
-halted, or because MON is offline. Batter must not wait for ever, so after 25 s (parameter **P3**)
+halted. Batter must not wait for ever, so after 25 s (parameter **P3**)
 of waiting the batter is discarded.
 
 An important detail: **there is no acknowledgement** from depositing. BAT-INSP never asks "did
@@ -705,7 +705,7 @@ queries cover every moment at which they can happen.
 **Not in the model** (covered by unit tests in `internal/plm/machine_test.go`): a restart of PLM-WH (the reservation
 is in the database, BAT repeats its request, `Reserve` gives the same answer), a recipe that cannot be read
 (the order is cancelled), the resend of an order that BAT did not pick up after 40 s, and the rule that no order is
-created while the monitor is offline. The model has one BAT and no order ids.
+created while the monitor is offline (the monitor does not stop depositing, only new batches, assumption S4). The model has one BAT and no order ids.
 
 ---
 
