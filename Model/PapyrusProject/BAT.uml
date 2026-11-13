@@ -9,7 +9,7 @@
     </packageImport>
     <packagedElement xmi:type="uml:Class" xmi:id="_SONHJDr6YZnEzTIGyQROVL" name="Batter Preparation (BAT)">
       <ownedComment xmi:type="uml:Comment" xmi:id="_Lb1VAMFgEfGOO9iMpQbh-Q" annotatedElement="_beQwFy7TH8bqMPx0YO21YV">
-        <body>See BAT Reporting ID</body>
+        <body>See: BAT Reporting IBD</body>
       </ownedComment>
       <ownedComment xmi:type="uml:Comment" xmi:id="_OMN4UMFoEfGHUsPDzf-qCA" annotatedElement="_Pg8UX_wK2bA3W2FP8IPjdN">
         <body>See: BAT Reporting IBD&#xD;
@@ -113,7 +113,6 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Mh-vcwx3Q15R3nl6bmPUsx" name="LiteralUnlimitedNatural1" value="1"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_REnYkMBGEfGiqthpeiudKA" name="Repair confirmed" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_cfvpUMFdEfGOO9iMpQbh-Q" name="Fault event" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_L-OiUMFeEfGOO9iMpQbh-Q" name="bat-af-09" type="_-26RsfCmnS0P_OqmegmGlF" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_Tas68MFeEfGOO9iMpQbh-Q" name="bat-fd-05" type="_aRU80OaFZNCxwE6Zz42I2a" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_1ZGBIMFgEfGOO9iMpQbh-Q" name="bat-fd-05" type="_aRU80OaFZNCxwE6Zz42I2a" aggregation="composite" association="_1ZC90MFgEfGOO9iMpQbh-Q">
@@ -192,23 +191,11 @@
         <end xmi:type="uml:ConnectorEnd" xmi:id="_5hMzQL8hEfGGcPtdB7flpA" partWithPort="_v_abGIqd5n3FtihDZAeMrB" role="_FZBsfDfRTohIsVR3koI_xb"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_5hMzQb8hEfGGcPtdB7flpA" partWithPort="_Ove9xkJpUFk5pM_NvX6jGn" role="_anbObpVwsRLHrZ3rbpQlxu"/>
       </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_2NYAIL8jEfGGcPtdB7flpA" name="Connector44">
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_2NcRkL8jEfGGcPtdB7flpA" partWithPort="_Rmc5OmndQ7cfYima8fKmTi" role="_9Y9Gc4Ku4mBy4gGgg0L2Hd"/>
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_2NcRkb8jEfGGcPtdB7flpA" partWithPort="_S5FB3mfK8sTEKnDRp1aYLp" role="_W7z69TEcMj_EO3AtkF_pqn"/>
-      </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_5Up6IL8jEfGGcPtdB7flpA" name="Connector45">
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_5UvZsL8jEfGGcPtdB7flpA" partWithPort="_Rmc5OmndQ7cfYima8fKmTi" role="_xTrYeB1wMJF2RVm0XTttO_"/>
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_5UvZsb8jEfGGcPtdB7flpA" role="_4Q8DacI-BLDiDT4JHPIMv3"/>
-      </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_77_IwL8jEfGGcPtdB7flpA" name="Connector46">
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_78CzIL8jEfGGcPtdB7flpA" role="_8BIne0vFFp0Pw3dUnLQB-1"/>
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_78CzIb8jEfGGcPtdB7flpA" partWithPort="_Rmc5OmndQ7cfYima8fKmTi" role="_-1adXMjxO2CebJ6f1O3U-r"/>
-      </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_FJMCsL8lEfGGcPtdB7flpA" name="Connector47">
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_FJMCsL8lEfGGcPtdB7flpA" name="Connector72">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_FJPtEL8lEfGGcPtdB7flpA" partWithPort="_6Osjh9CzXzhLYD6R8K9w_a" role="_QVB4-mEC0uQdLoiZKoM12h"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_FJPtEb8lEfGGcPtdB7flpA" partWithPort="_dKeWYC8mkj3HN62_OUn4Sh" role="_pXhqT07JJT49rsk5S5vMd9"/>
       </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_IdQbgL8lEfGGcPtdB7flpA" name="Connector49">
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_IdQbgL8lEfGGcPtdB7flpA" name="Connector73">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_IdV7EL8lEfGGcPtdB7flpA" partWithPort="_DSc7dWKsrTYvQJK2NbtLTp" role="_b__5Btosxw72G55xkDPTcN"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_IdV7Eb8lEfGGcPtdB7flpA" role="_XwP-oIuBJdMTnHqLXHbSwk"/>
       </ownedConnector>
@@ -224,10 +211,6 @@
         <end xmi:type="uml:ConnectorEnd" xmi:id="_ZwgxsMBGEfGiqthpeiudKA" role="_REnYkMBGEfGiqthpeiudKA"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_ZwgxscBGEfGiqthpeiudKA" partWithPort="_rlJV7MTRxnbT7Na7Hf6oiy" role="_YYw7oMBGEfGiqthpeiudKA"/>
       </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_d_dvoMFdEfGOO9iMpQbh-Q" name="Connector54">
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_d_gL4MFdEfGOO9iMpQbh-Q" partWithPort="_rlJV7MTRxnbT7Na7Hf6oiy" role="_fl7fuEQaf8gTRo9tM192o8"/>
-        <end xmi:type="uml:ConnectorEnd" xmi:id="_d_gL4cFdEfGOO9iMpQbh-Q" role="_cfvpUMFdEfGOO9iMpQbh-Q"/>
-      </ownedConnector>
       <ownedConnector xmi:type="uml:Connector" xmi:id="_-80FAMFeEfGOO9iMpQbh-Q" name="Connector59">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_-82hQMFeEfGOO9iMpQbh-Q" partWithPort="_rlJV7MTRxnbT7Na7Hf6oiy" role="_fzIZNAwR3VrRpDhFHYcfoS"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_-82hQcFeEfGOO9iMpQbh-Q" partWithPort="_Tas68MFeEfGOO9iMpQbh-Q" role="_W7z69TEcMj_EO3AtkF_pqn"/>
@@ -236,17 +219,29 @@
         <end xmi:type="uml:ConnectorEnd" xmi:id="_Lct7QMFfEfGOO9iMpQbh-Q" partWithPort="_L-OiUMFeEfGOO9iMpQbh-Q" role="_9Y9Gc4Ku4mBy4gGgg0L2Hd"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_LcuiUMFfEfGOO9iMpQbh-Q" partWithPort="_Tas68MFeEfGOO9iMpQbh-Q" role="_W7z69TEcMj_EO3AtkF_pqn"/>
       </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_hTD8cMFfEfGOO9iMpQbh-Q" name="Connector59">
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_hTD8cMFfEfGOO9iMpQbh-Q" name="Connector74">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_hTGYsMFfEfGOO9iMpQbh-Q" partWithPort="_L-OiUMFeEfGOO9iMpQbh-Q" role="_97MuA7T5CjiTI1tJEaM92g"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_hTGYscFfEfGOO9iMpQbh-Q" partWithPort="_Ove9xkJpUFk5pM_NvX6jGn" role="_wkUdT2LSfFNW7VxizcyTGQ"/>
       </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_CBruwMFgEfGOO9iMpQbh-Q" name="Connector60">
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_CBruwMFgEfGOO9iMpQbh-Q" name="Connector75">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_CBtj8MFgEfGOO9iMpQbh-Q" partWithPort="_L-OiUMFeEfGOO9iMpQbh-Q" role="_xTrYeB1wMJF2RVm0XTttO_"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_CBuLAMFgEfGOO9iMpQbh-Q" role="_4Q8DacI-BLDiDT4JHPIMv3"/>
       </ownedConnector>
       <ownedConnector xmi:type="uml:Connector" xmi:id="_HBmlYMFgEfGOO9iMpQbh-Q" name="Connector61">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_HBoakMFgEfGOO9iMpQbh-Q" partWithPort="_L-OiUMFeEfGOO9iMpQbh-Q" role="_-1adXMjxO2CebJ6f1O3U-r"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_HBoakcFgEfGOO9iMpQbh-Q" role="_8BIne0vFFp0Pw3dUnLQB-1"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_5CLcQN0uEfG9nYXaPaPUtQ" name="Connector69">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_5Cas0N0uEfG9nYXaPaPUtQ" partWithPort="_Pzl5LOSNJfG-0MXasFBWNo" role="__Db-_0ppm8dt1qAsnkBN2s"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_5Cas0d0uEfG9nYXaPaPUtQ" partWithPort="_dKeWYC8mkj3HN62_OUn4Sh" role="_pn4fuexxx8fEl343c_qBsH"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_7knj0N0uEfG9nYXaPaPUtQ" name="Connector70">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_7kqAEN0uEfG9nYXaPaPUtQ" partWithPort="_rlJV7MTRxnbT7Na7Hf6oiy" role="_fl7fuEQaf8gTRo9tM192o8"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_7kqAEd0uEfG9nYXaPaPUtQ" partWithPort="_dKeWYC8mkj3HN62_OUn4Sh" role="_pn4fuexxx8fEl343c_qBsH"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_93TYIN0uEfG9nYXaPaPUtQ" name="Connector71">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_93V0YN0uEfG9nYXaPaPUtQ" partWithPort="_Rmc5OmndQ7cfYima8fKmTi" role="_beQwFy7TH8bqMPx0YO21YV"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_93V0Yd0uEfG9nYXaPaPUtQ" partWithPort="_dKeWYC8mkj3HN62_OUn4Sh" role="_zWOOTIVpBYvyGJcHgtIrQu"/>
       </ownedConnector>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_D9pVkQiUeWVN7rIsXAvcoO" name="Order &amp; Ingredient Intake (BAT-AF-01)">
@@ -728,10 +723,10 @@
             </ownedRule>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_ITYoATcAoVM2TZkdIL2HMJ" guard="_Y3VIp9Au3Zc0ldpIEssIz4" source="_FVcFLX7hTPVGIjiUjCA0AH" target="_ZyZcK_TQEM_xZefZGEPfqp">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_Y3VIp9Au3Zc0ldpIEssIz4" name="the ingredients are reserved">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_gTwXSzMHgkJBla5XhT8mIM" name="the ingredients are reserved">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Y3VIp9Au3Zc0ldpIEssIz4" name="the ingredients are reserved and the monitor is online">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_gTwXSzMHgkJBla5XhT8mIM" name="the ingredients are reserved and the monitor is online">
                 <language>Natural language</language>
-                <body>the ingredients are reserved</body>
+                <body>the ingredients are reserved and the monitor is online</body>
               </specification>
             </ownedRule>
             <effect xmi:type="uml:OpaqueBehavior" xmi:id="_tnfIf2twFccnW4GurkChzy" name="consecutive failure count := 0"/>
@@ -742,43 +737,43 @@
             <trigger xmi:type="uml:Trigger" xmi:id="__1tE-Q0eTIIWR4R7EsghZz" name="doseResult" event="_WZMRyT9UH0rAxfQXmgvDDM"/>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_brAS5_rv9U8Vbwxzyj4uyD" guard="_Pts2p1lC4bk6FvlQXYlkTI" source="_G5-bzxVpD1qo50nnYdVmxX" target="_ZyZcK_TQEM_xZefZGEPfqp">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_Pts2p1lC4bk6FvlQXYlkTI" name="within dose tolerance (P1) and ingredients remaining">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_ZSbWQ77BSqwALfc-98Vi6D" name="within dose tolerance (P1) and ingredients remaining">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_Pts2p1lC4bk6FvlQXYlkTI" name="within dose tolerance (D_tol) and ingredients remaining">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_ZSbWQ77BSqwALfc-98Vi6D" name="within dose tolerance (D_tol) and ingredients remaining">
                 <language>Natural language</language>
-                <body>within dose tolerance (P1) and ingredients remaining</body>
+                <body>within dose tolerance (D_tol) and ingredients remaining</body>
               </specification>
             </ownedRule>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_LJ9lW4Y38n2Rd0-QTO7Y_L" guard="_572SmqXI0Tvsla6hc1gRbd" source="_G5-bzxVpD1qo50nnYdVmxX" target="_qeqF5fHY11fzEdsiomj6Af">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_572SmqXI0Tvsla6hc1gRbd" name="within dose tolerance (P1) and last ingredient">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_oeEiETJmwttT9bUTxgPq7v" name="within dose tolerance (P1) and last ingredient">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_572SmqXI0Tvsla6hc1gRbd" name="within dose tolerance (D_tol) and last ingredient">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_oeEiETJmwttT9bUTxgPq7v" name="within dose tolerance (D_tol) and last ingredient">
                 <language>Natural language</language>
-                <body>within dose tolerance (P1) and last ingredient</body>
+                <body>within dose tolerance (D_tol) and last ingredient</body>
               </specification>
             </ownedRule>
             <effect xmi:type="uml:OpaqueBehavior" xmi:id="_TNU7spcF1hTS0kXWk7C9Br" name="signal batch loading complete"/>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_aA471CaJqFqaU4SbFH9IC2" guard="_VMS4l1dXkQhkuAZasIP1xH" source="_G5-bzxVpD1qo50nnYdVmxX" target="_kSXpC9xmcUZJaJAblTkqAD">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_VMS4l1dXkQhkuAZasIP1xH" name="outside dose tolerance (P1) and consecutive failure count >= P2">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_oVBAwugMn0EpA6fT9rfrKO" name="outside dose tolerance (P1) and consecutive failure count >= P2">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_VMS4l1dXkQhkuAZasIP1xH" name="outside dose tolerance (D_tol) and consecutive failure count >= N_dose">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_oVBAwugMn0EpA6fT9rfrKO" name="outside dose tolerance (D_tol) and consecutive failure count >= N_dose">
                 <language>Natural language</language>
-                <body>outside dose tolerance (P1) and consecutive failure count >= P2</body>
+                <body>outside dose tolerance (D_tol) and consecutive failure count >= N_dose</body>
               </specification>
             </ownedRule>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_cXAwuamOH7ookLZFWnw3p6" guard="_aLhiNbVtp8GkGPUdMHuNsL" source="_G5-bzxVpD1qo50nnYdVmxX" target="_heqZfofIBtIHxwh29PIw4D">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_aLhiNbVtp8GkGPUdMHuNsL" name="under tolerance and consecutive failure count &lt; P2">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_UzXr12HP3IkNBLul9FUxYN" name="under tolerance and consecutive failure count &lt; P2">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_aLhiNbVtp8GkGPUdMHuNsL" name="under tolerance and consecutive failure count &lt; N_dose">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_UzXr12HP3IkNBLul9FUxYN" name="under tolerance and consecutive failure count &lt; N_dose">
                 <language>Natural language</language>
-                <body>under tolerance and consecutive failure count &lt; P2</body>
+                <body>under tolerance and consecutive failure count &lt; N_dose</body>
               </specification>
             </ownedRule>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_qYJTohWajl_CX2FwGV9Ryr" guard="_gC2htwNApz1gyhpbqkXapQ" source="_G5-bzxVpD1qo50nnYdVmxX" target="_hCWV6VKrcgEIyBU0UklTAu">
-            <ownedRule xmi:type="uml:Constraint" xmi:id="_gC2htwNApz1gyhpbqkXapQ" name="over tolerance and consecutive failure count &lt; P2">
-              <specification xmi:type="uml:OpaqueExpression" xmi:id="_3DCOqoJ-Vp2d4jOvSfNps7" name="over tolerance and consecutive failure count &lt; P2">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_gC2htwNApz1gyhpbqkXapQ" name="over tolerance and consecutive failure count &lt; N_dose">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_3DCOqoJ-Vp2d4jOvSfNps7" name="over tolerance and consecutive failure count &lt; N_dose">
                 <language>Natural language</language>
-                <body>over tolerance and consecutive failure count &lt; P2</body>
+                <body>over tolerance and consecutive failure count &lt; N_dose</body>
               </specification>
             </ownedRule>
           </transition>
@@ -803,7 +798,7 @@
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_Jcp5OAzs3HrJcvZU-5PY_n" name="stop the dispenser"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_6Xm3gt4mtvo2bsawdBIfIx" name="Verifying">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_0ALxB1zak1aWdActgKm5EY" name="judge the measured weight against the recipe target and tolerance (P1)"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_0ALxB1zak1aWdActgKm5EY" name="judge the measured weight against the recipe target and tolerance (D_tol)"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UeqU-fzz70IWmajuISlp7k" name="read the load cell for the dispensed ingredient"/>
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_u5C50N1TbDMv0Xr93d5ENo" name="update the consecutive failure count"/>
           </subvertex>
@@ -829,7 +824,6 @@
       </packagedElement>
       <packagedElement xmi:type="uml:StateMachine" xmi:id="_HOWNcTENOWVGVT6gGU4Sjl" name="Mixing and Handoff Behaviour">
         <region xmi:type="uml:Region" xmi:id="_8ebyaYNbIiKo35ZWT5pAQE" name="Mixing and handoff">
-          <transition xmi:type="uml:Transition" xmi:id="_8u5CsIbI0m5STqKWgEYNt8" source="_FEtjxEJ_KtaOVHK8Yo1VPC" target="_9g8e0H1QSzubDLF4BbuygK"/>
           <transition xmi:type="uml:Transition" xmi:id="_hT-i8BKC6OmMxI9kGtF_kd" guard="_N5K02l3kPn_kKzfBfgNBBP" source="_9g8e0H1QSzubDLF4BbuygK" target="_M2oB5rOeTYGNmfhuSfFznh">
             <ownedRule xmi:type="uml:Constraint" xmi:id="_N5K02l3kPn_kKzfBfgNBBP" name="depositing is working">
               <specification xmi:type="uml:OpaqueExpression" xmi:id="_Rn_xf_UmSMZPIUMwoTvkON" name="depositing is working">
@@ -879,17 +873,42 @@
             </ownedRule>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_4rwEa4LWGdXisMXgoxE75o" source="_i7uFkZcscCdaMXvsW2GFpR" target="_M2oB5rOeTYGNmfhuSfFznh"/>
-          <transition xmi:type="uml:Transition" xmi:id="_D7XdAC9Nb3RtkF0wYeaHK0" source="_Z35VX_KjP1L6O1j476-Ir2" target="_48Da7FedM-o55MXj6-9lw2">
-            <trigger xmi:type="uml:Trigger" xmi:id="_obPOi0qkhN44OMAoikfM2L" name="batchCollected" event="_xQZJBqDYltw_AvX1j-M1kh"/>
+          <transition xmi:type="uml:Transition" xmi:id="_D7XdAC9Nb3RtkF0wYeaHK0" name="" guard="_xoO3MN0CEfG9nYXaPaPUtQ" source="_Z35VX_KjP1L6O1j476-Ir2" target="_48Da7FedM-o55MXj6-9lw2">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_xoO3MN0CEfG9nYXaPaPUtQ" name="depositing is working">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_xoQsYN0CEfG9nYXaPaPUtQ" name="depositing is working">
+                <language>Natural language</language>
+                <body>depositing is working</body>
+              </specification>
+            </ownedRule>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_v81YYkrgObIBJjSP0oavPt" source="_Z35VX_KjP1L6O1j476-Ir2" target="_EthPe4QsJgPnN7v3DjsfV1">
-            <trigger xmi:type="uml:Trigger" xmi:id="_wNvDwD7zfY0iULAuUPDMxC" name="after (the maximum batter waiting time P3)" event="__CDIPd4ekhJT4roTggF0U_"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_wNvDwD7zfY0iULAuUPDMxC" name="after (the maximum batter waiting time T_batter)" event="__CDIPd4ekhJT4roTggF0U_"/>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_r8Z3Oa4PDV9j8NlQq6saqX" source="_EthPe4QsJgPnN7v3DjsfV1" target="_48Da7FedM-o55MXj6-9lw2"/>
           <transition xmi:type="uml:Transition" xmi:id="_wLVKLzUGa3txFyeoQHqiMY" source="_2TWp9JUWTHb1WLwERRJxIt" target="_48Da7FedM-o55MXj6-9lw2">
             <trigger xmi:type="uml:Trigger" xmi:id="_kkTZqwOVBk39uhfaCQ2Icn" name="mixerOperational" event="_L80x5VZBYDkVmgDbq7Ef71"/>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_QcLqMa7MZrxb7xUXzzAaxc" source="_48Da7FedM-o55MXj6-9lw2" target="_9g8e0H1QSzubDLF4BbuygK"/>
+          <transition xmi:type="uml:Transition" xmi:id="_RjcvoN1QEfG9nYXaPaPUtQ" source="_FEtjxEJ_KtaOVHK8Yo1VPC" target="_ABY30N00EfG9nYXaPaPUtQ"/>
+          <transition xmi:type="uml:Transition" xmi:id="_VmCbUN1QEfG9nYXaPaPUtQ" name="" guard="_9-SZYN28EfG9nYXaPaPUtQ" source="_ABY30N00EfG9nYXaPaPUtQ" target="_9g8e0H1QSzubDLF4BbuygK">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_9-SZYN28EfG9nYXaPaPUtQ" name="no saved batch">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_9-X48N28EfG9nYXaPaPUtQ" name="no saved batch">
+                <language>Natural language</language>
+                <body>no saved batch</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_XYlXAN1QEfG9nYXaPaPUtQ" name="" guard="_rQumIN1QEfG9nYXaPaPUtQ" source="_ABY30N00EfG9nYXaPaPUtQ" target="_M2oB5rOeTYGNmfhuSfFznh">
+            <ownedRule xmi:type="uml:Constraint" xmi:id="_rQumIN1QEfG9nYXaPaPUtQ" name="a saved batch was taken up">
+              <specification xmi:type="uml:OpaqueExpression" xmi:id="_rQwbUN1QEfG9nYXaPaPUtQ" name="a saved batch was taken up">
+                <language>Natural language</language>
+                <body>a saved batch was taken up</body>
+              </specification>
+            </ownedRule>
+          </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_vxQZsN4OEfG9nYXaPaPUtQ" source="_Z35VX_KjP1L6O1j476-Ir2" target="_48Da7FedM-o55MXj6-9lw2">
+            <trigger xmi:type="uml:Trigger" xmi:id="_xGoRMN4OEfG9nYXaPaPUtQ" name="depositingWorkingAgain" event="_pdUxkLWJnVf2Lq7X7FYXk4"/>
+          </transition>
           <subvertex xmi:type="uml:State" xmi:id="_9g8e0H1QSzubDLF4BbuygK" name="Idle">
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Gf_YW8E2YPn-8I7M4CCGrC" name="clear the mixer context"/>
           </subvertex>
@@ -927,6 +946,9 @@
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_VgWuMPHnivCVdaW-E_TCEq" name="Verdict" kind="choice"/>
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_48Da7FedM-o55MXj6-9lw2" name="BatchEnd" kind="junction"/>
           <subvertex xmi:type="uml:FinalState" xmi:id="_ptWbIEEoO9lAhet7N9XKYv" name="Mixing closed"/>
+          <subvertex xmi:type="uml:State" xmi:id="_ABY30N00EfG9nYXaPaPUtQ" name="Restoring">
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_JwrAkN00EfG9nYXaPaPUtQ" name="reload the saved batches and take them up again"/>
+          </subvertex>
         </region>
       </packagedElement>
       <packagedElement xmi:type="uml:StateMachine" xmi:id="_Nq0fd6YSY3hIJ_Q9xZrPt-" name="Reporting Behaviour">
@@ -940,7 +962,7 @@
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_mKv541nvVY6yYGziQXEJ2H" source="_HwDQxniPfvUbqBBUCfqoG4" target="_04EfTa9FiAFw2VCu031pqn"/>
           <transition xmi:type="uml:Transition" xmi:id="_pk4aO5ZanpQC8EqpcPfHfO" source="_04EfTa9FiAFw2VCu031pqn" target="_s65ld1A26HD5ioPUSvWkr7">
-            <trigger xmi:type="uml:Trigger" xmi:id="_caxQ9qcu-849OnlZNqNgBt" name="after (the health status interval P4)" event="_w7xDCvMfzrtA4LqOl0kprD"/>
+            <trigger xmi:type="uml:Trigger" xmi:id="_caxQ9qcu-849OnlZNqNgBt" name="after (the health status interval T_hb)" event="_w7xDCvMfzrtA4LqOl0kprD"/>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_f0NYrNwq-YgSwYjjc-MVl-" source="_s65ld1A26HD5ioPUSvWkr7" target="_04EfTa9FiAFw2VCu031pqn"/>
           <subvertex xmi:type="uml:State" xmi:id="_04EfTa9FiAFw2VCu031pqn" name="Observing">
@@ -977,8 +999,6 @@
         <packagedElement xmi:type="uml:SignalEvent" xmi:id="_jX8eJHcXE9petg6z2xV7je" name="mixerFault" signal="_kO7v5-I_7LSYmCppkzgNKZ"/>
         <packagedElement xmi:type="uml:Signal" xmi:id="_ekmOF_se3shv1LueIgiZk7" name="inspectionVerdict"/>
         <packagedElement xmi:type="uml:SignalEvent" xmi:id="_g6rnC40tbBqIB9OlIlFBMQ" name="inspectionVerdict" signal="_ekmOF_se3shv1LueIgiZk7"/>
-        <packagedElement xmi:type="uml:Signal" xmi:id="_lQjedPTiRpHMNfTj5Glr-p" name="batchCollected"/>
-        <packagedElement xmi:type="uml:SignalEvent" xmi:id="_xQZJBqDYltw_AvX1j-M1kh" name="batchCollected" signal="_lQjedPTiRpHMNfTj5Glr-p"/>
         <packagedElement xmi:type="uml:Signal" xmi:id="_xQM5FzidQUlmVemc0tikxN" name="mixerOperational"/>
         <packagedElement xmi:type="uml:SignalEvent" xmi:id="_L80x5VZBYDkVmgDbq7Ef71" name="mixerOperational" signal="_xQM5FzidQUlmVemc0tikxN"/>
         <packagedElement xmi:type="uml:Signal" xmi:id="_EyC7U84nABzz7uE4XIZ_V6" name="faultEvent"/>
@@ -990,14 +1010,14 @@
             <expr xmi:type="uml:LiteralString" xmi:id="_BFnws1ngmJd2Z2bIP9xm_a" value="the recipe mixing duration"/>
           </when>
         </packagedElement>
-        <packagedElement xmi:type="uml:TimeEvent" xmi:id="__CDIPd4ekhJT4roTggF0U_" name="after (the maximum batter waiting time P3)" isRelative="true">
-          <when xmi:type="uml:TimeExpression" xmi:id="_LWDNDusEYRB6foWOnIBcYH" name="the maximum batter waiting time P3">
-            <expr xmi:type="uml:LiteralString" xmi:id="_RSCp7vyralKBp1uZ1nWB3Y" value="the maximum batter waiting time P3"/>
+        <packagedElement xmi:type="uml:TimeEvent" xmi:id="__CDIPd4ekhJT4roTggF0U_" name="after (the maximum batter waiting time T_batter)" isRelative="true">
+          <when xmi:type="uml:TimeExpression" xmi:id="_LWDNDusEYRB6foWOnIBcYH" name="the maximum batter waiting time T_batter">
+            <expr xmi:type="uml:LiteralString" xmi:id="_RSCp7vyralKBp1uZ1nWB3Y" value="the maximum batter waiting time T_batter"/>
           </when>
         </packagedElement>
-        <packagedElement xmi:type="uml:TimeEvent" xmi:id="_w7xDCvMfzrtA4LqOl0kprD" name="after (the health status interval P4)" isRelative="true">
-          <when xmi:type="uml:TimeExpression" xmi:id="_kxn6Hvc2TM9gBQXJZVsqRX" name="the health status interval P4">
-            <expr xmi:type="uml:LiteralString" xmi:id="_8STuT6e3eaT1dnJroCV7F3" value="the health status interval P4"/>
+        <packagedElement xmi:type="uml:TimeEvent" xmi:id="_w7xDCvMfzrtA4LqOl0kprD" name="after (the health status interval T_hb)" isRelative="true">
+          <when xmi:type="uml:TimeExpression" xmi:id="_kxn6Hvc2TM9gBQXJZVsqRX" name="the health status interval T_hb">
+            <expr xmi:type="uml:LiteralString" xmi:id="_8STuT6e3eaT1dnJroCV7F3" value="the health status interval T_hb"/>
           </when>
         </packagedElement>
         <packagedElement xmi:type="uml:CallEvent" xmi:id="_YjkF3J18dJhdlMIYego334" name="startBatch" operation="_8FVqjXUu_fDq4aZidNtXja"/>
@@ -1121,10 +1141,6 @@
   <Blocks:NestedConnectorEnd xmi:id="_4KISo78hEfGGcPtdB7flpA" base_Element="_4KISob8hEfGGcPtdB7flpA" propertyPath="_YaqDnA4xa9CZIvKJ-HTbY4" base_ConnectorEnd="_4KISob8hEfGGcPtdB7flpA"/>
   <Blocks:NestedConnectorEnd xmi:id="_5hNaUL8hEfGGcPtdB7flpA" base_Element="_5hMzQL8hEfGGcPtdB7flpA" propertyPath="_v_abGIqd5n3FtihDZAeMrB" base_ConnectorEnd="_5hMzQL8hEfGGcPtdB7flpA"/>
   <Blocks:NestedConnectorEnd xmi:id="_5hNaUb8hEfGGcPtdB7flpA" base_Element="_5hMzQb8hEfGGcPtdB7flpA" propertyPath="_Ove9xkJpUFk5pM_NvX6jGn" base_ConnectorEnd="_5hMzQb8hEfGGcPtdB7flpA"/>
-  <Blocks:NestedConnectorEnd xmi:id="_2NcRkr8jEfGGcPtdB7flpA" base_Element="_2NcRkL8jEfGGcPtdB7flpA" propertyPath="_Rmc5OmndQ7cfYima8fKmTi" base_ConnectorEnd="_2NcRkL8jEfGGcPtdB7flpA"/>
-  <Blocks:NestedConnectorEnd xmi:id="_2Nc4oL8jEfGGcPtdB7flpA" base_Element="_2NcRkb8jEfGGcPtdB7flpA" propertyPath="_S5FB3mfK8sTEKnDRp1aYLp" base_ConnectorEnd="_2NcRkb8jEfGGcPtdB7flpA"/>
-  <Blocks:NestedConnectorEnd xmi:id="_5UvZsr8jEfGGcPtdB7flpA" base_Element="_5UvZsL8jEfGGcPtdB7flpA" propertyPath="_Rmc5OmndQ7cfYima8fKmTi" base_ConnectorEnd="_5UvZsL8jEfGGcPtdB7flpA"/>
-  <Blocks:NestedConnectorEnd xmi:id="_78CzIr8jEfGGcPtdB7flpA" base_Element="_78CzIb8jEfGGcPtdB7flpA" propertyPath="_Rmc5OmndQ7cfYima8fKmTi" base_ConnectorEnd="_78CzIb8jEfGGcPtdB7flpA"/>
   <Blocks:NestedConnectorEnd xmi:id="_FJPtEr8lEfGGcPtdB7flpA" base_Element="_FJPtEL8lEfGGcPtdB7flpA" propertyPath="_6Osjh9CzXzhLYD6R8K9w_a" base_ConnectorEnd="_FJPtEL8lEfGGcPtdB7flpA"/>
   <Blocks:NestedConnectorEnd xmi:id="_FJQUIL8lEfGGcPtdB7flpA" base_Element="_FJPtEb8lEfGGcPtdB7flpA" propertyPath="_dKeWYC8mkj3HN62_OUn4Sh" base_ConnectorEnd="_FJPtEb8lEfGGcPtdB7flpA"/>
   <Blocks:NestedConnectorEnd xmi:id="_IdWiIL8lEfGGcPtdB7flpA" base_Element="_IdV7EL8lEfGGcPtdB7flpA" propertyPath="_DSc7dWKsrTYvQJK2NbtLTp" base_ConnectorEnd="_IdV7EL8lEfGGcPtdB7flpA"/>
@@ -1132,7 +1148,6 @@
   <Blocks:NestedConnectorEnd xmi:id="_TW91ssBGEfGiqthpeiudKA" base_Element="_TW91scBGEfGiqthpeiudKA" propertyPath="_Pzl5LOSNJfG-0MXasFBWNo" base_ConnectorEnd="_TW91scBGEfGiqthpeiudKA"/>
   <Blocks:NestedConnectorEnd xmi:id="_ZwgxssBGEfGiqthpeiudKA" base_Element="_ZwgxscBGEfGiqthpeiudKA" propertyPath="_rlJV7MTRxnbT7Na7Hf6oiy" base_ConnectorEnd="_ZwgxscBGEfGiqthpeiudKA"/>
   <Blocks:BindingConnector xmi:id="_ZwjN8MBGEfGiqthpeiudKA" base_Connector="_ZwduYMBGEfGiqthpeiudKA"/>
-  <Blocks:NestedConnectorEnd xmi:id="_d_gL4sFdEfGOO9iMpQbh-Q" base_Element="_d_gL4MFdEfGOO9iMpQbh-Q" propertyPath="_rlJV7MTRxnbT7Na7Hf6oiy" base_ConnectorEnd="_d_gL4MFdEfGOO9iMpQbh-Q"/>
   <Blocks:NestedConnectorEnd xmi:id="_-82hQsFeEfGOO9iMpQbh-Q" base_Element="_-82hQMFeEfGOO9iMpQbh-Q" propertyPath="_rlJV7MTRxnbT7Na7Hf6oiy" base_ConnectorEnd="_-82hQMFeEfGOO9iMpQbh-Q"/>
   <Blocks:NestedConnectorEnd xmi:id="_-83IUMFeEfGOO9iMpQbh-Q" base_Element="_-82hQcFeEfGOO9iMpQbh-Q" propertyPath="_Tas68MFeEfGOO9iMpQbh-Q" base_ConnectorEnd="_-82hQcFeEfGOO9iMpQbh-Q"/>
   <Blocks:NestedConnectorEnd xmi:id="_LcuiUcFfEfGOO9iMpQbh-Q" base_Element="_Lct7QMFfEfGOO9iMpQbh-Q" propertyPath="_L-OiUMFeEfGOO9iMpQbh-Q" base_ConnectorEnd="_Lct7QMFfEfGOO9iMpQbh-Q"/>
@@ -1148,15 +1163,15 @@
   <Requirements:Requirement xmi:id="_rZVzIMyHEfGts8WNJoPXrQ" base_NamedElement="_rZRhsMyHEfGts8WNJoPXrQ" id="BAT-REQ-04.1" text="The system shall dispense each ingredient of the recipe into the mixer." base_Class="_rZRhsMyHEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_xa67EMyHEfGts8WNJoPXrQ" base_NamedElement="_xa2CkMyHEfGts8WNJoPXrQ" id="BAT-REQ-04.2" text="The system shall measure the dispensed weight of each ingredient." base_Class="_xa2CkMyHEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_2avrEMyHEfGts8WNJoPXrQ" base_NamedElement="_2arZoMyHEfGts8WNJoPXrQ" id="BAT-REQ-04.3" text="The system shall compare each measured weight against its recipe target." base_Class="_2arZoMyHEfGts8WNJoPXrQ"/>
-  <Requirements:Requirement xmi:id="_F_o8UMyIEfGts8WNJoPXrQ" base_NamedElement="_F_kq4MyIEfGts8WNJoPXrQ" id="BAT-REQ-05" text="The system shall treat a batch as ready for mixing only when every ingredient of the recipe is within the dose tolerance (P1) of its recipe target." base_Class="_F_kq4MyIEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_F_o8UMyIEfGts8WNJoPXrQ" base_NamedElement="_F_kq4MyIEfGts8WNJoPXrQ" id="BAT-REQ-05" text="The system shall treat a batch as ready for mixing only when every ingredient of the recipe is within the dose tolerance (D_tol) of its recipe target." base_Class="_F_kq4MyIEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_OigVQMyIEfGts8WNJoPXrQ" base_NamedElement="_OibcwMyIEfGts8WNJoPXrQ" id="BAT-REQ-06.1" text="The system shall request the missing amount of an ingredient when its measured weight is below the recipe target." base_Class="_OibcwMyIEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_aHATMMyIEfGts8WNJoPXrQ" base_NamedElement="_aG8BwMyIEfGts8WNJoPXrQ" id="BAT-REQ-06.2" text="The system shall weigh an ingredient again after every top-up." base_Class="_aG8BwMyIEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_eUbV4MyIEfGts8WNJoPXrQ" base_NamedElement="_eUWdYMyIEfGts8WNJoPXrQ" id="BAT-REQ-07.1" text="The system shall discard the batch when the measured weight of an ingredient exceeds its recipe target." base_Class="_eUWdYMyIEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_prD28MyIEfGts8WNJoPXrQ" base_NamedElement="_pq_lgMyIEfGts8WNJoPXrQ" id="BAT-REQ-07.2" text="The system shall record a discard, with its reason and the batch ID, for every batch discarded because of an over-dose." base_Class="_pq_lgMyIEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_yakkwMyIEfGts8WNJoPXrQ" base_NamedElement="_yagTUMyIEfGts8WNJoPXrQ" id="BAT-REQ-07.3" text="The system shall start a new batch after discarding an over-dosed batch." base_Class="_yagTUMyIEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="__2JZEMyIEfGts8WNJoPXrQ" base_NamedElement="__2EgkMyIEfGts8WNJoPXrQ" id="BAT-REQ-08.1" text="The system shall count consecutive failed dose measurements." base_Class="__2EgkMyIEfGts8WNJoPXrQ"/>
-  <Requirements:Requirement xmi:id="_FCNOQMyJEfGts8WNJoPXrQ" base_NamedElement="_FCIVwMyJEfGts8WNJoPXrQ" id="BAT-REQ-08.2" text="The system shall stop dosing when the number of consecutive failed dose measurements reaches the maximum (P2)." base_Class="_FCIVwMyJEfGts8WNJoPXrQ"/>
-  <Requirements:Requirement xmi:id="_MAa9kMyJEfGts8WNJoPXrQ" base_NamedElement="_MAWFEMyJEfGts8WNJoPXrQ" id="BAT-REQ-08.3" text="The system shall record an error, with the batch ID, when dosing is stopped because the maximum consecutive failed dose measurements (P2) was reached." base_Class="_MAWFEMyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_FCNOQMyJEfGts8WNJoPXrQ" base_NamedElement="_FCIVwMyJEfGts8WNJoPXrQ" id="BAT-REQ-08.2" text="The system shall stop dosing when the number of consecutive failed dose measurements reaches the maximum (N_dose)." base_Class="_FCIVwMyJEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_MAa9kMyJEfGts8WNJoPXrQ" base_NamedElement="_MAWFEMyJEfGts8WNJoPXrQ" id="BAT-REQ-08.3" text="The system shall record an error, with the batch ID, when dosing is stopped because the maximum consecutive failed dose measurements (N_dose) was reached." base_Class="_MAWFEMyJEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_Z0JMIMyJEfGts8WNJoPXrQ" base_NamedElement="_Z0E6sMyJEfGts8WNJoPXrQ" id="BAT-REQ-08.4" text="The system shall resume dosing only after the doser has been marked operational again." base_Class="_Z0E6sMyJEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_u4a3MMyJEfGts8WNJoPXrQ" base_NamedElement="_u4V-sMyJEfGts8WNJoPXrQ" id="BAT-REQ-09.1" text="The system shall start the mixing cycle when batch loading is complete." base_Class="_u4V-sMyJEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_z2SfYMyJEfGts8WNJoPXrQ" base_NamedElement="_z2Nm4MyJEfGts8WNJoPXrQ" id="BAT-REQ-09.2" text="The system shall run every mixing cycle for the recipe-defined duration." base_Class="_z2Nm4MyJEfGts8WNJoPXrQ"/>
@@ -1170,16 +1185,16 @@
   <Requirements:Requirement xmi:id="_epSgsMyKEfGts8WNJoPXrQ" base_NamedElement="_epPdYMyKEfGts8WNJoPXrQ" id="BAT-REQ-13.3" text="The system shall record an error, with the batch ID, when a mixer fault is detected." base_Class="_epPdYMyKEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_m6jMQMyKEfGts8WNJoPXrQ" base_NamedElement="_m6hXEMyKEfGts8WNJoPXrQ" id="BAT-REQ-13.4" text="The system shall resume mixing only after the mixer has been marked operational again." base_Class="_m6hXEMyKEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_szhx0MyKEfGts8WNJoPXrQ" base_NamedElement="_szc5UMyKEfGts8WNJoPXrQ" id="BAT-REQ-14.1" text="The system shall track the waiting time of every finished batch of batter." base_Class="_szc5UMyKEfGts8WNJoPXrQ"/>
-  <Requirements:Requirement xmi:id="_v45AQMyKEfGts8WNJoPXrQ" base_NamedElement="_v40u0MyKEfGts8WNJoPXrQ" id="BAT-REQ-14.2" text="The system shall discard any batter whose waiting time exceeds the maximum batter waiting time (P3)." base_Class="_v40u0MyKEfGts8WNJoPXrQ"/>
-  <Requirements:Requirement xmi:id="_-_WpEMyKEfGts8WNJoPXrQ" base_NamedElement="_-_RJgMyKEfGts8WNJoPXrQ" id="BAT-REQ-14.3" text="The system shall record a discard, with its reason and the batch ID, for every batch discarded because it waited longer than the maximum batter waiting time (P3)." base_Class="_-_RJgMyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_v45AQMyKEfGts8WNJoPXrQ" base_NamedElement="_v40u0MyKEfGts8WNJoPXrQ" id="BAT-REQ-14.2" text="The system shall discard any batter whose waiting time exceeds the maximum batter waiting time (T_batter)." base_Class="_v40u0MyKEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_-_WpEMyKEfGts8WNJoPXrQ" base_NamedElement="_-_RJgMyKEfGts8WNJoPXrQ" id="BAT-REQ-14.3" text="The system shall record a discard, with its reason and the batch ID, for every batch discarded because it waited longer than the maximum batter waiting time (T_batter)." base_Class="_-_RJgMyKEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_Moc8AMyLEfGts8WNJoPXrQ" base_NamedElement="_MoYqkMyLEfGts8WNJoPXrQ" id="BAT-REQ-15.1" text="The system shall hold new batches for as long as depositing is reported stopped." base_Class="_MoYqkMyLEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_UKslcMyLEfGts8WNJoPXrQ" base_NamedElement="_UKqJMMyLEfGts8WNJoPXrQ" id="BAT-REQ-15.2" text="The system shall resume starting new batches once depositing is reported working again." base_Class="_UKqJMMyLEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_dhvNUMyLEfGts8WNJoPXrQ" base_NamedElement="_dhqU0MyLEfGts8WNJoPXrQ" id="BAT-REQ-16" text="The system shall record every log, warning, error and discard event in the slice, each carrying the batch ID, and make it available to Line Monitoring &amp; Health." base_Class="_dhqU0MyLEfGts8WNJoPXrQ"/>
-  <Requirements:Requirement xmi:id="_lTJUIMyLEfGts8WNJoPXrQ" base_NamedElement="_lTFCsMyLEfGts8WNJoPXrQ" id="BAT-REQ-17" text="The system shall make the health state of every function and device in the slice observable at an interval no longer than the health status interval (P4)." base_Class="_lTFCsMyLEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_lTJUIMyLEfGts8WNJoPXrQ" base_NamedElement="_lTFCsMyLEfGts8WNJoPXrQ" id="BAT-REQ-17" text="The system shall make the health state of every function and device in the slice observable at an interval no longer than the health status interval (T_hb)." base_Class="_lTFCsMyLEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_u7HT8MyLEfGts8WNJoPXrQ" base_NamedElement="_u7DCgMyLEfGts8WNJoPXrQ" id="BAT-NFR-01" text="A fault in this slice shall not affect any batch that has already been handed over to Thermal Processing." base_Class="_u7DCgMyLEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_2lzuwMyLEfGts8WNJoPXrQ" base_NamedElement="_2lwrcMyLEfGts8WNJoPXrQ" id="BAT-NFR-02" text="A single dosing or mixing fault shall cost at most the batch being processed when the fault occurred." base_Class="_2lwrcMyLEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_-Qs94MyLEfGts8WNJoPXrQ" base_NamedElement="_-QoFYMyLEfGts8WNJoPXrQ" id="BAT-NFR-03" text="The system shall continue dosing and mixing from already-reserved ingredients while Production &amp; Logistics Management is not responding." base_Class="_-QoFYMyLEfGts8WNJoPXrQ"/>
-  <Requirements:Requirement xmi:id="_Q76f0MyMEfGts8WNJoPXrQ" base_NamedElement="_Q72OYMyMEfGts8WNJoPXrQ" id="BAT-NFR-04" text="A function or device that has stopped responding shall become observable to Line Monitoring &amp; Health within the fault report latency (P5)." base_Class="_Q72OYMyMEfGts8WNJoPXrQ"/>
+  <Requirements:Requirement xmi:id="_Q76f0MyMEfGts8WNJoPXrQ" base_NamedElement="_Q72OYMyMEfGts8WNJoPXrQ" id="BAT-NFR-04" text="A function or device that has stopped responding shall become observable to Line Monitoring &amp; Health within the fault report latency (T_detect)." base_Class="_Q72OYMyMEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_WjBSQMyMEfGts8WNJoPXrQ" base_NamedElement="_Wi9A0MyMEfGts8WNJoPXrQ" id="BAT-NFR-05" text="Dosing and mixing shall each resume without manual reconfiguration once the fault that stopped them has been cleared." base_Class="_Wi9A0MyMEfGts8WNJoPXrQ"/>
   <Requirements:Requirement xmi:id="_gWhzsMyMEfGts8WNJoPXrQ" base_NamedElement="_gWewYMyMEfGts8WNJoPXrQ" id="BAT-NFR-06" text="Ingredient Intake &amp; Dosing and Mixing Control shall each be deployable without stopping the other." base_Class="_gWewYMyMEfGts8WNJoPXrQ"/>
   <Requirements:Satisfy xmi:id="_9dj-0MyNEfGts8WNJoPXrQ" base_DirectedRelationship="_9dcqEMyNEfGts8WNJoPXrQ" base_Abstraction="_9dcqEMyNEfGts8WNJoPXrQ"/>
@@ -1369,4 +1384,10 @@
   <Requirements:Trace xmi:id="_vCGtUdCK2x13RAWoSHc7Y6" base_Abstraction="_MGBU8KNZbZeWLLyvAOjnt3"/>
   <Requirements:Trace xmi:id="_2NCxVFLBiqK8OXpegrS5g2" base_Abstraction="_BXFvbWR5xwfS76vkzUINse"/>
   <Requirements:Copy xmi:id="_wAUQFl8LFqTH5btu3QjWPQ" base_Abstraction="_ZAl8zKyQiBD98uVLmHoZjm"/>
+  <Blocks:NestedConnectorEnd xmi:id="_5CbT4N0uEfG9nYXaPaPUtQ" base_Element="_5Cas0N0uEfG9nYXaPaPUtQ" propertyPath="_Pzl5LOSNJfG-0MXasFBWNo" base_ConnectorEnd="_5Cas0N0uEfG9nYXaPaPUtQ"/>
+  <Blocks:NestedConnectorEnd xmi:id="_5Cb68N0uEfG9nYXaPaPUtQ" base_Element="_5Cas0d0uEfG9nYXaPaPUtQ" propertyPath="_dKeWYC8mkj3HN62_OUn4Sh" base_ConnectorEnd="_5Cas0d0uEfG9nYXaPaPUtQ"/>
+  <Blocks:NestedConnectorEnd xmi:id="_7kqAEt0uEfG9nYXaPaPUtQ" base_Element="_7kqAEN0uEfG9nYXaPaPUtQ" propertyPath="_rlJV7MTRxnbT7Na7Hf6oiy" base_ConnectorEnd="_7kqAEN0uEfG9nYXaPaPUtQ"/>
+  <Blocks:NestedConnectorEnd xmi:id="_7kqnIN0uEfG9nYXaPaPUtQ" base_Element="_7kqAEd0uEfG9nYXaPaPUtQ" propertyPath="_dKeWYC8mkj3HN62_OUn4Sh" base_ConnectorEnd="_7kqAEd0uEfG9nYXaPaPUtQ"/>
+  <Blocks:NestedConnectorEnd xmi:id="_93V0Yt0uEfG9nYXaPaPUtQ" base_Element="_93V0YN0uEfG9nYXaPaPUtQ" propertyPath="_Rmc5OmndQ7cfYima8fKmTi" base_ConnectorEnd="_93V0YN0uEfG9nYXaPaPUtQ"/>
+  <Blocks:NestedConnectorEnd xmi:id="_93XCgN0uEfG9nYXaPaPUtQ" base_Element="_93V0Yd0uEfG9nYXaPaPUtQ" propertyPath="_dKeWYC8mkj3HN62_OUn4Sh" base_ConnectorEnd="_93V0Yd0uEfG9nYXaPaPUtQ"/>
 </xmi:XMI>
