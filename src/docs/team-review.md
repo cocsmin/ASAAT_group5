@@ -21,15 +21,14 @@ is worth a look.
    Option A: a 15th signal, so BAT can free its station and send again if it never comes.
    Option B: remove the waiting step from the BAT diagram. Recommendation: B unless BAT must
    resend after a depositing crash.
-   **Proposed: B (to confirm by the group).** The code, the UPPAAL batter model and the
-   documents already follow B; only the Papyrus BAT state machine changes (steps in
-   [TODO.md](../TODO.md) item 7). Reasons: the 14-signal interface stays; the measured
+   **Decided: B.** The code, the UPPAAL batter model and the documents follow B, and since 13 Nov the
+   Papyrus BAT state machine does too (branch `requirement-diagrams-BAT`, PR #5, not merged yet). Reasons: the 14-signal interface stays; the measured
    experiment stays valid; a persistent QoS 1 handoff, the saved queue of depositing, the
    duplicate filter and the 120 s timer of dosing already cover a lost message; an
    acknowledgement would add a race (the acknowledgement in flight while BAT discards at P3).
    Switch to A only if BAT must resend after a depositing crash.
-3. ~~**BAT frame port "Fault event"**~~ **Decided (9 Nov): a teammate fixes the port in the
-   BAT diagram.** In the code a BAT fault already leaves as signal 12 (log, warning, error
+3. ~~**BAT frame port "Fault event"**~~ **Done (13 Nov): the port is removed in the BAT diagram
+   (branch `requirement-diagrams-BAT`).** In the code a BAT fault already leaves as signal 12 (log, warning, error
    and discard events), so there is no separate signal; the diagram has to match
    ([decisions.md](decisions.md) section 7).
 4. ~~**Pan Spacing & Position Tracking**~~ **Decided (9 Nov): dropped, removed everywhere.** It

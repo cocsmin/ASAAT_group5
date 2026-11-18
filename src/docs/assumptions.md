@@ -25,7 +25,7 @@ assumptions; time values that several systems share are in
 |---|---|---|---|---|
 | A1 | One product only: "Vanilla sponge" | one recipe, seeded in SQL | `internal/store/sql_mem.go`, `sql_mssql.go` | Keep. The report describes one line, not a catalogue |
 | A2 | Pans per batch | 24 (was 6, then 30) | recipe seed `PansPerBatch` | Keep. Chosen from the cycle times, see section 6: the batter of the next batch takes about 20 s (17 s plus the 3 s withdrawal, T8), depositing a batch takes 24 s, so depositing never waits and a failed batch loses little |
-| A3 | Pans in the pan loop | 48 | `PAN_COUNT` in `docker-compose.yml` | Keep. About 17 are on the line at a time, a full cooling buffer holds 24 more, the rest wait clean in the pool |
+| A3 | Pans in the pan loop, and the reserve in the hopper | 48 in the loop, plus a reserve of 100 % of them (48) in the pan hopper: 96 pans | `PAN_COUNT` and `PAN_RESERVE_PERCENT` in `docker-compose.yml` | Confirmed 18 Nov. About 17 pans are on the line at a time and a full cooling buffer holds 24 more (41), so with the washing station running at least 48 clean pans stay in the hopper. A damaged pan (UC12) is replaced by a new one 30 s later, so the number of pans does not shrink |
 | A4 | Fill target and tolerance of the batter in a pan | 450 g +/- 5 g (1.1 %) | recipe seed | Keep. Chosen, see section 5: well inside the legal tolerance of the packaged product |
 | A5 | Dose tolerance of every ingredient | 1 % (was 2 %); the load cell scatters 0.25 % | recipe seed, `internal/bat/dose.go` | Keep. Chosen, see section 5: industrial batching is accurate to about 0.3 to 1 % |
 | A6 | Ingredients and stock | recipe grams per pan as before (flour 4000 g for 24 pans); 36000 g of each ingredient at the start; restock after 15 s with 2 x the recipe + 20000 g | seed, `internal/plm/plm.go` | Keep. Stock for about nine batches |
@@ -53,7 +53,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | T4 | Heartbeat T_hb | 5 s for every system, PLM included | Keep. Decided by the group |
 | T5 | Detection of a stopped controller | 15 s (3 x T_hb, THM-REQ-72); the MQTT keep-alive (5 s, dead after 7.5 s) is an extra and faster | Keep |
 | T6 | A container that does not restart by itself | escalated to Maintenance after 45 s (THM-REQ-73 allows 60 s) | Keep |
-| T7 | Batter that waits too long for depositing to work again is discarded | 25 s (BAT parameter P3); BAT-INSP checks once a second, so 26 s; counted before the handoff only (`team-review.md`, section 3, item 11) | Confirm |
+| T7 | Batter that waits too long for depositing to work again is discarded | 25 s (BAT parameter P3, called T_batter in the BAT model since 13 Nov); BAT-INSP checks once a second, so 26 s; counted before the handoff only (`team-review.md`, section 3, item 11) | Confirm |
 | T8 | Retries | ingredient request repeated after 20 s; the ingredients are collected 3 s after the reservation; a held order is restocked after 15 s; order sent again after 40 s; every database call times out after 3 s; event outbox retried every second; state saved every 3 s | Keep. The test in `internal/timing` checks that they fit together |
 | T9 | Faults the system repairs by itself, injected for the demo | depositing jam 30 s; no-pan wait 4 s; recalibration 6 s; wrong speed corrected after 10 s; band sections restart 1.5 s apart | Keep |
 
@@ -134,7 +134,7 @@ per second, which is that limit.
   24 pans instead of 30) and needed more pans in the loop.
 - **Pans in the loop (48).** At one pan per second a pan spends about 14 to 17 s on the line,
   so about 17 pans are on the line. During a cooling failure the buffer holds up to 24 more
-  (FC15 to FC18). 17 + 24 = 41, and a few clean pans must be left in the pool: 48.
+  (FC15 to FC18). 17 + 24 = 41, so the loop has 48 pans. Since 18 Nov the pan hopper holds a reserve of as many again (`PAN_RESERVE_PERCENT = 100`): 96 pans, at least 48 of them clean in the hopper while the washing station runs. With the washing station down the hopper empties at one pan per second, the reserve is what keeps depositing going for about 48 s more (FC23).
 - **Throughput cannot be raised by a larger batch.** Only a faster slowest station would raise
   it; all station times are assumptions (T3), so this is not an optimisation of a real plant.
 

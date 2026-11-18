@@ -18,6 +18,10 @@ import (
 
 const washReason = "washing station down, clean pans nearly out"
 
+// A damaged pan (UC12) is replaced by a new one after this time (simulated). It is a variable so that
+// the test does not have to wait.
+var replaceDelay = 30 * time.Second
+
 // Wash is the pan washing station. It also keeps the clean-pan pool and answers the
 // pan requests of depositing from it (UC12, FC23).
 type Wash struct {
@@ -28,8 +32,9 @@ type Wash struct {
 	panReq  chan struct{}
 	catchup atomic.Bool // washing runs at increased speed after a repair
 
-	mu   sync.Mutex
-	pool []string
+	mu      sync.Mutex
+	pool    []string // the pan hopper: clean pans, the reserve included
+	nextPan int      // number of the next new pan
 }
 
 // RunWash starts the pan washing station.
@@ -45,7 +50,8 @@ func RunWash() {
 		f.catchup.Store(true)
 		f.N.Warn("FC23", "washing station repaired: speed increased to work off the backlog", "")
 	})
-	f.seedPans(svc.Env("PAN_COUNT", "48"))
+	reserve, _ := strconv.Atoi(svc.Env("PAN_RESERVE_PERCENT", "100"))
+	f.seedPans(svc.Env("PAN_COUNT", "48"), reserve)
 	f.Start()
 	f.adm.Reset()
 	go f.gaugeLoop()
@@ -54,25 +60,59 @@ func RunWash() {
 	f.washer()
 }
 
-// seedPans restores the clean-pan pool from the pan store and creates missing pans.
-func (f *Wash) seedPans(count string) {
+// seedPans restores the pan hopper from the pan store and creates the missing pans. The loop has
+// count pans; the hopper keeps a reserve of reservePercent of them on top (100: as many again), so
+// that depositing does not run out of clean pans while the washing station is down or a damaged pan
+// is not replaced yet. A pan that was sorted out (UC12) does not count: a new one takes its place.
+func (f *Wash) seedPans(count string, reservePercent int) {
 	n, _ := strconv.Atoi(count)
+	total := n + n*reservePercent/100
 	all, _ := f.Pans.List(f.Ctx, 1000)
-	known := map[string]bool{}
+	active, maxNo := 0, 0
 	for _, p := range all {
-		known[p.ID] = true
 		if p.Status == "clean" {
 			f.pool = append(f.pool, p.ID)
 		}
-	}
-	for i := 1; i <= n; i++ {
-		id := fmt.Sprintf("PAN-%03d", i)
-		if !known[id] {
-			store.Move(f.Ctx, f.Pans, id, "FIN-PanPool", "clean", "new pan", nil)
-			f.pool = append(f.pool, id)
+		var no int
+		if _, err := fmt.Sscanf(p.ID, "PAN-%d", &no); err == nil && len(p.ID) > 4 && p.ID[:4] == "PAN-" {
+			if no > maxNo {
+				maxNo = no
+			}
+			if p.Status != "discarded" {
+				active++
+			}
 		}
 	}
+	f.nextPan = maxNo + 1
+	for ; active < total; active++ {
+		id := f.newPanID()
+		store.Move(f.Ctx, f.Pans, id, "FIN-PanPool", "clean", "new pan", nil)
+		f.pool = append(f.pool, id)
+	}
 	f.N.Gauge("pool", int64(len(f.pool)))
+}
+
+// newPanID gives the number of a new pan.
+func (f *Wash) newPanID() string {
+	f.mu.Lock()
+	defer f.mu.Unlock()
+	id := fmt.Sprintf("PAN-%03d", f.nextPan)
+	f.nextPan++
+	return id
+}
+
+// replace puts a new pan into the hopper, some time after a damaged one was sorted out.
+func (f *Wash) replace() {
+	if !sim.Sleep(f.Ctx, replaceDelay) {
+		return
+	}
+	id := f.newPanID()
+	store.Move(f.Ctx, f.Pans, id, "FIN-PanPool", "clean", "replacement pan", nil)
+	f.mu.Lock()
+	f.pool = append(f.pool, id)
+	f.mu.Unlock()
+	f.N.AddGauge("pansReplaced", 1)
+	f.N.Log("UC12", "replacement pan "+id+" put into the pan hopper", "")
 }
 
 func (f *Wash) enqueue(id string) {
@@ -168,6 +208,7 @@ func (f *Wash) washer() {
 			f.N.Discard("UC12", "washed pan "+id+" is damaged: sorted out of the production cycle", "")
 			f.N.AddGauge("pansDiscarded", 1)
 			f.took.Drop(id)
+			go f.replace()
 			continue
 		}
 		store.Move(f.Ctx, f.Pans, id, "FIN-PanPool", "clean", "washed and dried", func(p *model.Pan) { p.BatchID, p.FillWeight, p.CakeTemp = "", 0, 0 })

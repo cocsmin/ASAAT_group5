@@ -13,8 +13,8 @@ where the diagrams are missing, wrong, or behind the implementation.
 1. **Cake Factory IBD** is empty. Add the message bus (Sparkplug B on an MQTT
    broker) and the MON part, and connect the frame ports of the slices to the bus
 
-2. **BAT frame port "Fault event"** is not in the signal table. Make it internal
-   (remove the frame port) or add it as a 15th signal.
+2. ~~**BAT frame port "Fault event"**~~ **DONE 13 Nov** (branch `requirement-diagrams-BAT`, PR #5, not merged):
+   the frame port is removed, faults are internal.
 3. **MON has no document and no diagrams.** Needed: blocks, IBD and state machines
    for the node watchdog (online, silent, dead), the band sections (run, slow,
    halt, fault) and the ticket lifecycle (open, repaired). The code in
@@ -29,8 +29,11 @@ where the diagrams are missing, wrong, or behind the implementation.
 6. **Container recovery (FC27) is modelled in no state machine.** THM, FIN and BAT
    need the behaviour "restart, reload saved state, take up cakes and pans again
    from the stored documents".
-7. **BAT Mixing and Handoff** has `batchCollected`, which is not one of the 14
-   signals. **DECIDED (proposed 2026-11-09, group to confirm): option B, remove it.**
+7. ~~**BAT Mixing and Handoff**~~ **DONE 13 Nov** (branch `requirement-diagrams-BAT`, PR #5, not merged):
+   `batchCollected` is removed, HandingOff leaves on the depositing state or "working again" and
+   discards after T_batter (= P3). Option B is decided. Text below is kept as the record.
+   It had `batchCollected`, which is not one of the 14
+   signals. **DECIDED: option B, remove it.**
    The code (`internal/bat/insp.go`, `handOff`), the UPPAAL batter model
    (`docs/uppaal/batter.xml`) and the documents already follow B; only Papyrus changes.
    Why: the 14-signal interface and the measured experiment stay valid, and a lost
@@ -160,8 +163,8 @@ See docs/team-review.md section 6 for the port table. To do **[person]**:
    - Look in BT, MON and the main model (ASAAT.uml), in the requirement diagrams and in the
      report for any block, requirement, port or use case about pan position or pan spacing,
      and remove it. The code, the signals and `docs/` have nothing of it.
-5. **BAT frame port "Fault event" (decided 9 Nov)**: the teammate who owns the BAT diagram
-   fixes the port. In the code there is no separate signal: a BAT fault leaves as signal 12
+5. **BAT frame port "Fault event": DONE 13 Nov** in the BAT diagram (branch `requirement-diagrams-BAT`).
+   Before: In the code there is no separate signal: a BAT fault leaves as signal 12
    (log, warning, error and discard events), so the port is an output of signal 12 or internal.
 
 ## PLM state machine (PR #7, branch requirement-diagrams-PLM) against the code

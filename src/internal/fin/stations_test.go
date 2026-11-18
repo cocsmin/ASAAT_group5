@@ -124,7 +124,7 @@ func TestWashingSeedsThePoolAndKeepsExistingPans(t *testing.T) {
 	s := &Wash{Base: b, took: station.NewPanSet(), washQ: make(chan string, 16), panReq: make(chan struct{}, 4), adm: &station.Admission{B: b}}
 	put(t, pans, "PAN-001", "", "FIN-PanPool", "clean", time.Minute)
 	put(t, pans, "PAN-002", "", "THM-Baking", "baking", time.Minute)
-	s.seedPans("5")
+	s.seedPans("5", 0)
 	all, _ := pans.List(context.Background(), 100)
 	if len(all) != 5 {
 		t.Fatalf("the loop has %d pans, want 5", len(all))
@@ -137,6 +137,63 @@ func TestWashingSeedsThePoolAndKeepsExistingPans(t *testing.T) {
 		if id == "PAN-002" {
 			t.Fatal("a pan that is baking must not be in the clean pool")
 		}
+	}
+}
+
+func TestHopperKeepsAReserveOfAsManyPansAsTheLoop(t *testing.T) {
+	b, pans := testBase(t, model.FINWash)
+	s := &Wash{Base: b, took: station.NewPanSet(), washQ: make(chan string, 16), panReq: make(chan struct{}, 4), adm: &station.Admission{B: b}}
+	s.seedPans("48", 100)
+	all, _ := pans.List(context.Background(), 1000)
+	if len(all) != 96 || len(s.pool) != 96 {
+		t.Fatalf("a loop of 48 and a reserve of 100 percent make 96 pans, store has %d, hopper %d", len(all), len(s.pool))
+	}
+	// with at most 48 pans out of the hopper (the line, the cooling buffer) 48 clean pans are left
+	if left := len(s.pool) - 48; left < 48 {
+		t.Fatalf("only %d clean pans left with 48 on the line", left)
+	}
+	// a restart creates nothing more
+	s2 := &Wash{Base: b, took: station.NewPanSet(), washQ: make(chan string, 16), panReq: make(chan struct{}, 4), adm: &station.Admission{B: b}}
+	s2.seedPans("48", 100)
+	again, _ := pans.List(context.Background(), 1000)
+	if len(again) != 96 {
+		t.Fatalf("a restart changed the number of pans to %d", len(again))
+	}
+}
+
+func TestSortedOutPanIsReplacedAfterARestartToo(t *testing.T) {
+	b, pans := testBase(t, model.FINWash)
+	s := &Wash{Base: b, took: station.NewPanSet(), washQ: make(chan string, 16), panReq: make(chan struct{}, 4), adm: &station.Admission{B: b}}
+	put(t, pans, "PAN-001", "", "FIN-PanPool", "clean", time.Minute)
+	put(t, pans, "PAN-002", "", "FIN-Washing", "discarded", time.Minute) // sorted out, not replaced yet
+	put(t, pans, "PAN-003", "", "FIN-PanPool", "clean", time.Minute)
+	s.seedPans("3", 0)
+	if len(s.pool) != 3 {
+		t.Fatalf("the hopper has %d pans, want 3 (the damaged one is replaced by PAN-004)", len(s.pool))
+	}
+	if _, ok, _ := pans.Get(context.Background(), "PAN-004"); !ok {
+		t.Fatal("the replacement is a new pan, PAN-004")
+	}
+}
+
+func TestDamagedPanIsReplacedByANewOneInTheHopper(t *testing.T) {
+	old := replaceDelay
+	replaceDelay = time.Millisecond
+	defer func() { replaceDelay = old }()
+	b, pans := testBase(t, model.FINWash)
+	s := &Wash{Base: b, took: station.NewPanSet(), washQ: make(chan string, 16), panReq: make(chan struct{}, 4), adm: &station.Admission{B: b}}
+	s.seedPans("3", 0)
+	before := len(s.pool)
+	s.replace()
+	if len(s.pool) != before+1 {
+		t.Fatalf("the hopper has %d pans, want %d", len(s.pool), before+1)
+	}
+	last := s.pool[len(s.pool)-1]
+	if last != "PAN-004" {
+		t.Fatalf("the new pan is %s, want PAN-004", last)
+	}
+	if p, ok, _ := pans.Get(context.Background(), last); !ok || p.Status != "clean" {
+		t.Fatalf("the replacement is not stored as a clean pan: %+v", p)
 	}
 }
 

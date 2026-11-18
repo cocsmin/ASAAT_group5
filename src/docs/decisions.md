@@ -255,3 +255,20 @@ Claude, the group still has to confirm them)
   PLM releases no order and BAT-DOSE starts no batch while MON is offline (as before); THM-DEP no longer has
   a "monitor offline" stop reason, so it keeps depositing the pans of batches that already exist (before, a
   MON restart stopped depositing too). The dashboard alert says "no new batches are started".
+
+**18 Nov** (pans, and the BAT diagram of 13 Nov)
+- Pans (assumption A3, decided by the group): a pan sorted out because it is damaged (UC12) is **replaced
+  eventually**, and the pan hopper (the clean-pan pool of FIN-WASH, "Pan Hopper" FIN-FD-15 in the model) always
+  holds an extra reserve of **100 % of the pans in the loop**, now 48. So the system has 96 pans: 48 in the loop and
+  48 in reserve. In the code: `PAN_COUNT = 48` is the loop, `PAN_RESERVE_PERCENT = 100` the reserve (`docker-compose.yml`);
+  a damaged pan is replaced by a new pan 30 s later (simulated), and a restart of FIN-WASH makes up any missing pan.
+  What this gives: with the washing station running, at least 48 clean pans stay in the hopper (at most 41 pans are
+  out of it: 17 on the line and 24 in a full cooling buffer). With the washing station down the hopper empties at one
+  pan per second, so depositing goes on for about 48 s more (FC23). It is not true that the hopper never shrinks: it
+  goes down whenever depositing draws pans faster than washing returns them.
+- BAT diagram (branch `requirement-diagrams-BAT`, commit of 13 Nov, Cosmin-Daniel): the frame port "Fault event" is
+  removed (faults reach Event Reporting inside the block), "batchCollected" is removed (option B of
+  team-review item 2: HandingOff leaves on the depositing state or "working again" and discards after T_batter), a
+  Restoring state for the restart (FC27), and dosing holds while the monitor is offline (S4). The parameters
+  P1 to P5 are renamed D_tol, N_dose, T_batter, T_hb and T_detect (P3 of our documents and of the UPPAAL models is
+  T_batter). The BAT items of the diagram to-do list are done; the PR is #5, not merged yet.

@@ -176,7 +176,7 @@ services:
   fin-wash:
     <<: *service
     build: { context: ., args: { SERVICE: station } }
-    environment: { <<: *env, STATION: fin-wash, PAN_COUNT: "48" }
+    environment: { <<: *env, STATION: fin-wash, PAN_COUNT: "48", PAN_RESERVE_PERCENT: "100" }
     volumes: ["fin-wash-data:/data"]
 
   mon:
