@@ -3,10 +3,11 @@
 <nta>
 <declaration>const int MIX = 6;       // recipe MixSeconds
 const int INSP = 3;       // inspection
-const int P3 = 25;        // batter waits at most this for depositing to work again (FC7)
-const int POLL = 1;       // BAT-INSP looks at the state once a second, so it discards after P3 + POLL
-const int LOST = 120;     // dosing gives up a batch that is not finished by now
-const int STALE = 6;      // BAT-INSP's copy of the state is at most this old (heartbeat 5 s + delivery 1 s, estimated)
+const int T_batter = 25;  // timing.BatterWait: batter waits at most this for depositing to work again (FC7)
+const int POLL = 1;       // BAT-INSP looks at the state once a second, so it really discards after T_batter + POLL
+const int LOST = 120;     // bat.batchLostAfter: dosing gives up a batch that is not finished by now
+const int T_hb = 5;       // timing.Heartbeat
+const int STALE = T_hb + 1; // BAT-INSP's copy of the state is at most one heartbeat plus one delivery old (estimated)
 const int BLOCKMAX = 60;  // depositing may stay stopped this long (estimated)
 const int DEPSTART = 24;  // a queued batter waits at most this for depositing to take it up: it may sit behind the previous batch, PansPerBatch 24 x depositTime 1 s
 clock g;                  // age of the batch
@@ -15,23 +16,27 @@ bool stopped = false;     // depositing is really stopped
 bool seen = false;        // BAT-INSP's copy of that state
 bool queued = false;      // "Batter ready" has reached depositing
 bool faultDone = false;   // one stop only
+bool rejectDone = false;  // one rejection only, the same one-fault bound as faultDone
 bool deposited = false;
+bool handedWhileStopped = false; // the real state at the instant of the handoff, not later: see FINDING 1
 chan ready;               // Batter ready (reliable, no acknowledgement)
 </declaration>
 <template>
 <name>Batch</name>
-<declaration>clock x;</declaration>
+<declaration>clock x; int[0, T_batter + POLL] waited;</declaration>
 <location id="Batch_Mixing" x="300" y="0"><name x="280" y="18">Mixing</name><label kind="invariant" x="280" y="36">x &lt;= MIX</label></location>
 <location id="Batch_Inspecting" x="93" y="190"><name x="73" y="208">Inspecting</name><label kind="invariant" x="73" y="226">x &lt;= INSP</label></location>
 <location id="Batch_Handed" x="-243" y="118"><name x="-263" y="136">Handed</name></location>
-<location id="Batch_Holding" x="-243" y="-118"><name x="-263" y="-100">Holding</name><label kind="invariant" x="-263" y="-82">x &lt;= P3 + POLL</label></location>
+<location id="Batch_Holding" x="-243" y="-118"><name x="-263" y="-100">Holding</name><label kind="invariant" x="-263" y="-82">x &lt;= POLL</label></location>
 <location id="Batch_Discarded" x="93" y="-190"><name x="73" y="-172">Discarded</name></location>
 <init ref="Batch_Mixing"/>
-<transition><source ref="Batch_Mixing"/><target ref="Batch_Inspecting"/><label kind="guard" x="132" y="49">x &gt;= MIX</label><label kind="assignment" x="132" y="65">x = 0</label></transition>
-<transition><source ref="Batch_Inspecting"/><target ref="Batch_Holding"/><label kind="guard" x="-105" y="-29">x &gt;= INSP &amp;&amp; seen</label><label kind="assignment" x="-105" y="-13">x = 0, h = 0</label></transition>
-<transition><source ref="Batch_Inspecting"/><target ref="Batch_Handed"/><label kind="guard" x="-163" y="173">x &gt;= INSP &amp;&amp; !seen</label><label kind="synchronisation" x="-163" y="189">ready!</label><label kind="assignment" x="-163" y="205">h = 0</label></transition>
-<transition><source ref="Batch_Holding"/><target ref="Batch_Handed"/><label kind="guard" x="-304" y="-16">!seen</label><label kind="synchronisation" x="-304" y="0">ready!</label></transition>
-<transition><source ref="Batch_Holding"/><target ref="Batch_Discarded"/><label kind="guard" x="-164" y="-131">seen &amp;&amp; x &gt;= P3 + POLL</label></transition>
+<transition><source ref="Batch_Mixing"/><target ref="Batch_Inspecting"/><label kind="guard" x="109" y="5">x &gt;= MIX</label><label kind="assignment" x="109" y="21">x = 0</label><nail x="156" y="51"/></transition>
+<transition><source ref="Batch_Inspecting"/><target ref="Batch_Mixing"/><label kind="guard" x="151" y="174">x &gt;= INSP &amp;&amp; !rejectDone</label><label kind="assignment" x="151" y="190">x = 0, rejectDone = true</label><nail x="237" y="139"/></transition>
+<transition><source ref="Batch_Inspecting"/><target ref="Batch_Holding"/><label kind="guard" x="-121" y="-43">x &gt;= INSP &amp;&amp; seen</label><label kind="assignment" x="-121" y="-27">x = 0, h = 0, waited = 0</label></transition>
+<transition><source ref="Batch_Inspecting"/><target ref="Batch_Handed"/><label kind="guard" x="-237" y="188">x &gt;= INSP &amp;&amp; !seen</label><label kind="synchronisation" x="-237" y="204">ready!</label><label kind="assignment" x="-237" y="220">h = 0, handedWhileStopped = stopped</label></transition>
+<transition><source ref="Batch_Holding"/><target ref="Batch_Holding"/><label kind="guard" x="-439" y="-209">x &gt;= POLL &amp;&amp; seen &amp;&amp; waited + POLL &lt;= T_batter</label><label kind="assignment" x="-439" y="-193">waited = waited + POLL, x = 0</label><nail x="-198" y="-173"/><nail x="-288" y="-173"/></transition>
+<transition><source ref="Batch_Holding"/><target ref="Batch_Handed"/><label kind="guard" x="-690" y="-24">x &gt;= POLL &amp;&amp; !seen &amp;&amp; waited + POLL &lt;= T_batter</label><label kind="synchronisation" x="-690" y="-8">ready!</label><label kind="assignment" x="-690" y="8">waited = waited + POLL, handedWhileStopped = stopped</label></transition>
+<transition><source ref="Batch_Holding"/><target ref="Batch_Discarded"/><label kind="guard" x="-189" y="-126">x &gt;= POLL &amp;&amp; waited + POLL &gt; T_batter</label><label kind="assignment" x="-189" y="-110">waited = waited + POLL</label></transition>
 </template>
 <template>
 <name>Dep</name>
@@ -58,12 +63,5 @@ chan ready;               // Batter ready (reliable, no acknowledgement)
 <init ref="Copy_Sync"/>
 <transition><source ref="Copy_Sync"/><target ref="Copy_Sync"/><label kind="guard" x="209" y="-91">w &gt;= 1</label><label kind="assignment" x="209" y="-75">seen = stopped, w = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
 </template>
-<template>
-<name>Tick</name>
-<declaration></declaration>
-<location id="Tick_On" x="300" y="0"><name x="280" y="18">On</name></location>
-<init ref="Tick_On"/>
-<transition><source ref="Tick_On"/><target ref="Tick_On"/><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
-</template>
-<system>system Batch, Dep, Copy, Tick;</system>
+<system>system Batch, Dep, Copy;</system>
 </nta>

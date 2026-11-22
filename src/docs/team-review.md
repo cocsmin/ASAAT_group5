@@ -126,17 +126,25 @@ is worth a look.
     station program and the compose file. They run in CI. The main loop of every station is
     not unit-tested (it needs a broker or a long simulation); the scenarios cover it.
 
-11. **P3 is checked before the handoff only.** BAT-INSP discards a batter that waited more
-    than P3 (25 s, looked at once a second) while depositing is stopped. After "Batter ready"
+11. **T_batter is checked before the handoff only.** BAT-INSP discards a batter that waited more
+    than T_batter (25 s, looked at once a second) while depositing is stopped. After "Batter ready"
     is sent, THM-DEP queues the batter and nothing discards it, so a batter can wait in the
     queue as long as depositing stays stopped (FC7). The UPPAAL batter model shows it: with the
     estimated stop time of 60 s a batter is deposited up to 108 s after approval (24 s
     behind the previous batch of 24 pans, the stop, 24 s again), only 3 s before dosing gives
     the batch up at 120 s; the jam FC7 alone clears after 30 s in the code, longer stops come
-    from the other stop reasons (full holding area, band halted). The
-    state copy of BAT can also be stale by a heartbeat. Proposed fix with no new signal: "Batter
+    from the other stop reasons (full holding area, band halted). Both figures are exact, not
+    rounded: `A[] Dep.Took imply h <= 107` is NOT satisfied and `h <= 108` is satisfied, and
+    raising `BLOCKMAX` from 60 to 64 is what makes `A[] Dep.Took imply g <= LOST` fail. With
+    the estimated 60 s stop it takes no more than that: one human rejection (UC4) adds a second
+    mixing and inspection cycle, and the oldest a batch can be when its batter is deposited
+    becomes **126 s** (`g <= 125` fails, `g <= 126` holds), already past the 120 s at which
+    dosing writes the batch off and starts a new one (`E<> (Dep.Took && g > LOST)` is
+    satisfied; forbid the rejection and it is not). Depositing then fills pans from a batch
+    that no longer exists for dosing, and nothing tells THM-DEP (`internal/bat/dose.go:180`).
+    The state copy of BAT can also be stale by a heartbeat. Proposed fix with no new signal: "Batter
     ready" carries how long the batter has already waited; THM-DEP discards a queued batter
-    whose total wait would pass P3 when it takes it up, and reports `Batch result` "discarded"
+    whose total wait would pass T_batter when it takes it up, and reports `Batch result` "discarded"
     (an existing signal that dosing already reads). Not done: it changes tested code and the
     experiment. Decide: fix, or state the limit in the report.
 
