@@ -125,16 +125,22 @@ is worth a look.
     station program and the compose file. They run in CI. The main loop of every station is
     not unit-tested (it needs a broker or a long simulation); the scenarios cover it.
 
-11. ~~**P3 is checked before the handoff only.**~~ **Fixed (24 Nov, decided by the group).** BAT-INSP still
-    discards a batter that waited more than P3 (25 s, looked at once a second) while depositing is stopped.
+11. ~~**T_batter is checked before the handoff only.**~~ **Fixed (24 Nov, decided by the group).** BAT-INSP still
+    discards a batter that waited more than T_batter (25 s, looked at once a second) while depositing is stopped.
     New: "Batter ready" carries `waited`, the seconds the batter already waited in BAT-INSP, and THM-DEP
-    discards a queued batter whose total wait since approval passes P3 when it takes the batter up
+    discards a queued batter whose total wait since approval passes T_batter when it takes the batter up
     (event FC7, `Batch result` "discarded", an existing signal). A batter whose first pan is already filled
     is not discarded. The queue saved in MongoDB keeps the start of the wait, so a restart does not give the
-    batter a new P3. The UPPAAL batter model shows it: a queued batter is deposited at most P3 after
-    approval or discarded (at most 108 s after approval with the 60 s stop estimate), always before dosing
-    gives the batch up at 120 s. Left over: dosing already counts the batch as handed when "handed" arrives,
-    so a later discard at depositing only shows as an event (dosing has started the next batch).
+    batter a new T_batter. What the UPPAAL batter model found before the fix, and what it proves now:
+    - before: a batter could be deposited 108 s after approval, and with one human rejection (UC4) 126 s after the
+      batch was started, past the 120 s at which dosing writes the batch off (`E<> (Dep.Took && g > LOST)`);
+    - now: a batter is deposited at most T_batter after approval (`A[] Dep.Took imply h <= T_batter`, exact) and
+      at most 43 s after the batch was started, also with one rejection (`g <= 43` holds, `g <= 42` fails), so
+      before dosing gives up; a batter that waited longer is discarded at depositing at the latest 108 s after
+      approval (`h <= 108` holds, `h <= 107` fails), 126 s after the batch started (exact). That late discard
+      only drops a batch dosing already replaced, nothing is deposited from it.
+    Left over: dosing already counts the batch as handed when "handed" arrives, so a later discard at
+    depositing only shows as an event (dosing has started the next batch).
 
 ## 4. Odd things worth a look [?]
 

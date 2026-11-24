@@ -115,10 +115,13 @@ function template(t) {
   return s + `</template>\n`;
 }
 
-const TICK = { name: "Tick", init: "On", locs: [{ n: "On" }], trans: [{ from: "On", to: "On" }] }; // keeps `not deadlock` meaningful: a finished run may idle
+const TICK = { name: "Tick", init: "On", locs: [{ n: "On" }], trans: [{ from: "On", to: "On" }] }; // lets a finished run idle instead of counting as a deadlock
+// supervision and plm have no Tick: they never end (the order cycle and the heartbeat keep going), and with the leads-to queries of plm a Tick that takes no time would let an infinite run stand still.
+// batter has none either: the same Tick broke its two leads-to queries, and it was never needed, because Copy
+// never stops, so `deadlock` is unreachable with or without it (both checked with verifyta 5.0.0).
+const NO_TICK = ["supervision", "plm", "batter"];
 function model(file, decl, templates, system, queries) {
-  // supervision and plm have no Tick: they never end (the order cycle and the heartbeat keep going), and with the leads-to queries of plm a Tick that takes no time would let an infinite run stand still.
-  if (file !== "supervision" && file !== "plm") { templates = templates.concat([TICK]); system = system.replace(";", ", Tick;"); }
+  if (!NO_TICK.includes(file)) { templates = templates.concat([TICK]); system = system.replace(";", ", Tick;"); }
   const xml = `<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>\n<nta>\n<declaration>${esc(decl)}</declaration>\n${templates.map(template).join("")}<system>${esc(system)}</system>\n</nta>\n`;
   fs.writeFileSync(file + ".xml", xml);
   fs.writeFileSync(file + ".q", queries.map((q) => `//${q[0]}\n${q[1]}\n`).join("\n"));
@@ -221,19 +224,20 @@ clock t;
   ["release is reachable", "E<> released"],
 ]);
 
-// 3. Batter: inspection, hold while depositing is stopped (P3 = 25 s), batch lost limit (120 s).
+// 3. Batter: inspection, hold while depositing is stopped (T_batter = 25 s), batch lost limit (120 s).
 // Models the code: BAT-INSP reads its own copy of the "Depositing stopped" state, holds the batter
-// while the copy says stopped, discards it after P3, otherwise sends "Batter ready" and is done.
-// "Batter ready" carries the time already waited, so depositing (THM-DEP) keeps counting towards the same
-// P3: when it takes the batter up and the total wait since approval is over P3, it discards it (FC7).
-// (Decision of 24 Nov: this closes the limit of team-review section 3, item 11.)
+// while the copy says stopped, discards it after T_batter, otherwise sends "Batter ready" and is done.
 // There is no acknowledgement from depositing (decision: docs/team-review.md section 1, item 2, option B).
+// "Batter ready" carries the time already waited, so depositing (THM-DEP) keeps counting towards the same
+// T_batter: when it takes the batter up and the total wait since approval is over T_batter, it discards it (FC7).
+// (Decision of 24 Nov: this closes the limit of team-review section 3, item 11.)
 model("batter", `const int MIX = 6;       // recipe MixSeconds
 const int INSP = 3;       // inspection
-const int P3 = 25;        // batter waits at most this for depositing to work again (FC7)
-const int POLL = 1;       // BAT-INSP looks at the state once a second, so it discards after P3 + POLL
-const int LOST = 120;     // dosing gives up a batch that is not finished by now
-const int STALE = 6;      // BAT-INSP's copy of the state is at most this old (heartbeat 5 s + delivery 1 s, estimated)
+const int T_batter = 25;  // timing.BatterWait: batter waits at most this for depositing to work again (FC7)
+const int POLL = 1;       // BAT-INSP looks at the state once a second, so it really discards after T_batter + POLL
+const int LOST = 120;     // bat.batchLostAfter: dosing gives up a batch that is not finished by now
+const int T_hb = 5;       // timing.Heartbeat
+const int STALE = T_hb + 1; // BAT-INSP's copy of the state is at most one heartbeat plus one delivery old (estimated)
 const int BLOCKMAX = 60;  // depositing may stay stopped this long (estimated)
 const int DEPSTART = 24;  // a queued batter waits at most this for depositing to take it up: it may sit behind the previous batch, PansPerBatch 24 x depositTime 1 s
 clock g;                  // age of the batch
@@ -242,17 +246,27 @@ bool stopped = false;     // depositing is really stopped
 bool seen = false;        // BAT-INSP's copy of that state
 bool queued = false;      // "Batter ready" has reached depositing
 bool faultDone = false;   // one stop only
+bool rejectDone = false;  // one rejection only, the same one-fault bound as faultDone
 bool deposited = false;
+bool handedWhileStopped = false; // the real state at the instant of the handoff, not later: see FINDING 1
 chan ready;               // Batter ready (reliable, no acknowledgement)
 `, [
-  { name: "Batch", decl: "clock x;", init: "Mixing",
-    locs: [{ n: "Mixing", inv: "x <= MIX" }, { n: "Inspecting", inv: "x <= INSP" }, { n: "Handed" }, { n: "Holding", inv: "x <= P3 + POLL" }, { n: "Discarded" }],
+  // Holding is the loop of bat.handOff, not a deadline: wait POLL, waited += POLL, discard once waited passes
+  // T_batter, otherwise look at the copy again. The 26 s bound is then derived by UPPAAL from the loop
+  // instead of being asserted as an invariant, so the T-RC4 query below can actually fail.
+  { name: "Batch", decl: "clock x; int[0, T_batter + POLL] waited;", init: "Mixing",
+    locs: [{ n: "Mixing", inv: "x <= MIX" }, { n: "Inspecting", inv: "x <= INSP" }, { n: "Handed" }, { n: "Holding", inv: "x <= POLL" }, { n: "Discarded" }],
     trans: [
       { from: "Mixing", to: "Inspecting", guard: "x >= MIX", assign: "x = 0" },
-      { from: "Inspecting", to: "Holding", guard: "x >= INSP && seen", assign: "x = 0, h = 0" },
-      { from: "Inspecting", to: "Handed", guard: "x >= INSP && !seen", sync: "ready!", assign: "h = 0" },
-      { from: "Holding", to: "Handed", guard: "!seen", sync: "ready!" },
-      { from: "Holding", to: "Discarded", guard: "seen && x >= P3 + POLL" } ] },
+      // UC4: the inspector rejects the batter and mixing starts another cycle at once (insp.go F.Take("UC4"), mix.go).
+      // Bounded to one rejection, as Dep is bounded to one stop: the code caps nothing, and unbounded rejection makes
+      // the batch outlive dosing's LOST timer, which breaks four of the queries below. See README 5.3.
+      { from: "Inspecting", to: "Mixing", guard: "x >= INSP && !rejectDone", assign: "x = 0, rejectDone = true" },
+      { from: "Inspecting", to: "Holding", guard: "x >= INSP && seen", assign: "x = 0, h = 0, waited = 0" },
+      { from: "Inspecting", to: "Handed", guard: "x >= INSP && !seen", sync: "ready!", assign: "h = 0, handedWhileStopped = stopped" },
+      { from: "Holding", to: "Holding", guard: "x >= POLL && seen && waited + POLL <= T_batter", assign: "waited = waited + POLL, x = 0" },
+      { from: "Holding", to: "Handed", guard: "x >= POLL && !seen && waited + POLL <= T_batter", sync: "ready!", assign: "waited = waited + POLL, handedWhileStopped = stopped" },
+      { from: "Holding", to: "Discarded", guard: "x >= POLL && waited + POLL > T_batter", assign: "waited = waited + POLL" } ] },
   { name: "Dep", decl: "clock y, q;", init: "Open",
     locs: [{ n: "Open", at: [0, -110] }, { n: "OpenQ", inv: "q <= DEPSTART", at: [0, 190] }, { n: "Blocked", inv: "y <= BLOCKMAX", at: [-380, 40] }, { n: "Took", committed: true, at: [260, 190] }, { n: "Done", at: [260, -110] }, { n: "Expired", committed: true, at: [-120, 190] }],
     trans: [
@@ -262,28 +276,32 @@ chan ready;               // Batter ready (reliable, no acknowledgement)
       { from: "OpenQ", to: "Blocked", guard: "!faultDone", assign: "stopped = true, y = 0" },
       { from: "Blocked", to: "Open", guard: "y >= 1 && !queued", assign: "stopped = false, faultDone = true" },
       { from: "Blocked", to: "OpenQ", guard: "y >= 1 && queued", assign: "stopped = false, faultDone = true, q = 0" },
-      { from: "OpenQ", to: "Took", guard: "h <= P3", assign: "deposited = true" },
-      { from: "OpenQ", to: "Expired", guard: "h > P3" },
+      { from: "OpenQ", to: "Took", guard: "h <= T_batter", assign: "deposited = true" },
+      { from: "OpenQ", to: "Expired", guard: "h > T_batter" },
       { from: "Took", to: "Done" },
       { from: "Expired", to: "Done" } ] },
   { name: "Copy", decl: "clock w;", init: "Sync",
     locs: [{ n: "Sync", inv: "w <= STALE" }],
     trans: [{ from: "Sync", to: "Sync", guard: "w >= 1", assign: "seen = stopped, w = 0" }] },
 ], "system Batch, Dep, Copy;", [
-  ["no deadlock", "A[] not deadlock"],
-  ["T-RC4: before the handoff the batter holds at most P3 + POLL", "A[] Batch.Holding imply Batch.x <= P3 + POLL"],
-  ["BAT's side of the batch is finished within MIX + INSP + P3 + POLL", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= MIX + INSP + P3 + POLL"],
+  ["no deadlock (weak here: Copy never stops, so `deadlock` is unreachable whatever the stations do, see the two LIMIT queries)", "A[] not deadlock"],
+  ["T-RC4: a discarded batter waited exactly T_batter + POLL = 26 polls, derived from the loop and not asserted anywhere (tight: the same query with <= 25 fails). Counted on `waited`, not on a clock: Discarded is terminal, so any clock keeps running after the batch has ended", "A[] Batch.Discarded imply Batch.waited <= T_batter + POLL"],
+  ["T-RC4: and it never waits longer than that before the handoff", "A[] Batch.Holding imply h <= T_batter + POLL"],
+  ["BAT's side of the batch is finished within 2 * (MIX + INSP) + T_batter + POLL = 44 s: one mixing cycle, one rejected cycle, and the full hold", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= 2 * (MIX + INSP) + T_batter + POLL"],
   ["T-RC6: and so well before the LOST limit", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= LOST"],
-  ["T-RC6: a batter is deposited before dosing gives the batch up", "A[] Dep.Took imply g <= LOST"],
-  ["T-RC4 after the handoff: a batter is deposited at most P3 after approval", "A[] Dep.Took imply h <= P3"],
-  ["depositing discards a queued batter that waited past P3, and dosing is not kept waiting past LOST", "A[] (Dep.Took || Dep.Expired) imply g <= LOST"],
-  ["a batter is discarded at depositing at most DEPSTART + BLOCKMAX + DEPSTART (108 s) after approval", "A[] Dep.Expired imply h <= 2 * DEPSTART + BLOCKMAX"],
+  ["T-RC4 after the handoff: a batter is deposited at most T_batter after approval", "A[] Dep.Took imply h <= T_batter"],
+  ["T-RC6: a batter is deposited before dosing gives the batch up, also with one rejection (was a FINDING before 24 Nov: 126 s)", "A[] Dep.Took imply g <= LOST"],
+  ["a batter that waited past T_batter is discarded at depositing at the latest DEPSTART + BLOCKMAX + DEPSTART = 108 s after approval (exact: h <= 107 fails)", "A[] Dep.Expired imply h <= 2 * DEPSTART + BLOCKMAX"],
   ["depositing and the discard at depositing exclude each other", "A[] not (Dep.Expired && deposited)"],
   ["the discard at depositing is reachable", "E<> Dep.Expired"],
   ["deposited and discarded exclude each other", "A[] not (Batch.Discarded && deposited)"],
   ["the discard path is reachable", "E<> Batch.Discarded"],
   ["the deposit path is reachable", "E<> Dep.Took"],
-  ["FINDING: the state copy can be stale, a batter is handed to depositing while it is stopped", "E<> (Batch.Handed && stopped)"],
+  ["every inspected batch ends, handed over or discarded", "Batch.Inspecting --> (Batch.Handed || Batch.Discarded)"],
+  ["a queued batter is always taken up or discarded in the end", "Dep.OpenQ --> (Dep.Took || Dep.Expired)"],
+  ["FINDING: the state copy can be stale, a batter is handed to depositing at a moment when it is really stopped (unreachable if the state signal arrives without delay)", "E<> handedWhileStopped"],
+  ["LIMIT: both stations can be frozen for good after a discard, which `not deadlock` above does not see", "E<> (Batch.Discarded && Dep.Open && faultDone)"],
+  ["LIMIT: and after a deposit", "E<> (Batch.Handed && Dep.Done)"],
 ]);
 
 // 4. Handover: document stored, signal may be lost, reconcile pass adopts after the grace.
