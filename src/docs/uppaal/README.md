@@ -861,3 +861,16 @@ Related documents: `docs/timing-constraints.md` (D1, which rules exist), `docs/v
 | **Crash / freeze** | The process dies (noticed at once) / the container is paused and goes silent (noticed after the keep-alive timeout). |
 | **MON** | The monitor system. |
 | **Estimated** | A value the plant does not give; chosen by the group and marked as such. |
+
+---
+
+## Optimization: how much room do the design values have?
+
+`node optimize.js` (needs `verifyta`) asks UPPAAL, by bisection, for the largest or smallest value of one
+parameter for which a set of queries stays satisfied, and writes [optimization.md](optimization.md).
+Examples (all other parameters unchanged): a Docker restart may take up to 43 s (the code assumes 30 s)
+before the 60 s recovery or the 45 s escalation is broken; BAT's ingredient request must not be repeated
+before 18 s (the code uses 20 s); the reconcile period of 5 s is exactly the largest that takes up a
+stored document within 8 s; dosing's batch-lost limit could be as low as 44 s without ever dropping a
+batch that is still alive (the code uses 120 s, which is food-safe slack, not a bound from the model).
+`sup` queries do not terminate on these models, which is why bisection is used.
