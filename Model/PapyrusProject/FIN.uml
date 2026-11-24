@@ -157,7 +157,7 @@
           <subvertex xmi:type="uml:State" xmi:id="_9-kJ9mYV5vmK-f21FijHoa" name="Awaiting Cake">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_eUUPKYbRaRs-WsWMmnSuZZ" name="wait for Cooled cake"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_cI7yMRvI8s49vjJK4QTjmZ" name="ready depanning station"/>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_kGCURLnFmf_7WHp8WMIxW7" name="record batch ID of incoming cake"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_kGCURLnFmf_7WHp8WMIxW7" name="record batch ID of incoming cake; after a restart take up handed-over cakes again (FC27)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_o5SZgOzwKrPMqvQAVdzi2E" name="Depanning">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_TtpcyJtNLuHFmtpB6lMSV_" name="separate cake from pan"/>
@@ -183,7 +183,7 @@
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_xYljEeBzWOTy3MOQ68Xh0B" name="mark cake as rejected and keep reason"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_kPEVp1YoC2jPnmtjMcnIhc" name="Deciding">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_qCW1_jwKj8rfP_NX9aMKdm" name="evaluate failed marks"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_qCW1_jwKj8rfP_NX9aMKdm" name="evaluate failed marks; 3 failed marks of the same check in a row: lock until Repair confirmed (FC24)"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="__jMarKEM3NrW7tqiLARaBD" name="collect weight, visual and metal results"/>
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_QeM-SmoSlXrox93SDdCcaL" name="forward decision to packaging or reject bin"/>
           </subvertex>
@@ -294,7 +294,7 @@
           <subvertex xmi:type="uml:State" xmi:id="_XKve_Blq7iEJD3f60n_k7y" name="Awaiting Cake">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Sx-r1TwWuLdBCkAY-qQE7C" name="wait for Passed cake"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_np_O-W4YWkhX0d5fG253YS" name="ready wrapping control"/>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_ostja6kIZEtNFs2EzsQ5UJ" name="note batch ID of cake"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_ostja6kIZEtNFs2EzsQ5UJ" name="note batch ID of cake; after a restart take up handed-over cakes again (FC27)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_aRI5HiHkHabQvWhNp9ToPc" name="Wrapping">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_AqtIRmfNZwUZb_lSilhcaC" name="wrap cake"/>
@@ -471,7 +471,7 @@
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_eocKMpyZVXpsBntOOWxg7v" name="Initial"/>
           <subvertex xmi:type="uml:State" xmi:id="_eoBNBnSD9HiLF8D8OmA0xh" name="Awaiting Washing">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_JRR12GwzE1rx6KpFuIq0rU" name="wait for free washer"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zEmmVeBCpxNroDR7jD5qAh" name="register pan at washing station"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_zEmmVeBCpxNroDR7jD5qAh" name="register pan at washing station; after a restart take up pans again and make up missing pans (FC27)"/>
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_wHIuzqNxSyHsIHpBvnffvZ" name="start washing cycle"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_ZH9KhxSU0LogUMLZ68DCpY" name="Washing">
@@ -498,7 +498,7 @@
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_1fQU9ooRGK-KP7BCNRODDj" name="take pan out of stock"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_tZ_ZpbbN918aC63pILrvxZ" name="Discarded">
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_FZgeBjoB7z186CfVgpoEAe" name="drop pan into discard bin"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_FZgeBjoB7z186CfVgpoEAe" name="drop pan into discard bin; a new pan replaces it after 30 s (pan hopper reserve 100 % of the loop)"/>
           </subvertex>
           <subvertex xmi:type="uml:FinalState" xmi:id="_rEPGnM_f41JoPmw5Ux4g6G" name="Final"/>
         </region>

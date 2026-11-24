@@ -129,18 +129,18 @@
           </transition>
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_QpKhkNEvEfGZ44KCKtLvcQ" name="Initial"/>
           <subvertex xmi:type="uml:State" xmi:id="_THm58NEvEfGZ44KCKtLvcQ" name="Idle">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_DWkiwNEyEfGZ44KCKtLvcQ" name="await incoming ingredient requests"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_DWkiwNEyEfGZ44KCKtLvcQ" name="await requests; new order every 22 s if monitor online, max 2 waiting; resend after 40 s"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="__dKBMNExEfGZ44KCKtLvcQ" name="set system state to ready"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_d0laANEvEfGZ44KCKtLvcQ" name="Scheduling_Order">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__IQ50NEyEfGZ44KCKtLvcQ" name="assign schedule ID and set order status to pending"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="__IQ50NEyEfGZ44KCKtLvcQ" name="assign schedule ID, set status pending (then released, reserved, withdrawn, held, cancelled)"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4RG0wNEyEfGZ44KCKtLvcQ" name="create new production order"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_hhS8UNEvEfGZ44KCKtLvcQ" name="Fetching_recipe_targets">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_ukqIINEzEfGZ44KCKtLvcQ" name="extract target parameters for order"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_cPLloNEzEfGZ44KCKtLvcQ" name="query recipe database"/>
           </subvertex>
-          <subvertex xmi:type="uml:State" xmi:id="_m06yENEvEfGZ44KCKtLvcQ" name="Veryfing_Inventory">
+          <subvertex xmi:type="uml:State" xmi:id="_m06yENEvEfGZ44KCKtLvcQ" name="Verifying_Inventory">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_kdmjINE0EfGZ44KCKtLvcQ" name="calculate requested versus available stock"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_hHsXQNE0EfGZ44KCKtLvcQ" name="enforce organic ingredient rule"/>
           </subvertex>
@@ -149,18 +149,18 @@
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_4mwF4NE4EfGZ44KCKtLvcQ" name="lock required ingredient quantities"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_JCk4wNExEfGZ44KCKtLvcQ" name="Holding_Order">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_bxFFoNE5EfGZ44KCKtLvcQ" name="await inventory replenishment"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_bxFFoNE5EfGZ44KCKtLvcQ" name="await restock (after 15 s)"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_YvXoINE5EfGZ44KCKtLvcQ" name="suspend active production order"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_cQ_1cNExEfGZ44KCKtLvcQ" name="Updating_Inventory">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_OzhqENE5EfGZ44KCKtLvcQ" name="compile order and recipe targets"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_OzhqENE5EfGZ44KCKtLvcQ" name="record the withdrawal"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_L3Np8NE5EfGZ44KCKtLvcQ" name="deduct withdrawn quantities from total warehouse stock"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_pexBANFiEfGZ44KCKtLvcQ" name="Waiting_For_Withdrawal">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_oG6uMNFrEfGZ44KCKtLvcQ" name="await physical ingredient retrieval"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_oG6uMNFrEfGZ44KCKtLvcQ" name="await ingredient retrieval (confirmation after 3 s)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_X-BRoNFjEfGZ44KCKtLvcQ" name="Communication_Suspended">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Qz5ToNFrEfGZ44KCKtLvcQ" name="monitor warehouse responsiveness"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_Qz5ToNFrEfGZ44KCKtLvcQ" name="monitor warehouse (timeout 2 s, test every 15 s)"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_OQC20NFrEfGZ44KCKtLvcQ" name="log WMS unresponsiveness"/>
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_UqfKsNFrEfGZ44KCKtLvcQ" name="restore warehouse communication"/>
           </subvertex>
@@ -329,9 +329,6 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_paqSAM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_trl7sM7OEfG6Z-2Eqxj-FQ" name="" client="_oVr44M7MEfG6Z-2Eqxj-FQ" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_vMl0YM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
-    <packagedElement xmi:type="uml:StateMachine" xmi:id="_exLdANCeEfG-6PPhNNbUSQ" name="StateMachine115">
-      <region xmi:type="uml:Region" xmi:id="_iJKFcNCeEfG-6PPhNNbUSQ" name="Region1"/>
-    </packagedElement>
     <packagedElement xmi:type="uml:SignalEvent" xmi:id="_iBGCsNCrEfG-6PPhNNbUSQ" name="Internal stock request" signal="_tTu0kNCrEfG-6PPhNNbUSQ"/>
     <packagedElement xmi:type="uml:Signal" xmi:id="_tTu0kNCrEfG-6PPhNNbUSQ" name="Internal stock request"/>
     <packagedElement xmi:type="uml:SignalEvent" xmi:id="_oyoEENCvEfG-6PPhNNbUSQ" name="" signal="_rFfekNCvEfG-6PPhNNbUSQ"/>

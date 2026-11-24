@@ -10,6 +10,19 @@ Everything that is not done, not verified, or not mine to decide. Items marked
 The implementation follows the diagrams where they exist. These are the places
 where the diagrams are missing, wrong, or behind the implementation.
 
+**Check of 24 Nov (what is in git):** [docs/diagram-check.md](docs/diagram-check.md) compares every Papyrus state
+machine and port list on `master` with the code. Elena reports that the diagrams were updated further on a
+computer; whatever is not pushed was not checked. Result in short:
+- **Done and consistent with the code** (apart from the gaps below): BAT dosing, mixing and handoff (incl.
+  Restoring and the waited time) and reporting, THM SM1 to SM5, FIN SM1 to SM5, the PLM state machine of PR #7,
+  and the 14 signal names on the BAT, THM, FIN and PLM ports (items 2 and 7 of this list and the batter wait).
+- **Closed the same day (checked on screen):** D1 to D6, D9, D12, D13, most of D7 and part of D10 (section 0 of the
+  check). Text of existing states was changed; the state machines of BT (1) and MON (2) are new diagrams
+  (generator in `Model/tools`).
+- **Still open (Papyrus):** D8 PLM heartbeat port, D11 the Cake Factory IBD (message bus), the drawn timer
+  transition Idle to Scheduling_Order in PLM, a "Band state change" port on BT and MON, and the deployment
+  diagram in Papyrus (the deployment view is in [docs/deployment.md](docs/deployment.md) as a diagram in the document).
+
 1. **Cake Factory IBD** is empty. Add the message bus (Sparkplug B on an MQTT
    broker) and the MON part, and connect the frame ports of the slices to the bus
 
@@ -50,8 +63,8 @@ where the diagrams are missing, wrong, or behind the implementation.
    - keep the 14 signals and the ports of BAT and THM as they are (no new port).
    **Done in the code 24 Nov (decided):** P3 counts after the handoff too: "Batter ready" carries `waited` and
    THM-DEP discards a queued batter whose total wait passes P3 (`docs/team-review.md` section 3, item 11).
-   **To do in Papyrus [person]:** BAT Mixing and Handoff sends the waited time with "Batter ready"; THM Depositing
-   discards a batter that passes P3 in the queue and sends "Batch result" "discarded". If the group chooses option A
+   **Done in Papyrus 24 Nov (PR #9):** BAT HandingOff makes the waited time available; THM SM1 `Waiting for Pan` exit
+   text and the T1 trace comment say that an aged batter is discarded ("Batch result" = discarded). If the group chooses option A
    instead (a 15th signal "Batter collected"), the code, `docs/signals.md`, the port tables,
    the Word document and the UPPAAL batter model (`gen.js`) all change.
 8. **State machines live on branches** (`state-machines-fin`,
@@ -221,33 +234,35 @@ Still to check **[person]**:
 3. The GitHub Actions pipeline has only been checked with actionlint and hadolint;
    it has not run on GitHub yet (first push shows it).
 
-## Code gaps
+## Code gaps (all settled on 24 Nov: done, or accepted with a reason)
 
-1. **Tests**: unit tests cover only the Sparkplug codec and the signal mapping; the
-   behaviour is checked by the scenarios (`docs/demo.md`), not by Go tests.
-2. **Deployment**: the pipeline pushes images to ghcr.io but has no deploy job (no
-   target machine yet).
-3. **THM resume** continues a baking pan from zone 1 (so it bakes longer), loses
-   the zone temperature offset, and treats buffered cakes as hot. A cake that was
-   being deposited at the moment of the crash is not resumed.
-4. **MON policy**: only band faults and unresponsive nodes halt or slow the band.
-   The general UC2 error flow (any error may require a halt) needs a policy table
-   once the MON document exists.
-5. **Duplicate filter** is in memory. After a receiver restart a duplicate is
-   caught only by the checks in the receivers (batch id, pan id).
-6. **PLM** keeps held orders in memory; after a PLM restart a held order is
-   noticed again when BAT repeats its request, not before.
-7. The `ctl` container (demo profile only) holds the Docker socket and can control
-   every container on the machine; it is not for production.
-8. Security is not a stated requirement and is not implemented (anonymous broker,
-   no TLS, no dashboard login).
-   (a single broker is an accepted risk).
-10. Real equipment (PLC, OPC UA, cameras) is out of scope: all machines are
-   simulated inside the services.
+The group has no real plant to match, so each gap was either closed or accepted as a limit of a design and
+analysis project. The reason is part of the entry so the report can state it.
+
+1. **Tests**: closed. The packages have unit tests (`go test ./...`, 17 packages, run in CI) and 28
+   scenarios check the behaviour against a running stack (`docs/demo.md`).
+2. **Deployment**: closed by decision. The compose file is the deployment ([docs/deployment.md](docs/deployment.md));
+   CI builds and pushes the images, there is no target machine for a deploy job.
+3. **THM resume** (a baking pan restarts at zone 1, buffered cakes come back "hot", a pan being deposited at the
+   crash is not resumed): accepted. The conservative choice is deliberate: a pan that bakes longer or a cake that
+   is cooled again is never under-baked or warm when packed (food safety). Documented in
+   `docs/team-review.md` section 3.
+4. **MON policy**: closed. The policy table is [docs/mon-policy.md](docs/mon-policy.md), read from the code; only
+   dead or silent stations and section faults halt the band.
+5. **Duplicate filter in memory**: accepted. After a receiver restart the receivers' own checks (batch id, pan id,
+   order id) make every handler idempotent, so a duplicate does no harm (`station.PanSet` takes a pan only once).
+6. **PLM held orders in memory**: accepted. A held order is noticed again when BAT repeats its request (at most
+   20 s later), and the order stays in SQL with status `held`; the UPPAAL PLM model shows BAT always gets its answer.
+7. **`ctl` holds the Docker socket**: accepted, demo profile only ([docs/security.md](docs/security.md)).
+8. **Security** not implemented: decided out of scope ([docs/security.md](docs/security.md)).
+9. A single broker is an accepted risk ([docs/scalability.md](docs/scalability.md)).
+10. **Real equipment** (PLC, OPC UA, cameras) is out of scope: all machines are simulated inside the services.
 
 ## Report
 
-1. Write the report sections that use this: the decisions (`docs/decisions.md`),
-   the signal table (`docs/signals.md`), the conformance table (section 6 of
-   `docs/decisions.md`).
-2. Contributions table and the evaluation experiment are empty in the template.
+1. **Done 24 Nov:** a draft of every section of the template, with the numbers and the references to the
+   documents, is in [docs/report-draft.md](docs/report-draft.md): problem, use case, QAS, modelling, formal
+   verification, the four evaluation subsections (with the pilot calculation), conclusion, contributions.
+2. **For the group:** related work (needs the papers you read), the authors in the template, and pasting the
+   draft into `report/GroupTemplate/conference_101719.tex`. The contributions table is filled from the git history;
+   check it.

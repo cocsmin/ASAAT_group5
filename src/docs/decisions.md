@@ -287,3 +287,14 @@ Claude, the group still has to confirm them)
 - Scalability is discussed, not built, and the numbers chosen (48 pans in the loop and 48 in reserve, 24 per batch, 16 containers,
   heartbeat 5 s) are backed by tests (`docs/scalability.md`, `internal/mon/scale_test.go`).
 - The inspector stays simulated (3 s, always good, UC4 rejects by fault injection). Assumption, no dashboard button.
+
+**24 Nov** (second part: what the implementation decides because the group delegated it)
+- Elena delegated all timing and parameter choices and the choice of failure cases to the implementation (the project is an
+  architecture and analysis exercise, there is no real plant to measure). The values in [assumptions.md](assumptions.md) and
+  `internal/timing` stand as they are, and the assumptions S8, T7 and E2 are confirmed.
+- Failure cases for the evaluation: **crash and freeze of every container** are measured (availability, THM-REQ-71 to -73,
+  270 runs); the other 26 failure cases and use cases are covered by the 28 scenarios as pass or fail, with the times they
+  produce in [demo.md](demo.md). Reason: crash and freeze are the two ways a controller stops, they are the requirement; the rest
+  are functional reactions that need a yes or no, not a statistic.
+- The hand-in names stay: project `ASAAT-cake-factory`, group `Group05`.
+- The overseer dashboard of the MON model stays in the model; the `ui` container is its simulation.

@@ -12,7 +12,8 @@ is worth a look.
 
 ## 1. Decisions waiting for the group [D]
 
-1. **The assumptions marked "Confirm" in [assumptions.md](assumptions.md)**: the Sparkplug
+1. ~~**The assumptions marked "Confirm" in [assumptions.md](assumptions.md)**~~ **Decided (24 Nov): the
+   values stay as chosen by the implementation** (Elena delegated all timing and parameter choices): the Sparkplug
    deviations (S8), the 25 s batter wait (T7), and the fault rate behind the availability
    figure (E2). S2 (the demo-only dashboard) and S4 are confirmed (9 Nov); for S4 the line
    keeps going without the monitor and only no new batches are created.
@@ -34,14 +35,16 @@ is worth a look.
 4. ~~**Pan Spacing & Position Tracking**~~ **Decided (9 Nov): dropped, removed everywhere.** It
    was never implemented. It is removed from the documents and from the feature model
    (MON-FEAT-06); what is left to remove in the diagrams is in [TODO.md](../TODO.md).
-5. **The overseer dashboard in the MON model.** The page you see is demo-only (its own
-   container). Does the real plant have an overseer UI inside MON (the model stays) or not
-   (the model needs a note)?
+5. ~~**The overseer dashboard in the MON model.**~~ **Decided (24 Nov): the model stays.** The page is
+   demo-only (the `ui` container); in the plant the overseer UI is the MON device "overseer dashboard", and
+   the `ui` container is its simulation.
 6. **The justification of the decisions already taken** (Sparkplug B on MQTT, SQL Server,
    MongoDB, Go, Docker, one container per station) has to be written in the report; the
    drafts in `communication.md`, `databases.md`, `languages.md` and `containers.md` are a
    starting point.
-7. **Which failure cases are measured** in the experiment beyond crash and freeze.
+7. ~~**Which failure cases are measured** in the experiment beyond crash and freeze.~~ **Decided (24 Nov):
+   crash and freeze of every container are measured (they are the two ways a controller stops, THM-REQ-71 to -73);
+   all other failure cases are checked as pass or fail by the 28 scenarios, not measured.**
 8. ~~**Scalability**~~ **Decided (24 Nov): a discussion, backed by small tests** for the numbers chosen
    (heartbeat load of 16 to 1 600 nodes, watchdog scan). See [scalability.md](scalability.md).
 9. ~~**Security**~~ **Decided (24 Nov): out of scope, named in the report.** The broker is anonymous, no TLS, the SQL
@@ -77,7 +80,7 @@ is worth a look.
 10. **Dashboard buttons play Maintenance**: *Mark repaired* confirms any repair; there is no
     login and no role. The `ctl` container (demo profile) can control every Docker
     container on the machine.
-11. **Hand-in workflow**: `PROJECT_NAME=ASAAT-cake-factory`, `GROUP_NUMBER=Group05` are a
+11. ~~**Hand-in workflow**~~ **Decided (24 Nov): `PROJECT_NAME=ASAAT-cake-factory`, `GROUP_NUMBER=Group05` stay** (group 5). They were a
     guess from the repository name. Please correct.
 12. **CI**: the root `Dockerfile` (Node template) was deleted, the deploy job and all
     `continue-on-error` were removed, images are pushed per image (stations, BT, MON, ui) to

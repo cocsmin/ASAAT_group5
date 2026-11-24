@@ -53,7 +53,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | T4 | Heartbeat T_hb | 5 s for every system, PLM included | Keep. Decided by the group |
 | T5 | Detection of a stopped controller | 15 s (3 x T_hb, THM-REQ-72); the MQTT keep-alive (5 s, dead after 7.5 s) is an extra and faster | Keep |
 | T6 | A container that does not restart by itself | escalated to Maintenance after 45 s (THM-REQ-73 allows 60 s) | Keep |
-| T7 | Batter that waits too long for depositing to work again is discarded | 25 s (BAT parameter P3, called T_batter in the BAT model since 13 Nov); BAT-INSP checks once a second, so 26 s; counted from approval, before and after the handoff (THM-DEP discards a queued batter too, since 24 Nov; `team-review.md`, section 3, item 11) | Confirm |
+| T7 | Batter that waits too long for depositing to work again is discarded | 25 s (BAT parameter P3, called T_batter in the BAT model since 13 Nov); BAT-INSP checks once a second, so 26 s; counted from approval, before and after the handoff (THM-DEP discards a queued batter too, since 24 Nov; `team-review.md`, section 3, item 11) | Confirmed 24 Nov (25 s, the implementation's choice: longer than the 1.5 x keep-alive of 7.5 s that a restarted station needs to be noticed, shorter than the 120 s of dosing) |
 | T8 | Retries | ingredient request repeated after 20 s; the ingredients are collected 3 s after the reservation; a held order is restocked after 15 s; order sent again after 40 s; every database call times out after 3 s; event outbox retried every second; state saved every 3 s | Keep. The test in `internal/timing` checks that they fit together |
 | T9 | Faults the system repairs by itself, injected for the demo | depositing jam 30 s; no-pan wait 4 s; recalibration 6 s; wrong speed corrected after 10 s; band sections restart 1.5 s apart | Keep |
 
@@ -68,7 +68,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | S5 | The broker is anonymous, no TLS; SQL Server uses a development password | security is not a stated quality attribute | Keep, and name it in the report as out of scope |
 | S6 | The dashboard buttons play Maintenance: anyone can confirm a repair; no login, no role | | Keep for the demo |
 | S7 | The `ctl` container (demo profile) can control every container on the machine through the Docker socket | opt-in | Keep, opt-in only |
-| S8 | Sparkplug B is used with deviations: nodes read each other's data messages directly; QoS 1 and persistent sessions for handoffs; state is repeated with the heartbeat instead of MQTT retained messages | see decisions.md section 1 | Confirm |
+| S8 | Sparkplug B is used with deviations: nodes read each other's data messages directly; QoS 1 and persistent sessions for handoffs; state is repeated with the heartbeat instead of MQTT retained messages | see decisions.md section 1 | Confirmed 24 Nov (Elena delegated the choice to the implementation, with the reasons in decisions.md section 1) |
 | S9 | Every handoff carries a message id and every event an event id, so receivers drop duplicates | not in any port description | Keep |
 | S10 | Failure injection (`Fault injection`) and `Node Control` messages exist only for the demo | outside the 14 signals | Keep |
 
@@ -77,7 +77,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | # | Assumption | Value | Recommendation |
 |---|---|---|---|
 | E1 | Availability counts the time the controller does not answer, not the time the line takes to produce again | about 1 s per crash; production recovery reported next to it | Keep |
-| E2 | Failures are random, not scheduled: every failure case has a rate per hour of operation of its container (the `PerHour` column of the fault catalog); `FAULT_RATE` multiplies all rates | 3 an hour for a wrong fill weight, 0.1 an hour for a machine that breaks, 0.1 an hour for a container crash, and so on (about 32 failures an hour over the whole factory at rate 1, most of them handled by the system itself) | Confirm. The rates are chosen, not measured; the group may change any number in `internal/model/faults.go` |
+| E2 | Failures are random, not scheduled: every failure case has a rate per hour of operation of its container (the `PerHour` column of the fault catalog); `FAULT_RATE` multiplies all rates | 3 an hour for a wrong fill weight, 0.1 an hour for a machine that breaks, 0.1 an hour for a container crash, and so on (about 32 failures an hour over the whole factory at rate 1, most of them handled by the system itself) | Confirmed 24 Nov (the values are the implementation's choice, Elena delegated it). The rates are chosen, not measured; the group may change any number in `internal/model/faults.go` |
 | E3 | Which faults are measured | every container crashing alone, the baking tunnel frozen, several stations frozen together, and a long run in which the factory fails by itself | Keep |
 | E4 | Runs | 15 per scenario for the single faults; one run of 2 hours with the random failures at twice the catalog rates (the same as 4 hours of the catalog); one machine, real speed (`SIM_SPEED=1`) | Keep |
 | E5 | THM-REQ-76 and -78 (stop new pans and react to the band within 1 s) are not measured | | Keep unmeasured unless the course asks for it |
