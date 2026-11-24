@@ -1316,7 +1316,7 @@
           <transition xmi:type="uml:Transition" xmi:id="_Q4nugX-yWkC7wr6iVPPDXA" name="T1" guard="_v88ZX2GK_k6NZrXTegxyhA" source="_Ebe9lLVW1kCBD7bvK7wESQ" target="_qsipS1OKDEiREyishxPibA">
             <ownedComment xmi:type="uml:Comment" xmi:id="_IV74oc3T10CRhzi9gIrV1g" annotatedElement="_Q4nugX-yWkC7wr6iVPPDXA"><body>Traces to: THM-REQ-02, THM-REQ-03, THM-REQ-06, THM-REQ-09</body></ownedComment>
             <ownedRule xmi:type="uml:Constraint" xmi:id="_v88ZX2GK_k6NZrXTegxyhA" name="admission open, Weight-Checker calibrated"><specification xmi:type="uml:LiteralString" xmi:id="_0alPqc-uxUC7PWUh_uFTOA" value="admission open, Weight-Checker calibrated"/></ownedRule>
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_sAEypnXrpUu2mBuGK5N-XA" name="start deposit, or discard the batter if it has waited longer than T_batter"/>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_sAEypnXrpUu2mBuGK5N-XA" name="start deposit, or discard batter past T_batter"/>
             <trigger xmi:type="uml:Trigger" xmi:id="_5rL2Z_8znUa3MOx7DhEEKQ" name="pan detected" event="_5DcvU48LRUm--d2OMwHArw"/>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_MpoADopoWUKUUoiaKMGESg" name="T2" kind="internal" source="_Ebe9lLVW1kCBD7bvK7wESQ" target="_Ebe9lLVW1kCBD7bvK7wESQ">
