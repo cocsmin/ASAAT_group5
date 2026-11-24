@@ -518,8 +518,6 @@ batch has 24 pans, so a batter that arrives early sits behind the previous batch
 
 ![Dep template](img/batter-dep.png)
 
-*(The picture was taken before 24 Nov and does not show the location `Expired` yet; open `batter.xml` in UPPAAL to see it.)*
-
 - `Open` (start) means depositing admits pans. `Blocked` means it is stopped; the invariant
   `y <= BLOCKMAX` limits that to 60 s, and the edges back need `y >= 1`. It can stop **only once**
   (`!faultDone`), from `Open` or from `OpenQ`.
