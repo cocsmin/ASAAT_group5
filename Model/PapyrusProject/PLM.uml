@@ -329,9 +329,6 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_paqSAM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_trl7sM7OEfG6Z-2Eqxj-FQ" name="" client="_oVr44M7MEfG6Z-2Eqxj-FQ" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_vMl0YM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
-    <packagedElement xmi:type="uml:StateMachine" xmi:id="_exLdANCeEfG-6PPhNNbUSQ" name="StateMachine115">
-      <region xmi:type="uml:Region" xmi:id="_iJKFcNCeEfG-6PPhNNbUSQ" name="Region1"/>
-    </packagedElement>
     <packagedElement xmi:type="uml:SignalEvent" xmi:id="_iBGCsNCrEfG-6PPhNNbUSQ" name="Internal stock request" signal="_tTu0kNCrEfG-6PPhNNbUSQ"/>
     <packagedElement xmi:type="uml:Signal" xmi:id="_tTu0kNCrEfG-6PPhNNbUSQ" name="Internal stock request"/>
     <packagedElement xmi:type="uml:SignalEvent" xmi:id="_oyoEENCvEfG-6PPhNNbUSQ" name="" signal="_rFfekNCvEfG-6PPhNNbUSQ"/>

@@ -24,11 +24,13 @@ longer text; the PLM texts were shortened after a first try ran over the box edg
 | D10 | partly | BT ports `controllerStatus`, `transportFault`, `sectionCommand`, `targetSpeed` renamed to "Machine status (heartbeat)", "Log, warning, error and discard events", "Section command", "Target speed"; MON `eventData` renamed to "Log, warning, error and discard events". The other BT and MON ports are internal and keep their names; a "Band state change" port and "Repair confirmed" are still missing |
 | D12 | yes | MON "Log Database" now has MON-FEAT-02 |
 | D13 | yes | PLM `Idle`: new order only if the monitor is online |
-| **D8** | **no** | PLM heartbeat and Repair confirmed ports: new ports need the IBD, to be drawn in Papyrus |
-| **D9** | **no** | state machines of BT and MON: new diagrams |
-| **D11** | **no** | the Cake Factory IBD (message bus and connections) |
+| D7 (rest) | yes | the empty `StateMachine115` is deleted. **Not drawn:** a transition with a timer from Idle to Scheduling_Order (the order cycle is in the text of `Idle`); a line there would cross the Fetching state |
+| D9 | yes | new Papyrus diagrams, generated and checked on screen: "BT Section Control STM" (run, slow, halt, correcting the speed, section fault) and, for MON, "MON Node Watchdog STM" (unknown, online, silent, dead, escalated) and "MON Ticket Lifecycle STM"; the generator is in `Model/tools` |
+| **D8** | **no** | PLM heartbeat port: a new port has to be drawn in the PLM IBD, not done |
+| **D11** | **no** | the Cake Factory IBD (message bus and connections): not done, it needs the layout of 15 parts |
 
-The table in section 2 is the state before these fixes.
+The table in section 2 is the state before these fixes. After them the three diagram gaps that remain are D8
+(PLM heartbeat port), D11 (Cake Factory IBD) and the drawn timer transition of D7.
 
 ## 1. Matches the code
 

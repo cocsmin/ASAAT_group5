@@ -325,6 +325,100 @@
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
     </profileApplication>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_aT1Qlo52ZvJ4SJ_IlYoh9Q" name="birth certificate"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_lBgDL1s8xdf-VEgwqBx9F-" name="birth certificate" signal="_aT1Qlo52ZvJ4SJ_IlYoh9Q"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_ESg27UraEjQcweCyEsZp14" name="no heartbeat for 3 x T_hb"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_X5xUvyp8l34HPvwn4USp-v" name="no heartbeat for 3 x T_hb" signal="_ESg27UraEjQcweCyEsZp14"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_Yde6iDQKhQHKCSwd6pUUgQ" name="heartbeat"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_e7wZOuZafqsO3OEHFb6AqK" name="heartbeat" signal="_Yde6iDQKhQHKCSwd6pUUgQ"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_GHNQ_bFxQYIbbjDR7r8adl" name="death certificate"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_GgIR3rVpFSBbQz2adVrb-v" name="death certificate" signal="_GHNQ_bFxQYIbbjDR7r8adl"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_tElCfqWvuk8AiCvGprEdBV" name="no restart after 45 s"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_kMi_xm81R3-s3jdQNYNX-d" name="no restart after 45 s" signal="_tElCfqWvuk8AiCvGprEdBV"/>
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="_6RAjrPHCrolD7eKmv0uvPc" name="MON SM1 Node Watchdog">
+      <region xmi:type="uml:Region" xmi:id="_b2gmq7exSro7OmX-MKdJi4" name="Node watchdog">
+        <transition xmi:type="uml:Transition" xmi:id="_1QQrcP1CldJWHpCLGauDjI" source="_-QTmxRNNkEDqDbIM4V18gX" target="_1pjLaxxsspUtqxlPBNWLL1">
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_9mgk6BOmHcyap4Wzfkj1qr" source="_1pjLaxxsspUtqxlPBNWLL1" target="_YgNb9KTeOSaRZYIwgnhbyG">
+          <trigger xmi:type="uml:Trigger" xmi:id="_aevZldHf5-0Rz5qg0QJlbo" name="birth certificate" event="_lBgDL1s8xdf-VEgwqBx9F-"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_ela1i_FSyPG9R3plHcyFAU" source="_YgNb9KTeOSaRZYIwgnhbyG" target="_bmGTcOXmz20PKgfvnUD-Bq">
+          <trigger xmi:type="uml:Trigger" xmi:id="_GzeZUGnThC9cWfzC63PKwo" name="no heartbeat for 3 x T_hb" event="_X5xUvyp8l34HPvwn4USp-v"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_oQ5Jxy_naqC53msQ2Wm77Q" source="_bmGTcOXmz20PKgfvnUD-Bq" target="_YgNb9KTeOSaRZYIwgnhbyG">
+          <trigger xmi:type="uml:Trigger" xmi:id="_zZfh-KTi7zjTnarVgC0Bll" name="heartbeat" event="_e7wZOuZafqsO3OEHFb6AqK"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_sNxasO_UTkW59p3YMhvYJd" source="_YgNb9KTeOSaRZYIwgnhbyG" target="_yuLMB_dAqw5wpMfufpkSJ6">
+          <trigger xmi:type="uml:Trigger" xmi:id="_8SDrzye3LWMn0MlFxab7wV" name="death certificate" event="_GgIR3rVpFSBbQz2adVrb-v"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_JxmofH0SEny54WIJOrCJdC" source="_bmGTcOXmz20PKgfvnUD-Bq" target="_yuLMB_dAqw5wpMfufpkSJ6">
+          <trigger xmi:type="uml:Trigger" xmi:id="_fi9sdXXlrn-bm-J-pdsXlY" name="death certificate" event="_GgIR3rVpFSBbQz2adVrb-v"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_4RX7Nf8cvhgYzWVJac5iex" source="_yuLMB_dAqw5wpMfufpkSJ6" target="_YgNb9KTeOSaRZYIwgnhbyG">
+          <trigger xmi:type="uml:Trigger" xmi:id="__sfTGGvXWncoL9GGUTDXAa" name="birth certificate" event="_lBgDL1s8xdf-VEgwqBx9F-"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_84zGO5L0IyRKr60zVenLdj" source="_yuLMB_dAqw5wpMfufpkSJ6" target="_3g1wgeDv4y28w1l9bA2UUK">
+          <trigger xmi:type="uml:Trigger" xmi:id="_eOeIVEo9EpG2-xKkM7gvYf" name="no restart after 45 s" event="_kMi_xm81R3-s3jdQNYNX-d"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_U2XCe-Ha2LUeINCXkJy09l" source="_3g1wgeDv4y28w1l9bA2UUK" target="_YgNb9KTeOSaRZYIwgnhbyG">
+          <effect xmi:type="uml:OpaqueBehavior" xmi:id="_quxeYDoUDSDtLj_tZHExns" name="close the container ticket"/>
+          <trigger xmi:type="uml:Trigger" xmi:id="_weS6XlV5LgExDOBnDDlUqS" name="birth certificate" event="_lBgDL1s8xdf-VEgwqBx9F-"/>
+        </transition>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_-QTmxRNNkEDqDbIM4V18gX" name="Initial"/>
+        <subvertex xmi:type="uml:State" xmi:id="_1pjLaxxsspUtqxlPBNWLL1" name="Unknown">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_SLeA0m3aFJ8FFIa1JAadjk" name="wait for a birth certificate"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_YgNb9KTeOSaRZYIwgnhbyG" name="Online">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_6jMm11mwN3GZxbF8_oXyIr" name="watch the heartbeat of the node"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_QcmhIIKO6mQ6-mSsNmgpE8" name="release the band sections halted for this node"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_bmGTcOXmz20PKgfvnUD-Bq" name="Silent">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_QB-BGlL97LUEzcG6MVERYu" name="keep the sections halted"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_rPWDKSp0iKIQP6l5I-1ct0" name="mark the node faulty (FC28), halt its band sections"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_yuLMB_dAqw5wpMfufpkSJ6" name="Dead">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_xCUyu5fFdDIgRwHN4-r1WD" name="wait for the container to restart"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_kGqUpVhPH8Otmm6Wn_2Z6i" name="halt the band sections of the node"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_3g1wgeDv4y28w1l9bA2UUK" name="Escalated">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_qtOq0C6VpsdzANbBQwlbxN" name="wait for the container to restart"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_pz65xC5f61DT8qGcEDCIcO" name="error event FC27, Maintenance ticket for the container"/>
+        </subvertex>
+      </region>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_IwI-mCIdtVZCrIRqdkWMLt" name="error event with a machine id"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_sM_VOnBpZ3br4XC586-rNO" name="error event with a machine id" signal="_IwI-mCIdtVZCrIRqdkWMLt"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_rtsIBdaq4fNZRwxAVoi0DP" name="Repair confirmed"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_VceUpfPgubhuGsDiV_jbIa" name="Repair confirmed" signal="_rtsIBdaq4fNZRwxAVoi0DP"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_DYSBjR7yMkXhbpMBovKi_p" name="container reborn"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_mUqsjmCY-7l0ZRDpD74eli" name="container reborn" signal="_DYSBjR7yMkXhbpMBovKi_p"/>
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="_86jmqtb-_ksrRNkruP2bYq" name="MON SM2 Ticket Lifecycle">
+      <region xmi:type="uml:Region" xmi:id="_pNo41UL0uss1gw7n7qYz5P" name="Ticket lifecycle">
+        <transition xmi:type="uml:Transition" xmi:id="_Sqfw47tY5VDXWZncjdFbLI" source="_P1z4SSTwvBgC3gQ0pTYObB" target="_jHhNH78dePpTRunvhhjLXK">
+          <trigger xmi:type="uml:Trigger" xmi:id="_0y0Iaa17C7sU_MYQ4vaQIz" name="error event with a machine id" event="_sM_VOnBpZ3br4XC586-rNO"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_bCpwe_anabs6MjmUoOV8k6" source="_jHhNH78dePpTRunvhhjLXK" target="_10OoYSlrP8fD9ESjBmD2EY">
+          <trigger xmi:type="uml:Trigger" xmi:id="_NHVKVFp7BHLF-Q8ECP--b9" name="Repair confirmed" event="_VceUpfPgubhuGsDiV_jbIa"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_6VtK0mzn704DtyIvvUreCb" guard="_1hVPwiF4iCyjCxuWiA3pF_" source="_jHhNH78dePpTRunvhhjLXK" target="_10OoYSlrP8fD9ESjBmD2EY">
+          <ownedRule xmi:type="uml:Constraint" xmi:id="_1hVPwiF4iCyjCxuWiA3pF_" name="container ticket">
+            <specification xmi:type="uml:LiteralString" xmi:id="_IxwZXI5AuA0XIL3SR9WEez" value="container ticket"/>
+          </ownedRule>
+          <trigger xmi:type="uml:Trigger" xmi:id="_QwdodvCLizJ4K87B8mRriO" name="container reborn" event="_mUqsjmCY-7l0ZRDpD74eli"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_LzRZlmcTn9JRIMXQsiKbWX" source="_10OoYSlrP8fD9ESjBmD2EY" target="_kVcopiBnqmhMOHoYIc6Dc_">
+        </transition>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_P1z4SSTwvBgC3gQ0pTYObB" name="Initial"/>
+        <subvertex xmi:type="uml:State" xmi:id="_jHhNH78dePpTRunvhhjLXK" name="Open">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_b6jlY-Eod77PT3kldIhhIt" name="show the ticket on the dashboard"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_bFSopT4PBw_0q-qnJZGdqC" name="open a ticket for the machine, one open ticket per machine"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_10OoYSlrP8fD9ESjBmD2EY" name="Closed">
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_WsPtJIa4LN_cRaqRC797h6" name="close the ticket"/>
+        </subvertex>
+        <subvertex xmi:type="uml:FinalState" xmi:id="_kVcopiBnqmhMOHoYIc6Dc_" name="Final"/>
+      </region>
+    </packagedElement>
   </uml:Model>
   <Blocks:Block xmi:id="_7cIFEMSWEfG8fKg8yLcw1w" base_Class="_7b6psMSWEfG8fKg8yLcw1w"/>
   <Blocks:Block xmi:id="_FRfnsMSXEfG8fKg8yLcw1w" base_Class="_FRbWQMSXEfG8fKg8yLcw1w"/>

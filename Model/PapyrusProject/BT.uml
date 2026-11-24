@@ -286,6 +286,87 @@
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
     </profileApplication>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_grZEgUGkhwu43RX-x8Sl1m" name="Section command"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_zQeCMUC-L2Ykou03xY8HTr" name="Section command" signal="_grZEgUGkhwu43RX-x8Sl1m"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_5PDyuN8xVaOYWFetTs4C3U" name="drive stops (FC19)"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_zaqS6s-zyFZ_Q8O0fjghC2" name="drive stops (FC19)" signal="_5PDyuN8xVaOYWFetTs4C3U"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_2L0d8MlVldUwOrqCUIeB8Y" name="Repair confirmed"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_wRo02SxGTLUI6FwM_rrRbN" name="Repair confirmed" signal="_2L0d8MlVldUwOrqCUIeB8Y"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_Dz5slgOuvmdgn1MZlCPNIK" name="speed differs from target"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_5fSP4NV6jqTzXc0llldy2c" name="speed differs from target" signal="_Dz5slgOuvmdgn1MZlCPNIK"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_oP30OSFP2v7qZLDlbEc28A" name="speed back in range"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_olStSEiITIKXMKm87df99G" name="speed back in range" signal="_oP30OSFP2v7qZLDlbEc28A"/>
+    <packagedElement xmi:type="uml:Signal" xmi:id="_x8y8qqbntU0sfoxKJVbJEO" name="correction fails"/>
+    <packagedElement xmi:type="uml:SignalEvent" xmi:id="_2fVhIHGRLq495t8P3ILU8k" name="correction fails" signal="_x8y8qqbntU0sfoxKJVbJEO"/>
+    <packagedElement xmi:type="uml:StateMachine" xmi:id="_DB3TRaUKTw197q9nR2Wqom" name="BT SM1 Section Control">
+      <region xmi:type="uml:Region" xmi:id="_1fYj95qXZbOOfw6OPkM9jg" name="Section control">
+        <transition xmi:type="uml:Transition" xmi:id="_kZAUeazQd9_0eURgBo0KW-" source="_akmEKdHKvP8LkApfuvEQZS" target="_fHfdTdMN6E2_z_S57mi-b_">
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_BELTGeCRFG3hptukzAFmt8" guard="_uXpWoBdsDKXJPhRwqCXfG_" source="_fHfdTdMN6E2_z_S57mi-b_" target="_RzwAsBkWFXV_7NRuzb1_aw">
+          <ownedRule xmi:type="uml:Constraint" xmi:id="_uXpWoBdsDKXJPhRwqCXfG_" name="slow">
+            <specification xmi:type="uml:LiteralString" xmi:id="__Etk8if5OZ1-qWeWv0GNcU" value="slow"/>
+          </ownedRule>
+          <trigger xmi:type="uml:Trigger" xmi:id="_rQ9AqOt1CJKzCI3r31SIQS" name="Section command" event="_zQeCMUC-L2Ykou03xY8HTr"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_yqVK9utEY_gC99hslj2lw9" guard="_4w4Rx6t1Wi7w8T6qWcVztb" source="_RzwAsBkWFXV_7NRuzb1_aw" target="_fHfdTdMN6E2_z_S57mi-b_">
+          <ownedRule xmi:type="uml:Constraint" xmi:id="_4w4Rx6t1Wi7w8T6qWcVztb" name="run">
+            <specification xmi:type="uml:LiteralString" xmi:id="_i1F8XO2qm6MNfOuavBwqqY" value="run"/>
+          </ownedRule>
+          <trigger xmi:type="uml:Trigger" xmi:id="_UtAeL3Je_7vAH20v2Thxje" name="Section command" event="_zQeCMUC-L2Ykou03xY8HTr"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_48crsIf-4r9kO1XVO9TCB-" source="_fHfdTdMN6E2_z_S57mi-b_" target="_X5Ca1gAE71PUlKegUzo6Mf">
+          <trigger xmi:type="uml:Trigger" xmi:id="_V-b4Vx7Z5HGN0maWNWtYSF" name="drive stops (FC19)" event="_zaqS6s-zyFZ_Q8O0fjghC2"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_rIS_Dn_OYjWu8E43a6mVEf" source="_X5Ca1gAE71PUlKegUzo6Mf" target="_fHfdTdMN6E2_z_S57mi-b_">
+          <trigger xmi:type="uml:Trigger" xmi:id="_j18zWe-Zrxg-MMezCi6ZR8" name="Repair confirmed" event="_wRo02SxGTLUI6FwM_rrRbN"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_BTbHeGzXOeNjvR9DmrKzox" source="_fHfdTdMN6E2_z_S57mi-b_" target="_BSEpXxjF9GhqZfmJaLwnWL">
+          <trigger xmi:type="uml:Trigger" xmi:id="_s7d04N5aDEMQ8-X5a2STtW" name="speed differs from target" event="_5fSP4NV6jqTzXc0llldy2c"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_2eZxhMpMbMhnDw2DaUGLhL" source="_BSEpXxjF9GhqZfmJaLwnWL" target="_fHfdTdMN6E2_z_S57mi-b_">
+          <trigger xmi:type="uml:Trigger" xmi:id="_Pd-DfqdaXP6z59c3Hu9CKl" name="speed back in range" event="_olStSEiITIKXMKm87df99G"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_TnxME8ApegDfGrlgMp70Ot" source="_BSEpXxjF9GhqZfmJaLwnWL" target="_X5Ca1gAE71PUlKegUzo6Mf">
+          <trigger xmi:type="uml:Trigger" xmi:id="_FjTMahjaSXDKtgFHCg-rF7" name="correction fails" event="_2fVhIHGRLq495t8P3ILU8k"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_vgw09yk17kV9LMYhR94lLM" guard="_B8uUMGt2_n3NLA3G_TGehO" source="_fHfdTdMN6E2_z_S57mi-b_" target="_-Qa45uvPuXpB4H8X4YiB0a">
+          <ownedRule xmi:type="uml:Constraint" xmi:id="_B8uUMGt2_n3NLA3G_TGehO" name="halt">
+            <specification xmi:type="uml:LiteralString" xmi:id="_JshbKxRiKspNHWUbM4hTZz" value="halt"/>
+          </ownedRule>
+          <trigger xmi:type="uml:Trigger" xmi:id="_t-i6Mfz-bw4NFkE1jOv4cP" name="Section command" event="_zQeCMUC-L2Ykou03xY8HTr"/>
+        </transition>
+        <transition xmi:type="uml:Transition" xmi:id="_mCDwpdTv-zOc2mER17MYZW" guard="_gq3os4NqvbtJ9rwKdpH7vO" source="_-Qa45uvPuXpB4H8X4YiB0a" target="_fHfdTdMN6E2_z_S57mi-b_">
+          <ownedRule xmi:type="uml:Constraint" xmi:id="_gq3os4NqvbtJ9rwKdpH7vO" name="run, owner is back">
+            <specification xmi:type="uml:LiteralString" xmi:id="_goM7HNZyfis3ZfQI2lsDZu" value="run, owner is back"/>
+          </ownedRule>
+          <trigger xmi:type="uml:Trigger" xmi:id="_yTC2c7L4Skkv-35gUIOwH5" name="Section command" event="_zQeCMUC-L2Ykou03xY8HTr"/>
+        </transition>
+        <subvertex xmi:type="uml:Pseudostate" xmi:id="_akmEKdHKvP8LkApfuvEQZS" name="Initial"/>
+        <subvertex xmi:type="uml:State" xmi:id="_fHfdTdMN6E2_z_S57mi-b_" name="Running">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_2RwfriKmrsxIPD4T5jdOHM" name="move pans at the target speed"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_xhC6tyWIJOF2W9JOug4oWl" name="set the section to the target speed"/>
+          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_gxYkdFKb7WpHnEvnHYd-Z2" name="publish Band state change"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_RzwAsBkWFXV_7NRuzb1_aw" name="Slowed">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_-DrKCxhKYktp6Y2KIv1dRG" name="move pans at reduced speed; a Section command may lead to any state"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_dMZ5k-SmPwGuXnrDOSz26T" name="set the reduced section speed"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_X5Ca1gAE71PUlKegUzo6Mf" name="Section Fault">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_OyGjzKTjPfl8mvZWDfMJ8n" name="wait for Repair confirmed"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_XtGilVnY8NIIyI5XinGxFu" name="halt every section before it, publish error event and ticket bt-section-N (FC19)"/>
+          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_I-lGgoFk-WW7Mc9l4sBVQC" name="run the section again"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_BSEpXxjF9GhqZfmJaLwnWL" name="Correcting">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_-LedxGppwdbwS111Hg7Jja" name="request the speed correction"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_OGApo9rhHEzoEnO90bBIXd" name="note the wrong speed (FC20)"/>
+        </subvertex>
+        <subvertex xmi:type="uml:State" xmi:id="_-Qa45uvPuXpB4H8X4YiB0a" name="Halted">
+          <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_SuOjDlkUN4azjlZkiZVTjL" name="finish the pans inside, take no new pans"/>
+          <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UbItgbSH6zUEbV5rR2Kgdt" name="halt this section and every section before it"/>
+          <exit xmi:type="uml:OpaqueBehavior" xmi:id="_MkXlPLEXI4Zw90-2W1YCDt" name="restart the sections before it one by one, 1.5 s apart"/>
+        </subvertex>
+      </region>
+    </packagedElement>
   </uml:Model>
   <Blocks:Block xmi:id="_rh_68cSnEfG8fKg8yLcw1w" base_Class="_rh_68MSnEfG8fKg8yLcw1w"/>
   <Blocks:Block xmi:id="_Bnt04cSoEfG8fKg8yLcw1w" base_Class="_Bnt04MSoEfG8fKg8yLcw1w"/>
