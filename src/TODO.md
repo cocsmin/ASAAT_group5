@@ -10,10 +10,16 @@ Everything that is not done, not verified, or not mine to decide. Items marked
 The implementation follows the diagrams where they exist. These are the places
 where the diagrams are missing, wrong, or behind the implementation.
 
-**Status 24 Nov:** Elena reports that all open diagram items below are now updated in the Papyrus models
-(not re-checked item by item in this file). Done and seen on screen: BAT "Mixing and Handoff Behaviour" (waited
-time carried to THM, re-laid out) and THM SM1 Depositing (aged batter discarded), PR #9. Delete the items that the
-group has checked.
+**Check of 24 Nov (what is in git):** [docs/diagram-check.md](docs/diagram-check.md) compares every Papyrus state
+machine and port list on `master` with the code. Elena reports that the diagrams were updated further on a
+computer; whatever is not pushed was not checked. Result in short:
+- **Done and consistent with the code:** all of BAT (dosing, mixing and handoff incl. Restoring and the waited
+  time, reporting), THM SM1 to SM5, FIN SM1 to SM5, the PLM state machine of PR #7, the 14 signal names on the
+  BAT, THM, FIN and PLM ports (items 2, 5-BAT, 7 of this list and the batter wait are done).
+- **Still behind the code (13 gaps, D1 to D13 in the check):** pan replacement and hopper reserve (FIN SM4),
+  FC24 lockout (FIN SM1), FC7 jam stop reason (THM SM1), 120 s lost batch (BAT dosing), where BAT holds, FC27
+  recovery in THM and FIN, the open PLM items, PLM ports (heartbeat, repair), state machines of BT and MON,
+  BT and MON port names, the empty Cake Factory IBD, MON-FEAT-06 in MON, the Monitor gate in PLM.
 
 1. **Cake Factory IBD** is empty. Add the message bus (Sparkplug B on an MQTT
    broker) and the MON part, and connect the frame ports of the slices to the bus
