@@ -238,7 +238,7 @@ Still to check **[person]**:
 The group has no real plant to match, so each gap was either closed or accepted as a limit of a design and
 analysis project. The reason is part of the entry so the report can state it.
 
-1. **Tests**: closed. The packages have unit tests (`go test ./...`, about 20 packages, run in CI) and 28
+1. **Tests**: closed. The packages have unit tests (`go test ./...`, 17 packages, run in CI) and 28
    scenarios check the behaviour against a running stack (`docs/demo.md`).
 2. **Deployment**: closed by decision. The compose file is the deployment ([docs/deployment.md](docs/deployment.md));
    CI builds and pushes the images, there is no target machine for a deploy job.
