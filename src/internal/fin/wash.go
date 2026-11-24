@@ -78,7 +78,7 @@ func (f *Wash) seedPans(count string, reservePercent int) {
 			if no > maxNo {
 				maxNo = no
 			}
-			if p.Status != "discarded" {
+			if !(p.Status == "discarded" && p.Station == "FIN-Washing") { // a pan diverted at THM is still on its way to washing
 				active++
 			}
 		}

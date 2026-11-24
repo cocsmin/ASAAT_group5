@@ -126,13 +126,14 @@ func (e *env) lastEventID() int64 {
 
 func (e *env) pans() (int, map[string]int) {
 	var s struct {
-		Total    int            `json:"total"`
-		ByStatus map[string]int `json:"byStatus"`
+		Total     int            `json:"total"`
+		ByStatus  map[string]int `json:"byStatus"`
+		SortedOut int            `json:"sortedOut"`
 	}
 	_ = e.get("/api/pans/summary", &s)
-	// A pan sorted out as damaged (UC12) stays as a document with status "discarded" and a new pan
+	// A pan sorted out as damaged (UC12) stays as a document (status "discarded" at FIN-Washing) and a new pan
 	// replaces it after replaceDelay (30 s): count the pans in service, so the replacement keeps the number.
-	return s.Total - s.ByStatus["discarded"], s.ByStatus
+	return s.Total - s.SortedOut, s.ByStatus
 }
 
 func (e *env) gauge(node, name string) int64 {

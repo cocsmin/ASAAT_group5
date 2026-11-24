@@ -929,7 +929,7 @@
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UqvpJ_luz_HTC4U-aw8F2R" name="schedule a further mixing cycle"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_Z35VX_KjP1L6O1j476-Ir2" name="HandingOff">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_g245sITH68Ca7gaT3KAQvO" name="make the batch and its batch ID available to Thermal Processing"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_g245sITH68Ca7gaT3KAQvO" name="make the batch, its batch ID and the time it has already waited available to Thermal Processing"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_Uorn4YKLrXfJPxMES6Yl4V" name="start the batter waiting timer"/>
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_nYVD9JSqFLdihu_KuqOy81" name="stop the waiting timer"/>
           </subvertex>
