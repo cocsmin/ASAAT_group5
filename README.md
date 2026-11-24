@@ -1,3 +1,45 @@
+# ASAAT Group 5: cake factory architecture and implementation
+
+## Group 5 project: how to run and review it
+
+A medium-sized cake factory modelled as six systems (batter preparation, thermal
+processing, finishing and packaging, band transport, line monitoring and health,
+production and logistics). The architecture is implemented as a running simulation in
+Go: six services talking Sparkplug B over an MQTT broker, SQL Server and MongoDB for
+data, Docker for deployment, and a live dashboard that shows the flow of cakes and what
+happens when something goes wrong. The main quality attribute is availability.
+
+**Run it** (needs Docker Desktop; about 1 minute after the first build):
+
+```bash
+cd src
+docker compose --profile demo up -d --build
+```
+
+Then open <http://localhost:8080>. Stop with `docker compose --profile demo down`.
+Full instructions, options and troubleshooting: [src/README.md](src/README.md).
+
+**What to look at**
+
+| If you want to see | Go to |
+|---|---|
+| the factory running, failures injected, parts switched off | the dashboard, cards *Live line*, *Inject a failure case*, *Components*, *Test scenarios* |
+| a 5-minute live demo script | [src/docs/demo.md](src/docs/demo.md) |
+| all 28 failure cases of the report and how each is triggered | [src/docs/failure-cases.md](src/docs/failure-cases.md) |
+| the architecture decisions (messaging, databases, containers, languages) | [src/docs/decisions.md](src/docs/decisions.md) |
+| the 14 signals between systems | [src/docs/signals.md](src/docs/signals.md) |
+| the exercise 6 write-ups (communication, containers, languages, databases with ER diagram) | [communication](src/docs/communication.md), [containers](src/docs/containers.md), [languages](src/docs/languages.md), [databases](src/docs/databases.md) |
+| the availability experiment (exercise 7): design and data | [src/docs/experiment.md](src/docs/experiment.md), [data](src/docs/experiment-results.csv) |
+| the automated checks | `cd src && go run ./cmd/scenario all`; the CI pipeline in [.github/workflows/cicd.yml](.github/workflows/cicd.yml) runs them |
+| what is still open or must be updated in the diagrams | [src/TODO.md](src/TODO.md) |
+| every assumption the simulation makes (values, times, architecture, experiment) | [src/docs/assumptions.md](src/docs/assumptions.md) |
+| everything odd, unfixed, decided without the group or still to debate (time constraints too) | [src/docs/team-review.md](src/docs/team-review.md) |
+| the models (Papyrus, feature model, documents) | [Model/](Model/) |
+
+The rest of this file is the course template README.
+
+---
+
 # Advanced Software Architecture and Analysis Portfolio Template
 
 - [Introduction](#introduction)

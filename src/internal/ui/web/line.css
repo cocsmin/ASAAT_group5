@@ -1,0 +1,61 @@
+/* Live line picture (see line.js). Colours come from the page's theme variables. */
+#line-card .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;color:var(--muted);font-size:11.5px}
+#line-card .legend span{display:inline-flex;align-items:center;gap:6px}
+#line-card .legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+#nodechips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+#lineviz{width:100%;height:auto;display:block;overflow:visible}
+.vz-title{font:700 12px system-ui,sans-serif;fill:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.vz-note{font:11px system-ui,sans-serif;fill:var(--muted);font-style:italic}
+
+/* stations */
+.vz-box{fill:var(--panel);stroke:var(--line);stroke-width:1.5}
+.vz-name{font:650 12.5px system-ui,sans-serif;fill:var(--ink)}
+.vz-sub{font:11px system-ui,sans-serif;fill:var(--muted)}
+.vz-stripe{fill:var(--idle)}
+.vz-stripe.g-PLM{fill:#6b7cff}.vz-stripe.g-BAT{fill:#d79a1f}.vz-stripe.g-THM{fill:#e2683c}.vz-stripe.g-FIN{fill:#2fa38a}.vz-stripe.g-BT{fill:#9a6bd1}
+.vz-st{transition:opacity .3s}
+.st-ok .vz-box{stroke:var(--ok)}
+.st-idle .vz-box{stroke:var(--idle)}
+.st-warn .vz-box{stroke:var(--warn);fill:var(--warn-bg)} .st-warn .vz-sub{fill:var(--warn);font-weight:600}
+.st-bad .vz-box{stroke:var(--bad);fill:var(--bad-bg);stroke-width:2.5;animation:vz-pulse 1.1s ease-in-out infinite}
+.st-bad .vz-sub{fill:var(--bad);font-weight:700}
+.st-down .vz-box{stroke:var(--bad);fill:var(--bad-bg);stroke-dasharray:6 4;stroke-width:2.5;animation:vz-pulse 1.1s ease-in-out infinite}
+.st-down .vz-sub{fill:var(--bad);font-weight:700}
+.st-off{opacity:.55} .st-off .vz-box{stroke-dasharray:3 4}
+.st-ok.busy .vz-box{stroke-width:2.5;filter:drop-shadow(0 0 5px color-mix(in srgb,var(--ok) 55%,transparent))}
+@keyframes vz-pulse{50%{stroke-opacity:.35}}
+.vz-badge circle{fill:var(--accent)} .vz-badge text{fill:#fff;font:700 11px ui-monospace,monospace}
+.vz-bang circle{fill:var(--bad)} .vz-bang text{fill:#fff;font:800 13px system-ui,sans-serif}
+.vz-zone rect{fill:var(--bg);stroke:var(--line)} .vz-zone text{font:600 11px ui-monospace,monospace;fill:var(--ink)}
+.vz-zone.z-warn rect{fill:var(--warn-bg);stroke:var(--warn)} .vz-zone.z-bad rect{fill:var(--bad-bg);stroke:var(--bad)}
+.vz-zone.z-bad text{fill:var(--bad)}
+
+/* conveyor */
+.vz-rail{fill:none;stroke:var(--line);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.vz-seg.run .vz-rail{stroke:color-mix(in srgb,var(--ok) 35%,var(--line))}
+.vz-seg.slow .vz-rail{stroke:color-mix(in srgb,var(--warn) 55%,var(--line))}
+.vz-seg.halt .vz-rail{stroke:color-mix(in srgb,var(--bad) 45%,var(--line))}
+.vz-seg.off .vz-rail{stroke:var(--line);stroke-dasharray:2 6}
+.vz-seg.buf .vz-rail{stroke-dasharray:4 5}
+.vz-dot{offset-rotate:0deg;animation:vz-travel linear infinite;animation-duration:var(--d,4s);fill:#f0a93b}
+.vz-seg.batter .vz-dot{fill:#f3d98a}
+.vz-seg.pan .vz-dot{fill:var(--idle)}
+.vz-seg.cake .vz-dot{fill:#c9793a}
+.vz-seg.slow .vz-dot{animation-duration:calc(var(--d,4s) * 2.4)}
+.vz-seg.halt .vz-dot,.vz-seg.off .vz-dot{animation-play-state:paused;opacity:.3}
+@keyframes vz-travel{from{offset-distance:0%}to{offset-distance:100%}}
+
+/* band sections */
+.vz-band rect{fill:var(--ok)} .vz-band.b-slow rect{fill:var(--warn)} .vz-band.b-halt rect{fill:var(--idle)} .vz-band.b-fault rect{fill:var(--bad)} .vz-band.b-off rect{fill:var(--idle);opacity:.4}
+.vz-band rect{opacity:.85}
+.vz-bandl{font:600 10px ui-monospace,monospace;fill:var(--muted);text-anchor:end}
+
+/* short messages */
+.vz-flash{font:800 14px system-ui,sans-serif;animation:vz-rise 1.6s ease-out forwards;pointer-events:none}
+.vz-flash.bad{fill:var(--bad)} .vz-flash.good{fill:var(--ok)}
+@keyframes vz-rise{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-26px)}}
+@media (prefers-reduced-motion: reduce){.vz-dot,.st-bad .vz-box,.st-down .vz-box{animation:none}}
+
+.vz-pan{pointer-events:all}
+.vz-pan rect{stroke:rgba(0,0,0,.35);stroke-width:.8}
+.vz-pan text{font:600 7px ui-monospace,monospace;fill:#1b1f27;pointer-events:none}

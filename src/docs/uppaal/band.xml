@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<nta>
+<declaration>const int N = 5;          // sections S1..S5, index 0 is the most upstream
+const int HOP = 1;        // T-RC3: every section reacts within 1 s
+const int RDMIN = 1, RDMAX = 30; // owner restart, estimated
+typedef int[0,N-1] id_t;
+chan halt[N];
+broadcast chan stop[N+1];   // stop[N] is the sink of the most upstream section
+broadcast chan release;
+bool ownerUp[N] = {true,true,true,true,true};
+bool faulted = false, released = false;
+int hk = 0;               // the section whose owner failed
+int nstopped = 0;
+clock t;
+</declaration>
+<template>
+<name>Section</name>
+<parameter>const id_t i</parameter>
+<declaration>clock x;</declaration>
+<location id="Section_Running" x="300" y="0"><name x="280" y="18">Running</name></location>
+<location id="Section_Pass" x="-150" y="173"><name x="-170" y="191">Pass</name><label kind="invariant" x="-170" y="209">x &lt;= HOP</label></location>
+<location id="Section_Stopped" x="-150" y="-173"><name x="-170" y="-155">Stopped</name></location>
+<init ref="Section_Running"/>
+<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="13" y="-10">halt[i]?</label><label kind="assignment" x="13" y="6">x = 0</label><nail x="53" y="30"/></transition>
+<transition><source ref="Section_Running"/><target ref="Section_Pass"/><label kind="synchronisation" x="63" y="151">stop[i]?</label><label kind="assignment" x="63" y="167">x = 0</label><nail x="97" y="143"/></transition>
+<transition><source ref="Section_Pass"/><target ref="Section_Stopped"/><label kind="synchronisation" x="-146" y="-16">stop[i&gt;0?i-1:N]!</label><label kind="assignment" x="-146" y="0">nstopped++</label></transition>
+<transition><source ref="Section_Stopped"/><target ref="Section_Running"/><label kind="synchronisation" x="17" y="-70">release?</label><label kind="assignment" x="17" y="-54">nstopped--</label></transition>
+</template>
+<template>
+<name>Env</name>
+<declaration></declaration>
+<location id="Env_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
+<location id="Env_Down" x="-150" y="173"><name x="-170" y="191">Down</name><label kind="invariant" x="-170" y="209">t &lt;= RDMAX</label></location>
+<location id="Env_Back" x="-150" y="-173"><name x="-170" y="-155">Back</name></location>
+<init ref="Env_Idle"/>
+<transition><source ref="Env_Idle"/><target ref="Env_Down"/><label kind="select" x="-98" y="157">k : id_t</label><label kind="synchronisation" x="-98" y="173">halt[k]!</label><label kind="assignment" x="-98" y="189">hk = k, ownerUp[k] = false, faulted = true, t = 0</label></transition>
+<transition><source ref="Env_Down"/><target ref="Env_Back"/><label kind="guard" x="-146" y="-16">t &gt;= RDMIN</label><label kind="assignment" x="-146" y="0">ownerUp[hk] = true</label></transition>
+</template>
+<template>
+<name>MON</name>
+<declaration></declaration>
+<location id="MON_Idle" x="300" y="0"><name x="280" y="18">Idle</name></location>
+<location id="MON_Done" x="-300" y="0"><name x="-320" y="18">Done</name></location>
+<init ref="MON_Idle"/>
+<transition><source ref="MON_Idle"/><target ref="MON_Done"/><label kind="guard" x="-188" y="-52">faulted &amp;&amp; ownerUp[hk] &amp;&amp; nstopped == hk + 1</label><label kind="synchronisation" x="-188" y="-36">release!</label><label kind="assignment" x="-188" y="-20">released = true</label></transition>
+</template>
+<template>
+<name>Tick</name>
+<declaration></declaration>
+<location id="Tick_On" x="300" y="0"><name x="280" y="18">On</name></location>
+<init ref="Tick_On"/>
+<transition><source ref="Tick_On"/><target ref="Tick_On"/><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
+</template>
+<system>system Section, Env, MON, Tick;</system>
+</nta>

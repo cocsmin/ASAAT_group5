@@ -19,6 +19,12 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_5EGJYMBGEfGiqthpeiudKA">
       <importedPackage xmi:type="uml:Model" href="THM.uml#_XNJflI6ZUUm27gAMsm_S8Q"/>
     </packageImport>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_eXKMwNMKEfGVktM5bqmNpQ">
+      <importedPackage xmi:type="uml:Model" href="MON.uml#_tFpuwMSWEfG8fKg8yLcw1w"/>
+    </packageImport>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_trLJYNMKEfGVktM5bqmNpQ">
+      <importedPackage xmi:type="uml:Model" href="BT.uml#_tFpuwMSWEfG8fKg8yLcw1w"/>
+    </packageImport>
     <packagedElement xmi:type="uml:Class" xmi:id="_4ivN8MA0EfGhFcn1z0k66Q" name="Cake Factory">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_dNAWcMA1EfGhFcn1z0k66Q" name="bat" aggregation="composite" association="_dM9TIMA1EfGhFcn1z0k66Q">
         <type xmi:type="uml:Class" href="BAT.uml#_SONHJDr6YZnEzTIGyQROVL"/>
@@ -39,6 +45,22 @@
         <type xmi:type="uml:Class" href="THM.uml#_ymoUSNakSkmvqMfI-mQ32A"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_cBOjYMCDEfGUWMgM8J-Rhw" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cBPKcMCDEfGUWMgM8J-Rhw" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_JWnVsNMLEfGVktM5bqmNpQ" name="band transport" aggregation="composite" association="_JWUawNMLEfGVktM5bqmNpQ">
+        <type xmi:type="uml:Class" href="BT.uml#_rh_68MSnEfG8fKg8yLcw1w"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Nfq1wNMLEfGVktM5bqmNpQ" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NfvHMNMLEfGVktM5bqmNpQ" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_PQmn49MLEfGVktM5bqmNpQ" name="line monitoring &amp; health (mon)" aggregation="composite" association="_PQmn4NMLEfGVktM5bqmNpQ">
+        <type xmi:type="uml:Class" href="MON.uml#_7b6psMSWEfG8fKg8yLcw1w"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ru3aENMLEfGVktM5bqmNpQ" name="LiteralInteger1" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ru3aEdMLEfGVktM5bqmNpQ" name="LiteralUnlimitedNatural1" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_o4pZENMLEfGVktM5bqmNpQ" name="band Transport" aggregation="composite">
+        <type xmi:type="uml:Class" href="BT.uml#_rh_68MSnEfG8fKg8yLcw1w"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_vLblwNMLEfGVktM5bqmNpQ" name="line Monitoring &amp; Health (MON)" aggregation="composite">
+        <type xmi:type="uml:Class" href="MON.uml#_7b6psMSWEfG8fKg8yLcw1w"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Association" xmi:id="_dM9TIMA1EfGhFcn1z0k66Q" memberEnd="_dNAWcMA1EfGhFcn1z0k66Q _dNAWc8A1EfGhFcn1z0k66Q">
@@ -64,6 +86,18 @@
         <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_InbUYcBHEfGiqthpeiudKA" key="nature" value="UML_Nature"/>
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_IndwosBHEfGiqthpeiudKA" name="cake factory" type="_4ivN8MA0EfGhFcn1z0k66Q" association="_InXqAMBHEfGiqthpeiudKA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_JWUawNMLEfGVktM5bqmNpQ" memberEnd="_JWnVsNMLEfGVktM5bqmNpQ _JWoj0dMLEfGVktM5bqmNpQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_JWmHkNMLEfGVktM5bqmNpQ" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_JWmHkdMLEfGVktM5bqmNpQ" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_JWoj0dMLEfGVktM5bqmNpQ" name="cake factory" type="_4ivN8MA0EfGhFcn1z0k66Q" association="_JWUawNMLEfGVktM5bqmNpQ"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_PQmn4NMLEfGVktM5bqmNpQ" memberEnd="_PQmn49MLEfGVktM5bqmNpQ _PQmn5tMLEfGVktM5bqmNpQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_PQmn4dMLEfGVktM5bqmNpQ" source="org.eclipse.papyrus">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_PQmn4tMLEfGVktM5bqmNpQ" key="nature" value="UML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_PQmn5tMLEfGVktM5bqmNpQ" name="cake factory" type="_4ivN8MA0EfGhFcn1z0k66Q" association="_PQmn4NMLEfGVktM5bqmNpQ"/>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_giQ-4MAxEfGAG8Ad5GAfjQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_giWecMAxEfGAG8Ad5GAfjQ" source="http://www.eclipse.org/uml2/2.0.0/UML">

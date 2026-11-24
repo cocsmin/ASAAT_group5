@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cake Factory Control</title>
+<link rel="stylesheet" href="line.css">
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2230; --muted:#667085; --line:#e3e6ec;
+  --ok:#1f9d63; --ok-bg:#e6f6ee; --warn:#c77d0a; --warn-bg:#fff3dc; --bad:#d3372f; --bad-bg:#fde9e7;
+  --idle:#8a93a5; --idle-bg:#eef0f4; --accent:#2f5bea; --shadow:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#10131a; --panel:#181c26; --ink:#e8ebf2; --muted:#98a1b3; --line:#2a3040;
+    --ok:#3ccf8a; --ok-bg:#12332a; --warn:#f0a93b; --warn-bg:#3a2d12; --bad:#ff6b61; --bad-bg:#3d1a19;
+    --idle:#7d869a; --idle-bg:#222836; --accent:#7b9bff; --shadow:none; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:16px;padding:14px 24px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+h1{font-size:18px;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:12px}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:4px 11px;border-radius:999px;font-weight:600;font-size:12px;background:var(--idle-bg);color:var(--idle)}
+.pill i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.pill.ok{background:var(--ok-bg);color:var(--ok)} .pill.warn{background:var(--warn-bg);color:var(--warn)} .pill.bad{background:var(--bad-bg);color:var(--bad)}
+.pill.ok i{animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.kpis{display:flex;gap:22px;margin-left:auto;flex-wrap:wrap}
+.kpi b{display:block;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+main{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;padding:16px 24px 40px;max-width:1700px;margin:0 auto}
+@media (max-width:1100px){main{grid-template-columns:1fr;padding:12px 16px}header{padding:12px 16px}.kpis{margin-left:0}}
+.col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:14px 16px}
+.card h2{font-size:12px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:650;display:flex;align-items:center;gap:8px}
+.card h2 .n{margin-left:auto;font-weight:500;text-transform:none;letter-spacing:0}
+/* attention */
+#attention{border-color:transparent;background:var(--bad-bg)}
+#attention.clear{background:var(--ok-bg)}
+#attention h2{color:var(--bad)} #attention.clear h2{color:var(--ok)}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid color-mix(in srgb,var(--bad) 18%,transparent)}
+.alert:first-of-type{border-top:0}
+.alert .dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:none;background:var(--bad)}
+.alert.warning .dot{background:var(--warn)}
+.alert .t{font-weight:600} .alert .d{color:var(--muted);font-size:12.5px}
+.alert .go{margin-left:auto;flex:none}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:5px 11px;border-radius:8px;font-weight:600}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+button.sm{padding:3px 8px;font-size:12px}
+/* flow */
+.lanes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+@media (max-width:900px){.lanes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lane{border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--bg);position:relative}
+.lane.down{outline:2px solid var(--bad)}
+.lane h3{margin:0 0 2px;font-size:13px;display:flex;align-items:center;gap:6px}
+.lane .id{font:600 10px ui-monospace,Menlo,monospace;color:var(--muted);background:var(--idle-bg);padding:1px 5px;border-radius:4px}
+.lane .st{font-size:11.5px;color:var(--muted);margin-bottom:8px;min-height:16px}
+.stage{display:flex;align-items:center;gap:8px;padding:6px 8px;margin-top:5px;border-radius:8px;border:1px solid var(--line);background:var(--panel);position:relative}
+.stage::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
+.stage.warn{background:var(--warn-bg);border-color:transparent} .stage.warn::before{background:var(--warn)}
+.stage.bad{background:var(--bad-bg);border-color:var(--bad)} .stage.bad::before{background:var(--bad)}
+.stage.idle::before{background:var(--idle)} .stage.off{opacity:.55} .stage.off::before{background:var(--idle)}
+.stage .nm{font-weight:600;font-size:12.5px;line-height:1.2}
+.stage .dt{font-size:11px;color:var(--muted);line-height:1.2}
+.stage .ct{margin-left:auto;font:650 15px ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+.stage.busy{box-shadow:inset 3px 0 0 var(--accent)}
+.band{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}
+.sec{padding:6px 8px;border-radius:8px;font-size:11.5px;background:var(--ok-bg);color:var(--ok);font-weight:600;line-height:1.25}
+.sec small{display:block;font-weight:500;opacity:.85}
+.sec.off{background:var(--idle-bg);color:var(--idle);opacity:.7} .sec.slow{background:var(--warn-bg);color:var(--warn)} .sec.halt{background:var(--idle-bg);color:var(--idle)} .sec.fault{background:var(--bad-bg);color:var(--bad)}
+.flowlabel{font-size:11px;color:var(--muted);margin-top:6px}
+/* events */
+.filters{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.chip{padding:2px 9px;border-radius:999px;border:1px solid var(--line);font-size:12px;cursor:pointer;background:var(--panel)}
+.chip.on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+#events{max-height:460px;overflow:auto;margin:0 -6px}
+.ev{display:grid;grid-template-columns:60px 46px 1fr;gap:8px;padding:6px 6px;border-top:1px solid var(--line);align-items:start}
+.ev:first-child{border-top:0}
+.ev time{color:var(--muted);font:11.5px ui-monospace,Menlo,monospace;padding-top:1px}
+.sev{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:1px 0;border-radius:4px;text-align:center;background:var(--idle-bg);color:var(--idle)}
+.sev.warning{background:var(--warn-bg);color:var(--warn)} .sev.error{background:var(--bad-bg);color:var(--bad)} .sev.discard{background:#efe7fb;color:#7a45c7}
+@media (prefers-color-scheme: dark){.sev.discard{background:#2c2142;color:#b793f5}}
+.ev .msg{min-width:0} .ev .meta{color:var(--muted);font-size:11.5px}
+.ev.new{animation:flash 1.6s ease-out}
+@keyframes flash{from{background:color-mix(in srgb,var(--accent) 22%,transparent)}to{background:transparent}}
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:4px 6px}
+td{padding:5px 6px;border-top:1px solid var(--line);vertical-align:top}
+.mono{font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.tag{font-size:10.5px;padding:1px 6px;border-radius:4px;background:var(--idle-bg);color:var(--muted);font-weight:600}
+.tag.m{background:var(--warn-bg);color:var(--warn)}
+/* inject */
+.grp{margin-bottom:8px} .grp h4{margin:0 0 4px;font-size:12px}
+.inj{display:flex;flex-wrap:wrap;gap:5px}
+.inj button{font-weight:500;font-size:12px;padding:3px 8px;text-align:left}
+.inj button b{font-family:ui-monospace,Menlo,monospace;margin-right:4px}
+details summary{cursor:pointer;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:650;margin-bottom:6px}
+/* components and scenarios */
+.comp{display:flex;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.comp:first-child{border-top:0}
+.cdot{width:10px;height:10px;border-radius:50%;flex:none;background:var(--ok)}
+.comp.paused .cdot{background:var(--warn)} .comp.exited .cdot,.comp.created .cdot{background:var(--idle)} .comp.restarting .cdot{background:var(--warn);animation:pulse 1s infinite}
+.comp.exited .cname b,.comp.created .cname b{color:var(--muted)}
+.cname{min-width:0;flex:1} .cname b{font-size:13px} .cname small{display:block;color:var(--muted);font-size:11.5px;line-height:1.3}
+.cbtns{display:flex;gap:5px;flex:none;flex-wrap:wrap;justify-content:flex-end}
+.scn{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-top:1px solid var(--line)}
+.scn:first-child{border-top:0}
+.scn .sname{flex:1;min-width:0} .scn .sname b{font:600 12.5px ui-monospace,Menlo,monospace} .scn .sname small{display:block;color:var(--muted);font-size:11.5px;line-height:1.3}
+button:disabled{opacity:.45;cursor:not-allowed}
+#scn-log{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:10px 0 0;max-height:300px;overflow:auto;font:11.5px/1.5 ui-monospace,Menlo,monospace;white-space:pre-wrap;display:none}
+#scn-log .pass{color:var(--ok);font-weight:700} #scn-log .fail{color:var(--bad);font-weight:700} #scn-log .hd{color:var(--accent);font-weight:700}
+.scn-top{display:flex;align-items:center;gap:8px;margin-top:8px}
+.note{color:var(--muted);font-size:12px;margin:0 0 8px}
+#toasts{position:fixed;right:18px;bottom:18px;display:flex;flex-direction:column;gap:8px;z-index:20}
+.toast{background:var(--ink);color:var(--panel);padding:9px 14px;border-radius:10px;max-width:360px;box-shadow:0 6px 20px rgba(0,0,0,.25);font-size:13px}
+.toast.error{background:var(--bad);color:#fff}
+.empty{color:var(--muted);padding:6px 0}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>Cake Factory Control</h1>
+    <div class="sub">Line Monitoring &amp; Health · Sparkplug B over MQTT</div>
+  </div>
+  <span id="line" class="pill"><i></i><span>connecting…</span></span>
+  <span id="conn" class="pill"><i></i><span>offline</span></span>
+  <div class="kpis">
+    <div class="kpi"><b id="k-pallets">0</b><span>Pallets shipped</span></div>
+    <div class="kpi"><b id="k-cakes">0</b><span>Cakes shipped</span></div>
+    <div class="kpi"><b id="k-disc">0</b><span>Discards</span></div>
+    <div class="kpi"><b id="k-maint">0</b><span>Open repairs</span></div>
+  </div>
+</header>
+
+<main>
+<div class="col">
+  <section class="card" id="attention">
+    <h2><span id="att-title">Needs attention</span><span class="n" id="att-n"></span></h2>
+    <div id="alerts"></div>
+  </section>
+
+  <section class="card" id="line-card">
+    <h2>Live line <span class="n">batter, cakes and pans moving through the factory</span></h2>
+    <div id="nodechips"></div>
+    <svg id="lineviz" viewBox="0 0 1200 540" role="img" aria-label="Live picture of the production line"></svg>
+    <div class="legend">
+      <span><i style="background:#f3d98a"></i>batter</span>
+      <span><i style="background:#c9793a"></i>cakes</span>
+      <span><i style="background:var(--idle)"></i>empty pans returning</span>
+      <span><i style="background:var(--ok)"></i>running</span>
+      <span><i style="background:var(--warn)"></i>slow or degraded</span>
+      <span><i style="background:var(--bad)"></i>fault, halted or down</span>
+      <span>bars under the line: band sections S1 to S5</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Production flow <span class="n">pan loop: washing → clean pool → depositing</span></h2>
+    <div class="lanes" id="lanes"></div>
+    <div class="flowlabel">Band sections (independently drivable): a stopped section halts everything upstream; downstream keeps running until empty.</div>
+    <div class="band" id="band"></div>
+  </section>
+
+  <section class="card">
+    <h2>Pans in motion <span class="n">documents passed from station to station</span></h2>
+    <table><thead><tr><th>Pan</th><th>Batch</th><th>Station</th><th>Status</th><th>Last note</th><th>Updated</th></tr></thead><tbody id="pans"></tbody></table>
+  </section>
+</div>
+
+<div class="col">
+  <section class="card">
+    <h2>Maintenance tickets <span class="n" id="tk-n"></span></h2>
+    <table><thead><tr><th>#</th><th>Machine</th><th>Status</th><th></th></tr></thead><tbody id="tickets"></tbody></table>
+  </section>
+
+  <section class="card">
+    <h2>Event log <span class="n">stored in SQL for traceability</span></h2>
+    <div class="filters" id="filters"></div>
+    <div id="events"></div>
+  </section>
+
+  <section class="card">
+    <h2>Components <span class="n">switch parts off and on, live</span></h2>
+    <p class="note">Stop or freeze a part and watch the lanes, alerts and event log react. Start it again to see the recovery.</p>
+    <div id="comps"><div class="empty">loading…</div></div>
+  </section>
+
+  <section class="card">
+    <h2>Test scenarios <span class="n">repeatable checks, live timeline</span></h2>
+    <div id="scn-list"><div class="empty">loading…</div></div>
+    <div class="scn-top"><button class="sm primary" id="scn-all" onclick="runScn('all')">Run all</button><button class="sm" id="scn-stop" onclick="stopScn()" style="display:none">Stop</button><span id="scn-res" class="pill"><i></i><span>idle</span></span></div>
+    <pre id="scn-log"></pre>
+  </section>
+
+  <section class="card">
+    <details>
+      <summary>Inject a failure case (demo)</summary>
+      <div id="inject"></div>
+    </details>
+  </section>
+</div>
+</main>
+<div id="toasts"></div>
+
+<script src="line.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rank = {FAULT:4, OFFLINE:3, DEGRADED:2, IDLE:1, OK:0};
+let snap = null, filter = 'all', seen = new Set(), booted = false;
+
+// Stages of the line. Each lists its node, the devices that decide its health and the gauge that counts work in it.
+const LANES = [
+ {node:'PLM', title:'Production & Logistics', stages:[
+   {n:'Orders', d:['OrderScheduler','RecipeManager'], c:g=>g['orders.created'], sub:g=>'orders released'},
+   {n:'Warehouse', d:['WarehouseInventory'], c:g=>g['orders.held'] ? g['orders.held'] : null, sub:g=>(g.breaker?'circuit breaker open':'flour '+(g['stock.flour']??'–')+' g · eggs '+(g['stock.eggs']??'–')+' g')},
+   {n:'Shipment', d:['TransportPlanner'], c:g=>g['pallets.shipped'], sub:g=>(g['cakes.shipped']??0)+' cakes shipped'},
+ ]},
+ {node:'BAT', title:'Batter Preparation', stages:[
+   {n:'Dosing', d:['Doser','LoadCell'], c:g=>g['stage.dosing'], busy:true},
+   {n:'Mixing', d:['Mixer','ConsistencySensor'], c:g=>g['stage.mixing'], busy:true},
+   {n:'Human inspection', d:['InspectionStation'], c:g=>g['stage.inspection'], busy:true},
+   {n:'Batter waiting', d:[], c:g=>g['stage.waiting'], sub:g=>g['stage.waiting']?'depositing is stopped':'', busy:true},
+ ]},
+ {node:'THM', title:'Thermal Processing', stages:[
+   {n:'Depositing', d:['Depositor','PanPresenceEye','CheckWeigher'], c:g=>g.queue, sub:g=>(g.deposited??0)+' pans filled'},
+   {n:'Baking tunnel', d:['Zone1','Zone2','Zone3'], c:g=>g.tunnel, sub:g=>'zones '+[1,2,3].map(i=>g['zone'+i]??'–').join(' / ')+' °C', busy:true},
+   {n:'Exit inspection', d:['HeatCamera'], c:g=>g.baked, sub:g=>'97 °C ± 0.5 · '+(g.baked??0)+' passed'},
+   {n:'Cooling', d:['CoolingControl'], c:g=>g.cooling, busy:true},
+   {n:'Cooling buffer', d:['CoolingBuffer'], c:g=>g.buffer, sub:g=>g.buffer?'cakes waiting':'empty', busy:true},
+ ]},
+ {node:'FIN', title:'Finishing & Packaging', stages:[
+   {n:'Depanning', d:['Depanner','VisionPicker'], c:g=>g.depanQ, busy:true},
+   {n:'Quality inspection', d:['Checkweigher','VisionCamera','MetalDetector'], c:g=>g.inspected, sub:g=>(g.rejected??0)+' rejected'},
+   {n:'Wrap & carton', d:['Wrapper','Cartoner','CaseCheckweigher','HoldingArea'], c:g=>g.holding, sub:g=>'holding area', busy:true},
+   {n:'Pallet', d:['PalletPacker'], c:g=>g.palletFill, sub:g=>(g.pallets??0)+' pallets done', busy:true},
+   {n:'Pan washing', d:['WashingStation'], c:g=>g.washQ, busy:true},
+   {n:'Clean pan pool', d:['PanPool'], c:g=>g.pool, sub:g=>'ready for depositing'},
+ ]},
+ {node:'BT', title:'Band Transport', stages:[
+   {n:'Section control', d:['SectionStatusSensor','ConveyorController'], c:g=>[1,2,3,4,5].filter(i=>(g['state'+i]||0)>0).length, sub:g=>'sections not running'},
+   {n:'Conveyor drive', d:['ConveyorDrive'], c:g=>null, sub:g=>'target '+(g.target??'–')+' cm/s'},
+   {n:'Speed monitoring', d:['SpeedSensor'], c:g=>null, sub:g=>[1,2,3,4,5].map(i=>g['speed'+i]??'–').join(' / ')+' cm/s'},
+ ]},
+ {node:'MON', title:'Line Monitoring & Health', stages:[]},
+];
+
+function worst(node, names){
+  let r = 0, detail = '';
+  for(const d of names){
+    const s = node.devices[d]; if(!s) continue;
+    const k = rank[s.state] ?? 0;
+    if(k > r){ r = k; detail = s.detail || ''; }
+  }
+  return {r, detail};
+}
+const cls = r => r>=4?'bad': r==3?'off': r==2?'warn': r==1?'idle':'';
+
+function renderLanes(){
+  const nodes = Object.fromEntries(snap.nodes.map(n=>[n.id,n]));
+  $('#lanes').innerHTML = LANES.map(l=>{
+    const n = nodes[l.node];
+    if(l.node==='MON'){
+      const others = snap.nodes.filter(x=>x.id!=='MON'), monDown = n && n.status==='dead';
+      return `<div class="lane ${monDown?'down':''}"><h3>${esc(l.title)} <span class="id">MON</span></h3>
+        <div class="st" style="${monDown?'color:var(--bad);font-weight:600':''}">${monDown?'MONITOR OFFLINE: production paused':'primary host · '+others.filter(x=>x.status==='online').length+'/'+others.length+' nodes online'}</div>
+        ${others.map(x=>`<div class="stage ${x.status==='online'?'':x.status==='unknown'?'idle':'bad'}"><div><div class="nm">${esc(x.id)} node</div>
+          <div class="dt">${x.status==='online'?'up '+x.uptime+' s'+(x.restarts?' · '+x.restarts+' restart(s)':''):esc(x.note||x.status)}</div></div></div>`).join('')}
+      </div>`;
+    }
+    const down = n.status==='dead' || n.status==='silent';
+    const label = {online:'online', unknown:'waiting for birth certificate', silent:'NOT RESPONDING', dead:'CONTAINER DOWN'}[n.status];
+    return `<div class="lane ${down?'down':''}"><h3>${esc(l.title)} <span class="id">${l.node}</span></h3>
+      <div class="st" style="${down?'color:var(--bad);font-weight:600':''}">${label}</div>
+      ${l.stages.map(s=>{
+        const w = worst(n, s.d);
+        const g = n.gauges;
+        const c = s.c(g);
+        const dim = n.status==='dead' || n.status==='unknown';
+        const klass = dim ? 'off' : cls(w.r) || ((s.busy && c>0) ? 'busy' : '');
+        const sub = w.detail || (s.sub ? s.sub(g) : '');
+        return `<div class="stage ${klass}"><div style="min-width:0"><div class="nm">${esc(s.n)}</div>${sub?`<div class="dt">${esc(sub)}</div>`:''}</div>
+          <div class="ct">${c==null?'':c}</div></div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+  $('#band').innerHTML = snap.sections.map(s=>`<div class="sec ${s.state==='run'?'':s.state}">S${s.id} ${esc(s.name)}<small>${{off:'unknown (BT not responding)',run:'running',slow:'slow – wrong speed',halt:'halted',fault:'STOPPED – fault'}[s.state]}</small></div>`).join('');
+}
+
+function renderAttention(){
+  const a = snap.alerts, errs = a.filter(x=>x.level==='error').length;
+  const box = $('#attention');
+  box.classList.toggle('clear', a.length===0);
+  $('#att-title').textContent = a.length===0 ? 'All clear' : errs ? 'Needs attention' : 'Warnings';
+  $('#att-n').textContent = a.length ? a.length+' active' : 'no open alerts';
+  const tk = Object.fromEntries(snap.tickets.filter(t=>t.status==='open').map(t=>['Maintenance needed: '+t.machineId,t]));
+  $('#alerts').innerHTML = a.length===0 ? '<div class="empty" style="color:var(--ok)">The line is running normally. Inject a failure case to see how it is handled.</div>' :
+    a.map(x=>{ const t = tk[x.title];
+      return `<div class="alert ${x.level}"><span class="dot"></span><div><div class="t">${esc(x.title)}</div><div class="d">${esc(x.detail)}</div></div>
+      ${t?`<button class="go sm primary" onclick="repair(${t.id})">Mark repaired</button>`:''}</div>`}).join('');
+}
+
+function status(){
+  const a = snap.alerts, errs = a.some(x=>x.level==='error');
+  const halted = snap.sections.some(s=>s.state==='halt'||s.state==='fault');
+  const offline = snap.nodes.some(n=>n.status==='dead'||n.status==='silent');
+  let k='ok', t='Line running';
+  if(offline || halted){k='bad'; t='Line halted / node down';}
+  else if(errs){k='warn'; t='Running with faults';}
+  else if(a.length||snap.sections.some(s=>s.state!=='run')){k='warn'; t='Running – degraded';}
+  const el=$('#line'); el.className='pill '+k; el.lastElementChild.textContent=t;
+  const g = Object.fromEntries(snap.nodes.map(n=>[n.id,n.gauges]));
+  $('#k-pallets').textContent = g.PLM?.['pallets.shipped'] ?? 0;
+  $('#k-cakes').textContent = g.PLM?.['cakes.shipped'] ?? 0;
+  $('#k-disc').textContent = Object.values(snap.discards).reduce((x,y)=>x+y,0);
+  $('#k-maint').textContent = snap.tickets.filter(t=>t.status==='open').length;
+}
+
+function renderEvents(){
+  const evs = snap.events.filter(e=>filter==='all'||e.severity===filter);
+  const first = !booted;
+  $('#events').innerHTML = evs.length ? evs.map(e=>{
+    const fresh = !first && !seen.has(e.id);
+    const t = new Date(e.at).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    return `<div class="ev ${fresh?'new':''}"><time>${t}</time><span class="sev ${e.severity}">${e.severity.slice(0,4)}</span>
+      <div class="msg">${esc(e.reason)}<div class="meta">${esc(e.node)}${e.device?' · '+esc(e.device):''} · ${esc(e.code)}${e.batchId?' · batch '+esc(e.batchId):''}</div></div></div>`;
+  }).join('') : '<div class="empty">No events.</div>';
+  snap.events.forEach(e=>seen.add(e.id));
+}
+
+function renderFilters(){
+  $('#filters').innerHTML = ['all','log','warning','error','discard'].map(f=>`<span class="chip ${f===filter?'on':''}" onclick="setFilter('${f}')">${f}</span>`).join('');
+}
+window.setFilter = f => { filter=f; renderFilters(); renderEvents(); };
+
+function renderTickets(){
+  $('#tk-n').textContent = snap.tickets.filter(t=>t.status==='open').length+' open';
+  $('#tickets').innerHTML = snap.tickets.length ? snap.tickets.slice(0,10).map(t=>`<tr><td class="mono">${t.id}</td>
+    <td><div class="mono">${esc(t.machineId)}</div><div style="color:var(--muted);font-size:12px">${esc(t.reason)}</div></td>
+    <td>${t.status==='open'?'<span class="tag m">open</span>':'<span class="tag">repaired</span>'}</td>
+    <td>${t.status==='open'?`<button class="sm primary" onclick="repair(${t.id})">Mark repaired</button>`:''}</td></tr>`).join('')
+    : '<tr><td colspan="4" class="empty">No tickets. Faults that need Maintenance appear here.</td></tr>';
+}
+
+function renderInject(){
+  if($('#inject').dataset.done) return;
+  const by = {};
+  snap.faults.forEach(f=>(by[f.node]=by[f.node]||[]).push(f));
+  $('#inject').dataset.done = 1;
+  $('#inject').innerHTML = Object.entries(by).map(([n,fs])=>`<div class="grp"><h4>${n}</h4><div class="inj">${fs.map(f=>
+    `<button title="resolved by: ${f.resolved}" onclick="inject('${n}','${f.code}',${f.count})"><b>${f.code}</b>${esc(f.title)}</button>`).join('')}</div></div>`).join('');
+}
+
+window.inject = async (node, code, count) => {
+  const r = await fetch('/api/inject',{method:'POST',body:JSON.stringify({node,code,count})});
+  toast(r.ok ? `Injected ${code} into ${node}` : await r.text(), r.ok?'':'error');
+};
+window.repair = async id => {
+  const r = await fetch('/api/repair',{method:'POST',body:JSON.stringify({ticket:id})});
+  toast(r.ok ? 'Repair confirmed, machine marked operational' : await r.text(), r.ok?'':'error');
+};
+function toast(msg, k=''){
+  const d=document.createElement('div'); d.className='toast '+k; d.textContent=msg; $('#toasts').append(d);
+  setTimeout(()=>d.remove(), 4500);
+}
+
+async function renderPans(){
+  try{
+    const ps = await (await fetch('/api/pans')).json();
+    $('#pans').innerHTML = (ps||[]).slice(0,12).map(p=>{
+      const last = p.history?.[p.history.length-1];
+      return `<tr><td class="mono">${esc(p.id)}</td><td class="mono">${esc(p.batchId||'–')}</td><td>${esc(p.station)}</td>
+        <td>${esc(p.status)}</td><td style="color:var(--muted)">${esc(last?.note||'')}</td>
+        <td class="mono" style="color:var(--muted)">${new Date(p.updated).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'})}</td></tr>`}).join('')
+      || '<tr><td colspan="6" class="empty">No pans yet.</td></tr>';
+  }catch(e){}
+}
+
+const HINT = {
+  mosquitto: 'All messaging stops. Parts keep working alone, reconnect and repeat what was lost.',
+  mssql: 'No orders, reservations or event log can be stored. Back when started.',
+  mongo: 'Pan documents and saved state are unavailable. Back when started.',
+  'plm-wh': 'No new orders or ingredient reservations; batches already dosing finish.',
+  'plm-ship': 'Finished pallets wait; nothing is dispatched.',
+  'bat-dose': 'No new batter is dosed; the line slowly empties.',
+  'bat-mix': 'Dosed batches wait for the mixer; the line slowly empties.',
+  'bat-insp': 'Mixed batter waits for inspection and handoff; the line slowly empties.',
+  'thm-dep': 'No new pans are filled; pans already in the tunnel finish. MON asks Band Transport to halt section 1.',
+  'thm-bake': 'The tunnel stops taking pans; MON has Band Transport halt section 2 and everything upstream. Depositing stops.',
+  'thm-exit': 'Cakes cannot be checked at the tunnel exit; MON halts section 3 and the ones upstream.',
+  'thm-cool': 'Cakes cannot be cooled or buffered; MON halts section 3 and the ones upstream.',
+  bt: 'Sections stop being commanded; THM and FIN keep their last band state; MON shows the sections as unknown.',
+  'fin-dpn': 'Cooled cakes wait; MON halts section 4 and everything upstream.',
+  'fin-qua': 'Cakes wait to be inspected; MON halts section 4 and the ones upstream.',
+  'fin-wrap': 'Cakes wait in the holding area; new pans stop when it is full.',
+  'fin-pal': 'Wrapped cakes wait; no pallets leave.',
+  'fin-wash': 'No clean pans come back and the pool runs out; depositing stops.',
+  mon: 'Without the monitor no new batch is started; the line finishes the batches it has and events wait in the outboxes. This dashboard keeps working and shows it.',
+  ui: 'This dashboard (not part of the factory).'
+};
+const ALABEL = {stop:'Stop', start:'Start', pause:'Freeze', unpause:'Unfreeze', restart:'Restart'};
+const ATITLE = {stop:'Stop it (like switching it off)', start:'Start it again', pause:'Freeze the process: no keep-alive, the broker declares it dead', unpause:'Let it run again', restart:'Restart it'};
+let comps = null, scn = null;
+async function loadComps(){
+  try{ comps = await (await fetch('/api/components')).json(); }catch(e){ comps = null; }
+  renderComps();
+}
+function renderComps(){
+  const box = $('#comps');
+  if(!comps){ box.innerHTML = '<div class="empty">no answer from the dashboard service</div>'; return; }
+  if(!comps.available){ box.innerHTML = '<div class="empty">'+esc(comps.hint)+'</div>'; return; }
+  box.innerHTML = comps.items.map(c=>'<div class="comp '+esc(c.state)+'"><span class="cdot"></span><div class="cname"><b>'+esc(c.label)+'</b> <span class="tag">'+esc(c.state)+'</span><small>'+esc(HINT[c.name]||'')+'</small></div><div class="cbtns">'+
+    (c.locked ? '<span class="tag">locked</span>' : (c.actions||[]).map(a=>'<button class="sm '+(a==='start'||a==='unpause'?'primary':'')+'" title="'+esc(ATITLE[a]||a)+'" onclick="comp(\''+c.name+'\',\''+a+'\')">'+(ALABEL[a]||a)+'</button>').join(''))+'</div></div>').join('');
+}
+window.comp = async (name, action) => {
+  const r = await fetch('/api/components/'+name+'/'+action, {method:'POST'});
+  toast(r.ok ? name+': '+action : await r.text(), r.ok?'':'error');
+  setTimeout(loadComps, 500); setTimeout(loadComps, 2500);
+};
+async function loadScn(){
+  try{ scn = await (await fetch('/api/scenarios')).json(); }catch(e){ return; }
+  renderScn();
+}
+function renderScn(){
+  if(!scn) return;
+  const run = scn.run || {}, busy = !!run.running;
+  $('#scn-list').innerHTML = scn.items.map(i=>{
+    const why = !i.runnable ? (i.needsPause || (i.needs||[]).length ? 'Needs component control (docker compose --profile demo up -d).' : 'Needs component control (docker compose --profile demo up -d).')+' Terminal: go run ./cmd/scenario '+i.name : '';
+    return '<div class="scn"><div class="sname"><b>'+esc(i.name)+'</b>'+(i.docker?' <span class="tag">switches parts</span>':'')+'<small>'+esc(i.desc)+(why?'<br><i>'+esc(why)+'</i>':'')+'</small></div>'+
+      '<button class="sm primary" '+((!i.runnable||busy)?'disabled':'')+' onclick="runScn(\''+i.name+'\')">Run</button></div>';
+  }).join('');
+  $('#scn-all').disabled = busy;
+  $('#scn-stop').style.display = busy ? '' : 'none';
+  const res = $('#scn-res'), lines = run.lines || [];
+  res.className = 'pill ' + (busy ? 'warn' : run.result==='pass' ? 'ok' : run.result==='fail' ? 'bad' : run.result==='stopped' ? 'warn' : '');
+  res.lastElementChild.textContent = busy ? 'running '+run.name+'…' : run.result==='pass' ? 'all passed' : run.result==='fail' ? 'something failed' : run.result==='stopped' ? 'stopped' : 'idle';
+  const log = $('#scn-log');
+  log.style.display = lines.length ? 'block' : 'none';
+  const atEnd = log.scrollTop + log.clientHeight >= log.scrollHeight - 30;
+  log.innerHTML = lines.map(l=>{ const t = esc(l);
+    return /\bPASS\b/.test(l) ? '<span class="pass">'+t+'</span>' : /\bFAIL\b/.test(l) ? '<span class="fail">'+t+'</span>' : l.startsWith('== ') ? '<span class="hd">'+t+'</span>' : t; }).join('\n');
+  if(atEnd) log.scrollTop = log.scrollHeight;
+}
+window.stopScn = async () => {
+  const r = await fetch('/api/scenarios/stop', {method:'POST'});
+  toast(r.ok ? 'stopping, parts are being put back' : await r.text(), r.ok?'':'error');
+};
+window.runScn = async name => {
+  const r = await fetch('/api/scenarios/run', {method:'POST', body:JSON.stringify({name})});
+  if(!r.ok) toast(await r.text(), 'error');
+  loadScn();
+};
+function render(){
+  status(); renderAttention(); renderLanes(); if (window.drawLine) { window.drawLine(snap); } renderTickets(); renderEvents(); renderInject();
+  booted = true;
+}
+function connect(){
+  const es = new EventSource('/api/stream');
+  const c = $('#conn');
+  es.onopen = ()=>{ c.className='pill ok'; c.lastElementChild.textContent='live'; };
+  es.onerror = ()=>{ c.className='pill bad'; c.lastElementChild.textContent='reconnecting…'; };
+  es.addEventListener('snapshot', e=>{ snap = JSON.parse(e.data); render(); });
+  es.addEventListener('scenario', e=>{ if(scn){ scn.run = JSON.parse(e.data); renderScn(); } });
+  es.addEventListener('event', e=>{
+    const ev = JSON.parse(e.data);
+    if(booted && ev.severity==='error') toast(`${ev.node} ${ev.code}: ${ev.reason}`, 'error');
+  });
+}
+renderFilters(); connect(); loadComps(); loadScn(); setInterval(loadComps, 3000);
+ setInterval(renderPans, 2000); renderPans();
+</script>
+</body>
+</html>

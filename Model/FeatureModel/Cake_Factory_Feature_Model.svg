@@ -162,8 +162,6 @@
 <circle cx="618" cy="1790" r="5" fill="#9d8f7e" stroke="#9d8f7e" stroke-width="1.2"/>
 <line x1="902" y1="1745" x2="942" y2="1730" stroke="#9d8f7e" stroke-width="1.2"/>
 <circle cx="936" cy="1730" r="5" fill="#9d8f7e" stroke="#9d8f7e" stroke-width="1.2"/>
-<line x1="902" y1="1745" x2="942" y2="1760" stroke="#9d8f7e" stroke-width="1.2"/>
-<circle cx="936" cy="1760" r="5" fill="#9d8f7e" stroke="#9d8f7e" stroke-width="1.2"/>
 <line x1="584" y1="1925" x2="624" y2="1835" stroke="#9d8f7e" stroke-width="1.2"/>
 <circle cx="618" cy="1835" r="5" fill="#9d8f7e" stroke="#9d8f7e" stroke-width="1.2"/>
 <line x1="584" y1="1925" x2="624" y2="1880" stroke="#9d8f7e" stroke-width="1.2"/>
@@ -350,8 +348,6 @@
 <text x="631" y="1749" font-size="11.5" font-family="Segoe UI, Arial, sans-serif">MON-FEAT-04 Band Coordination</text>
 <rect x="942" y="1719" width="361.2" height="22" fill="#ccccff" stroke="#7d7dcc" stroke-width="1.1"/>
 <text x="949" y="1734" font-size="11.5" font-family="Segoe UI, Arial, sans-serif">MON-FEAT-05 Band Speed Supervision</text>
-<rect x="942" y="1749" width="361.2" height="22" fill="#ccccff" stroke="#7d7dcc" stroke-width="1.1"/>
-<text x="949" y="1764" font-size="11.5" font-family="Segoe UI, Arial, sans-serif">MON-FEAT-06 Pan Position &amp; Spacing Tracking</text>
 <rect x="624" y="1779" width="278" height="22" fill="#ccccff" stroke="#7d7dcc" stroke-width="1.1"/>
 <text x="631" y="1794" font-size="11.5" font-family="Segoe UI, Arial, sans-serif">MON-FEAT-07 Container Recovery</text>
 <rect x="222.8" y="1914" width="361.2" height="22" fill="#ccccff" stroke="#7d7dcc" stroke-width="1.1"/>

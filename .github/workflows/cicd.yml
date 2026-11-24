@@ -1,6 +1,14 @@
 name: CI/CD Workflow
 
-  # Workflow triggers
+# What this pipeline does for the cake factory (the Go code lives in src/):
+#   lint         gofmt, go vet and hadolint on the Dockerfile
+#   test         go build and go test with -count=1 (a failing test fails the pipeline and
+#                the pull request; make the check required under Settings, Branches)
+#   integration  starts the whole stack with docker compose and runs the demo
+#                scenarios against it (crashes, frozen node, monitor down,
+#                broker restart); see src/docs/demo.md
+#   images       builds the images (stations, bt, mon, ui) and pushes them to ghcr.io (only on
+#                a push to main or master)
 on:
   push:
     branches:
@@ -10,123 +18,126 @@ on:
     branches:
       - main
       - master
+  workflow_dispatch:
 
-  # Environment Variables
 env:
-  PACKAGE_REGISTRY_TO_USE: thmork
-  DOCKER_IMAGE_NAME: lowercase-name-dockerimage
-  PROJECT_NAME: ProjectName
-  GROUP_NUMBER: GroupNumber #I.e  Group02
+  GO_VERSION: "1.25"
+  IMAGE_PREFIX: cake-factory
 
 jobs:
-  # Create artifact of repository source code to use for consistensy accross all jobs
-  clone-repository:
+  lint:
     runs-on: ubuntu-latest
     permissions:
-      packages: write
-      contents: read 
+      contents: read
+    defaults:
+      run:
+        working-directory: src
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4.0.0
-      - name: Upload Repository artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          name: repository-artifacts
-          path: .
-
-  # Perform linting and/or other static code analysis
-  code-analysis:
-    runs-on: ubuntu-latest
-    needs: clone-repository
-    permissions:
-      contents: read 
-    # Allow continuation of pipeline if linting fails
-    continue-on-error: true
-    steps:
-      - name: Download repository artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: repository-artifacts
-          path: .
-      - name: Install dependencies
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: src/go.sum
+      - name: gofmt
         run: |
-          sudo apt-get update
-          sudo apt-get install -y 
-          echo "install your-linting-dependencies"
-      - name: Run Linter / Other Code Analysis tool
-        run: echo "running linter"
-  
-  # Job for compiling applicaitons and uploading as an artifact
-  build-application:
-    runs-on: ubuntu-latest
-    needs: clone-repository
-    steps:
-      - name: Download repository artifact
-        uses: actions/download-artifact@v4
+          unformatted="$(gofmt -l .)"
+          if [ -n "$unformatted" ]; then echo "not formatted:"; echo "$unformatted"; exit 1; fi
+      - name: go vet
+        run: go vet ./...
+      - name: hadolint
+        uses: hadolint/hadolint-action@v3.1.0
         with:
-          name: repository-artifacts
-          path: .
-      # Your logic for building the applicaiton, language dependent
-      - name: Build application
-        run:  echo "build app"
-      # Upload compiled artifact
-      - name: Upload Build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifact
-          path: ./src # Replace with path to your compiled artifact
-  
-  # Job for testing the application i.e 
-  test-application:
-    runs-on: ubuntu-latest
-    needs: [build-application,code-analysis]
-    # Allow pipeline to continue on error
-    continue-on-error: true
-    steps:
-      # Download build artifact and use for applicaiton tests
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifact
-          path: ./build
-      - name: Test application
-        run: echo "test"
+          dockerfile: src/Dockerfile
+          ignore: DL3018
 
-  build-push-docker-image:
+  test:
     runs-on: ubuntu-latest
-    needs: [test-application]
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: src
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: src/go.sum
+      - name: Build all services
+        run: go build ./...
+      - name: Unit tests
+        run: go test -count=1 -cover ./...
+
+  integration:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: src
+    env:
+      SIM_SPEED: "3"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache-dependency-path: src/go.sum
+      - name: Start the stack (SQL Server, MongoDB, MQTT broker, 16 factory containers)
+        run: |
+          docker compose up -d --build
+          for _ in $(seq 1 60); do
+            unhealthy="$(docker compose ps --format '{{.Name}} {{.Status}}' | grep -v healthy || true)"
+            [ -z "$unhealthy" ] && break
+            sleep 5
+          done
+          docker compose ps
+      - name: Run the demo scenarios
+        run: go run ./cmd/scenario healthy crash-plm-wh crash-plm-ship crash-bat-dose crash-bat-mix crash-bat-insp crash-thm-dep crash-thm-bake crash-thm-exit crash-thm-cool crash-fin-dpn crash-fin-qua crash-fin-wrap crash-fin-pal crash-fin-wash crash-bt freeze-thm-bake freeze-two-stations freeze-three-stations band-halt band-section-stop bt-down mon-down broker-restart sql-down cooling-chain faults-system faults-maintenance
+      - name: Show logs of the stack
+        if: always()
+        run: docker compose logs --no-color --tail=300
+      - name: Stop the stack
+        if: always()
+        run: docker compose down -v
+
+  build-push-images:
+    runs-on: ubuntu-latest
+    needs: [integration]
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     permissions:
       packages: write
       contents: read
+    strategy:
+      matrix:
+        service: [station, bt, mon, ui]
     steps:
-      - name: Download repository artifact
-        uses: actions/download-artifact@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
         with:
-          name: repository-artifacts
-          path: .
-      - name: Login to GitHub Package Registry
-        uses: docker/login-action@v2
-        with:
-          # Authenticate with GitHub Container Registry, could be changed to use DockerHub
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      # Transform github.actor to lowercase
-      - name: Transform username to lowercase
-        run: echo "OWNER_LOWER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-      # Building and pushing application image go to: GitHub -> Profile -> Packages 
-      - name: Build & Push image
-        uses: docker/build-push-action@v3
+      - name: Transform owner to lowercase
+        run: echo "OWNER_LOWER=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
+      - name: Build and push image
+        uses: docker/build-push-action@v5
         with:
-          context: . #Path to your dockerfile
+          context: ./src
+          build-args: SERVICE=${{ matrix.service }}
           push: true
-          tags: ghcr.io/${{ env.OWNER_LOWER }}/${{ env.DOCKER_IMAGE_NAME }}:1.0-${{ github.sha }},ghcr.io/${{ env.OWNER_LOWER }}/${{ env.DOCKER_IMAGE_NAME }}:latest
+          tags: |
+            ghcr.io/${{ env.OWNER_LOWER }}/${{ env.IMAGE_PREFIX }}-${{ matrix.service }}:${{ github.sha }}
+            ghcr.io/${{ env.OWNER_LOWER }}/${{ env.IMAGE_PREFIX }}-${{ matrix.service }}:latest
 
-  # Job for deploying the application, could be the logic for deploying to your VM  
-  deploy-application:
-    runs-on: ubuntu-latest
-    needs: [build-push-docker-image]
-    continue-on-error: true
-    steps:
-      - name: Logic for deploying application
-        run: echo "deploy app"
+  # No deploy job: there is no target machine yet. Add one that pulls these
+  # images and runs src/docker-compose.yml when a deployment target exists.
