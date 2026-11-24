@@ -87,7 +87,7 @@
       </ownedConnector>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_Bnt04MSoEfG8fKg8yLcw1w" name="BT-AF-01 Section Control">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_tkVAkM-TEfGqiL-AEFFLIg" name="sectionStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_tkVAkM-TEfGqiL-AEFFLIg" name="Band state change" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_4wYpUM-TEfGqiL-AEFFLIg" name="sectionFault" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_XmQ74M-VEfGqiL-AEFFLIg" name="Section command" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_Vl2LANIAEfGKVdaTCg46lw" name="featureID" visibility="public">
@@ -142,7 +142,7 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_okRwIMSoEfG8fKg8yLcw1w" name="BT-FD-04 Section Status Sensor">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_eWLUAM-WEfGqiL-AEFFLIg" name="sectionState" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_iFk98M-WEfGqiL-AEFFLIg" name="sectionStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_iFk98M-WEfGqiL-AEFFLIg" name="Band state change" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_g75AwNIBEfGKVdaTCg46lw" name="featureID" visibility="public">
         <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_lDERgNIBEfGKVdaTCg46lw" name="LiteralString1" value="BT-FEAT-07"/>
