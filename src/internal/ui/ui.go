@@ -438,7 +438,7 @@ func (s *Server) serve(addr string) {
 		writeJSON(w, pans)
 	})
 	mux.HandleFunc("/api/pans/summary", func(w http.ResponseWriter, r *http.Request) {
-		by, total := map[string]int{}, 0
+		by, total, sortedOut := map[string]int{}, 0, 0
 		if ps := s.panStore(); ps != nil {
 			all, err := ps.List(r.Context(), 5000)
 			if err != nil {
@@ -449,10 +449,13 @@ func (s *Server) serve(addr string) {
 				if strings.HasPrefix(p.ID, "PAN-") {
 					total++
 					by[p.Status]++
+					if p.Status == "discarded" && p.Station == "FIN-Washing" {
+						sortedOut++ // damaged pan removed from the cycle (UC12); a pan diverted at THM is still on its way to washing
+					}
 				}
 			}
 		}
-		writeJSON(w, map[string]any{"total": total, "byStatus": by})
+		writeJSON(w, map[string]any{"total": total, "byStatus": by, "sortedOut": sortedOut})
 	})
 	mux.HandleFunc("/api/inject", func(w http.ResponseWriter, r *http.Request) {
 		var in struct {
