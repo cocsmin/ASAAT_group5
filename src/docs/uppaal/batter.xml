@@ -41,15 +41,18 @@ chan ready;               // Batter ready (reliable, no acknowledgement)
 <location id="Dep_Blocked" x="-380" y="40"><name x="-400" y="58">Blocked</name><label kind="invariant" x="-400" y="76">y &lt;= BLOCKMAX</label></location>
 <location id="Dep_Took" x="260" y="190"><name x="240" y="208">Took</name><committed/></location>
 <location id="Dep_Done" x="260" y="-110"><name x="240" y="-92">Done</name></location>
+<location id="Dep_Expired" x="-120" y="190"><name x="-140" y="208">Expired</name><committed/></location>
 <init ref="Dep_Open"/>
-<transition><source ref="Dep_Open"/><target ref="Dep_OpenQ"/><label kind="synchronisation" x="4" y="24">ready?</label><label kind="assignment" x="4" y="40">queued = true, q = 0</label></transition>
+<transition><source ref="Dep_Open"/><target ref="Dep_OpenQ"/><label kind="synchronisation" x="4" y="114">ready?</label><label kind="assignment" x="4" y="130">queued = true, q = 0</label></transition>
 <transition><source ref="Dep_Blocked"/><target ref="Dep_Blocked"/><label kind="synchronisation" x="-438" y="-51">ready?</label><label kind="assignment" x="-438" y="-35">queued = true</label><nail x="-335" y="-15"/><nail x="-425" y="-15"/></transition>
 <transition><source ref="Dep_Open"/><target ref="Dep_Blocked"/><label kind="guard" x="-367" y="-188">!faultDone</label><label kind="assignment" x="-367" y="-172">stopped = true, y = 0</label><nail x="-212" y="-91"/></transition>
-<transition><source ref="Dep_OpenQ"/><target ref="Dep_Blocked"/><label kind="guard" x="-324" y="195">!faultDone</label><label kind="assignment" x="-324" y="211">stopped = true, y = 0</label><nail x="-168" y="59"/></transition>
+<transition><source ref="Dep_OpenQ"/><target ref="Dep_Blocked"/><label kind="guard" x="-215" y="-14">!faultDone</label><label kind="assignment" x="-215" y="2">stopped = true, y = 0</label><nail x="-168" y="59"/></transition>
 <transition><source ref="Dep_Blocked"/><target ref="Dep_Open"/><label kind="guard" x="-427" y="-145">y &gt;= 1 &amp;&amp; !queued</label><label kind="assignment" x="-427" y="-129">stopped = false, faultDone = true</label><nail x="-168" y="21"/></transition>
 <transition><source ref="Dep_Blocked"/><target ref="Dep_OpenQ"/><label kind="guard" x="-458" y="251">y &gt;= 1 &amp;&amp; queued</label><label kind="assignment" x="-458" y="267">stopped = false, faultDone = true, q = 0</label><nail x="-212" y="171"/></transition>
-<transition><source ref="Dep_OpenQ"/><target ref="Dep_Took"/><label kind="assignment" x="60" y="194">deposited = true</label></transition>
+<transition><source ref="Dep_OpenQ"/><target ref="Dep_Took"/><label kind="guard" x="60" y="154">h &lt;= P3</label><label kind="assignment" x="60" y="170">deposited = true</label></transition>
+<transition><source ref="Dep_OpenQ"/><target ref="Dep_Expired"/><label kind="guard" x="-88" y="224">h &gt; P3</label></transition>
 <transition><source ref="Dep_Took"/><target ref="Dep_Done"/></transition>
+<transition><source ref="Dep_Expired"/><target ref="Dep_Done"/></transition>
 </template>
 <template>
 <name>Copy</name>

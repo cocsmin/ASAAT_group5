@@ -42,11 +42,10 @@ is worth a look.
    drafts in `communication.md`, `databases.md`, `languages.md` and `containers.md` are a
    starting point.
 7. **Which failure cases are measured** in the experiment beyond crash and freeze.
-8. **Scalability**: the exercises ask for it; nothing is built or measured beyond 60 pans
-   and 15 nodes. A small test (more pans, more messages) or only a discussion?
-9. **Security** is not a stated quality attribute: the broker is anonymous, no TLS, the SQL
-   password is in the compose file with a demo default. Name it as out of scope in the
-   report?
+8. ~~**Scalability**~~ **Decided (24 Nov): a discussion, backed by small tests** for the numbers chosen
+   (heartbeat load of 16 to 1 600 nodes, watchdog scan). See [scalability.md](scalability.md).
+9. ~~**Security**~~ **Decided (24 Nov): out of scope, named in the report.** The broker is anonymous, no TLS, the SQL
+   password is a demo default. What is open and what a plant would add: [security.md](security.md).
 10. **Merge**: the branch `implementation` is pushed, not merged, no pull request yet. The
     CI pipeline has never run on GitHub (to be checked once the pull request exists).
 
@@ -71,8 +70,9 @@ is worth a look.
 7. **The pan or cake document is the truth, the message is the trigger**: a station adopts
    what the station before it handed over by scanning the documents every 5 s
    ([stations.md](stations.md)).
-8. **Inspector is simulated** (3 s, "good"). The real human gate is a button nobody built;
-   do we want one on the dashboard?
+8. **Inspector is simulated** (3 s, "good"). The real human gate is a button nobody built.
+   **Decided (24 Nov): stays simulated, no dashboard button; it is an assumption** (the UC4 rejection is
+   triggered by fault injection).
 9. **A cake gets its own document** (`CAKE-<batch>-<pan>`) after depanning.
 10. **Dashboard buttons play Maintenance**: *Mark repaired* confirms any repair; there is no
     login and no role. The `ctl` container (demo profile) can control every Docker
@@ -125,19 +125,16 @@ is worth a look.
     station program and the compose file. They run in CI. The main loop of every station is
     not unit-tested (it needs a broker or a long simulation); the scenarios cover it.
 
-11. **P3 is checked before the handoff only.** BAT-INSP discards a batter that waited more
-    than P3 (25 s, looked at once a second) while depositing is stopped. After "Batter ready"
-    is sent, THM-DEP queues the batter and nothing discards it, so a batter can wait in the
-    queue as long as depositing stays stopped (FC7). The UPPAAL batter model shows it: with the
-    estimated stop time of 60 s a batter is deposited up to 108 s after approval (24 s
-    behind the previous batch of 24 pans, the stop, 24 s again), only 3 s before dosing gives
-    the batch up at 120 s; the jam FC7 alone clears after 30 s in the code, longer stops come
-    from the other stop reasons (full holding area, band halted). The
-    state copy of BAT can also be stale by a heartbeat. Proposed fix with no new signal: "Batter
-    ready" carries how long the batter has already waited; THM-DEP discards a queued batter
-    whose total wait would pass P3 when it takes it up, and reports `Batch result` "discarded"
-    (an existing signal that dosing already reads). Not done: it changes tested code and the
-    experiment. Decide: fix, or state the limit in the report.
+11. ~~**P3 is checked before the handoff only.**~~ **Fixed (24 Nov, decided by the group).** BAT-INSP still
+    discards a batter that waited more than P3 (25 s, looked at once a second) while depositing is stopped.
+    New: "Batter ready" carries `waited`, the seconds the batter already waited in BAT-INSP, and THM-DEP
+    discards a queued batter whose total wait since approval passes P3 when it takes the batter up
+    (event FC7, `Batch result` "discarded", an existing signal). A batter whose first pan is already filled
+    is not discarded. The queue saved in MongoDB keeps the start of the wait, so a restart does not give the
+    batter a new P3. The UPPAAL batter model shows it: a queued batter is deposited at most P3 after
+    approval or discarded (at most 108 s after approval with the 60 s stop estimate), always before dosing
+    gives the batch up at 120 s. Left over: dosing already counts the batch as handed when "handed" arrives,
+    so a later discard at depositing only shows as an event (dosing has started the next batch).
 
 ## 4. Odd things worth a look [?]
 

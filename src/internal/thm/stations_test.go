@@ -8,6 +8,7 @@ import (
 	"cakefactory/internal/model"
 	"cakefactory/internal/node"
 	"cakefactory/internal/sim"
+	"cakefactory/internal/timing"
 	"cakefactory/internal/station"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
@@ -250,5 +251,63 @@ func TestFinishedBatchLeavesTheSavedQueue(t *testing.T) {
 	d2.restoreQueue()
 	if len(d2.batters) != 0 {
 		t.Fatal("nothing to take up after a finished batch")
+	}
+}
+
+// P3 counts from approval, also in the queue of depositing (team-review 3.11).
+func TestBatterThatWaitedPastP3IsDiscardedByDepositing(t *testing.T) {
+	b, _ := testBase(t, model.THMDep)
+	d := newDep(b)
+	old := batch{id: "B0007", pans: 24, target: 450, tol: 5, origin: time.Now().Add(-(timing.BatterWait + 3*time.Second))}
+	d.enqueue(old)
+	if !d.expired(old) {
+		t.Fatal("a batter that waited longer than P3 must be discarded")
+	}
+	d.qmu.Lock()
+	_, still := d.pend["B0007"]
+	d.qmu.Unlock()
+	if still {
+		t.Fatal("a discarded batter leaves the saved queue")
+	}
+	if d.dropped != "B0007" {
+		t.Fatal("the depositor is told to skip the batter")
+	}
+}
+
+func TestBatterWithinP3IsKept(t *testing.T) {
+	b, _ := testBase(t, model.THMDep)
+	d := newDep(b)
+	fresh := batch{id: "B0008", pans: 24, target: 450, tol: 5, origin: time.Now().Add(-(timing.BatterWait - 10*time.Second))}
+	if d.expired(fresh) {
+		t.Fatal("a batter inside P3 is deposited")
+	}
+	if (batch{}).waited() != 0 {
+		t.Fatal("a batter without a start time has not waited")
+	}
+}
+
+func TestWaitedTimeInInspectionCountsTowardsP3(t *testing.T) {
+	b, _ := testBase(t, model.THMDep)
+	d := newDep(b)
+	// "Batter ready" says the batter already waited 20 s in BAT-INSP; 8 more in the queue pass P3 (25 s)
+	already := 20 * time.Second
+	bt := batch{id: "B0009", pans: 24, origin: time.Now().Add(-sim.Scale(already) - 8*time.Second)}
+	if !d.expired(bt) {
+		t.Fatal("20 s in inspection plus 8 s in depositing is 28 s, over P3")
+	}
+}
+
+func TestSavedQueueKeepsTheStartOfTheWait(t *testing.T) {
+	b, pans := testBase(t, model.THMDep)
+	d := newDep(b)
+	start := time.Now().Add(-10 * time.Second)
+	d.enqueue(batch{id: "B0007", pans: 24, target: 450, tol: 5, origin: start})
+	waitSaved(t, pans, 24)
+	b2 := &svc.Base{ID: model.THMDep, Ctx: b.Ctx, N: node.New(node.Config{ID: model.THMDep}), F: sim.NewFaults(), Pans: pans}
+	d2 := newDep(b2)
+	d2.restoreQueue()
+	got := <-d2.batters
+	if got.origin.Unix() != start.Unix() {
+		t.Fatalf("a restart must not give the batter a new P3: %v vs %v", got.origin, start)
 	}
 }

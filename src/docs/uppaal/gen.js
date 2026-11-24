@@ -224,6 +224,9 @@ clock t;
 // 3. Batter: inspection, hold while depositing is stopped (P3 = 25 s), batch lost limit (120 s).
 // Models the code: BAT-INSP reads its own copy of the "Depositing stopped" state, holds the batter
 // while the copy says stopped, discards it after P3, otherwise sends "Batter ready" and is done.
+// "Batter ready" carries the time already waited, so depositing (THM-DEP) keeps counting towards the same
+// P3: when it takes the batter up and the total wait since approval is over P3, it discards it (FC7).
+// (Decision of 24 Nov: this closes the limit of team-review section 3, item 11.)
 // There is no acknowledgement from depositing (decision: docs/team-review.md section 1, item 2, option B).
 model("batter", `const int MIX = 6;       // recipe MixSeconds
 const int INSP = 3;       // inspection
@@ -251,7 +254,7 @@ chan ready;               // Batter ready (reliable, no acknowledgement)
       { from: "Holding", to: "Handed", guard: "!seen", sync: "ready!" },
       { from: "Holding", to: "Discarded", guard: "seen && x >= P3 + POLL" } ] },
   { name: "Dep", decl: "clock y, q;", init: "Open",
-    locs: [{ n: "Open", at: [0, -110] }, { n: "OpenQ", inv: "q <= DEPSTART", at: [0, 190] }, { n: "Blocked", inv: "y <= BLOCKMAX", at: [-380, 40] }, { n: "Took", committed: true, at: [260, 190] }, { n: "Done", at: [260, -110] }],
+    locs: [{ n: "Open", at: [0, -110] }, { n: "OpenQ", inv: "q <= DEPSTART", at: [0, 190] }, { n: "Blocked", inv: "y <= BLOCKMAX", at: [-380, 40] }, { n: "Took", committed: true, at: [260, 190] }, { n: "Done", at: [260, -110] }, { n: "Expired", committed: true, at: [-120, 190] }],
     trans: [
       { from: "Open", to: "OpenQ", sync: "ready?", assign: "queued = true, q = 0" },
       { from: "Blocked", to: "Blocked", sync: "ready?", assign: "queued = true" },
@@ -259,8 +262,10 @@ chan ready;               // Batter ready (reliable, no acknowledgement)
       { from: "OpenQ", to: "Blocked", guard: "!faultDone", assign: "stopped = true, y = 0" },
       { from: "Blocked", to: "Open", guard: "y >= 1 && !queued", assign: "stopped = false, faultDone = true" },
       { from: "Blocked", to: "OpenQ", guard: "y >= 1 && queued", assign: "stopped = false, faultDone = true, q = 0" },
-      { from: "OpenQ", to: "Took", assign: "deposited = true" },
-      { from: "Took", to: "Done" } ] },
+      { from: "OpenQ", to: "Took", guard: "h <= P3", assign: "deposited = true" },
+      { from: "OpenQ", to: "Expired", guard: "h > P3" },
+      { from: "Took", to: "Done" },
+      { from: "Expired", to: "Done" } ] },
   { name: "Copy", decl: "clock w;", init: "Sync",
     locs: [{ n: "Sync", inv: "w <= STALE" }],
     trans: [{ from: "Sync", to: "Sync", guard: "w >= 1", assign: "seen = stopped, w = 0" }] },
@@ -270,12 +275,15 @@ chan ready;               // Batter ready (reliable, no acknowledgement)
   ["BAT's side of the batch is finished within MIX + INSP + P3 + POLL", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= MIX + INSP + P3 + POLL"],
   ["T-RC6: and so well before the LOST limit", "A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g <= LOST"],
   ["T-RC6: a batter is deposited before dosing gives the batch up", "A[] Dep.Took imply g <= LOST"],
-  ["from approval to deposit at most DEPSTART + BLOCKMAX + DEPSTART (108 s), more than P3", "A[] Dep.Took imply h <= 2 * DEPSTART + BLOCKMAX"],
+  ["T-RC4 after the handoff: a batter is deposited at most P3 after approval", "A[] Dep.Took imply h <= P3"],
+  ["depositing discards a queued batter that waited past P3, and dosing is not kept waiting past LOST", "A[] (Dep.Took || Dep.Expired) imply g <= LOST"],
+  ["a batter is discarded at depositing at most DEPSTART + BLOCKMAX + DEPSTART (108 s) after approval", "A[] Dep.Expired imply h <= 2 * DEPSTART + BLOCKMAX"],
+  ["depositing and the discard at depositing exclude each other", "A[] not (Dep.Expired && deposited)"],
+  ["the discard at depositing is reachable", "E<> Dep.Expired"],
   ["deposited and discarded exclude each other", "A[] not (Batch.Discarded && deposited)"],
   ["the discard path is reachable", "E<> Batch.Discarded"],
   ["the deposit path is reachable", "E<> Dep.Took"],
   ["FINDING: the state copy can be stale, a batter is handed to depositing while it is stopped", "E<> (Batch.Handed && stopped)"],
-  ["FINDING: after the handoff nothing limits the wait, a batter is deposited more than P3 + POLL after approval", "E<> (Dep.Took && h > P3 + POLL)"],
 ]);
 
 // 4. Handover: document stored, signal may be lost, reconcile pass adopts after the grace.

@@ -64,7 +64,8 @@ func (t *Insp) inspect(j job) {
 }
 
 // handOff signals the batter to Thermal Processing, holding it while depositing
-// is stopped and discarding it once it has waited longer than P3 (FC7).
+// is stopped and discarding it once it has waited longer than P3 (FC7). "Batter ready" carries
+// the time already waited, so depositing can keep counting towards the same P3.
 func (t *Insp) handOff(j job) {
 	waited := time.Duration(0)
 	for t.depStopped.Load() {
@@ -82,7 +83,7 @@ func (t *Insp) handOff(j job) {
 	}
 	t.N.Gauge(stageWaiting, 0)
 	t.N.SendReliable(sig.New(sig.BatterReady, "batchId", j.batch, "orderId", j.order, "pans", int64(j.pans),
-		"fillTarget", j.fillTarget, "fillTol", j.fillTol))
+		"fillTarget", j.fillTarget, "fillTol", j.fillTol, "waited", int64(waited.Seconds())))
 	t.N.Log("UC4", fmt.Sprintf("batter ready: %d pans worth handed to thermal processing", j.pans), j.batch)
 	t.N.SendReliable(sig.New(sig.BatchResult, "batchId", j.batch, "result", "handed"))
 }

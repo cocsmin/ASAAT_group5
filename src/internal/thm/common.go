@@ -13,6 +13,7 @@ import (
 
 	"cakefactory/internal/model"
 	"cakefactory/internal/sig"
+	"cakefactory/internal/sim"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
 	"cakefactory/internal/timing"
@@ -45,6 +46,15 @@ type batch struct {
 	pans   int
 	target float64
 	tol    float64
+	origin time.Time // wall-clock moment the batter started to wait (approval, or earlier if it already waited)
+}
+
+// waited is how long the batter has waited since approval, in simulated time.
+func (b batch) waited() time.Duration {
+	if b.origin.IsZero() {
+		return 0
+	}
+	return sim.Unscale(time.Since(b.origin))
 }
 
 type pan struct {

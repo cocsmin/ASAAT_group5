@@ -253,7 +253,7 @@ written into one automaton. They are properties of the NTA, checked with a query
 |---|---|---|---|
 | `uppaal/supervision.xml` | Node, Broker, MON, Docker, Env | 8 | all satisfied |
 | `uppaal/band.xml` | five Sections, Env, MON | 7 | all satisfied |
-| `uppaal/batter.xml` | Batch, Dep, Copy | 11 | all satisfied (two of them are reachability findings, see below) |
+| `uppaal/batter.xml` | Batch, Dep, Copy | 14 | all satisfied (one of them is a reachability finding, see below) |
 | `uppaal/handover.xml` | Sender, Message, Receiver | 4 | all satisfied |
 | `uppaal/plm.xml` | Plm, Bat, Clock, Stock, Wms | 13 | all satisfied |
 
@@ -269,16 +269,16 @@ What the queries prove, with the estimated parameters:
   within 1 s. A section is released only after its owner is back. After the release no section
   stays stopped.
 - **Batter.** Before the handoff the batter holds at most P3 + POLL = 26 s. BAT's side of a batch
-  is finished within 6 + 3 + 26 = 35 s, far inside the 120 s limit. A batter is always deposited
+  is finished within 6 + 3 + 26 = 35 s, far inside the 120 s limit. After the handoff THM-DEP
+  deposits a batter at most P3 after approval and discards one that waited longer (since 24 Nov,
+  "Batter ready" carries the time already waited). A batter is always deposited or discarded
   before dosing gives the batch up (`g <= LOST`, with the estimated `BLOCKMAX`). Deposited and
   discarded exclude each other. Both end states are reachable.
-- **Batter, two findings** (queries that are satisfied and show a weakness, not a proof of
-  safety). (1) The state copy can be stale: a batter can be handed to depositing while
-  depositing is already stopped (`E<> Batch.Handed && stopped`). Depositing queues it, so
-  nothing is lost. (2) After the handoff nothing in the code limits the wait: a batter can be
-  deposited more than `P3 + POLL` after approval, at most `DEPSTART + BLOCKMAX + DEPSTART` = 108 s
-  with the estimates. `P3` is checked in BAT-INSP only; THM-DEP does not discard queued batter
-  (`internal/thm`). The proposed fix, with no new signal, is in `team-review.md` section 3.
+- **Batter, finding** (a query that is satisfied and shows a weakness, not a proof of safety). The state
+  copy can be stale: a batter can be handed to depositing while depositing is already stopped
+  (`E<> Batch.Handed && stopped`). Depositing queues it, so nothing is lost. The second finding of the
+  first version (nothing limited the wait after the handoff, up to `DEPSTART + BLOCKMAX + DEPSTART` =
+  108 s) is fixed: THM-DEP discards a queued batter whose total wait passes P3.
 - **Handover.** A stored document is taken up within GRACE + RECONCILE = 8 s, also when the
   message is lost.
 - **PLM-WH.** BAT has at most two orders it has not asked ingredients for; at most one order is
@@ -290,8 +290,8 @@ What the queries prove, with the estimated parameters:
 
 **Negative controls** (to show the queries can fail): with a restart time of up to 60 s the
 60 s recovery query and the no-escalation query fail; with a batch limit of 30 s instead of
-120 s the two LOST queries of the batter model fail; with depositing blocked for up to 120 s
-instead of 60 s the query "a batter is deposited before dosing gives the batch up" fails; in the PLM
+120 s the three LOST queries of the batter model fail; with depositing blocked for up to 120 s
+instead of 60 s the query "a batter is deposited or discarded before dosing gives the batch up" fails; in the PLM
 model a restock time of 25 s or a withdrawal time of 30 s makes the 18 s answer query fail.
 
 ## Limits

@@ -500,6 +500,8 @@ batch has 24 pans, so a batter that arrives early sits behind the previous batch
 
 ![Dep template](img/batter-dep.png)
 
+*(The picture was taken before 24 Nov and does not show the location `Expired` yet; open `batter.xml` in UPPAAL to see it.)*
+
 - `Open` (start) means depositing admits pans. `Blocked` means it is stopped; the invariant
   `y <= BLOCKMAX` limits that to 60 s, and the edges back need `y >= 1`. It can stop **only once**
   (`!faultDone`), from `Open` or from `OpenQ`.
@@ -511,6 +513,10 @@ batch has 24 pans, so a batter that arrives early sits behind the previous batch
   `Took` has a `C`, it is committed and only sets `deposited = true`; then `Done`.
 - When `Blocked` ends, it goes to `Open` or to `OpenQ` depending on whether a batter was queued
   in the meantime.
+- Since 24 Nov depositing also keeps the P3 rule. "Batter ready" carries the time the batter already
+  waited in BAT-INSP, so the clock `h` (time since approval) goes on. `OpenQ` has two ways out: to
+  `Took` when `h <= P3`, and to `Expired` when `h > P3` (the batter is discarded, FC7, `Batch result`
+  "discarded"). `Expired` is committed like `Took`, then `Done`.
 
 *Why it is its own diagram:* it is a different system (THM), with its own failure. BAT must **not**
 see it directly. The model keeps them apart, so it cannot cheat by letting BAT read the true state.
@@ -529,18 +535,21 @@ own diagram makes the staleness an explicit, tunable value. The first finding be
 comes from this diagram.
 
 **What the queries prove:** before the handoff the batter holds at most 26 s; BAT's side of a
-batch is finished within 35 s; a batter is always deposited before dosing gives the batch up
+batch is finished within 35 s; after the handoff a batter is deposited at most P3 (25 s) after
+approval, otherwise depositing discards it (at most 108 s after approval, when a stop of 60 s
+kept it waiting); a batter is always deposited or discarded before dosing gives the batch up
 (120 s); deposited and discarded never both happen; both ends are reachable.
 
-**Two findings** (satisfied queries that show a weakness rather than a safety guarantee):
+**Finding** (a satisfied query that shows a weakness rather than a safety guarantee):
 
-1. The state copy can be stale: a batter can be handed over while depositing is already
+The state copy can be stale: a batter can be handed over while depositing is already
    stopped. Depositing queues it, so nothing is lost.
-2. After the handoff **nothing limits the wait**: a batter can be deposited up to 108 s after
-   approval (24 s behind the previous batch, a stop of up to 60 s, 24 s again), longer than P3.
-   That is only 3 s before dosing gives the batch up at 120 s (9 s of mixing and inspection plus
-   108 s). The 25 s rule is only enforced before the handoff. This is documented in
-   `docs/team-review.md` section 3, item 11, with a proposed fix.
+
+The second finding of the first version of this model (after the handoff nothing limited the wait, a
+batter could be deposited 108 s after approval, 3 s before dosing gives up) is **fixed since 24 Nov**:
+the code and this model now let THM-DEP discard a queued batter whose total wait passes P3
+(`docs/team-review.md` section 3, item 11). The query that proved the weakness was replaced by
+`A[] Dep.Took imply h <= P3`.
 
 ---
 

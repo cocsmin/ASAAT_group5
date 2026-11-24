@@ -15,6 +15,7 @@ import (
 	"cakefactory/internal/station"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
+	"cakefactory/internal/timing"
 )
 
 // Dep is the depositing station: it fills clean pans with batter.
@@ -24,6 +25,7 @@ type Dep struct {
 	batters chan batch
 	clean   chan string
 	pending atomic.Int64 // pan requests not answered yet
+	dropped string       // batch discarded by expired (depositor goroutine only)
 
 	cmu       sync.Mutex
 	inClean   map[string]bool // clean pans waiting at depositing (drops duplicates)
@@ -64,7 +66,9 @@ func RunDep() {
 		if dup {
 			return
 		}
-		t.enqueue(batch{id: s.Str("batchId"), pans: s.Int("pans"), target: s.Float("fillTarget"), tol: s.Float("fillTol")})
+		already := time.Duration(s.Int("waited")) * time.Second // time spent waiting in BAT-INSP (P3 counts from approval)
+		t.enqueue(batch{id: s.Str("batchId"), pans: s.Int("pans"), target: s.Float("fillTarget"), tol: s.Float("fillTol"),
+			origin: time.Now().Add(-sim.Scale(already))})
 	})
 	t.N.OnSignal(model.FINWash, sig.CleanPanSupply, func(_ string, s sig.Signal) {
 		t.pending.Add(-1)
@@ -190,8 +194,14 @@ func (t *Dep) depositor() {
 			return
 		case b := <-t.batters:
 			for i := 0; i < b.pans; i++ {
-				if !t.depositOne(b) {
+				if i == 0 && t.expired(b) {
+					break
+				}
+				if !t.depositOne(b, i == 0) {
 					return
+				}
+				if t.dropped == b.id { // the batter was discarded for waiting past P3
+					break
 				}
 				t.consumed(b.id)
 			}
@@ -199,7 +209,25 @@ func (t *Dep) depositor() {
 	}
 }
 
-func (t *Dep) depositOne(b batch) bool {
+// expired discards a batter that has waited longer than P3 (FC7) before its first pan was filled.
+// It counts from approval at inspection, in the queue of depositing too. Once the first pan is
+// filled the batter is in use and is not discarded.
+func (t *Dep) expired(b batch) bool {
+	w := b.waited()
+	if w <= timing.BatterWait {
+		return false
+	}
+	t.N.Discard("FC7", fmt.Sprintf("batter waited %.0f s for depositing (limit %.0f s): discarded", w.Seconds(), timing.BatterWait.Seconds()), b.id)
+	t.N.SendReliable(sig.New(sig.BatchResult, "batchId", b.id, "result", "discarded"))
+	t.qmu.Lock()
+	delete(t.pend, b.id)
+	t.qmu.Unlock()
+	t.saveQueue()
+	t.dropped = b.id
+	return true
+}
+
+func (t *Dep) depositOne(b batch, first bool) bool {
 	if t.F.Take("FC7") {
 		t.setReason("jam", "depositing jam (FC7)", true)
 		t.N.Warn("FC7", "depositing stopped by a jam: batter has to wait", b.id)
@@ -211,6 +239,9 @@ func (t *Dep) depositOne(b batch) bool {
 	}
 	if !t.waitAdmission() || !t.sec.Gate.Wait(t.Ctx) {
 		return false
+	}
+	if first && t.expired(b) { // the stop lasted past P3 while this batter was at the front
+		return true
 	}
 	if t.F.Take("UC5") { // SM1 T1 guard: the Weight-Checker must be calibrated before depositing
 		t.N.SetDevice("CheckWeigher", model.StateWarn, "scale out of calibration")
@@ -381,6 +412,7 @@ func (t *Dep) saveQueue() {
 			m[id+".left"] = int64(q.left)
 			m[id+".target10"] = int64(q.target*10 + 0.5)
 			m[id+".tol10"] = int64(q.tol*10 + 0.5)
+			m[id+".origin"] = q.origin.Unix()
 		}
 		t.qmu.Unlock()
 		_ = t.Pans.SaveState(t.Ctx, queueKey, m)
@@ -402,6 +434,9 @@ func (t *Dep) restoreQueue() {
 	sort.Strings(ids)
 	for _, id := range ids {
 		b := batch{id: id, pans: int(st[id+".left"]), target: float64(st[id+".target10"]) / 10, tol: float64(st[id+".tol10"]) / 10}
+		if o := st[id+".origin"]; o > 0 {
+			b.origin = time.Unix(o, 0)
+		}
 		t.seenBatch[id] = true
 		t.pend[id] = &queued{batch: b, left: b.pans}
 		t.batters <- b

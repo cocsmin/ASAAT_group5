@@ -218,7 +218,7 @@ Claude, the group still has to confirm them)
 - Estimated values, marked as such in the models: restart delay 1 to 30 s, message delay 1 s,
   state copy up to 6 s old, depositing stopped up to 60 s. `DEPSTART = 24` comes from the code
   (24 pans of 1 s per batch).
-- Known limit, not fixed: P3 (25 s) is checked before the handoff only; a batter can be deposited
+- Known limit (fixed 24 Nov, see below): P3 (25 s) was checked before the handoff only; a batter could be deposited
   up to 108 s after approval, 3 s before dosing gives up (team-review section 3, item 11).
 
 **9 Nov** (group review notes, taken in the same session)
@@ -272,3 +272,18 @@ Claude, the group still has to confirm them)
   Restoring state for the restart (FC27), and dosing holds while the monitor is offline (S4). The parameters
   P1 to P5 are renamed D_tol, N_dose, T_batter, T_hb and T_detect (P3 of our documents and of the UPPAAL models is
   T_batter). The BAT items of the diagram to-do list are done; the PR is #5, not merged yet.
+
+**24 Nov** (open decisions of the review list, taken by the group)
+- P3 is enforced after the handoff too (team-review section 3, item 11). "Batter ready" carries `waited` (seconds
+  the batter already waited in BAT-INSP, a field of the existing signal, no 15th signal); THM-DEP discards a queued
+  batter whose total wait since approval passes P3 when it takes it up (event FC7, `Batch result` "discarded"),
+  never one whose first pan is filled. The saved queue keeps the start of the wait, so a restart does not give a
+  new P3. The UPPAAL batter model follows (template Dep has a location Expired, 14 queries satisfied). To do in
+  the diagrams (Papyrus): BAT "Mixing and Handoff" sends the waited time with "Batter ready"; THM Depositing gets
+  the discard (time event after the total wait passes P3) and sends "Batch result" "discarded".
+- Security is out of scope. The broker is anonymous, there is no TLS and the SQL password is a demo default in the
+  compose file. The report names it as not a stated quality attribute and says what a plant would add
+  (authenticated broker with per-system ACLs, TLS, secrets outside the compose file); see `docs/security.md`.
+- Scalability is discussed, not built, and the numbers chosen (48 pans in the loop and 48 in reserve, 24 per batch, 16 containers,
+  heartbeat 5 s) are backed by tests (`docs/scalability.md`, `internal/mon/scale_test.go`).
+- The inspector stays simulated (3 s, always good, UC4 rejects by fault injection). Assumption, no dashboard button.

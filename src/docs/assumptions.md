@@ -37,7 +37,7 @@ assumptions; time values that several systems share are in
 | A12 | Core temperature up to which a cooled cake is accepted for packaging | 28 C (was 30); cooling brings a cake to 24 C with a scatter of 1 C | `model.TSafe`, `CoolMean`, `CoolSigma`, used by cooling and depanning | Keep. Chosen, see section 5: ambient plus a few degrees; a normal cake is 4 scatters below the limit and is never refused |
 | A13 | Cooling buffer capacity | 24 pans (one batch) | `internal/thm/common.go` | Keep |
 | A14 | Holding area before packaging | 6 cakes | `internal/fin/fin.go` | Change only if needed |
-| A15 | Human inspection of the batter | simulated, 3 s, always "good" unless UC4 is injected | `internal/bat/bat.go` | Confirm. A button on the dashboard would make it real; only worth it if the demo needs it |
+| A15 | Human inspection of the batter | simulated, 3 s, always "good" unless UC4 is injected | `internal/bat/bat.go` | Confirmed 24 Nov: stays simulated, no dashboard button |
 
 ## 2. Time
 
@@ -53,7 +53,7 @@ seconds). The supervision timers (heartbeat, keep-alive, timeouts) are real
 | T4 | Heartbeat T_hb | 5 s for every system, PLM included | Keep. Decided by the group |
 | T5 | Detection of a stopped controller | 15 s (3 x T_hb, THM-REQ-72); the MQTT keep-alive (5 s, dead after 7.5 s) is an extra and faster | Keep |
 | T6 | A container that does not restart by itself | escalated to Maintenance after 45 s (THM-REQ-73 allows 60 s) | Keep |
-| T7 | Batter that waits too long for depositing to work again is discarded | 25 s (BAT parameter P3, called T_batter in the BAT model since 13 Nov); BAT-INSP checks once a second, so 26 s; counted before the handoff only (`team-review.md`, section 3, item 11) | Confirm |
+| T7 | Batter that waits too long for depositing to work again is discarded | 25 s (BAT parameter P3, called T_batter in the BAT model since 13 Nov); BAT-INSP checks once a second, so 26 s; counted from approval, before and after the handoff (THM-DEP discards a queued batter too, since 24 Nov; `team-review.md`, section 3, item 11) | Confirm |
 | T8 | Retries | ingredient request repeated after 20 s; the ingredients are collected 3 s after the reservation; a held order is restocked after 15 s; order sent again after 40 s; every database call times out after 3 s; event outbox retried every second; state saved every 3 s | Keep. The test in `internal/timing` checks that they fit together |
 | T9 | Faults the system repairs by itself, injected for the demo | depositing jam 30 s; no-pan wait 4 s; recalibration 6 s; wrong speed corrected after 10 s; band sections restart 1.5 s apart | Keep |
 

@@ -48,10 +48,10 @@ where the diagrams are missing, wrong, or behind the implementation.
      (`timing.BatterWait`); on "working again" leave it and send "Batter ready"; when the
      timer ends, discard the batter (event FC7) and report "Batch result" = discarded;
    - keep the 14 signals and the ports of BAT and THM as they are (no new port).
-   **Open, optional (code):** P3 is checked before the handoff only; nothing in THM-DEP
-   discards a queued batter (found with UPPAAL, `docs/team-review.md` section 3, item 11).
-   If the group wants it fixed: add the already-waited time to "Batter ready" and let
-   THM-DEP discard a batter whose total wait passes P3. If the group chooses option A
+   **Done in the code 24 Nov (decided):** P3 counts after the handoff too: "Batter ready" carries `waited` and
+   THM-DEP discards a queued batter whose total wait passes P3 (`docs/team-review.md` section 3, item 11).
+   **To do in Papyrus [person]:** BAT Mixing and Handoff sends the waited time with "Batter ready"; THM Depositing
+   discards a batter that passes P3 in the queue and sends "Batch result" "discarded". If the group chooses option A
    instead (a 15th signal "Batter collected"), the code, `docs/signals.md`, the port tables,
    the Word document and the UPPAAL batter model (`gen.js`) all change.
 8. **State machines live on branches** (`state-machines-fin`,
