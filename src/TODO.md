@@ -19,12 +19,11 @@ computer; whatever is not pushed was not checked. Result in short:
 - **Closed the same day (checked on screen):** D1 to D6, D9, D12, D13, most of D7 and part of D10 (section 0 of the
   check). Text of existing states was changed; the state machines of BT (1) and MON (2) are new diagrams
   (generator in `Model/tools`).
-- **Still open (Papyrus, by hand):** the connectors of the Cake Factory IBD (D11: move the ports so they face each
-  other, then route about 28 connectors), the drawn timer transition Idle to Scheduling_Order in PLM, and a deployment
-  diagram in Papyrus (the deployment view is in [docs/deployment.md](docs/deployment.md)). D8 (PLM heartbeat port) and the
-  "Band state change" port of BT are done on 25 Nov.
+- **Still open (Papyrus):** the drawn timer transition Idle to Scheduling_Order in PLM and a deployment diagram in
+  Papyrus (the deployment view is in [docs/deployment.md](docs/deployment.md) as a diagram in the document). The Cake
+  Factory IBD has its 13 connectors since 25 Nov; the events, heartbeat and repair ports are not drawn in it.
 
-1. **Cake Factory IBD** is empty. Add the message bus (Sparkplug B on an MQTT
+1. ~~**Cake Factory IBD** is empty.~~ **Done 25 Nov** (connectors between the systems). Still wanted: the message bus (Sparkplug B on an MQTT
    broker) and the MON part, and connect the frame ports of the slices to the bus
 
 2. ~~**BAT frame port "Fault event"**~~ **DONE 13 Nov** (branch `requirement-diagrams-BAT`, PR #5, not merged):
