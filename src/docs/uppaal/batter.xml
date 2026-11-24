@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.5//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_5.dtd'>
 <nta>
 <declaration>const int MIX = 6;       // recipe MixSeconds
 const int INSP = 3;       // inspection
@@ -64,4 +64,23 @@ chan ready;               // Batter ready (reliable, no acknowledgement)
 <transition><source ref="Copy_Sync"/><target ref="Copy_Sync"/><label kind="guard" x="209" y="-91">w &gt;= 1</label><label kind="assignment" x="209" y="-75">seen = stopped, w = 0</label><nail x="345" y="-55"/><nail x="255" y="-55"/></transition>
 </template>
 <system>system Batch, Dep, Copy;</system>
+<queries>
+<query><formula>A[] not deadlock</formula><comment>no deadlock (weak here: Copy never stops, so `deadlock` is unreachable whatever the stations do, see the two LIMIT queries)</comment></query>
+<query><formula>A[] Batch.Discarded imply Batch.waited &lt;= T_batter + POLL</formula><comment>T-RC4: a discarded batter waited exactly T_batter + POLL = 26 polls, derived from the loop and not asserted anywhere (tight: the same query with &lt;= 25 fails). Counted on `waited`, not on a clock: Discarded is terminal, so any clock keeps running after the batch has ended</comment></query>
+<query><formula>A[] Batch.Holding imply h &lt;= T_batter + POLL</formula><comment>T-RC4: and it never waits longer than that before the handoff</comment></query>
+<query><formula>A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g &lt;= 2 * (MIX + INSP) + T_batter + POLL</formula><comment>BAT's side of the batch is finished within 2 * (MIX + INSP) + T_batter + POLL = 44 s: one mixing cycle, one rejected cycle, and the full hold</comment></query>
+<query><formula>A[] (Batch.Mixing || Batch.Inspecting || Batch.Holding) imply g &lt;= LOST</formula><comment>T-RC6: and so well before the LOST limit</comment></query>
+<query><formula>A[] Dep.Took imply g &lt;= 2 * (MIX + INSP) + 2 * DEPSTART + BLOCKMAX</formula><comment>T-RC6: a batter is deposited at the latest 2 * (MIX + INSP) + 2 * DEPSTART + BLOCKMAX = 126 s after the batch was started (tight: 125 fails)</comment></query>
+<query><formula>E&lt;&gt; (Dep.Took &amp;&amp; g &gt; LOST)</formula><comment>FINDING: T-RC6 is broken by a single rejection. 126 s is past dosing's LOST limit, so a batter can be deposited for a batch dosing has already given up (FC27) and replaced. Set rejectDone = true in the declarations and this becomes NOT satisfied, so the rejection is the whole cause</comment></query>
+<query><formula>A[] Dep.Took imply h &lt;= 2 * DEPSTART + BLOCKMAX</formula><comment>from approval to deposit at most DEPSTART + BLOCKMAX + DEPSTART (108 s), more than T_batter</comment></query>
+<query><formula>A[] not (Batch.Discarded &amp;&amp; deposited)</formula><comment>deposited and discarded exclude each other</comment></query>
+<query><formula>E&lt;&gt; Batch.Discarded</formula><comment>the discard path is reachable</comment></query>
+<query><formula>E&lt;&gt; Dep.Took</formula><comment>the deposit path is reachable</comment></query>
+<query><formula>Batch.Inspecting --&gt; (Batch.Handed || Batch.Discarded)</formula><comment>every inspected batch ends, handed over or discarded</comment></query>
+<query><formula>Dep.OpenQ --&gt; Dep.Took</formula><comment>a queued batter is always taken up in the end</comment></query>
+<query><formula>E&lt;&gt; handedWhileStopped</formula><comment>FINDING: the state copy can be stale, a batter is handed to depositing at a moment when it is really stopped (unreachable if the state signal arrives without delay)</comment></query>
+<query><formula>E&lt;&gt; (Dep.Took &amp;&amp; h &gt; T_batter + POLL)</formula><comment>FINDING: after the handoff nothing limits the wait, a batter is deposited more than T_batter + POLL after approval (the exact maximum is 108 s: A[] Dep.Took imply h &lt;= 107 fails, h &lt;= 108 holds)</comment></query>
+<query><formula>E&lt;&gt; (Batch.Discarded &amp;&amp; Dep.Open &amp;&amp; faultDone)</formula><comment>LIMIT: both stations can be frozen for good after a discard, which `not deadlock` above does not see</comment></query>
+<query><formula>E&lt;&gt; (Batch.Handed &amp;&amp; Dep.Done)</formula><comment>LIMIT: and after a deposit</comment></query>
+</queries>
 </nta>

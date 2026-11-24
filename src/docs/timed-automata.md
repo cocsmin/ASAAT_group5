@@ -259,7 +259,7 @@ written into one automaton. They are properties of the NTA, checked with a query
 |---|---|---|---|
 | `uppaal/supervision.xml` | Node, Broker, MON, Docker, Env | 8 | all satisfied |
 | `uppaal/band.xml` | five Sections, Env, MON | 7 | all satisfied |
-| `uppaal/batter.xml` | Batch, Dep, Copy | 11 | all satisfied (two of them are reachability findings, see below) |
+| `uppaal/batter.xml` | Batch, Dep, Copy | 17 | all satisfied (three of them are reachability findings and two mark a limit of the model, see below) |
 | `uppaal/handover.xml` | Sender, Message, Receiver | 4 | all satisfied |
 | `uppaal/plm.xml` | Plm, Bat, Clock, Stock, Wms | 13 | all satisfied |
 

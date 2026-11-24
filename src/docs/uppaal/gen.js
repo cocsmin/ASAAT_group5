@@ -120,9 +120,17 @@ const TICK = { name: "Tick", init: "On", locs: [{ n: "On" }], trans: [{ from: "O
 // batter has none either: the same Tick broke its two leads-to queries, and it was never needed, because Copy
 // never stops, so `deadlock` is unreachable with or without it (both checked with verifyta 5.0.0).
 const NO_TICK = ["supervision", "plm", "batter"];
+// Only the batter model keeps its queries inside the .xml. That is where UPPAAL itself keeps them (it ships
+// no .q files at all), and the Verifier then lists every query with its comment; importing a .q shows none.
+// The DTD has to be 1.5 for that: the 1.1 DTD has no <queries> element. The other four models belong to the
+// rest of the group, so they are left exactly as they were; add a name here when its owner wants the same.
+const QUERIES_IN_XML = ["batter"];
 function model(file, decl, templates, system, queries) {
   if (!NO_TICK.includes(file)) { templates = templates.concat([TICK]); system = system.replace(";", ", Tick;"); }
-  const xml = `<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_1.dtd'>\n<nta>\n<declaration>${esc(decl)}</declaration>\n${templates.map(template).join("")}<system>${esc(system)}</system>\n</nta>\n`;
+  const inXml = QUERIES_IN_XML.includes(file);
+  const dtd = inXml ? "1.5" : "1.1";
+  const qxml = inXml ? `<queries>\n${queries.map((q) => `<query><formula>${esc(q[1])}</formula><comment>${esc(q[0])}</comment></query>`).join("\n")}\n</queries>\n` : "";
+  const xml = `<?xml version="1.0" encoding="utf-8"?>\n<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System ${dtd}//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-${dtd.replace(".", "_")}.dtd'>\n<nta>\n<declaration>${esc(decl)}</declaration>\n${templates.map(template).join("")}<system>${esc(system)}</system>\n${qxml}</nta>\n`;
   fs.writeFileSync(file + ".xml", xml);
   fs.writeFileSync(file + ".q", queries.map((q) => `//${q[0]}\n${q[1]}\n`).join("\n"));
 }

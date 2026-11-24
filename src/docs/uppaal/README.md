@@ -807,8 +807,18 @@ verifyta -q plm.xml plm.q
 On Windows `verifyta` is at `C:\Program Files\UPPAAL-5.0.0\app\bin\verifyta.exe`. Every line
 should say `Formula is satisfied`.
 
-**Look at the diagrams:** open the `.xml` in the UPPAAL GUI (click *Import* when it asks about
-the query file). The *Editor* tab shows the templates; the *Verifier* tab runs the queries.
+**Look at the diagrams:** open the `.xml` in the UPPAAL GUI. The *Editor* tab shows the templates
+(click a name in the project tree on the left); the *Verifier* tab runs the queries: select them all
+with Cmd+A and click *Check*.
+
+`batter.xml` keeps its queries inside the model, in a `<queries>` block, which is where UPPAAL itself
+keeps them (it ships no `.q` files at all). So its *Verifier* tab already lists all seventeen with their
+comments, and if it ever asks about a query file, say *Cancel*. The other four models still store their
+queries only in the `.q` file: for those, click *Import* when asked. Moving one of them over is a one-word
+change, `QUERIES_IN_XML` in `gen.js`, and is each owner's call.
+
+Watch out for stale copies: UPPAAL reopens whatever is in *File > Open Recent*, which may be a copy
+somewhere else entirely. Check the path before believing what you see.
 To see one automaton, click its name in the project tree on the left (drag the splitter to
 widen it).
 

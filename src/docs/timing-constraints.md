@@ -31,9 +31,9 @@ requirement in the report) or the design level (the value chosen in the implemen
 | T-RC1 | Reaction | EC1 | detected within 3 heartbeat intervals | at most 15 s; the broker's keep-alive finds a frozen node after 7.5 s; a crash at once (measured at most 0.43 s) | analysis and design | THM-REQ-72, `timing.DetectLimit`, `timing.KeepAlive` |
 | T-RC2 | Reaction | EC2 | back in normal operation after the cause is removed | at most 60 s; a container that has not restarted after 45 s goes to Maintenance | analysis and design | THM-REQ-73, `timing.RestoreLimit`, `timing.MonDeadAfter` |
 | T-RC3 | Reaction | EC5 | stop new pans after a band halt | at most 1 s; in the code Band Transport derives the halt of every upstream section in the same step (`bt.effective`), so the real value is far below 1 s | analysis | THM-REQ-76 and -78 (not measured) |
-| T-RC4 | Reaction | EC7 | batter that waits for depositing to work again is discarded | after 25 s (parameter P3), looked at once a second, so after 26 s; counted before the handoff only, after it nothing limits the wait (`team-review.md`, section 3) | design | `timing.BatterWait`, FC7, `bat.handOff` |
+| T-RC4 | Reaction | EC7 | batter that waits for depositing to work again is discarded | after 25 s (parameter P3, `T_batter` in the UPPAAL model), looked at once a second, so after 26 s; counted before the handoff only, after it nothing limits the wait (`team-review.md`, section 3) | design | `timing.BatterWait`, FC7, `bat.handOff` |
 | T-RC5 | Reaction | EC6 | decide refuse or re-cool after a cooling failure | 30 min in the plant, 40 s in the simulation (factor 45) | analysis and design | UC10, `timing.BufferWait` |
-| T-RC6 | Reaction | EC4 | a batch whose result does not come back is given up | after 120 s, which is longer than mixing plus inspection plus P3 (unit test) | design | `batchLostAfter`, FC27 |
+| T-RC6 | Reaction | EC4 | a batch whose result does not come back is given up | after 120 s, which is longer than mixing plus inspection plus P3 (`T_batter`) for BAT's own side of the batch (unit test). It is **not** longer than the whole path to the deposit: with one UC4 rejection the batter is deposited at 126 s, see section 6 | design | `batchLostAfter`, FC27 |
 | T-RC7 | Reaction | EC8 | a station takes up a handed-over document that the message did not deliver | after 3 s grace, checked every 5 s | design | `station.HandoverGrace`, `station.ReconcileEvery` |
 | T-RC8 | Reaction | EC4 | an order without an ingredient request is sent again | after 40 s | design | `timing.OrderResend` |
 | T-IS1 | Input synchronization | EC5 | the stations on one band section must see the same halt state | all five sections stop together; sections restart 1.5 s apart | design | `bt` package |
@@ -74,7 +74,8 @@ These are checked by `internal/timing/timing_test.go` and `internal/bat/bat_test
 - keep-alive detection (1.5 x 5 s = 7.5 s) is below the 15 s detection limit;
 - the 15 s limit equals three heartbeats;
 - the 45 s escalation is below the 60 s recovery limit;
-- `batchLostAfter` (120 s) is longer than mixing plus inspection plus P3;
+- `batchLostAfter` (120 s) is longer than mixing plus inspection plus P3 (`T_batter`), which covers
+  BAT's own side of the batch but not the wait at depositing (section 6);
 - the compression factor is 45 (30 min to 40 s).
 
 ## 5. Requirement list update
@@ -98,5 +99,10 @@ confirm.
 
 Detection at most 0.43 s (crash) and 7.06 s (freeze), recovery at most 1.19 s, 270 runs
 (`experiment.md`). T-RC3 and T-OS1 are not measured. T-RC4 holds before the handoff; the UPPAAL
-batter model shows a batter can be deposited up to 108 s after approval (24 s behind the previous batch, a stop of 60 s that is estimated, 24 s again; only 3 s inside the 120 s limit of dosing),
-see `team-review.md` section 3.
+batter model shows a batter can be deposited up to 108 s after approval (24 s behind the previous
+batch, a stop of 60 s that is estimated, 24 s again). Without a rejection that leaves 3 s inside the
+120 s limit of dosing. **With one UC4 rejection it does not:** the second mixing and inspection cycle
+puts the deposit at 126 s, past the 120 s at which dosing has already written the batch off, so
+T-RC6 does not hold on the whole chain (`E<> (Dep.Took && g > LOST)` is satisfied; `g <= 125` fails
+and `g <= 126` holds, so the bound is exact). Both bounds use the estimated 60 s stop.
+See `team-review.md` section 3 and `timed-automata.md`.
