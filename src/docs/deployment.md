@@ -4,46 +4,7 @@ One image holds all stations; Docker Compose starts one container per station, p
 databases, the dashboard and the optional control service. This is the view for the report (a Papyrus deployment
 diagram would show the same nodes).
 
-```mermaid
-flowchart LR
-  subgraph host[Docker host]
-    subgraph infra[infrastructure]
-      MQ[(mosquitto<br/>MQTT broker :1883)]
-      SQL[(mssql<br/>SQL Server)]
-      MG[(mongo<br/>MongoDB)]
-    end
-    subgraph plm[PLM]
-      plmwh[plm-wh]
-      plmship[plm-ship]
-    end
-    subgraph bat[BAT]
-      dose[bat-dose]
-      mix[bat-mix]
-      insp[bat-insp]
-    end
-    subgraph thm[THM]
-      dep[thm-dep]
-      bake[thm-bake]
-      exit[thm-exit]
-      cool[thm-cool]
-    end
-    subgraph fin[FIN]
-      dpn[fin-dpn]
-      qua[fin-qua]
-      wrap[fin-wrap]
-      pal[fin-pal]
-      wash[fin-wash]
-    end
-    bt[bt<br/>band transport]
-    mon[mon<br/>monitor]
-    ui[ui<br/>dashboard :8080]
-    ctl[ctl<br/>control, demo profile]
-  end
-  plm & bat & thm & fin & bt & mon & ui --- MQ
-  plmwh & plmship & mon --- SQL
-  plm & bat & thm & fin & bt & ui --- MG
-  ctl -. Docker socket .-> host
-```
+![Deployment view](deployment.svg)
 
 | Node | Image | State on a volume | Talks to |
 |---|---|---|---|

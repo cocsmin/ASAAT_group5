@@ -44,6 +44,7 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_IuV98L9FEfGK09TLxcHe5g" name="Ingredient request and reservation result" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_Y2-1cL9FEfGK09TLxcHe5g" name="Log, warning, error and discard events" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_EuckcL9GEfGK09TLxcHe5g" name="Pallet ready for shipment" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_DPKmP9zaWRnuq2dOz5sRzu" name="Machine status (heartbeat)" aggregation="composite"/>
       <ownedConnector xmi:type="uml:Connector" xmi:id="_4CFxIL9GEfGK09TLxcHe5g" name="Connector13">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_4CO7EL9GEfGK09TLxcHe5g" partWithPort="_rGH1gL88EfGK09TLxcHe5g" role="_cFXAgL9GEfGK09TLxcHe5g"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_4CPiIL9GEfGK09TLxcHe5g" role="_IuV98L9FEfGK09TLxcHe5g"/>
@@ -79,6 +80,10 @@
       <ownedConnector xmi:type="uml:Connector" xmi:id="_kKSmoL9OEfGK09TLxcHe5g" name="Connector21">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_kKUb0L9OEfGK09TLxcHe5g" role="_Y2-1cL9FEfGK09TLxcHe5g"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_kKUb0b9OEfGK09TLxcHe5g" partWithPort="_uLlxob88EfGK09TLxcHe5g" role="_9B6SYL9MEfGK09TLxcHe5g"/>
+      </ownedConnector>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_DWlnGYQe4o0hPYdlHwpc5x" name="Connector22">
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_5yTgx0BvYVaI7jBlHsjNmJ" role="_DPKmP9zaWRnuq2dOz5sRzu"/>
+        <end xmi:type="uml:ConnectorEnd" xmi:id="_2PoFR_UaDayTb4r_5oFOY7" partWithPort="_uLlxob88EfGK09TLxcHe5g" role="_wW_tyJYulacycZ8tTAoovY"/>
       </ownedConnector>
       <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_EK3N0NEvEfGZ44KCKtLvcQ" name="StateMachine22">
         <region xmi:type="uml:Region" xmi:id="_IJAeYNEvEfGZ44KCKtLvcQ" name="Region1">
@@ -187,6 +192,7 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_vo-dAL85EfGK09TLxcHe5g" name="Event Reporting (PLM-AF-05)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_9B6SYL9MEfGK09TLxcHe5g" name="Log, warning, error and discard events" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_wW_tyJYulacycZ8tTAoovY" name="Machine status (heartbeat)" aggregation="composite"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_--U2YL85EfGK09TLxcHe5g" name="Warehouse Storage Equipment (PLM-FD-01)">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_qffVgL9LEfGK09TLxcHe5g" name="Withdrawal confirmation" aggregation="composite"/>
@@ -434,6 +440,7 @@
   <Blocks:NestedConnectorEnd xmi:id="_Z8xpwb9OEfGK09TLxcHe5g" base_Element="_Z8xCsL9OEfGK09TLxcHe5g" propertyPath="_w5-qg788EfGK09TLxcHe5g" base_ConnectorEnd="_Z8xCsL9OEfGK09TLxcHe5g"/>
   <Blocks:NestedConnectorEnd xmi:id="_Z8yQ0L9OEfGK09TLxcHe5g" base_Element="_Z8xpwL9OEfGK09TLxcHe5g" propertyPath="_sxz7QL88EfGK09TLxcHe5g" base_ConnectorEnd="_Z8xpwL9OEfGK09TLxcHe5g"/>
   <Blocks:NestedConnectorEnd xmi:id="_kKUb0r9OEfGK09TLxcHe5g" base_Element="_kKUb0b9OEfGK09TLxcHe5g" propertyPath="_uLlxob88EfGK09TLxcHe5g" base_ConnectorEnd="_kKUb0b9OEfGK09TLxcHe5g"/>
+  <Blocks:NestedConnectorEnd xmi:id="_rX7bkzeWXhwGM_1cC66kKt" base_Element="_2PoFR_UaDayTb4r_5oFOY7" propertyPath="_uLlxob88EfGK09TLxcHe5g" base_ConnectorEnd="_2PoFR_UaDayTb4r_5oFOY7"/>
   <Requirements:Requirement xmi:id="_VvwtgMyFEfG0tpuZPTrJ-Q" base_NamedElement="_VvH0UMyFEfG0tpuZPTrJ-Q" id="PLM-REQ-01" text="The system shall create and schedule production orders for new batter mixing processes" base_Class="_VvH0UMyFEfG0tpuZPTrJ-Q"/>
   <Requirements:Requirement xmi:id="_ETWPEMyHEfG-B8dhrKvttQ" base_NamedElement="_ES-boMyHEfG-B8dhrKvttQ" id="PLM-REQ-02" text="The system shall maintain recipe definitions and target parameters used by production stations" base_Class="_ES-boMyHEfG-B8dhrKvttQ"/>
   <Requirements:Requirement xmi:id="_EyGnoMyHEfG-B8dhrKvttQ" base_NamedElement="_Ex-r0MyHEfG-B8dhrKvttQ" id="PLM-REQ-03" text="The system shall initiate production by sending the &quot;Production order and recipe targets&quot; signal to BAT" base_Class="_Ex-r0MyHEfG-B8dhrKvttQ"/>
