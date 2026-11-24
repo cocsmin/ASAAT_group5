@@ -130,7 +130,9 @@ func (e *env) pans() (int, map[string]int) {
 		ByStatus map[string]int `json:"byStatus"`
 	}
 	_ = e.get("/api/pans/summary", &s)
-	return s.Total, s.ByStatus
+	// A pan sorted out as damaged (UC12) stays as a document with status "discarded" and a new pan
+	// replaces it after replaceDelay (30 s): count the pans in service, so the replacement keeps the number.
+	return s.Total - s.ByStatus["discarded"], s.ByStatus
 }
 
 func (e *env) gauge(node, name string) int64 {
@@ -255,6 +257,10 @@ func (e *env) flowResumes(since time.Duration) error {
 // panLoop checks that no pan was lost or duplicated.
 func (e *env) panLoop(want int) error {
 	total, by := e.pans()
+	for i := 0; i < 45 && total != want; i++ { // a sorted-out pan is replaced within 30 s
+		time.Sleep(time.Second)
+		total, by = e.pans()
+	}
 	e.rec("pans_lost", float64(want-total))
 	e.logf("pans: %d in the loop %v", total, by)
 	if total != want {
