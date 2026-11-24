@@ -28,9 +28,9 @@ longer text; the PLM texts were shortened after a first try ran over the box edg
 | D9 | yes | new Papyrus diagrams, generated and checked on screen: "BT Section Control STM" (run, slow, halt, correcting the speed, section fault) and, for MON, "MON Node Watchdog STM" (unknown, online, silent, dead, escalated) and "MON Ticket Lifecycle STM"; the generator is in `Model/tools` |
 | D8 | yes | PLM: new port "Machine status (heartbeat)" on the PLM block and on Event Reporting, connected in the PLM IBD (checked on screen) |
 | D10 (rest) | yes | BT port `sectionStatus` renamed "Band state change". MON receives it on its port `sensorData` (decision 25 Nov: the band state arrives with the other node data); MON ports keep their own names for the rest |
-| **D11** | **no** | the Cake Factory IBD: it has the six parts and their ports but no connectors. The ports sit on the wrong sides to face each other (for example Clean pan supply is on the left of THM and the right of FIN), so about 28 connectors would cross the diagram. It needs the ports moved and the connectors routed by hand in Papyrus |
+| D11 | yes (25 Nov) | the Cake Factory IBD was re-laid out and has 13 connectors, checked on screen: PLM-BAT (2), BAT-THM (2), THM-FIN (5), FIN to PLM "Pallet ready for shipment" over the top, and "Band state change" from BT to THM, FIN and MON as one bus. The ports are on the sides that face each other. Two top-level ports were missing and are added: "Pallet ready for shipment" on FIN and "Band state change" on BT. **Not drawn in this diagram** (they stay in the model): the events, heartbeat and repair ports of every system and the other ports of BT and MON; drawn as lines they would cross everything. The generator is `Model/tools/ibd.js` |
 
-The table in section 2 is the state before these fixes. After them the diagram gaps that remain are D11 (connectors in the Cake Factory IBD) and the drawn timer transition of D7.
+The table in section 2 is the state before these fixes. After them the only diagram gap that remains is the drawn timer transition of D7.
 
 ## 1. Matches the code
 

@@ -1295,6 +1295,7 @@
       </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_JB5r8Lz8EfGC__yJIGIlPQ" name="Finishing &amp; Packaging (FIN) ">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_EqTknJHuGgAjjL533BggdQ" name="Pallet ready for shipment" aggregation="composite"/>
       <ownedTemplateSignature xmi:type="uml:RedefinableTemplateSignature" xmi:id="_rxZDML2TEfGl1tErtx_5Og" name="RedefinableTemplateSignature29"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_hblXILz9EfGC__yJIGIlPQ" name="fin-af-13" type="_uxyYsLz8EfGC__yJIGIlPQ" aggregation="composite" association="_hbM8oLz9EfGC__yJIGIlPQ">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_seL6ML0DEfGuNPIy4mhsQg" name="LiteralInteger1" value="1"/>
