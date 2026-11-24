@@ -60,6 +60,5 @@ Differences to the alignment baseline to settle with the group:
   run from the sections it owns.
 
 **MON ports in the model:** MON receives "Band state change", the heartbeats and the birth and death certificates on its
-port `sensorData` and `containerStatus`; the events arrive on `Log, warning, error and discard events`. "Repair confirmed"
-is sent from the maintenance manager (`maintenanceStatus`). BT sends "Band state change" on the port of the same name
+port `sensorData` and `containerStatus`; the events arrive on `Log, warning, error and discard events`. BT sends "Band state change" on the port of the same name
 (renamed from `sectionStatus` on 25 Nov).
