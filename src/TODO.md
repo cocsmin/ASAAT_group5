@@ -249,7 +249,7 @@ analysis project. The reason is part of the entry so the report can state it.
 4. **MON policy**: closed. The policy table is [docs/mon-policy.md](docs/mon-policy.md), read from the code; only
    dead or silent stations and section faults halt the band.
 5. **Duplicate filter in memory**: accepted. After a receiver restart the receivers' own checks (batch id, pan id,
-   order id) make every handler idempotent, so a duplicate does no harm (UPPAAL handover model).
+   order id) make every handler idempotent, so a duplicate does no harm (`station.PanSet` takes a pan only once).
 6. **PLM held orders in memory**: accepted. A held order is noticed again when BAT repeats its request (at most
    20 s later), and the order stays in SQL with status `held`; the UPPAAL PLM model shows BAT always gets its answer.
 7. **`ctl` holds the Docker socket**: accepted, demo profile only ([docs/security.md](docs/security.md)).
@@ -259,7 +259,9 @@ analysis project. The reason is part of the entry so the report can state it.
 
 ## Report
 
-1. Write the report sections that use this: the decisions (`docs/decisions.md`),
-   the signal table (`docs/signals.md`), the conformance table (section 6 of
-   `docs/decisions.md`).
-2. Contributions table and the evaluation experiment are empty in the template.
+1. **Done 24 Nov:** a draft of every section of the template, with the numbers and the references to the
+   documents, is in [docs/report-draft.md](docs/report-draft.md): problem, use case, QAS, modelling, formal
+   verification, the four evaluation subsections (with the pilot calculation), conclusion, contributions.
+2. **For the group:** related work (needs the papers you read), the authors in the template, and pasting the
+   draft into `report/GroupTemplate/conference_101719.tex`. The contributions table is filled from the git history;
+   check it.
