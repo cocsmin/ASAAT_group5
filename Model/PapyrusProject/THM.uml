@@ -1316,7 +1316,7 @@
           <transition xmi:type="uml:Transition" xmi:id="_Q4nugX-yWkC7wr6iVPPDXA" name="T1" guard="_v88ZX2GK_k6NZrXTegxyhA" source="_Ebe9lLVW1kCBD7bvK7wESQ" target="_qsipS1OKDEiREyishxPibA">
             <ownedComment xmi:type="uml:Comment" xmi:id="_IV74oc3T10CRhzi9gIrV1g" annotatedElement="_Q4nugX-yWkC7wr6iVPPDXA"><body>Traces to: THM-REQ-02, THM-REQ-03, THM-REQ-06, THM-REQ-09. Aged: a batter whose total wait since approval at Batter Preparation (carried in "Batter ready") is over T_batter is discarded instead (event FC7, signal "Batch result" = discarded).</body></ownedComment>
             <ownedRule xmi:type="uml:Constraint" xmi:id="_v88ZX2GK_k6NZrXTegxyhA" name="admission open, Weight-Checker calibrated"><specification xmi:type="uml:LiteralString" xmi:id="_0alPqc-uxUC7PWUh_uFTOA" value="admission open, Weight-Checker calibrated"/></ownedRule>
-            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_sAEypnXrpUu2mBuGK5N-XA" name="start deposit, discard if aged"/>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_sAEypnXrpUu2mBuGK5N-XA" name="start deposit"/>
             <trigger xmi:type="uml:Trigger" xmi:id="_5rL2Z_8znUa3MOx7DhEEKQ" name="pan detected" event="_5DcvU48LRUm--d2OMwHArw"/>
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_MpoADopoWUKUUoiaKMGESg" name="T2" kind="internal" source="_Ebe9lLVW1kCBD7bvK7wESQ" target="_Ebe9lLVW1kCBD7bvK7wESQ">
@@ -1380,7 +1380,7 @@
           <subvertex xmi:type="uml:State" xmi:id="_Ebe9lLVW1kCBD7bvK7wESQ" name="Waiting for Pan">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_oG2LPP8cvU2MLcvsG-DgDQ" name="check whether a pan is present"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ZrihJZkqU02GAour9gBryA" name="ready depositing point"/>
-            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_vzU6uRnVvkqUjMOUBLcQ9A" name="record batch ID"/>
+            <exit xmi:type="uml:OpaqueBehavior" xmi:id="_vzU6uRnVvkqUjMOUBLcQ9A" name="record batch ID, discard batter if aged (T_batter)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_rtM37FkeNU-XITc5DrgXxQ" name="Admission Stopped">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_0f_p6BC_nkSf6JJFrZ5Z6w" name="track active stop reasons"/>
