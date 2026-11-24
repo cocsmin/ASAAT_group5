@@ -10,6 +10,11 @@ Everything that is not done, not verified, or not mine to decide. Items marked
 The implementation follows the diagrams where they exist. These are the places
 where the diagrams are missing, wrong, or behind the implementation.
 
+**Status 24 Nov:** Elena reports that all open diagram items below are now updated in the Papyrus models
+(not re-checked item by item in this file). Done and seen on screen: BAT "Mixing and Handoff Behaviour" (waited
+time carried to THM, re-laid out) and THM SM1 Depositing (aged batter discarded), PR #9. Delete the items that the
+group has checked.
+
 1. **Cake Factory IBD** is empty. Add the message bus (Sparkplug B on an MQTT
    broker) and the MON part, and connect the frame ports of the slices to the bus
 
@@ -50,8 +55,8 @@ where the diagrams are missing, wrong, or behind the implementation.
    - keep the 14 signals and the ports of BAT and THM as they are (no new port).
    **Done in the code 24 Nov (decided):** P3 counts after the handoff too: "Batter ready" carries `waited` and
    THM-DEP discards a queued batter whose total wait passes P3 (`docs/team-review.md` section 3, item 11).
-   **To do in Papyrus [person]:** BAT Mixing and Handoff sends the waited time with "Batter ready"; THM Depositing
-   discards a batter that passes P3 in the queue and sends "Batch result" "discarded". If the group chooses option A
+   **Done in Papyrus 24 Nov (PR #9):** BAT HandingOff makes the waited time available; THM SM1 `Waiting for Pan` exit
+   text and the T1 trace comment say that an aged batter is discarded ("Batch result" = discarded). If the group chooses option A
    instead (a 15th signal "Batter collected"), the code, `docs/signals.md`, the port tables,
    the Word document and the UPPAAL batter model (`gen.js`) all change.
 8. **State machines live on branches** (`state-machines-fin`,
