@@ -177,12 +177,17 @@ You will notice the layout looks mechanical. That is on purpose.
 - **Labels** are placed by a small search in `gen.js`: for every edge it tries boxes beside the edge and keeps
   the one that overlaps the fewest other labels, location names, circles and edges. Colours are UPPAAL's:
   green guard, teal synchronisation, blue update, olive select, purple invariant.
-- **Every model except `supervision` and `plm` has a tiny `Tick` template**: one location with a loop to
+- **`band` and `handover` have a tiny `Tick` template**: one location with a loop to
   itself. UPPAAL calls a state with no way forward a *deadlock*. When a model has finished its
   story, it would count as a deadlock and `A[] not deadlock` would fail for a boring reason.
-  `Tick` lets time keep passing. The two exceptions never end (the heartbeat and the order cycle go on
-  for ever), and in `plm` a `Tick` that takes no time would let an infinite run stand still and spoil the
-  "leads-to" queries.
+  `Tick` lets time keep passing. `supervision` and `plm` never end (the heartbeat and the order cycle go on
+  for ever), so they need none, and in `plm` a `Tick` that takes no time would let an infinite run stand
+  still and spoil the "leads-to" queries.
+- **`batter` had a `Tick` and no longer does**, for that same "leads-to" reason: with it, both leads-to
+  queries of section 5.3 came back NOT satisfied, and without it both are satisfied. It was never needed
+  there either, because `Copy` never stops, so `deadlock` is unreachable with or without it. Both facts
+  checked with `verifyta` 5.0.0. The lesson generalises: a `Tick` buys a tidier `not deadlock` and costs
+  every liveness property, so `band` and `handover` cannot carry a leads-to query while they keep theirs.
 
 ---
 
@@ -219,7 +224,7 @@ and only talk through channels. There are four reasons for splitting it:
 |---|---|---|
 | Supervision | `Node`, `Broker`, `MON` | `Docker` (restarts), `Env` (injects the fault) |
 | Band | `Section` (×5), `MON` | `Env` (injects the fault), `Tick` |
-| Batter | `Batch` (BAT-INSP), `Dep` (THM-DEP) | `Copy` (state signal delay), `Tick` |
+| Batter | `Batch` (BAT-INSP), `Dep` (THM-DEP) | `Copy` (state signal delay) |
 | Handover | `Sender`, `Receiver` | `Message` (the network, may lose), `Tick` |
 | PLM-WH | `Plm` (the state machine), `Bat` (BAT-DOSE asking for ingredients) | `Clock` (the order cycle), `Stock` (the stock gets too low), `Wms` (the warehouse stops answering) |
 
@@ -462,17 +467,20 @@ more sections stopped than are upstream; release is reachable.
 depositing (THM-DEP). Depositing can be **stopped**: for a jam (FC7, which clears by itself after
 30 s in the code), or because a station behind it asks it to stop (the baking zone, the cooling
 buffer, the holding area before wrapping, no clean pans), or because the band section S1 is
-halted. Batter must not wait for ever, so after 25 s (parameter **P3**)
-of waiting the batter is discarded.
+halted. Batter must not wait for ever, so after 25 s (parameter **`T_batter`**, `timing.BatterWait`)
+of waiting the batter is discarded. The inspector can also **reject** the batter (UC4), and mixing
+then starts another cycle at once.
 
 An important detail: **there is no acknowledgement** from depositing. BAT-INSP never asks "did
 you take it?". It keeps its own **copy** of the "depositing stopped / working again" state and
 acts on that. If the copy says working, it sends "Batter ready" and is done. This matches the
 code (`internal/bat/insp.go`) and is the group decision recorded in `TODO.md` item 7.
 
-**Parameters:** `MIX = 6`, `INSP = 3`, `P3 = 25`, `POLL = 1` (the code looks at the state once
-a second, so it really discards after 26 s), `LOST = 120` (dosing gives up on a batch after 120
-s), `STALE = 6` (the copy is at most one heartbeat plus one delivery old, *estimated*),
+**Parameters:** `MIX = 6` (`store.SeedRecipe.MixSeconds`, the one recipe the factory bakes, so this
+is exact and not an abstraction), `INSP = 3`, `T_batter = 25` (`timing.BatterWait`), `POLL = 1` (the
+code looks at the state once a second, so it really discards after 26 s), `LOST = 120` (dosing gives
+up on a batch after 120 s), `T_hb = 5` (`timing.Heartbeat`) and `STALE = T_hb + 1`, derived rather
+than written out (the copy is at most one heartbeat plus one delivery old, *estimated*),
 `BLOCKMAX = 60` (depositing stays stopped at most this long, *estimated*: the jam alone is 30 s,
 the other stop reasons can last longer), `DEPSTART = 24` (a queued batter waits at most this long
 for depositing to take it up: depositing works one batch after another, one pan per second, and a
@@ -484,14 +492,24 @@ batch has 24 pans, so a batter that arrives early sits behind the previous batch
 ![Batch template](img/batter-batch.png)
 
 - The batch starts in `Mixing` (6 s) and goes to `Inspecting` (3 s).
-- After the inspection there is a fork, decided by `seen`, BAT-INSP's copy of the depositing
-  state:
+- From `Inspecting` the inspector may **reject** the batter (UC4) and go back to `Mixing` for another
+  cycle. `rejectDone` allows this once, the same one-fault bound `Dep` uses for its stop. The code
+  caps nothing — UC4 is a random fault at 3 per hour — and an unbounded loop here makes the batch
+  outlive dosing's `LOST` timer, which breaks four queries. One rejection is enough to show the
+  effect; see the second finding below.
+- Otherwise there is a fork, decided by `seen`, BAT-INSP's copy of the depositing state:
   - `!seen` (depositing works): straight to `Handed`, sending `ready!` (the "Batter ready"
     signal). BAT is done with the batch.
   - `seen` (depositing is stopped): to `Holding`.
-- In `Holding` the batter waits. The invariant `x <= P3 + POLL` limits the wait to 26 s. If the
-  copy says working again (`!seen`), it goes to `Handed`. If it is still stopped after 26 s, it goes
-  to `Discarded`.
+- `Holding` **is the loop of `bat.handOff`, not a deadline.** The invariant is `x <= POLL`, so one
+  second passes per turn; each turn adds `POLL` to the counter `waited` and then either discards the
+  batter (`waited + POLL > T_batter`), hands it over (`!seen`) or looks again (`seen`). That is the
+  order of the `for` loop in `insp.go`, and it means the 26 s limit is something UPPAAL **derives**
+  from the loop rather than something the model asserts. The earlier version put `x <= T_batter + POLL`
+  straight onto `Holding`, which made the T-RC4 query unfalsifiable.
+- Both edges into `Handed` also record `handedWhileStopped = stopped`: the **real** state of
+  depositing at the instant of the handoff. Nothing in the model reads this flag; it exists only so
+  that FINDING 1 below can ask about that instant instead of about any later moment.
 
 *Why it is its own diagram:* it is the part of the batter's life that belongs to BAT-INSP. The
 `ready!` arrow is the only place where this diagram touches depositing.
@@ -499,8 +517,6 @@ batch has 24 pans, so a batter that arrives early sits behind the previous batch
 #### Dep (THM-DEP, depositing)
 
 ![Dep template](img/batter-dep.png)
-
-*(The picture was taken before 24 Nov and does not show the location `Expired` yet; open `batter.xml` in UPPAAL to see it.)*
 
 - `Open` (start) means depositing admits pans. `Blocked` means it is stopped; the invariant
   `y <= BLOCKMAX` limits that to 60 s, and the edges back need `y >= 1`. It can stop **only once**
@@ -513,9 +529,9 @@ batch has 24 pans, so a batter that arrives early sits behind the previous batch
   `Took` has a `C`, it is committed and only sets `deposited = true`; then `Done`.
 - When `Blocked` ends, it goes to `Open` or to `OpenQ` depending on whether a batter was queued
   in the meantime.
-- Since 24 Nov depositing also keeps the P3 rule. "Batter ready" carries the time the batter already
+- Since 24 Nov depositing also keeps the T_batter rule. "Batter ready" carries the time the batter already
   waited in BAT-INSP, so the clock `h` (time since approval) goes on. `OpenQ` has two ways out: to
-  `Took` when `h <= P3`, and to `Expired` when `h > P3` (the batter is discarded, FC7, `Batch result`
+  `Took` when `h <= T_batter`, and to `Expired` when `h > T_batter` (the batter is discarded, FC7, `Batch result`
   "discarded"). `Expired` is committed like `Took`, then `Done`.
 
 *Why it is its own diagram:* it is a different system (THM), with its own failure. BAT must **not**
@@ -534,22 +550,44 @@ see it directly. The model keeps them apart, so it cannot cheat by letting BAT r
 own diagram makes the staleness an explicit, tunable value. The first finding below
 comes from this diagram.
 
-**What the queries prove:** before the handoff the batter holds at most 26 s; BAT's side of a
-batch is finished within 35 s; after the handoff a batter is deposited at most P3 (25 s) after
-approval, otherwise depositing discards it (at most 108 s after approval, when a stop of 60 s
-kept it waiting); a batter is always deposited or discarded before dosing gives the batch up
-(120 s); deposited and discarded never both happen; both ends are reachable.
+**What the queries prove:** **T-RC4 holds and is tight** — a discarded batter has waited exactly
+`T_batter + POLL` = 26 polls, and the same query with 25 fails. BAT's side of a batch is finished
+within 44 s, allowing one rejected mixing cycle. **After the handoff** (since 24 Nov) a batter is
+deposited at most `T_batter` after approval and at most 43 s after the batch started, also with one
+rejection, so always before dosing gives the batch up at 120 s; one that waited longer is discarded
+at depositing (at most 108 s after approval, exact). Deposited and discarded never both happen; both
+ends are reachable; **every inspected batch ends**, handed over or discarded, and **every queued
+batter is taken up or discarded in the end** (the two leads-to queries, which only became possible
+once `Tick` was removed — see section 4).
 
-**Finding** (a satisfied query that shows a weakness rather than a safety guarantee):
+T-RC4 is counted on the integer `waited`, not on a clock. `Discarded` is terminal, so a clock keeps
+running after the batch has ended and *any* clock bound on a terminal location fails for a reason
+that has nothing to do with the requirement. The same trap produced the old form of finding 1.
 
-The state copy can be stale: a batter can be handed over while depositing is already
-   stopped. Depositing queues it, so nothing is lost.
+One query still carries less than it looks like, and says so in `batter.q`: `A[] not deadlock` holds,
+but `Copy` never stops, so `deadlock` is unreachable whatever the two stations do. The two `LIMIT`
+queries make the gap explicit: `Batch.Discarded && Dep.Open && faultDone` and `Batch.Handed &&
+Dep.Done` are both reachable, and in both the two stations can never move again.
 
-The second finding of the first version of this model (after the handoff nothing limited the wait, a
-batter could be deposited 108 s after approval, 3 s before dosing gives up) is **fixed since 24 Nov**:
-the code and this model now let THM-DEP discard a queued batter whose total wait passes P3
-(`docs/team-review.md` section 3, item 11). The query that proved the weakness was replaced by
-`A[] Dep.Took imply h <= P3`.
+**One finding** (a satisfied query that shows a weakness rather than a safety guarantee):
+
+1. The state copy can be stale: a batter can be handed over at a moment when depositing is really
+   stopped (`E<> handedWhileStopped`). Depositing queues it, so nothing is lost. Rebuilding the
+   model so the state signal arrives with no delay makes this query NOT satisfied, which pins the
+   cause on the delivery delay rather than on the handoff logic.
+
+**Two findings of the first version are fixed since 24 Nov** (decision of the group,
+`docs/team-review.md` section 3, item 11): (2) after the handoff nothing limited the wait, up to
+108 s after approval; (3) one rejection made the deposit 126 s after the batch started, past
+dosing's `LOST` limit of 120 s. THM-DEP now discards a queued batter whose total wait passes
+`T_batter`. The two weakness queries became proofs: `A[] Dep.Took imply h <= T_batter` and
+`A[] Dep.Took imply g <= LOST`. Exact numbers by bisection: a batter is deposited at `h <= 25`
+(`h <= 24` fails) and `g <= 43` (`g <= 42` fails); a discard at depositing happens at `h <= 108`
+(`h <= 107` fails) and `g <= 126` (`g <= 125` fails).
+
+`sup` queries do not work on this model: `g` is never reset and appears in no guard or invariant, so
+`sup{Dep.Took}: h` and `sup{Batch.Holding}: Batch.x` do not terminate, while ordinary reachability
+answers at once. Use the bisection above instead — it gives the exact number from `A[]` queries only.
 
 ---
 
@@ -724,7 +762,7 @@ created while the monitor is offline (the monitor does not stop depositing, only
 |---|---|---|
 | `supervision.xml` | 8 | all satisfied |
 | `band.xml` | 7 | all satisfied |
-| `batter.xml` | 11 | all satisfied (two of them are the findings above) |
+| `batter.xml` | 17 | all satisfied (three are the findings above, two are stated limits, and one — `not deadlock` — cannot fail; see 5.3) |
 | `handover.xml` | 4 | all satisfied |
 | `plm.xml` | 13 | all satisfied (bounds tight, negative controls fail) |
 
@@ -821,3 +859,16 @@ Related documents: `docs/timing-constraints.md` (D1, which rules exist), `docs/v
 | **Crash / freeze** | The process dies (noticed at once) / the container is paused and goes silent (noticed after the keep-alive timeout). |
 | **MON** | The monitor system. |
 | **Estimated** | A value the plant does not give; chosen by the group and marked as such. |
+
+---
+
+## Optimization: how much room do the design values have?
+
+`node optimize.js` (needs `verifyta`) asks UPPAAL, by bisection, for the largest or smallest value of one
+parameter for which a set of queries stays satisfied, and writes [optimization.md](optimization.md).
+Examples (all other parameters unchanged): a Docker restart may take up to 43 s (the code assumes 30 s)
+before the 60 s recovery or the 45 s escalation is broken; BAT's ingredient request must not be repeated
+before 18 s (the code uses 20 s); the reconcile period of 5 s is exactly the largest that takes up a
+stored document within 8 s; dosing's batch-lost limit could be as low as 44 s without ever dropping a
+batch that is still alive (the code uses 120 s, which is food-safe slack, not a bound from the model).
+`sup` queries do not terminate on these models, which is why bisection is used.

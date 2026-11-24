@@ -262,7 +262,7 @@ func (e *env) panLoop(want int) error {
 		total, by = e.pans()
 	}
 	e.rec("pans_lost", float64(want-total))
-	e.logf("pans: %d in the loop %v", total, by)
+	e.logf("pans: %d in the loop %v (expected %d)", total, by, want)
 	if total != want {
 		return fmt.Errorf("pan count changed: %d, expected %d", total, want)
 	}
@@ -532,7 +532,8 @@ func faults(e *env, list []fault) error {
 	if err := e.settle(); err != nil {
 		return err
 	}
-	pans, _ := e.pans()
+	pans, by0 := e.pans()
+	e.logf("pans at the start: %d in service %v", pans, by0)
 	var failed []string
 	for _, f := range list {
 		if err := runFault(e, f); err != nil {

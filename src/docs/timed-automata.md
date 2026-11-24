@@ -7,7 +7,7 @@ seconds. All timing values that the plant does not give are estimated by the gro
 (restart time, message delay, how long depositing may stay stopped). `x`, `y`, `z` are local clocks. `!` sends and `?` receives on a channel.
 
 Time constants (`internal/timing`): `HB = 5`, `KA = 5` (the broker declares a node dead after 1.5 x 5 s = 7.5 s, rounded up to `DEADAFTER = 8`), `DETECT = 15`, `RESTORE = 60`,
-`ESCALATE = 45`, `P3 = 25`, `LOST = 120`, `GRACE = 3`, `RECONCILE = 5`.
+`ESCALATE = 45`, `T_batter = 25`, `LOST = 120`, `GRACE = 3`, `RECONCILE = 5`.
 
 ## D3.1 Intra-behaviour: one TA per function block
 
@@ -100,11 +100,12 @@ to a sink), `release?`.
 This follows the implementation and the decision in `team-review.md` (section 1, item 2,
 option B): there is **no acknowledgement** from depositing to batter preparation. BAT-INSP
 reads its own copy of the state signal "Depositing stopped / working again". While the copy
-says stopped it holds the batter; after `P3` (plus one polling second) it discards it.
+says stopped it holds the batter, one second at a time as `handOff` does; after `T_batter`
+(plus one polling second) it discards it.
 Otherwise it sends "Batter ready" and is done with the batch.
 
-Constants: `MIX = 6`, `INSP = 3`, `P3 = 25`, `POLL = 1` (the code looks at the state once a
-second, so it discards after 26 s), `LOST = 120`, `STALE = 6` (the copy is at most one
+Constants: `MIX = 6`, `INSP = 3`, `T_batter = 25`, `POLL = 1` (the code looks at the state once a
+second, so it discards after 26 s), `LOST = 120`, `T_hb = 5` and `STALE = T_hb + 1` (the copy is at most one
 heartbeat plus one delivery old, estimated), `BLOCKMAX = 60` (depositing stays stopped at
 most this long, estimated), `DEPSTART = 24` (a queued batter waits at most this long for
 depositing to take it up: it can sit behind the previous batch, 24 pans of 1 s each, from the code). Clocks: `g` age of the batch, `h` time since approval.
@@ -116,17 +117,19 @@ Channel: `ready` (Batter ready).
 |---|---|---|
 | `Mixing` | `x <= MIX` | mixing |
 | `Inspecting` | `x <= INSP` | inspection takes 3 s |
-| `Holding` | `x <= P3 + POLL` | the copy says depositing is stopped, the batter waits |
+| `Holding` | `x <= POLL` | the copy says depositing is stopped; one turn of the `handOff` loop per second, counted in `waited` |
 | `Handed` | none | "Batter ready" sent, BAT is done |
 | `Discarded` | none | waited too long |
 
 | From | To | Guard | Sync | Update |
 |---|---|---|---|---|
 | `Mixing` | `Inspecting` | `x >= MIX` | | `x = 0` |
-| `Inspecting` | `Holding` | `x >= INSP && seen` | | `x = 0, h = 0` |
-| `Inspecting` | `Handed` | `x >= INSP && !seen` | `ready!` | `h = 0` |
-| `Holding` | `Handed` | `!seen` | `ready!` | |
-| `Holding` | `Discarded` | `seen && x >= P3 + POLL` | | |
+| `Inspecting` | `Mixing` | `x >= INSP && !rejectDone` | | `x = 0, rejectDone = true` |
+| `Inspecting` | `Holding` | `x >= INSP && seen` | | `x = 0, h = 0, waited = 0` |
+| `Inspecting` | `Handed` | `x >= INSP && !seen` | `ready!` | `h = 0, handedWhileStopped = stopped` |
+| `Holding` | `Holding` | `x >= POLL && seen && waited + POLL <= T_batter` | | `waited = waited + POLL, x = 0` |
+| `Holding` | `Handed` | `x >= POLL && !seen && waited + POLL <= T_batter` | `ready!` | `waited = waited + POLL, handedWhileStopped = stopped` |
+| `Holding` | `Discarded` | `x >= POLL && waited + POLL > T_batter` | | `waited = waited + POLL` |
 
 **Dep** (THM-DEP): `Open`, `OpenQ` (a batter is queued, invariant `q <= DEPSTART`),
 `Blocked` (invariant `y <= BLOCKMAX`), `Took` (committed: the batter is taken up), `Done`.
@@ -134,6 +137,9 @@ It accepts `ready?` in `Open` and `Blocked` (it queues the batter whatever its s
 can stop once (`stopped = true`) and starts again after at least 1 s. `OpenQ` to `Took` sets
 `deposited`. **Copy**: one location with invariant `w <= STALE`; every 1 to 6 s it sets
 `seen = stopped`. This is the state signal, repeated with every heartbeat.
+`handedWhileStopped` records the real state of depositing at the instant of each handoff; no automaton
+reads it, it only lets a query ask about that instant. This model has **no `Tick`**: with one, its two
+leads-to queries were NOT satisfied, and it needs none, because `Copy` never stops.
 
 ### Station handover (sender and receiver)
 
@@ -233,8 +239,8 @@ answers; `Stock` and `Wms` only change `lowStock` and `wmsDown`, and `Clock` onl
 | T-RC1 detection 15 s | Broker invariant, MON | proven by the query `A[] MON.Failed imply ...` below |
 | T-RC2 recovery 60 s | Node, Docker, MON | `ESCALATE` guard on MON; query bounds restart plus birth |
 | T-RC3 stop within 1 s | Band section | invariant `x <= 1` in `Pass` |
-| T-RC4 batter 25 s | Batch | invariant `x <= P3 + POLL` in `Holding` and guard `x >= P3 + POLL` on the discard; covers the wait **before** the handoff only (see Limits) |
-| T-RC6 batch lost 120 s | queries on the clock `g` | `g <= LOST` while the batch is with BAT and when the batter is deposited; the dosing timer itself is not modelled |
+| T-RC4 batter 25 s | Batch | derived from the `handOff` poll loop in `Holding` (`x <= POLL` per turn, counter `waited`), not asserted: `A[] Batch.Discarded imply Batch.waited <= T_batter + POLL` holds and the same with 25 fails; covers the wait **before** the handoff only (see Limits) |
+| T-RC6 batch lost 120 s | queries on the clock `g` | holds while the batch is with BAT, but **not** at the deposit: with one UC4 rejection the batter can be deposited at 126 s, past the 120 s give-up (`E<> (Dep.Took && g > LOST)` is satisfied). The dosing timer itself is not modelled |
 | T-RC7 handover 3 s | Handover | guard `x >= GRACE`, invariant `x <= GRACE + RECONCILE` |
 | T-EX* execution times | Station TAs | invariant `x <= d` and guard `x >= d` |
 | T-OR2 release after birth | Band NTA | `release` edge guarded by `owner_online` |
@@ -253,7 +259,7 @@ written into one automaton. They are properties of the NTA, checked with a query
 |---|---|---|---|
 | `uppaal/supervision.xml` | Node, Broker, MON, Docker, Env | 8 | all satisfied |
 | `uppaal/band.xml` | five Sections, Env, MON | 7 | all satisfied |
-| `uppaal/batter.xml` | Batch, Dep, Copy | 14 | all satisfied (one of them is a reachability finding, see below) |
+| `uppaal/batter.xml` | Batch, Dep, Copy | 18 | all satisfied (one of them is a reachability finding, two are LIMIT queries, see below) |
 | `uppaal/handover.xml` | Sender, Message, Receiver | 4 | all satisfied |
 | `uppaal/plm.xml` | Plm, Bat, Clock, Stock, Wms | 13 | all satisfied |
 
@@ -268,17 +274,24 @@ What the queries prove, with the estimated parameters:
 - **Band.** A halt reaches every upstream section within N x 1 s = 5 s, each section hands it on
   within 1 s. A section is released only after its owner is back. After the release no section
   stays stopped.
-- **Batter.** Before the handoff the batter holds at most P3 + POLL = 26 s. BAT's side of a batch
-  is finished within 6 + 3 + 26 = 35 s, far inside the 120 s limit. After the handoff THM-DEP
-  deposits a batter at most P3 after approval and discards one that waited longer (since 24 Nov,
-  "Batter ready" carries the time already waited). A batter is always deposited or discarded
-  before dosing gives the batch up (`g <= LOST`, with the estimated `BLOCKMAX`). Deposited and
-  discarded exclude each other. Both end states are reachable.
-- **Batter, finding** (a query that is satisfied and shows a weakness, not a proof of safety). The state
-  copy can be stale: a batter can be handed to depositing while depositing is already stopped
-  (`E<> Batch.Handed && stopped`). Depositing queues it, so nothing is lost. The second finding of the
-  first version (nothing limited the wait after the handoff, up to `DEPSTART + BLOCKMAX + DEPSTART` =
-  108 s) is fixed: THM-DEP discards a queued batter whose total wait passes P3.
+- **Batter.** Before the handoff the batter holds at most T_batter + POLL = 26 s. This is no
+  longer asserted: `Holding` is the real `handOff` poll loop (one second per turn, counted in
+  `waited`), so the bound is derived — `waited <= 26` holds and `waited <= 25` fails. BAT's side
+  of a batch is finished within 6 + 3 + 26 = 35 s without a rejection, and within 44 s with one,
+  far inside the 120 s limit. After the handoff THM-DEP deposits a batter at most T_batter after
+  approval (exact) and discards one that waited longer (since 24 Nov, "Batter ready" carries the
+  time already waited). A batter is deposited at most 43 s after the batch started, also with one
+  UC4 rejection (exact), so always before dosing gives the batch up (`g <= LOST`). Deposited and
+  discarded exclude each other. Both end states are reachable; every inspected batch ends and every
+  queued batter is taken up or discarded.
+- **Batter, findings** (queries that are satisfied and show a weakness, not a proof of safety). The
+  state copy can be stale: a batter can be handed to depositing while depositing is already stopped
+  (`E<> handedWhileStopped`, captured at the instant of the handoff). Depositing queues it, so
+  nothing is lost. Two findings of the first version are **fixed since 24 Nov**: nothing limited the
+  wait after the handoff (108 s), and one UC4 rejection made the deposit 126 s after the batch
+  started, past dosing's 120 s (`E<> (Dep.Took && g > LOST)`). THM-DEP now discards a queued batter
+  whose total wait passes T_batter, and both queries became proofs (`A[] Dep.Took imply h <= T_batter`,
+  `A[] Dep.Took imply g <= LOST`).
 - **Handover.** A stored document is taken up within GRACE + RECONCILE = 8 s, also when the
   message is lost.
 - **PLM-WH.** BAT has at most two orders it has not asked ingredients for; at most one order is
@@ -299,6 +312,7 @@ model a restock time of 25 s or a withdrawal time of 30 s makes the 18 s answer 
 - The models are hand-written from the code and documents and are not generated from the
   code, so they can drift. The UPPAAL check is not part of the CI.
 - Each model has one node, one fault and one batch; several faults at once are not covered.
+  The batter model allows one UC4 rejection (`rejectDone`), the same one-fault bound.
 - Time is simulated seconds; the supervision values are wall-clock.
 - The restart delay (1 to 30 s), message delay (1 s), and the time depositing may stay stopped
   (60 s) are estimates. The measured restart is at most 1.2 s, so the proven bounds are safe,
@@ -306,7 +320,7 @@ model a restock time of 25 s or a withdrawal time of 30 s makes the 18 s answer 
 - The batter model has no acknowledgement from depositing, as in the code. If the group
   chooses option A of `team-review.md` (a 15th signal "Batter collected"), `Batch` waits for
   that signal instead of reading `seen`, and the model has to be changed. The race to watch
-  then is the acknowledgement in flight while BAT discards at `P3`.
+  then is the acknowledgement in flight while BAT discards at `T_batter`.
 - The PLM model has one BAT that asks for one order at a time, anonymous orders (no ids), one stock
   shortage and one warehouse silence. A restart of PLM-WH is not modelled: the reservation is in
   the database, BAT repeats its request and `Reserve` gives the same answer (unit test
