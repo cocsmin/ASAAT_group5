@@ -42,7 +42,7 @@
         <end xmi:type="uml:ConnectorEnd" xmi:id="_S5ON8Mx0EfGjU5susPnx8g" partWithPort="_EWN1wsSYEfG8fKg8yLcw1w" role="_LpYjIMx0EfGjU5susPnx8g"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_S5O1AMx0EfGjU5susPnx8g" partWithPort="_FrXq0sSYEfG8fKg8yLcw1w" role="_N8cx8Mx0EfGjU5susPnx8g"/>
       </ownedConnector>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_q_zzcMx0EfGjU5susPnx8g" name="eventData">
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_q_zzcMx0EfGjU5susPnx8g" name="Log, warning, error and discard events">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_q_0agMx0EfGjU5susPnx8g" partWithPort="_Cf074sSYEfG8fKg8yLcw1w" role="_kdCC8Mx0EfGjU5susPnx8g"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_q_1BkMx0EfGjU5susPnx8g" partWithPort="_EWN1wsSYEfG8fKg8yLcw1w" role="_omcIUMx0EfGjU5susPnx8g"/>
       </ownedConnector>
@@ -126,7 +126,7 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_Li_a8MSXEfG8fKg8yLcw1w" name="MON-AF-02 Event / Traceability Logger">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_LpYjIMx0EfGjU5susPnx8g" name="logEntry" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_omcIUMx0EfGjU5susPnx8g" name="eventData" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_omcIUMx0EfGjU5susPnx8g" name="Log, warning, error and discard events" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_7mZyQMx0EfGjU5susPnx8g" name="traceabilityData" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_2SbB0NHzEfGKVdaTCg46lw" name="healthStatus" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_5gNMcNHzEfGKVdaTCg46lw" name="healthAlert" aggregation="composite"/>
@@ -154,7 +154,7 @@
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_eKHuIMSXEfG8fKg8yLcw1w" name="MON-FD-01 Message Bus">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_kdCC8Mx0EfGjU5susPnx8g" name="eventData" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_kdCC8Mx0EfGjU5susPnx8g" name="Log, warning, error and discard events" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_7DOo8NH0EfGKVdaTCg46lw" name="healthAlert" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_9rj9INH0EfGKVdaTCg46lw" name="containerAlert" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_CUG1kNH1EfGKVdaTCg46lw" name="maintenanceRequest" aggregation="composite"/>
@@ -171,7 +171,7 @@
       <ownedAttribute xmi:type="uml:Port" xmi:id="_P54uwNH1EfGKVdaTCg46lw" name="logResult" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_nNQjENH_EfGKVdaTCg46lw" name="featureID" visibility="public">
         <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
-        <defaultValue xmi:type="uml:LiteralString" xmi:id="_rEprYNH_EfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-06"/>
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_rEprYNH_EfGKVdaTCg46lw" name="LiteralString1" value="MON-FEAT-02"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_oOJX0MSXEfG8fKg8yLcw1w" name="MON-FD-03 Overseer Dashboard">

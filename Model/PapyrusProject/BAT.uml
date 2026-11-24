@@ -786,7 +786,7 @@
           </transition>
           <transition xmi:type="uml:Transition" xmi:id="_7Cs7xXuQyDi6v-Qzkrc_gS" source="_qeqF5fHY11fzEdsiomj6Af" target="_TtKNxcPZFynNG6ANb5SC4K"/>
           <subvertex xmi:type="uml:State" xmi:id="_TtKNxcPZFynNG6ANb5SC4K" name="Idle">
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_JplA3WuFBl_ZrI-Y8MT5d0" name="clear batch context"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_JplA3WuFBl_ZrI-Y8MT5d0" name="clear batch context; hold while depositing stopped or monitor offline; drop a batch silent for 120 s (FC27)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_FVcFLX7hTPVGIjiUjCA0AH" name="Reserving">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_vMWcZSgdcVHUGK6lsQncBO" name="await the reservation result"/>

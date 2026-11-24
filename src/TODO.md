@@ -16,10 +16,11 @@ computer; whatever is not pushed was not checked. Result in short:
 - **Done and consistent with the code** (apart from the gaps below): BAT dosing, mixing and handoff (incl.
   Restoring and the waited time) and reporting, THM SM1 to SM5, FIN SM1 to SM5, the PLM state machine of PR #7,
   and the 14 signal names on the BAT, THM, FIN and PLM ports (items 2 and 7 of this list and the batter wait).
-- **Still behind the code (13 gaps, D1 to D13 in the check):** pan replacement and hopper reserve (FIN SM4),
-  FC24 lockout (FIN SM1), FC7 jam stop reason (THM SM1), 120 s lost batch (BAT dosing), where BAT holds, FC27
-  recovery in THM and FIN, the open PLM items, PLM ports (heartbeat, repair), state machines of BT and MON,
-  BT and MON port names, the empty Cake Factory IBD, MON-FEAT-06 in MON, the Monitor gate in PLM.
+- **Closed the same day by text changes (checked on screen):** D1 to D6, D12, D13, most of D7 and part of D10
+  (see section 0 of the check). Nothing was moved or added in the diagrams.
+- **Still open (needs Papyrus by hand):** D8 PLM ports (heartbeat, Repair confirmed), D9 state machines of BT and
+  MON, D11 the Cake Factory IBD (message bus), and from D7 the timer transition Idle to Scheduling_Order and the
+  empty `StateMachine115`; from D10 a "Band state change" port on BT and MON.
 
 1. **Cake Factory IBD** is empty. Add the message bus (Sparkplug B on an MQTT
    broker) and the MON part, and connect the frame ports of the slices to the bus

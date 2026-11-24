@@ -8,6 +8,28 @@ Not compared: the requirement texts (about 210 requirements), the block diagrams
 **Important:** this is the state in git. Papyrus changes that were made on a computer but not pushed are not
 in this check. If the group updated more diagrams, push them and the table below is re-checked in minutes.
 
+## 0. Fixes of the same day (text only, checked on screen in Papyrus)
+
+The gaps below were closed by changing the text of existing states, so no layout changed (the state boxes wrap the
+longer text; the PLM texts were shortened after a first try ran over the box edges). Nothing was added or moved.
+
+| Gap | Done | How |
+|---|---|---|
+| D1 | yes | FIN SM4 `Discarded` entry: a new pan replaces it after 30 s, hopper reserve 100 % of the loop |
+| D2 | yes | FIN SM1 `Deciding`: 3 failed marks of the same check in a row lock the inspection until Repair confirmed (FC24) |
+| D3 | yes | THM SM1 `Admission Stopped`: stop reasons now include the depositing jam (FC7) |
+| D4, D5 | yes | BAT Dosing `Idle`: hold while depositing is stopped or the monitor is offline; drop a batch silent for 120 s (FC27) |
+| D6 | yes | restart text (FC27) in THM SM1, SM2, SM3, SM4 and FIN SM1, SM2, SM4: reload saved state and take up pans or cakes again |
+| D7 | mostly | PLM: spelling `Verifying_Inventory`; order cycle 22 s, max 2 waiting, resend after 40 s (`Idle`); order statuses (`Scheduling_Order`); 3 s, 15 s, 2 s and 15 s time values in their states; redundant "compile order and recipe targets" replaced by "record the withdrawal". **Not done:** a real transition with a timer from Idle to Scheduling_Order, and deleting the empty `StateMachine115` (both need the Papyrus GUI) |
+| D10 | partly | BT ports `controllerStatus`, `transportFault`, `sectionCommand`, `targetSpeed` renamed to "Machine status (heartbeat)", "Log, warning, error and discard events", "Section command", "Target speed"; MON `eventData` renamed to "Log, warning, error and discard events". The other BT and MON ports are internal and keep their names; a "Band state change" port and "Repair confirmed" are still missing |
+| D12 | yes | MON "Log Database" now has MON-FEAT-02 |
+| D13 | yes | PLM `Idle`: new order only if the monitor is online |
+| **D8** | **no** | PLM heartbeat and Repair confirmed ports: new ports need the IBD, to be drawn in Papyrus |
+| **D9** | **no** | state machines of BT and MON: new diagrams |
+| **D11** | **no** | the Cake Factory IBD (message bus and connections) |
+
+The table in section 2 is the state before these fixes.
+
 ## 1. Matches the code
 
 | Diagram | What matches |

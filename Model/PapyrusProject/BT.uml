@@ -33,11 +33,11 @@
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Cawl8MSpEfG8fKg8yLcw1w" name="LiteralInteger1" value="1"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Cawl8cSpEfG8fKg8yLcw1w" name="LiteralUnlimitedNatural1" value="1"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_erkfwM-XEfGqiL-AEFFLIg" name="targetSpeed" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_mIHJ0M-XEfGqiL-AEFFLIg" name="sectionCommand" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_pTEp8M-XEfGqiL-AEFFLIg" name="transportFault" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_tt0-AM-XEfGqiL-AEFFLIg" name="controllerStatus" aggregation="composite"/>
-      <ownedConnector xmi:type="uml:Connector" xmi:id="_FM93EM-aEfGqiL-AEFFLIg" name="sectionCommand">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_erkfwM-XEfGqiL-AEFFLIg" name="Target speed" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_mIHJ0M-XEfGqiL-AEFFLIg" name="Section command" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_pTEp8M-XEfGqiL-AEFFLIg" name="Log, warning, error and discard events" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_tt0-AM-XEfGqiL-AEFFLIg" name="Machine status (heartbeat)" aggregation="composite"/>
+      <ownedConnector xmi:type="uml:Connector" xmi:id="_FM93EM-aEfGqiL-AEFFLIg" name="Section command">
         <end xmi:type="uml:ConnectorEnd" xmi:id="_FNCvkM-aEfGqiL-AEFFLIg" role="_mIHJ0M-XEfGqiL-AEFFLIg"/>
         <end xmi:type="uml:ConnectorEnd" xmi:id="_FNCvkc-aEfGqiL-AEFFLIg" partWithPort="_4kPz0sSoEfG8fKg8yLcw1w" role="_7NLxAM-VEfGqiL-AEFFLIg"/>
       </ownedConnector>
@@ -89,14 +89,14 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_Bnt04MSoEfG8fKg8yLcw1w" name="BT-AF-01 Section Control">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_tkVAkM-TEfGqiL-AEFFLIg" name="sectionStatus" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_4wYpUM-TEfGqiL-AEFFLIg" name="sectionFault" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_XmQ74M-VEfGqiL-AEFFLIg" name="sectionCommand" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_XmQ74M-VEfGqiL-AEFFLIg" name="Section command" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_Vl2LANIAEfGKVdaTCg46lw" name="featureID" visibility="public">
         <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_c5FIENIAEfGKVdaTCg46lw" name="LiteralString1" value="BT-FEAT-01"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_GQqV8MSoEfG8fKg8yLcw1w" name="BT-AF-02 Speed Monitoring">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_e5-PgM-UEfGqiL-AEFFLIg" name="targetSpeed" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_e5-PgM-UEfGqiL-AEFFLIg" name="Target speed" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_h-UxUM-UEfGqiL-AEFFLIg" name="speedMismatch" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_fURJYM-VEfGqiL-AEFFLIg" name="actualSpeed" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_iKGVwNIAEfGKVdaTCg46lw" name="featureID" visibility="public">
@@ -107,17 +107,17 @@
     <packagedElement xmi:type="uml:Class" xmi:id="_MnDQQMSoEfG8fKg8yLcw1w" name="BT-AF-03 Transport Fault Handling">
       <ownedAttribute xmi:type="uml:Port" xmi:id="_k3bP8M-VEfGqiL-AEFFLIg" name="sectionFault" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_n2tEgM-VEfGqiL-AEFFLIg" name="speedMismatch" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_58yDoM-WEfGqiL-AEFFLIg" name="transportFault" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_58yDoM-WEfGqiL-AEFFLIg" name="Log, warning, error and discard events" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_01A8wNIAEfGKVdaTCg46lw" name="featureID" visibility="public">
         <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_5DH78NIAEfGKVdaTCg46lw" name="LiteralString1" value="BT-FEAT-03"/>
       </ownedAttribute>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_R_y2kMSoEfG8fKg8yLcw1w" name="BT-FD-01 Conveyor Controller">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_7NLxAM-VEfGqiL-AEFFLIg" name="sectionCommand" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_-OOgIM-VEfGqiL-AEFFLIg" name="targetSpeed" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_7NLxAM-VEfGqiL-AEFFLIg" name="Section command" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_-OOgIM-VEfGqiL-AEFFLIg" name="Target speed" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_BIstMM-WEfGqiL-AEFFLIg" name="driveCommand" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_EHINMM-WEfGqiL-AEFFLIg" name="controllerStatus" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_EHINMM-WEfGqiL-AEFFLIg" name="Machine status (heartbeat)" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_FvKwwNIBEfGKVdaTCg46lw" name="featureID" visibility="public">
         <type xmi:type="uml:DataType" href="pathmap://SysML16_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries.package_packagedElement_PrimitiveValueTypes.dataType_packagedElement_String"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_J2OFsNIBEfGKVdaTCg46lw" name="LiteralString1" value="BT-FEAT-04"/>

@@ -1379,11 +1379,11 @@
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_HK4sW-LMpkKJRFRxUxKlSQ" name="Initial"/>
           <subvertex xmi:type="uml:State" xmi:id="_Ebe9lLVW1kCBD7bvK7wESQ" name="Waiting for Pan">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_oG2LPP8cvU2MLcvsG-DgDQ" name="check whether a pan is present"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ZrihJZkqU02GAour9gBryA" name="ready depositing point"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_ZrihJZkqU02GAour9gBryA" name="ready depositing point; after a restart reload the saved batch queue and take up pans again (FC27)"/>
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_vzU6uRnVvkqUjMOUBLcQ9A" name="record batch ID, discard batter if aged (T_batter)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_rtM37FkeNU-XITc5DrgXxQ" name="Admission Stopped">
-            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_0f_p6BC_nkSf6JJFrZ5Z6w" name="track active stop reasons"/>
+            <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_0f_p6BC_nkSf6JJFrZ5Z6w" name="track active stop reasons (zone fault, buffer full, band halt, depositing jam FC7)"/>
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_6sJ2EzF2F0OAnFk_Wge9ZQ" name="stop admitting new pans"/>
             <exit xmi:type="uml:OpaqueBehavior" xmi:id="_LpDpm0ICMUma9H3pveT6Gg" name="send working again"/>
           </subvertex>
@@ -1442,7 +1442,7 @@
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_yEEe6rxvPEqOGQ6JulSi0w" name="Initial"/>
           <subvertex xmi:type="uml:State" xmi:id="_pLeHgEMu_kG-XDEeNIc1jw" name="Regulating">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_mHk6cVPbY0K1cq7R1NPhmg" name="run local control loop while product is inside"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_gU02tMOW0E-DFM5efwTIBw" name="select zone setpoint"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_gU02tMOW0E-DFM5efwTIBw" name="select zone setpoint; after a restart take up the pans on the band again (FC27)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_xljw7kO_DkO9vWrrpOMlEg" name="Adjusting">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_sCtmUu_OW0KSEQDFoBXfCw" name="adjust zone heating"/>
@@ -1504,7 +1504,7 @@
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_lh9gMQZf-0-0Ko80g_KM6Q" name="Initial"/>
           <subvertex xmi:type="uml:State" xmi:id="_qzITSHnw2USNeUoklyeYLA" name="Checking Cakes">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_1MiEbg2v0k-0ur33suw_AQ" name="measure every cake leaving the tunnel"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_1gkUW_6ID06nL9OSJPRh6g" name="start temperature measurement"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_1gkUW_6ID06nL9OSJPRh6g" name="start temperature measurement; after a restart take up pans again (FC27)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_JgKCv-3qE0uvt9Y5lQPj1A" name="Diverting Cake">
             <entry xmi:type="uml:OpaqueBehavior" xmi:id="_j_hfFnQxtUOhDQwOaPCBuA" name="divert cake to refuse path"/>
@@ -1590,7 +1590,7 @@
           <subvertex xmi:type="uml:Pseudostate" xmi:id="_5osBkf4y90CfqgrMwi7n-Q" name="Initial"/>
           <subvertex xmi:type="uml:State" xmi:id="_5Xdq8LwT-UOTpese5v7W3g" name="Cooling">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_4lnssQG4j06YwZXfjzUhWw" name="measure core temperature at exit"/>
-            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UTPVtbvhB0eSINHJ8z7pyQ" name="control sprays toward T_safe"/>
+            <entry xmi:type="uml:OpaqueBehavior" xmi:id="_UTPVtbvhB0eSINHJ8z7pyQ" name="control sprays toward T_safe; after a restart restore the cooling buffer (FC27)"/>
           </subvertex>
           <subvertex xmi:type="uml:State" xmi:id="_GrtSXl5_W0y2D9KgE4mpFw" name="Increased Cooling">
             <doActivity xmi:type="uml:OpaqueBehavior" xmi:id="_nwQhSQGShE-XW_UCeHw8Qw" name="measure core temperature again"/>
