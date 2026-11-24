@@ -41,7 +41,7 @@ flowchart LR
   end
   plm & bat & thm & fin & bt & mon & ui --- MQ
   plmwh & plmship & mon --- SQL
-  plm & bat & thm & fin & bt --- MG
+  plm & bat & thm & fin & bt & ui --- MG
   ctl -. Docker socket .-> host
 ```
 
@@ -51,7 +51,7 @@ flowchart LR
 | `mosquitto` | eclipse-mosquitto | persistent sessions | every node |
 | `mssql` | SQL Server 2022 | `mssql-data` | PLM, MON |
 | `mongo` | MongoDB | `mongo-data` | stations |
-| `ui` | `cmd/ui` | none | broker, MON API, SQL |
+| `ui` | `cmd/ui` | none | broker, MON API, SQL, MongoDB (pan counts) |
 | `ctl` | `cmd/ctl` (profile `demo`) | none | Docker socket |
 
 Start: `docker compose up -d --build` (`docker compose --profile demo up -d --build` adds `ctl`). A container that

@@ -233,29 +233,29 @@ Still to check **[person]**:
 3. The GitHub Actions pipeline has only been checked with actionlint and hadolint;
    it has not run on GitHub yet (first push shows it).
 
-## Code gaps
+## Code gaps (all settled on 24 Nov: done, or accepted with a reason)
 
-1. **Tests**: unit tests cover only the Sparkplug codec and the signal mapping; the
-   behaviour is checked by the scenarios (`docs/demo.md`), not by Go tests.
-2. **Deployment**: the pipeline pushes images to ghcr.io but has no deploy job (no
-   target machine yet).
-3. **THM resume** continues a baking pan from zone 1 (so it bakes longer), loses
-   the zone temperature offset, and treats buffered cakes as hot. A cake that was
-   being deposited at the moment of the crash is not resumed.
-4. **MON policy**: only band faults and unresponsive nodes halt or slow the band.
-   The general UC2 error flow (any error may require a halt) needs a policy table
-   once the MON document exists.
-5. **Duplicate filter** is in memory. After a receiver restart a duplicate is
-   caught only by the checks in the receivers (batch id, pan id).
-6. **PLM** keeps held orders in memory; after a PLM restart a held order is
-   noticed again when BAT repeats its request, not before.
-7. The `ctl` container (demo profile only) holds the Docker socket and can control
-   every container on the machine; it is not for production.
-8. Security is not a stated requirement and is not implemented (anonymous broker,
-   no TLS, no dashboard login).
-   (a single broker is an accepted risk).
-10. Real equipment (PLC, OPC UA, cameras) is out of scope: all machines are
-   simulated inside the services.
+The group has no real plant to match, so each gap was either closed or accepted as a limit of a design and
+analysis project. The reason is part of the entry so the report can state it.
+
+1. **Tests**: closed. The packages have unit tests (`go test ./...`, about 20 packages, run in CI) and 28
+   scenarios check the behaviour against a running stack (`docs/demo.md`).
+2. **Deployment**: closed by decision. The compose file is the deployment ([docs/deployment.md](docs/deployment.md));
+   CI builds and pushes the images, there is no target machine for a deploy job.
+3. **THM resume** (a baking pan restarts at zone 1, buffered cakes come back "hot", a pan being deposited at the
+   crash is not resumed): accepted. The conservative choice is deliberate: a pan that bakes longer or a cake that
+   is cooled again is never under-baked or warm when packed (food safety). Documented in
+   `docs/team-review.md` section 3.
+4. **MON policy**: closed. The policy table is [docs/mon-policy.md](docs/mon-policy.md), read from the code; only
+   dead or silent stations and section faults halt the band.
+5. **Duplicate filter in memory**: accepted. After a receiver restart the receivers' own checks (batch id, pan id,
+   order id) make every handler idempotent, so a duplicate does no harm (UPPAAL handover model).
+6. **PLM held orders in memory**: accepted. A held order is noticed again when BAT repeats its request (at most
+   20 s later), and the order stays in SQL with status `held`; the UPPAAL PLM model shows BAT always gets its answer.
+7. **`ctl` holds the Docker socket**: accepted, demo profile only ([docs/security.md](docs/security.md)).
+8. **Security** not implemented: decided out of scope ([docs/security.md](docs/security.md)).
+9. A single broker is an accepted risk ([docs/scalability.md](docs/scalability.md)).
+10. **Real equipment** (PLC, OPC UA, cameras) is out of scope: all machines are simulated inside the services.
 
 ## Report
 
