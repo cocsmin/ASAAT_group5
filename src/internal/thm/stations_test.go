@@ -8,10 +8,10 @@ import (
 	"cakefactory/internal/model"
 	"cakefactory/internal/node"
 	"cakefactory/internal/sim"
-	"cakefactory/internal/timing"
 	"cakefactory/internal/station"
 	"cakefactory/internal/store"
 	"cakefactory/internal/svc"
+	"cakefactory/internal/timing"
 )
 
 // testBase is a station base that is not connected to a broker: sends are dropped,
