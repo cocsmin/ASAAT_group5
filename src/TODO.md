@@ -13,9 +13,9 @@ where the diagrams are missing, wrong, or behind the implementation.
 **Check of 24 Nov (what is in git):** [docs/diagram-check.md](docs/diagram-check.md) compares every Papyrus state
 machine and port list on `master` with the code. Elena reports that the diagrams were updated further on a
 computer; whatever is not pushed was not checked. Result in short:
-- **Done and consistent with the code:** all of BAT (dosing, mixing and handoff incl. Restoring and the waited
-  time, reporting), THM SM1 to SM5, FIN SM1 to SM5, the PLM state machine of PR #7, the 14 signal names on the
-  BAT, THM, FIN and PLM ports (items 2, 5-BAT, 7 of this list and the batter wait are done).
+- **Done and consistent with the code** (apart from the gaps below): BAT dosing, mixing and handoff (incl.
+  Restoring and the waited time) and reporting, THM SM1 to SM5, FIN SM1 to SM5, the PLM state machine of PR #7,
+  and the 14 signal names on the BAT, THM, FIN and PLM ports (items 2 and 7 of this list and the batter wait).
 - **Still behind the code (13 gaps, D1 to D13 in the check):** pan replacement and hopper reserve (FIN SM4),
   FC24 lockout (FIN SM1), FC7 jam stop reason (THM SM1), 120 s lost batch (BAT dosing), where BAT holds, FC27
   recovery in THM and FIN, the open PLM items, PLM ports (heartbeat, repair), state machines of BT and MON,
