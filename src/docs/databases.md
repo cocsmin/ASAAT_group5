@@ -32,75 +32,9 @@ Only the solid line (recipes to recipe_items) is a declared foreign key. Dotted 
 does not enforce (the batch id is created by PLM with the order and travels in every
 message, so it is not a table of its own).
 
-```mermaid
-erDiagram
-    recipes ||--|{ recipe_items : "has ingredients"
-    recipes ||..o{ production_orders : "is baked by"
-    production_orders ||..o{ reservations : "reserves"
-    ingredient_stock ||..o{ reservations : "is reserved in"
-    production_orders ||..o{ event_log : "batch id"
-    production_orders ||..o{ shipments : "batch ids"
-    event_log }o..o| maintenance_tickets : "machine id"
+![ER diagram of the SQL Server database](img/er-diagram.png)
 
-    recipes {
-        nvarchar name PK
-        int mix_seconds
-        float dose_tol_pct
-        int pans_per_batch
-        float fill_target
-        float fill_tol
-    }
-    recipe_items {
-        nvarchar recipe PK,FK
-        nvarchar ingredient PK
-        float grams
-    }
-    ingredient_stock {
-        nvarchar ingredient PK
-        float grams
-        float reserved
-        bit organic
-    }
-    reservations {
-        nvarchar order_id PK
-        nvarchar ingredient PK
-        float grams
-        bit consumed
-    }
-    production_orders {
-        nvarchar id PK
-        nvarchar recipe
-        nvarchar status
-        datetime2 created
-        nvarchar note
-    }
-    shipments {
-        nvarchar pallet_id PK
-        int cakes
-        nvarchar batches
-        nvarchar vehicle
-        datetime2 at
-    }
-    event_log {
-        bigint id PK
-        datetime2 at
-        nvarchar node
-        nvarchar severity
-        nvarchar code
-        nvarchar reason
-        nvarchar batch_id
-        nvarchar machine_id
-        bit maintenance
-    }
-    maintenance_tickets {
-        bigint id PK
-        datetime2 opened
-        datetime2 closed
-        nvarchar node
-        nvarchar machine_id
-        nvarchar status
-    }
-```
+The same diagram as vector graphics: [img/er-diagram.svg](img/er-diagram.svg). The tables and columns are those of `internal/store/sql_mssql.go`.
 
 Note: in the code only `recipe_items.recipe` is a declared foreign key
 (to `recipes`). The links from `reservations`, `production_orders`, `event_log` and

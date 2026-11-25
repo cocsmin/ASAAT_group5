@@ -432,14 +432,41 @@ func (t *Dep) restoreQueue() {
 		}
 	}
 	sort.Strings(ids)
+	var restored []batch
 	for _, id := range ids {
 		b := batch{id: id, pans: int(st[id+".left"]), target: float64(st[id+".target10"]) / 10, tol: float64(st[id+".tol10"]) / 10}
 		if o := st[id+".origin"]; o > 0 {
 			b.origin = time.Unix(o, 0)
+		} else {
+			b.origin = time.Unix(1, 0) // saved before the start of the wait was kept: its age is unknown, so it counts as expired (food safety)
 		}
 		t.seenBatch[id] = true
 		t.pend[id] = &queued{batch: b, left: b.pans}
-		t.batters <- b
+		restored = append(restored, b)
+	}
+	// What fits in the channel goes in now, in order; the rest follows from a goroutine. The saved queue may hold more
+	// batches than the channel does, and the station must come up (and answer the monitor) whatever it looks like.
+	var rest []batch
+	for _, b := range restored {
+		if len(rest) == 0 {
+			select {
+			case t.batters <- b:
+				continue
+			default:
+			}
+		}
+		rest = append(rest, b)
+	}
+	if len(rest) > 0 {
+		go func() {
+			for _, b := range rest {
+				select {
+				case t.batters <- b:
+				case <-t.Ctx.Done():
+					return
+				}
+			}
+		}()
 	}
 	if len(ids) > 0 {
 		log.Printf("[%s] %d batches taken up again from the saved queue", t.ID, len(ids))

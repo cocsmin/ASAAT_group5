@@ -24,13 +24,13 @@ longer text; the PLM texts were shortened after a first try ran over the box edg
 | D10 | partly | BT ports `controllerStatus`, `transportFault`, `sectionCommand`, `targetSpeed` renamed to "Machine status (heartbeat)", "Log, warning, error and discard events", "Section command", "Target speed"; MON `eventData` renamed to "Log, warning, error and discard events". The other BT and MON ports are internal and keep their names; a "Band state change" port and "Repair confirmed" are still missing |
 | D12 | yes | MON "Log Database" now has MON-FEAT-02 |
 | D13 | yes | PLM `Idle`: new order only if the monitor is online |
-| D7 (rest) | yes | the empty `StateMachine115` is deleted. **Not drawn:** a transition with a timer from Idle to Scheduling_Order (the order cycle is in the text of `Idle`); a line there would cross the Fetching state |
+| D7 (rest) | yes | the empty `StateMachine115` is deleted. **Done 25 Nov:** the timer transition Idle to Scheduling_Order ("after 22 s") is drawn around the left side of the state machine, checked on screen |
 | D9 | yes | new Papyrus diagrams, generated and checked on screen: "BT Section Control STM" (run, slow, halt, correcting the speed, section fault) and, for MON, "MON Node Watchdog STM" (unknown, online, silent, dead, escalated) and "MON Ticket Lifecycle STM"; the generator is in `Model/tools` |
 | D8 | yes | PLM: new port "Machine status (heartbeat)" on the PLM block and on Event Reporting, connected in the PLM IBD (checked on screen) |
 | D10 (rest) | yes | BT port `sectionStatus` renamed "Band state change". MON receives it on its port `sensorData` (decision 25 Nov: the band state arrives with the other node data); MON ports keep their own names for the rest |
 | D11 | yes (25 Nov) | the Cake Factory IBD was re-laid out and has 13 connectors, checked on screen: PLM-BAT (2), BAT-THM (2), THM-FIN (5), FIN to PLM "Pallet ready for shipment" over the top, and "Band state change" from BT to THM, FIN and MON as one bus. The ports are on the sides that face each other. Two top-level ports were missing and are added: "Pallet ready for shipment" on FIN and "Band state change" on BT. **Not drawn in this diagram** (they stay in the model): the events, heartbeat and repair ports of every system and the other ports of BT and MON; drawn as lines they would cross everything. The generator is `Model/tools/ibd.js` |
 
-The table in section 2 is the state before these fixes. After them the only diagram gap that remains is the drawn timer transition of D7.
+The table in section 2 is the state before these fixes. After them no diagram gap is open. Not done on purpose: a message-bus part in the Cake Factory IBD (every signal is already drawn end to end, a bus part would repeat each connection; the broker is in the message-flow and deployment pictures).
 
 ## 1. Matches the code
 

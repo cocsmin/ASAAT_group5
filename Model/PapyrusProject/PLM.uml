@@ -118,6 +118,9 @@
           <transition xmi:type="uml:Transition" xmi:id="_leI6cNExEfGZ44KCKtLvcQ" source="_cQ_1cNExEfGZ44KCKtLvcQ" target="_THm58NEvEfGZ44KCKtLvcQ">
             <effect xmi:type="uml:OpaqueBehavior" xmi:id="_fezMYNFsEfGZ44KCKtLvcQ" name="send reservation result confirmation to BAT"/>
           </transition>
+          <transition xmi:type="uml:Transition" xmi:id="_CW7t0__W_B8tyuY_M8DthS" source="_THm58NEvEfGZ44KCKtLvcQ" target="_d0laANEvEfGZ44KCKtLvcQ">
+            <trigger xmi:type="uml:Trigger" xmi:id="_B29FB0t1VeSJtObEFdHVcZ" name="after (22 s)" event="_V7bODHQl9eP-es-_p9Velo"/>
+          </transition>
           <transition xmi:type="uml:Transition" xmi:id="_NtXMENFhEfGZ44KCKtLvcQ" source="_QpKhkNEvEfGZ44KCKtLvcQ" target="_d0laANEvEfGZ44KCKtLvcQ"/>
           <transition xmi:type="uml:Transition" xmi:id="_tFJHQNFhEfGZ44KCKtLvcQ" source="_THm58NEvEfGZ44KCKtLvcQ" target="_m06yENEvEfGZ44KCKtLvcQ">
             <trigger xmi:type="uml:Trigger" xmi:id="_57fuoNFhEfGZ44KCKtLvcQ" name="Trigger1" event="_8NQ88NFhEfGZ44KCKtLvcQ"/>
@@ -335,6 +338,11 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_paqSAM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_yIL0QMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_trl7sM7OEfG6Z-2Eqxj-FQ" name="" client="_oVr44M7MEfG6Z-2Eqxj-FQ" supplier="_7478oMyIEfG-B8dhrKvttQ"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_vMl0YM7OEfG6Z-2Eqxj-FQ" name="" client="_0VBAQL83EfGK09TLxcHe5g" supplier="_8oX1gMyIEfG-B8dhrKvttQ"/>
+    <packagedElement xmi:type="uml:TimeEvent" xmi:id="_V7bODHQl9eP-es-_p9Velo" name="after (22 s)" isRelative="true">
+      <when xmi:type="uml:TimeExpression" xmi:id="_XeW6WuY7IsMEJz_JJBj86x" name="22 s">
+        <expr xmi:type="uml:LiteralString" xmi:id="_Az5pTdMPcWvqzKmhFBYe4Z" value="22 s"/>
+      </when>
+    </packagedElement>
     <packagedElement xmi:type="uml:SignalEvent" xmi:id="_iBGCsNCrEfG-6PPhNNbUSQ" name="Internal stock request" signal="_tTu0kNCrEfG-6PPhNNbUSQ"/>
     <packagedElement xmi:type="uml:Signal" xmi:id="_tTu0kNCrEfG-6PPhNNbUSQ" name="Internal stock request"/>
     <packagedElement xmi:type="uml:SignalEvent" xmi:id="_oyoEENCvEfG-6PPhNNbUSQ" name="" signal="_rFfekNCvEfG-6PPhNNbUSQ"/>

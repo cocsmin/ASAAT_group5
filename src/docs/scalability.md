@@ -38,8 +38,30 @@ in one process, without broker and network, on the development machine:
 - The test fails if one heartbeat costs more than 1 ms, if 1 600 nodes need more than 10 % of a
   core, or more than 100 KB/s.
 
-What this does **not** include: the broker's own work (routing, persistence of QoS 1 sessions),
-TLS, network delay, and the database writes of events. The broker is the part to measure next.
+What this does **not** include: TLS, network delay and the database writes of events. The broker itself is measured in
+section 2b.
+
+## 2b. Load test of the broker (25 Nov)
+
+`go run ./cmd/loadtest -nodes 16,160,800,1600 -step 40s -out docs/loadtest-results.csv` starts N simulated nodes in the
+Sparkplug group `LoadTest` (the factory uses `CakeFactory`, so it is not disturbed). Every node has its own connection with the
+keep-alive of the stations (5 s), sends a heartbeat every 5 s (QoS 0, the 56 byte heartbeat plus a time stamp), and five
+publishers add 50 reliable handoff messages per second (QoS 1). One subscriber measures the delay from publish to receive.
+The real factory (16 containers) ran at the same time on the same Mosquitto, with its own traffic. One machine, one Mosquitto
+with the file `deploy/mosquitto.conf`.
+
+| Nodes | Messages per second | Lost | Connect | p50 | p95 | p99 | max |
+|---|---|---|---|---|---|---|---|
+| 16 | 53 | 0 | 0.0 s | 1.9 ms | 23 ms | 44 ms | 50 ms |
+| 160 | 82 | 0 | 0.5 s | 1.7 ms | 35 ms | 42 ms | 49 ms |
+| 800 | 210 | 0 | 3.6 s | 1.5 ms | 37 ms | 42 ms | 56 ms |
+| 1 600 | 370 | 0 | 6.9 s | 6.9 ms | 27 ms | 36 ms | 65 ms |
+
+Mosquitto used 0.1 % of a core and 10 MiB at the end. Result: 1 600 nodes (100 times the factory) and 370 messages per second
+cost no message and no more than 65 ms of delay, so the broker is not the first limit at this size; the 5 s detection rule
+(15 s limit) would not be touched by tens of milliseconds. What it does not show: the broker under a crash of many nodes at once
+(many death certificates in one second), TLS, a network between the nodes and the broker, and a cluster. The raw data is
+[loadtest-results.csv](loadtest-results.csv).
 
 ## 3. Why the other numbers are what they are
 
@@ -56,7 +78,8 @@ TLS, network delay, and the database writes of events. The broker is the part to
 ## 4. What limits growth, in the order it would hurt
 
 1. **The broker** is one process and a single point of failure. Heartbeats are small, but
-   every state signal, handoff and event passes through it. First step: a clustered broker or a
+   every state signal, handoff and event passes through it. It carried 1 600 nodes without loss (section 2b), so the limit is
+   availability (one process), not capacity. First step: a clustered broker or a
    bridge per production area. The Sparkplug topic space already allows a group per area.
 2. **The monitor** is one process. Our test says it takes in 320 heartbeats per second at 0.1 %
    of a core, so the limit is its event handling and the SQL writes, not heartbeats. Step: one
@@ -74,6 +97,6 @@ TLS, network delay, and the database writes of events. The broker is the part to
 
 - More pans, more bands, more orders: the line is simulated with fixed station times; the
   throughput is one pan per second at depositing, so more pans only lengthen the queue.
-- A load test on the broker: it needs a load generator and a decision on what "a bigger plant"
-  means. Listed as future work.
+- A load test with a failing broker or a crash of many nodes at once: listed as future work. The load of a bigger plant on a
+  healthy broker is measured (section 2b).
 - Everything ran on one machine at simulated station times (`team-review.md` section 3, item 9).

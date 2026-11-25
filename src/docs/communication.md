@@ -21,21 +21,11 @@ signal goes through one message broker.
 
 Message flow diagram (system level):
 
-```
-        PLM ----- order, reservation ------> BAT ----- batter ready ------> THM
-         ^   <---- reservation result ------  ^   <-- depositing stopped --   |  \
-         |                                     |                              |   cooled cake,
-   pallet ready                                |                              |   pan for washing
-         |                                     |                              v   v
-        FIN <------ cooled cake, pan for washing, pan request ---------------+
-         |  ----- clean pan supply, stop / resume pan admission ---------> THM
+![Message flow between the systems](img/message-flow.png)
 
-   every system --- events, heartbeat ---> MON --- section command, target speed ---> BT --- band state ---> THM, FIN, MON
-                                           MON --- repair confirmed ---> the system that owns the machine
-   all of it travels through the MQTT broker (Mosquitto); MON also publishes the host STATE
-```
-
-(The Papyrus system-level IBD with the bus is still to be drawn, see TODO.md item 1.)
+Vector version: [img/message-flow.svg](img/message-flow.svg). The Papyrus system-level IBD with the connections between
+the systems is in `Model/PapyrusProject/ASAAT.uml` ("Cake Factory IBD"); the supervision signals (events, heartbeat, repair)
+are drawn here but not in the IBD.
 
 ## Technologies considered
 
