@@ -1,0 +1,426 @@
+start experiment Wed Nov 25 01:13:28     2026
+crash-plm-wh run  1/15  pass  map[detect_s:0.3143175 flow_resume_s:17.9704074 outage_s:23.8926906 pans_lost:0 recover_s:0.8825063]
+crash-plm-wh run  2/15  pass  map[detect_s:0.3126358 flow_resume_s:18.9899343 outage_s:24.9669494 pans_lost:0 recover_s:0.942126]
+crash-plm-wh run  3/15  pass  map[detect_s:0.3127036 flow_resume_s:18.9527284 outage_s:24.9274347 pans_lost:0 recover_s:0.9391644]
+crash-plm-wh run  4/15  pass  map[detect_s:0.3121788 flow_resume_s:24.1235937 outage_s:29.9965532 pans_lost:0 recover_s:0.835532]
+crash-plm-wh run  5/15  pass  map[detect_s:0.3151687 flow_resume_s:18.9034768 outage_s:24.8854242 pans_lost:0 recover_s:0.943882]
+crash-plm-wh run  6/15  pass  map[detect_s:0.3135763 flow_resume_s:18.9757643 outage_s:25.0003427 pans_lost:0 recover_s:0.9851874]
+crash-plm-wh run  7/15  pass  map[detect_s:0.3131862 flow_resume_s:19.0281925 outage_s:24.9053807 pans_lost:0 recover_s:0.8359409]
+crash-plm-wh run  8/15  pass  map[detect_s:0.3126518 flow_resume_s:18.9763339 outage_s:24.9658237 pans_lost:0 recover_s:0.9432667]
+crash-plm-wh run  9/15  pass  map[detect_s:0.3134473 flow_resume_s:78.9647669 outage_s:84.9459877 pans_lost:0 recover_s:0.9408323]
+crash-plm-wh run 10/15  pass  map[detect_s:0.3132165 flow_resume_s:19.0700966 outage_s:24.9588339 pans_lost:0 recover_s:0.8381926]
+crash-plm-wh run 11/15  pass  map[detect_s:0.3135377 flow_resume_s:19.0396565 outage_s:24.9252926 pans_lost:0 recover_s:0.8396053]
+crash-plm-wh run 12/15  pass  map[detect_s:0.3136727 flow_resume_s:18.892313 outage_s:25.0015732 pans_lost:0 recover_s:1.0544853]
+crash-plm-wh run 13/15  pass  map[detect_s:0.3132612 flow_resume_s:19.0916354 outage_s:24.9712782 pans_lost:0 recover_s:0.8366234]
+crash-plm-wh run 14/15  pass  map[detect_s:0.3195139 flow_resume_s:33.9005847 outage_s:39.8385726 pans_lost:0 recover_s:0.8866724]
+crash-plm-wh run 15/15  pass  map[detect_s:0.3176181 flow_resume_s:19.0843454 outage_s:24.96613 pans_lost:0 recover_s:0.8428807]
+crash-plm-ship run  1/15  pass  map[detect_s:0.4231457 flow_resume_s:19.93634 outage_s:25.9332366 pans_lost:0 recover_s:0.948209]
+crash-plm-ship run  2/15  pass  map[detect_s:0.3142642 flow_resume_s:24.966722 outage_s:30.7406877 pans_lost:0 recover_s:0.7343606]
+crash-plm-ship run  3/15  pass  map[detect_s:0.3149359 flow_resume_s:19.9526825 outage_s:25.8302246 pans_lost:0 recover_s:0.8374899]
+crash-plm-ship run  4/15  pass  map[detect_s:0.315032 flow_resume_s:14.9330655 outage_s:20.8591523 pans_lost:0 recover_s:0.8866065]
+crash-plm-ship run  5/15  pass  map[detect_s:0.3153939 flow_resume_s:19.9460788 outage_s:25.872761099999998 pans_lost:0 recover_s:0.8841373]
+crash-plm-ship run  6/15  pass  map[detect_s:0.3148726 flow_resume_s:19.9388671 outage_s:25.8198196 pans_lost:0 recover_s:0.8393482]
+crash-plm-ship run  7/15  pass  map[detect_s:0.417857 flow_resume_s:19.9595064 outage_s:25.8397601 pans_lost:0 recover_s:0.8394597]
+crash-plm-ship run  8/15  pass  map[detect_s:0.3161322 flow_resume_s:19.941191 outage_s:25.823165 pans_lost:0 recover_s:0.8427782]
+crash-plm-ship run  9/15  pass  map[detect_s:0.3169533 flow_resume_s:19.9444331 outage_s:25.8272364 pans_lost:0 recover_s:0.842155]
+crash-plm-ship run 10/15  pass  map[detect_s:0.3149035 flow_resume_s:14.937291 outage_s:20.8174168 pans_lost:0 recover_s:0.8371825]
+crash-plm-ship run 11/15  pass  map[detect_s:0.316108 flow_resume_s:19.9501944 outage_s:25.877253 pans_lost:0 recover_s:0.8821494]
+crash-plm-ship run 12/15  pass  map[detect_s:0.4214671 flow_resume_s:19.983981 outage_s:25.8722629 pans_lost:0 recover_s:0.8442475]
+crash-plm-ship run 13/15  pass  map[detect_s:0.3165123 flow_resume_s:19.8505515 outage_s:25.8462754 pans_lost:0 recover_s:0.9484835]
+crash-plm-ship run 14/15  pass  map[detect_s:0.3162379 flow_resume_s:19.9689039 outage_s:25.855566 pans_lost:0 recover_s:0.8429932]
+crash-plm-ship run 15/15  pass  map[detect_s:0.317485 flow_resume_s:19.9426227 outage_s:25.9442312 pans_lost:0 recover_s:0.9537153]
+crash-bat-dose run  1/15  pass  map[detect_s:0.3185234 flow_resume_s:18.9696561 outage_s:24.9028458 pans_lost:0 recover_s:0.8897251]
+crash-bat-dose run  2/15  pass  map[detect_s:0.3164343 flow_resume_s:19.0578434 outage_s:24.9517217 pans_lost:0 recover_s:0.8447978]
+crash-bat-dose run  3/15  pass  map[detect_s:0.3183788 flow_resume_s:19.0103293 outage_s:24.9248276 pans_lost:0 recover_s:0.8704426]
+crash-bat-dose run  4/15  pass  map[detect_s:0.3179468 flow_resume_s:19.0845035 outage_s:25.0154463 pans_lost:0 recover_s:0.8862993]
+crash-bat-dose run  5/15  pass  map[detect_s:0.3178002 flow_resume_s:18.9897011 outage_s:24.9215603 pans_lost:0 recover_s:0.8894143]
+crash-bat-dose run  6/15  pass  map[detect_s:0.4292154 flow_resume_s:63.7067474 outage_s:69.8342692 pans_lost:0 recover_s:1.0771952]
+crash-bat-dose run  7/15  pass  map[detect_s:0.317417 flow_resume_s:19.1903269 outage_s:25.0236831 pans_lost:0 recover_s:0.784286]
+crash-bat-dose run  8/15  pass  map[detect_s:0.3194456 flow_resume_s:23.9477511 outage_s:29.8937404 pans_lost:0 recover_s:0.896515]
+crash-bat-dose run  9/15  pass  map[detect_s:0.317708 flow_resume_s:19.0775943 outage_s:25.0034351 pans_lost:0 recover_s:0.880257]
+crash-bat-dose run 10/15  pass  map[detect_s:0.4280142 flow_resume_s:18.8206083 outage_s:24.8395572 pans_lost:0 recover_s:0.8652278]
+crash-bat-dose run 11/15  pass  map[detect_s:0.3229956 flow_resume_s:53.9530179 outage_s:59.9905218 pans_lost:0 recover_s:0.9724272]
+crash-bat-dose run 12/15  pass  map[detect_s:0.3257884 flow_resume_s:18.9150028 outage_s:24.9042168 pans_lost:0 recover_s:0.9148765]
+crash-bat-dose run 13/15  pass  map[detect_s:0.3281629 flow_resume_s:18.8954855 outage_s:24.9776917 pans_lost:0 recover_s:0.9711844]
+crash-bat-dose run 14/15  pass  map[detect_s:0.4244547 flow_resume_s:53.9339163 outage_s:59.8548484 pans_lost:0 recover_s:0.85323]
+crash-bat-dose run 15/15  pass  map[detect_s:0.3192472 flow_resume_s:34.0419185 outage_s:39.9760011 pans_lost:0 recover_s:0.8768927]
+crash-bat-mix run  1/15  pass  map[detect_s:0.4311616 flow_resume_s:18.6597113 outage_s:24.8807257 pans_lost:0 recover_s:1.1359116]
+crash-bat-mix run  2/15  pass  map[detect_s:0.3172344 flow_resume_s:18.846231799999998 outage_s:24.9404817 pans_lost:0 recover_s:0.9595177]
+crash-bat-mix run  3/15  pass  map[detect_s:0.3209558 flow_resume_s:19.0899294 outage_s:24.9974514 pans_lost:0 recover_s:0.8545699]
+crash-bat-mix run  4/15  pass  map[detect_s:0.3476977 flow_resume_s:18.5772111 outage_s:24.891835 pans_lost:0 recover_s:1.2347641]
+crash-bat-mix run  5/15  pass  map[detect_s:0.4282301 flow_resume_s:18.965754 outage_s:24.9102495 pans_lost:0 recover_s:0.8851661]
+crash-bat-mix run  6/15  pass  map[detect_s:0.3208609 flow_resume_s:18.9947937 outage_s:24.961735 pans_lost:0 recover_s:0.9062475]
+crash-bat-mix run  7/15  pass  map[detect_s:0.3229769 flow_resume_s:18.8103315 outage_s:24.8482237 pans_lost:0 recover_s:0.9769149]
+crash-bat-mix run  8/15  pass  map[detect_s:0.3777174 flow_resume_s:19.1272755 outage_s:24.9914829 pans_lost:0 recover_s:0.8044225]
+crash-bat-mix run  9/15  pass  map[detect_s:0.3180728 flow_resume_s:19.0831605 outage_s:24.9230696 pans_lost:0 recover_s:0.7867513]
+crash-bat-mix run 10/15  pass  map[detect_s:0.3225579 flow_resume_s:18.9757866 outage_s:24.9360277 pans_lost:0 recover_s:0.9008695]
+crash-bat-mix run 11/15  pass  map[detect_s:0.3198643 flow_resume_s:18.9701565 outage_s:24.9171499 pans_lost:0 recover_s:0.8994718]
+crash-bat-mix run 12/15  pass  map[detect_s:0.3170903 flow_resume_s:24.0128357 outage_s:29.9545569 pans_lost:0 recover_s:0.8915418]
+crash-bat-mix run 13/15  pass  map[detect_s:0.3295745 flow_resume_s:18.5440098 outage_s:24.7393663 pans_lost:0 recover_s:1.1080031]
+crash-bat-mix run 14/15  pass  map[detect_s:0.3174619 flow_resume_s:19.0477014 outage_s:24.9932773 pans_lost:0 recover_s:0.8907017]
+crash-bat-mix run 15/15  pass  map[detect_s:0.3200412 flow_resume_s:18.8494075 outage_s:24.9082401 pans_lost:0 recover_s:1.0021086]
+crash-bat-insp run  1/15  pass  map[detect_s:0.4232438 flow_resume_s:19.0592984 outage_s:24.9699882 pans_lost:0 recover_s:0.8515744]
+crash-bat-insp run  2/15  pass  map[detect_s:0.3210812 flow_resume_s:18.9619469 outage_s:24.9239909 pans_lost:0 recover_s:0.9017831]
+crash-bat-insp run  3/15  pass  map[detect_s:0.3195613 flow_resume_s:23.9888728 outage_s:29.8282255 pans_lost:0 recover_s:0.7884052]
+crash-bat-insp run  4/15  pass  map[detect_s:0.3171509 flow_resume_s:19.0760361 outage_s:24.9777709 pans_lost:0 recover_s:0.8493561]
+crash-bat-insp run  5/15  pass  map[detect_s:0.3196395 flow_resume_s:18.9334578 outage_s:24.8992865 pans_lost:0 recover_s:0.905117]
+crash-bat-insp run  6/15  pass  map[detect_s:0.3294187 flow_resume_s:18.9367708 outage_s:24.9733173 pans_lost:0 recover_s:0.9770389]
+crash-bat-insp run  7/15  pass  map[detect_s:0.3177717 flow_resume_s:19.0086136 outage_s:24.9638739 pans_lost:0 recover_s:0.895198]
+crash-bat-insp run  8/15  pass  map[detect_s:0.3957469 flow_resume_s:18.8483862 outage_s:24.8649626 pans_lost:0 recover_s:0.9482376]
+crash-bat-insp run  9/15  pass  map[detect_s:0.3290902 flow_resume_s:18.8050746 outage_s:24.8600167 pans_lost:0 recover_s:0.9816985]
+crash-bat-insp run 10/15  pass  map[detect_s:0.3240909 flow_resume_s:18.9038873 outage_s:24.8958353 pans_lost:0 recover_s:0.9127289]
+crash-bat-insp run 11/15  pass  map[detect_s:0.3247104 flow_resume_s:18.8605553 outage_s:24.8632298 pans_lost:0 recover_s:0.9311179]
+crash-bat-insp run 12/15  pass  map[detect_s:0.3240188 flow_resume_s:18.8376665 outage_s:24.8855376 pans_lost:0 recover_s:0.9735357]
+crash-bat-insp run 13/15  pass  map[detect_s:0.3822291 flow_resume_s:18.8230557 outage_s:24.8181412 pans_lost:0 recover_s:0.9261547]
+crash-bat-insp run 14/15  pass  map[detect_s:0.3244803 flow_resume_s:18.8604781 outage_s:24.9095212 pans_lost:0 recover_s:0.9805883]
+crash-bat-insp run 15/15  pass  map[detect_s:0.319256 flow_resume_s:18.798225 outage_s:24.901214500000002 pans_lost:0 recover_s:0.8545391]
+crash-thm-dep run  1/15  pass  map[detect_s:0.4254003 flow_resume_s:18.8983036 outage_s:24.9400322 pans_lost:0 recover_s:0.9681422]
+crash-thm-dep run  2/15  pass  map[detect_s:0.3218199 flow_resume_s:19.0519368 outage_s:25.0108153 pans_lost:0 recover_s:0.9030452]
+crash-thm-dep run  3/15  pass  map[detect_s:0.3254277 flow_resume_s:18.9445203 outage_s:24.8639711 pans_lost:0 recover_s:0.8619685]
+crash-thm-dep run  4/15  pass  map[detect_s:0.3201688 flow_resume_s:19.0702529 outage_s:24.9909043 pans_lost:0 recover_s:0.8598103]
+crash-thm-dep run  5/15  pass  map[detect_s:0.4275597 flow_resume_s:18.9355186 outage_s:24.8515213 pans_lost:0 recover_s:0.855698]
+crash-thm-dep run  6/15  pass  map[detect_s:0.3222852 flow_resume_s:28.9274402 outage_s:34.9210666 pans_lost:0 recover_s:0.8580763]
+crash-thm-dep run  7/15  pass  map[detect_s:0.3203913 flow_resume_s:18.8619227 outage_s:24.9478665 pans_lost:0 recover_s:0.9938315]
+crash-thm-dep run  8/15  pass  map[detect_s:0.3232817 flow_resume_s:18.8194334 outage_s:24.8962536 pans_lost:0 recover_s:1.0090082]
+crash-thm-dep run  9/15  pass  map[detect_s:0.4282614 flow_resume_s:18.9975199 outage_s:24.9993918 pans_lost:0 recover_s:0.8619972]
+crash-thm-dep run 10/15  pass  map[detect_s:0.3247194 flow_resume_s:19.0004064 outage_s:24.9224806 pans_lost:0 recover_s:0.8568071]
+crash-thm-dep run 11/15  pass  map[detect_s:0.4294092 flow_resume_s:18.956487 outage_s:24.8788099 pans_lost:0 recover_s:0.8604931]
+crash-thm-dep run 12/15  pass  map[detect_s:0.4244378 flow_resume_s:28.9579023 outage_s:34.8691935 pans_lost:0 recover_s:0.8504627]
+crash-thm-dep run 13/15  pass  map[detect_s:0.4281914 flow_resume_s:18.8924042 outage_s:24.9223422 pans_lost:0 recover_s:0.9637224]
+crash-thm-dep run 14/15  pass  map[detect_s:0.3197356 flow_resume_s:18.9357428 outage_s:24.8635984 pans_lost:0 recover_s:0.8576703]
+crash-thm-dep run 15/15  pass  map[detect_s:0.3146538 flow_resume_s:18.9473035 outage_s:24.9256746 pans_lost:0 recover_s:0.8964792]
+crash-thm-bake run  1/15  pass  map[detect_s:0.4271056 flow_resume_s:23.9022272 outage_s:29.9403071 pans_lost:0 recover_s:0.9684171]
+crash-thm-bake run  2/15  pass  map[detect_s:0.4231105 flow_resume_s:18.9394882 outage_s:24.8886743 pans_lost:0 recover_s:0.8784464]
+crash-thm-bake run  3/15  pass  map[detect_s:0.3726069 flow_resume_s:18.9487629 outage_s:24.9385576 pans_lost:0 recover_s:0.9109511]
+crash-thm-bake run  4/15  pass  map[detect_s:0.424973 flow_resume_s:18.9285849 outage_s:24.9071529 pans_lost:0 recover_s:0.9063688]
+crash-thm-bake run  5/15  pass  map[detect_s:0.3317045 flow_resume_s:19.1497769 outage_s:24.9773505 pans_lost:0 recover_s:0.7618787]
+crash-thm-bake run  6/15  pass  map[detect_s:0.4273531 flow_resume_s:18.9395292 outage_s:24.8578 pans_lost:0 recover_s:0.8566127]
+crash-thm-bake run  7/15  pass  map[detect_s:0.319536 flow_resume_s:18.8676474 outage_s:24.8753202 pans_lost:0 recover_s:0.8954248]
+crash-thm-bake run  8/15  pass  map[detect_s:0.3221604 flow_resume_s:18.9407356 outage_s:24.9101568 pans_lost:0 recover_s:0.906385]
+crash-thm-bake run  9/15  pass  map[detect_s:0.4253243 flow_resume_s:19.0658155 outage_s:24.9806991 pans_lost:0 recover_s:0.8535779]
+crash-thm-bake run 10/15  pass  map[detect_s:0.3178947 flow_resume_s:23.912073499999998 outage_s:29.8767109 pans_lost:0 recover_s:0.8988924]
+crash-thm-bake run 11/15  pass  map[detect_s:0.3195882 flow_resume_s:18.9494467 outage_s:24.9084615 pans_lost:0 recover_s:0.8945775]
+crash-thm-bake run 12/15  pass  map[detect_s:0.3216532 flow_resume_s:18.8144302 outage_s:24.900065 pans_lost:0 recover_s:0.9975878]
+crash-thm-bake run 13/15  pass  map[detect_s:0.327177 flow_resume_s:18.909233 outage_s:24.9997295 pans_lost:0 recover_s:0.9956165]
+crash-thm-bake run 14/15  pass  map[detect_s:0.3247002 flow_resume_s:18.8585202 outage_s:24.8366545 pans_lost:0 recover_s:0.9083574]
+crash-thm-bake run 15/15  pass  map[detect_s:0.3289902 flow_resume_s:24.0272584 outage_s:29.9665714 pans_lost:0 recover_s:0.8677592]
+crash-thm-exit run  1/15  pass  map[detect_s:0.3305399 flow_resume_s:18.8950832 outage_s:24.8667984 pans_lost:0 recover_s:0.8879826]
+crash-thm-exit run  2/15  pass  map[detect_s:0.322743 flow_resume_s:18.9387002 outage_s:24.8712275 pans_lost:0 recover_s:0.8632533]
+crash-thm-exit run  3/15  pass  map[detect_s:0.4226232 flow_resume_s:18.9229984 outage_s:24.8405552 pans_lost:0 recover_s:0.8487446]
+crash-thm-exit run  4/15  pass  map[detect_s:0.3201728 flow_resume_s:19.0876577 outage_s:24.9899307 pans_lost:0 recover_s:0.7462675]
+crash-thm-exit run  5/15  pass  map[detect_s:0.3161588 flow_resume_s:19.0151636 outage_s:24.8680561 pans_lost:0 recover_s:0.7845446]
+crash-thm-exit run  6/15  pass  map[detect_s:0.3266368 flow_resume_s:19.1159731 outage_s:24.9730598 pans_lost:0 recover_s:0.7966478]
+crash-thm-exit run  7/15  pass  map[detect_s:0.4267461 flow_resume_s:19.09812 outage_s:24.9120576 pans_lost:0 recover_s:0.7490334]
+crash-thm-exit run  8/15  pass  map[detect_s:0.425173 flow_resume_s:18.9662886 outage_s:24.8856083 pans_lost:0 recover_s:0.8577074]
+crash-thm-exit run  9/15  pass  map[detect_s:0.4243513 flow_resume_s:19.0094409 outage_s:24.9213861 pans_lost:0 recover_s:0.8501837]
+crash-thm-exit run 10/15  pass  map[detect_s:0.3717383 flow_resume_s:19.0060432 outage_s:24.8646208 pans_lost:0 recover_s:0.7947259]
+crash-thm-exit run 11/15  pass  map[detect_s:0.3192757 flow_resume_s:18.9946818 outage_s:24.848315200000002 pans_lost:0 recover_s:0.7879228]
+crash-thm-exit run 12/15  pass  map[detect_s:0.321917 flow_resume_s:24.0464224 outage_s:29.9677772 pans_lost:0 recover_s:0.8550133]
+crash-thm-exit run 13/15  pass  map[detect_s:0.3186264 flow_resume_s:18.8650221 outage_s:24.8260813 pans_lost:0 recover_s:0.9006981]
+crash-thm-exit run 14/15  pass  map[detect_s:0.3218552 flow_resume_s:19.0366312 outage_s:24.9526477 pans_lost:0 recover_s:0.8533551]
+crash-thm-exit run 15/15  pass  map[detect_s:0.356132 flow_resume_s:18.936931 outage_s:24.960027 pans_lost:0 recover_s:0.947749]
+crash-thm-cool run  1/15  pass  map[detect_s:0.4269332 flow_resume_s:18.8831383 outage_s:24.8148628 pans_lost:0 recover_s:0.8584091]
+crash-thm-cool run  2/15  pass  map[detect_s:0.3219673 flow_resume_s:19.0255565 outage_s:24.9836666 pans_lost:0 recover_s:0.8900644]
+crash-thm-cool run  3/15  pass  map[detect_s:0.3195397 flow_resume_s:18.855176 outage_s:24.824938 pans_lost:0 recover_s:0.9029172]
+crash-thm-cool run  4/15  pass  map[detect_s:0.3224527 flow_resume_s:24.0879279 outage_s:30.0146306 pans_lost:0 recover_s:0.8555963]
+crash-thm-cool run  5/15  pass  map[detect_s:0.3206755 flow_resume_s:18.8476999 outage_s:24.8776946 pans_lost:0 recover_s:0.9606161]
+crash-thm-cool run  6/15  pass  map[detect_s:0.32204 flow_resume_s:18.9302584 outage_s:24.9015817 pans_lost:0 recover_s:0.9017049]
+crash-thm-cool run  7/15  pass  map[detect_s:0.3163835 flow_resume_s:18.9326627 outage_s:24.8965857 pans_lost:0 recover_s:0.8971094]
+crash-thm-cool run  8/15  pass  map[detect_s:0.3240236 flow_resume_s:18.8548294 outage_s:24.839158 pans_lost:0 recover_s:0.8608214]
+crash-thm-cool run  9/15  pass  map[detect_s:0.3218073 flow_resume_s:19.0298868 outage_s:24.959738 pans_lost:0 recover_s:0.8597551]
+crash-thm-cool run 10/15  pass  map[detect_s:0.3188789 flow_resume_s:23.866274 outage_s:29.8764782 pans_lost:0 recover_s:0.9137097]
+crash-thm-cool run 11/15  pass  map[detect_s:0.322605 flow_resume_s:18.8509975 outage_s:24.8351752 pans_lost:0 recover_s:0.8565917]
+crash-thm-cool run 12/15  pass  map[detect_s:0.3218831 flow_resume_s:19.0565337 outage_s:24.978938 pans_lost:0 recover_s:0.8537821]
+crash-thm-cool run 13/15  pass  map[detect_s:0.3205085 flow_resume_s:18.9721227 outage_s:24.9109029 pans_lost:0 recover_s:0.8613822]
+crash-thm-cool run 14/15  pass  map[detect_s:0.3188897 flow_resume_s:18.9620653 outage_s:24.8782213 pans_lost:0 recover_s:0.8482011]
+crash-thm-cool run 15/15  pass  map[detect_s:0.3281881 flow_resume_s:18.9600447 outage_s:24.9020623 pans_lost:0 recover_s:0.8693752]
+crash-fin-dpn run  1/15  pass  map[detect_s:0.3231988 flow_resume_s:18.8299874 outage_s:24.8080353 pans_lost:0 recover_s:0.8995878]
+crash-fin-dpn run  2/15  pass  map[detect_s:0.4243251 flow_resume_s:18.9470204 outage_s:24.8682469 pans_lost:0 recover_s:0.8533518]
+crash-fin-dpn run  3/15  pass  map[detect_s:0.3288312 flow_resume_s:18.9147689 outage_s:24.8869846 pans_lost:0 recover_s:0.9020807]
+crash-fin-dpn run  4/15  pass  map[detect_s:0.3249018 flow_resume_s:18.8241078 outage_s:24.8180168 pans_lost:0 recover_s:0.9031474]
+crash-fin-dpn run  5/15  pass  map[detect_s:0.324014 flow_resume_s:18.9619405 outage_s:24.9035801 pans_lost:0 recover_s:0.8592923]
+crash-fin-dpn run  6/15  pass  map[detect_s:0.3182501 flow_resume_s:23.9483573 outage_s:29.9287923 pans_lost:0 recover_s:0.9082327]
+crash-fin-dpn run  7/15  pass  map[detect_s:0.3269851 flow_resume_s:18.6133223 outage_s:24.6803359 pans_lost:0 recover_s:0.9856976]
+crash-fin-dpn run  8/15  pass  map[detect_s:0.3192623 flow_resume_s:18.8510387 outage_s:24.8146397 pans_lost:0 recover_s:0.8949478]
+crash-fin-dpn run  9/15  pass  map[detect_s:0.4247108 flow_resume_s:19.068763 outage_s:24.9423075 pans_lost:0 recover_s:0.79565]
+crash-fin-dpn run 10/15  pass  map[detect_s:0.3206208 flow_resume_s:18.7254489 outage_s:24.8163473 pans_lost:0 recover_s:0.9184546]
+crash-fin-dpn run 11/15  pass  map[detect_s:0.320878 flow_resume_s:19.0334783 outage_s:24.9603013 pans_lost:0 recover_s:0.8561907]
+crash-fin-dpn run 12/15  pass  map[detect_s:0.4240074 flow_resume_s:24.0813891 outage_s:29.9187469 pans_lost:0 recover_s:0.7510981]
+crash-fin-dpn run 13/15  pass  map[detect_s:0.3196714 flow_resume_s:19.0093413 outage_s:24.8300258 pans_lost:0 recover_s:0.7491962]
+crash-fin-dpn run 14/15  pass  map[detect_s:0.3224609 flow_resume_s:19.0571703 outage_s:24.9914498 pans_lost:0 recover_s:0.8581307]
+crash-fin-dpn run 15/15  pass  map[detect_s:0.3234054 flow_resume_s:18.7636104 outage_s:24.8607841 pans_lost:0 recover_s:1.0169919]
+crash-fin-qua run  1/15  pass  map[detect_s:0.3284329 flow_resume_s:18.8373498 outage_s:24.8404756 pans_lost:0 recover_s:0.8711555]
+crash-fin-qua run  2/15  pass  map[detect_s:0.3237462 flow_resume_s:18.9667469 outage_s:24.9559978 pans_lost:0 recover_s:0.8585847]
+crash-fin-qua run  3/15  pass  map[detect_s:0.3179894 flow_resume_s:18.8386264 outage_s:24.8309453 pans_lost:0 recover_s:0.8991669]
+crash-fin-qua run  4/15  pass  map[detect_s:0.3222324 flow_resume_s:18.9132514 outage_s:24.9258752 pans_lost:0 recover_s:0.8583683]
+crash-fin-qua run  5/15  pass  map[detect_s:0.3218314 flow_resume_s:19.029094 outage_s:24.9711295 pans_lost:0 recover_s:0.8599559]
+crash-fin-qua run  6/15  pass  map[detect_s:0.3226156 flow_resume_s:18.953771 outage_s:24.8894122 pans_lost:0 recover_s:0.8562339]
+crash-fin-qua run  7/15  pass  map[detect_s:0.3240657 flow_resume_s:18.9115279 outage_s:24.8416894 pans_lost:0 recover_s:0.8574627]
+crash-fin-qua run  8/15  pass  map[detect_s:0.3167839 flow_resume_s:19.0009199 outage_s:24.8589868 pans_lost:0 recover_s:0.7890239]
+crash-fin-qua run  9/15  pass  map[detect_s:0.4237509 flow_resume_s:23.9377917 outage_s:29.8722658 pans_lost:0 recover_s:0.8557316]
+crash-fin-qua run 10/15  pass  map[detect_s:0.3491881 flow_resume_s:19.0171708 outage_s:24.9162565 pans_lost:0 recover_s:0.8223468]
+crash-fin-qua run 11/15  pass  map[detect_s:0.3376627 flow_resume_s:18.9327784 outage_s:24.8257136 pans_lost:0 recover_s:0.7642351]
+crash-fin-qua run 12/15  pass  map[detect_s:0.3286702 flow_resume_s:19.0441218 outage_s:24.9751209 pans_lost:0 recover_s:0.8597736]
+crash-fin-qua run 13/15  pass  map[detect_s:0.3232777 flow_resume_s:18.9111912 outage_s:24.9003325 pans_lost:0 recover_s:0.8562999]
+crash-fin-qua run 14/15  pass  map[detect_s:0.3187285 flow_resume_s:19.0204867 outage_s:24.9095291 pans_lost:0 recover_s:0.7916307]
+crash-fin-qua run 15/15  pass  map[detect_s:0.3205386 flow_resume_s:23.940014 outage_s:29.8223054 pans_lost:0 recover_s:0.8042548]
+crash-fin-wrap run  1/15  pass  map[detect_s:0.3190637 flow_resume_s:19.0283197 outage_s:24.9821507 pans_lost:0 recover_s:0.8827289]
+crash-fin-wrap run  2/15  pass  map[detect_s:0.320628 flow_resume_s:18.9256712 outage_s:24.8113746 pans_lost:0 recover_s:0.7528509]
+crash-fin-wrap run  3/15  pass  map[detect_s:0.3197883 flow_resume_s:18.9232943 outage_s:24.9127566 pans_lost:0 recover_s:0.8567159]
+crash-fin-wrap run  4/15  pass  map[detect_s:0.424281 flow_resume_s:19.038647 outage_s:24.9610995 pans_lost:0 recover_s:0.8489875]
+crash-fin-wrap run  5/15  pass  map[detect_s:0.4238394 flow_resume_s:19.0234847 outage_s:24.8601442 pans_lost:0 recover_s:0.7461868]
+crash-fin-wrap run  6/15  pass  map[detect_s:0.3198544 flow_resume_s:24.0686754 outage_s:29.8876544 pans_lost:0 recover_s:0.7479147]
+crash-fin-wrap run  7/15  pass  map[detect_s:0.3281382 flow_resume_s:19.0506986 outage_s:24.9945698 pans_lost:0 recover_s:0.8625197]
+crash-fin-wrap run  8/15  pass  map[detect_s:0.319451 flow_resume_s:18.9383717 outage_s:24.8732454 pans_lost:0 recover_s:0.8596839]
+crash-fin-wrap run  9/15  pass  map[detect_s:0.3246029 flow_resume_s:19.0554105 outage_s:24.889268 pans_lost:0 recover_s:0.7572545]
+crash-fin-wrap run 10/15  pass  map[detect_s:0.3226503 flow_resume_s:23.9445489 outage_s:29.8378424 pans_lost:0 recover_s:0.792992]
+crash-fin-wrap run 11/15  pass  map[detect_s:0.4234346 flow_resume_s:19.0124393 outage_s:24.97283 pans_lost:0 recover_s:0.8523284]
+crash-fin-wrap run 12/15  pass  map[detect_s:0.4223238 flow_resume_s:18.9250076 outage_s:24.909045 pans_lost:0 recover_s:0.8523285]
+crash-fin-wrap run 13/15  pass  map[detect_s:0.3185784 flow_resume_s:19.0027308 outage_s:24.8891088 pans_lost:0 recover_s:0.7889291]
+crash-fin-wrap run 14/15  pass  map[detect_s:0.3224938 flow_resume_s:18.9409461 outage_s:24.865777 pans_lost:0 recover_s:0.8514805]
+crash-fin-wrap run 15/15  pass  map[detect_s:0.3190476 flow_resume_s:18.7751186 outage_s:24.772275 pans_lost:0 recover_s:0.9083434]
+crash-fin-pal run  1/15  pass  map[detect_s:0.4243282 flow_resume_s:23.9291841 outage_s:29.8668754 pans_lost:0 recover_s:0.847156]
+crash-fin-pal run  2/15  pass  map[detect_s:0.3176791 flow_resume_s:23.9430102 outage_s:29.8786207 pans_lost:0 recover_s:0.8521172]
+crash-fin-pal run  3/15  pass  map[detect_s:0.3202253 flow_resume_s:23.8843803 outage_s:29.8179426 pans_lost:0 recover_s:0.8543304]
+crash-fin-pal run  4/15  pass  map[detect_s:0.3277141 flow_resume_s:24.0670185 outage_s:29.9535421 pans_lost:0 recover_s:0.7562645]
+crash-fin-pal run  5/15  pass  map[detect_s:0.4328457 flow_resume_s:24.0208664 outage_s:29.8612858 pans_lost:0 recover_s:0.7548696]
+crash-fin-pal run  6/15  pass  map[detect_s:0.3705214 flow_resume_s:24.0222684 outage_s:29.8971638 pans_lost:0 recover_s:0.7972796]
+crash-fin-pal run  7/15  pass  map[detect_s:0.3258755 flow_resume_s:24.0287829 outage_s:30.0056617 pans_lost:0 recover_s:0.8585855]
+crash-fin-pal run  8/15  pass  map[detect_s:0.3221096 flow_resume_s:23.9084847 outage_s:29.8474658 pans_lost:0 recover_s:0.8581323]
+crash-fin-pal run  9/15  pass  map[detect_s:0.3189633 flow_resume_s:24.0569505 outage_s:29.913294 pans_lost:0 recover_s:0.7562955]
+crash-fin-pal run 10/15  pass  map[detect_s:0.3227621 flow_resume_s:23.8749495 outage_s:29.8165739 pans_lost:0 recover_s:0.8668827]
+crash-fin-pal run 11/15  pass  map[detect_s:0.3204492 flow_resume_s:24.0472277 outage_s:29.9848643 pans_lost:0 recover_s:0.8594193]
+crash-fin-pal run 12/15  pass  map[detect_s:0.318921 flow_resume_s:23.8277649 outage_s:29.8079707 pans_lost:0 recover_s:0.8495557]
+crash-fin-pal run 13/15  pass  map[detect_s:0.3178406 flow_resume_s:24.0435041 outage_s:29.9222338 pans_lost:0 recover_s:0.7663362]
+crash-fin-pal run 14/15  pass  map[detect_s:0.325606 flow_resume_s:24.0726737 outage_s:29.9384412 pans_lost:0 recover_s:0.7528535]
+crash-fin-pal run 15/15  pass  map[detect_s:0.3226583 flow_resume_s:23.9341805 outage_s:29.8714804 pans_lost:0 recover_s:0.8582219]
+crash-fin-wash run  1/15  pass  map[detect_s:0.4243805 flow_resume_s:18.8446225 outage_s:24.8274377 pans_lost:0 recover_s:0.8562693]
+crash-fin-wash run  2/15  pass  map[detect_s:0.3247634 flow_resume_s:18.9874365 outage_s:24.9513068 pans_lost:0 recover_s:0.8564603]
+crash-fin-wash run  3/15  pass  map[detect_s:0.3182741 flow_resume_s:18.9498105 outage_s:24.8881433 pans_lost:0 recover_s:0.8497075]
+crash-fin-wash run  4/15  pass  map[detect_s:0.319397 flow_resume_s:18.9222353 outage_s:24.810064 pans_lost:0 recover_s:0.7870665]
+crash-fin-wash run  5/15  pass  map[detect_s:0.3165842 flow_resume_s:19.0075267 outage_s:24.9628264 pans_lost:0 recover_s:0.866879]
+crash-fin-wash run  6/15  pass  map[detect_s:0.3186176 flow_resume_s:18.8233499 outage_s:24.815908 pans_lost:0 recover_s:0.8979693]
+crash-fin-wash run  7/15  pass  map[detect_s:0.3258522 flow_resume_s:19.0285671 outage_s:24.9961643 pans_lost:0 recover_s:0.8585114]
+crash-fin-wash run  8/15  pass  map[detect_s:0.3181613 flow_resume_s:18.9196472 outage_s:24.8082191 pans_lost:0 recover_s:0.7866916]
+crash-fin-wash run  9/15  pass  map[detect_s:0.3284682 flow_resume_s:18.9971471 outage_s:24.9776505 pans_lost:0 recover_s:0.8605945]
+crash-fin-wash run 10/15  pass  map[detect_s:0.3174136 flow_resume_s:18.9823746 outage_s:24.8757336 pans_lost:0 recover_s:0.7441369]
+crash-fin-wash run 11/15  pass  map[detect_s:0.3181259 flow_resume_s:18.8800253 outage_s:24.8671315 pans_lost:0 recover_s:0.8930002]
+crash-fin-wash run 12/15  pass  map[detect_s:0.3182724 flow_resume_s:18.9958278 outage_s:24.9037414 pans_lost:0 recover_s:0.787287]
+crash-fin-wash run 13/15  pass  map[detect_s:0.317571 flow_resume_s:18.7624128 outage_s:24.8504107 pans_lost:0 recover_s:0.9717437]
+crash-fin-wash run 14/15  pass  map[detect_s:0.3210175 flow_resume_s:18.8934409 outage_s:24.8922055 pans_lost:0 recover_s:0.851889]
+crash-fin-wash run 15/15  pass  map[detect_s:0.3170064 flow_resume_s:18.9940237 outage_s:24.8162103 pans_lost:0 recover_s:0.7427624]
+crash-bt     run  1/15  pass  map[detect_s:0.4225472 flow_resume_s:18.9845822 outage_s:24.9791214 pans_lost:0 recover_s:0.8495786]
+crash-bt     run  2/15  pass  map[detect_s:0.319593 flow_resume_s:18.9610029 outage_s:24.8527359 pans_lost:0 recover_s:0.7896759]
+crash-bt     run  3/15  pass  map[detect_s:0.3199551 flow_resume_s:18.8871492 outage_s:24.8836498 pans_lost:0 recover_s:0.8575961]
+crash-bt     run  4/15  pass  map[detect_s:0.327611 flow_resume_s:18.832864 outage_s:24.8214136 pans_lost:0 recover_s:0.8663062]
+crash-bt     run  5/15  pass  map[detect_s:0.3740472 flow_resume_s:19.1049003 outage_s:24.9907008 pans_lost:0 recover_s:0.7973074]
+crash-bt     run  6/15  pass  map[detect_s:0.3262292 flow_resume_s:18.9217429 outage_s:24.8166405 pans_lost:0 recover_s:0.7493374]
+crash-bt     run  7/15  pass  map[detect_s:0.317076 flow_resume_s:23.9825931 outage_s:29.9532131 pans_lost:0 recover_s:0.8492262]
+crash-bt     run  8/15  pass  map[detect_s:0.3159775 flow_resume_s:18.8291543 outage_s:24.8484313 pans_lost:0 recover_s:0.8928845]
+crash-bt     run  9/15  pass  map[detect_s:0.3172481 flow_resume_s:18.9716551 outage_s:24.8872881 pans_lost:0 recover_s:0.7836347]
+crash-bt     run 10/15  pass  map[detect_s:0.3192095 flow_resume_s:18.8200258 outage_s:24.8289653 pans_lost:0 recover_s:0.8510344]
+crash-bt     run 11/15  pass  map[detect_s:0.3290556 flow_resume_s:18.8377154 outage_s:24.8268299 pans_lost:0 recover_s:0.8692119]
+crash-bt     run 12/15  pass  map[detect_s:0.3190278 flow_resume_s:18.7073137 outage_s:24.8085468 pans_lost:0 recover_s:0.9001928]
+crash-bt     run 13/15  pass  map[detect_s:0.3318443 flow_resume_s:24.0005415 outage_s:29.9856027 pans_lost:0 recover_s:0.8667606]
+crash-bt     run 14/15  pass  map[detect_s:0.3189158 flow_resume_s:19.0104124 outage_s:24.8990114 pans_lost:0 recover_s:0.7932518]
+crash-bt     run 15/15  pass  map[detect_s:0.314437 flow_resume_s:19.0048674 outage_s:24.8960573 pans_lost:0 recover_s:0.7824608]
+freeze-thm-bake run  1/15  pass  map[detect_s:7.6638845 flow_resume_s:20.8627391 outage_s:29.8489923 pans_lost:0]
+freeze-thm-bake run  2/15  pass  map[detect_s:6.8391385 flow_resume_s:16.9339827 outage_s:24.8388805 pans_lost:0]
+freeze-thm-bake run  3/15  pass  map[detect_s:6.9386127 flow_resume_s:16.9330978 outage_s:24.9229566 pans_lost:0]
+freeze-thm-bake run  4/15  pass  map[detect_s:6.9479476 flow_resume_s:16.850643 outage_s:24.8642397 pans_lost:0]
+freeze-thm-bake run  5/15  pass  map[detect_s:6.9390908 flow_resume_s:16.9158542 outage_s:24.9083341 pans_lost:0]
+freeze-thm-bake run  6/15  pass  map[detect_s:6.8231585 flow_resume_s:16.8182613 outage_s:24.8160695 pans_lost:0]
+freeze-thm-bake run  7/15  pass  map[detect_s:6.9473884 flow_resume_s:16.916881 outage_s:24.8976244 pans_lost:0]
+freeze-thm-bake run  8/15  pass  map[detect_s:7.7828663 flow_resume_s:15.853258 outage_s:24.92917 pans_lost:0]
+freeze-thm-bake run  9/15  pass  map[detect_s:6.9416446 flow_resume_s:16.9186573 outage_s:24.9221029 pans_lost:0]
+freeze-thm-bake run 10/15  pass  map[detect_s:6.8342254 flow_resume_s:16.9568146 outage_s:24.8430753 pans_lost:0]
+freeze-thm-bake run 11/15  pass  map[detect_s:7.8737209 flow_resume_s:15.8379999 outage_s:24.8689859 pans_lost:0]
+freeze-thm-bake run 12/15  pass  map[detect_s:7.8932749 flow_resume_s:20.890053 outage_s:29.8841635 pans_lost:0]
+freeze-thm-bake run 13/15  pass  map[detect_s:6.8490269 flow_resume_s:16.8256733 outage_s:24.8207692 pans_lost:0]
+freeze-thm-bake run 14/15  pass  map[detect_s:6.940156 flow_resume_s:16.8858629 outage_s:24.9174516 pans_lost:0]
+freeze-thm-bake run 15/15  pass  map[detect_s:6.9466359 flow_resume_s:16.8044205 outage_s:24.8018596 pans_lost:0]
+freeze-two-stations run  1/15  pass  map[detect_s:6.5071717 flow_resume_s:15.298575 outage_s:24.9100395 pans_lost:0 recover_s:0.0113763]
+freeze-two-stations run  2/15  pass  map[detect_s:7.3680883999999995 flow_resume_s:20.2080334 outage_s:29.8836624 pans_lost:0 recover_s:0.0111951]
+freeze-two-stations run  3/15  pass  map[detect_s:6.3300753 flow_resume_s:25.2901421 outage_s:34.8819138 pans_lost:0 recover_s:0.0077614]
+freeze-two-stations run  4/15  pass  map[detect_s:6.3277672 flow_resume_s:20.4041398 outage_s:29.8022199 pans_lost:0 recover_s:0.0102764]
+freeze-two-stations run  5/15  pass  map[detect_s:6.4100054 flow_resume_s:20.4156162 outage_s:29.9099396 pans_lost:0 recover_s:0.0084126]
+freeze-two-stations run  6/15  pass  map[detect_s:6.5267172 flow_resume_s:25.4391462 outage_s:34.9159801 pans_lost:0 recover_s:0.0080577]
+freeze-two-stations run  7/15  pass  map[detect_s:7.3664784 flow_resume_s:20.0736679 outage_s:29.8699309 pans_lost:0 recover_s:0.0250108]
+freeze-two-stations run  8/15  pass  map[detect_s:7.3590549 flow_resume_s:25.3014954 outage_s:34.8789774 pans_lost:0 recover_s:0.0150397]
+freeze-two-stations run  9/15  pass  map[detect_s:7.3667504 flow_resume_s:20.309510799999998 outage_s:29.9001916 pans_lost:0 recover_s:0.0086234]
+freeze-two-stations run 10/15  pass  map[detect_s:6.4212957 flow_resume_s:20.4174159 outage_s:29.8077943 pans_lost:0 recover_s:0.0090712]
+freeze-two-stations run 11/15  pass  map[detect_s:6.2266016 flow_resume_s:25.3074754 outage_s:34.9843677 pans_lost:0 recover_s:0.0072244]
+freeze-two-stations run 12/15  pass  map[detect_s:7.3824599 flow_resume_s:20.3922771 outage_s:29.8602958 pans_lost:0 recover_s:0.008182]
+freeze-two-stations run 13/15  pass  map[detect_s:7.3546674 flow_resume_s:25.4784551 outage_s:34.8800541 pans_lost:0 recover_s:0.0080432]
+freeze-two-stations run 14/15  pass  map[detect_s:6.4113297 flow_resume_s:20.224831000000002 outage_s:29.8030537 pans_lost:0 recover_s:0.0088325]
+freeze-two-stations run 15/15  pass  map[detect_s:6.5172562 flow_resume_s:20.4253322 outage_s:29.9261598 pans_lost:0 recover_s:0.0073296]
+freeze-three-stations run  1/15  fail  map[detect_s:5.8022613]
+freeze-three-stations run  2/15  pass  map[detect_s:5.8039971 flow_resume_s:18.7027103 outage_s:29.795133 pans_lost:0 recover_s:0.010845]
+freeze-three-stations run  3/15  pass  map[detect_s:5.997765 flow_resume_s:14.7599147 outage_s:24.9487832 pans_lost:0 recover_s:0.0100652]
+freeze-three-stations run  4/15  pass  map[detect_s:5.7880228 flow_resume_s:13.800736 outage_s:24.8061018 pans_lost:0 recover_s:0.011795]
+freeze-three-stations run  5/15  pass  map[detect_s:6.0052785 flow_resume_s:14.9806097 outage_s:24.9723355 pans_lost:0 recover_s:0.0085334]
+freeze-three-stations run  6/15  pass  map[detect_s:5.8885062999999995 flow_resume_s:14.9600761 outage_s:24.8575251 pans_lost:0 recover_s:0.0126265]
+freeze-three-stations run  7/15  pass  map[detect_s:6.8312854 flow_resume_s:14.8782258 outage_s:24.8484314 pans_lost:0 recover_s:0.0080013]
+freeze-three-stations run  8/15  pass  map[detect_s:6.8395683 flow_resume_s:13.8914886 outage_s:24.8644864 pans_lost:0 recover_s:0.0080035]
+freeze-three-stations run  9/15  pass  map[detect_s:5.8043974 flow_resume_s:19.9865448 outage_s:29.8871277 pans_lost:0 recover_s:0.0077323]
+freeze-three-stations run 10/15  pass  map[detect_s:5.8887657 flow_resume_s:14.8616717 outage_s:24.8566292 pans_lost:0 recover_s:0.0083551]
+freeze-three-stations run 11/15  pass  map[detect_s:6.7275030000000005 flow_resume_s:14.7200122 outage_s:24.7997308 pans_lost:0 recover_s:0.0156965]
+freeze-three-stations run 12/15  pass  map[detect_s:5.8895576 flow_resume_s:14.8093339 outage_s:24.828444 pans_lost:0 recover_s:0.0081503]
+freeze-three-stations run 13/15  pass  map[detect_s:5.8930833 flow_resume_s:14.7696813 outage_s:24.8399236 pans_lost:0 recover_s:0.0111316]
+freeze-three-stations run 14/15  pass  map[detect_s:5.8992366 flow_resume_s:14.853681 outage_s:24.8685153 pans_lost:0 recover_s:0.0076517]
+freeze-three-stations run 15/15  pass  map[detect_s:6.6216888 flow_resume_s:13.7988783 outage_s:24.7125931 pans_lost:0 recover_s:0.006904]
+
+wrote docs/experiment-results-rerun.csv (1 failed runs)
+exit status 1
+experiment done Wed Nov 25 03:15:17     2026
+ Container src-mssql-1 Running 
+ Container src-mongo-1 Running 
+ Container src-mosquitto-1 Recreate 
+ Container src-mosquitto-1 Recreated 
+ Container src-bat-dose-1 Recreate 
+ Container src-ui-1 Recreate 
+ Container src-fin-wash-1 Recreate 
+ Container src-thm-cool-1 Recreate 
+ Container src-fin-wrap-1 Recreate 
+ Container src-thm-exit-1 Recreate 
+ Container src-mon-1 Recreate 
+ Container src-fin-pal-1 Recreate 
+ Container src-plm-wh-1 Recreate 
+ Container src-plm-ship-1 Recreate 
+ Container src-thm-bake-1 Recreate 
+ Container src-fin-dpn-1 Recreate 
+ Container src-bat-insp-1 Recreate 
+ Container src-bt-1 Recreate 
+ Container src-bat-mix-1 Recreate 
+ Container src-fin-qua-1 Recreate 
+ Container src-thm-dep-1 Recreate 
+ Container src-ui-1 Recreated 
+ Container src-thm-dep-1 Recreated 
+ Container src-bat-dose-1 Recreated 
+ Container src-fin-qua-1 Recreated 
+ Container src-bat-insp-1 Recreated 
+ Container src-bat-mix-1 Recreated 
+ Container src-thm-cool-1 Recreated 
+ Container src-fin-pal-1 Recreated 
+ Container src-fin-dpn-1 Recreated 
+ Container src-plm-ship-1 Recreated 
+ Container src-fin-wash-1 Recreated 
+ Container src-plm-wh-1 Recreated 
+ Container src-thm-bake-1 Recreated 
+ Container src-thm-exit-1 Recreated 
+ Container src-bt-1 Recreated 
+ Container src-fin-wrap-1 Recreated 
+ Container src-mon-1 Recreated 
+ Container src-mosquitto-1 Starting 
+ Container src-mosquitto-1 Started 
+ Container src-mosquitto-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mssql-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mssql-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mssql-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mssql-1 Waiting 
+ Container src-mosquitto-1 Waiting 
+ Container src-mongo-1 Healthy 
+ Container src-mssql-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mssql-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mssql-1 Healthy 
+ Container src-mongo-1 Healthy 
+ Container src-mssql-1 Healthy 
+ Container src-mosquitto-1 Healthy 
+ Container src-thm-dep-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-mon-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-mosquitto-1 Healthy 
+ Container src-thm-cool-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-plm-ship-1 Starting 
+ Container src-bat-dose-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-mosquitto-1 Healthy 
+ Container src-fin-qua-1 Starting 
+ Container src-fin-wash-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-plm-wh-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-ui-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-fin-wrap-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-thm-exit-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-bt-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-thm-bake-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-bat-insp-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-bat-mix-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-fin-dpn-1 Starting 
+ Container src-mosquitto-1 Healthy 
+ Container src-fin-pal-1 Starting 
+ Container src-thm-dep-1 Started 
+ Container src-mon-1 Started 
+ Container src-thm-cool-1 Started 
+ Container src-plm-ship-1 Started 
+ Container src-bat-dose-1 Started 
+ Container src-fin-qua-1 Started 
+ Container src-fin-wash-1 Started 
+ Container src-plm-wh-1 Started 
+ Container src-ui-1 Started 
+ Container src-fin-wrap-1 Started 
+ Container src-thm-exit-1 Started 
+ Container src-bt-1 Started 
+ Container src-thm-bake-1 Started 
+ Container src-bat-insp-1 Started 
+ Container src-bat-mix-1 Started 
+ Container src-fin-dpn-1 Started 
+ Container src-fin-pal-1 Started 
+availability done Wed Nov 25 05:16:38     2026

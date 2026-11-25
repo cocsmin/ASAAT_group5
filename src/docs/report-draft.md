@@ -127,7 +127,7 @@ scenario were chosen to compare scenarios, not for one interval each.
 interval of ±0.2 s, no pan lost. Freeze: detection 7.0 s (limit 7.5 s from the keep-alive), inside 15 s. The outage is
 a fixed refill delay of about 25 s, nearly the same for every container; with one container crash per hour it costs
 about 18 minutes a month, inside the 216 minutes allowed by 99.5 %. The two-hour run at doubled rates gave 99.997 %
-availability at the container level and 96 % of the maximum cake output, with 260 events absorbed. One run failed: the pan
+availability at the container level and 96 % of the maximum cake output, with 260 events absorbed. A rerun on 25 Nov (same detection and recovery, 269 of 270 runs passed) gave a mean container availability of 99.844 % and 90 % of the maximum output, with the worst container (THM-DEP) at 98.752 %, because the random failures drew 4 freezes (see [experiment.md](experiment.md) section 5.2). One run failed: the pan
 count before it was taken while a pan was between two stations (47 against 48), a measurement artefact of the runner, not a lost pan ([experiment.md](experiment.md) section 5). Threats to validity: simulated
 machines, one host, chosen failure rates ([experiment.md](experiment.md) section 7).
 
