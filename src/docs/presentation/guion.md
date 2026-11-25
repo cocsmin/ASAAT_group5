@@ -22,6 +22,34 @@ Total about 4:40, which leaves 20 seconds of margin. The weight is on what the p
 the experiment (slides 7 and 8), the implementation (slides 3 and 4) and UPPAAL with its simulation (slide 5).
 The GIFs play only in slideshow mode (F5), not in the editing view. If you run over, cut slide 6 to one sentence.
 
+## Three speakers: who says what
+
+| Speaker | Slides | Time | Topic |
+|---|---|---|---|
+| A | 1 Title, 2 Goal, 3 Implementation, 4 Control UI | 1:35 | The question, the requirements, how it is built, the real UI |
+| B | 5 UPPAAL, 6 Papyrus, 7 Exercise 8 | 1:35 | The models and the experiment design |
+| C | 8 Exercise 9, 9 Scalability and conclusion | 1:30 | Results, load test, conclusion |
+
+Change slides on your own part with the keyboard; the next speaker steps forward during the last sentence of the previous one.
+Hand-over sentences (the last sentence of each part, which leads into the next one):
+
+- **A to B (end of slide 4):** "The batter that waited 25 seconds and was discarded is exactly the rule we checked with UPPAAL, so
+  [B] will show how."
+- **B to C (end of slide 7):** "So that is how we break the system on purpose; [C] will show what we measured."
+- **C (end of slide 9):** "In short: a dead container is noticed in under a second, back in about a second, no cake is lost, and the
+  line needs about 25 seconds to refill. Thank you, we are happy to answer questions."
+
+Who answers which questions (the questions below are grouped the same way):
+
+| Speaker | Questions |
+|---|---|
+| A | About the architecture, About the project in general, About the presentation itself (UI and GIF) |
+| B | About the models (UPPAAL, Papyrus), About the experiment (design: runs, faults, metrics, pans lost, threats to validity) |
+| C | About the experiment (results), Why things failed or came out worse than expected, About the process |
+
+If a question is not for you, say "[name] can answer that" and pass it on; if nobody knows, say what we know, what we did not check, and what we would
+do to find out (see "Why things failed" for examples).
+
 ## Script
 
 **Slide 1 (0:10).** Good morning. We are group 5. Our cake factory is six systems running in sixteen Docker
