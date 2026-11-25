@@ -125,6 +125,65 @@ broker, so they would be similar in a real line. The failure rates are our choic
 **What is Docker Compose doing?**
 It starts all the containers (the 16 stations, broker, databases, dashboard) together and restarts the ones that die.
 
+### More questions (longer answers)
+
+**What is a frozen station?**
+A container whose program is still running but stuck: it does not crash and does not answer (for example a deadlock). The network
+connection stays open, so there is no clean "goodbye". The broker only notices because the keep-alive pings stop; after 1.5 times the
+keep-alive (7.5 s) it closes the connection and publishes the death certificate. This is why a freeze is detected in 6 to 8 s and a crash
+in 0.3 s. We test both because they are different failures and the freeze is the harder one to detect.
+
+**Why MQTT and Sparkplug B and not something else?**
+We compared them (docs/communication.md). MQTT is a light broker with built-in presence detection (Last Will), which is exactly our
+failure detector. Sparkplug B adds the standard topics and birth/death messages, so we did not have to invent a protocol. The others:
+Kafka is heavy and has no Last Will (we do not need its throughput, about 50 messages per second). RabbitMQ/AMQP and NATS would make us build
+presence detection ourselves. OPC UA is the industrial standard but its SDK and information model are heavy for simulated machines.
+REST or gRPC couple every sender to its receiver being up, which is against failure containment. Honest cost: one broker is a single point of failure.
+
+**Why Go?**
+One small language for everything: a static binary that starts in well under a second (our recovery is about 1 s), small Docker images,
+goroutines that map well to many pans moving at the same time, compile-time type checks, and good MQTT, SQL and MongoDB libraries. Alternatives:
+C++ or Rust are slower to write and we do not need hard real time (our deadlines are seconds); Java or C# have heavier runtime and slower start;
+Python is slower to start and weak for many concurrent devices. Cost: garbage collection gives no hard real-time guarantee.
+
+**How did you run the experiments?**
+An experiment runner (a Go program) starts the factory in Docker Compose, waits until it is producing, then injects a fault through the
+same API the dashboard uses (stop, freeze, restart a container). It reads the event log and measures: time to detect, time to recover, time
+until the next cake ships, and pans lost. 18 scenarios, each repeated 15 times, written to a CSV file. Details with speaker B/C and docs/experiment.md.
+
+**Which stations save their own queue? Why not the others?**
+The batter queue of THM-DEP (depositing) is saved to MongoDB every time it changes and read back at start. The BAT stations also save their queues.
+BT saves its state, and every station saves its counters (processed, queue length) every 3 s and reloads them after a restart.
+Other stations hold nothing waiting that must survive: the pan and cake documents already live in MongoDB, so after a restart the station just
+continues from the database and the broker redelivers what it missed (QoS 1, persistent session). THM-DEP is special because it holds batter that
+is waiting and ages: if it forgot the queue, batter would be lost.
+
+**Why SQL Server and MongoDB, why not everything in one?**
+The data has two different shapes. Orders, recipes, stock, shipments and the event log are relational and need transactions: SQL Server.
+A pan is one document that every station updates in turn and that carries its own history; the structure changes when a station is added, and
+there are no joins: MongoDB. One database could do both, but then one of the two uses would fit badly, and it would also be one
+shared failure point for everything. Honest cost: two databases to run and to keep consistent (no joins between them).
+
+**Why no broker cluster?**
+It is out of scope and would not give real redundancy here. (1) Our requirements are about the availability of the controllers (the stations), not of
+the broker. (2) Everything runs with Docker Compose on one machine, so a cluster on the same machine does not survive a machine failure.
+(3) Mosquitto has no clustering; we would need another broker (EMQX, HiveMQ) and more complexity. (4) We wanted to measure the stations first.
+It is listed as future work (a clustered broker and one monitor per area).
+
+**Single point of failure, a bit more.**
+A single point of failure is one part that, if it fails, stops the whole system, with no backup. In our system: the **broker** (if it dies, no
+signal moves and no death certificate is published, so the monitor is blind), **SQL Server** (orders, stock, event log) and **MongoDB** (pans and
+saved queues). Also MON itself: it is the one who decides to stop the band. In the experiment we only fail factory containers, so we do not claim
+anything about these. How we would fix it: broker cluster (several brokers, clients reconnect to another), replicated databases (SQL Server
+availability group, MongoDB replica set), a second monitor. The honest sentence: "we measured the failure of a station, not of the infrastructure."
+
+**What is QoS 1?**
+QoS = quality of service, how sure MQTT is that a message arrives. QoS 0: send once, no confirmation (can be lost). **QoS 1: the receiver confirms; if
+no confirmation the broker sends again, so it arrives at least once (can arrive twice).** QoS 2: exactly once, but slower. We use QoS 1 for hand-offs and
+events (a lost message would lose a batch or an event), with a message id so the receiver drops duplicates. The heartbeat uses QoS 0: if one is
+lost, the next comes in 5 s, and a missing one is itself the information. With a persistent session, QoS 1 messages wait in the broker while the
+station is down, so it gets them after it restarts.
+
 If you get a question you do not know: say "[colleague] can answer that" or "we did not check that; what we know is ..., and to find
 out we would ...". It is fine, they mostly want to see that you understand the limits.
 
