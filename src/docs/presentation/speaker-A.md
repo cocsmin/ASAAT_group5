@@ -198,5 +198,5 @@ out we would ...". It is fine, they mostly want to see that you understand the l
 | Heartbeat | A "still alive" message each station sends every 5 s. |
 | Keep-alive | The MQTT ping; if it stops, the broker closes the connection (after 7.5 s for us). |
 | Last Will | A message the client gives the broker on connect; the broker sends it if the client disappears. |
-| Pan | The tray that carries the batter and the cake around the line; 96 pans circulate. |
+| Pan | The tray that carries the batter and the cake around the line; 48 pans circulate and 48 more wait in a reserve hopper (96 in total). 24 pans make one batch and one pallet. |
 | Outage | The time from the fault until the next cake ships (about 25 s, the line has to refill). |
