@@ -66,17 +66,16 @@ crash one container, one freezes the baking tunnel, and two freeze two or three 
 until the factory is settled, injects the fault through the dashboard API, polls every 100 milliseconds and measures.
 Afterwards we ran the factory for two hours with doubled failure rates.
 
-**Slide 8 (0:55).** Exercise 9, the results. 269 of 270 runs passed; the one failure was a pan count taken while a pan
-was between two stations, which looks like a measurement artefact. A crash is detected in 0.3 seconds, a freeze in 6 to
-7 seconds, both far inside the 15 seconds. Recovery took at most 1.2 seconds, the limit is 60. No pan was lost.
-In the two-hour run the availability was 99.997 % and the line made 3444 cakes per hour, 96 % of the maximum. The
+**Slide 8 (0:55).** Exercise 9, the results. 269 of 270 runs passed; the one failure was a frozen BAT-MIX that came back after 70 seconds instead
+of 60, a timing race we did not investigate. A crash is detected in 0.3 seconds, a freeze in 6 to
+8 seconds, both inside the 15 seconds. Recovery took at most 1.2 seconds, the limit is 60. No pan was lost.
+In the two-hour run with doubled random failures the mean availability of the containers was 99.844 %, above 99.5 %, but the worst container, THM-DEP, was at 98.75 %, below it. The line made 3252 cakes per hour, 90 % of the maximum. The
 interesting result is the outage: about 25 seconds for almost every container. The line has to refill, so refill
 time, not detection or recovery, decides the availability.
 
 **Slide 9 (0:35).** We also tested the broker with up to 1600 simulated nodes, each sending a heartbeat every
 5 seconds, plus 50 handoffs per second. No message was lost and the 99th percentile delay stayed under 45
-milliseconds. So the first limit of the design is availability, not broker capacity. To conclude: all three
-requirements are met in this setup, and model, code and experiment agree: UPPAAL found one defect and the
+milliseconds. So the first limit of the design is availability, not broker capacity. To conclude: detection and recovery are met, and the 99.5 % is met on average but not for the worst container, and model, code and experiment agree: UPPAAL found one defect and the
 experiment found another one, a queue restore that blocked THM-DEP, which we fixed. The limits are that the machines
 are simulated, everything runs on one host, the failure rates are our choice, and 15 runs per scenario. Next
 steps are a real network, a broker cluster and measured failure rates. Thank you, we are happy to answer questions.
@@ -99,14 +98,23 @@ halts correctly when several stations fail together.
 pans in flight travel on and the next order comes on its own 22 s cycle. The spread is small, so it is a fixed delay
 of the simulated line and does not depend on which container fails.
 
-**Is 99.997 % realistic?** No, it holds for the failure rates we chose (`docs/assumptions.md`, section 7), and in
-two hours only 3 container outages happened. It shows the line absorbs failures; it is not a prediction. The
-requirement check that matters is the per-fault one: detect at most 7 s, recover at most 1.2 s.
+**Is the availability requirement met?** Only partly shown. In the 2 h run at doubled rates the mean container availability was
+99.844 %, above 99.5 %, but the worst container (THM-DEP) was at 98.752 %, below it, and two hours are not a month. The first run
+on 3 Nov gave 99.997 %, but that was a lucky draw: the failures are random, and the rerun drew 4 freezes and 16 crashes instead
+of 0 and 10. A freezing container stays down until the broker declares it dead and the crew repairs it, up to 55 s. What the run
+shows is that the line keeps producing (90 % of the maximum, no pan lost) while containers fail. The per-fault check is clear:
+detect at most 8 s, recover at most 1.2 s.
 
-**What about the one failed run?** `crash-fin-wash`, run 1: "pan count changed: 48, expected 47". A pan cannot
-appear from nothing, so the first count was taken while a pan was between two stations. It is a measurement
-artefact of the runner; runs 2 to 15 of the same scenario show 0. We did not investigate it further, and say so in
-the report.
+**What about the one failed run?** In the rerun it is `freeze-three-stations`, run 1: BAT-MIX was frozen together with two
+other stations and came back after about 70 s, the limit is 60 s. The broker sent a second death certificate and then the
+birth certificate arrived. The other 14 runs passed and on 3 Nov all 15 passed. We did not find the cause; our guess is a
+race between the old frozen connection and the new one of the same client, or load on the test machine. On 3 Nov the one
+failed run was a pan count taken while a pan was between two stations (a measurement artefact).
+
+**Why are some outages much longer than 25 s?** 6 of 269 runs had an outage above 35 s (up to 85 s), all in `crash-plm-wh`
+and `crash-bat-dose`, all in the first 25 minutes, while we were also using the machine for other work. We did not
+investigate it, so we cannot say if it is a real tail or load. The median stays 24.9 s and detection and recovery are not
+affected.
 
 **What are the threats to validity?** Simulated machines with compressed process times (the 30 minutes of UC10 are
 40 s); one machine and one Docker host, so no network delay; failure rates are assumed, not measured; the tail
@@ -200,7 +208,7 @@ calls); birth and death certificates as failure detector; state saved in a datab
 doubled safety nets for food safety (a batter is discarded after 25 s). They are listed in `docs/decisions.md`.
 
 **Which requirements did you not meet or only partly meet?** Say it openly: the machines are simulated, availability
-99.997 % holds for assumed failure rates, there is no real network and no broker cluster, security is described in
+the availability figure holds for assumed failure rates, there is no real network and no broker cluster, security is described in
 `docs/security.md` but not fully implemented. Check `docs/verification-scope.md` and `docs/team-review.md` for the list.
 
 **How do you know the code does what the models say?** Papyrus and UPPAAL were checked against the code
@@ -220,9 +228,10 @@ with a long tail, running the experiment on several machines.
 
 ### About the process
 
-**What did you find with the rerun?** The rerun found a bug: THM-DEP stuck at start because it tried to restore a
-queue of 1025 stale batches into a channel that is smaller, and blocked. We made the restore not block and a batter
-of unknown age count as expired. Add the numbers of the rerun here when it is finished.
+**What did you find with the rerun?** Two things. Before the experiment: THM-DEP got stuck at start because it tried to
+restore a queue of 1025 stale batches into a channel that is smaller; we made the restore not block and a batter of unknown
+age count as expired. In the experiment: detection and recovery are the same as on 3 Nov (crash 0.34 s, at most 1.23 s to
+recover), 269 of 270 passed, and we see a few long outages and one slow recovery that we did not explain.
 
 **What would you do differently?** Measure real failure rates, run on separate machines, and run more repetitions
 for the scenarios with a long tail (`crash-fin-pal` and others showed single runs about 5 s longer; the cause is not

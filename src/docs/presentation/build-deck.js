@@ -9,10 +9,10 @@ const img = (f) => path.join(__dirname, "img", f);
 // ---------- data ----------
 const DATA = {
   runs: 270, passed: 269,
-  detectCrash: 0.33, detectCrashMax: 0.43,
-  recoverMax: 1.19,
-  detectFreeze1: 7.01, detectFreeze2: 6.55, detectFreeze3: 6.06,
-  outage: 25, availability: "99.997", cakesPerHour: 3444,
+  detectCrash: 0.34, detectCrashMax: 0.43,
+  recoverMax: 1.23,
+  detectFreeze1: 7.14, detectFreeze2: 6.79, detectFreeze3: 6.13,
+  outage: 25, availability: "99.844", cakesPerHour: 3252,
   load: { nodes: ["16", "160", "800", "1600"], p50: [1.94, 1.71, 1.47, 6.91], p95: [22.98, 34.53, 36.66, 26.7], p99: [44.17, 41.71, 42.43, 35.9] },
 };
 
@@ -150,13 +150,13 @@ s.addChart(pres.charts.BAR, [{ name: "Mean time to detect (s)", labels: ["Crash 
 stat(s, 5.75, 0.95, 1.85, `${DATA.passed}/${DATA.runs}`, "runs passed");
 stat(s, 7.7, 0.95, 1.85, `${DATA.recoverMax.toFixed(1)} s`, "slowest recovery (limit 60 s)");
 stat(s, 5.75, 2.0, 1.85, "0", "pans lost", C_CARA);
-stat(s, 7.7, 2.0, 1.85, `${DATA.availability} %`, "availability, 2 h run", C_CARA);
+stat(s, 7.7, 2.0, 1.85, `${DATA.availability} %`, "mean availability, 2 h run (worst container 98.75 %)", C_CARA);
 card(s, 5.75, 3.05, 3.8, 1.0);
-txt(s, `${DATA.cakesPerHour} cakes/h during the 2 h run with doubled failure rates (96 % of maximum 3600).`, { x: 5.88, y: 3.12, w: 3.55, h: 0.85, fontSize: 11.5, valign: "middle" });
+txt(s, `${DATA.cakesPerHour} cakes/h during the 2 h run with doubled random failures (90 % of maximum 3600).`, { x: 5.88, y: 3.12, w: 3.55, h: 0.85, fontSize: 11.5, valign: "middle" });
 card(s, 0.4, 4.25, 9.2, 0.95);
 txt(s, bullets([
-  `A crash is found in 0.3 s, a freeze in 6 to 7 s (broker keep-alive limit 7.5 s). Both are far inside 15 s.`,
-  `The production outage is about ${DATA.outage} s for almost every container: the line has to refill. Detection and recovery are under 1.2 s, so refill, not failure handling, dominates availability.`,
+  `A crash is found in 0.3 s (max 0.43 s), a freeze in 6 to 8 s (broker keep-alive limit 7.5 s). Both are inside 15 s.`,
+  `The production outage is about ${DATA.outage} s for the median run: the line has to refill. A few runs took up to 85 s (6 of 269 above 35 s, cause not investigated). One run failed: a frozen BAT-MIX came back after 70 s, not 60 s.`,
 ]), { x: 0.55, y: 4.3, w: 8.9, h: 0.85, fontSize: 11 });
 s.addNotes("One run failed: a pan count taken while a pan was between two stations, looks like a measurement artefact. All requirements are met in this setup. Threats: simulated machines, one host, chosen failure rates.");
 
@@ -174,7 +174,7 @@ s.addChart(pres.charts.LINE, [
 txt(s, "Load test: 16 to 1600 nodes, heartbeat every 5 s, 50 handoffs/s. The broker is not the first limit; availability is.", { x: 0.4, y: 3.95, w: 4.9, h: 0.5, fontSize: 10.5, color: C_MUTE });
 card(s, 5.55, 0.95, 4.0, 3.5, C_ESP);
 txt(s, [{ text: "Conclusion", options: { fontFace: HEAD, bold: true, fontSize: 16, color: C_CARA, breakLine: true } }].concat(bullets([
-  "Requirements met: detect 15 s, recover 60 s, no pan lost, 99.5 %",
+  "Detect (15 s) and recover (60 s) met, no pan lost. 99.5 % availability met on average (99.84 %), not for the worst container (98.75 %)",
   "Model, code and test agree: UPPAAL found a real defect, the experiment found another (queue restore) that we fixed",
   "Limits: simulated machines, one host, chosen failure rates, 15 runs per scenario",
   "Next: real network, a broker cluster, measured failure rates",

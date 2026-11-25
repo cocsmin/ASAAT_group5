@@ -240,6 +240,152 @@ the other 16 scenarios, the faults `faults-system` and the 2 h availability run 
 code (the first run of `faults-system` with FC1 and FC2, `healthy` and `sql-down` passed, but they are not
 measurements). The availability figure of section 5 is from the earlier code.
 
+### 5.2 Full rerun on 25 Nov 2026 (current code)
+
+All 18 scenarios, 15 runs each, were run again on 25 Nov (01:13 to 03:15 local time), on a freshly built stack with
+the code of the `work2` branch (PLM-WH follows its state machine; THM-DEP restores a long saved queue without blocking, see
+`decisions.md`). Data: [experiment-results-rerun.csv](experiment-results-rerun.csv). **269 of 270 runs passed.**
+
+| Measure | 3 Nov | 25 Nov |
+|---|---|---|
+| runs passed | 269 of 270 | 269 of 270 |
+| crash: time to detect, mean (max) | 0.33 s (0.43 s) | 0.34 s (0.43 s) |
+| crash: time to recover, mean (max) | 0.8 s (1.19 s) | 0.87 s (1.23 s) |
+| freeze: time to detect, mean (max) | 7.0 s (7.06 s) | 7.1 s (7.89 s) for one station |
+| pans lost | 0 | 0 |
+| crash: outage, median | 24.9 s | 24.9 s |
+
+Detection (at most 0.43 s for a crash, at most 7.9 s for a freeze) and recovery (at most 1.23 s) are the same as on 3 Nov
+and inside the requirements (15 s and 60 s). No pan was lost in any of the 269 passed runs.
+
+**The failed run:** `freeze-three-stations`, run 1 (02:09): "BAT-MIX did not come back within 1m0s". The broker declared
+BAT-MIX dead at 02:08:15, then sent a second death certificate at 02:09:26 and the birth certificate arrived at 02:09:28, about
+70 s after the freeze and 13 s later than the limit of 60 s. The line was normal again afterwards and the other 14 runs of
+the scenario passed (on 3 Nov all 15 passed). The cause was not found. It looks like a race between the old frozen
+connection and the new one of the same client, or a load effect on the test machine; this is a guess and it was not checked.
+
+**Long outages:** 6 of the 269 passed runs had an outage above 35 s (`crash-plm-wh` 85 s and 40 s, `crash-bat-dose` 70 s, 60 s, 60 s
+and 40 s), against 25 s for the median run. All six are in the first 25 minutes of the experiment, in the two scenarios that
+the PLM change touches (PLM-WH and BAT-DOSE), and other work on the same machine (screen recording, slide export) was
+running during that time. The cause was not investigated, so we cannot say if this is a real tail of the system or an effect of the
+machine load. Detection and recovery are not affected in these runs. For the availability estimate the tail matters: the
+mean outage of a crash is 26.7 s, the median 24.9 s, the 95th percentile 30 s.
+
+**Availability run of 25 Nov (2 h, `FAULT_RATE=2`, `CREW_SECONDS=40`, 03:17 to 05:16)** ([availability-run-rerun.log](availability-run-rerun.log)):
+
+| Measure | 3 Nov | 25 Nov |
+|---|---|---|
+| Container availability, mean | 99.997 % | 99.844 % |
+| Container availability, worst | 99.986 % (BAT-DOSE) | 98.752 % (THM-DEP) |
+| Line availability (a pallet leaves at least every 1m15s) | 100.00 % | 99.94 % |
+| Container outages | 3, mean 1.0 s, longest 1.0 s | 10, mean 18.0 s, longest 55.5 s |
+| Repairs by the crew | 2, mean 53 s | 6, mean 44 s |
+| Throughput | 3444 cakes/h (96 %) | 3252 cakes/h (90 %) |
+| Pans at the end | 48 of 48 | 96 of 96 (the loop now has 96 pans) |
+| Random container crashes (FC27) / freezes (FC28) | 10 / 0 | 16 / 4 |
+
+The mean availability of the containers is above the 99.5 % of THM-REQ-71, but the worst container (THM-DEP, about 90 s down in
+7130 s) is **below** 99.5 % in this run. The two runs are not the same experiment: the failures are random and this run drew
+4 freezes (FC28) and 16 crashes against 0 and 10 on 3 Nov. A freezing container stays down until the broker declares it dead and
+the crew has repaired it, which explains the longer outages (up to 55.5 s) and the 6 repairs; this is our reading of the event
+counts, we did not check each outage. Two hours at doubled rates is also not a month, so it
+does not show the monthly figure of the requirement; it shows that the line keeps running (no pan lost, 90 % of the maximum
+output) while containers crash and freeze at random. The 3 Nov figure of 99.997 % was a lucky draw and should not be quoted alone.
+
+Per scenario (seconds):
+
+| scenario | runs | passed | metric | min | median | mean | p95 | max |
+|---|---|---|---|---|---|---|---|---|
+| crash-plm-wh | 15 | 15 | detect_s | 0.31 | 0.31 | 0.31 | 0.32 | 0.32 |
+| crash-plm-wh | 15 | 15 | recover_s | 0.84 | 0.89 | 0.90 | 0.99 | 1.05 |
+| crash-plm-wh | 15 | 15 | outage_s | 23.89 | 24.97 | 30.21 | 39.84 | 84.95 |
+| crash-plm-wh | 15 | 15 | flow_resume_s | 17.97 | 19.03 | 24.26 | 33.90 | 78.96 |
+| crash-plm-wh | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-plm-ship | 15 | 15 | detect_s | 0.31 | 0.32 | 0.34 | 0.42 | 0.42 |
+| crash-plm-ship | 15 | 15 | recover_s | 0.73 | 0.84 | 0.86 | 0.95 | 0.95 |
+| crash-plm-ship | 15 | 15 | outage_s | 20.82 | 25.85 | 25.52 | 25.94 | 30.74 |
+| crash-plm-ship | 15 | 15 | flow_resume_s | 14.93 | 19.94 | 19.61 | 19.98 | 24.97 |
+| crash-plm-ship | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-bat-dose | 15 | 15 | detect_s | 0.32 | 0.32 | 0.34 | 0.43 | 0.43 |
+| crash-bat-dose | 15 | 15 | recover_s | 0.78 | 0.89 | 0.90 | 0.97 | 1.08 |
+| crash-bat-dose | 15 | 15 | outage_s | 24.84 | 25.00 | 33.93 | 59.99 | 69.83 |
+| crash-bat-dose | 15 | 15 | flow_resume_s | 18.82 | 19.08 | 27.97 | 53.95 | 63.71 |
+| crash-bat-dose | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-bat-mix | 15 | 15 | detect_s | 0.32 | 0.32 | 0.34 | 0.43 | 0.43 |
+| crash-bat-mix | 15 | 15 | recover_s | 0.79 | 0.90 | 0.95 | 1.14 | 1.23 |
+| crash-bat-mix | 15 | 15 | outage_s | 24.74 | 24.92 | 25.25 | 25.00 | 29.95 |
+| crash-bat-mix | 15 | 15 | flow_resume_s | 18.54 | 18.97 | 19.24 | 19.13 | 24.01 |
+| crash-bat-mix | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-bat-insp | 15 | 15 | detect_s | 0.32 | 0.32 | 0.34 | 0.40 | 0.42 |
+| crash-bat-insp | 15 | 15 | recover_s | 0.79 | 0.91 | 0.91 | 0.98 | 0.98 |
+| crash-bat-insp | 15 | 15 | outage_s | 24.82 | 24.90 | 25.24 | 24.98 | 29.83 |
+| crash-bat-insp | 15 | 15 | flow_resume_s | 18.80 | 18.90 | 19.25 | 19.08 | 23.99 |
+| crash-bat-insp | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-thm-dep | 15 | 15 | detect_s | 0.31 | 0.32 | 0.36 | 0.43 | 0.43 |
+| crash-thm-dep | 15 | 15 | recover_s | 0.85 | 0.86 | 0.90 | 0.99 | 1.01 |
+| crash-thm-dep | 15 | 15 | outage_s | 24.85 | 24.93 | 26.25 | 34.87 | 34.92 |
+| crash-thm-dep | 15 | 15 | flow_resume_s | 18.82 | 18.95 | 20.28 | 28.93 | 28.96 |
+| crash-thm-dep | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-thm-bake | 15 | 15 | detect_s | 0.32 | 0.33 | 0.36 | 0.43 | 0.43 |
+| crash-thm-bake | 15 | 15 | recover_s | 0.76 | 0.90 | 0.90 | 1.00 | 1.00 |
+| crash-thm-bake | 15 | 15 | outage_s | 24.84 | 24.91 | 25.92 | 29.94 | 29.97 |
+| crash-thm-bake | 15 | 15 | flow_resume_s | 18.81 | 18.94 | 19.94 | 23.91 | 24.03 |
+| crash-thm-bake | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-thm-exit | 15 | 15 | detect_s | 0.32 | 0.33 | 0.36 | 0.43 | 0.43 |
+| crash-thm-exit | 15 | 15 | recover_s | 0.75 | 0.85 | 0.84 | 0.90 | 0.95 |
+| crash-thm-exit | 15 | 15 | outage_s | 24.83 | 24.89 | 25.24 | 24.99 | 29.97 |
+| crash-thm-exit | 15 | 15 | flow_resume_s | 18.87 | 19.01 | 19.33 | 19.12 | 24.05 |
+| crash-thm-exit | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-thm-cool | 15 | 15 | detect_s | 0.32 | 0.32 | 0.33 | 0.33 | 0.43 |
+| crash-thm-cool | 15 | 15 | recover_s | 0.85 | 0.86 | 0.88 | 0.91 | 0.96 |
+| crash-thm-cool | 15 | 15 | outage_s | 24.81 | 24.90 | 25.57 | 29.88 | 30.01 |
+| crash-thm-cool | 15 | 15 | flow_resume_s | 18.85 | 18.96 | 19.61 | 23.87 | 24.09 |
+| crash-thm-cool | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-fin-dpn | 15 | 15 | detect_s | 0.32 | 0.32 | 0.34 | 0.42 | 0.42 |
+| crash-fin-dpn | 15 | 15 | recover_s | 0.75 | 0.89 | 0.88 | 0.99 | 1.02 |
+| crash-fin-dpn | 15 | 15 | outage_s | 24.68 | 24.87 | 25.54 | 29.92 | 29.93 |
+| crash-fin-dpn | 15 | 15 | flow_resume_s | 18.61 | 18.95 | 19.57 | 23.95 | 24.08 |
+| crash-fin-dpn | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-fin-qua | 15 | 15 | detect_s | 0.32 | 0.32 | 0.33 | 0.35 | 0.42 |
+| crash-fin-qua | 15 | 15 | recover_s | 0.76 | 0.86 | 0.84 | 0.87 | 0.90 |
+| crash-fin-qua | 15 | 15 | outage_s | 24.83 | 24.91 | 25.56 | 29.82 | 29.87 |
+| crash-fin-qua | 15 | 15 | flow_resume_s | 18.84 | 18.97 | 19.62 | 23.94 | 23.94 |
+| crash-fin-qua | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-fin-wrap | 15 | 15 | detect_s | 0.32 | 0.32 | 0.35 | 0.42 | 0.42 |
+| crash-fin-wrap | 15 | 15 | recover_s | 0.75 | 0.85 | 0.82 | 0.88 | 0.91 |
+| crash-fin-wrap | 15 | 15 | outage_s | 24.77 | 24.91 | 25.56 | 29.84 | 29.89 |
+| crash-fin-wrap | 15 | 15 | flow_resume_s | 18.78 | 19.01 | 19.64 | 23.94 | 24.07 |
+| crash-fin-wrap | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-fin-pal | 15 | 15 | detect_s | 0.32 | 0.32 | 0.34 | 0.42 | 0.43 |
+| crash-fin-pal | 15 | 15 | recover_s | 0.75 | 0.85 | 0.82 | 0.86 | 0.87 |
+| crash-fin-pal | 15 | 15 | outage_s | 29.81 | 29.88 | 29.89 | 29.98 | 30.01 |
+| crash-fin-pal | 15 | 15 | flow_resume_s | 23.83 | 24.02 | 23.98 | 24.07 | 24.07 |
+| crash-fin-pal | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-fin-wash | 15 | 15 | detect_s | 0.32 | 0.32 | 0.33 | 0.33 | 0.42 |
+| crash-fin-wash | 15 | 15 | recover_s | 0.74 | 0.86 | 0.84 | 0.90 | 0.97 |
+| crash-fin-wash | 15 | 15 | outage_s | 24.81 | 24.88 | 24.88 | 24.98 | 25.00 |
+| crash-fin-wash | 15 | 15 | flow_resume_s | 18.76 | 18.95 | 18.93 | 19.01 | 19.03 |
+| crash-fin-wash | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| crash-bt | 15 | 15 | detect_s | 0.31 | 0.32 | 0.33 | 0.37 | 0.42 |
+| crash-bt | 15 | 15 | recover_s | 0.75 | 0.85 | 0.83 | 0.89 | 0.90 |
+| crash-bt | 15 | 15 | outage_s | 24.81 | 24.88 | 25.55 | 29.95 | 29.99 |
+| crash-bt | 15 | 15 | flow_resume_s | 18.71 | 18.96 | 19.59 | 23.98 | 24.00 |
+| crash-bt | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| freeze-thm-bake | 15 | 15 | detect_s | 6.82 | 6.94 | 7.14 | 7.87 | 7.89 |
+| freeze-thm-bake | 15 | 15 | outage_s | 24.80 | 24.90 | 25.54 | 29.85 | 29.88 |
+| freeze-thm-bake | 15 | 15 | flow_resume_s | 15.84 | 16.92 | 17.28 | 20.86 | 20.89 |
+| freeze-thm-bake | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| freeze-two-stations | 15 | 15 | detect_s | 6.23 | 6.52 | 6.79 | 7.37 | 7.38 |
+| freeze-two-stations | 15 | 15 | recover_s | 0.01 | 0.01 | 0.01 | 0.02 | 0.03 |
+| freeze-two-stations | 15 | 15 | outage_s | 24.91 | 29.90 | 31.21 | 34.92 | 34.98 |
+| freeze-two-stations | 15 | 15 | flow_resume_s | 15.30 | 20.42 | 21.67 | 25.44 | 25.48 |
+| freeze-two-stations | 15 | 15 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+| freeze-three-stations | 15 | 14 | detect_s | 5.79 | 5.89 | 6.11 | 6.83 | 6.84 |
+| freeze-three-stations | 15 | 14 | recover_s | 0.01 | 0.01 | 0.01 | 0.01 | 0.02 |
+| freeze-three-stations | 15 | 14 | outage_s | 24.71 | 24.86 | 25.56 | 29.80 | 29.89 |
+| freeze-three-stations | 15 | 14 | flow_resume_s | 13.80 | 14.85 | 15.27 | 18.70 | 19.99 |
+| freeze-three-stations | 15 | 14 | pans_lost | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+
 ## 6. Observations and unexpected behaviour
 
 1. **The outage is about 25 s for almost every container**, much longer than detection or
