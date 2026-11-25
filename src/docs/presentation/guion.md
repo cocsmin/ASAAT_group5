@@ -226,6 +226,46 @@ batches. Keeping the models and the code consistent was the second hardest part.
 **What would you do with more time?** Broker cluster, measured failure rates, more repetitions for the scenarios
 with a long tail, running the experiment on several machines.
 
+### Why things failed or came out worse than expected
+
+**Why did the results of the rerun differ from 3 Nov?** Detection and recovery did not change (crash 0.34 s, at most 1.23 s). What
+changed is the random part. The 2 h run draws failures at random: on 3 Nov it drew 10 crashes and no freezes, on 25 Nov 16 crashes
+and 4 freezes. A frozen container stays down until the broker declares it dead and the crew has repaired it, so the outages were
+longer (up to 55 s against 1 s) and the availability lower (99.844 % against 99.997 %). The 3 Nov figure was a lucky draw and we
+do not quote it alone. In the 270 runs, 25 Nov also has one failed run and a few long outages that 3 Nov did not have.
+
+**Why is the worst container below the 99.5 % of the requirement?** THM-DEP was down about 90 s in 7130 s of the run (98.752 %). The
+requirement is a monthly figure and our run is 2 h at doubled failure rates, so it cannot prove or disprove it. It shows that a
+single container with a few freezes can fall below the figure, and that the line still keeps producing (90 % of the maximum)
+and loses no pan. To meet the figure for every container we would need faster repair of a frozen container, for example a
+watchdog that restarts it without waiting for the crew.
+
+**Why did the one run fail, and did you fix it?** `freeze-three-stations`, run 1: BAT-MIX came back about 70 s after the freeze, the limit is
+60 s. The broker sent a second death certificate and then the birth certificate. We did not find the cause and we did not fix
+it. The two explanations we consider are a race between the old frozen connection and the new connection of the same client,
+or load on the test machine (we were also recording the screen and exporting slides at that time). To find out we would run the
+scenario 100 times on a quiet machine and read the Mosquitto and BAT-MIX logs around the second death certificate.
+
+**Does one failed run in 270 invalidate the result?** No, 269 of 270 passed, and the failed run is shown in the data, not removed. But
+it is a failure of the requirement of 60 s for that run, so we say that the requirement is met in 269 of 270 runs, not always.
+
+**Why were 6 outages longer than 35 s, up to 85 s?** All six are in `crash-plm-wh` and `crash-bat-dose`, in the first 25 minutes of the run,
+when the machine was also busy with other work. The median of the same scenarios is 25 s. We did not investigate, so we cannot tell if
+it is a real tail of the system (for example a batter waiting 25 s in the queue and then being discarded and made again) or a
+load effect. We list it as a threat to validity.
+
+**Why was the THM-DEP bug not found before the rerun?** It only appears when a lot of old batter is stored in the database before a
+start. That happened after many runs and restarts with the old data in the volume (1025 stored batches). The first runs started with
+a clean database. The rerun started with the old volume and found it; we fixed it and added a test.
+
+**Did the model (UPPAAL) predict these failures?** No. The UPPAAL models check timing rules (a batter is discarded after 25 s, a
+node is back in time) under assumptions, for example that a container restarts in at most 30 s. They do not model the broker
+connection race or the load of the test machine. What UPPAAL found was a different defect (a queued batter could wait 108 s).
+
+**What does the failed run tell you about the architecture?** The failure detector (birth and death certificates) works, as detection is
+fast in all runs. The weak point is the reconnect after a freeze, when several stations come back together. A more robust design
+would use a unique session per connection and an explicit takeover, or a watchdog.
+
 ### About the process
 
 **What did you find with the rerun?** Two things. Before the experiment: THM-DEP got stuck at start because it tried to
