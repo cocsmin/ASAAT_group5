@@ -2,6 +2,7 @@ package thm
 
 import (
 	"context"
+	"fmt"
 	"testing"
 	"time"
 
@@ -309,5 +310,33 @@ func TestSavedQueueKeepsTheStartOfTheWait(t *testing.T) {
 	got := <-d2.batters
 	if got.origin.Unix() != start.Unix() {
 		t.Fatalf("a restart must not give the batter a new P3: %v vs %v", got.origin, start)
+	}
+}
+
+// A saved queue longer than the channel must not stop the station from starting (found by the rerun of the
+// experiment: 1 025 saved batches blocked RunDep for ever, and the saved batches had no start of the wait).
+func TestRestoreQueueLargerThanTheChannelDoesNotBlock(t *testing.T) {
+	b, pans := testBase(t, model.THMDep)
+	st := map[string]int64{}
+	for i := 0; i < cap(make(chan batch, 1024))+50; i++ {
+		id := fmt.Sprintf("B%05d", i)
+		st[id+".left"], st[id+".target10"], st[id+".tol10"] = 24, 4500, 50
+	}
+	if err := pans.SaveState(context.Background(), queueKey, st); err != nil {
+		t.Fatal(err)
+	}
+	d := newDep(b)
+	done := make(chan struct{})
+	go func() { d.restoreQueue(); close(done) }()
+	select {
+	case <-done:
+	case <-time.After(3 * time.Second):
+		t.Fatal("restoreQueue blocks on a long saved queue")
+	}
+	if len(d.pend) != 1074 {
+		t.Fatalf("all saved batches are kept, got %d", len(d.pend))
+	}
+	if !d.expired(batch{id: "B00001", pans: 24, origin: time.Unix(1, 0)}) {
+		t.Fatal("a saved batch without a start of the wait counts as expired")
 	}
 }
