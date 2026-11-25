@@ -104,7 +104,8 @@ and the next pallet of 24 cakes has to be completed and shipped. The outage is t
 - We only fail the factory containers. The broker, SQL Server and MongoDB are not failed.
 - For freezes, the runner unfreezes the container. In a real plant a health check or a person would restart it.
 - 15 runs per scenario is a small sample. The results were stable (the spread is small), but we make no statistics claim.
-- Time is real time (`SIM_SPEED=1`), but machine times are compressed.
+- Time is real time (`SIM_SPEED=1`): 1 simulated second is 1 real second. The availability run lasts 2 h (4 h of normal failures with doubled rates), but the
+  requirement is per month (about 720 h), so the run is a short sample.
 
 ## 10. Questions they may ask
 
