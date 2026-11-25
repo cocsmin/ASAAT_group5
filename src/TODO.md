@@ -19,9 +19,8 @@ computer; whatever is not pushed was not checked. Result in short:
 - **Closed the same day (checked on screen):** D1 to D6, D9, D12, D13, most of D7 and part of D10 (section 0 of the
   check). Text of existing states was changed; the state machines of BT (1) and MON (2) are new diagrams
   (generator in `Model/tools`).
-- **Still open (Papyrus):** the drawn timer transition Idle to Scheduling_Order in PLM and a deployment diagram in
-  Papyrus (the deployment view is in [docs/deployment.md](docs/deployment.md) as a diagram in the document). The Cake
-  Factory IBD has its 13 connectors since 25 Nov; the events, heartbeat and repair ports are not drawn in it.
+- **Diagrams: nothing open** (25 Nov). The timer transition in PLM is drawn. Not done on purpose: a deployment diagram in Papyrus
+  (the deployment view is [docs/deployment.md](docs/deployment.md)) and a message-bus part in the Cake Factory IBD (see `docs/diagram-check.md`).
 
 1. ~~**Cake Factory IBD** is empty.~~ **Done 25 Nov** (connectors between the systems). Still wanted: the message bus (Sparkplug B on an MQTT
    broker) and the MON part, and connect the frame ports of the slices to the bus
